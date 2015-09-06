@@ -144,7 +144,7 @@ package com.gerantech.islamic.themes
 		public static var SECONDARY_BACKGROUND_COLOR:uint = 0xE0F2F1;//0xE0F2F1;
 		public static var CHROME_COLOR:uint = 0x009688;//0xE0F2F1;
 		
-		public static var LIGHT_TEXT_COLOR:uint = 0xa6a6a6;
+		public static var LIGHT_TEXT_COLOR:uint = 0xFFFFFF//0xa6a6a6;
 		public static var DARK_TEXT_COLOR:uint = 0x666666;
 		public static var SELECTED_TEXT_COLOR:uint = 0x009688;
 		public static var DISABLED_TEXT_COLOR:uint = 0x8a8a8a;
@@ -1041,8 +1041,8 @@ package com.gerantech.islamic.themes
 
 		protected function setBaseButtonStyles(button:Button):void
 		{
-			button.defaultLabelProperties.elementFormat = this.darkUIElementFormat;
-			button.disabledLabelProperties.elementFormat = this.darkUIDisabledElementFormat;
+			button.defaultLabelProperties.elementFormat = this.lightUIElementFormat;
+			button.disabledLabelProperties.elementFormat = this.lightUIDisabledElementFormat;
 			if(button is ToggleButton)
 			{
 				//for convenience, this function can style both a regular button

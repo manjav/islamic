@@ -110,16 +110,6 @@ package com.gerantech.islamic
 			
 			appModel.drawers.content = appModel.navigator;
 			addChild(appModel.drawers);
-	/*		setTimeout(showFirstPage, 0);
-		}
-		
-		private function showFirstPage():void
-		{*/
-			appModel.toolbar = new Toolbar();
-			//appModel.toolbar.layoutData = new AnchorLayoutData(0,0,NaN,0);
-			addChild(appModel.toolbar);
-
-			appModel.navigator.rootScreenID = appModel.PAGE_QURAN;
 			
 			if(UserModel.instance.user.profile.numRun==1)
 			{
@@ -138,6 +128,13 @@ package com.gerantech.islamic
 		{
 			PopUpManager.removePopUp(event.currentTarget as TutorialPopUp, true);
 			Starling.current.nativeStage.autoOrients=true;
+			
+			appModel.toolbar = new Toolbar();
+			//appModel.toolbar.layoutData = new AnchorLayoutData(0,0,NaN,0);
+			addChild(appModel.toolbar);
+			
+			appModel.navigator.rootScreenID = appModel.PAGE_QURAN;
+
 		}
 	}
 }

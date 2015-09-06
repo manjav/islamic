@@ -1,18 +1,19 @@
 package com.gerantech.islamic.views.popups
 {
-	import com.greensock.TweenLite;
+	import com.gerantech.islamic.views.controls.FeaturesView;
 	import com.gerantech.islamic.views.items.TutorialItemRenderer;
+	import com.greensock.TweenLite;
 	
 	import feathers.controls.List;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.renderers.IListItemRenderer;
-	import feathers.core.PopUpManager;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalLayout;
 	
 	import starling.display.Quad;
+	import starling.events.Event;
 
 	public class TutorialPopUp extends BasePopUp
 	{
@@ -20,6 +21,7 @@ package com.gerantech.islamic.views.popups
 		private var selectedTute:int;
 
 		private var tutes:Array;
+		private var features:FeaturesView;
 		
 		public function TutorialPopUp()
 		{
@@ -34,7 +36,17 @@ package com.gerantech.islamic.views.popups
 			backgroundSkin = new Quad(1,1);
 			backgroundSkin.alpha = 0.85;
 			
-			tutes = ["listen", "read", "swipe", "zoom"];
+			features = new FeaturesView();
+			features.layoutData = new AnchorLayoutData(0,0,0,0);
+			features.addEventListener(Event.COMPLETE, features_completeHandler);
+			addChild(features);
+		}
+		
+		private function features_completeHandler():void
+		{
+			removeChildren();
+			
+			tutes = ["swipe", "zoom"];
 			if(!appModel.ltr)
 				tutes.reverse();
 			
@@ -55,8 +67,7 @@ package com.gerantech.islamic.views.popups
 			//list.addEventListener("addAya", list_ayaChangedHandler);
 			list.addEventListener("next", list_nextHandler);
 			list.scrollToPageIndex(selectedTute, 0, 0);
-			addChild(list);
-		}
+			addChild(list);		}
 		
 		private function list_nextHandler():void
 		{

@@ -26,17 +26,7 @@
 		<link>
 			<name>[source path] _src</name>
 			<type>2</type>
-			<location>D:/_PROJECTS/_FLEX/_src</location>
-		</link>
-		<link>
-			<name>[source path] source</name>
-			<type>2</type>
-			<location>D:/_PROJECTS/_FLEX/_frameworks/feathers-2.2.0-beta/source</location>
-		</link>
-		<link>
-			<name>[source path] src</name>
-			<type>2</type>
-			<location>D:/_PROJECTS/_FLEX/_frameworks/Starling-Framework-1.7rc/starling/src</location>
+			<location>E:/_PROJECTS/_FLEX_Flash/hidaya-project/_src</location>
 		</link>
 	</linkedResources>
 </projectDescription>
