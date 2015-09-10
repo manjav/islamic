@@ -36,7 +36,7 @@ package com.gerantech.islamic.views.controls
 			image.source = "com/gerantech/islamic/assets/images/tutorial/"+_data+".png";
 			addChild(image);
 			
-			tip = new RTLLabel(ResourceManager.getInstance().getString("loc", _data), 0, "center", null, true);
+			tip = new RTLLabel(ResourceManager.getInstance().getString("loc", _data), 0, "center", null, true, null, 0, null, "bold");
 			tip.alpha = 0;
 			tip.layoutData = new VerticalLayoutData(80, 20);
 			addChild(tip);

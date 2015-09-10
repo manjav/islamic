@@ -12,6 +12,7 @@ package com.gerantech.islamic.views.controls
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
+	import spine.Event;
 	import spine.SkeletonData;
 	import spine.SkeletonJson;
 	import spine.animation.AnimationStateData;
@@ -20,10 +21,9 @@ package com.gerantech.islamic.views.controls
 	import spine.starling.SkeletonAnimation;
 	import spine.starling.StarlingTextureLoader;
 	
+	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
-	import starling.display.Sprite;
-	import starling.events.Event;
 	
 	public class FeaturesView extends LayoutGroup
 	{
@@ -63,36 +63,39 @@ package com.gerantech.islamic.views.controls
 			
 			setTimeout(startSplash, 1000);
 			skeleton.state.onComplete.add(animationCompleted);
+			skeleton.state.onEvent.add(animationEventHandler);
+		}
+		
+		private function animationEventHandler(trackIndex:int, event:spine.Event):void
+		{
+			setTitle("tute_"+event.data.name);
 		}
 		
 		private function animationCompleted (trackIndex:int, count:int):void 
 		{
+			var state:String;
 			switch(skeleton.state.getCurrent(trackIndex).animation.name)
 			{
 				case "appear":
-					gotoState("listen");
+					state = ("listen");
 					showButton();
 					break;
 				
 				case "listen":
-					gotoState("read");
+					state = ("read");
 					break;
 				
 				case "read":
-					gotoState("search");
+					state = ("search");
 					break;
 				
 				case "search":
-					gotoState("listen");
+					state = ("listen");
 					break;
 			}
-		}
-		
-		private function gotoState(state:String):void
-		{
-			setTimeout(setTitle, 1500, "tute_"+state);
 			skeleton.state.setAnimationByName(0, state, false);
 		}
+
 		
 		private function startSplash():void
 		{
@@ -101,7 +104,11 @@ package com.gerantech.islamic.views.controls
 			addChild(skeleton);
 			
 			titleDisplay = new RTLLabel("", BaseMaterialTheme.CHROME_COLOR, "center", null, true, null, 0, null, "bold");
-			titleDisplay.layoutData = new AnchorLayoutData(AppModel.instance.itemHeight/2, AppModel.instance.actionHeight, NaN, AppModel.instance.actionHeight, 0);
+		//	titleDisplay.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0);
+			titleDisplay.x = (width)/2
+			titleDisplay.y = AppModel.instance.itemHeight;
+			titleDisplay.width = width-AppModel.instance.itemHeight*2;
+			titleDisplay.pivotX = titleDisplay.width/2;
 			addChild(titleDisplay);
 			
 			setTimeout(setTitle, 1500, "app_title");
@@ -109,11 +116,14 @@ package com.gerantech.islamic.views.controls
 		
 		private function setTitle(str:String):void
 		{
-			titleDisplay.alpha = 0;
 			titleDisplay.text = ResourceManager.getInstance().getString("loc", str);
+			titleDisplay.pivotY = titleDisplay.height/2;
+			titleDisplay.alpha = 0;
+			titleDisplay.scaleX = titleDisplay.scaleY = 0.5;
 			
-			var tw:Tween = new Tween(titleDisplay, 0.8);
+			var tw:Tween = new Tween(titleDisplay, 0.4, Transitions.EASE_OUT_BACK);
 			tw.fadeTo(1);
+			tw.scaleTo(1);
 			Starling.juggler.add(tw);
 		}
 		
@@ -122,7 +132,7 @@ package com.gerantech.islamic.views.controls
 			startButton = new Button();
 			startButton.label = "  شـــروع  ";
 			startButton.layoutData = new AnchorLayoutData(NaN, NaN, AppModel.instance.itemHeight/2, NaN, 0);
-			startButton.addEventListener(Event.TRIGGERED, startButton_triggeredHandler);
+			startButton.addEventListener("triggered", startButton_triggeredHandler);
 			addChild(startButton);
 			
 			startButton.alpha = 0;
@@ -133,7 +143,7 @@ package com.gerantech.islamic.views.controls
 		
 		private function startButton_triggeredHandler():void
 		{
-			dispatchEventWith(Event.COMPLETE);
+			dispatchEventWith("complete");
 			
 		}
 		

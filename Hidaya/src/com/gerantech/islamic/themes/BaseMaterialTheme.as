@@ -27,6 +27,7 @@ package com.gerantech.islamic.themes
 	import com.gerantech.islamic.models.Assets;
 	
 	import flash.geom.Rectangle;
+	import flash.system.Capabilities;
 	import flash.text.TextFormat;
 	import flash.text.engine.CFFHinting;
 	import flash.text.engine.ElementFormat;
@@ -164,14 +165,14 @@ package com.gerantech.islamic.themes
 		 * used by this theme are designed for this density and scale for other
 		 * densities.
 		 */
-		protected static const ORIGINAL_DPI_IPHONE_RETINA:int = 326;
+		protected static var ORIGINAL_DPI_IPHONE_RETINA:int = 326;
 
 		/**
 		 * The screen density of an iPad with Retina display. The textures used
 		 * by this theme are designed for this density and scale for other
 		 * densities.
 		 */
-		protected static const ORIGINAL_DPI_IPAD_RETINA:int = 264;
+		protected static var ORIGINAL_DPI_IPAD_RETINA:int = 264;
 
 		protected static const DEFAULT_SCALE9_GRID:Rectangle = new Rectangle(5, 5, 22, 22);
 		protected static const BUTTON_SCALE9_GRID:Rectangle = new Rectangle(5, 5, 50, 50);
@@ -635,6 +636,11 @@ package com.gerantech.islamic.themes
 		 */
 		protected function initializeScale():void
 		{
+			
+		//	326 264
+			ORIGINAL_DPI_IPAD_RETINA = Capabilities.os.substr(0,2)=="iP" ? 264 : 240;
+			ORIGINAL_DPI_IPHONE_RETINA = Capabilities.os.substr(0,5)=="iP" ? 326 : 300;
+			
 			var scaledDPI:int = DeviceCapabilities.dpi / Starling.contentScaleFactor;
 			this._originalDPI = scaledDPI;
 			if(this._scaleToDPI)
@@ -649,7 +655,7 @@ package com.gerantech.islamic.themes
 				}
 			}
 			this.scale = scaledDPI / this._originalDPI;
-			//trace("DeviceCapabilities", DeviceCapabilities.dpi, Starling.contentScaleFactor, scaledDPI, _scaleToDPI, scale)
+			trace("DeviceCapabilities", DeviceCapabilities.dpi, Starling.contentScaleFactor, scaledDPI, _originalDPI, scale)
 		}
 
 		/**
@@ -660,7 +666,7 @@ package com.gerantech.islamic.themes
 			this.gridSize = Math.round(88 * this.scale);
 			this.smallGutterSize = Math.round(11 * this.scale);
 			this.gutterSize = Math.round(22 * this.scale);
-			this.controlSize = Math.round(72 * this.scale);//58
+			this.controlSize = Math.round(58 * this.scale);
 			this.smallControlSize = Math.round(22 * this.scale);
 			this.popUpFillSize = Math.round(552 * this.scale);
 			this.calloutBackgroundMinSize = Math.round(11 * this.scale);
