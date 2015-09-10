@@ -61,7 +61,7 @@ package com.gerantech.islamic.views.controls
 			skeleton.y = Starling.current.nativeStage.stageHeight/2;
 			skeleton.scaleX = skeleton.scaleY = Math.min(Starling.current.nativeStage.stageWidth, Starling.current.nativeStage.stageHeight)/520;
 			
-			setTimeout(startSplash, 100);
+			setTimeout(startSplash, 1000);
 			skeleton.state.onComplete.add(animationCompleted);
 		}
 		
