@@ -33,7 +33,7 @@ package com.gerantech.islamic.views.headers
 		
 		public function UthmaniHeader()
 		{
-			height = _height = uint(AppModel.instance.actionHeight*0.8);
+			height = _height = uint(AppModel.instance.subtitleHeight);
 			backgroundSkin = new Quad(1, 1, UserModel.instance.nightMode ? BaseMaterialTheme.LIGHT_TEXT_COLOR : BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			
 			var myLayout:AnchorLayout = new AnchorLayout()
@@ -46,9 +46,9 @@ package com.gerantech.islamic.views.headers
 			colorFilter.invert();*/
 			
 			juzeImage = new ImageLoader()
-			juzeImage.height = uint(_height*0.6);
+			//juzeImage.height = uint(_height*0.5);
 			//juzeImage.scaleX = juzeImage.scaleY;
-			juzeImage.layoutData = new AnchorLayoutData(_height/8, NaN, _height/8, _height/4, NaN, 0);
+			juzeImage.layoutData = new AnchorLayoutData(_height/5.4, NaN, _height/5.4, _height/5.4, NaN, 0);
 			addChild(juzeImage);
 			
 			/*if(UserModel.instance.nightMode)
@@ -65,9 +65,9 @@ package com.gerantech.islamic.views.headers
 				addChild(numLabel);
 			}
 			suraImage = new ImageLoader();
-			suraImage.height = uint(_height*0.8);
+			//suraImage.height = uint(_height*0.6);
 			//suraImage.scaleX = suraImage.scaleY;
-			suraImage.layoutData = new AnchorLayoutData(_height/10, _height/5, _height/10, NaN, NaN, 0);
+			suraImage.layoutData = new AnchorLayoutData(_height/6, _height/6, _height/6, NaN, NaN, 0);
 			addChild(suraImage);
 			
 			/*if(UserModel.instance.nightMode)

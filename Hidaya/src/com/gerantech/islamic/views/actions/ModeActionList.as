@@ -1,4 +1,4 @@
-package com.gerantech.islamic.views.action
+package com.gerantech.islamic.views.actions
 {
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
@@ -9,7 +9,6 @@ package com.gerantech.islamic.views.action
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
-	import com.gerantech.islamic.views.action.items.ActionItemRenderer;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	
 	import flash.geom.Point;
@@ -26,6 +25,7 @@ package com.gerantech.islamic.views.action
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.filters.BlurFilter;
+	import com.gerantech.islamic.views.actions.items.ActionItemRenderer;
 	
 	
 	public class ModeActionList extends LayoutGroup
@@ -71,7 +71,7 @@ package com.gerantech.islamic.views.action
 			
 			actionButton = new FlatButton("action_plus", "action_player", false, 1, 0.8);
 			actionButton.iconScale = 0.3;
-			actionButton.width = actionButton.height = AppModel.instance.itemHeight*1.3;
+			actionButton.width = actionButton.height = AppModel.instance.toolbarSize;
 			actionButton.pivotY = actionButton.pivotX = actionButton.width/2;
 			actionButton.filter = BlurFilter.createDropShadow(AppModel.instance.border, 90*(Math.PI/180), 0, 0.4, 3);
 			actionButton.addEventListener(Event.TRIGGERED, actionButton_triggerd);
@@ -137,7 +137,7 @@ package com.gerantech.islamic.views.action
 					personModes[i].y = actionButton.y;
 					personModes[i].alpha = 0;
 				}
-				bY = opened ? actionButton.y-AppModel.instance.actionHeight*(1.8+i) : actionButton.y;
+				bY = opened ? actionButton.y-AppModel.instance.toolbarSize*(1.8+i) : actionButton.y;
 				TweenLite.to(personModes[i], opened?0.3:0.2, {delay:i*0.05, alpha:opened?1:0, y:bY, ease:opened?Back.easeOut:Back.easeIn});
 			}
 			TweenLite.to(background, 0.5, {alpha:(opened?0.9:0)});

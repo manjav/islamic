@@ -4,8 +4,8 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
-	import com.gerantech.islamic.views.action.LanguageActionList;
-	import com.gerantech.islamic.views.action.ModeActionList;
+	import com.gerantech.islamic.views.actions.LanguageActionList;
+	import com.gerantech.islamic.views.actions.ModeActionList;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.lists.SortablePersonList;
 	

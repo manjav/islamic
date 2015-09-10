@@ -56,6 +56,8 @@ package
 			trace(ResourceManager.getInstance().getString("loc", "quran_t"))//, String.fromCharCode(0x25b8));
 			mouseEnabled = mouseChildren = false;
 			
+			
+			
 			if(stage)
 			{
 				stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -68,7 +70,7 @@ package
 
 			//Add Splash -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 			loaderInfo.addEventListener(Event.COMPLETE, loaderInfo_completeHandler);
-			
+			trace(stage.stageWidth, stage.stageHeight, Capabilities.screenDPI, Capabilities.screenResolutionX, Capabilities.screenResolutionY)
 			graphics.beginFill(0x009688);
 			graphics.drawRect(0,0,Math.max(stage.stageWidth, stage.stageHeight), Capabilities.screenDPI/3.2);
 		}
@@ -76,19 +78,10 @@ package
 		private function loaderInfo_completeHandler(event:Event):void
 		{
 			loaderInfo.removeEventListener(Event.COMPLETE, loaderInfo_completeHandler);
+			trace(stage.stageWidth, stage.stageHeight, Capabilities.screenDPI, Capabilities.screenResolutionX, Capabilities.screenResolutionY)
 
 			appModel = AppModel.instance;
-			appModel.dpi = Capabilities.screenDPI;
-			appModel.main = this as Hidaya;
-			appModel.orginalWidth = stage.stageWidth;
-			appModel.orginalHeightFull = stage.stageHeight;
-			appModel.itemHeight = uint(appModel.dpi/3.2);//Math.min(Math.max(64, appModel.orginalHeightFull/8), 240);
-			appModel.suraItemHeight = appModel.itemHeight//appModel.orginalWidth/9;
-			//appModel.actionHeight = uint(appModel.itemHeight*0.76);//trace(appModel.itemHeight, appModel.actionHeight);
-			appModel.orginalHeight = appModel.orginalHeightFull - appModel.actionHeight;
-			appModel.border = Math.round(appModel.itemHeight/16);
-			appModel.itemBorder = Math.round(appModel.itemHeight/24);			
-			appModel.isTablet = DeviceCapabilities.isTablet(stage);
+			appModel.init(this as Hidaya);
 			
 			//Flurry initialising ----------------------------------------------------
 			//Flurry.getInstance().logEnabled = true
@@ -163,7 +156,6 @@ package
 		{
 			BillingManager.instance.init();
 			
-			appModel.orginalFontSize = uint(appModel.itemHeight/3.2);//uint(height/40+2);
 			if(Capabilities.cpuArchitecture=="x86" || userModel.fontSize==12)
 			{
 				userModel.fontSize = appModel.orginalFontSize;
@@ -187,19 +179,8 @@ package
 			stage.removeEventListener(Event.RESIZE, stage_resizeHandler, false);
 			appModel.width = 				stage.stageWidth;
 			appModel.heightFull = 			stage.stageHeight;
-			appModel.height = 				appModel.heightFull - appModel.actionHeight;
-			var isUp:Boolean = 				appModel.heightFull>appModel.width;//stage.deviceOrientation=="default" || stage.deviceOrientation=="upsideDown" || stage.deviceOrientation=="unknown";
-			/*if(isUp)
-			{
-				appModel.scaledHeightFull =	appModel.heightFull;
-				appModel.scaledHeight =		appModel.height;
-			}
-			else
-			{
-				appModel.scaledHeightFull =	appModel.orginalHeightFull*(appModel.orginalHeightFull/appModel.orginalWidth);
-				appModel.scaledHeight =		appModel.scaledHeightFull - appModel.actionHeight;
-			} */
-			appModel.upside = isUp;
+			appModel.height = 				appModel.heightFull - appModel.toolbarSize;
+			appModel.upside =  				appModel.heightFull>appModel.width;//stage.deviceOrientation=="default" || stage.deviceOrientation=="upsideDown" || stage.deviceOrientation=="unknown";
 			
 			if(_starling==null)
 				return;

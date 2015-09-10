@@ -85,7 +85,7 @@ package com.gerantech.islamic.views.headers
 			autoSizeMode = AUTO_SIZE_MODE_STAGE;
 			appModel = AppModel.instance;
 			configModel = ConfigModel.instance;
-			_height = height = appModel.headerHeight;
+			_height = height = appModel.toolbarSize;
 			
 			player = Player.instance;
 			player.addEventListener(Player.RECITER_CHANGED,		player_reciterChanged);
@@ -145,7 +145,7 @@ package com.gerantech.islamic.views.headers
 			playerButton = new FlatButton("action_play", "action_player", false, 1, 0.8);
 			playerButton.iconScale = 0.4;
 			playerButton.x = appModel.width-_height;
-			playerButton.width = playerButton.height = appModel.itemHeight*1.3;
+			playerButton.width = playerButton.height = appModel.toolbarSize;
 			playerButton.pivotY = playerButton.pivotX = playerButton.width/2;
 			playerButton.addEventListener("triggered", playerButton_triggeredHandler);
 			playerButton.includeInLayout = false;

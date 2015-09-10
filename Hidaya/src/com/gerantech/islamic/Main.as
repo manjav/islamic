@@ -118,15 +118,15 @@ package com.gerantech.islamic
 				PopUpManager.addPopUp(tute);
 			}
 			else
-				Starling.current.nativeStage.autoOrients=true;		
+				tute_closeHandler(null)
 			
-			appModel.dispatchEventWith(AppEvent.PUSH_FIRST_SCREEN);
 		}
 
 		
 		private function tute_closeHandler(event:Event):void
 		{
-			PopUpManager.removePopUp(event.currentTarget as TutorialPopUp, true);
+			if(event!=null)
+				PopUpManager.removePopUp(event.currentTarget as TutorialPopUp, true);
 			Starling.current.nativeStage.autoOrients=true;
 			
 			appModel.toolbar = new Toolbar();
@@ -134,6 +134,7 @@ package com.gerantech.islamic
 			addChild(appModel.toolbar);
 			
 			appModel.navigator.rootScreenID = appModel.PAGE_QURAN;
+			appModel.dispatchEventWith(AppEvent.PUSH_FIRST_SCREEN);
 
 		}
 	}

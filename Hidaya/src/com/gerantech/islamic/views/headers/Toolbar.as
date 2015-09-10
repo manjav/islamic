@@ -55,9 +55,9 @@ package com.gerantech.islamic.views.headers
 			appModel = AppModel.instance;
 			backgroundSkin = new Quad(1,1,BaseMaterialTheme.CHROME_COLOR);
 			
-			height = appModel.headerHeight;
-			gap = Math.min(appModel.headerHeight*1.2, appModel.orginalWidth/5);
-			padding = appModel.headerHeight/3;
+			height = appModel.toolbarSize;
+			gap = Math.min(appModel.toolbarSize*1.2, appModel.orginalWidth/5);
+			padding = appModel.toolbarSize/3;
 			
 			layout = new AnchorLayout();
 			buttons = new Vector.<ToolbarButton>();
@@ -135,15 +135,15 @@ package com.gerantech.islamic.views.headers
 			for(var i:uint; i<buttons.length; i++) 
 			{
 				buttons[i].x = appModel.ltr?appModel.width-i*gap-padding:i*gap+padding;
-				buttons[i].y = appModel.headerHeight/2;
+				buttons[i].y = appModel.toolbarSize/2;
 				buttons[i].buttonWidth = gap;
-				buttons[i].buttonHeight = appModel.headerHeight;
+				buttons[i].buttonHeight = appModel.toolbarSize;
 				buttons[i].addEventListener(Event.TRIGGERED, activeButtons_triggerdHandler);
 			}
 			navigateButton.x = appModel.ltr ? padding*1.5 : appModel.width-padding*1.5;
-			navigateButton.y = appModel.headerHeight/2;
+			navigateButton.y = appModel.toolbarSize/2;
 			navigateButton.buttonWidth = gap;
-			navigateButton.buttonHeight = appModel.headerHeight;
+			navigateButton.buttonHeight = appModel.toolbarSize;
 		}
 		
 		private function navigator_changeHandler(event:Event):void

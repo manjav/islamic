@@ -639,7 +639,7 @@ package com.gerantech.islamic.themes
 			
 		//	326 264
 			ORIGINAL_DPI_IPAD_RETINA = Capabilities.os.substr(0,2)=="iP" ? 264 : 240;
-			ORIGINAL_DPI_IPHONE_RETINA = Capabilities.os.substr(0,5)=="iP" ? 326 : 300;
+			ORIGINAL_DPI_IPHONE_RETINA = Capabilities.os.substr(0,2)=="iP" ? 326 : 320;
 			
 			var scaledDPI:int = DeviceCapabilities.dpi / Starling.contentScaleFactor;
 			this._originalDPI = scaledDPI;

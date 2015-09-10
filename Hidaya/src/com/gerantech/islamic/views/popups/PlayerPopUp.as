@@ -47,7 +47,7 @@ package com.gerantech.islamic.views.popups
 			container.addChild(personPanel);*/
 			
 			ayaPanel = new SettingPanel("player_popup_aya", numRepeats, {value:userModel.ayaRepeat});
-			ayaPanel.list.listProperties.width = appModel.actionHeight*2;
+			ayaPanel.list.listProperties.width = appModel.toolbarSize*2;
 			ayaPanel.addEventListener(Event.CHANGE, ayaPanel_changeHandler);
 			container.addChild(ayaPanel);
 			
@@ -59,7 +59,7 @@ package com.gerantech.islamic.views.popups
 				case "juze_navi": pageLabel += loc("juze_l"); break;
 			}
 			pagePanel = new SettingPanel(pageLabel , numRepeats, {value:userModel.pageRepeat});
-			pagePanel.list.listProperties.width = appModel.actionHeight*2;
+			pagePanel.list.listProperties.width = appModel.toolbarSize*2;
 			pagePanel.addEventListener(Event.CHANGE, pagePanel_changeHandler);
 			container.addChild(pagePanel);
 			

@@ -107,7 +107,7 @@ package com.gerantech.islamic.views.controls
 			}
 
 			signButton = new FlatButton(profileData.registered?"logout":"info", null, true);
-			signButton.width = signButton.height = AppModel.instance.actionHeight;
+			signButton.width = signButton.height = AppModel.instance.toolbarSize;
 			signButton.iconScale = 0.4;
 			//signButton.icon.scaleX  = AppModel.instance.ltr ? 1 : -1
 			signButton.layoutData = new AnchorLayoutData(NaN, !AppModel.instance.ltr?NaN:0, 0, AppModel.instance.ltr?NaN:0);

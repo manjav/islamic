@@ -1,4 +1,4 @@
-package com.gerantech.islamic.views.action
+package com.gerantech.islamic.views.actions
 {
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
@@ -6,7 +6,6 @@ package com.gerantech.islamic.views.action
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
-	import com.gerantech.islamic.views.action.items.ActionItemRenderer;
 	
 	import flash.geom.Point;
 	import flash.utils.clearTimeout;
@@ -20,6 +19,7 @@ package com.gerantech.islamic.views.action
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import com.gerantech.islamic.views.actions.items.ActionItemRenderer;
 	
 	public class LanguageActionList extends LayoutGroup
 	{

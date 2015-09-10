@@ -41,7 +41,7 @@ package com.gerantech.islamic.views.lists
 			layout = llaouyt;
 			
 			
-			width = Math.min(AppModel.instance.actionHeight*7, AppModel.instance.orginalWidth*0.8);
+			width = Math.min(AppModel.instance.itemHeight*7, AppModel.instance.orginalWidth*0.8);
 			array = new Array({value:"goto_popup", icon:Assets.getTexture("jump")}, {value:"sura_navi"}, {value:"juze_navi"}, {value:"page_navi"});
 			dataProvider = new ListCollection(array); 
 			itemRendererFactory = function():IListItemRenderer

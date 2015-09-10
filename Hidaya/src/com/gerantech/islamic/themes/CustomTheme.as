@@ -18,9 +18,6 @@ package com.gerantech.islamic.themes
 		public function CustomTheme(scaleToDPI:Boolean=true)
 		{
 			super(scaleToDPI);
-			AppModel.instance.actionHeight = gridSize;
-			AppModel.instance.headerHeight = uint(gridSize*1.2);
-			AppModel.instance.height = AppModel.instance.heightFull-gridSize;
 			controlsSize = controlSize;
 		}
 		

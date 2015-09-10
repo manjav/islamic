@@ -44,7 +44,7 @@ package com.gerantech.islamic.views.screens
 			addChild(listsContainer);*/
 			
 			indexHeader = new IndexHeader();
-			indexHeader._width = appModel.suraItemHeight;
+			indexHeader._width = appModel.itemHeight;
 			indexHeader.layoutData = new AnchorLayoutData(NaN,0,NaN,0);
 			indexHeader.addEventListener(Event.CHANGE, indexHeader_changeHandler);
 			lastSortMode = indexHeader.sortMode;
@@ -59,7 +59,7 @@ package com.gerantech.islamic.views.screens
 
 			hizbsList = new List();
 			//hizbsList.layout = hizbLayout;
-			hizbsList.layoutData = new AnchorLayoutData(appModel.actionHeight*0.8, NaN, 0, 0);
+			hizbsList.layoutData = new AnchorLayoutData(appModel.subtitleHeight, NaN, 0, 0);
 			hizbsList.width = appModel.itemHeight;
 			hizbsList.itemRendererFactory = function():IListItemRenderer
 			{
@@ -71,7 +71,7 @@ package com.gerantech.islamic.views.screens
 
 			surasList = new List();
 			//surasList.layout = suraLayout;
-			surasList.layoutData = new AnchorLayoutData(appModel.actionHeight*0.8, 0, 0, appModel.itemHeight);
+			surasList.layoutData = new AnchorLayoutData(appModel.subtitleHeight, 0, 0, appModel.itemHeight);
 			surasList.itemRendererFactory = function():IListItemRenderer
 			{
 				return new SuraItemRenderer();

@@ -37,12 +37,12 @@ package com.gerantech.islamic.views.headers
 			backgroundSkin = new Quad(1,1,0x004D40);
 			appModel = AppModel.instance;
 				
-			_width = AppModel.instance.suraItemHeight;
+			_width = AppModel.instance.itemHeight;
 			if(appModel.width/_width<6.7)
 				_width = appModel.width/6.7;
 			
 			_width = (_width+appModel.border)*0.8;
-			height = _height = appModel.actionHeight*0.8;
+			height = _height = appModel.subtitleHeight;
 
 			myLayout = new HorizontalLayout();
 			myLayout.gap = appModel.border/2;

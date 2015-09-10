@@ -32,7 +32,7 @@ package com.gerantech.islamic.views.headers
 			hlayout.paddingRight = AppModel.instance.ltr? 0 : AppModel.instance.border*3;
 			hlayout.paddingLeft = AppModel.instance.ltr? AppModel.instance.border*3 : 0;
 			layout = hlayout;
-			height = _height = AppModel.instance.actionHeight*0.8;
+			height = _height = AppModel.instance.subtitleHeight;
 			
 			backgroundSkin = new Quad(1,1,0x96000e);
 			

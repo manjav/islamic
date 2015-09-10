@@ -78,7 +78,7 @@
 			scrollLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
 			scrollLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
 			scrollLayout.paddingTop = headerHeight;
-			scrollLayout.paddingBottom = ConfigModel.instance.selectedReciters.length>0?AppModel.instance.headerHeight*1.6:0
+			scrollLayout.paddingBottom = ConfigModel.instance.selectedReciters.length>0?AppModel.instance.toolbarSize*1.6:0
 			layout = scrollLayout;
 			
 			scrollBarDisplayMode = SCROLL_BAR_DISPLAY_MODE_NONE;

@@ -40,7 +40,7 @@ package com.gerantech.islamic.views.items
 			shadow.layoutData = new AnchorLayoutData(header.height, 0, NaN, 0);
 			//shadow.y = header.height;
 			//shadow.width = appModel.width; 
-			shadow.height = appModel.itemBorder*2;
+			shadow.height = appModel.border;
 			headerContainer.addChild(shadow);
 		}
 

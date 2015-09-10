@@ -1,4 +1,4 @@
-package com.gerantech.islamic.views.action.items
+package com.gerantech.islamic.views.actions.items
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;

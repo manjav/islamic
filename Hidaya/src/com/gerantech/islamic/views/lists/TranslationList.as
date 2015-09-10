@@ -64,7 +64,7 @@ package com.gerantech.islamic.views.lists
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			listLayout.padding = appModel.border*2;
 			listLayout.paddingTop = headerHeight;
-			listLayout.paddingBottom = ConfigModel.instance.hasReciter?appModel.headerHeight*1.5+appModel.border:appModel.border
+			listLayout.paddingBottom = ConfigModel.instance.hasReciter?appModel.toolbarSize*1.5+appModel.border:appModel.border
 			listLayout.hasVariableItemDimensions = true;
 			listLayout.useVirtualLayout = true;
 			

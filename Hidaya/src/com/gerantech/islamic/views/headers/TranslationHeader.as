@@ -71,7 +71,7 @@ package com.gerantech.islamic.views.headers
 			
 			suraImage = new ImageLoader();
 			suraImage.delayTextureCreation = true;
-			suraImage.height = appModel.headerHeight/2;
+			suraImage.height = appModel.toolbarSize/2;
 			suraImage.layoutData = new AnchorLayoutData(NaN,NaN,NaN,NaN,0,0);
 			addChild(suraImage);
 			

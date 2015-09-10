@@ -15,6 +15,7 @@ package com.gerantech.islamic.models
 	import feathers.controls.StackScreenNavigator;
 	import feathers.motion.Cover;
 	import feathers.motion.Reveal;
+	import feathers.system.DeviceCapabilities;
 	
 	import starling.events.EventDispatcher;
 	import starling.utils.AssetManager;
@@ -44,20 +45,16 @@ package com.gerantech.islamic.models
 		public const PAGE_DOWNLOAD:String = "page_download";
 
 		
+		public var theme:CustomTheme;
 		public var toolbar:Toolbar;
 		public var drawers:CustomDrawers;
-		//public var leftDrawer:DrawerView;
-		//public var rightDrawer:DrawerView;
 		public var myDrawer:DrawerList;
 		public var navigator:StackScreenNavigator;
-		
 		public var descriptor:Descriptor ;
-/*		
-		public var calloutIsOpen:Boolean;
-		public var menusIsOpen:Boolean;
-		public var popupIsOpen:Boolean;
+		public var gotoPopUP:GotoPopUp;
+		public var assetManager:AssetManager;
+		public var byteArraySec:ByteArray;
 
-*/
 		private static var _this:AppModel;
 		public static function get instance():AppModel
 		{
@@ -71,15 +68,15 @@ package com.gerantech.islamic.models
 			descriptor = new Descriptor(NativeApplication.nativeApplication.applicationDescriptor);
 			byteArraySec = new ByteArray();
 			byteArraySec.writeUTFBytes("d@t@B@53_53cur3d");
-			isAndroid = Capabilities.os.substr(0, 5)=="Linux";
+			_isAndroid = Capabilities.os.substr(0, 5)=="Linux";
+			_dpi = Capabilities.screenDPI;
 		}
 
-		
 		public var upside:Boolean = true;
-		
-		
 		public var align:String = "left";
 		public var ltr:Boolean;
+		
+		
 		private var _direction:String = "ltr";
 		public function set direction(value:String):void
 		{
@@ -92,46 +89,59 @@ package com.gerantech.islamic.models
 			return(_direction);
 		}
 				
-		public var main:Hidaya;
+		private var _main:Hidaya;
+		public function get main():Hidaya{return _main;}
 
-		
-		public var orginalFontSize:uint;
-		public var orginalWidth:Number;
-		public var orginalHeight:Number;
-		public var orginalHeightFull:Number;
-		
-	//	public var scaledHeight:Number;
-		//public var scaledHeightFull:Number;
-		
+		private var _isTablet:Boolean;
+		public function get isTablet():Boolean{return _isTablet;}
+
+		private var _isAndroid:Boolean;
+		public function get isAndroid():Boolean{return _isAndroid;}
+
+		private var _dpi:Number;
+		public function get dpi():Number{return _dpi;}
+
+		private var _orginalFontSize:uint;
+		public function get orginalFontSize():uint{return _orginalFontSize;}
+
+		private var _orginalWidth:Number;
+		public function get orginalWidth():Number{return _orginalWidth;}
+
+		private var _orginalHeight:Number;
+		public function get orginalHeight():Number{return _orginalHeight;}
+
+		private var _orginalHeightFull:Number;
+		public function get orginalHeightFull():Number{return _orginalHeightFull;}
+
+		private var _toolbarSize:Number = 66;
+		public function get toolbarSize():Number{return _toolbarSize;}
+
+		private var _subtitleHeight:Number = 66;
+		public function get subtitleHeight():Number{return _subtitleHeight;}
+
+		private var _itemHeight:Number = 80;
+		public function get itemHeight():Number{return _itemHeight;}
+
+		//private var _playerHeight:Number = 0;
+		//public function get playerHeight():Number{return _playerHeight;}
+
+		private var _border:uint = 0;
+		public function get border():uint{return _border;}
+
+
 		public var width:Number;
 		public var height:Number;
 		public var heightFull:Number;
-		
-		public var headerHeight:Number = 66;
-		public var actionHeight:Number = 66;
-		public var itemHeight:Number = 80;
-		public var playerHeight:Number = 0;
-		public var border:uint = 0;
-		public var itemBorder:uint;
-		
+				
 		public var autoPlay:Boolean;
 		public var isCalloutOpen:Boolean;
 		public var pageViewState:String = "normal";
 		
 		public var autoDownload:Boolean;
 		public var navigateToItem:Boolean;
-		//public var overlay:OverlayScreen;
-		public var dpi:Number;
-		public var suraItemHeight:Number;
-		public var theme:CustomTheme;
-		public var preventPurchaseWarning:Boolean;
-		public var gotoPopUP:GotoPopUp;
-		public var isTablet:Boolean;
-		public var assetManager:AssetManager;
 		public var puased:Boolean;
-		public var byteArraySec:ByteArray;
-		public var isAndroid:Boolean;
-
+		public var preventPurchaseWarning:Boolean;
+		
 		public function get pushTransition():Function
 		{
 			return ltr ? Cover.createCoverLeftTransition() : Cover.createCoverRightTransition() ;
@@ -139,6 +149,26 @@ package com.gerantech.islamic.models
 		public function get popTransition():Function
 		{
 			return ltr ? Reveal.createRevealRightTransition() : Reveal.createRevealLeftTransition() ;
+		}
+		
+		public function init(main:Hidaya):void
+		{
+			_main = main;
+			_isTablet = DeviceCapabilities.isTablet(main.stage);
+			_orginalWidth = main.stage.stageWidth;
+			_orginalHeightFull = main.stage.stageHeight;
+			
+			var scale:Number = dpi/160;
+			trace("scale", scale)
+			_subtitleHeight = Math.round(48*scale);
+			_toolbarSize = Math.round(56*scale);
+			_itemHeight = Math.round(72*scale);//Math.min(Math.max(64, _orginalHeightFull/8), 240);
+			height = heightFull-_toolbarSize;
+			//_actionHeight = uint(_itemHeight*0.76);//trace(_itemHeight, _actionHeight);
+			_orginalHeight = _orginalHeightFull - _toolbarSize;
+			_orginalFontSize = Math.round(16*scale);//uint(height/40+2);
+			_border = Math.round(_itemHeight/16);
+			
 		}
 	}
 }

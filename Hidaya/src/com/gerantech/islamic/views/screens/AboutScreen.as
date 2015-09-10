@@ -57,7 +57,7 @@ package com.gerantech.islamic.views.screens
 
 			var appIcon:ImageLoader = new ImageLoader();
 			appIcon.source = "app:/com/gerantech/islamic/assets/images/icon/icon-192.png";
-			appIcon.width = appIcon.height = uint(appModel.actionHeight*0.9)*2;
+			appIcon.width = appIcon.height = uint(appModel.itemHeight*0.9)*2;
 			addChild(appIcon);
 			
 			var appName:RTLLabel = new RTLLabel(loc("app_title"), BaseMaterialTheme.PRIMARY_TEXT_COLOR, "center", null, true, null, 0, null, "bold");

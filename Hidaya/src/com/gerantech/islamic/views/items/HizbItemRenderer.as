@@ -33,7 +33,7 @@ package com.gerantech.islamic.views.items
 		{
 			super.initialize();
 		//	backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
-			height = AppModel.instance.actionHeight;
+			height = AppModel.instance.itemHeight;
 			
 			layout = new AnchorLayout();
 			
