@@ -2710,7 +2710,7 @@ package feathers.controls
 		 * This value is precalculated. See the <code>decelerationRate</code>
 		 * setter for the dynamic calculation.
 		 */
-		protected var _fixedThrowDuration:Number = 2.996998998998728;
+		protected var _fixedThrowDuration:Number = 1; // 2.996998998998728;
 
 		/**
 		 * @private
