@@ -48,7 +48,7 @@ package com.gerantech.islamic.views.headers
 			juzeImage = new ImageLoader()
 			//juzeImage.height = uint(_height*0.5);
 			//juzeImage.scaleX = juzeImage.scaleY;
-			juzeImage.layoutData = new AnchorLayoutData(_height/5.4, NaN, _height/5.4, _height/5.4, NaN, 0);
+			juzeImage.layoutData = new AnchorLayoutData(_height/4.5, NaN, _height/4.5, _height/4.5, NaN, 0);
 			addChild(juzeImage);
 			
 			/*if(UserModel.instance.nightMode)
@@ -67,7 +67,7 @@ package com.gerantech.islamic.views.headers
 			suraImage = new ImageLoader();
 			//suraImage.height = uint(_height*0.6);
 			//suraImage.scaleX = suraImage.scaleY;
-			suraImage.layoutData = new AnchorLayoutData(_height/6, _height/6, _height/6, NaN, NaN, 0);
+			suraImage.layoutData = new AnchorLayoutData(_height/5, _height/5, _height/5, NaN, NaN, 0);
 			addChild(suraImage);
 			
 			/*if(UserModel.instance.nightMode)

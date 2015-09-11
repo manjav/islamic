@@ -160,8 +160,8 @@ package com.gerantech.islamic.models
 			
 			var scale:Number = dpi/160;
 			trace("scale", scale)
+			_toolbarSize = Math.round(56*scale);//56
 			_subtitleHeight = Math.round(48*scale);
-			_toolbarSize = Math.round(56*scale);
 			_itemHeight = Math.round(72*scale);//Math.min(Math.max(64, _orginalHeightFull/8), 240);
 			height = heightFull-_toolbarSize;
 			//_actionHeight = uint(_itemHeight*0.76);//trace(_itemHeight, _actionHeight);

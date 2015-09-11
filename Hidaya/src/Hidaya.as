@@ -30,8 +30,6 @@ package
 	
 	import mx.resources.ResourceManager;
 	
-	import feathers.system.DeviceCapabilities;
-	
 	import starling.core.Starling;
 	import starling.utils.AssetManager;
 
@@ -70,7 +68,6 @@ package
 
 			//Add Splash -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 			loaderInfo.addEventListener(Event.COMPLETE, loaderInfo_completeHandler);
-			trace(stage.stageWidth, stage.stageHeight, Capabilities.screenDPI, Capabilities.screenResolutionX, Capabilities.screenResolutionY)
 			graphics.beginFill(0x009688);
 			graphics.drawRect(0,0,Math.max(stage.stageWidth, stage.stageHeight), Capabilities.screenDPI/3.2);
 		}
@@ -78,7 +75,6 @@ package
 		private function loaderInfo_completeHandler(event:Event):void
 		{
 			loaderInfo.removeEventListener(Event.COMPLETE, loaderInfo_completeHandler);
-			trace(stage.stageWidth, stage.stageHeight, Capabilities.screenDPI, Capabilities.screenResolutionX, Capabilities.screenResolutionY)
 
 			appModel = AppModel.instance;
 			appModel.init(this as Hidaya);
