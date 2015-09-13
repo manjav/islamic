@@ -29,10 +29,10 @@ package com.gerantech.islamic.views.headers
 			super.initialize();
 			var hlayout:HorizontalLayout = new HorizontalLayout();
 			hlayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			hlayout.paddingRight = AppModel.instance.ltr? 0 : AppModel.instance.border*3;
-			hlayout.paddingLeft = AppModel.instance.ltr? AppModel.instance.border*3 : 0;
+			hlayout.paddingRight = AppModel.instance.ltr? 0 : AppModel.instance.sizes.border*3;
+			hlayout.paddingLeft = AppModel.instance.ltr? AppModel.instance.sizes.border*3 : 0;
 			layout = hlayout;
-			height = _height = AppModel.instance.subtitleHeight;
+			height = _height = AppModel.instance.sizes.subtitle;
 			
 			backgroundSkin = new Quad(1,1,0x96000e);
 			

@@ -49,7 +49,7 @@ package com.gerantech.islamic.views.popups
 	/*	override protected function initialize():void
 		{
 			super.initialize();
-			//height = Math.round(Math.min(appModel.orginalWidth, appModel.orginalHeightFull)*0.9);
+			//height = Math.round(Math.min(appModel.sizes.orginalWidth, appModel.sizes.orginalHeightFull)*0.9);
 		}	*/	
 		
 		override protected function initialize():void

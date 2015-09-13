@@ -31,13 +31,13 @@ package com.gerantech.islamic.views.items
 		{
 			super.initialize();
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
-			height = appModel.itemHeight;
+			height = appModel.sizes.listItem;
 			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			myLayout.gap = appModel.border*4;
-			myLayout.paddingLeft = appModel.ltr ? appModel.border*4 : 0;
-			myLayout.paddingRight = appModel.ltr ? 0 : appModel.border*4;
+			myLayout.gap = appModel.sizes.border*4;
+			myLayout.paddingLeft = appModel.ltr ? appModel.sizes.border*4 : 0;
+			myLayout.paddingRight = appModel.ltr ? 0 : appModel.sizes.border*4;
 			layout = myLayout;
 			
 			deleteButton = new FlatButton("remove", null, true);

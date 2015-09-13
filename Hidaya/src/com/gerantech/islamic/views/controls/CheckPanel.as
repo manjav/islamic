@@ -38,7 +38,7 @@ package com.gerantech.islamic.views.controls
 			
 			var mLayout:HorizontalLayout = new HorizontalLayout();
 			mLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			mLayout.gap = AppModel.instance.border*2;
+			mLayout.gap = AppModel.instance.sizes.border*2;
 			container.layout = mLayout;
 			
 			titleDisplay = new RTLLabel(label, BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, uint(UserModel.instance.fontSize*0.95), null, "bold");

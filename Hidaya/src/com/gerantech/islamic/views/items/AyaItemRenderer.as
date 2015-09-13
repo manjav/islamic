@@ -56,15 +56,15 @@ package com.gerantech.islamic.views.items
 			userModel.addEventListener(UserEvent.FONT_SIZE_CHANGE_END, user_fontSizeChangeHandler);
 			
 			vLayout = new VerticalLayout();
-			vLayout.gap = Math.round(Math.min(appModel.border*3, userModel.fontSize*1.2))*0.7; 
+			vLayout.gap = Math.round(Math.min(appModel.sizes.border*3, userModel.fontSize*1.2))*0.7; 
 			vLayout.paddingTop = vLayout.paddingRight = vLayout.paddingLeft = vLayout.gap*3;
 			vLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
 			vLayout.paddingBottom = vLayout.gap*2;
 			layout = vLayout
 			
 			toolsList = new ToolsList();
-			//toolsList.x = appModel.border*2;
-			toolsList.y = appModel.border;
+			//toolsList.x = appModel.sizes.border*2;
+			toolsList.y = appModel.sizes.border;
 			toolsList.layoutData = new VerticalLayoutData(100);
 			addChild(toolsList);
 			
@@ -97,7 +97,7 @@ package com.gerantech.islamic.views.items
 			//moreStrip.backgroundSkin.alpha = 0.1;
 			moreStrip.layoutData = new VerticalLayoutData(100)
 			moreStrip.addEventListener(Event.TRIGGERED, moreStrip_triggeredHandler);
-			moreStrip.height = appModel.itemHeight/2;
+			moreStrip.height = appModel.sizes.listItem/2;
 			//moreStrip.layout = new AnchorLayout();
 			addChild(moreStrip);
 			
@@ -152,7 +152,7 @@ package com.gerantech.islamic.views.items
 			//(aya.aya==1?(aya.aya + " . "):"") + 	
 			if(!hasTranslation)
 			{
-				vLayout.paddingBottom = vLayout.gap*2 + (aya.isLastItem? appModel.itemHeight/3 : 0);
+				vLayout.paddingBottom = vLayout.gap*2 + (aya.isLastItem? appModel.sizes.listItem/3 : 0);
 				return;
 			}
 			/*if(moreStrip.parent == this)
@@ -195,7 +195,7 @@ package com.gerantech.islamic.views.items
 				//moreStrip.visible = true;
 				/*}
 				else
-				vLayout.paddingBottom = vLayout.gap*2 + (aya.isLastItem? appModel.itemHeight/2 : 0);*/
+				vLayout.paddingBottom = vLayout.gap*2 + (aya.isLastItem? appModel.sizes.itemHeight/2 : 0);*/
 			}
 		}
 		
@@ -222,7 +222,7 @@ package com.gerantech.islamic.views.items
 			
 			if(event.type==UserEvent.FONT_SIZE_CHANGE_END)
 			{
-				vLayout.gap = Math.round(Math.min(appModel.border*3, userModel.fontSize*1.2))*0.7;
+				vLayout.gap = Math.round(Math.min(appModel.sizes.border*3, userModel.fontSize*1.2))*0.7;
 				moreStrip.visible = true;
 
 				//setTimeout(setNextTranslation, FAST_COMMIT_TIMEOUT);
@@ -241,7 +241,7 @@ package com.gerantech.islamic.views.items
 			
 			if(value!=STATE_DOWN)
 				toolsList.selected = value==STATE_SELECTED;
-			/*if(hasTranslation && touch && touch.phase==TouchPhase.ENDED && touch.getLocation(this).y>height-appModel.itemHeight)
+			/*if(hasTranslation && touch && touch.phase==TouchPhase.ENDED && touch.getLocation(this).y>height-appModel.sizes.itemHeight)
 			{
 				trace(touch.getLocation(moreStrip))
 				_owner.dispatchEventWith(Event.SELECT, false, this);

@@ -35,9 +35,9 @@ package com.gerantech.islamic.views.screens
 			super.initialize();
 			
 			var mlayout:VerticalLayout = new VerticalLayout();
-			mlayout.lastGap = mlayout.firstGap = appModel.border;
-			mlayout.gap = -appModel.border;
-			mlayout.padding = appModel.border*2;
+			mlayout.lastGap = mlayout.firstGap = appModel.sizes.border;
+			mlayout.gap = -appModel.sizes.border;
+			mlayout.padding = appModel.sizes.border*2;
 			mlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
 			layout = mlayout;
 			
@@ -57,7 +57,7 @@ package com.gerantech.islamic.views.screens
 
 			var appIcon:ImageLoader = new ImageLoader();
 			appIcon.source = "app:/com/gerantech/islamic/assets/images/icon/icon-192.png";
-			appIcon.width = appIcon.height = uint(appModel.itemHeight*0.9)*2;
+			appIcon.width = appIcon.height = uint(appModel.sizes.listItem*0.9)*2;
 			addChild(appIcon);
 			
 			var appName:RTLLabel = new RTLLabel(loc("app_title"), BaseMaterialTheme.PRIMARY_TEXT_COLOR, "center", null, true, null, 0, null, "bold");
@@ -70,7 +70,7 @@ package com.gerantech.islamic.views.screens
 			addChild(appCopyRight);
 			
 			var headerSpacer:LayoutGroup = new LayoutGroup();
-			headerSpacer.height = appModel.border*4;
+			headerSpacer.height = appModel.sizes.border*4;
 			addChild(headerSpacer);			
 		}/*
 		
@@ -78,7 +78,7 @@ package com.gerantech.islamic.views.screens
 		{
 			var headerGroup:LayoutGroup = new LayoutGroup();
 			var hlayout:HorizontalLayout = new HorizontalLayout();
-			hlayout.gap = appModel.border*3;
+			hlayout.gap = appModel.sizes.border*3;
 			hlayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
 			headerGroup.layout = hlayout;
 			addChild(headerGroup);
@@ -86,7 +86,7 @@ package com.gerantech.islamic.views.screens
 			var appIcon:ImageLoader = new ImageLoader();
 			appIcon.source = "com/gerantech/islamic/assets/images/icon/icon-192.png";
 			//appIcon.source = Assets.getTexture("icon_144");
-			appIcon.width = appIcon.height = appModel.itemHeight;
+			appIcon.width = appIcon.height = appModel.sizes.itemHeight;
 			
 			var appDetails:LayoutGroup = new LayoutGroup();
 			var dLayout:VerticalLayout = new VerticalLayout();

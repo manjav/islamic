@@ -65,7 +65,7 @@ package com.gerantech.islamic.views.popups
 		override protected function initialize():void
 		{
 			super.initialize();
-			width = Math.round(Math.min(appModel.itemHeight*6, appModel.orginalWidth));
+			width = Math.round(Math.min(appModel.sizes.listItem*6, appModel.sizes.orginalWidth));
 			
 			resModel = ResourceModel.instance;
 			if(inited)
@@ -73,13 +73,13 @@ package com.gerantech.islamic.views.popups
 				return;
 			}
 			var cLayout:VerticalLayout = new VerticalLayout();
-			cLayout.gap = appModel.border*3;
+			cLayout.gap = appModel.sizes.border*3;
 			cLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
 			container.layout = cLayout;
 			
 			var hLayout:HorizontalLayout = new HorizontalLayout();
 			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_BOTTOM;
-			hLayout.gap = appModel.border*3;
+			hLayout.gap = appModel.sizes.border*3;
 			
 			pageMode = userModel.navigationMode.value=="page_navi"
 			if(pageMode)
@@ -103,7 +103,7 @@ package com.gerantech.islamic.views.popups
 			}
 			
 			var suraLayout:HorizontalLayout = new HorizontalLayout();
-			suraLayout.gap = appModel.border*2;
+			suraLayout.gap = appModel.sizes.border*2;
 			
 			suraGroup = new LayoutGroup();
 			suraGroup.layout = suraLayout;
@@ -113,7 +113,7 @@ package com.gerantech.islamic.views.popups
 			suraPicker = new PickerList();
 			suraPicker.buttonProperties.iconPosition = appModel.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
 			suraPicker.layoutData = new HorizontalLayoutData(70);
-			suraPicker.listProperties.width = appModel.itemHeight*3;
+			suraPicker.listProperties.width = appModel.sizes.listItem*3;
 			suraPicker.labelFunction = function( item:Object ):String
 			{
 				return (appModel.ltr ? resModel.suraList[item.index].tname : resModel.suraList[item.index].name);
@@ -134,7 +134,7 @@ package com.gerantech.islamic.views.popups
 			ayaPicker = new PickerList();
 			ayaPicker.buttonProperties.iconPosition = appModel.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
 			ayaPicker.layoutData = new HorizontalLayoutData(30);
-			ayaPicker.listProperties.width = appModel.itemHeight*2;
+			ayaPicker.listProperties.width = appModel.sizes.listItem*2;
 			ayaPicker.labelField = "name";
 			initAyaPicker(suraPicker.selectedIndex);
 			ayaPicker.listProperties.itemRendererFactory = function():IListItemRenderer
@@ -146,7 +146,7 @@ package com.gerantech.islamic.views.popups
 			suraGroup.addChild(appModel.ltr?ayaPicker:suraPicker);
 			
 			var spacer:Spacer = new Spacer();
-			spacer.height = appModel.itemHeight/2;
+			spacer.height = appModel.sizes.listItem/2;
 			container.addChild(spacer);
 			
 			firstButton = new Button();

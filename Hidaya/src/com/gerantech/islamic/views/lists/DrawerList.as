@@ -38,7 +38,7 @@ package com.gerantech.islamic.views.lists
 		{
 			this.isLeft = isLeft;
 			appModel = AppModel.instance;
-			width = Math.min(appModel.itemHeight*5, appModel.orginalWidth*0.8);
+			width = Math.min(appModel.sizes.listItem*5, appModel.sizes.orginalWidth-appModel.sizes.toolbar);
 		}
 		
 		override protected function initialize():void
@@ -48,7 +48,7 @@ package com.gerantech.islamic.views.lists
 			var myLayout:VerticalLayout = new VerticalLayout();
 			myLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
 			myLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
-			myLayout.gap = appModel.border*3;
+			myLayout.gap = appModel.sizes.border*3;
 			layout = myLayout;
 			
 			profileView = new ProfileView();
@@ -59,9 +59,10 @@ package com.gerantech.islamic.views.lists
 
 			
 			var listLayout:VerticalLayout = new VerticalLayout();
+			listLayout.gap = listLayout.padding = 0;
 			listLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
-			listLayout.hasVariableItemDimensions = true;
+		//	listLayout.hasVariableItemDimensions = true;
 			
 			list = new List();
 			list.layout = listLayout;
@@ -92,7 +93,7 @@ package com.gerantech.islamic.views.lists
 			shadow.delayTextureCreation = true;
 			shadow.includeInLayout = false;
 			shadow.maintainAspectRatio = false
-			shadow.width = appModel.border*2;
+			shadow.width = appModel.sizes.border*2;
 			shadow.x = isLeft?width-shadow.width : 0;
 			shadow.height = viewPort.height;
 			addChild(shadow);

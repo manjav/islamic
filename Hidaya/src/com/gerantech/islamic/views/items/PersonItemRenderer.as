@@ -41,12 +41,12 @@ package com.gerantech.islamic.views.items
 		{
 			super.initialize();
 		//	backgroundSkin = new Quad(10, 10);
-			height = appModel.itemHeight;
+			height = appModel.sizes.listItem;
 			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			myLayout.gap = appModel.border*2;
-			myLayout.padding = appModel.border*2;
+			myLayout.gap = appModel.sizes.border*2;
+			myLayout.padding = appModel.sizes.border*2;
 			layout = myLayout;
 			
 			accessory = new PersonAccessory();
@@ -58,7 +58,7 @@ package com.gerantech.islamic.views.items
 			mainContents.layout = new VerticalLayout();
 			addChild(mainContents);
 			
-			var fontSize:uint = appModel.itemHeight/4;
+			var fontSize:uint = appModel.sizes.listItem/4;
 			
 			nameDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, fontSize, null, "bold");
 			
@@ -152,7 +152,7 @@ package com.gerantech.islamic.views.items
 		{
 			var rect:Rectangle = getBounds(_owner);
 		//	trace(rect.y, tempY)
-			if(Math.abs(tempY-rect.y)<appModel.itemHeight)
+			if(Math.abs(tempY-rect.y)<appModel.sizes.listItem)
 			{
 				clearInterval(intevalId);
 				messageDisplay.text = person.getCurrentMessage();

@@ -56,26 +56,26 @@ package com.gerantech.islamic.views.headers
 
 			hlayout = new HorizontalLayout();
 			hlayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			hlayout.gap = appModel.border;
-		//	hlayout.padding = appModel.border;
+			hlayout.gap = appModel.sizes.border;
+		//	hlayout.padding = appModel.sizes.border;
 			layout = hlayout;
 			
-			height = uint(appModel.itemHeight*1.1);
+			height = uint(appModel.sizes.listItem*1.1);
 			
 			/*personImage = new ImageLoader();
 			personImage.layoutData = new HorizontalLayoutData(NaN, 100);
-			//personImage.width = personImage.height//-appModel.border*2;
+			//personImage.width = personImage.height//-appModel.sizes.border*2;
 			personImage.source = reciter.iconTexture;
 			addChild(personImage);*/
 			var dLayout:HorizontalLayout = new HorizontalLayout();
-			dLayout.padding = appModel.border*3;
-			dLayout.paddingLeft = appModel.border;
+			dLayout.padding = appModel.sizes.border*3;
+			dLayout.paddingLeft = appModel.sizes.border;
 			dLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
 			
 			downloadButton = new SimpleLayoutButton();
 			downloadButton.backgroundSkin = new Quad(1,1,0x96000E);
 			downloadButton.layout = dLayout;
-			downloadButton.height = height-appModel.border*2;
+			downloadButton.height = height-appModel.sizes.border*2;
 			downloadButton.width = height*2.4;
 			downloadButton.layoutData = new HorizontalLayoutData(NaN, 100);
 			downloadButton.addEventListener(Event.TRIGGERED, downloadButton_triggeredHandler);

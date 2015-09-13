@@ -66,7 +66,7 @@ package com.gerantech.islamic.views.controls
 			super.validateSize()
 			
 			list.width = containerWidth;
-			list.height = AppModel.instance.heightFull;
+			list.height = AppModel.instance.sizes.heightFull;
 		}
 		
 		private function list_changeHandler( event:Event ):void

@@ -106,8 +106,8 @@ package com.gerantech.islamic.views.controls
 			titleDisplay = new RTLLabel("", BaseMaterialTheme.CHROME_COLOR, "center", null, true, null, 0, null, "bold");
 		//	titleDisplay.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0);
 			titleDisplay.x = (width)/2
-			titleDisplay.y = AppModel.instance.itemHeight;
-			titleDisplay.width = width-AppModel.instance.itemHeight*2;
+			titleDisplay.y = AppModel.instance.sizes.listItem;
+			titleDisplay.width = width-AppModel.instance.sizes.listItem*2;
 			titleDisplay.pivotX = titleDisplay.width/2;
 			addChild(titleDisplay);
 			
@@ -131,7 +131,7 @@ package com.gerantech.islamic.views.controls
 		{
 			startButton = new Button();
 			startButton.label = "  شـــروع  ";
-			startButton.layoutData = new AnchorLayoutData(NaN, NaN, AppModel.instance.itemHeight/2, NaN, 0);
+			startButton.layoutData = new AnchorLayoutData(NaN, NaN, AppModel.instance.sizes.listItem/2, NaN, 0);
 			startButton.addEventListener("triggered", startButton_triggeredHandler);
 			addChild(startButton);
 			

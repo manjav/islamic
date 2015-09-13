@@ -40,7 +40,7 @@ package com.gerantech.islamic.views.popups
 			var listLayout:TiledRowsLayout = new TiledRowsLayout();
 			listLayout.tileHorizontalAlign = TiledRowsLayout.TILE_HORIZONTAL_ALIGN_JUSTIFY;
 			listLayout.verticalAlign = TiledRowsLayout.TILE_VERTICAL_ALIGN_MIDDLE;
-			listLayout.gap = AppModel.instance.border*2;
+			listLayout.gap = AppModel.instance.sizes.border*2;
 			listLayout.useSquareTiles = true;
 			
 			listDisplay = new List();

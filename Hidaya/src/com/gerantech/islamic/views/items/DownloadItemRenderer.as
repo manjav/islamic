@@ -55,12 +55,12 @@ package com.gerantech.islamic.views.items
 			
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			appModel = AppModel.instance;
-			height = _height = uint(appModel.itemHeight*1.1);
+			height = _height = uint(appModel.sizes.listItem*1.1);
 			
 			var hLayout:HorizontalLayout = new HorizontalLayout();
 			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			//hLayout.paddingRight = hLayout.gap = appModel.border/3;
-			hLayout.paddingLeft = appModel.border*2;
+			//hLayout.paddingRight = hLayout.gap = appModel.sizes.border/3;
+			hLayout.paddingLeft = appModel.sizes.border*2;
 			layout = hLayout;
 			
 			mainContents = new LayoutGroup();

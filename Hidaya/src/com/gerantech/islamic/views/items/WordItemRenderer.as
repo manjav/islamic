@@ -19,11 +19,11 @@ package com.gerantech.islamic.views.items
 			super.initialize();
 			isQuickHitAreaEnabled = true;
 			//backgroundSkin = new Scale9Image(Assets.getItemTextures(STATE_NORMAL));
-			height = uint(appModel.itemHeight*0.7);
+			height = uint(appModel.sizes.listItem*0.7);
 			layout = new AnchorLayout();
 			
 			wordDisplay = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "right", "rtl", false, null, 0, null, "bold");
-			wordDisplay.layoutData = new AnchorLayoutData(appModel.border, appModel.border*2, appModel.border*2, appModel.border);
+			wordDisplay.layoutData = new AnchorLayoutData(appModel.sizes.border, appModel.sizes.border*2, appModel.sizes.border*2, appModel.sizes.border);
 			addChild(wordDisplay);
 		}
 		

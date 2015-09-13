@@ -62,9 +62,9 @@ package com.gerantech.islamic.views.lists
 			listLayout = new VerticalLayout();
 			listLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
-			listLayout.padding = appModel.border*2;
+			listLayout.padding = appModel.sizes.border*2;
 			listLayout.paddingTop = headerHeight;
-			listLayout.paddingBottom = ConfigModel.instance.hasReciter?appModel.toolbarSize*1.5+appModel.border:appModel.border
+			listLayout.paddingBottom = ConfigModel.instance.hasReciter?appModel.sizes.toolbar*1.5+appModel.sizes.border:appModel.sizes.border
 			listLayout.hasVariableItemDimensions = true;
 			listLayout.useVirtualLayout = true;
 			
@@ -219,7 +219,7 @@ package com.gerantech.islamic.views.lists
 						break;
 					
 					default:
-						if(textTemp.length<appModel.itemHeight*10)
+						if(textTemp.length<appModel.sizes.listItem*10)
 							textTemp += t
 						else
 						{

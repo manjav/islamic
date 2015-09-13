@@ -55,12 +55,12 @@ package com.gerantech.islamic.views.controls
 			layout = new AnchorLayout();
 			
 			background = new ShapeLayout(BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
-			background.height = appModel.border/4;
+			background.height = appModel.sizes.border/4;
 			background.layoutData = new AnchorLayoutData(NaN, 0, NaN, 0, NaN, 0);
 			addChild(background);
 			
 			track = new ShapeLayout(BaseMaterialTheme.CHROME_COLOR);
-			track.height = appModel.border/2;
+			track.height = appModel.sizes.border/2;
 			track.layoutData = new AnchorLayoutData(NaN, appModel.ltr?NaN:0, NaN, appModel.ltr?0:NaN, NaN, 0);
 			addChild(track);
 			

@@ -111,7 +111,7 @@ package com.gerantech.islamic.views.headers
 		
 		private function user_fontChangedHandler():void
 		{
-			var ih:Number = AppModel.instance.itemHeight;
+			var ih:Number = AppModel.instance.sizes.listItem;
 			var _h:uint = height = uint(Math.min(Math.max(ih/1.6, UserModel.instance.fontSize*2.6),ih/1.2));
 			if(lastHeight==_h)
 				return;

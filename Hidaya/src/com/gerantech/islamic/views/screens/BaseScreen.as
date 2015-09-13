@@ -20,8 +20,6 @@ package com.gerantech.islamic.views.screens
 		public function BaseScreen()
 		{
 			super();
-		//	layoutData = new AnchorLayoutData(0,0,0,0);
-		//	y = app.actionHeight;
 		}
 		
 		override protected function initialize():void
@@ -31,8 +29,8 @@ package com.gerantech.islamic.views.screens
 			userModel = UserModel.instance;
 			
 			appModel.drawers.isEnabled = false;
-			width = appModel.width;
-			height = appModel.height;
+			width = appModel.sizes.width;
+			height = appModel.sizes.height;
 			headerFactory = customHeaderFactory;
 			backButtonHandler = backButtonFunction;
 			searchButtonHandler = searchButtonFunction;

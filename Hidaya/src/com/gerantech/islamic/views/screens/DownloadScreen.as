@@ -49,7 +49,7 @@ package com.gerantech.islamic.views.screens
 			
 			listLayout = new VerticalLayout();
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
-			listLayout.paddingTop = appModel.itemHeight/4;
+			listLayout.paddingTop = appModel.sizes.listItem/4;
 			
 			list = new List();
 			list.layout = listLayout;
@@ -65,7 +65,7 @@ package com.gerantech.islamic.views.screens
 			var shadow:ImageLoader = new ImageLoader();
 			shadow.maintainAspectRatio = false;  
 			shadow.layoutData = new AnchorLayoutData(downloadHeader.height,0,NaN,0);
-			shadow.height = appModel.border*2;
+			shadow.height = appModel.sizes.border*2;
 			shadow.source = Assets.getTexture("shadow");
 			addChild(shadow);
 		//	setTimeout(list_changedHandler, 1);

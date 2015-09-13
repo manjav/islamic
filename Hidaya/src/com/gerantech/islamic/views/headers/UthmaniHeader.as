@@ -33,7 +33,7 @@ package com.gerantech.islamic.views.headers
 		
 		public function UthmaniHeader()
 		{
-			height = _height = uint(AppModel.instance.subtitleHeight);
+			height = _height = uint(AppModel.instance.sizes.subtitle);
 			backgroundSkin = new Quad(1, 1, UserModel.instance.nightMode ? BaseMaterialTheme.LIGHT_TEXT_COLOR : BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			
 			var myLayout:AnchorLayout = new AnchorLayout()

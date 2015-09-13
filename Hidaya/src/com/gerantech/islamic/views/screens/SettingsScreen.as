@@ -29,7 +29,7 @@ package com.gerantech.islamic.views.screens
 			super.initialize();
 			
 			var mLayout:VerticalLayout = new VerticalLayout();
-			mLayout.gap = mLayout.padding = appModel.border*4;
+			mLayout.gap = mLayout.padding = appModel.sizes.border*4;
 			mLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			layout = mLayout;
 			

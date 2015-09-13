@@ -31,8 +31,8 @@ package com.gerantech.islamic.views.screens
 			var fontSize:uint = userModel.fontSize*0.94;
 			
 			var mlayout:VerticalLayout = new VerticalLayout();
-			mlayout.lastGap = mlayout.firstGap = appModel.border;
-			mlayout.gap = mlayout.padding = appModel.border*4;
+			mlayout.lastGap = mlayout.firstGap = appModel.sizes.border;
+			mlayout.gap = mlayout.padding = appModel.sizes.border*4;
 			mlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			layout = mlayout;
 			

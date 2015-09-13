@@ -31,7 +31,7 @@ package com.gerantech.islamic.views.controls
 			
 			var mLayout:HorizontalLayout = new HorizontalLayout();
 			mLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			mLayout.gap = AppModel.instance.border*2;
+			mLayout.gap = AppModel.instance.sizes.border*2;
 			layout = mLayout;
 			
 			var index:uint = 0;
@@ -55,7 +55,7 @@ package com.gerantech.islamic.views.controls
 			list.layoutData = new HorizontalLayoutData(100);
 			list.buttonProperties.iconPosition = AppModel.instance.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
 			list.labelField = "name";
-			list.listProperties.width = AppModel.instance.width*0.8;
+			list.listProperties.width = AppModel.instance.sizes.width*0.8;
 			list.listProperties.itemRendererFactory = function():IListItemRenderer
 			{
 				var r:SettingItemRenderer = new SettingItemRenderer();

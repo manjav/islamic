@@ -73,7 +73,7 @@ package com.gerantech.islamic.views.headers
 		
 		override protected function stage_resizeHandler(event:Event):void
 		{
-			playerButton.x = appModel.width - _height/(isShow?1:2) 
+			playerButton.x = appModel.sizes.width - _height/(isShow?1:2) 
 			super.stage_resizeHandler(event);
 		}
 		
@@ -85,7 +85,7 @@ package com.gerantech.islamic.views.headers
 			autoSizeMode = AUTO_SIZE_MODE_STAGE;
 			appModel = AppModel.instance;
 			configModel = ConfigModel.instance;
-			_height = height = appModel.toolbarSize;
+			_height = height = appModel.sizes.toolbar;
 			
 			player = Player.instance;
 			player.addEventListener(Player.RECITER_CHANGED,		player_reciterChanged);
@@ -98,17 +98,17 @@ package com.gerantech.islamic.views.headers
 			
 			background = new LayoutGroup();
 			background.backgroundSkin = new Quad(1, 1, UserModel.instance.nightMode ? BaseMaterialTheme.LIGHT_TEXT_COLOR : BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
-			background.filter = BlurFilter.createGlow(0, 0.5, appModel.border/2);
+			background.filter = BlurFilter.createGlow(0, 0.5, appModel.sizes.border/2);
 			background.layoutData = backgroundLayoutData;
 			addChild(background);
 			
 			layout = new AnchorLayout();
 			
-			dataProgress = new Quad(1, appModel.border/1.4, BaseMaterialTheme.PRIMARY_TEXT_COLOR);
+			dataProgress = new Quad(1, appModel.sizes.border/1.4, BaseMaterialTheme.PRIMARY_TEXT_COLOR);
 			dataProgress.width = player.progressPercent*actualWidth;
 			addChild(dataProgress);
 			
-			playProgress = new Quad(1, appModel.border/1.4, 0xFFFF);
+			playProgress = new Quad(1, appModel.sizes.border/1.4, 0xFFFF);
 			playProgress.width = player.positionPercent*actualWidth;
 			addChild(playProgress);
 						
@@ -118,7 +118,7 @@ package com.gerantech.islamic.views.headers
 			settingIcon.layoutData = new AnchorLayoutData(NaN, NaN, NaN, _height/4, NaN, 0);
 			addChild(settingIcon);
 			
-			reciterLayoutdata = new AnchorLayoutData(appModel.border, NaN, appModel.border, _height, NaN, 0);
+			reciterLayoutdata = new AnchorLayoutData(appModel.sizes.border, NaN, appModel.sizes.border, _height, NaN, 0);
 			
 			reciterImage = new ImageLoader();
 			reciterImage.width = reciterImage.height = _height*0.8;
@@ -144,12 +144,12 @@ package com.gerantech.islamic.views.headers
 			
 			playerButton = new FlatButton("action_play", "action_player", false, 1, 0.8);
 			playerButton.iconScale = 0.4;
-			playerButton.x = appModel.width-_height;
-			playerButton.width = playerButton.height = appModel.toolbarSize;
+			playerButton.x = appModel.sizes.width-_height;
+			playerButton.width = playerButton.height = appModel.sizes.toolbar;
 			playerButton.pivotY = playerButton.pivotX = playerButton.width/2;
 			playerButton.addEventListener("triggered", playerButton_triggeredHandler);
 			playerButton.includeInLayout = false;
-			playerButton.filter = BlurFilter.createDropShadow(AppModel.instance.border, 90*(Math.PI/180), 0, 0.4, 3);
+			playerButton.filter = BlurFilter.createDropShadow(AppModel.instance.sizes.border, 90*(Math.PI/180), 0, 0.4, 3);
 			addChild(playerButton);
 			
 			setState(player.state);
@@ -181,7 +181,7 @@ package com.gerantech.islamic.views.headers
 			playProgress.width = toucher.touchPoint.x;
 			if(player.ayaSound!=null && player.ayaSound.sound!=null)
 			{
-				var pos:Number = toucher.touchPoint.x/appModel.width*player.ayaSound.sound.length
+				var pos:Number = toucher.touchPoint.x/appModel.sizes.width*player.ayaSound.sound.length
 				player.lastPosition = pos;
 				timeLabel.text = GTStringUtils.uintToTime(pos/1000);
 			}
@@ -324,7 +324,7 @@ package com.gerantech.islamic.views.headers
 			if(isShow)
 				return;
 			isShow = true;
-			buttonSize = 1//appModel.itemHeight*1.3;
+			buttonSize = 1//appModel.sizes.itemHeight*1.3;
 			
 			animate(duration)
 
@@ -348,7 +348,7 @@ package com.gerantech.islamic.views.headers
 			var s:Number = 0.5;
 			var _h:Number = isShow?0:_height*s;
 			var border:Number = _height / (isShow?8:18);
-			buttonSize = 1-(isShow?0:s*0.8)//appModel.itemHeight*1.3*0.65;
+			buttonSize = 1-(isShow?0:s*0.8)//appModel.sizes.itemHeight*1.3*0.65;
 			
 			var tween:Tween = new Tween(playerButton, duration, Transitions.EASE_IN_OUT);
 			tween.moveTo(actualWidth-_height+_h, _h);
@@ -392,7 +392,7 @@ package com.gerantech.islamic.views.headers
 		{
 			//reciterLabel.visible = reciterImage.visible = 
 			settingIcon.visible = isShow;
-			playerButton.filter = isShow ? BlurFilter.createDropShadow(AppModel.instance.border, 90*(Math.PI/180), 0, 0.4, 3) : null;
+			playerButton.filter = isShow ? BlurFilter.createDropShadow(AppModel.instance.sizes.border, 90*(Math.PI/180), 0, 0.4, 3) : null;
 			timeLabel.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, isShow?0:_height/4);
 		}
 		
