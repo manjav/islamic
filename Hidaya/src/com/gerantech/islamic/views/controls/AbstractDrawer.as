@@ -47,12 +47,12 @@ package com.gerantech.islamic.views.controls
 		
 		public function AbstractDrawer()
 		{
-			containerWidth = AppModel.instance.itemHeight*4;
-			edgeWidth =  AppModel.instance.itemHeight/3;
+			containerWidth = AppModel.instance.sizes.listItem*4;
+			edgeWidth =  AppModel.instance.sizes.listItem/3;
 			hitAlpha = 0.1;
 			
 			hit = new Button(Assets.getTexture("toolbar_background_skin"));
-			hit.width = AppModel.instance.width;
+			hit.width = AppModel.instance.sizes.width;
 			//hit.addEventListener( Event.TRIGGERED, hit_triggeredHandler );
 			hit.alpha = hitAlpha;
 			addChild(hit);
@@ -107,8 +107,8 @@ package com.gerantech.islamic.views.controls
 		
 		public function validateSize():void
 		{
-			hit.width = AppModel.instance.width;
-			edge.height = hit.height = AppModel.instance.heightFull;
+			hit.width = AppModel.instance.sizes.width;
+			edge.height = hit.height = AppModel.instance.sizes.heightFull;
 		}
 		
 		

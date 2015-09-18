@@ -69,8 +69,8 @@ package com.gerantech.islamic.views.popups
 		
 		/*override protected function stage_resizeHandler(event:Event):void
 		{
-		width = AppModel.instance.width-AppModel.instance.border*2;
-		height = AppModel.instance.height-AppModel.instance.border*6;
+		width = AppModel.instance.sizes.width-AppModel.instance.sizes.border*2;
+		height = AppModel.instance.sizes.height-AppModel.instance.sizes.border*6;
 		
 		if(event)
 		super.stage_resizeHandler(event);

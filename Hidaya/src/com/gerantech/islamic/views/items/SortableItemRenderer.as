@@ -44,13 +44,13 @@ package com.gerantech.islamic.views.items
 		{
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			appModel = AppModel.instance;
-			height = appModel.itemHeight;
+			height = appModel.sizes.listItem;
 			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			myLayout.paddingLeft = myLayout.paddingRight = myLayout.gap = -appModel.border;
-			//myLayout.gap = appModel.border*2;
-			//myLayout.padding = appModel.border;
+			myLayout.paddingLeft = myLayout.paddingRight = myLayout.gap = -appModel.sizes.border;
+			//myLayout.gap = appModel.sizes.border*2;
+			//myLayout.padding = appModel.sizes.border;
 			//myLayout.paddingLeft = myLayout.firstGap = appModel.ltr ? 0 : myLayout.gap;
 			//myLayout.paddingRight = myLayout.lastGap = appModel.ltr ? myLayout.gap : 0;
 			layout = myLayout;
@@ -71,7 +71,7 @@ package com.gerantech.islamic.views.items
 			mainContents.layoutData = new HorizontalLayoutData(100, 75);
 			mainContents.layout = new VerticalLayout();
 			
-			var fontSize:uint = appModel.itemHeight/4;
+			var fontSize:uint = appModel.sizes.listItem/4;
 			nameDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, fontSize, null, "bold");
 			/*var fd:FontDescription = new FontDescription("SourceSansPro", FontWeight.BOLD, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
 			nameDisplay.bidiLevel = appModel.ltr?0:1;
@@ -89,7 +89,7 @@ package com.gerantech.islamic.views.items
 			mainContents.addChild(messageDisplay);
 			
 			var spacer:Spacer = new Spacer();
-			spacer.width = appModel.border*4;
+			spacer.width = appModel.sizes.border*4;
 			
 			personImage = new ImageLoader();
 			personImage.layoutData = new HorizontalLayoutData(NaN, 80);

@@ -41,14 +41,14 @@ package com.gerantech.islamic.views.controls
 			
 			layout = new AnchorLayout();
 			
-			titleDisplay = new RTLLabel(_title, 0xFFFFFF, "center", null, false, null, AppModel.instance.itemHeight/4);
+			titleDisplay = new RTLLabel(_title, 0xFFFFFF, "center", null, false, null, AppModel.instance.sizes.listItem/4);
 			titleDisplay.layoutData = new AnchorLayoutData(0,0,0,0);
 			//titleDisplay.height = AppModel.instance.actionHeight/3;
 			addChild(titleDisplay);
 			
 			var icon:ImageLoader = new ImageLoader();
 			icon.layoutData = new AnchorLayoutData(NaN,NaN,0,NaN,0);
-			icon.height = AppModel.instance.itemHeight/3;
+			icon.height = AppModel.instance.sizes.listItem/3;
 			icon.source = Assets.getTexture("chevron_w");
 			addChild(icon);
 			

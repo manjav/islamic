@@ -50,8 +50,8 @@ package com.gerantech.islamic.views.actions
 		override protected function draw():void
 		{
 			super.draw();
-			actionButton.x = actualWidth-AppModel.instance.itemHeight;
-			actionButton.y = actualHeight-AppModel.instance.itemHeight;
+			actionButton.x = actualWidth-AppModel.instance.sizes.listItem;
+			actionButton.y = actualHeight-AppModel.instance.sizes.listItem;
 			/*if(opened)
 				animateButtons(true);*/
 			background.width = actualWidth;
@@ -71,9 +71,9 @@ package com.gerantech.islamic.views.actions
 			
 			actionButton = new FlatButton("action_plus", "action_player", false, 1, 0.8);
 			actionButton.iconScale = 0.3;
-			actionButton.width = actionButton.height = AppModel.instance.toolbarSize;
+			actionButton.width = actionButton.height = AppModel.instance.sizes.toolbar;
 			actionButton.pivotY = actionButton.pivotX = actionButton.width/2;
-			actionButton.filter = BlurFilter.createDropShadow(AppModel.instance.border, 90*(Math.PI/180), 0, 0.4, 3);
+			actionButton.filter = BlurFilter.createDropShadow(AppModel.instance.sizes.border, 90*(Math.PI/180), 0, 0.4, 3);
 			actionButton.addEventListener(Event.TRIGGERED, actionButton_triggerd);
 			addChild(actionButton);
 			
@@ -137,7 +137,7 @@ package com.gerantech.islamic.views.actions
 					personModes[i].y = actionButton.y;
 					personModes[i].alpha = 0;
 				}
-				bY = opened ? actionButton.y-AppModel.instance.toolbarSize*(1.8+i) : actionButton.y;
+				bY = opened ? actionButton.y-AppModel.instance.sizes.toolbar*(1.8+i) : actionButton.y;
 				TweenLite.to(personModes[i], opened?0.3:0.2, {delay:i*0.05, alpha:opened?1:0, y:bY, ease:opened?Back.easeOut:Back.easeIn});
 			}
 			TweenLite.to(background, 0.5, {alpha:(opened?0.9:0)});

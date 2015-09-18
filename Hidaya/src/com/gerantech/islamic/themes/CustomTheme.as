@@ -39,7 +39,7 @@ package com.gerantech.islamic.themes
 			
 			button.gap = Number.POSITIVE_INFINITY;
 			button.minGap = this.gutterSize;
-			button.padding = AppModel.instance.border;
+			button.padding = AppModel.instance.sizes.border;
 			button.iconPosition = Button.ICON_POSITION_LEFT;
 			
 			

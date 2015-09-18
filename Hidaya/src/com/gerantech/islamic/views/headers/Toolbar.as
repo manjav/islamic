@@ -55,9 +55,9 @@ package com.gerantech.islamic.views.headers
 			appModel = AppModel.instance;
 			backgroundSkin = new Quad(1,1,BaseMaterialTheme.CHROME_COLOR);
 			
-			height = appModel.toolbarSize;
-			gap = Math.min(appModel.toolbarSize*1.2, appModel.orginalWidth/5);
-			padding = appModel.toolbarSize/3;
+			height = appModel.sizes.toolbar;
+			gap = Math.min(appModel.sizes.toolbar*1.2, appModel.sizes.orginalWidth/5);
+			padding = appModel.sizes.toolbar/3;
 			
 			layout = new AnchorLayout();
 			buttons = new Vector.<ToolbarButton>();
@@ -97,7 +97,7 @@ package com.gerantech.islamic.views.headers
 			buttons.push(gotoButton);
 			*/
 			searchInput = new SearchInput();
-			searchInput.layoutData = new AnchorLayoutData(appModel.border, NaN, appModel.border, NaN);
+			searchInput.layoutData = new AnchorLayoutData(appModel.sizes.border, NaN, appModel.sizes.border, NaN);
 			
 			appModel.navigator.addEventListener(Event.CHANGE, navigator_changeHandler);
 			appModel.drawers.addEventListener(Event.CLOSE, drawers_changeHandler);
@@ -129,21 +129,21 @@ package com.gerantech.islamic.views.headers
 		
 		public function setLayout():void
 		{
-			width = appModel.width;
-			searchInput.width = appModel.width - gap*2;
+			width = appModel.sizes.width;
+			searchInput.width = appModel.sizes.width - gap*2;
 			searchInput.x =  gap ;
 			for(var i:uint; i<buttons.length; i++) 
 			{
-				buttons[i].x = appModel.ltr?appModel.width-i*gap-padding:i*gap+padding;
-				buttons[i].y = appModel.toolbarSize/2;
+				buttons[i].x = appModel.ltr?appModel.sizes.width-i*gap-padding:i*gap+padding;
+				buttons[i].y = appModel.sizes.toolbar/2;
 				buttons[i].buttonWidth = gap;
-				buttons[i].buttonHeight = appModel.toolbarSize;
+				buttons[i].buttonHeight = appModel.sizes.toolbar;
 				buttons[i].addEventListener(Event.TRIGGERED, activeButtons_triggerdHandler);
 			}
-			navigateButton.x = appModel.ltr ? padding*1.5 : appModel.width-padding*1.5;
-			navigateButton.y = appModel.toolbarSize/2;
+			navigateButton.x = appModel.ltr ? padding*1.5 : appModel.sizes.width-padding*1.5;
+			navigateButton.y = appModel.sizes.toolbar/2;
 			navigateButton.buttonWidth = gap;
-			navigateButton.buttonHeight = appModel.toolbarSize;
+			navigateButton.buttonHeight = appModel.sizes.toolbar;
 		}
 		
 		private function navigator_changeHandler(event:Event):void
@@ -157,7 +157,7 @@ package com.gerantech.islamic.views.headers
 			TweenLite.to(screenTitle, 0.3, {alpha:0, onComplete:function():void{screenTitle.removeFromParent()}});
 			
 			for(var i:uint; i<activeButtons.length; i++) 
-				TweenLite.to(activeButtons[i], 0.3, {alpha:0, x:appModel.ltr?appModel.width-i*gap:i*gap, delay:i*0.06});
+				TweenLite.to(activeButtons[i], 0.3, {alpha:0, x:appModel.ltr?appModel.sizes.width-i*gap:i*gap, delay:i*0.06});
 			
 			TweenLite.to(navigateButton, 0.3, {alpha:0, scaleX:0, scaleY:0});
 			
@@ -190,10 +190,10 @@ package com.gerantech.islamic.views.headers
 				
 			for(var i:uint; i<activeButtons.length; i++) 
 			{
-				activeButtons[i].x = appModel.ltr?appModel.width-i*gap:i*gap;
+				activeButtons[i].x = appModel.ltr?appModel.sizes.width-i*gap:i*gap;
 				activeButtons[i].alpha = 0;
 				addChild(activeButtons[i]);
-				TweenLite.to(activeButtons[i], 0.3, {alpha:1, x:appModel.ltr?appModel.width-i*gap-padding:i*gap+padding, delay:i*0.05});
+				TweenLite.to(activeButtons[i], 0.3, {alpha:1, x:appModel.ltr?appModel.sizes.width-i*gap-padding:i*gap+padding, delay:i*0.05});
 			}
 			var naviIcon:String = "arrow_w_"+appModel.align;
 			switch(appModel.navigator.activeScreenID)
@@ -228,7 +228,7 @@ package com.gerantech.islamic.views.headers
 					var menu:MenuList = new MenuList();
 					menu.addEventListener(Event.CLOSE, callout_closeHandler);
 					callout = Callout.show(menu, btn);
-					callout.filter = BlurFilter.createDropShadow(appModel.border, 90*(Math.PI/180), 0, 0.5, 3);
+					callout.filter = BlurFilter.createDropShadow(appModel.sizes.border, 90*(Math.PI/180), 0, 0.5, 3);
 					break;
 				case "search":
 					AppModel.instance.navigator.pushScreen(appModel.PAGE_SEARCH);

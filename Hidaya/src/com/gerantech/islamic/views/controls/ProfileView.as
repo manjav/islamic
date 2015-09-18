@@ -44,8 +44,8 @@ package com.gerantech.islamic.views.controls
 			super.initialize();
 			backgroundSkin = new Quad(1, 1, 0x304040);
 			layout = new AnchorLayout();
-			height = AppModel.instance.itemHeight*2.4;
-			padding = uint(AppModel.instance.border*3);
+			height = AppModel.instance.sizes.listItem*2;
+			padding = AppModel.instance.sizes.DP16;
 						
 			reload();
 		}
@@ -56,7 +56,6 @@ package com.gerantech.islamic.views.controls
 			
 			var vlayout:VerticalLayout = new VerticalLayout();
 			vlayout.horizontalAlign = AppModel.instance.align;
-			//vlayout.lastGap = -padding;
 			vGroup = new LayoutGroup();
 			vGroup.layout = vlayout;
 			vGroup.layoutData = new AnchorLayoutData(padding,padding,padding/4,padding);
@@ -65,10 +64,12 @@ package com.gerantech.islamic.views.controls
 			profileData = UserModel.instance.user.profile;
 						
 			imageViewer = new LayoutGroup();
-			imageViewer.layoutData = new VerticalLayoutData(NaN, 100);
+			imageViewer.height = AppModel.instance.sizes.DP72;
+			//imageViewer.layoutData = new VerticalLayoutData(NaN, 100);
 			imageViewer.layout = new AnchorLayout();
 			vGroup.addChild(imageViewer);
 			
+			vGroup.addChild(new Spacer());
 			
 			var nameLabel:RTLLabel = new RTLLabel(profileData.registered?profileData.name:ResourceManager.getInstance().getString("loc", "profile_label"), 0xFFFFFF);
 			nameLabel.truncateToFit = true;
@@ -84,7 +85,7 @@ package com.gerantech.islamic.views.controls
 			image.delayTextureCreation = true;
 			image.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, NaN, 0);
 			
-			var imageSize:uint = uint(height*0.6);
+			var imageSize:uint = AppModel.instance.sizes.DP72;
 			if(profileData.registered)
 			{
 				imageLoadder = new LoadAndSaver(File.applicationStorageDirectory.resolvePath(profileData.gid+".jpg").nativePath, (profileData.photoURL + "?sz=" + imageSize), null, true);
@@ -107,7 +108,7 @@ package com.gerantech.islamic.views.controls
 			}
 
 			signButton = new FlatButton(profileData.registered?"logout":"info", null, true);
-			signButton.width = signButton.height = AppModel.instance.toolbarSize;
+			signButton.width = signButton.height = AppModel.instance.sizes.toolbar;
 			signButton.iconScale = 0.4;
 			//signButton.icon.scaleX  = AppModel.instance.ltr ? 1 : -1
 			signButton.layoutData = new AnchorLayoutData(NaN, !AppModel.instance.ltr?NaN:0, 0, AppModel.instance.ltr?NaN:0);

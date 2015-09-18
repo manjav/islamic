@@ -3,6 +3,7 @@ package com.gerantech.islamic.models
 	
 	import com.gerantech.islamic.models.vo.Descriptor;
 	import com.gerantech.islamic.themes.CustomTheme;
+	import com.gerantech.islamic.utils.MetricUtils;
 	import com.gerantech.islamic.views.controls.CustomDrawers;
 	import com.gerantech.islamic.views.headers.Toolbar;
 	import com.gerantech.islamic.views.lists.DrawerList;
@@ -69,7 +70,6 @@ package com.gerantech.islamic.models
 			byteArraySec = new ByteArray();
 			byteArraySec.writeUTFBytes("d@t@B@53_53cur3d");
 			_isAndroid = Capabilities.os.substr(0, 5)=="Linux";
-			_dpi = Capabilities.screenDPI;
 		}
 
 		public var upside:Boolean = true;
@@ -98,41 +98,6 @@ package com.gerantech.islamic.models
 		private var _isAndroid:Boolean;
 		public function get isAndroid():Boolean{return _isAndroid;}
 
-		private var _dpi:Number;
-		public function get dpi():Number{return _dpi;}
-
-		private var _orginalFontSize:uint;
-		public function get orginalFontSize():uint{return _orginalFontSize;}
-
-		private var _orginalWidth:Number;
-		public function get orginalWidth():Number{return _orginalWidth;}
-
-		private var _orginalHeight:Number;
-		public function get orginalHeight():Number{return _orginalHeight;}
-
-		private var _orginalHeightFull:Number;
-		public function get orginalHeightFull():Number{return _orginalHeightFull;}
-
-		private var _toolbarSize:Number = 66;
-		public function get toolbarSize():Number{return _toolbarSize;}
-
-		private var _subtitleHeight:Number = 66;
-		public function get subtitleHeight():Number{return _subtitleHeight;}
-
-		private var _itemHeight:Number = 80;
-		public function get itemHeight():Number{return _itemHeight;}
-
-		//private var _playerHeight:Number = 0;
-		//public function get playerHeight():Number{return _playerHeight;}
-
-		private var _border:uint = 0;
-		public function get border():uint{return _border;}
-
-
-		public var width:Number;
-		public var height:Number;
-		public var heightFull:Number;
-				
 		public var autoPlay:Boolean;
 		public var isCalloutOpen:Boolean;
 		public var pageViewState:String = "normal";
@@ -141,6 +106,8 @@ package com.gerantech.islamic.models
 		public var navigateToItem:Boolean;
 		public var puased:Boolean;
 		public var preventPurchaseWarning:Boolean;
+
+		public var sizes:MetricUtils;
 		
 		public function get pushTransition():Function
 		{
@@ -154,21 +121,7 @@ package com.gerantech.islamic.models
 		public function init(main:Hidaya):void
 		{
 			_main = main;
-			_isTablet = DeviceCapabilities.isTablet(main.stage);
-			_orginalWidth = main.stage.stageWidth;
-			_orginalHeightFull = main.stage.stageHeight;
-			
-			var scale:Number = dpi/160;
-			trace("scale", scale)
-			_toolbarSize = Math.round(56*scale);//56
-			_subtitleHeight = Math.round(48*scale);
-			_itemHeight = Math.round(72*scale);//Math.min(Math.max(64, _orginalHeightFull/8), 240);
-			height = heightFull-_toolbarSize;
-			//_actionHeight = uint(_itemHeight*0.76);//trace(_itemHeight, _actionHeight);
-			_orginalHeight = _orginalHeightFull - _toolbarSize;
-			_orginalFontSize = Math.round(16*scale);//uint(height/40+2);
-			_border = Math.round(_itemHeight/16);
-			
+			sizes = new MetricUtils(Capabilities.screenDPI, main.stage);
 		}
 	}
 }

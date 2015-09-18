@@ -108,9 +108,9 @@ package com.gerantech.islamic.views.items
 			
 			height = _owner.height;
 			if(!appModel.upside && appModel.isTablet && !ConfigModel.instance.hasTranslator)
-				width = appModel.width/2;
+				width = appModel.sizes.width/2;
 			else
-				width = appModel.width;
+				width = appModel.sizes.width;
 			shadowImage.width = width*0.02;
 			//trace("isTablet", appModel.isTablet, appModel.upside, ConfigModel.instance.selectedTranslators.length, width, height)
 		}
@@ -135,7 +135,7 @@ package com.gerantech.islamic.views.items
 					var _h:Number = height-header._height;
 					var even:Boolean = _qdata.index%2==0;
 					uthmaniPage = new UthmaniPage(_qdata as Page, _h/1.3, header._height, 1.3);
-					uthmaniPage.layoutData = new AnchorLayoutData(0,even?NaN:appModel.border*4,0, even?appModel.border*4:NaN);
+					uthmaniPage.layoutData = new AnchorLayoutData(0,even?NaN:appModel.sizes.border*4,0, even?appModel.sizes.border*4:NaN);
 					
 					traslatePage.page = _qdata as Page;
 					traslatePage.width = width-_h/1.3;
@@ -233,7 +233,7 @@ package com.gerantech.islamic.views.items
 		override protected function get isShow():Boolean
 		{
 			var rect:Rectangle = getBounds(_owner);//trace(index, rect)
-			return(rect.x==0 || rect.x==appModel.width/2)
+			return(rect.x==0 || rect.x==appModel.sizes.width/2)
 		}
 		
 	}

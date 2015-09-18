@@ -39,10 +39,10 @@ package com.gerantech.islamic.views.items
 			var listLayout: VerticalLayout = new VerticalLayout();
 			listLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
-			listLayout.paddingTop = appModel.border+header._height;
-			listLayout.paddingBottom = ConfigModel.instance.hasReciter?appModel.toolbarSize+appModel.border:appModel.border
+			listLayout.paddingTop = appModel.sizes.border+header._height;
+			listLayout.paddingBottom = ConfigModel.instance.hasReciter?appModel.sizes.toolbar+appModel.sizes.border:appModel.sizes.border
 			listLayout.hasVariableItemDimensions = true;
-			//listLayout.gap = appModel.border;
+			//listLayout.gap = appModel.sizes.border;
 			
 			list = new List();
 			list.verticalScrollBarPosition = List.VERTICAL_SCROLL_BAR_POSITION_RIGHT;

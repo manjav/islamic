@@ -29,16 +29,16 @@ package com.gerantech.islamic.views.items
 			super.initialize();
 			
 			appModel = AppModel.instance;
-			width = appModel.width;
-			height = appModel.heightFull;
+			width = appModel.sizes.width;
+			height = appModel.sizes.heightFull;
 			layout = new AnchorLayout();
 			tute = new Tute_0();
-			tute.layoutData = new AnchorLayoutData(0,0,appModel.itemHeight,0);
+			tute.layoutData = new AnchorLayoutData(0,0,appModel.sizes.listItem,0);
 			addChild(tute);
 			
 			nextButton = new FlatButton("arrow_g_"+(appModel.ltr?"right":"left"), null, true);
-			nextButton.width = nextButton.height = appModel.itemHeight;
-			nextButton.layoutData = new AnchorLayoutData(NaN, appModel.ltr?appModel.border:NaN, appModel.border, appModel.ltr?NaN:appModel.border);
+			nextButton.width = nextButton.height = appModel.sizes.listItem;
+			nextButton.layoutData = new AnchorLayoutData(NaN, appModel.ltr?appModel.sizes.border:NaN, appModel.sizes.border, appModel.ltr?NaN:appModel.sizes.border);
 			nextButton.addEventListener(Event.TRIGGERED, nextButton_triggeredHandler);
 			addChild(nextButton);
 		}

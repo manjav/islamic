@@ -35,19 +35,19 @@ package com.gerantech.islamic.views.items
 		override protected function initialize():void
 		{
 			super.initialize();
-			height = AppModel.instance.itemHeight;
+			height = AppModel.instance.sizes.menuItem;
 			backgroundSkin = new Quad(1, 1);
 			backgroundSkin.alpha = 0;
 			
 			myLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			myLayout.gap = AppModel.instance.border*5;
-			myLayout.padding = AppModel.instance.border*2;
+			myLayout.padding = AppModel.instance.sizes.DP16;
+			myLayout.gap = AppModel.instance.sizes.DP32
 			layout = myLayout;
-			height = AppModel.instance.itemHeight;
 			
 			iconDisplay = new ImageLoader();
-			iconDisplay.layoutData = new HorizontalLayoutData(NaN, 60);
+		//	iconDisplay.layoutData = new HorizontalLayoutData(NaN, NaN);
+			iconDisplay.width = iconDisplay.height = AppModel.instance.sizes.getPixelByDP(24);
 			iconDisplay.delayTextureCreation = true;
 			
 			titleDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, UserModel.instance.fontSize*0.94, null, "bold") 

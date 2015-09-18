@@ -38,61 +38,36 @@ package com.gerantech.islamic.views.screens
 			super.initialize();
 			layout = new AnchorLayout();
 			
-			/*var listsContainer:LayoutGroup = new LayoutGroup();
-			listsContainer.layoutData = new AnchorLayoutData(appModel.actionHeight*0.8, 0, 0, 0);
-			listsContainer.layout = new HorizontalLayout();
-			addChild(listsContainer);*/
-			
 			indexHeader = new IndexHeader();
-			indexHeader._width = appModel.itemHeight;
+			indexHeader._width = appModel.sizes.listItem;
 			indexHeader.layoutData = new AnchorLayoutData(NaN,0,NaN,0);
 			indexHeader.addEventListener(Event.CHANGE, indexHeader_changeHandler);
 			lastSortMode = indexHeader.sortMode;
 			addChild(indexHeader);
-			
-			
-/*			var suraLayout: VerticalLayout = new VerticalLayout();
-			var hizbLayout: VerticalLayout = new VerticalLayout();
-			hizbLayout.verticalAlign = suraLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
-			hizbLayout.horizontalAlign = suraLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
-			hizbLayout.paddingTop = suraLayout.paddingTop = indexHeader._height;*/
 
 			hizbsList = new List();
 			//hizbsList.layout = hizbLayout;
-			hizbsList.layoutData = new AnchorLayoutData(appModel.subtitleHeight, NaN, 0, 0);
-			hizbsList.width = appModel.itemHeight;
+			hizbsList.layoutData = new AnchorLayoutData(appModel.sizes.subtitle, NaN, 0, 0);
+			hizbsList.width = appModel.sizes.listItem;
 			hizbsList.itemRendererFactory = function():IListItemRenderer
 			{
 				return new HizbItemRenderer();
 			}
 			hizbsList.addEventListener(Event.CHANGE, hizbsList_changeHandler);
-			//hizbsList.addEventListener(Event.SCROLL, list_scrollChangedHandler);
 			addChild(hizbsList);
 
 			surasList = new List();
-			//surasList.layout = suraLayout;
-			surasList.layoutData = new AnchorLayoutData(appModel.subtitleHeight, 0, 0, appModel.itemHeight);
+			surasList.layoutData = new AnchorLayoutData(appModel.sizes.subtitle, 0, 0, appModel.sizes.listItem);
 			surasList.itemRendererFactory = function():IListItemRenderer
 			{
 				return new SuraItemRenderer();
 			}
 			surasList.addEventListener(Event.CHANGE, surasList_changeHandler);
-			//surasList.addEventListener(Event.SCROLL, list_scrollChangedHandler);
 			addChild(surasList);
 			
 			addEventListener(FeathersEventType.TRANSITION_IN_COMPLETE, transitionInCompleteHandler);
-			
 		}
 		
-		private function list_scrollChangedHandler(event:Event):void
-		{
-			var list:List = event.currentTarget as List;
-			var scrollPos:Number = Math.max(0,list.verticalScrollPosition);
-			var changes:Number = startScrollBarIndicator-scrollPos;
-			indexHeader.y = Math.max(-header.height, Math.min(0, indexHeader.y+changes));
-			startScrollBarIndicator = scrollPos;
-			
-		}
 		
 		private function transitionInCompleteHandler():void
 		{

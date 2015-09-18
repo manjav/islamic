@@ -28,10 +28,10 @@ package com.gerantech.islamic.views.popups
 		override protected function initialize():void
 		{
 			super.initialize();
-			width = Math.round(Math.min(appModel.itemHeight*5, appModel.orginalWidth));
+			width = Math.round(Math.min(appModel.sizes.listItem*5, appModel.sizes.orginalWidth));
 			
 			var cLayout:VerticalLayout = new VerticalLayout();
-			cLayout.gap = appModel.border*3;
+			cLayout.gap = appModel.sizes.border*3;
 			cLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			cLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
 			container.layout = cLayout;
@@ -47,7 +47,7 @@ package com.gerantech.islamic.views.popups
 			container.addChild(personPanel);*/
 			
 			ayaPanel = new SettingPanel("player_popup_aya", numRepeats, {value:userModel.ayaRepeat});
-			ayaPanel.list.listProperties.width = appModel.toolbarSize*2;
+			ayaPanel.list.listProperties.width = appModel.sizes.toolbar*2;
 			ayaPanel.addEventListener(Event.CHANGE, ayaPanel_changeHandler);
 			container.addChild(ayaPanel);
 			
@@ -59,7 +59,7 @@ package com.gerantech.islamic.views.popups
 				case "juze_navi": pageLabel += loc("juze_l"); break;
 			}
 			pagePanel = new SettingPanel(pageLabel , numRepeats, {value:userModel.pageRepeat});
-			pagePanel.list.listProperties.width = appModel.toolbarSize*2;
+			pagePanel.list.listProperties.width = appModel.sizes.toolbar*2;
 			pagePanel.addEventListener(Event.CHANGE, pagePanel_changeHandler);
 			container.addChild(pagePanel);
 			

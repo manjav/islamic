@@ -24,11 +24,11 @@ package com.gerantech.islamic.views.headers
 		public function BismHeader()
 		{
 			mlayout = new AnchorLayout();
-			//mlayout.gap = AppModel.instance.border/2;
+			//mlayout.gap = AppModel.instance.sizes.border/2;
 			layout = mlayout;
 			
 			touchable = false;
-			height = AppModel.instance.itemHeight/2;
+			height = AppModel.instance.sizes.listItem/2;
 			
 			colorFilter = new ColorMatrixFilter();
 			colorFilter.invert();

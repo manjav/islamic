@@ -39,8 +39,8 @@ package com.gerantech.islamic.views.items
 			shadow.backgroundSkin = new Image(Assets.getTexture("shadow"));
 			shadow.layoutData = new AnchorLayoutData(header.height, 0, NaN, 0);
 			//shadow.y = header.height;
-			//shadow.width = appModel.width; 
-			shadow.height = appModel.border;
+			//shadow.width = appModel.sizes.width; 
+			shadow.height = appModel.sizes.border;
 			headerContainer.addChild(shadow);
 		}
 

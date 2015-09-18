@@ -92,7 +92,7 @@ package com.gerantech.islamic.views.actions
 				personModes.reverse();
 			}
 			var bY:Number;
-			var gap:Number = Math.min(AppModel.instance.itemHeight, actualHeight/(personModes.length+1));
+			var gap:Number = Math.min(AppModel.instance.sizes.listItem, actualHeight/(personModes.length+1));
 			for(i=0; i<personModes.length; i++)
 			{
 				personModes[i].touchable = opened;

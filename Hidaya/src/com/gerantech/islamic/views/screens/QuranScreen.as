@@ -276,7 +276,7 @@ package com.gerantech.islamic.views.screens
 				// scale
 				var sizeDiff:Number = currentVector.length / previousVector.length;
 				fontScale = Math.min(1.8, Math.max(0.6, fontScale*sizeDiff));
-				userModel.fontSize = Math.round(appModel.orginalFontSize*fontScale/2)*2;
+				userModel.fontSize = Math.round(appModel.sizes.orginalFontSize*fontScale/2)*2;
 			}
 		}
 	}

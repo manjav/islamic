@@ -45,9 +45,9 @@ package com.gerantech.islamic.views.items
 		override protected function initialize():void
 		{
 			super.initialize();
-			_height = AppModel.instance.itemHeight;
-			if(AppModel.instance.width/_height<6.7)
-				_height = AppModel.instance.width/6.7;
+			_height = AppModel.instance.sizes.listItem;
+			if(AppModel.instance.sizes.width/_height<6.7)
+				_height = AppModel.instance.sizes.width/6.7;
 			
 			var fontSize:uint = uint(_height/2.8);
 
@@ -56,7 +56,7 @@ package com.gerantech.islamic.views.items
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			
 			myLayout = new HorizontalLayout();
-			myLayout.padding = appModel.border;
+			myLayout.padding = appModel.sizes.border;
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
 		//	myLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_RIGHT
 			layout = myLayout;
@@ -64,7 +64,7 @@ package com.gerantech.islamic.views.items
 			textRenderer = new RTLLabel("32 322 234", BaseMaterialTheme.PRIMARY_TEXT_COLOR, "justify", "rtl", true, "justify", fontSize, "mequran");
 
 		//	textRenderer = new TextBlockTextRenderer();
-			textRenderer.width = _height*2.4+appModel.border;
+			textRenderer.width = _height*2.4+appModel.sizes.border;
 			//textRenderer.text = "32 322 234";
 			//var fd:FontDescription = new FontDescription( "mequran", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF );
 			//textRenderer.wordWrap = true;
@@ -131,7 +131,7 @@ package com.gerantech.islamic.views.items
 			if(sura.sura_texture==null)
 				sura.sura_texture = Assets.getTexture(sura.sura.toString());
 			
-			//backgroundSkin = new Quad(AppModel.instance.width, _height, !isSelected?0xFFFFFF:0xAAFFFF);
+			//backgroundSkin = new Quad(AppModel.instance.sizes.width, _height, !isSelected?0xFFFFFF:0xAAFFFF);
 			suraImage.source = sura.sura_texture;
 			//suraImage.readjustSize();
 			indexText.text = sura.sura.toString();//StrTools.getNumberFromLocale(sura.index);

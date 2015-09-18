@@ -34,9 +34,9 @@ package com.gerantech.islamic.views.popups
 		
 		override protected function draw():void
 		{
-			width = AppModel.instance.width-AppModel.instance.border*4;
-			y = AppModel.instance.height*0.7;
-			x = AppModel.instance.border*2;
+			width = AppModel.instance.sizes.width-AppModel.instance.sizes.border*4;
+			y = AppModel.instance.sizes.height*0.7;
+			x = AppModel.instance.sizes.border*2;
 			super.draw();
 		}
 		
@@ -48,7 +48,7 @@ package com.gerantech.islamic.views.popups
 			_isEnabled = callback!=null;
 			includeInLayout = false;
 			
-			height = uint(AppModel.instance.itemHeight*0.8);
+			height = uint(AppModel.instance.sizes.listItem*0.8);
 			layout = new AnchorLayout();
 		
 			backgroundSkin = new Scale3Image(new Scale3Textures(Assets.getTexture("round_alert"), 31,2));
@@ -56,7 +56,7 @@ package com.gerantech.islamic.views.popups
 			
 			var hLayout:HorizontalLayout = new HorizontalLayout();
 			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			hLayout.gap = hLayout.padding = AppModel.instance.itemHeight/4;
+			hLayout.gap = hLayout.padding = AppModel.instance.sizes.listItem/4;
 			
 			var hGroup:LayoutGroup = new LayoutGroup();
 			hGroup.layout = hLayout;
@@ -74,7 +74,7 @@ package com.gerantech.islamic.views.popups
 			
 		/*	var line:ImageLoader = new ImageLoader();
 			//line.layoutData = new HorizontalLayoutData(NaN, 100);
-			line.width = AppModel.instance.border/2;
+			line.width = AppModel.instance.sizes.border/2;
 			line.height = 100;
 			line.source = Assets.getTexture("white_rect");
 			hGroup.addChild(line);*/

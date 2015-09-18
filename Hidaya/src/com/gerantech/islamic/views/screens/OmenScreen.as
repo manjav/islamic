@@ -33,7 +33,7 @@ package com.gerantech.islamic.views.screens
 		{
 			super.initialize();
 			
-			var padding:Number = appModel.border*4;
+			var padding:Number = appModel.sizes.border*4;
 			layout = new AnchorLayout()
 			
 			var scroller:ScrollContainer = new ScrollContainer();
@@ -61,7 +61,7 @@ package com.gerantech.islamic.views.screens
 			
 			waitingIcon = new ImageLoader();
 			waitingIcon.source = "app:/com/gerantech/islamic/assets/images/icon/icon-192.png";
-			waitingIcon.width = waitingIcon.height = Math.min(appModel.width, appModel.height)/3;
+			waitingIcon.width = waitingIcon.height = Math.min(appModel.sizes.width, appModel.sizes.height)/3;
 			waitingIcon.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
 			button.addChild(waitingIcon);
 		}

@@ -94,8 +94,8 @@ package com.gerantech.islamic.views.popups
 		{
 			super.initialize();
 			
-			width = appModel.width;
-			height = appModel.height;
+			width = appModel.sizes.width;
+			height = appModel.sizes.height;
 			layout = new AnchorLayout();
 		
 			listLayout = new HorizontalLayout();
@@ -212,7 +212,7 @@ package com.gerantech.islamic.views.popups
 			else if(touche.phase == TouchPhase.ENDED)
 			{
 				endTouchPoint = touche.getLocation(list);
-				if(Math.abs(startTouchPoint.x-endTouchPoint.x)> Math.abs(startTouchPoint.y-endTouchPoint.y) && Math.abs(startTouchPoint.x-endTouchPoint.x)>appModel.itemHeight)
+				if(Math.abs(startTouchPoint.x-endTouchPoint.x)> Math.abs(startTouchPoint.y-endTouchPoint.y) && Math.abs(startTouchPoint.x-endTouchPoint.x)>appModel.sizes.itemHeight)
 					swipe(startTouchPoint.x-endTouchPoint.x)
 			}
 		}

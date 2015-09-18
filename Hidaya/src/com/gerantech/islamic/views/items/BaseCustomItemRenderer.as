@@ -84,12 +84,12 @@ package com.gerantech.islamic.views.items
 		{
 			var rect:Rectangle = getBounds(_owner);
 			var speed:Number = Math.abs(tempY-rect.y);
-			if(commitPhase==0 && speed<AppModel.instance.itemHeight*5)
+			if(commitPhase==0 && speed<AppModel.instance.sizes.listItem*5)
 			{
 				commitPhase = 1;
 				commitBeforeStopScrolling();
 			}
-			else if(commitPhase==1 && speed<AppModel.instance.itemHeight)
+			else if(commitPhase==1 && speed<AppModel.instance.sizes.listItem)
 			{
 				commitPhase = 2;
 				clearInterval(intevalId);

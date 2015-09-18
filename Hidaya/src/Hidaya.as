@@ -130,7 +130,7 @@ package
 			
 			/*graphics.clear();
 			graphics.beginFill(0x009688);
-			graphics.drawRect(0,0,Math.max(stage.stageWidth, stage.stageHeight), appModel.itemHeight);
+			graphics.drawRect(0,0,Math.max(stage.stageWidth, stage.stageHeight), appModel.sizes.itemHeight);
 			*/			
 			userModel = UserModel.instance;
 			userModel.addEventListener(UserEvent.LOAD_DATA_COMPLETE, user_completeHandler);
@@ -154,14 +154,14 @@ package
 			
 			if(Capabilities.cpuArchitecture=="x86" || userModel.fontSize==12)
 			{
-				userModel.fontSize = appModel.orginalFontSize;
+				userModel.fontSize = appModel.sizes.orginalFontSize;
 			//	UserModel.instance.premiumMode = Capabilities.cpuArchitecture=="x86"
 			}
 
-			stage.addEventListener(Event.RESIZE, stage_resizeHandler, false, int.MAX_VALUE, true);
 			stage.addEventListener(Event.DEACTIVATE, stage_deactivateHandler, false, 0, true);
 			Main(_starling.root).createScreens();
 			graphics.clear();
+			stage.addEventListener(Event.RESIZE, stage_resizeHandler, false, int.MAX_VALUE, true);
 		}
 		
 		private function stage_resizeHandler(event:Event):void
@@ -171,22 +171,19 @@ package
 		
 		public function validateScreenSize():void
 		{
-			//trace("validate Screen Size")
 			stage.removeEventListener(Event.RESIZE, stage_resizeHandler, false);
-			appModel.width = 				stage.stageWidth;
-			appModel.heightFull = 			stage.stageHeight;
-			appModel.height = 				appModel.heightFull - appModel.toolbarSize;
-			appModel.upside =  				appModel.heightFull>appModel.width;//stage.deviceOrientation=="default" || stage.deviceOrientation=="upsideDown" || stage.deviceOrientation=="unknown";
+			appModel.sizes.resize(stage.stageWidth, stage.stageHeight);
+			appModel.upside = stage.stageHeight>stage.stageWidth;//stage.deviceOrientation=="default" || stage.deviceOrientation=="upsideDown" || stage.deviceOrientation=="unknown";
 			
 			if(_starling==null)
 				return;
 			
 			var viewPort:Rectangle = _starling.viewPort;
-			viewPort.width = appModel.width
-			viewPort.height = appModel.heightFull;
+			viewPort.width = appModel.sizes.width
+			viewPort.height = appModel.sizes.heightFull;
 			
-			_starling.stage.stageWidth = appModel.width;
-			_starling.stage.stageHeight = appModel.heightFull;
+			_starling.stage.stageWidth = appModel.sizes.width;
+			_starling.stage.stageHeight = appModel.sizes.heightFull;
 			
 			try
 			{

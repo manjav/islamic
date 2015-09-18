@@ -1,15 +1,11 @@
 package com.gerantech.islamic.views.lists
 {
-	import com.gerantech.islamic.managers.AppController;
-	import com.gerantech.islamic.managers.BillingManager;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	import com.gerantech.islamic.views.popups.GotoPopUp;
-	
-	import mx.resources.ResourceManager;
 	
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
@@ -36,17 +32,17 @@ package com.gerantech.islamic.views.lists
 			super.initialize();
 			
 			var llaouyt:VerticalLayout = new VerticalLayout();
-			llaouyt.firstGap = AppModel.instance.itemHeight/4;
+			llaouyt.firstGap = AppModel.instance.sizes.listItem/4;
 			llaouyt.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			layout = llaouyt;
 			
 			
-			width = Math.min(AppModel.instance.itemHeight*7, AppModel.instance.orginalWidth*0.8);
+			width = Math.min(AppModel.instance.sizes.listItem*7, AppModel.instance.sizes.orginalWidth*0.8);
 			array = new Array({value:"goto_popup", icon:Assets.getTexture("jump")}, {value:"sura_navi"}, {value:"juze_navi"}, {value:"page_navi"});
 			dataProvider = new ListCollection(array); 
 			itemRendererFactory = function():IListItemRenderer
 			{
-				return new SettingItemRenderer( AppModel.instance.itemHeight*0.75);
+				return new SettingItemRenderer( AppModel.instance.sizes.getPixelByDP(48));
 			}
 			selectedIndex = getSelectedIndex();
 			addEventListener(Event.CHANGE, changeHandler);

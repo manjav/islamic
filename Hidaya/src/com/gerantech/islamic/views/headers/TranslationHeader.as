@@ -2,7 +2,6 @@ package com.gerantech.islamic.views.headers
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Aya;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.buttons.FlatButton;
@@ -12,7 +11,6 @@ package com.gerantech.islamic.views.headers
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	import feathers.layout.HorizontalLayout;
 	
 	import starling.display.Quad;
 	import starling.events.Event;
@@ -53,7 +51,7 @@ package com.gerantech.islamic.views.headers
 			super.initialize();
 			layout = new AnchorLayout();
 			
-			height = appModel.itemHeight;
+			height = appModel.sizes.subtitle;
 			backgroundSkin = new Quad(1,1,BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
 			backgroundSkin.alpha = 0.8//UserModel.instance.nightMode ? 0.9 : 0.7;
 			
@@ -66,12 +64,12 @@ package com.gerantech.islamic.views.headers
 			suraGroup.layout = slayout;
 			addChild(suraGroup);
 			
-			ayaLabel = new RTLLabel("", 0, null, null, false, null, appModel.itemHeight*0.5, "mequran");
+			ayaLabel = new RTLLabel("", 0, null, null, false, null, appModel.sizes.itemHeight*0.5, "mequran");
 			suraGroup.addChild(ayaLabel);*/
 			
 			suraImage = new ImageLoader();
 			suraImage.delayTextureCreation = true;
-			suraImage.height = appModel.toolbarSize/2;
+			suraImage.height = uint(height*0.6);
 			suraImage.layoutData = new AnchorLayoutData(NaN,NaN,NaN,NaN,0,0);
 			addChild(suraImage);
 			

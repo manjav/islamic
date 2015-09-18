@@ -53,8 +53,8 @@ package com.gerantech.islamic.views.items
 			listLayout = new VerticalLayout();
 			listLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
-			listLayout.padding = appModel.border*2;
-			listLayout.paddingBottom = ConfigModel.instance.hasReciter?appModel.toolbarSize*1.5+appModel.border:appModel.border
+			listLayout.padding = appModel.sizes.border*2;
+			listLayout.paddingBottom = ConfigModel.instance.hasReciter?appModel.sizes.toolbar*1.5+appModel.sizes.border:appModel.sizes.border
 			listLayout.hasVariableItemDimensions = true;
 			listLayout.useVirtualLayout = true;
 			
@@ -109,7 +109,7 @@ package com.gerantech.islamic.views.items
 			list.visible = false;
 			list.scrollToPosition(0, 0, 0);
 			
-			listLayout.paddingTop = appModel.toolbarSize*( aya.hasBism ? 1.5 : 1.2);
+			listLayout.paddingTop = appModel.sizes.toolbar*( aya.hasBism ? 1.5 : 1.2);
 		}
 		
 		override protected function commitAfterStopScrolling():void

@@ -33,12 +33,12 @@ package com.gerantech.islamic.views.items
 		{
 			super.initialize();
 		//	backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
-			height = AppModel.instance.itemHeight;
+			height = AppModel.instance.sizes.listItem;
 			
 			layout = new AnchorLayout();
 			
 			iconDisplay = new ImageLoader();
-			iconDisplay.width = iconDisplay.height = appModel.itemHeight*0.8;
+			iconDisplay.width = iconDisplay.height = appModel.sizes.listItem*0.8;
 			iconDisplay.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
 			iconDisplay.delayTextureCreation = true;
 			addChild(iconDisplay);
@@ -46,7 +46,7 @@ package com.gerantech.islamic.views.items
 			titleDisplay = new TextBlockTextRenderer();
 			var fd:FontDescription = new FontDescription("mequran", FontWeight.BOLD, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
 			titleDisplay.textAlign = "center";
-			titleDisplay.elementFormat = new ElementFormat(fd, appModel.itemHeight/3, BaseMaterialTheme.PRIMARY_TEXT_COLOR);
+			titleDisplay.elementFormat = new ElementFormat(fd, appModel.sizes.listItem/3, BaseMaterialTheme.PRIMARY_TEXT_COLOR);
 			titleDisplay.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
 			addChild(titleDisplay);
 		}

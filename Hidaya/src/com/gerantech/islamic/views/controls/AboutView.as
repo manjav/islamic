@@ -30,7 +30,7 @@ package com.gerantech.islamic.views.controls
 			
 			var aboutIcon:ImageLoader = new ImageLoader();
 			aboutIcon.source = "com/gerantech/islamic/assets/images/icon/icon-192.png";
-			aboutIcon.height = aboutIcon.width = AppModel.instance.itemHeight;
+			aboutIcon.height = aboutIcon.width = AppModel.instance.sizes.listItem;
 			addChild(aboutIcon);
 			
 			/*			appNameLabel = new Label();

@@ -40,11 +40,11 @@ package com.gerantech.islamic.views.items
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			
 			if(height==0)
-				height = AppModel.instance.itemHeight;
+				height = AppModel.instance.sizes.listItem;
 			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			myLayout.gap = myLayout.padding = AppModel.instance.border*2;
+			myLayout.gap = myLayout.padding = AppModel.instance.sizes.border*2;
 			layout = myLayout;
 			
 			titleDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, uint(userModel.fontSize*0.9), null, FontWeight.BOLD);

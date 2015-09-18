@@ -46,7 +46,7 @@ package com.gerantech.islamic.views.headers
 			
 			textRenderer = new TextBlockTextRenderer();
 			textRenderer.width = height
-			//	textRenderer.width = _height*3+AppModel.instance.border;
+			//	textRenderer.width = _height*3+AppModel.instance.sizes.border;
 			textRenderer.text = "233";
 			var fd:FontDescription = new FontDescription( "mequran", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
 			//textRenderer.wordWrap = true;

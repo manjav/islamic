@@ -50,13 +50,13 @@ package com.gerantech.islamic.views.popups
 			backgroundSkin = new Scale9Image(Assets.getSclaed9Textures("dialog"));
 			
 			alpha = 0;
-			width = Math.round(Math.min(appModel.orginalWidth, appModel.orginalHeightFull)*0.9);
-			minHeight = appModel.itemHeight*2;
-			maxHeight = appModel.heightFull//;Math.round(Math.min(appModel.orginalWidth, appModel.orginalHeightFull));
+			width = Math.round(Math.min(appModel.sizes.orginalWidth, appModel.sizes.orginalHeightFull)*0.9);
+			minHeight = appModel.sizes.listItem*2;
+			maxHeight = appModel.sizes.heightFull//;Math.round(Math.min(appModel.sizes.orginalWidth, appModel.sizes.orginalHeightFull));
 			
 			vLayout = new VerticalLayout();
-			vLayout.padding = appModel.itemHeight*0.8;
-			vLayout.paddingTop = appModel.itemHeight*0.6;
+			vLayout.padding = appModel.sizes.listItem*0.8;
+			vLayout.paddingTop = appModel.sizes.listItem*0.6;
 			//vLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			vLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
 			layout = vLayout;
@@ -69,18 +69,18 @@ package com.gerantech.islamic.views.popups
 			container.autoSizeMode = AUTO_SIZE_MODE_CONTENT; 
 			container.layoutData = new VerticalLayoutData(100);
 			container.horizontalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
-			container.maxHeight = maxHeight - vLayout.paddingBottom - vLayout.paddingTop - appModel.theme.controlsSize*2 - appModel.border*4;
+			container.maxHeight = maxHeight - vLayout.paddingBottom - vLayout.paddingTop - appModel.theme.controlsSize*2 - appModel.sizes.border*4;
 			addChild(container);
 			
 			var spacer:LayoutGroup = new LayoutGroup();
-			spacer.height = appModel.border*4;
+			spacer.height = appModel.sizes.border*4;
 			addChild(spacer);
 			
 			var buttonLayout:HorizontalLayout = new HorizontalLayout();
-			buttonLayout.padding = -appModel.itemHeight*0.2;
-			//buttonLayout.paddingTop = -appModel.itemHeight*0.3;
+			buttonLayout.padding = -appModel.sizes.listItem*0.2;
+			//buttonLayout.paddingTop = -appModel.sizes.itemHeight*0.3;
 			buttonLayout.horizontalAlign = appModel.ltr ? "right" : "left";
-			buttonLayout.gap = appModel.border;
+			buttonLayout.gap = appModel.sizes.border;
 			
 			buttonBar = new LayoutGroup();
 			buttonBar.layout = buttonLayout;
@@ -92,12 +92,12 @@ package com.gerantech.islamic.views.popups
 		
 		protected function orientationChangedHandler(event:AppEvent):void
 		{
-			var _h:Number = appModel.heightFull;
+			var _h:Number = appModel.sizes.heightFull;
 			if(height>width)
 				height = _h;
 			
-			maxHeight = _h//;Math.round(Math.min(appModel.orginalWidth, appModel.orginalHeightFull));
-			container.maxHeight = _h - vLayout.paddingBottom - vLayout.paddingTop - titleDisplay.height - buttonBar.height - appModel.border*4;
+			maxHeight = _h//;Math.round(Math.min(appModel.sizes.orginalWidth, appModel.sizes.orginalHeightFull));
+			container.maxHeight = _h - vLayout.paddingBottom - vLayout.paddingTop - titleDisplay.height - buttonBar.height - appModel.sizes.border*4;
 		}		
 		
 		public function show():void

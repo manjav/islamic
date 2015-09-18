@@ -29,11 +29,11 @@ package com.gerantech.islamic.views.items
 			backgroundSkin = new Quad(10, 10);
 			
 			layout = new AnchorLayout();
-			width = AppModel.instance.itemHeight*1.6;
-			height = AppModel.instance.itemHeight*0.8;
+			width = AppModel.instance.sizes.listItem*1.6;
+			height = AppModel.instance.sizes.listItem*0.8;
 			
 			checkDisplay = new Check();
-			checkDisplay.padding = AppModel.instance.border
+			checkDisplay.padding = AppModel.instance.sizes.border
 			checkDisplay.horizontalAlign = AppModel.instance.align;
 			checkDisplay.iconPosition = AppModel.instance.align;
 			checkDisplay.layoutData = new AnchorLayoutData(0,0,0,0);
@@ -41,7 +41,7 @@ package com.gerantech.islamic.views.items
 			
 			
 			/*labelDisplay = new Label();
-			//labelDisplay.height = AppModel.instance.itemHeight;
+			//labelDisplay.height = AppModel.instance.sizes.itemHeight;
 			labelDisplay.layoutData = new AnchorLayoutData(0,0,0,0);
 			addChild(labelDisplay);*/
 		}

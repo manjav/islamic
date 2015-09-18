@@ -38,17 +38,17 @@ package com.gerantech.islamic.views.items
 			
 			
 			deleyCommit = true;
-			height = appModel.itemHeight*2;
+			height = appModel.sizes.listItem*2;
 			
 			var myLayout:VerticalLayout = new VerticalLayout();
-			myLayout.padding = appModel.border*4;
-			myLayout.paddingTop = appModel.border*2;
+			myLayout.padding = appModel.sizes.border*4;
+			myLayout.paddingTop = appModel.sizes.border*2;
 			layout = myLayout;
 			
 			/*var hLayout:HorizontalLayout = new HorizontalLayout();
 			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			hLayout.gap = appModel.border*4;
-			hLayout.padding = appModel.border*2;
+			hLayout.gap = appModel.sizes.border*4;
+			hLayout.padding = appModel.sizes.border*2;
 			hLayout.paddingBottom = 0;
 			
 			var header:LayoutGroup = new LayoutGroup();
@@ -91,7 +91,7 @@ package com.gerantech.islamic.views.items
 			quranTextField.alpha = 0;
 			TweenLite.to(quranTextField, 0.3, {alpha:1});
 			
-		//	height = Math.min(appModel.itemHeight*2, quranTextField.height+appModel.itemHeight)
+		//	height = Math.min(appModel.sizes.itemHeight*2, quranTextField.height+appModel.sizes.itemHeight)
 		}
 		
 		override public function set currentState(value:String):void
