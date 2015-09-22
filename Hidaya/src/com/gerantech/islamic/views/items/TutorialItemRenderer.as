@@ -33,11 +33,11 @@ package com.gerantech.islamic.views.items
 			height = appModel.sizes.heightFull;
 			layout = new AnchorLayout();
 			tute = new Tute_0();
-			tute.layoutData = new AnchorLayoutData(0,0,appModel.sizes.listItem,0);
+			tute.layoutData = new AnchorLayoutData(0,0,appModel.sizes.twoLineItem,0);
 			addChild(tute);
 			
 			nextButton = new FlatButton("arrow_g_"+(appModel.ltr?"right":"left"), null, true);
-			nextButton.width = nextButton.height = appModel.sizes.listItem;
+			nextButton.width = nextButton.height = appModel.sizes.twoLineItem;
 			nextButton.layoutData = new AnchorLayoutData(NaN, appModel.ltr?appModel.sizes.border:NaN, appModel.sizes.border, appModel.ltr?NaN:appModel.sizes.border);
 			nextButton.addEventListener(Event.TRIGGERED, nextButton_triggeredHandler);
 			addChild(nextButton);

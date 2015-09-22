@@ -55,7 +55,7 @@ package com.gerantech.islamic.views.screens
 			else
 			{
 				var emptyLabel:RTLLabel = new RTLLabel(loc("bookmark_empty"), BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "center", null, true);
-				emptyLabel.layoutData = new AnchorLayoutData(NaN, appModel.sizes.listItem, NaN, appModel.sizes.listItem, NaN, 0);
+				emptyLabel.layoutData = new AnchorLayoutData(NaN, appModel.sizes.twoLineItem, NaN, appModel.sizes.twoLineItem, NaN, 0);
 				addChild(emptyLabel);
 			}
 			

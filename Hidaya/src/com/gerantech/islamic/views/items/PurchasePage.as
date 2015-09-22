@@ -38,7 +38,7 @@ package com.gerantech.islamic.views.items
 			var vlayout:VerticalLayout = new VerticalLayout();
 			vlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
 			vlayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
-			vlayout.gap = AppModel.instance.sizes.listItem/4;
+			vlayout.gap = AppModel.instance.sizes.twoLineItem/4;
 			layout = vlayout;
 			
 			

@@ -126,7 +126,7 @@ package com.gerantech.islamic.views.headers
 			reciterImage.layoutData = reciterLayoutdata;
 			addChild(reciterImage);
 			
-			reciterLabel = new RTLLabel(configModel.hasReciter?configModel.selectedReciters[0].name:"", 0, "left", "rtl", false, null, UserModel.instance.fontSize*0.9)
+			reciterLabel = new RTLLabel(configModel.hasReciter?configModel.selectedReciters[0].name:"", 0, "left", "rtl", false, null, 0.9)
 			reciterLabelLayoutData = new AnchorLayoutData(NaN, NaN, NaN, _height*2, NaN, 0);
 			reciterLabel.layoutData = reciterLabelLayoutData;
 			addChild(reciterLabel);

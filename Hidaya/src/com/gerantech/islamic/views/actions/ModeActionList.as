@@ -50,8 +50,8 @@ package com.gerantech.islamic.views.actions
 		override protected function draw():void
 		{
 			super.draw();
-			actionButton.x = actualWidth-AppModel.instance.sizes.listItem;
-			actionButton.y = actualHeight-AppModel.instance.sizes.listItem;
+			actionButton.x = actualWidth-AppModel.instance.sizes.subtitle;
+			actionButton.y = actualHeight-AppModel.instance.sizes.subtitle;
 			/*if(opened)
 				animateButtons(true);*/
 			background.width = actualWidth;

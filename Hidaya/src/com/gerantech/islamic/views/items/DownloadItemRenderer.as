@@ -55,7 +55,7 @@ package com.gerantech.islamic.views.items
 			
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			appModel = AppModel.instance;
-			height = _height = uint(appModel.sizes.listItem*1.1);
+			height = _height = appModel.sizes.twoLineItem;
 			
 			var hLayout:HorizontalLayout = new HorizontalLayout();
 			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
@@ -64,7 +64,7 @@ package com.gerantech.islamic.views.items
 			layout = hLayout;
 			
 			mainContents = new LayoutGroup();
-			mainContents.layoutData = new HorizontalLayoutData(100, 90);
+			mainContents.layoutData = new HorizontalLayoutData(100, 80);
 			var mLayout:VerticalLayout = new VerticalLayout();
 			//mLayout.firstGap = 0;
 			mLayout.lastGap = -_height/12;
@@ -72,9 +72,9 @@ package com.gerantech.islamic.views.items
 			mainContents.layout = mLayout;
 			addChild(mainContents);
 
-			var fontSize:uint = uint(_height/4.6);
+			var fontSize:uint = uint(_height/5.6);
 			nameDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, fontSize, null, "bold");
-			nameDisplay.layoutData = new VerticalLayoutData(100, 48);
+			nameDisplay.layoutData = new VerticalLayoutData(100, 40);
 			mainContents.addChild(nameDisplay);
 			
 			progressBar = new LinierProgressBar();
@@ -95,7 +95,7 @@ package com.gerantech.islamic.views.items
 			addChild(checkButton);
 			
 			checkImage = new DownloadAccessory();
-			checkImage.iconScale = 0.5;
+			checkImage.iconScale = 0.36;
 			checkImage.layoutData = new AnchorLayoutData(0,0,0,0);
 			checkButton.addChild(checkImage);
 		}

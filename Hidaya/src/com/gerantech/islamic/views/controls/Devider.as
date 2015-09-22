@@ -8,6 +8,8 @@ package com.gerantech.islamic.views.controls
 	{
 		public function Devider(color:uint=0, size:uint=1)
 		{
+			if(size<1)
+				size = 1;
 			backgroundSkin = new Quad(size,size, color);
 		}
 	}

@@ -47,8 +47,8 @@ package com.gerantech.islamic.views.controls
 		
 		public function AbstractDrawer()
 		{
-			containerWidth = AppModel.instance.sizes.listItem*4;
-			edgeWidth =  AppModel.instance.sizes.listItem/3;
+			containerWidth = AppModel.instance.sizes.twoLineItem*4;
+			edgeWidth =  AppModel.instance.sizes.twoLineItem/3;
 			hitAlpha = 0.1;
 			
 			hit = new Button(Assets.getTexture("toolbar_background_skin"));

@@ -60,7 +60,7 @@ package com.gerantech.islamic.views.headers
 		//	hlayout.padding = appModel.sizes.border;
 			layout = hlayout;
 			
-			height = uint(appModel.sizes.listItem*1.1);
+			height = appModel.sizes.subtitle;
 			
 			/*personImage = new ImageLoader();
 			personImage.layoutData = new HorizontalLayoutData(NaN, 100);
@@ -87,12 +87,12 @@ package com.gerantech.islamic.views.headers
 			downloadImage.source = Assets.getTexture("download_w");
 			downloadButton.addChild(downloadImage);
 			
-			downloadLabel = new RTLLabel(loc("download_link"), 0xE0F2F1, null, null, false, null, 0, null, "bold");
+			downloadLabel = new RTLLabel(loc("download_link"), 0xE0F2F1, null, null, false, null, 0.8, null, "bold");
 			downloadLabel.layoutData = new HorizontalLayoutData(100);
 			downloadButton.addChild(downloadLabel);
 			
 			
-			descriptionLabel = new RTLLabel(loc("downloader_result_any"), BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, true, null, UserModel.instance.fontSize*0.8);
+			descriptionLabel = new RTLLabel(loc("downloader_result_any"), BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, true, null, 0.8);
 			descriptionLabel.layoutData = new HorizontalLayoutData(100);
 			addChild(descriptionLabel);
 			

@@ -38,7 +38,7 @@ package com.gerantech.islamic.views.lists
 		{
 			this.isLeft = isLeft;
 			appModel = AppModel.instance;
-			width = Math.min(appModel.sizes.listItem*5, appModel.sizes.orginalWidth-appModel.sizes.toolbar);
+			width = Math.min(appModel.sizes.twoLineItem*5, appModel.sizes.orginalWidth-appModel.sizes.toolbar);
 		}
 		
 		override protected function initialize():void

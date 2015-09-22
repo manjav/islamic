@@ -48,7 +48,7 @@ package com.gerantech.islamic.views.popups
 			_isEnabled = callback!=null;
 			includeInLayout = false;
 			
-			height = uint(AppModel.instance.sizes.listItem*0.8);
+			height = uint(AppModel.instance.sizes.twoLineItem*0.8);
 			layout = new AnchorLayout();
 		
 			backgroundSkin = new Scale3Image(new Scale3Textures(Assets.getTexture("round_alert"), 31,2));
@@ -56,7 +56,7 @@ package com.gerantech.islamic.views.popups
 			
 			var hLayout:HorizontalLayout = new HorizontalLayout();
 			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			hLayout.gap = hLayout.padding = AppModel.instance.sizes.listItem/4;
+			hLayout.gap = hLayout.padding = AppModel.instance.sizes.twoLineItem/4;
 			
 			var hGroup:LayoutGroup = new LayoutGroup();
 			hGroup.layout = hLayout;

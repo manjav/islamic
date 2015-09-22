@@ -40,18 +40,18 @@ package com.gerantech.islamic.views.screens
 			layout = new AnchorLayout();
 
 			sortable = new SortablePersonList(type);
-			sortable.layoutData = new AnchorLayoutData(0,0,appModel.sizes.listItem,0);
+			sortable.layoutData = new AnchorLayoutData(0,0,appModel.sizes.twoLineItem,0);
 			addChild(sortable);
 
 			footers = new LayoutGroup();
 			footers.layout = new AnchorLayout();
 			footers.layoutData = new AnchorLayoutData(NaN,0,0,0);
-			footers.height = appModel.sizes.listItem;
+			footers.height = appModel.sizes.subtitle;
 			footers.backgroundSkin = new Quad(1, 1, BaseMaterialTheme.SECONDARY_BACKGROUND_COLOR);
 			addChild(footers);
 			
 			var labelDisplay:RTLLabel = new RTLLabel(loc("person_add"), BaseMaterialTheme.PRIMARY_TEXT_COLOR, "center");
-			labelDisplay.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, -appModel.sizes.listItem/2, 0);
+			labelDisplay.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, -appModel.sizes.subtitle/2, 0);
 			footers.addChild(labelDisplay);
 			
 			modeSelector = new ModeActionList(type);

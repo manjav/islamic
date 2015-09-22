@@ -27,7 +27,7 @@ package com.gerantech.islamic.views.actions.items
 			mLayout.gap = AppModel.instance.sizes.border*2;
 			layout = mLayout;
 			
-			var _h:uint = height = uint(AppModel.instance.sizes.listItem*0.7);
+			var _h:uint = height = AppModel.instance.sizes.DP40;
 			var _w:uint = width = AppModel.instance.sizes.orginalWidth/2;
 			
 			backgroundSkin = new Quad(1, 1);

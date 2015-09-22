@@ -26,13 +26,19 @@ package com.gerantech.islamic.views.controls
 		public var fontDescription:FontDescription;
 		public var color:uint;
 		
-		public function RTLLabel(text:String, color:uint=1, align:String=null, direction:String=null, wordWrap:Boolean=false, lastAlign:String=null, fontSize:uint=0, fontFamily:String=null, fontWeight:String=null, fontPosture:String=null)
+		public function RTLLabel(text:String, color:uint=1, align:String=null, direction:String=null, wordWrap:Boolean=false, lastAlign:String=null, fontSize:Number=0, fontFamily:String=null, fontWeight:String=null, fontPosture:String=null)
 		{
+			if(fontSize==0)
+				this.fontSize = AppModel.instance.sizes.orginalFontSize;
+			else if(fontSize<1)
+				this.fontSize = fontSize*AppModel.instance.sizes.orginalFontSize;
+			else
+				this.fontSize = fontSize;
+						
 			this.align = align==null ? AppModel.instance.align : align;
 			this.lastAlign = lastAlign==null ? AppModel.instance.align : lastAlign;
 			this.direction = direction==null ? AppModel.instance.direction : direction;
 			this.fontFamily = fontFamily==null ? "SourceSansPro" : fontFamily;
-			this.fontSize = fontSize==0 ? UserModel.instance.fontSize : fontSize;
 			this.fontWeight = fontWeight==null ? "normal" : fontWeight;
 			this.fontPosture = fontPosture==null ? "normal" : fontPosture;
 			this.color = color==1 ? BaseMaterialTheme.PRIMARY_TEXT_COLOR : color;

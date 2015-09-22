@@ -2,6 +2,7 @@
 Hidaya/bin/
 Hidaya/bin-debug/
 Hidaya/bin-release/
+Hidaya/bin-release-temp/
 .swf
 .settings
 .project

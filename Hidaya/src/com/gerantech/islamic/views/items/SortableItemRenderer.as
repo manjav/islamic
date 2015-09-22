@@ -44,7 +44,7 @@ package com.gerantech.islamic.views.items
 		{
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			appModel = AppModel.instance;
-			height = appModel.sizes.listItem;
+			height = appModel.sizes.twoLineItem;
 			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
@@ -71,7 +71,7 @@ package com.gerantech.islamic.views.items
 			mainContents.layoutData = new HorizontalLayoutData(100, 75);
 			mainContents.layout = new VerticalLayout();
 			
-			var fontSize:uint = appModel.sizes.listItem/4;
+			var fontSize:uint = appModel.sizes.twoLineItem/4;
 			nameDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, fontSize, null, "bold");
 			/*var fd:FontDescription = new FontDescription("SourceSansPro", FontWeight.BOLD, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
 			nameDisplay.bidiLevel = appModel.ltr?0:1;

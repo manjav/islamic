@@ -28,7 +28,7 @@ package com.gerantech.islamic.views.popups
 		override protected function initialize():void
 		{
 			super.initialize();
-			width = Math.round(Math.min(appModel.sizes.listItem*5, appModel.sizes.orginalWidth));
+			width = Math.round(Math.min(appModel.sizes.twoLineItem*5, appModel.sizes.orginalWidth));
 			
 			var cLayout:VerticalLayout = new VerticalLayout();
 			cLayout.gap = appModel.sizes.border*3;

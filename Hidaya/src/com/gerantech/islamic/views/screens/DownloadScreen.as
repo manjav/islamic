@@ -7,8 +7,6 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.headers.DownloadHeader;
 	import com.gerantech.islamic.views.items.DownloadItemRenderer;
 	
-	import flash.utils.setTimeout;
-	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
@@ -49,7 +47,7 @@ package com.gerantech.islamic.views.screens
 			
 			listLayout = new VerticalLayout();
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
-			listLayout.paddingTop = appModel.sizes.listItem/4;
+			listLayout.paddingTop = appModel.sizes.twoLineItem/4;
 			
 			list = new List();
 			list.layout = listLayout;

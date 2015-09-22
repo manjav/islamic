@@ -13,22 +13,28 @@ package com.gerantech.islamic.utils
 			var isTablet:Boolean = DeviceCapabilities.isTablet(stage);
 			
 			trace("scale", _scale, "dpi", _dpi)
-			_toolbar = Math.round(56*_scale);
-			_subtitle = Math.round(48*_scale);
-			_listItem = Math.round((isTablet?64:72)*_scale);
-			_menuItem = Math.round((isTablet?48:48)*_scale);
-			_orginalFontSize = Math.round(15*_scale);//uint(height/40+2);
-			_border = Math.round(4*_scale);
+			_toolbar = getPixelByDP(56);
+			_subtitle = getPixelByDP(48);
+			_twoLineItem = getPixelByDP(isTablet?48:56);
+			_twoLineItem = getPixelByDP(isTablet?64:72);
+			_threeLineItem = getPixelByDP(88);
+			_menuItem = getPixelByDP(isTablet?48:48);
+			_orginalFontSize = getPixelByDP(15);//uint(height/40+2);
+			_border = getPixelByDP(4);
 			
 			width = _orginalWidth = stage.stageWidth;
 			_orginalHeightFull = heightFull = stage.stageHeight;
 			_orginalHeight = height = heightFull-toolbar;
 			
-			_DP72 = Math.round(72*_scale);
-			_DP32 = Math.round(32*_scale);
-			_DP16 = Math.round(16*_scale);
-			_DP8 = Math.round(8*_scale);
-			_DP4 = Math.round(4*_scale);
+			_DP72 = getPixelByDP(72);
+			_DP64 = getPixelByDP(64);
+			_DP48 = getPixelByDP(48);
+			_DP40 = getPixelByDP(40);
+			_DP36 = getPixelByDP(36);
+			_DP32 = getPixelByDP(32);
+			_DP16 = getPixelByDP(16);
+			_DP8 = getPixelByDP(8);
+			_DP4 = getPixelByDP(4);
 		}
 		
 		public function getPixelByDP(dp:uint):uint
@@ -42,23 +48,41 @@ package com.gerantech.islamic.utils
 		private var _scale:Number;
 		public function get scale():Number{return _scale;}
 		
-		private var _toolbar:uint = 66;
+		private var _toolbar:uint = 56;
 		public function get toolbar():uint{return _toolbar;}
 		
-		private var _subtitle:uint = 66;
+		private var _subtitle:uint = 48;
 		public function get subtitle():uint{return _subtitle;}
 		
 		private var _menuItem:Number;
 		public function get menuItem():uint{return _menuItem;}
 
-		private var _listItem:uint = 80;
-		public function get listItem():uint{return _listItem;}
+		private var _singleLineItem:uint = 56;
+		public function get singleLineItem():uint{return _singleLineItem;}
+		
+		private var _twoLineItem:uint = 72;
+		public function get twoLineItem():uint{return _twoLineItem;}
+		
+		private var _threeLineItem:uint = 88;
+		public function get threeLineItem():uint{return _threeLineItem;}
 		
 		private var _border:uint = 0;
 		public function get border():uint{return _border;}
 		
 		private var _DP72:Number;
 		public function get DP72():uint{return _DP72;}
+		
+		private var _DP64:Number;
+		public function get DP64():uint{return _DP64;}
+		
+		private var _DP48:Number;
+		public function get DP48():uint{return _DP48;}
+		
+		private var _DP40:Number;
+		public function get DP40():uint{return _DP40;}
+		
+		private var _DP36:Number;
+		public function get DP36():uint{return _DP36;}
 		
 		private var _DP32:Number;
 		public function get DP32():uint{return _DP32;}

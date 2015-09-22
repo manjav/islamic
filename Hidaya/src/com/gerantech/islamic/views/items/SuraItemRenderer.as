@@ -45,7 +45,7 @@ package com.gerantech.islamic.views.items
 		override protected function initialize():void
 		{
 			super.initialize();
-			_height = AppModel.instance.sizes.listItem;
+			_height = AppModel.instance.sizes.twoLineItem;
 			if(AppModel.instance.sizes.width/_height<6.7)
 				_height = AppModel.instance.sizes.width/6.7;
 			

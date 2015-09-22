@@ -40,7 +40,7 @@ package com.gerantech.islamic.views.items
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			
 			if(height==0)
-				height = AppModel.instance.sizes.listItem;
+				height = AppModel.instance.sizes.twoLineItem;
 			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;

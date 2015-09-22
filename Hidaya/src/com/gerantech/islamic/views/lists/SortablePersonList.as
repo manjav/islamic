@@ -49,7 +49,7 @@ package com.gerantech.islamic.views.lists
 		public function SortablePersonList(type:String)
 		{
 			this.type = type;				
-			itemHeight = AppModel.instance.sizes.listItem+AppModel.instance.sizes.border;
+			itemHeight = AppModel.instance.sizes.twoLineItem+AppModel.instance.sizes.border;
 		}
 		
 

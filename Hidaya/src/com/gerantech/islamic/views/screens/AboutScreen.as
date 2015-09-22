@@ -25,6 +25,7 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.VerticalLayoutData;
 	
 	import starling.events.Event;
+	import com.gerantech.islamic.utils.StrTools;
 	
 	public class AboutScreen extends BaseScreen
 	{
@@ -43,7 +44,7 @@ package com.gerantech.islamic.views.screens
 			
 			createAboutHeader();
 			
-			var dec:RTLLabel = new RTLLabel(loc("app_descript")+"\n"+loc("alpha_popup_message")+"\n\n", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "justify", null, true, null, userModel.fontSize*0.9);
+			var dec:RTLLabel = new RTLLabel(loc("app_descript")+"\n"+loc("alpha_popup_message")+"\n\n", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "justify", null, true, null, 0.8);
 			dec.layoutData = new VerticalLayoutData(94);
 			addChild(dec);
 			
@@ -57,16 +58,16 @@ package com.gerantech.islamic.views.screens
 
 			var appIcon:ImageLoader = new ImageLoader();
 			appIcon.source = "app:/com/gerantech/islamic/assets/images/icon/icon-192.png";
-			appIcon.width = appIcon.height = uint(appModel.sizes.listItem*0.9)*2;
+			appIcon.width = appIcon.height = appModel.sizes.twoLineItem;
 			addChild(appIcon);
 			
 			var appName:RTLLabel = new RTLLabel(loc("app_title"), BaseMaterialTheme.PRIMARY_TEXT_COLOR, "center", null, true, null, 0, null, "bold");
 			addChild(appName);
 			
-			var appVersion:RTLLabel = new RTLLabel(appModel.descriptor.versionLabel, BaseMaterialTheme.PRIMARY_TEXT_COLOR, "center", null, false, null, userModel.fontSize*0.8);
+			var appVersion:RTLLabel = new RTLLabel(StrTools.getNumberFromLocale(appModel.descriptor.versionLabel), BaseMaterialTheme.PRIMARY_TEXT_COLOR, "center", null, false, null, 0.8);
 			addChild(appVersion);
 			
-			var appCopyRight:RTLLabel = new RTLLabel(ConfigModel.instance.market, BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "center", null, false, null, userModel.fontSize*0.7);
+			var appCopyRight:RTLLabel = new RTLLabel(ConfigModel.instance.market, BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "center", null, false, null, 0.7);
 			addChild(appCopyRight);
 			
 			var headerSpacer:LayoutGroup = new LayoutGroup();

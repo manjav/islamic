@@ -33,7 +33,7 @@ package com.gerantech.islamic.views.popups
 		override protected function draw():void
 		{
 			width = AppModel.instance.sizes.width-AppModel.instance.sizes.border*2;
-			y = AppModel.instance.sizes.height-AppModel.instance.sizes.listItem;
+			y = AppModel.instance.sizes.height-AppModel.instance.sizes.twoLineItem;
 			super.draw();
 		}
 		
@@ -42,7 +42,7 @@ package com.gerantech.islamic.views.popups
 		public function UndoAlert(label:String, callback:Function, duration:Number=2, delay:Number=1)
 		{
 			this.callback = callback;
-			height = uint(AppModel.instance.sizes.listItem*0.8);
+			height = uint(AppModel.instance.sizes.twoLineItem*0.8);
 			
 			layout = new AnchorLayout();
 			//hGroup.layoutData = new AnchorLayoutData(0,AppModel.instance.sizes.itemHeight,0,AppModel.instance.sizes.itemHeight)
@@ -53,7 +53,7 @@ package com.gerantech.islamic.views.popups
 			
 			var hLayout:HorizontalLayout = new HorizontalLayout();
 			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			hLayout.gap = hLayout.padding = AppModel.instance.sizes.listItem/4;
+			hLayout.gap = hLayout.padding = AppModel.instance.sizes.twoLineItem/4;
 			
 			var hGroup:LayoutGroup = new LayoutGroup();
 			hGroup.layout = hLayout;

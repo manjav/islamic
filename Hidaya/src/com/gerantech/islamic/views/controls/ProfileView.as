@@ -44,7 +44,7 @@ package com.gerantech.islamic.views.controls
 			super.initialize();
 			backgroundSkin = new Quad(1, 1, 0x304040);
 			layout = new AnchorLayout();
-			height = AppModel.instance.sizes.listItem*2;
+			height = AppModel.instance.sizes.twoLineItem*2;
 			padding = AppModel.instance.sizes.DP16;
 						
 			reload();
@@ -76,7 +76,7 @@ package com.gerantech.islamic.views.controls
 			nameLabel.layoutData = new VerticalLayoutData(100);
 			vGroup.addChild(nameLabel);
 			
-			var emailLabal:RTLLabel = new RTLLabel(profileData.registered?profileData.email:ResourceManager.getInstance().getString("loc", "profile_message"), 0xAAAAAA, null, null, false, null, UserModel.instance.fontSize*0.8);
+			var emailLabal:RTLLabel = new RTLLabel(profileData.registered?profileData.email:ResourceManager.getInstance().getString("loc", "profile_message"), 0xAAAAAA, null, null, false, null, 0.8);
 			emailLabal.truncateToFit = true;
 			emailLabal.layoutData = new VerticalLayoutData(100);
 			vGroup.addChild(emailLabal);

@@ -38,7 +38,7 @@ package com.gerantech.islamic.views.items
 			
 			
 			deleyCommit = true;
-			height = appModel.sizes.listItem*2;
+			height = appModel.sizes.twoLineItem*2;
 			
 			var myLayout:VerticalLayout = new VerticalLayout();
 			myLayout.padding = appModel.sizes.border*4;

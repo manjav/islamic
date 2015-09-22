@@ -31,8 +31,8 @@ package com.gerantech.islamic.views.items
 		{
 			super.initialize();
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
-			height = appModel.sizes.listItem;
-			
+			height = appModel.sizes.singleLineItem;
+			trace(height)
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
 			myLayout.gap = appModel.sizes.border*4;

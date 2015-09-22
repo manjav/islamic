@@ -55,7 +55,7 @@ package com.gerantech.islamic.views.controls
 			
 			if(!isHtml)
 			{
-				textBlock = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, translator.flag.align, translator.flag.dir);
+				textBlock = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, translator.flag.align, translator.flag.dir, false, null, UserModel.instance.fontSize);
 				//textBlock.truncateToFit = false
 				textBlock.layoutData = new HorizontalLayoutData(100);
 				addChild(textBlock);

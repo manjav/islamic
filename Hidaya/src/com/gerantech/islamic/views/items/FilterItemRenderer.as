@@ -29,8 +29,8 @@ package com.gerantech.islamic.views.items
 			backgroundSkin = new Quad(10, 10);
 			
 			layout = new AnchorLayout();
-			width = AppModel.instance.sizes.listItem*1.6;
-			height = AppModel.instance.sizes.listItem*0.8;
+			width = AppModel.instance.sizes.twoLineItem*1.6;
+			height = AppModel.instance.sizes.twoLineItem*0.8;
 			
 			checkDisplay = new Check();
 			checkDisplay.padding = AppModel.instance.sizes.border

@@ -28,7 +28,7 @@ package com.gerantech.islamic.views.headers
 			layout = mlayout;
 			
 			touchable = false;
-			height = AppModel.instance.sizes.listItem/2;
+			height = AppModel.instance.sizes.twoLineItem/2;
 			
 			colorFilter = new ColorMatrixFilter();
 			colorFilter.invert();

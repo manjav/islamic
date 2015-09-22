@@ -24,6 +24,7 @@
  */
 package com.gerantech.islamic.themes
 {
+	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
 	
 	import flash.geom.Rectangle;
@@ -1477,7 +1478,7 @@ package com.gerantech.islamic.themes
 		protected function setHeaderStyles(header:Header):void
 		{
 			header.minWidth = uint(this.gridSize*1.2);
-			header.minHeight = uint(this.gridSize*1.2);
+			header.minHeight = AppModel.instance.sizes.toolbar;// uint(this.gridSize*1.2);
 			header.padding = this.smallGutterSize;
 			header.gap = this.smallGutterSize;
 			header.titleGap = this.smallGutterSize;

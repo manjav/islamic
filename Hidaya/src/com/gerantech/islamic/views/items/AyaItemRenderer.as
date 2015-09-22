@@ -79,7 +79,7 @@ package com.gerantech.islamic.views.items
 			if(!hasTranslation)
 				return;
 				
-			devider = new Devider(BaseMaterialTheme.CHROME_COLOR, userModel.fontSize/14);
+			devider = new Devider(BaseMaterialTheme.CHROME_COLOR, Math.ceil(userModel.fontSize/14));
 			devider.layoutData = new VerticalLayoutData(60);
 			addChild(devider);
 			
@@ -97,7 +97,7 @@ package com.gerantech.islamic.views.items
 			//moreStrip.backgroundSkin.alpha = 0.1;
 			moreStrip.layoutData = new VerticalLayoutData(100)
 			moreStrip.addEventListener(Event.TRIGGERED, moreStrip_triggeredHandler);
-			moreStrip.height = appModel.sizes.listItem/2;
+			moreStrip.height = appModel.sizes.twoLineItem/2;
 			//moreStrip.layout = new AnchorLayout();
 			addChild(moreStrip);
 			
@@ -152,7 +152,7 @@ package com.gerantech.islamic.views.items
 			//(aya.aya==1?(aya.aya + " . "):"") + 	
 			if(!hasTranslation)
 			{
-				vLayout.paddingBottom = vLayout.gap*2 + (aya.isLastItem? appModel.sizes.listItem/3 : 0);
+				vLayout.paddingBottom = vLayout.gap*2 + (aya.isLastItem? appModel.sizes.twoLineItem/3 : 0);
 				return;
 			}
 			/*if(moreStrip.parent == this)

@@ -51,12 +51,12 @@ package com.gerantech.islamic.views.popups
 			
 			alpha = 0;
 			width = Math.round(Math.min(appModel.sizes.orginalWidth, appModel.sizes.orginalHeightFull)*0.9);
-			minHeight = appModel.sizes.listItem*2;
+			minHeight = appModel.sizes.twoLineItem*2;
 			maxHeight = appModel.sizes.heightFull//;Math.round(Math.min(appModel.sizes.orginalWidth, appModel.sizes.orginalHeightFull));
 			
 			vLayout = new VerticalLayout();
-			vLayout.padding = appModel.sizes.listItem*0.8;
-			vLayout.paddingTop = appModel.sizes.listItem*0.6;
+			vLayout.padding = appModel.sizes.twoLineItem*0.8;
+			vLayout.paddingTop = appModel.sizes.twoLineItem*0.6;
 			//vLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			vLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
 			layout = vLayout;
@@ -77,7 +77,7 @@ package com.gerantech.islamic.views.popups
 			addChild(spacer);
 			
 			var buttonLayout:HorizontalLayout = new HorizontalLayout();
-			buttonLayout.padding = -appModel.sizes.listItem*0.2;
+			buttonLayout.padding = -appModel.sizes.twoLineItem*0.2;
 			//buttonLayout.paddingTop = -appModel.sizes.itemHeight*0.3;
 			buttonLayout.horizontalAlign = appModel.ltr ? "right" : "left";
 			buttonLayout.gap = appModel.sizes.border;

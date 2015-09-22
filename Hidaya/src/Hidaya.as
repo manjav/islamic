@@ -68,8 +68,6 @@ package
 
 			//Add Splash -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 			loaderInfo.addEventListener(Event.COMPLETE, loaderInfo_completeHandler);
-			graphics.beginFill(0x009688);
-			graphics.drawRect(0,0,Math.max(stage.stageWidth, stage.stageHeight), Capabilities.screenDPI/3.2);
 		}
 		
 		private function loaderInfo_completeHandler(event:Event):void
@@ -78,6 +76,9 @@ package
 
 			appModel = AppModel.instance;
 			appModel.init(this as Hidaya);
+			
+			graphics.beginFill(0x009688);
+			graphics.drawRect(0,0,appModel.sizes.width, appModel.sizes.toolbar);
 			
 			//Flurry initialising ----------------------------------------------------
 			//Flurry.getInstance().logEnabled = true
@@ -154,7 +155,7 @@ package
 			
 			if(Capabilities.cpuArchitecture=="x86" || userModel.fontSize==12)
 			{
-				userModel.fontSize = appModel.sizes.orginalFontSize;
+				userModel.fontSize = 12//appModel.sizes.orginalFontSize;
 			//	UserModel.instance.premiumMode = Capabilities.cpuArchitecture=="x86"
 			}
 

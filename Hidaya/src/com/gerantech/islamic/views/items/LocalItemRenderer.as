@@ -41,7 +41,7 @@ package com.gerantech.islamic.views.items
 			super.initialize();
 			backgroundSkin = new Scale9Image(Assets.getItemTextures());
 			layout = new AnchorLayout();
-			height = width = uint(AppModel.instance.sizes.listItem*1.5);
+			height = width = uint(AppModel.instance.sizes.twoLineItem*1.5);
 			
 			
 			labelDisplay = new TextBlockTextRenderer();

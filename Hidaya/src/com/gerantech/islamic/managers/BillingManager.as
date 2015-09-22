@@ -1,23 +1,18 @@
 package com.gerantech.islamic.managers
 {
+	import com.gerantech.extensions.AndroidExtension;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
-	
-	import flash.net.URLRequest;
-	import flash.net.navigateToURL;
-	import flash.system.Capabilities;
-	
-
-	CONFIG::Android 
-		{
-	import com.gerantech.extensions.AndroidExtension;
 	import com.pozirk.payment.android.InAppPurchase;
 	import com.pozirk.payment.android.InAppPurchaseDetails;
 	import com.pozirk.payment.android.InAppPurchaseEvent;
 	import com.pozirk.payment.android.InAppSkuDetails;
+	
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
+	
 	import mx.resources.ResourceManager;
-		}
-		
+	
 	public class BillingManager
 	{
 		private var _iap:InAppPurchase;
@@ -74,8 +69,8 @@ package com.gerantech.islamic.managers
 			_iap = new InAppPurchase();
 			_iap.addEventListener(InAppPurchaseEvent.INIT_SUCCESS, onInitSuccess);
 			_iap.addEventListener(InAppPurchaseEvent.INIT_ERROR, onInitError);
-			if(Capabilities.os == "")
-			_iap.init(base64Key, bindURL, packageURL);
+			if(AppModel.instance.isAndroid)
+				_iap.init(base64Key, bindURL, packageURL);
 		}
 
 		protected function onInitSuccess(event:InAppPurchaseEvent):void

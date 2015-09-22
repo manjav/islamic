@@ -1,25 +1,12 @@
 package com.gerantech.islamic.managers
 {
-	import com.gerantech.islamic.events.AppEvent;
+	import com.gerantech.extensions.AndroidExtension;
 	import com.gerantech.islamic.events.UserEvent;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Message;
 	import com.pushwoosh.nativeExtensions.PushNotification;
-	
-	import flash.net.URLRequest;
-	import flash.net.navigateToURL;
-	import flash.system.Capabilities;
-	
-	
-
-	CONFIG::Android 
-		{
-	import flash.utils.setTimeout;
-	import com.gerantech.extensions.AndroidExtension;
-	import com.pushwoosh.nativeExtensions.PushNotification;
 	import com.pushwoosh.nativeExtensions.PushNotificationEvent;
-		}
 		
 	public class NotificationManager
 	{

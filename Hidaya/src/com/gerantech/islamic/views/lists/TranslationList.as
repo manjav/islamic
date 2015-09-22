@@ -219,7 +219,7 @@ package com.gerantech.islamic.views.lists
 						break;
 					
 					default:
-						if(textTemp.length<appModel.sizes.listItem*10)
+						if(textTemp.length<appModel.sizes.twoLineItem*10)
 							textTemp += t
 						else
 						{

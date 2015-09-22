@@ -27,7 +27,7 @@ package com.gerantech.islamic.views.controls
 			mlayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
 			layout = mlayout;
 			
-			height = AppModel.instance.sizes.listItem/2
+			height = AppModel.instance.sizes.twoLineItem/2
 			var textField:TextField = new TextField(height/2, height, ConfigModel.instance.selectedTranslators.length.toString(), "SourceSans", UserModel.instance.fontSize);
 			
 			var icon:ImageLoader = new ImageLoader();
