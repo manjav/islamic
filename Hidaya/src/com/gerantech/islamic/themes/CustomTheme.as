@@ -2,6 +2,14 @@ package com.gerantech.islamic.themes
 {
 	import com.gerantech.islamic.models.AppModel;
 	
+	import flash.text.engine.CFFHinting;
+	import flash.text.engine.ElementFormat;
+	import flash.text.engine.FontDescription;
+	import flash.text.engine.FontLookup;
+	import flash.text.engine.FontPosture;
+	import flash.text.engine.FontWeight;
+	import flash.text.engine.RenderingMode;
+	
 	import feathers.controls.Button;
 	import feathers.controls.List;
 	import feathers.controls.Scroller;
@@ -41,9 +49,10 @@ package com.gerantech.islamic.themes
 			button.minGap = this.gutterSize;
 			button.padding = AppModel.instance.sizes.border;
 			button.iconPosition = Button.ICON_POSITION_LEFT;
-			
-			
-			
+				
+			var fd:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);
+			var ef:ElementFormat = new ElementFormat(fd, uint(AppModel.instance.sizes.orginalFontSize*0.8), BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
+			button.defaultLabelProperties.elementFormat = ef;			
 			
 			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
 			skinSelector.defaultValue = this.backgroundInsetSkinTextures;

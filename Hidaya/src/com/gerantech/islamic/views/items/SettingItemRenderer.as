@@ -5,7 +5,6 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	
 	import flash.text.engine.ElementFormat;
-	import flash.text.engine.FontWeight;
 	
 	import mx.resources.ResourceManager;
 	
@@ -40,14 +39,14 @@ package com.gerantech.islamic.views.items
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			
 			if(height==0)
-				height = AppModel.instance.sizes.twoLineItem;
+				height = AppModel.instance.sizes.singleLineItem;
 			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			myLayout.gap = myLayout.padding = AppModel.instance.sizes.border*2;
+			myLayout.gap = myLayout.padding = AppModel.instance.sizes.DP16;
 			layout = myLayout;
 			
-			titleDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, uint(userModel.fontSize*0.9), null, FontWeight.BOLD);
+			titleDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0.9, null, "bold");
 			titleDisplay.layoutData = new HorizontalLayoutData(100);
 			
 			iconDisplay = new ImageLoader();

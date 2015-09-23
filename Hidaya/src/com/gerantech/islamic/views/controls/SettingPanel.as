@@ -1,11 +1,8 @@
 package com.gerantech.islamic.views.controls
 {
 	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
-	
-	import flash.text.engine.FontWeight;
 	
 	import mx.resources.ResourceManager;
 	
@@ -29,9 +26,11 @@ package com.gerantech.islamic.views.controls
 		{
 			this.label = label;
 			
+			height = AppModel.instance.sizes.singleLineItem;
+			
 			var mLayout:HorizontalLayout = new HorizontalLayout();
 			mLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			mLayout.gap = AppModel.instance.sizes.border*2;
+			mLayout.gap = AppModel.instance.sizes.DP8;
 			layout = mLayout;
 			
 			var index:uint = 0;
@@ -46,9 +45,8 @@ package com.gerantech.islamic.views.controls
 					selectedIndex = index;
 				index++;
 			}			
-			var isLeft:Boolean = AppModel.instance.ltr;
 			
-			titleDisplay = new RTLLabel(label, BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, uint(UserModel.instance.fontSize*0.95), null, FontWeight.BOLD);
+			titleDisplay = new RTLLabel(label, BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0.9, null, "bold");
 			titleDisplay.layoutData =  new HorizontalLayoutData(100);
 			
 			list = new PickerList();

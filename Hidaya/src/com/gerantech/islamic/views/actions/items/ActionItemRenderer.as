@@ -33,19 +33,6 @@ package com.gerantech.islamic.views.actions.items
 			backgroundSkin = new Quad(1, 1);
 			backgroundSkin.alpha = 0;
 			
-		/*	var bg:Image = new Image(Assets.getTexture("white_rect"));
-			bg.alpha = 0;
-			bg.pivotY = bg.height/2;
-			bg.x = -_w+_h;
-			bg.height = AppModel.instance.sizes.itemHeight;
-			bg.width = _w;
-			addChild(bg);			
-			var textField:TextBlockTextRenderer = new TextBlockTextRenderer();
-			var fd:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
-			textField.textAlign = TextBlockTextRenderer.TEXT_ALIGN_RIGHT;
-			textField.elementFormat = new ElementFormat(fd, UserModel.instance.fontSize, 0);
-			textField.text = ResourceManager.getInstance().getString("loc", mode.name);
-			*/
 			var label:RTLLabel = new RTLLabel(ResourceManager.getInstance().getString("loc", mode.name), BaseMaterialTheme.PRIMARY_TEXT_COLOR, "right"); 
 			label.layoutData = new HorizontalLayoutData(100);
 			addChild(label);

@@ -32,21 +32,24 @@ package com.gerantech.islamic.views.controls
 			this.checked = checked;
 			layout = new AnchorLayout();
 			
+			height = AppModel.instance.sizes.singleLineItem;
+			
 			container = new LayoutGroup();
 			container.layoutData =  new AnchorLayoutData(0, 0, 0, 0);
 			addChild(container);
 			
 			var mLayout:HorizontalLayout = new HorizontalLayout();
 			mLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			mLayout.gap = AppModel.instance.sizes.border*2;
+			mLayout.gap = AppModel.instance.sizes.DP8;
 			container.layout = mLayout;
 			
-			titleDisplay = new RTLLabel(label, BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, uint(UserModel.instance.fontSize*0.95), null, "bold");
+			titleDisplay = new RTLLabel(label, BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0.9, null, "bold");
 			titleDisplay.layoutData =  new HorizontalLayoutData(100);
 			
 			checkDisplay = new PersonAccessory();
 			checkDisplay.layoutData = new HorizontalLayoutData(NaN, 86);
 			checkDisplay.setState(checked ? Person.SELECTED : Person.HAS_FILE, 1);
+			checkDisplay.iconScale = 0.6;
 			
 			hit = new FlatButton(null, null, true, 0, 0);
 			hit.layoutData =  new AnchorLayoutData(0, 0, 0, 0);

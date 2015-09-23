@@ -29,7 +29,7 @@ package com.gerantech.islamic.views.screens
 			super.initialize();
 			
 			var mLayout:VerticalLayout = new VerticalLayout();
-			mLayout.gap = mLayout.padding = appModel.sizes.border*4;
+			mLayout.padding = appModel.sizes.DP16;
 			mLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			layout = mLayout;
 			
@@ -44,7 +44,7 @@ package com.gerantech.islamic.views.screens
 			locPanel.addEventListener(Event.CHANGE, locPanel_changeHandler);
 			addChild(locPanel);
 			
-			/*			naviModes = [{value:"page_navi"}, {value:"sura_navi"}, {value:"juze_navi"}]; 
+			/*naviModes = [{value:"page_navi"}, {value:"sura_navi"}, {value:"juze_navi"}]; 
 			naviPanel = new SettingPanel("page_mode", naviModes, userModel.navigationMode);
 			naviPanel.addEventListener(Event.CHANGE, naviPanel_changeHandler);
 			addChild(naviPanel);

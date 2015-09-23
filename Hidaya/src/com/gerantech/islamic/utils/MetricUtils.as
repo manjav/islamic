@@ -15,7 +15,7 @@ package com.gerantech.islamic.utils
 			trace("scale", _scale, "dpi", _dpi)
 			_toolbar = getPixelByDP(56);
 			_subtitle = getPixelByDP(48);
-			_twoLineItem = getPixelByDP(isTablet?48:56);
+			_singleLineItem = getPixelByDP(isTablet?48:56);
 			_twoLineItem = getPixelByDP(isTablet?64:72);
 			_threeLineItem = getPixelByDP(88);
 			_menuItem = getPixelByDP(isTablet?48:48);
