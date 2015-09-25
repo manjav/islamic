@@ -4,59 +4,55 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.models.vo.Bookmark;
 	import com.gerantech.islamic.models.vo.Word;
 	import com.gerantech.islamic.utils.StrTools;
-	import com.gerantech.islamic.views.buttons.FlatButton;
-	import com.gerantech.islamic.views.controls.CustomTextInput;
-	import com.gerantech.islamic.views.controls.SettingPanel;
+	import com.gerantech.islamic.views.headers.SearchSubtitle;
 	import com.gerantech.islamic.views.items.SearchItemRenderer;
 	import com.gerantech.islamic.views.items.WordItemRenderer;
 	
-	import feathers.controls.Header;
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
+	import feathers.layout.VerticalLayout;
 	
-	import starling.display.DisplayObject;
-	import starling.display.Quad;
 	import starling.events.Event;
 	
 	public class SearchScreen extends BaseScreen
 	{
-		private var locPanel:SettingPanel;
-		private var naviPanel:SettingPanel;
-		private var idlePanel:SettingPanel;
-		private var fontPanel:SettingPanel;
 
-
-		private var searchInput:CustomTextInput;
-		private var clearButton:FlatButton;
-
-		private var myHeader:Header;
-		private var searchItems:Vector.<DisplayObject>;
-		private var hasText:Boolean;
 		private var list:List;
 		private var resultList:Array;
 		private var wordList:List;
+		private var searchSubtitle:SearchSubtitle;
+		private var startScrollBarIndicator:Number = 0;
 		
 		override protected function initialize():void
 		{
 			super.initialize();
 			layout = new AnchorLayout();
-		//	backgroundSkin = new Quad(1,1,0xFFFFFF);
+			
+			searchSubtitle = new SearchSubtitle();
+			searchSubtitle.layoutData = new AnchorLayoutData(NaN,0,NaN,0);
+			
+			var listLayout: VerticalLayout = new VerticalLayout();
+			listLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
+			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			listLayout.paddingTop = searchSubtitle._height+appModel.sizes.DP4;
 			
 			list = new List();
-			//list.isQuickHitAreaEnabled = true;
+			list.layout = listLayout;
+			list.layoutData = new AnchorLayoutData(0,0,0,0);
 			list.itemRendererFactory = function():IListItemRenderer
 			{
 				return new SearchItemRenderer();
 			}
-			list.layoutData = new AnchorLayoutData(0,0,0,0);
 			list.addEventListener(Event.CHANGE, listChangeHandler);
+			list.addEventListener(Event.SCROLL, listScrollHandler);
 			list.decelerationRate = 0.999;
 			addChild(list);
 			
 			wordList = new List();
+			//wordList.layout = listLayout;
 			wordList.layoutData = new AnchorLayoutData(0,0,0,0);
 			wordList.itemRendererFactory = function():IListItemRenderer
 			{
@@ -65,11 +61,23 @@ package com.gerantech.islamic.views.screens
 			wordList.addEventListener(Event.CHANGE, wordList_changeHandler);
 			addChild(wordList);
 			
+			addChild(searchSubtitle);
 		}	
+		
+		private function listScrollHandler():void
+		{
+			var scrollPos:Number = Math.max(0,list.verticalScrollPosition);
+			var changes:Number = startScrollBarIndicator-scrollPos;
+			if(changes<0)
+				changes /=2;
+			
+			searchSubtitle.y = Math.max(-searchSubtitle._height/2, Math.min(0, searchSubtitle.y+changes));
+			startScrollBarIndicator = scrollPos;			
+		}
 		
 		private function searchMode(param0:Boolean):void
 		{
-			list.visible = param0;
+			searchSubtitle.visible = list.visible = param0;
 			wordList.visible = !param0;
 		}
 		
@@ -109,7 +117,7 @@ package com.gerantech.islamic.views.screens
 		
 		public function updateSuggests(input:String):void
 		{
-			searchMode(false);
+			//searchMode(false);
 			if(input.length<2)
 				return;
 			

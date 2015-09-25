@@ -37,11 +37,10 @@ package com.gerantech.islamic.views.headers
 			backgroundSkin = new Quad(1,1,0x004D40);
 			appModel = AppModel.instance;
 				
-			_width = AppModel.instance.sizes.twoLineItem;
+			_width = AppModel.instance.sizes.subtitle;
 			if(appModel.sizes.width/_width<6.7)
 				_width = appModel.sizes.width/6.7;
 			
-			_width = (_width+appModel.sizes.border)*0.8;
 			height = _height = appModel.sizes.subtitle;
 
 			myLayout = new HorizontalLayout();
@@ -51,12 +50,14 @@ package com.gerantech.islamic.views.headers
 			layout = myLayout;
 			
 			hizbSorter = new IndexSorter();
-			hizbSorter.width = appModel.sizes.twoLineItem;
+			hizbSorter.width = _width;
 			hizbSorter.layoutData = new HorizontalLayoutData(NaN, 100);
 			hizbSorter.title = loc("hizb_l");
 			hizbSorter.name = "hizb"
 			hizbSorter.addEventListener(Event.TRIGGERED, buttons_triggeredHandler);
 			addChild(hizbSorter);
+			
+			_width = (_width+appModel.sizes.border)*0.8;
 			
 			pageSorter = new IndexSorter();
 			pageSorter.width = _width;

@@ -26,6 +26,7 @@ package com.gerantech.islamic.views.items
 		private var iconDisplay:ImageLoader;
 
 		public var labelFunction:Function;
+		public var iconFunction:Function;
 		
 		public function SettingItemRenderer(height:Number=0)
 		{
@@ -61,7 +62,13 @@ package com.gerantech.islamic.views.items
 			/*if(bookmark==_data)
 				return;*/
 			
-			if(_data.hasOwnProperty("icon"))
+			if(iconFunction!=null)
+			{
+				iconDisplay.source = iconFunction(_data);
+				addChild(appModel.ltr?iconDisplay:titleDisplay);
+				addChild(appModel.ltr?titleDisplay:iconDisplay);
+			}
+			else if(_data.hasOwnProperty("icon"))
 			{
 				iconDisplay.source = _data.icon
 				addChild(appModel.ltr?iconDisplay:titleDisplay);

@@ -47,6 +47,7 @@ package com.gerantech.islamic.views.screens
 			
 			listLayout = new VerticalLayout();
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			listLayout.gap = appModel.sizes.twoLineItem/6;
 			listLayout.paddingTop = appModel.sizes.twoLineItem/4;
 			
 			list = new List();

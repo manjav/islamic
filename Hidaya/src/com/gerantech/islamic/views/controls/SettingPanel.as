@@ -46,7 +46,7 @@ package com.gerantech.islamic.views.controls
 				index++;
 			}			
 			
-			titleDisplay = new RTLLabel(label, BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0.9, null, "bold");
+			titleDisplay = new RTLLabel(label, BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0, null, "bold");
 			titleDisplay.layoutData =  new HorizontalLayoutData(100);
 			
 			list = new PickerList();
@@ -56,8 +56,7 @@ package com.gerantech.islamic.views.controls
 			list.listProperties.width = AppModel.instance.sizes.width*0.8;
 			list.listProperties.itemRendererFactory = function():IListItemRenderer
 			{
-				var r:SettingItemRenderer = new SettingItemRenderer();
-				return r;
+				return new SettingItemRenderer();
 			}
 			list.dataProvider = new ListCollection(data);
 			list.selectedIndex = selectedIndex;

@@ -57,7 +57,7 @@ package com.gerantech.islamic.views.popups
 			super.initialize();
 			container.layout = new AnchorLayout();
 
-			messageLabel = new RTLLabel(_message, BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "justify", null, true, null, uint(userModel.fontSize*0.9));
+			messageLabel = new RTLLabel(_message, BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "justify", null, true, null, 0.9);
 			messageLabel.layoutData = new AnchorLayoutData(0,0,NaN,0);
 			container.addChild(messageLabel);
 /*			
@@ -92,8 +92,8 @@ package com.gerantech.islamic.views.popups
 		{
 			var btn:Button = event.currentTarget as Button;
 			var fd2:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);
-			var fe:ElementFormat = new ElementFormat(fd2, uint(userModel.fontSize*1.05), BaseMaterialTheme.SELECTED_TEXT_COLOR);
-			var fd:ElementFormat = new ElementFormat(fd2, uint(userModel.fontSize*1.05), BaseMaterialTheme.DARK_DISABLED_TEXT_COLOR);
+			var fe:ElementFormat = new ElementFormat(fd2, appModel.sizes.orginalFontSize, BaseMaterialTheme.SELECTED_TEXT_COLOR);
+			var fd:ElementFormat = new ElementFormat(fd2, appModel.sizes.orginalFontSize, BaseMaterialTheme.DARK_DISABLED_TEXT_COLOR);
 			btn.disabledLabelProperties.bidiLevel = btn.downLabelProperties.bidiLevel = btn.defaultLabelProperties.bidiLevel = appModel.ltr ? 0 : 1;
 			btn.defaultLabelProperties.elementFormat = fe;
 			btn.downLabelProperties.elementFormat = fd;

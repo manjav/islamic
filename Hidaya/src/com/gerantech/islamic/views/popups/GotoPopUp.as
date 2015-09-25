@@ -65,13 +65,11 @@ package com.gerantech.islamic.views.popups
 		override protected function initialize():void
 		{
 			super.initialize();
-			width = Math.round(Math.min(appModel.sizes.twoLineItem*6, appModel.sizes.orginalWidth));
 			
 			resModel = ResourceModel.instance;
 			if(inited)
-			{
 				return;
-			}
+			
 			var cLayout:VerticalLayout = new VerticalLayout();
 			cLayout.gap = appModel.sizes.border*3;
 			cLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
@@ -171,7 +169,7 @@ package com.gerantech.islamic.views.popups
 		{
 			var btn:Button = event.currentTarget as Button;
 			var fd2:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);
-			var fe:ElementFormat = new ElementFormat(fd2, uint(userModel.fontSize*1.1), BaseMaterialTheme.SELECTED_TEXT_COLOR);
+			var fe:ElementFormat = new ElementFormat(fd2, appModel.sizes.orginalFontSize, BaseMaterialTheme.SELECTED_TEXT_COLOR);
 			btn.defaultLabelProperties.elementFormat = fe;
 			btn.downLabelProperties.elementFormat = fe;
 			btn.disabledLabelProperties.elementFormat = fe;

@@ -121,11 +121,11 @@ package
 				return;
 			
 			scaled9TexturesLoaded();
-			Assets.loadSclaed9Textures(["dialog", "item_roundrect_down", "item_roundrect_normal", "item_roundrect_selected", "i_item_roundrect_down", "i_item_roundrect_normal", "i_item_roundrect_selected"], null);
+			Assets.loadSclaed9Textures(["dialog", "i_dialog", "item_roundrect_down", "item_roundrect_normal", "item_roundrect_selected", "i_item_roundrect_down", "i_item_roundrect_normal", "i_item_roundrect_selected"], null);
 		}
 		
 		private function scaled9TexturesLoaded():void
-		{trace(getTimer()-tt)
+		{//trace(getTimer()-tt)
 			appController = AppController.instance;
 			configModel = ConfigModel.instance;
 			

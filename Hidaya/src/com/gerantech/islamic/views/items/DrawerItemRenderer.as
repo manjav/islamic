@@ -50,7 +50,7 @@ package com.gerantech.islamic.views.items
 			iconDisplay.width = iconDisplay.height = AppModel.instance.sizes.getPixelByDP(24);
 			iconDisplay.delayTextureCreation = true;
 			
-			titleDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0.92, null, "bold") 
+			titleDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0, null, "bold") 
 			titleDisplay.layoutData = new HorizontalLayoutData(100);
 						
 			addChild(isLeft?iconDisplay:titleDisplay);

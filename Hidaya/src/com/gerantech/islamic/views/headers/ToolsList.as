@@ -99,7 +99,7 @@ package com.gerantech.islamic.views.headers
 			numTextField.vAlign = VAlign.CENTER;
 			numContainer.addChild(numTextField);
 			
-			UserModel.instance.addEventListener(UserEvent.FONT_SIZE_CHANGE_END, user_fontChangedHandler);
+		//	UserModel.instance.addEventListener(UserEvent.FONT_SIZE_CHANGE_END, user_fontChangedHandler);
 			if(aya!=null)
 				setAya(aya);
 			
@@ -111,8 +111,8 @@ package com.gerantech.islamic.views.headers
 		
 		private function user_fontChangedHandler():void
 		{
-			var ih:Number = AppModel.instance.sizes.twoLineItem;
-			var _h:uint = height = uint(Math.min(Math.max(ih/1.6, UserModel.instance.fontSize*2.6),ih/1.2));
+		//	var ih:Number = AppModel.instance.sizes.twoLineItem;
+			var _h:uint = height = AppModel.instance.sizes.DP36;//uint(Math.min(Math.max(ih/1.6, UserModel.instance.fontSize*2.6),ih/1.2));
 			if(lastHeight==_h)
 				return;
 			
@@ -156,7 +156,7 @@ package com.gerantech.islamic.views.headers
 				playButton.texture = SoundPlayer.instance.ayaSound!=null&&SoundPlayer.instance.ayaSound.equals(aya)&&SoundPlayer.instance.playing ? "pause_circle" : "play_circle";
 				SoundPlayer.instance.addEventListener("toggle", soundPlayer_toggleHandler);
 			}*/
-			setTimeout(user_fontChangedHandler, 200);
+			//setTimeout(user_fontChangedHandler, 200);
 		}
 		
 		private function share_triggerHandler(event:Event):void

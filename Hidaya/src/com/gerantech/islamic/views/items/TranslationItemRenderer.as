@@ -66,7 +66,7 @@ package com.gerantech.islamic.views.items
 			
 			bismHeader = new ImageLoader();
 			bismHeader.delayTextureCreation = true;
-			bismHeader.height = AppModel.instance.sizes.twoLineItem*0.5;
+			bismHeader.height = AppModel.instance.sizes.DP24;
 			bismHeader.source = Assets.getTexture("bism_header");
 			bismHeader.layoutData = new AnchorLayoutData(0, NaN, NaN, NaN, 0);
 			if(UserModel.instance.nightMode)
@@ -109,7 +109,7 @@ package com.gerantech.islamic.views.items
 			translatorIcon.width = translatorIcon.height = uint(UserModel.instance.fontSize*2.4);
 			translatorIcon.delayTextureCreation = true;
 			
-			translatorName = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0, null, "bold");
+			translatorName = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, userModel.fontSize, null, "bold");
 		}
 		
 		
@@ -132,7 +132,7 @@ package com.gerantech.islamic.views.items
 					return;
 				
 				rtlText.layoutData = new AnchorLayoutData((aya.hasBism?AppModel.instance.sizes.twoLineItem:0), border*2, NaN, border*2);
-				rtlText.elementFormat = new ElementFormat(uthmaniFont, UserModel.instance.fontSize, BaseMaterialTheme.PRIMARY_TEXT_COLOR);
+				rtlText.elementFormat = new ElementFormat(uthmaniFont, UserModel.instance.fontSize*1.2, BaseMaterialTheme.PRIMARY_TEXT_COLOR);
 				rtlText.textAlign = "right";
 				rtlText.text = aya.aya + ". " + ResourceModel.instance.quranXML.sura[aya.sura-1].aya[aya.aya-1].@text;
 				addChild(rtlText);

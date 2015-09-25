@@ -4,6 +4,7 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.vo.Hizb;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
+	import com.gerantech.islamic.views.controls.RTLLabel;
 	
 	import flash.text.engine.ElementFormat;
 	import flash.text.engine.FontDescription;
@@ -15,14 +16,12 @@ package com.gerantech.islamic.views.items
 	import feathers.controls.text.TextBlockTextRenderer;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	
-	import starling.display.Quad;
 
 	public class HizbItemRenderer extends BaseCustomItemRenderer
 	{		
 		private var iconDisplay:ImageLoader;
-		private var titleDisplay:TextBlockTextRenderer;
 		private var hizb:Hizb;
+		private var titleDisplay:RTLLabel;
 		
 		public function HizbItemRenderer()
 		{
@@ -33,20 +32,17 @@ package com.gerantech.islamic.views.items
 		{
 			super.initialize();
 		//	backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
-			height = AppModel.instance.sizes.twoLineItem;
+			height = appModel.sizes.twoLineItem;
 			
 			layout = new AnchorLayout();
 			
 			iconDisplay = new ImageLoader();
-			iconDisplay.width = iconDisplay.height = appModel.sizes.twoLineItem*0.8;
-			iconDisplay.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
+			//iconDisplay.width = iconDisplay.height = appModel.sizes.twoLineItem*0.8;
+			iconDisplay.layoutData = new AnchorLayoutData(appModel.sizes.DP4, appModel.sizes.DP4, appModel.sizes.DP4, appModel.sizes.DP4, 0, 0);
 			iconDisplay.delayTextureCreation = true;
 			addChild(iconDisplay);
 
-			titleDisplay = new TextBlockTextRenderer();
-			var fd:FontDescription = new FontDescription("mequran", FontWeight.BOLD, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
-			titleDisplay.textAlign = "center";
-			titleDisplay.elementFormat = new ElementFormat(fd, appModel.sizes.twoLineItem/3, BaseMaterialTheme.PRIMARY_TEXT_COLOR);
+			titleDisplay = new RTLLabel("", 1, "center", null, false, null, appModel.sizes.twoLineItem/3.6, "mequran");
 			titleDisplay.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
 			addChild(titleDisplay);
 		}

@@ -97,7 +97,7 @@ package com.gerantech.islamic.views.items
 			//moreStrip.backgroundSkin.alpha = 0.1;
 			moreStrip.layoutData = new VerticalLayoutData(100)
 			moreStrip.addEventListener(Event.TRIGGERED, moreStrip_triggeredHandler);
-			moreStrip.height = appModel.sizes.twoLineItem/2;
+			moreStrip.height = appModel.sizes.singleLineItem/2;
 			//moreStrip.layout = new AnchorLayout();
 			addChild(moreStrip);
 			

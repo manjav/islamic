@@ -38,33 +38,18 @@ package com.gerantech.islamic.views.items
 			
 			
 			deleyCommit = true;
-			height = appModel.sizes.twoLineItem*2;
+			height = appModel.sizes.threeLineItem;
 			
 			var myLayout:VerticalLayout = new VerticalLayout();
 			myLayout.padding = appModel.sizes.border*4;
 			myLayout.paddingTop = appModel.sizes.border*2;
 			layout = myLayout;
 			
-			/*var hLayout:HorizontalLayout = new HorizontalLayout();
-			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			hLayout.gap = appModel.sizes.border*4;
-			hLayout.padding = appModel.sizes.border*2;
-			hLayout.paddingBottom = 0;
-			
-			var header:LayoutGroup = new LayoutGroup();
-			header.height = appModel.actionHeight;
-			header.layout = hLayout;
-			header.layoutData = new VerticalLayoutData(100);
-			addChild(header);
-			
-			openButton = new FlatButton(appModel.ltr?"arrow_right":"arrow_left");
-			openButton.addEventListener(Event.TRIGGERED, openButton_triggeredHandler);*/
-			
 			nameDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0, null, "bold");
 			nameDisplay.layoutData = new VerticalLayoutData(100);
 			addChild(nameDisplay);
 
-			quranTextField = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "justify", "rtl", true, "right", uint(UserModel.instance.fontSize*0.86));
+			quranTextField = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "justify", "rtl", true, "right", 0.9);
 			quranTextField.layoutData = new VerticalLayoutData(100, 100);
 			addChild(quranTextField);
 		}
@@ -73,8 +58,6 @@ package com.gerantech.islamic.views.items
 		{
 			if(_data==null || _owner==null)
 				return;
-			/*if(bookmark==_data)
-				return;*/
 			
 			bookmark = Bookmark.getFromObject(_data);
 			var sura:Sura = ResourceModel.instance.suraList[bookmark.sura-1];
@@ -90,8 +73,6 @@ package com.gerantech.islamic.views.items
 			quranTextField.visible = true;
 			quranTextField.alpha = 0;
 			TweenLite.to(quranTextField, 0.3, {alpha:1});
-			
-		//	height = Math.min(appModel.sizes.itemHeight*2, quranTextField.height+appModel.sizes.itemHeight)
 		}
 		
 		override public function set currentState(value:String):void

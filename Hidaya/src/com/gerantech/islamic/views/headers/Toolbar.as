@@ -88,14 +88,6 @@ package com.gerantech.islamic.views.headers
 			searchButton.screens = [appModel.PAGE_QURAN];
 			buttons.push(searchButton);
 			
-			var selectedReciterButton:ToolbarButton = new ToolbarButton("dots");
-			selectedReciterButton.screens = [appModel.PAGE_SEARCH];
-			buttons.push(selectedReciterButton);
-			
-			/*var gotoButton:ToolbarButton = new ToolbarButton("jump");
-			gotoButton.screens = [appModel.PAGE_QURAN];
-			buttons.push(gotoButton);
-			*/
 			searchInput = new SearchInput();
 			searchInput.layoutData = new AnchorLayoutData(appModel.sizes.border, NaN, appModel.sizes.border, NaN);
 			
@@ -126,12 +118,11 @@ package com.gerantech.islamic.views.headers
 			super.stage_resizeHandler(event);
 		}
 		
-		
 		public function setLayout():void
 		{
 			width = appModel.sizes.width;
-			searchInput.width = appModel.sizes.width - gap*2;
-			searchInput.x =  gap ;
+			searchInput.width = appModel.sizes.width - gap - padding;
+			searchInput.x = appModel.ltr ? gap : padding ;
 			for(var i:uint; i<buttons.length; i++) 
 			{
 				buttons[i].x = appModel.ltr?appModel.sizes.width-i*gap-padding:i*gap+padding;
@@ -154,7 +145,7 @@ package com.gerantech.islamic.views.headers
 		
 		public function fadeOut():void
 		{
-			TweenLite.to(screenTitle, 0.3, {alpha:0, onComplete:function():void{screenTitle.removeFromParent()}});
+			TweenLite.to(screenTitle, 0.3, {alpha:0, onComplete:screenTitle.removeFromParent});
 			
 			for(var i:uint; i<activeButtons.length; i++) 
 				TweenLite.to(activeButtons[i], 0.3, {alpha:0, x:appModel.ltr?appModel.sizes.width-i*gap:i*gap, delay:i*0.06});
@@ -162,8 +153,7 @@ package com.gerantech.islamic.views.headers
 			TweenLite.to(navigateButton, 0.3, {alpha:0, scaleX:0, scaleY:0});
 			
 			if(searchInput.parent)
-				TweenLite.to(searchInput, 0.3, {alpha:0});
-				
+				TweenLite.to(searchInput, 0.3, {alpha:0, onComplete:searchInput.removeFromParent});
 		}
 		
 		public function fadeIn():void

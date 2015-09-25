@@ -12,14 +12,14 @@ package com.gerantech.islamic.utils
 			_scale = _dpi/160;
 			var isTablet:Boolean = DeviceCapabilities.isTablet(stage);
 			
-			trace("scale", _scale, "dpi", _dpi)
+			//trace("scale", _scale, "dpi", _dpi)
 			_toolbar = getPixelByDP(56);
 			_subtitle = getPixelByDP(48);
 			_singleLineItem = getPixelByDP(isTablet?48:56);
 			_twoLineItem = getPixelByDP(isTablet?64:72);
 			_threeLineItem = getPixelByDP(88);
 			_menuItem = getPixelByDP(isTablet?48:48);
-			_orginalFontSize = getPixelByDP(15);//uint(height/40+2);
+			_orginalFontSize = getPixelByDP(14);//uint(height/40+2);
 			_border = getPixelByDP(4);
 			
 			width = _orginalWidth = stage.stageWidth;
@@ -32,6 +32,7 @@ package com.gerantech.islamic.utils
 			_DP40 = getPixelByDP(40);
 			_DP36 = getPixelByDP(36);
 			_DP32 = getPixelByDP(32);
+			_DP24 = getPixelByDP(24);
 			_DP16 = getPixelByDP(16);
 			_DP8 = getPixelByDP(8);
 			_DP4 = getPixelByDP(4);
@@ -86,6 +87,9 @@ package com.gerantech.islamic.utils
 		
 		private var _DP32:Number;
 		public function get DP32():uint{return _DP32;}
+		
+		private var _DP24:Number;
+		public function get DP24():uint{return _DP24;}
 		
 		private var _DP16:Number;
 		public function get DP16():uint{return _DP16;}

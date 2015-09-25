@@ -51,7 +51,7 @@ package com.gerantech.islamic.themes
 			button.iconPosition = Button.ICON_POSITION_LEFT;
 				
 			var fd:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);
-			var ef:ElementFormat = new ElementFormat(fd, uint(AppModel.instance.sizes.orginalFontSize*0.8), BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
+			var ef:ElementFormat = new ElementFormat(fd, uint(AppModel.instance.sizes.orginalFontSize*0.9), BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
 			button.defaultLabelProperties.elementFormat = ef;			
 			
 			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();

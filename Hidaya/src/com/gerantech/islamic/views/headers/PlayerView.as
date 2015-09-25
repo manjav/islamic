@@ -65,6 +65,7 @@ package com.gerantech.islamic.views.headers
 		private var reciterLayoutdata:AnchorLayoutData;
 		private var reciterLabelLayoutData:AnchorLayoutData;
 		private var appearTimeout:uint;
+		private var shadow:BlurFilter;
 		
 		public function PlayerView()
 		{
@@ -97,7 +98,7 @@ package com.gerantech.islamic.views.headers
 			backgroundLayoutData = new AnchorLayoutData(0,0,0,0);
 			
 			background = new LayoutGroup();
-			background.backgroundSkin = new Quad(1, 1, UserModel.instance.nightMode ? BaseMaterialTheme.LIGHT_TEXT_COLOR : BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
+			background.backgroundSkin = new Quad(1, 1, UserModel.instance.nightMode ? BaseMaterialTheme.DESCRIPTION_TEXT_COLOR : BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			background.filter = BlurFilter.createGlow(0, 0.5, appModel.sizes.border/2);
 			background.layoutData = backgroundLayoutData;
 			addChild(background);
@@ -149,7 +150,8 @@ package com.gerantech.islamic.views.headers
 			playerButton.pivotY = playerButton.pivotX = playerButton.width/2;
 			playerButton.addEventListener("triggered", playerButton_triggeredHandler);
 			playerButton.includeInLayout = false;
-			playerButton.filter = BlurFilter.createDropShadow(AppModel.instance.sizes.border, 90*(Math.PI/180), 0, 0.4, 3);
+			shadow = BlurFilter.createDropShadow(AppModel.instance.sizes.DP4/2, 90*(Math.PI/180), 0, 0.4, AppModel.instance.sizes.DP4/4);
+			playerButton.filter = shadow;
 			addChild(playerButton);
 			
 			setState(player.state);
@@ -392,7 +394,7 @@ package com.gerantech.islamic.views.headers
 		{
 			//reciterLabel.visible = reciterImage.visible = 
 			settingIcon.visible = isShow;
-			playerButton.filter = isShow ? BlurFilter.createDropShadow(AppModel.instance.sizes.border, 90*(Math.PI/180), 0, 0.4, 3) : null;
+			playerButton.filter = isShow ? shadow : null;
 			timeLabel.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, isShow?0:_height/4);
 		}
 		

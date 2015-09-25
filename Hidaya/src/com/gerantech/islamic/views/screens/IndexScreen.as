@@ -8,15 +8,12 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.items.HizbItemRenderer;
 	import com.gerantech.islamic.views.items.SuraItemRenderer;
 	
-	import feathers.controls.LayoutGroup;
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	import feathers.layout.HorizontalLayout;
-	import feathers.layout.HorizontalLayoutData;
 	
 	import starling.events.Event;
 
@@ -39,7 +36,6 @@ package com.gerantech.islamic.views.screens
 			layout = new AnchorLayout();
 			
 			indexHeader = new IndexHeader();
-			indexHeader._width = appModel.sizes.twoLineItem;
 			indexHeader.layoutData = new AnchorLayoutData(NaN,0,NaN,0);
 			indexHeader.addEventListener(Event.CHANGE, indexHeader_changeHandler);
 			lastSortMode = indexHeader.sortMode;
@@ -48,7 +44,7 @@ package com.gerantech.islamic.views.screens
 			hizbsList = new List();
 			//hizbsList.layout = hizbLayout;
 			hizbsList.layoutData = new AnchorLayoutData(appModel.sizes.subtitle, NaN, 0, 0);
-			hizbsList.width = appModel.sizes.twoLineItem;
+			hizbsList.width = appModel.sizes.subtitle;
 			hizbsList.itemRendererFactory = function():IListItemRenderer
 			{
 				return new HizbItemRenderer();
@@ -57,7 +53,7 @@ package com.gerantech.islamic.views.screens
 			addChild(hizbsList);
 
 			surasList = new List();
-			surasList.layoutData = new AnchorLayoutData(appModel.sizes.subtitle, 0, 0, appModel.sizes.twoLineItem);
+			surasList.layoutData = new AnchorLayoutData(appModel.sizes.subtitle, 0, 0, appModel.sizes.subtitle);
 			surasList.itemRendererFactory = function():IListItemRenderer
 			{
 				return new SuraItemRenderer();

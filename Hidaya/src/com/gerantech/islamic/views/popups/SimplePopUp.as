@@ -12,6 +12,8 @@ package com.gerantech.islamic.views.popups
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
+	
+	import starling.filters.BlurFilter;
 
 	public class SimplePopUp extends BasePopUp
 	{
@@ -47,21 +49,23 @@ package com.gerantech.islamic.views.popups
 			removeChildren()
 			super.initialize();
 			autoSizeMode = AUTO_SIZE_MODE_CONTENT; 
-			backgroundSkin = new Scale9Image(Assets.getSclaed9Textures("dialog"));
+			backgroundSkin = new Scale9Image(Assets.getSclaed9Textures(userModel.nightMode?"i_dialog":"dialog"));
+			filter = BlurFilter.createDropShadow(appModel.sizes.DP4/2, 90*(Math.PI/180), 0, 0.4, appModel.sizes.DP4/2);
 			
 			alpha = 0;
-			width = Math.round(Math.min(appModel.sizes.orginalWidth, appModel.sizes.orginalHeightFull)*0.9);
-			minHeight = appModel.sizes.twoLineItem*2;
+			width = Math.min(appModel.sizes.orginalWidth, appModel.sizes.orginalHeightFull)-appModel.sizes.DP48;
+			minHeight = appModel.sizes.twoLineItem;
 			maxHeight = appModel.sizes.heightFull//;Math.round(Math.min(appModel.sizes.orginalWidth, appModel.sizes.orginalHeightFull));
 			
 			vLayout = new VerticalLayout();
-			vLayout.padding = appModel.sizes.twoLineItem*0.8;
-			vLayout.paddingTop = appModel.sizes.twoLineItem*0.6;
+			vLayout.padding = appModel.sizes.getPixelByDP(24);
+			vLayout.gap = appModel.sizes.DP4;
+			vLayout.paddingTop = appModel.sizes.DP16;
 			//vLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			vLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
 			layout = vLayout;
 			
-			titleDisplay = new RTLLabel(_title, 0, null, null, false, null, uint(userModel.fontSize*1.1), null, "bold");
+			titleDisplay = new RTLLabel(_title, 1, null, null, false, null, 0, null, "bold");
 			titleDisplay.layoutData = new VerticalLayoutData(100);
 			addChild(titleDisplay);
 			

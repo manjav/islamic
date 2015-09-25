@@ -32,7 +32,7 @@ package com.gerantech.islamic.views.items
 			super.initialize();
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			height = appModel.sizes.singleLineItem;
-			trace(height)
+			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
 			myLayout.gap = appModel.sizes.border*4;
@@ -43,7 +43,7 @@ package com.gerantech.islamic.views.items
 			deleteButton = new FlatButton("remove", null, true);
 			deleteButton.layoutData = new HorizontalLayoutData(NaN, 100);
 			deleteButton.width = height;
-			deleteButton.iconScale = 0.5;
+			deleteButton.iconScale = 0.4;
 			deleteButton.addEventListener(Event.TRIGGERED, deleteButton_triggeredHandler);
 			
 			nameDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR);//TextBlockTextRenderer();

@@ -44,7 +44,7 @@ package com.gerantech.islamic.views.screens
 			
 			createAboutHeader();
 			
-			var dec:RTLLabel = new RTLLabel(loc("app_descript")+"\n"+loc("alpha_popup_message")+"\n\n", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "justify", null, true, null, 0.8);
+			var dec:RTLLabel = new RTLLabel(loc("app_descript")+"\n"+loc("alpha_popup_message")+"\n\n", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "justify", null, true, null, 0.9);
 			dec.layoutData = new VerticalLayoutData(94);
 			addChild(dec);
 			

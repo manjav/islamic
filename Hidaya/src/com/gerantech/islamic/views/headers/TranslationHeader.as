@@ -52,7 +52,7 @@ package com.gerantech.islamic.views.headers
 			layout = new AnchorLayout();
 			
 			height = appModel.sizes.subtitle;
-			backgroundSkin = new Quad(1,1,BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
+			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
 			backgroundSkin.alpha = 0.8//UserModel.instance.nightMode ? 0.9 : 0.7;
 			
 			/*var slayout:HorizontalLayout = new HorizontalLayout();

@@ -46,63 +46,48 @@ package com.gerantech.islamic.views.items
 			appModel = AppModel.instance;
 			height = appModel.sizes.twoLineItem;
 			
+			var grid:uint = appModel.sizes.DP32;
+			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			myLayout.paddingLeft = myLayout.paddingRight = myLayout.gap = -appModel.sizes.border;
-			//myLayout.gap = appModel.sizes.border*2;
-			//myLayout.padding = appModel.sizes.border;
-			//myLayout.paddingLeft = myLayout.firstGap = appModel.ltr ? 0 : myLayout.gap;
-			//myLayout.paddingRight = myLayout.lastGap = appModel.ltr ? myLayout.gap : 0;
+			myLayout.paddingLeft = myLayout.paddingRight = appModel.sizes.DP8;
 			layout = myLayout;
-			
-			downloadButton = new FlatButton("download_g", null, true);
-			downloadButton.layoutData = new HorizontalLayoutData(NaN, 100);
-			downloadButton.width = height;
-			downloadButton.iconScale = 0.5;
-			downloadButton.addEventListener(Event.TRIGGERED, downloadButton_triggeredHandler);
 			
 			deleteButton = new FlatButton("remove", null, true);
 			deleteButton.layoutData = new HorizontalLayoutData(NaN, 100);
-			deleteButton.width = height;
-			deleteButton.iconScale = 0.46;
+			deleteButton.width = grid;
+			deleteButton.iconScale = 0.7;
 			deleteButton.addEventListener(Event.TRIGGERED, deleteButton_triggeredHandler);
 			
+			downloadButton = new FlatButton("download_g", null, true);
+			downloadButton.layoutData = new HorizontalLayoutData(NaN, 100);
+			downloadButton.width = grid;
+			downloadButton.iconScale = 0.7;
+			downloadButton.addEventListener(Event.TRIGGERED, downloadButton_triggeredHandler);
+			
 			mainContents = new LayoutGroup();
-			mainContents.layoutData = new HorizontalLayoutData(100, 75);
+			mainContents.layoutData = new HorizontalLayoutData(100, 60);
 			mainContents.layout = new VerticalLayout();
 			
-			var fontSize:uint = appModel.sizes.twoLineItem/4;
+			var fontSize:uint = height/5.4;
 			nameDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, fontSize, null, "bold");
-			/*var fd:FontDescription = new FontDescription("SourceSansPro", FontWeight.BOLD, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
-			nameDisplay.bidiLevel = appModel.ltr?0:1;
-			nameDisplay.textAlign = appModel.align;
-			nameDisplay.elementFormat = new ElementFormat(fd, fontSize, BaseMaterialTheme.PRIMARY_TEXT_COLOR);*/
 			nameDisplay.layoutData = new VerticalLayoutData(100, 55);
 			mainContents.addChild(nameDisplay);
 			
 			messageDisplay = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, false, null, fontSize*0.8, null);
-			/*var fd2:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
-			messageDisplay.bidiLevel = appModel.ltr?0:1;
-			messageDisplay.textAlign = appModel.align;
-			messageDisplay.elementFormat = new ElementFormat(fd2, fontSize*0.8, BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);*/
 			messageDisplay.layoutData = new VerticalLayoutData(100, 45);
 			mainContents.addChild(messageDisplay);
 			
 			var spacer:Spacer = new Spacer();
-			spacer.width = appModel.sizes.border*4;
+			spacer.width = appModel.sizes.DP4;
 			
 			personImage = new ImageLoader();
-			personImage.layoutData = new HorizontalLayoutData(NaN, 80);
+			personImage.layoutData = new HorizontalLayoutData(NaN, 60);
 			personImage.delayTextureCreation = true;
 			
 			dragButton = new FlatButton("drag", null, true, 0, 0);
-			dragButton.width = height;
-			dragButton.iconScale = 0.6;
+			dragButton.width = grid;
 			dragButton.layoutData = new HorizontalLayoutData(NaN, 100);
-			/*var sortImage:ImageLoader = new ImageLoader();
-			sortImage.layoutData = new HorizontalLayoutData(NaN, 60);
-			sortImage.source = Assets.getTexture("sort");
-			sortImage.delayTextureCreation = true;*/
 			
 			var itms:Array = [deleteButton, downloadButton, mainContents, spacer, personImage, dragButton];
 			if(appModel.ltr)

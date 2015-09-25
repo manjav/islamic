@@ -182,7 +182,7 @@ package com.gerantech.islamic.models.vo
 		 * Get Random Aya
 		 */
 		
-		private function remindeFirstTranslate():void
+		public function remindeFirstTranslate():void
 		{
 			if(UserModel.instance.remniderTime.value=="reminder_never")
 				return;

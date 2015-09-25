@@ -40,13 +40,12 @@ package com.gerantech.islamic.views.items
 		override protected function initialize():void
 		{
 			super.initialize();
-		//	backgroundSkin = new Quad(10, 10);
 			height = appModel.sizes.twoLineItem;
 			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			myLayout.gap = appModel.sizes.border*2;
-			myLayout.padding = appModel.sizes.border*2;
+			myLayout.gap = myLayout.padding = appModel.sizes.DP16;
+			myLayout.paddingLeft = appModel.sizes.DP8;
 			layout = myLayout;
 			
 			accessory = new PersonAccessory();
@@ -58,29 +57,17 @@ package com.gerantech.islamic.views.items
 			mainContents.layout = new VerticalLayout();
 			addChild(mainContents);
 			
-			var fontSize:uint = appModel.sizes.twoLineItem/4;
-			
+			var fontSize:uint = height/5.4;
 			nameDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, fontSize, null, "bold");
-			
-			/*nameDisplay = new TextBlockTextRenderer();
-			var fd:FontDescription = new FontDescription("SourceSansPro", FontWeight.BOLD, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
-			nameDisplay.bidiLevel = appModel.ltr?0:1;
-			nameDisplay.textAlign = appModel.align;
-			nameDisplay.elementFormat = new ElementFormat(fd, fontSize, 0x000000);*/
-			nameDisplay.layoutData = new VerticalLayoutData(100, 50);
+			nameDisplay.layoutData = new VerticalLayoutData(100, 55);
 			mainContents.addChild(nameDisplay);
 			
 			messageDisplay = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, false, null, fontSize*0.8);
-
-			/*messageDisplay = new TextBlockTextRenderer();
-			var fd2:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
-			messageDisplay.bidiLevel = appModel.ltr?0:1;
-			messageDisplay.textAlign = appModel.align;
-			messageDisplay.elementFormat = new ElementFormat(fd2, fontSize*0.8, 0x666666);*/
-			messageDisplay.layoutData = new VerticalLayoutData(100, 50);
+			messageDisplay.layoutData = new VerticalLayoutData(100, 45);
 			mainContents.addChild(messageDisplay);
 			
 			personImage = new ImageLoader();
+			personImage.width = appModel.sizes.DP40;
 			personImage.loadingTexture = Person.getDefaultImage();
 			personImage.source = Person.getDefaultImage();
 			personImage.layoutData = new HorizontalLayoutData(NaN, 100);

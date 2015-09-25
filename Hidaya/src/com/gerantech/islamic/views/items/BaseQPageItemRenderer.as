@@ -4,7 +4,7 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Aya;
 	import com.gerantech.islamic.models.vo.BaseQData;
-	import com.gerantech.islamic.views.headers.UthmaniHeader;
+	import com.gerantech.islamic.views.headers.UthmaniSubtitle;
 	
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
@@ -17,7 +17,7 @@ package com.gerantech.islamic.views.items
 	{
 		protected var _qdata:BaseQData;
 
-		protected var header:UthmaniHeader;
+		protected var header:UthmaniSubtitle;
 		protected var headerContainer:LayoutGroup;
 		
 		override protected function initialize():void
@@ -31,7 +31,7 @@ package com.gerantech.islamic.views.items
 			headerContainer.layoutData = new AnchorLayoutData(NaN, 0, NaN, 0);
 			addChild(headerContainer);
 			
-			header = new UthmaniHeader();
+			header = new UthmaniSubtitle();
 			header.layoutData = new AnchorLayoutData(0, 0, NaN, 0);
 			headerContainer.addChild(header);
 			
