@@ -73,7 +73,7 @@ package com.gerantech.islamic.views.headers
 			dLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
 			
 			downloadButton = new SimpleLayoutButton();
-			downloadButton.backgroundSkin = new Quad(1,1,0x96000E);
+			downloadButton.backgroundSkin = new Quad(1,1,BaseMaterialTheme.ACCENT_COLOR);
 			downloadButton.layout = dLayout;
 			downloadButton.height = height-appModel.sizes.border*2;
 			downloadButton.width = height*2.4;

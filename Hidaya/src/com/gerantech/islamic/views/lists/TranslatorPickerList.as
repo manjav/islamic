@@ -2,9 +2,12 @@ package com.gerantech.islamic.views.lists
 {
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.models.vo.Translator;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
+	
+	import mx.resources.ResourceManager;
 	
 	import feathers.controls.PickerList;
 	import feathers.controls.renderers.IListItemRenderer;
@@ -20,6 +23,8 @@ package com.gerantech.islamic.views.lists
 		{
 			super.initialize();
 			
+			buttonProperties.visible = false;
+			
 			var iconSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
 			iconSelector.defaultValue = Assets.getTexture("remove");//this.pickerListButtonIconTexture;
 			buttonProperties.stateToIconFunction = iconSelector.updateValue;
@@ -33,18 +38,28 @@ package com.gerantech.islamic.views.lists
 			{
 				return new SettingItemRenderer();
 			}
-			addEventListener(Event.CHANGE, listchangeHandler);		
 			
-			var data:Array = new Array({name:"قرآن کریم", icon:"app:/com/gerantech/islamic/assets/images/icon/icon-192.png"});
+			
+				
+			var data:Array = new Array({name:ResourceManager.getInstance().getString("loc", "quran_t"), icon:"app:/com/gerantech/islamic/assets/images/icon/icon-192.png"});
 			for each(var p:Person in ConfigModel.instance.selectedTranslators)
-				data.push({name:p.name, icon:p.iconUrl});
+				data.push({name:p.name, icon:p.iconTexture});
 			dataProvider = new ListCollection(data);
+			
+			trace(UserModel.instance.searchSource, ConfigModel.instance.selectedTranslators.length)
+			
+			if(UserModel.instance.searchSource<ConfigModel.instance.selectedTranslators.length-1)
+				UserModel.instance.searchSource = 0;
+			
+			selectedIndex = UserModel.instance.searchSource;
 		}
 		
-		private function listchangeHandler():void
+		override protected function list_changeHandler(event:Event):void
 		{
 			closeList();
-		}		
+			super.list_changeHandler(event);
+			UserModel.instance.searchSource = selectedIndex;
+		}
 
 	}
 }

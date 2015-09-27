@@ -155,7 +155,7 @@ package
 			
 			if(Capabilities.cpuArchitecture=="x86" || userModel.fontSize==12)
 			{
-				userModel.fontSize = 12//appModel.sizes.orginalFontSize;
+				appModel.sizes.orginalFontSize;
 			//	UserModel.instance.premiumMode = Capabilities.cpuArchitecture=="x86"
 			}
 

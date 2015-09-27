@@ -13,6 +13,7 @@ package com.gerantech.islamic.models.vo
 		//public var reciterIndex:int = 37;
 		//public var translatorIndex:int = 0;
 		public var searchPatt:String = "";
+		public var searchSource:uint = 0;
 		
 		//public var breakRepeat:uint = 1;
 		public var personRepeat:uint = 1;

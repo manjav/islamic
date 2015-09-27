@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.9.1</string>
+        <string>3.9.4</string>
         <key>fileName</key>
-        <string>D:/_PROJECTS/_FLEX/Bayan_projects/Bayan_temp/Temp/Images/3/atlases/skins.tps</string>
+        <string>E:/_PROJECTS/_FLEX_Flash/hidaya-project/_temp/atlases/skins.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -197,7 +197,6 @@
             <filename>../skin/action_item_3.png</filename>
             <filename>../skin/action_pause.png</filename>
             <filename>../skin/action_play.png</filename>
-            <filename>../skin/action_player.png</filename>
             <filename>../skin/action_plus.png</filename>
             <filename>../skin/action_timer.png</filename>
             <filename>../skin/arrow_g_left.png</filename>
@@ -306,6 +305,9 @@
             <filename>../skin/download_g.png</filename>
             <filename>../skin/cart_grey.png</filename>
             <filename>../skin/repeat_black.png</filename>
+            <filename>../skin/action_accent.png</filename>
+            <filename>../skin/pencil_white.png</filename>
+            <filename>../skin/action.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

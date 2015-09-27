@@ -69,7 +69,7 @@ package com.gerantech.islamic.views.actions
 			
 			
 			
-			actionButton = new FlatButton("action_plus", "action_player", false, 1, 0.8);
+			actionButton = new FlatButton("action_plus", "action_accent", false, 1, 0.8);
 			actionButton.iconScale = 0.3;
 			actionButton.width = actionButton.height = AppModel.instance.sizes.toolbar;
 			actionButton.pivotY = actionButton.pivotX = actionButton.width/2;

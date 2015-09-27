@@ -199,7 +199,10 @@ package com.gerantech.islamic.models
 		public function get lastJuze():Juze{return _lastJoze};
 		*/
 		
-		public function set searchPatt(value:String):void{user.searchPatt=value, activeSaver()};
+		public function set searchSource(value:uint):void{if(user.searchSource==value)return; user.searchSource=value; activeSaver()};
+		public function get searchSource():uint{return user.searchSource};
+		
+		public function set searchPatt(value:String):void{if(user.searchPatt==value)return; user.searchPatt=value; activeSaver()};
 		public function get searchPatt():String{return user.searchPatt};
 		
 		public function set locale(value:Object):void{user.local = value;activeSaver();appController.setLanguage(value);}

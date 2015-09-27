@@ -19,7 +19,6 @@ package com.gerantech.islamic.views.screens
 	
 	public class SearchScreen extends BaseScreen
 	{
-
 		private var list:List;
 		private var resultList:Array;
 		private var wordList:List;
@@ -117,9 +116,16 @@ package com.gerantech.islamic.views.screens
 		
 		public function updateSuggests(input:String):void
 		{
-			//searchMode(false);
+			searchMode(false);
 			if(input.length<2)
 				return;
+			
+			if(userModel.searchSource>0)
+			{
+				userModel.searchPatt = input;
+				startSearch()
+				return;
+			}
 			
 			var inputs:Array = input.split(" ");
 			var words:Array = new Array();
@@ -163,6 +169,8 @@ package com.gerantech.islamic.views.screens
 				new Alert(this, StrTools.getNumberFromLocale(wordCount) + " " + loc('search_item') + " " + StrTools.getNumberFromLocale(resultList.length) + " " + loc('verses_in'));
 			else
 				new Alert(this, loc("search_no"));*/
+			
+			searchSubtitle.result = wordCount== 0 ? loc("search_no") : StrTools.getNumberFromLocale(wordCount) + " " + loc('search_item') + " " + StrTools.getNumberFromLocale(resultList.length) + " " + loc('verses_in')
 			list.dataProvider = new ListCollection(resultList);
 			searchMode(true);
 		}

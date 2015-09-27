@@ -25,13 +25,24 @@ package com.gerantech.islamic.views.headers
 		private var descriptionLabel:RTLLabel;
 		private var resultLabel:RTLLabel;
 		private var actionButton:FlatButton;
-		private var translatorSelector:TranslatorPickerList;
+		public var translatorSelector:TranslatorPickerList;
+		private var _result:String;
+		
 		public function SearchSubtitle()
 		{
 			super();
 			height = _height = AppModel.instance.sizes.twoLineItem;
 		}
 		
+		public function set result(value:String):void
+		{
+			if(_result==value)
+				return;
+			
+			_result = value;
+			resultLabel.text = _result;
+		}
+
 		override protected function initialize():void
 		{
 			super.initialize();
@@ -45,11 +56,8 @@ package com.gerantech.islamic.views.headers
 			shadowUp.layoutData = new AnchorLayoutData(NaN, 0, -border/2, 0);
 			addChild(shadowUp);
 			
-
-			
 			translatorImage = new ImageLoader();
 			translatorImage.layoutData = new AnchorLayoutData(border, NaN, _height/2, border);
-			translatorImage.source = "app:/com/gerantech/islamic/assets/images/icon/icon-192.png";
 			addChild(translatorImage);
 			
 			var translatorLayout:LayoutGroup = new LayoutGroup();
@@ -57,31 +65,42 @@ package com.gerantech.islamic.views.headers
 			translatorLayout.layoutData = new AnchorLayoutData(border, border, _height/2, border+_height/2);
 			addChild(translatorLayout);
 			
-			titleLabel = new RTLLabel("asd", 1, "left");
+			titleLabel = new RTLLabel("", 1, "left", null, false, null, 0.9);
 			titleLabel.layoutData = new VerticalLayoutData(100, 60);
 			translatorLayout.addChild(titleLabel);
 			
-			descriptionLabel = new RTLLabel("asd dfd", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "left", null, false, null, 0.92);
+			descriptionLabel = new RTLLabel("جستجو در متن قرآن کریم", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "left", null, false, null, 0.84);
 			descriptionLabel.layoutData = new VerticalLayoutData(100, 60);
 			translatorLayout.addChild(descriptionLabel);
 			
-			resultLabel = new RTLLabel("asd dfda d dfd", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "center", null, true, null, 0.86);
+			resultLabel = new RTLLabel("جستجو در این بخش صورت میگیرد", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "center", null, true, null, 0.8);
 			resultLabel.layoutData = new AnchorLayoutData(NaN, _height, border, border);
 			resultLabel.maxHeight = _height/2;
 			addChild(resultLabel);
 			
-			actionButton = new FlatButton("action_plus", "action_player", false, 1, 0.8);
-			actionButton.iconScale = 0.3;
+			actionButton = new FlatButton("pencil_white", "action_accent", false, 1, 0.8);
+			actionButton.iconScale = 0.4;
 			actionButton.width = actionButton.height = appModel.sizes.toolbar;
 			actionButton.pivotY = actionButton.pivotX = actionButton.width/2;
-			actionButton.filter = BlurFilter.createDropShadow(border/4, 90*(Math.PI/180), 0, 0.4, border/6);
+			actionButton.filter = BlurFilter.createDropShadow(border/8, 90*(Math.PI/180), 0, 0.6, border/16);
 			actionButton.addEventListener(Event.TRIGGERED, actionButton_triggerd);
 			actionButton.layoutData = new AnchorLayoutData(NaN, border*2, -appModel.sizes.toolbar/2, NaN);
 			addChild(actionButton);
 
 			translatorSelector = new TranslatorPickerList();
-			translatorSelector.buttonProperties.visible = false;
+			translatorSelector.addEventListener(Event.CHANGE, translatorSelector_changeHandler);
 			addChild(translatorSelector); 
+			
+			translatorSelector_changeHandler(null);
+		}
+		
+		private function translatorSelector_changeHandler(event:Event):void
+		{
+			if(translatorSelector.selectedItem==null)
+				return;
+			
+			titleLabel.text = translatorSelector.selectedItem.name;
+			translatorImage.source = translatorSelector.selectedItem.icon;
 		}
 		
 		private function actionButton_triggerd():void

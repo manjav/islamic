@@ -143,7 +143,7 @@ package com.gerantech.islamic.views.headers
 			timeLabel.visible = false;
 			addChild(timeLabel);
 			
-			playerButton = new FlatButton("action_play", "action_player", false, 1, 0.8);
+			playerButton = new FlatButton("action_play", "action", false, 1, 0.8);
 			playerButton.iconScale = 0.4;
 			playerButton.x = appModel.sizes.width-_height;
 			playerButton.width = playerButton.height = appModel.sizes.toolbar;
