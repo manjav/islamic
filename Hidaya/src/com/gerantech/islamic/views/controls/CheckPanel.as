@@ -43,7 +43,7 @@ package com.gerantech.islamic.views.controls
 			mLayout.gap = AppModel.instance.sizes.DP8;
 			container.layout = mLayout;
 			
-			titleDisplay = new RTLLabel(label, BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0, null, "bold");
+			titleDisplay = new RTLLabel(label, BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0.9, null, "bold");
 			titleDisplay.layoutData =  new HorizontalLayoutData(100);
 			
 			checkDisplay = new PersonAccessory();

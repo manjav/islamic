@@ -10,6 +10,7 @@ package com.gerantech.islamic.views.controls
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.PickerList;
 	import feathers.controls.renderers.IListItemRenderer;
+	import feathers.core.FeathersControl;
 	import feathers.data.ListCollection;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
@@ -21,6 +22,8 @@ package com.gerantech.islamic.views.controls
 		private var titleDisplay:RTLLabel;
 		public var list:PickerList;
 		private var label:String;
+
+		private var spacer:Spacer;
 		
 		public function SettingPanel(label:String, data:Object, selectedItem:Object)
 		{
@@ -46,11 +49,14 @@ package com.gerantech.islamic.views.controls
 				index++;
 			}			
 			
-			titleDisplay = new RTLLabel(label, BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0, null, "bold");
-			titleDisplay.layoutData =  new HorizontalLayoutData(100);
+			titleDisplay = new RTLLabel(label, BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0.9, null, "bold");
+			//titleDisplay.layoutData =  new HorizontalLayoutData(100);
+			
+			spacer = new Spacer()
+			spacer.layoutData =  new HorizontalLayoutData(100);
 			
 			list = new PickerList();
-			list.layoutData = new HorizontalLayoutData(100);
+			//list.layoutData = new HorizontalLayoutData(100);
 			list.buttonProperties.iconPosition = AppModel.instance.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
 			list.labelField = "name";
 			list.listProperties.width = AppModel.instance.sizes.width*0.8;
@@ -78,8 +84,16 @@ package com.gerantech.islamic.views.controls
 		{
 			titleDisplay.bidiLevel = AppModel.instance.ltr?0:1;
 			titleDisplay.textAlign = AppModel.instance.ltr?"left":"right";
-			addChild(!AppModel.instance.ltr?list:titleDisplay);
-			addChild(AppModel.instance.ltr?list:titleDisplay);
+			
+			var els:Array;
+			if(AppModel.instance.ltr)
+				els = new Array(titleDisplay, spacer, list) ;
+			else
+				els = new Array(list, spacer, titleDisplay) ;
+
+			removeChildren();
+			for each(var c:FeathersControl in els)
+				addChild(c);
 			
 			var _label:String = ResourceManager.getInstance().getString("loc", label);
 			if(_label==null)

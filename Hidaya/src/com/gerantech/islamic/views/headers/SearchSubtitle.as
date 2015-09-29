@@ -6,14 +6,17 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.lists.TranslatorPickerList;
+	import com.gerantech.islamic.views.popups.SearchSettingPopup;
 	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
+	import feathers.core.PopUpManager;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 	
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.events.Event;
 	import starling.filters.BlurFilter;
@@ -27,6 +30,10 @@ package com.gerantech.islamic.views.headers
 		private var actionButton:FlatButton;
 		public var translatorSelector:TranslatorPickerList;
 		private var _result:String;
+
+		private var overlay:FlatButton;
+
+		private var searchPopUp:SearchSettingPopup;
 		
 		public function SearchSubtitle()
 		{
@@ -105,8 +112,24 @@ package com.gerantech.islamic.views.headers
 		
 		private function actionButton_triggerd():void
 		{
-			translatorSelector.openList();
+			searchPopUp = new SearchSettingPopup();
+			searchPopUp.addEventListener(Event.CLOSE, searchPopUp_closeHandler);
+			PopUpManager.overlayFactory = function():DisplayObject
+			{
+				overlay = new FlatButton(null, null, true, 0.3, 0.3, 0);
+				overlay.addEventListener(Event.TRIGGERED, searchPopUp.close);
+				return overlay;
+			};
+			PopUpManager.addPopUp(searchPopUp);
 		}		
+		
+		private function searchPopUp_closeHandler():void
+		{
+			overlay.removeEventListener(Event.TRIGGERED, searchPopUp.close);
+			searchPopUp.removeEventListener(Event.CLOSE, searchPopUp_closeHandler);
+			if(PopUpManager.isPopUp(searchPopUp))
+				PopUpManager.removePopUp(searchPopUp);
+		}
 		
 	}
 }

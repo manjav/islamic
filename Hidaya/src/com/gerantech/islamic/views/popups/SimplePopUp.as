@@ -21,7 +21,7 @@ package com.gerantech.islamic.views.popups
 		protected var container:ScrollContainer;
 		protected var buttonBar:LayoutGroup;
 		
-		private var vLayout:VerticalLayout;
+		protected var vLayout:VerticalLayout;
 		private var _title:String;
 		
 		public function SimplePopUp()
@@ -46,7 +46,7 @@ package com.gerantech.islamic.views.popups
 
 		override protected function initialize():void
 		{
-			removeChildren()
+			removeChildren();
 			super.initialize();
 			autoSizeMode = AUTO_SIZE_MODE_CONTENT; 
 			backgroundSkin = new Scale9Image(Assets.getSclaed9Textures(userModel.nightMode?"i_dialog":"dialog"));

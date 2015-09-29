@@ -199,6 +199,9 @@ package com.gerantech.islamic.models
 		public function get lastJuze():Juze{return _lastJoze};
 		*/
 		
+		public function set searchScope(value:uint):void{if(user.searchScope==value)return; user.searchScope=value; activeSaver()};
+		public function get searchScope():uint{return user.searchScope};
+		
 		public function set searchSource(value:uint):void{if(user.searchSource==value)return; user.searchSource=value; activeSaver()};
 		public function get searchSource():uint{return user.searchSource};
 		

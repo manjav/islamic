@@ -116,7 +116,7 @@ package com.gerantech.islamic.views.screens
 		
 		public function updateSuggests(input:String):void
 		{
-			searchMode(false);
+			//searchMode(false);
 			if(input.length<2)
 				return;
 			
