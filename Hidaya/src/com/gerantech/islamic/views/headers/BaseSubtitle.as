@@ -4,6 +4,8 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	
+	import mx.resources.ResourceManager;
+	
 	import feathers.controls.LayoutGroup;
 	
 	import starling.display.Quad;
@@ -22,5 +24,11 @@ package com.gerantech.islamic.views.headers
 			height = _height = AppModel.instance.sizes.subtitle;
 			backgroundSkin = new Quad(1, 1, UserModel.instance.nightMode ? BaseMaterialTheme.DESCRIPTION_TEXT_COLOR : BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 		}
+		
+		protected function loc(str:String, parameters:Array=null, locale:String=null):String
+		{
+			return ResourceManager.getInstance().getString("loc", str, parameters, locale);
+		}
+		
 	}
 }

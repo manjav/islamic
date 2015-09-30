@@ -1,10 +1,11 @@
 package com.gerantech.islamic.models
 {
-	import com.gerantech.islamic.managers.BillingManager;
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.models.vo.Reciter;
 	import com.gerantech.islamic.models.vo.Translator;
+	
+	import mx.resources.ResourceManager;
 
 	public class ConfigModel
 	{
@@ -35,6 +36,7 @@ package com.gerantech.islamic.models
 		
 		public var freeTranslators:Array;
 		public var freeReciters:Array;
+		public var searchSources:Array;
 
 
 
@@ -196,6 +198,10 @@ package com.gerantech.islamic.models
 			for each(var t:Translator in translators)
 			if(t.path==ut)
 				selectedTranslators.push(t);
+			
+			searchSources = new Array({name:ResourceManager.getInstance().getString("loc", "quran_t"), icon:"app:/com/gerantech/islamic/assets/images/icon/icon-192.png"});
+			for each(var p:Person in selectedTranslators)
+				searchSources.push({name:p.name, icon:p.iconTexture});
 		}
 		private function createTransFlags():void
 		{

@@ -29,6 +29,8 @@ package com.gerantech.islamic.views.popups
 		private var scopePanel:SettingPanel;
 		private var suraPicker:PickerList;
 		private var juzePicker:PickerList;
+
+		
 		public function SearchSettingPopup()
 		{
 			super();
@@ -37,8 +39,8 @@ package com.gerantech.islamic.views.popups
 		override protected function initialize():void
 		{
 			
-			title = "تنظیمات جستجو";
-			message = "منبع و محدوده جستجوی خود را تعیین و سپس تأیید را فشار دهید";
+			title = loc("search_set_title");
+			message = loc("search_set_message");
 			acceptButtonLabel = loc("ok_button");
 			cancelButtonLabel = loc("cancel_button");
 			
@@ -46,20 +48,22 @@ package com.gerantech.islamic.views.popups
 			
 			var clayout:VerticalLayout = new VerticalLayout();
 			clayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			clayout.paddingBottom = appModel.sizes.DP16;
 			container.layout = clayout;
 			
-			var sourceData:Array = new Array({name:ResourceManager.getInstance().getString("loc", "quran_t"), icon:"app:/com/gerantech/islamic/assets/images/icon/icon-192.png"});
+			ConfigModel.instance.searchSources = new Array({name:ResourceManager.getInstance().getString("loc", "quran_t"), icon:"app:/com/gerantech/islamic/assets/images/icon/icon-192.png"});
 			for each(var p:Person in ConfigModel.instance.selectedTranslators)
-			sourceData.push({name:p.name, icon:p.iconTexture});
+				ConfigModel.instance.searchSources.push({name:p.name, icon:p.iconTexture});
 
-			sourcePanel = new SettingPanel ("انتخاب منبع", sourceData, SettingItemRenderer);
-			sourcePanel.addEventListener(Event.CHANGE, settingPanel_changeHandler);
+			sourcePanel = new SettingPanel (loc("search_set_source"), ConfigModel.instance.searchSources, SettingItemRenderer);
+			sourcePanel.list.selectedIndex = userModel.searchSource;
+			sourcePanel.addEventListener(Event.CHANGE, sourcePanel.list.closeList);
 			container.addChild(sourcePanel);
 			
 			
-			var scopeData:Array = new Array({name:"کل قرآن"}, {name:"یک سوره خاص"}, {name:"یک جزء خاص"});
-			
-			scopePanel = new SettingPanel ("محدوده جستجو", scopeData, SettingItemRenderer);
+			var scopeData:Array = new Array({name:loc("search_set_scope_0")}, {name:loc("search_set_scope_1")}, {name:loc("search_set_scope_2")});
+			scopePanel = new SettingPanel (loc("search_set_scope"), scopeData, SettingItemRenderer);
+			scopePanel.list.selectedIndex = userModel.searchScope;
 			scopePanel.addEventListener(Event.CHANGE, scopePanel_changeHandler);
 			container.addChild(scopePanel);
 			
@@ -71,7 +75,8 @@ package com.gerantech.islamic.views.popups
 				return loc("sura_l") + " " + (appModel.ltr ? ResourceModel.instance.suraList[item.index].tname : ResourceModel.instance.suraList[item.index].name);
 			};
 			suraPicker.dataProvider = new ListCollection(ResourceModel.instance.popupSuraList);
-			suraPicker.addEventListener(Event.CHANGE, suraPicker_changeHandler);
+			suraPicker.selectedIndex = userModel.searchSura;
+			suraPicker.addEventListener(Event.CHANGE, suraPicker.closeList);
 			suraPicker.listProperties.itemRendererFactory = function():IListItemRenderer
 			{
 				var i:SettingItemRenderer = new SettingItemRenderer();
@@ -90,7 +95,8 @@ package com.gerantech.islamic.views.popups
 				return loc("juze_l") + " " + loc("j_"+(item.index+1));
 			};
 			juzePicker.dataProvider = new ListCollection(ResourceModel.instance.juzeList);
-			juzePicker.addEventListener(Event.CHANGE, juzePicker_changeHandler);
+			juzePicker.selectedIndex = userModel.searchJuze;
+			juzePicker.addEventListener(Event.CHANGE, juzePicker.closeList);
 			juzePicker.listProperties.itemRendererFactory = function():IListItemRenderer
 			{
 				var i:SettingItemRenderer = new SettingItemRenderer();
@@ -100,39 +106,28 @@ package com.gerantech.islamic.views.popups
 				};
 				return i;
 			}
-	
-
-		}
-		
-		private function settingPanel_changeHandler(event:Event):void
-		{
-			sourcePanel.list.closeList();
-			userModel.searchSource = sourcePanel.list.selectedIndex;
+			scopePanel_changeHandler(null);
+			acceptCallback = acceptCallbackHandler;
 		}
 		
 		private function scopePanel_changeHandler(event:Event):void
 		{
-			scopePanel.list.closeList();
-			userModel.searchScope = scopePanel.list.selectedIndex;
-			
 			container.removeChildren(3);
-			if(userModel.searchScope==1)
+			if(scopePanel.list.selectedIndex==1)
 				container.addChild(suraPicker);
-			else if(userModel.searchScope==2)
+			else if(scopePanel.list.selectedIndex==2)
 				container.addChild(juzePicker);
+			
+			scopePanel.list.closeList();
 		}
 		
-		
-		private function suraPicker_changeHandler():void
+		private function acceptCallbackHandler():void
 		{
-			suraPicker.closeList();
+			userModel.searchSource = sourcePanel.list.selectedIndex;
+			userModel.searchScope = scopePanel.list.selectedIndex;
+			userModel.searchSura = suraPicker.selectedIndex;
+			userModel.searchJuze = juzePicker.selectedIndex;
 		}
-		
-		
-		private function juzePicker_changeHandler():void
-		{
-			juzePicker.closeList();
-		}		
 
 	}
 }

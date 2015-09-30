@@ -70,7 +70,7 @@ package com.gerantech.islamic.views.screens
 			if(changes<0)
 				changes /=2;
 			
-			searchSubtitle.y = Math.max(-searchSubtitle._height/2, Math.min(0, searchSubtitle.y+changes));
+			searchSubtitle.y = Math.max(-searchSubtitle._height*0.6, Math.min(0, searchSubtitle.y+changes));
 			startScrollBarIndicator = scrollPos;			
 		}
 		

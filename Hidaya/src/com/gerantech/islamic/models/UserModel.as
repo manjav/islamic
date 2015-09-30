@@ -199,14 +199,20 @@ package com.gerantech.islamic.models
 		public function get lastJuze():Juze{return _lastJoze};
 		*/
 		
-		public function set searchScope(value:uint):void{if(user.searchScope==value)return; user.searchScope=value; activeSaver()};
-		public function get searchScope():uint{return user.searchScope};
+		public function set searchPatt(value:String):void{if(user.searchPatt==value)return; user.searchPatt=value; activeSaver()};
+		public function get searchPatt():String{return user.searchPatt};
 		
 		public function set searchSource(value:uint):void{if(user.searchSource==value)return; user.searchSource=value; activeSaver()};
 		public function get searchSource():uint{return user.searchSource};
 		
-		public function set searchPatt(value:String):void{if(user.searchPatt==value)return; user.searchPatt=value; activeSaver()};
-		public function get searchPatt():String{return user.searchPatt};
+		public function set searchScope(value:uint):void{if(user.searchScope==value)return; user.searchScope=value; activeSaver()};
+		public function get searchScope():uint{return user.searchScope};
+		
+		public function set searchSura(value:uint):void{if(user.searchSura==value)return; user.searchSura=value; activeSaver()};
+		public function get searchSura():uint{return user.searchSura};
+		
+		public function set searchJuze(value:uint):void{if(user.searchJuze==value)return; user.searchJuze=value; activeSaver()};
+		public function get searchJuze():uint{return user.searchJuze};
 		
 		public function set locale(value:Object):void{user.local = value;activeSaver();appController.setLanguage(value);}
 		public function get locale():Object{return user.local};

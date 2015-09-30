@@ -27,6 +27,8 @@ package com.gerantech.islamic.views.items
 
 		public var labelFunction:Function;
 		public var iconFunction:Function;
+
+		private var lastState:String;
 		
 		public function SettingItemRenderer(height:Number=0)
 		{
@@ -59,9 +61,7 @@ package com.gerantech.islamic.views.items
 		{
 			if(_data==null || _owner==null)
 				return;
-			/*if(bookmark==_data)
-				return;*/
-			
+
 			if(iconFunction!=null)
 			{
 				iconDisplay.source = iconFunction(_data);
@@ -87,22 +87,21 @@ package com.gerantech.islamic.views.items
 				titleDisplay.text = labelFunction(_data);
 			}
 			else
-				titleDisplay.text = _data.name
+				titleDisplay.text = _data.name;
+			
 			super.commitData();
 		}
 		
-		
 		override public function set currentState(value:String):void
 		{
-			var lastState:String = super.currentState;
 			super.currentState = value;
 			
-			if(value==lastState)
+			if(lastState==value || stage==null)
 				return;
-			//	trace(value)
 			backgroundSkin = new Quad(1, 1, (value==STATE_SELECTED||value==STATE_DOWN)?BaseMaterialTheme.SELECTED_BACKGROUND_COLOR:BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			if(titleDisplay)
-			titleDisplay.elementFormat = new ElementFormat(titleDisplay.fontDescription, titleDisplay.fontSize, (value==STATE_SELECTED||value==STATE_DOWN) ? BaseMaterialTheme.SELECTED_TEXT_COLOR : BaseMaterialTheme.PRIMARY_TEXT_COLOR);
+				titleDisplay.elementFormat = new ElementFormat(titleDisplay.fontDescription, titleDisplay.fontSize, (value==STATE_SELECTED||value==STATE_DOWN) ? BaseMaterialTheme.SELECTED_TEXT_COLOR : BaseMaterialTheme.PRIMARY_TEXT_COLOR);
+			lastState = value;
 		}
 
 

@@ -12,9 +12,11 @@ package com.gerantech.islamic.models.vo
 		public var local:Object;
 		//public var reciterIndex:int = 37;
 		//public var translatorIndex:int = 0;
-		public var searchPatt:String = "هدایة";
+		public var searchPatt:String = "کتاب";
 		public var searchSource:uint = 0;
 		public var searchScope:uint = 0;
+		public var searchSura:uint = 0;
+		public var searchJuze:uint = 0;
 		
 		//public var breakRepeat:uint = 1;
 		public var personRepeat:uint = 1;

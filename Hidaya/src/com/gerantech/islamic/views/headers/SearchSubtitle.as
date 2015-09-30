@@ -2,6 +2,9 @@ package com.gerantech.islamic.views.headers
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
+	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.ResourceModel;
+	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
@@ -18,6 +21,7 @@ package com.gerantech.islamic.views.headers
 	
 	import starling.display.DisplayObject;
 	import starling.display.Image;
+	import starling.display.Quad;
 	import starling.events.Event;
 	import starling.filters.BlurFilter;
 	
@@ -28,7 +32,6 @@ package com.gerantech.islamic.views.headers
 		private var descriptionLabel:RTLLabel;
 		private var resultLabel:RTLLabel;
 		private var actionButton:FlatButton;
-		public var translatorSelector:TranslatorPickerList;
 		private var _result:String;
 
 		private var overlay:FlatButton;
@@ -63,22 +66,19 @@ package com.gerantech.islamic.views.headers
 			shadowUp.layoutData = new AnchorLayoutData(NaN, 0, -border/2, 0);
 			addChild(shadowUp);
 			
+			var bg:LayoutGroup = new LayoutGroup();
+			bg.layoutData = new AnchorLayoutData(0, 0, _height*0.4, 0);
+			bg.backgroundSkin = new Quad(1,1,BaseMaterialTheme.CHROME_COLOR);
+			bg.alpha = 0.5;
+			addChild(bg);
+			
 			translatorImage = new ImageLoader();
 			translatorImage.layoutData = new AnchorLayoutData(border, NaN, _height/2, border);
 			addChild(translatorImage);
 			
-			var translatorLayout:LayoutGroup = new LayoutGroup();
-			translatorLayout.layout = new VerticalLayout();
-			translatorLayout.layoutData = new AnchorLayoutData(border, border, _height/2, border+_height/2);
-			addChild(translatorLayout);
-			
-			titleLabel = new RTLLabel("", 1, "left", null, false, null, 0.9);
-			titleLabel.layoutData = new VerticalLayoutData(100, 60);
-			translatorLayout.addChild(titleLabel);
-			
-			descriptionLabel = new RTLLabel("جستجو در متن قرآن کریم", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "left", null, false, null, 0.84);
-			descriptionLabel.layoutData = new VerticalLayoutData(100, 60);
-			translatorLayout.addChild(descriptionLabel);
+			titleLabel = new RTLLabel("", 1, "center", null, true, "center", 0.85);
+			titleLabel.layoutData = new AnchorLayoutData(NaN, border, NaN, border+_height/2, NaN, -_height/4.6);
+			addChild(titleLabel);
 			
 			resultLabel = new RTLLabel("جستجو در این بخش صورت میگیرد", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "center", null, true, null, 0.8);
 			resultLabel.layoutData = new AnchorLayoutData(NaN, _height, border, border);
@@ -93,22 +93,10 @@ package com.gerantech.islamic.views.headers
 			actionButton.addEventListener(Event.TRIGGERED, actionButton_triggerd);
 			actionButton.layoutData = new AnchorLayoutData(NaN, border*2, -appModel.sizes.toolbar/2, NaN);
 			addChild(actionButton);
+			
+			setElementsData();
+		}
 
-			translatorSelector = new TranslatorPickerList();
-			translatorSelector.addEventListener(Event.CHANGE, translatorSelector_changeHandler);
-			addChild(translatorSelector); 
-			
-			translatorSelector_changeHandler(null);
-		}
-		
-		private function translatorSelector_changeHandler(event:Event):void
-		{
-			if(translatorSelector.selectedItem==null)
-				return;
-			
-			titleLabel.text = translatorSelector.selectedItem.name;
-			translatorImage.source = translatorSelector.selectedItem.icon;
-		}
 		
 		private function actionButton_triggerd():void
 		{
@@ -129,6 +117,25 @@ package com.gerantech.islamic.views.headers
 			searchPopUp.removeEventListener(Event.CLOSE, searchPopUp_closeHandler);
 			if(PopUpManager.isPopUp(searchPopUp))
 				PopUpManager.removePopUp(searchPopUp);
+			
+			setElementsData();
+		}
+		
+		private function setElementsData():void
+		{
+			var obj:Object = ConfigModel.instance.searchSources[UserModel.instance.searchSource];
+			translatorImage.source = obj.icon;
+			var des:String = loc("search_set_source") + ": " + obj.name + " - ";
+			
+			des += loc("search_set_scope") + ": ";
+			if(UserModel.instance.searchScope==1)
+				des += loc("sura_l") + " " + (appModel.ltr ? ResourceModel.instance.suraList[UserModel.instance.searchSura].tname : ResourceModel.instance.suraList[UserModel.instance.searchSura].name);
+			else if(UserModel.instance.searchScope==2)
+				des += loc("juze_l") + " " + loc("j_"+(UserModel.instance.searchJuze+1));
+			else
+				des += loc("search_set_scope_0");
+			
+			titleLabel.text = des;
 		}
 		
 	}
