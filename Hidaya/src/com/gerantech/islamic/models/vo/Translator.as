@@ -122,6 +122,33 @@ package com.gerantech.islamic.models.vo
 		}
 		
 		
+		public function search(pattern:String, response:Function):void
+		{
+			var createStmt:SQLStatement = new SQLStatement(); 
+			createStmt.sqlConnection = sqlConnection; 
+			createStmt.text = "SELECT text,sura,aya FROM quran WHERE text LIKE '%"+pattern+"%'";
+			createStmt.addEventListener(SQLEvent.RESULT, createResult); 
+			createStmt.addEventListener(SQLErrorEvent.ERROR, createError); 
+			if(sqlConnection.connected)
+				createStmt.execute(); 
+			else
+			{
+				setTimeout(response, 1, "SQL Connection not found.");
+				return;
+			}
+			
+			function createError(event:SQLErrorEvent):void
+			{
+				response(event.text);
+			}
+			
+			function createResult(event:SQLEvent):void
+			{
+				response(createStmt.getResult());
+			}
+		}
+		
+		
 		public function getAyaText(aya:*, response:Function):void
 		{
 			var createStmt:SQLStatement = new SQLStatement(); 

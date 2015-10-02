@@ -110,7 +110,7 @@ package com.gerantech.islamic.views.items
 			else
 			{
 				person.addEventListener(Person.ICON_LOADED, person_iconLoadedHandler);
-				person.loadImage(person.iconUrl);
+				person.loadImage();
 			}
 		}
 		private function person_iconLoadedHandler():void

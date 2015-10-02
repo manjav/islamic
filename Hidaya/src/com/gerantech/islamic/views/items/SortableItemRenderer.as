@@ -136,7 +136,7 @@ package com.gerantech.islamic.views.items
 			else
 			{
 				_person.addEventListener(Person.ICON_LOADED, person_imageCompleteHandler);
-				_person.loadImage(_person.iconUrl);
+				_person.loadImage();
 			}
 		}
 		private function person_imageCompleteHandler():void

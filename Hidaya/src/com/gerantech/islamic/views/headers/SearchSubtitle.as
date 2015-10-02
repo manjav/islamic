@@ -5,11 +5,15 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
+	import com.gerantech.islamic.models.vo.Person;
+	import com.gerantech.islamic.models.vo.Translator;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.lists.TranslatorPickerList;
 	import com.gerantech.islamic.views.popups.SearchSettingPopup;
+	
+	import mx.resources.ResourceManager;
 	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
@@ -80,7 +84,7 @@ package com.gerantech.islamic.views.headers
 			titleLabel.layoutData = new AnchorLayoutData(NaN, border, NaN, border+_height/2, NaN, -_height/4.6);
 			addChild(titleLabel);
 			
-			resultLabel = new RTLLabel("جستجو در این بخش صورت میگیرد", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "center", null, true, null, 0.8);
+			resultLabel = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "center", null, true, null, 0.8);
 			resultLabel.layoutData = new AnchorLayoutData(NaN, _height, border, border);
 			resultLabel.maxHeight = _height/2;
 			addChild(resultLabel);
@@ -93,6 +97,15 @@ package com.gerantech.islamic.views.headers
 			actionButton.addEventListener(Event.TRIGGERED, actionButton_triggerd);
 			actionButton.layoutData = new AnchorLayoutData(NaN, border*2, -appModel.sizes.toolbar/2, NaN);
 			addChild(actionButton);
+			
+			var q:Translator = new Translator();
+			q.name = ResourceManager.getInstance().getString("loc", "quran_t");
+			q.iconUrl = "app:/com/gerantech/islamic/assets/images/icon/icon-192.png";
+			q.iconPath = UserModel.instance.TRANSLATOR_PATH + "quran/quran.pbqr";
+
+			ConfigModel.instance.searchSources = new Array(q);
+			for each(var p:Person in ConfigModel.instance.selectedTranslators)
+				ConfigModel.instance.searchSources.push(p);
 			
 			setElementsData();
 		}
@@ -123,8 +136,8 @@ package com.gerantech.islamic.views.headers
 		
 		private function setElementsData():void
 		{
-			var obj:Object = ConfigModel.instance.searchSources[UserModel.instance.searchSource];
-			translatorImage.source = obj.icon;
+			var obj:Translator  = ConfigModel.instance.searchSources[UserModel.instance.searchSource];
+			translatorImage.source = obj.iconTexture;
 			var des:String = loc("search_set_source") + ": " + obj.name + " - ";
 			
 			des += loc("search_set_scope") + ": ";

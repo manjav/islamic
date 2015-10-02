@@ -25,9 +25,11 @@ package com.gerantech.islamic.views.controls
 
 		private var spacer:Spacer;
 		
-		public function SettingPanel(label:String, data:Object, selectedItem:Object)
+		public function SettingPanel(label:String, data:Object, selectedItem:Object, itemRendererFactory:Class=null)
 		{
 			this.label = label;
+			if(itemRendererFactory==null)
+				itemRendererFactory = SettingItemRenderer;
 			
 			height = AppModel.instance.sizes.singleLineItem;
 			
@@ -38,13 +40,15 @@ package com.gerantech.islamic.views.controls
 			
 			var index:uint = 0;
 			var selectedIndex:uint;
-					
+			if(selectedItem is uint || selectedItem is int)
+				selectedIndex = selectedItem as uint;
+
 			for each(var obj:Object in data)
 			{//trace(obj.value, selectedItem.value)
 				if(!obj.name)
 					obj.name = ResourceManager.getInstance().getString("loc", obj.value); //trace(obj.name, obj.value);
 				
-				if(obj.value==selectedItem.value)
+				if(obj.hasOwnProperty("value") && selectedItem.hasOwnProperty("value") && obj.value==selectedItem.value)
 					selectedIndex = index;
 				index++;
 			}			
@@ -62,7 +66,7 @@ package com.gerantech.islamic.views.controls
 			list.listProperties.width = AppModel.instance.sizes.width*0.8;
 			list.listProperties.itemRendererFactory = function():IListItemRenderer
 			{
-				return new SettingItemRenderer();
+				return new itemRendererFactory();
 			}
 			list.dataProvider = new ListCollection(data);
 			list.selectedIndex = selectedIndex;

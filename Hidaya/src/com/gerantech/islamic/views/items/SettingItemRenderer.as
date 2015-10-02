@@ -21,14 +21,14 @@ package com.gerantech.islamic.views.items
 		public static const IDLE:String = "idle";
 		public static const NAVIGATION:String = "navigation";*/
 		
-		private var mode:String;
-		private var titleDisplay:RTLLabel;
-		private var iconDisplay:ImageLoader;
+		protected var mode:String;
+		protected var titleDisplay:RTLLabel;
+		protected var iconDisplay:ImageLoader;
 
 		public var labelFunction:Function;
 		public var iconFunction:Function;
 
-		private var lastState:String;
+		protected var lastState:String;
 		
 		public function SettingItemRenderer(height:Number=0)
 		{

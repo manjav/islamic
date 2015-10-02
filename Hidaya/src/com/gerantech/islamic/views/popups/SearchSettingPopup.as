@@ -6,6 +6,7 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.SettingPanel;
+	import com.gerantech.islamic.views.items.SearchSourceItemRenderer;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	
 	import flash.utils.setTimeout;
@@ -51,19 +52,12 @@ package com.gerantech.islamic.views.popups
 			clayout.paddingBottom = appModel.sizes.DP16;
 			container.layout = clayout;
 			
-			ConfigModel.instance.searchSources = new Array({name:ResourceManager.getInstance().getString("loc", "quran_t"), icon:"app:/com/gerantech/islamic/assets/images/icon/icon-192.png"});
-			for each(var p:Person in ConfigModel.instance.selectedTranslators)
-				ConfigModel.instance.searchSources.push({name:p.name, icon:p.iconTexture});
-
-			sourcePanel = new SettingPanel (loc("search_set_source"), ConfigModel.instance.searchSources, SettingItemRenderer);
-			sourcePanel.list.selectedIndex = userModel.searchSource;
+			sourcePanel = new SettingPanel (loc("search_set_source"), ConfigModel.instance.searchSources, userModel.searchSource, SearchSourceItemRenderer);
 			sourcePanel.addEventListener(Event.CHANGE, sourcePanel.list.closeList);
 			container.addChild(sourcePanel);
 			
-			
 			var scopeData:Array = new Array({name:loc("search_set_scope_0")}, {name:loc("search_set_scope_1")}, {name:loc("search_set_scope_2")});
-			scopePanel = new SettingPanel (loc("search_set_scope"), scopeData, SettingItemRenderer);
-			scopePanel.list.selectedIndex = userModel.searchScope;
+			scopePanel = new SettingPanel (loc("search_set_scope"), scopeData, userModel.searchScope);
 			scopePanel.addEventListener(Event.CHANGE, scopePanel_changeHandler);
 			container.addChild(scopePanel);
 			

@@ -1,12 +1,17 @@
 package com.gerantech.islamic.views.screens
 {
+	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.vo.Bookmark;
+	import com.gerantech.islamic.models.vo.Person;
+	import com.gerantech.islamic.models.vo.Translator;
 	import com.gerantech.islamic.models.vo.Word;
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.headers.SearchSubtitle;
 	import com.gerantech.islamic.views.items.SearchItemRenderer;
 	import com.gerantech.islamic.views.items.WordItemRenderer;
+	
+	import flash.data.SQLResult;
 	
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
@@ -24,6 +29,7 @@ package com.gerantech.islamic.views.screens
 		private var wordList:List;
 		private var searchSubtitle:SearchSubtitle;
 		private var startScrollBarIndicator:Number = 0;
+		private var loadingTranslation:Boolean;
 		
 		override protected function initialize():void
 		{
@@ -34,9 +40,12 @@ package com.gerantech.islamic.views.screens
 			searchSubtitle.layoutData = new AnchorLayoutData(NaN,0,NaN,0);
 			
 			var listLayout: VerticalLayout = new VerticalLayout();
-			listLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			listLayout.paddingTop = searchSubtitle._height+appModel.sizes.DP4;
+			
+			var wLayout: VerticalLayout = new VerticalLayout();
+			wLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			wLayout.paddingTop = searchSubtitle._height+appModel.sizes.DP48;
 			
 			list = new List();
 			list.layout = listLayout;
@@ -51,7 +60,7 @@ package com.gerantech.islamic.views.screens
 			addChild(list);
 			
 			wordList = new List();
-			//wordList.layout = listLayout;
+			wordList.layout = wLayout;
 			wordList.layoutData = new AnchorLayoutData(0,0,0,0);
 			wordList.itemRendererFactory = function():IListItemRenderer
 			{
@@ -65,7 +74,7 @@ package com.gerantech.islamic.views.screens
 		
 		private function listScrollHandler():void
 		{
-			var scrollPos:Number = Math.max(0,list.verticalScrollPosition);
+			var scrollPos:Number = Math.max(0, list.verticalScrollPosition);
 			var changes:Number = startScrollBarIndicator-scrollPos;
 			if(changes<0)
 				changes /=2;
@@ -76,7 +85,7 @@ package com.gerantech.islamic.views.screens
 		
 		private function searchMode(param0:Boolean):void
 		{
-			searchSubtitle.visible = list.visible = param0;
+			list.visible = param0;
 			wordList.visible = !param0;
 		}
 		
@@ -95,35 +104,20 @@ package com.gerantech.islamic.views.screens
 			appModel.navigator.popScreen();
 		}		
 
-		/*
-		override protected function customHeaderFactory():Header
-		{
-			myHeader = new Header();
-			myHeader.visible = false
-			
-			var backButton:FlatButton = new FlatButton("arrow_"+AppModel.instance.align);
-			backButton.addEventListener(Event.TRIGGERED, backButtonHandler);
-			myHeader[AppModel.instance.align+"Items"] = new <DisplayObject>[backButton];
-			
-			searchItems = new <DisplayObject>[clearButton, searchInput];
-			if(AppModel.instance.ltr)
-				searchItems.reverse();
-			
-			myHeader[AppModel.instance.ltr?"rightItems":"leftItems"] = new <DisplayObject>[searchInput];
-			return myHeader;
-		}*/
-		
 		
 		public function updateSuggests(input:String):void
 		{
-			//searchMode(false);
+			searchMode(false);
 			if(input.length<2)
+			{
+				searchSubtitle.result = loc("search_error");
 				return;
+			}
 			
 			if(userModel.searchSource>0)
 			{
 				userModel.searchPatt = input;
-				startSearch()
+				startTranslationSearch()
 				return;
 			}
 			
@@ -151,7 +145,7 @@ package com.gerantech.islamic.views.screens
 				{
 					if (ay.search(userModel.searchPatt) != -1)
 					{
-						var book:Bookmark = new Bookmark(s+1, a+1);//serachItemList.length+1, , ay.@text, pattern);
+						var book:Bookmark = new Bookmark(s+1, a+1, 0, 3, 0, ay);//serachItemList.length+1, , ay.@text, pattern);
 						book.isSearch = true;
 						book.colorList = getColorList(ay, userModel.searchPatt);
 						wordCount += (book.colorList.length-1)/2;
@@ -190,6 +184,66 @@ package com.gerantech.islamic.views.screens
 				colorList.push(secondPoint);
 			}
 			return colorList;
+		}
+		
+				
+		private function startTranslationSearch():void
+		{
+			if(loadingTranslation)
+				return;
+			
+			var tr:Translator = ConfigModel.instance.searchSources[userModel.searchSource];
+			if(tr.loadingState!=Translator.L_LOADED)
+			{
+				loadingTranslation = true;
+				tr.addEventListener(Person.TRANSLATION_LOADED, translationLoaded);
+				tr.addEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
+				tr.loadTransltaion();
+				return;
+			}
+			tr.search(userModel.searchPatt, searchResponder);
+		}
+		
+		private function translationErrorHandler(event:Event):void
+		{
+			loadingTranslation = false;
+			searchSubtitle.result = "translationErrorHandler";
+			event.currentTarget.removeEventListener(Person.TRANSLATION_LOADED, translationLoaded);
+			event.currentTarget.removeEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
+		}
+		
+		private function translationLoaded(event:Event):void
+		{
+			loadingTranslation = false;
+			event.currentTarget.removeEventListener(Person.TRANSLATION_LOADED, translationLoaded);
+			event.currentTarget.removeEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
+			startTranslationSearch();
+		}
+		
+		private function searchResponder(obj:Object):void
+		{
+			if(obj is String)
+			{
+				searchSubtitle.result = obj as String;
+				return;
+			}
+			var wordCount:uint;
+			resultList = new Array();
+			var l:uint;
+			if(obj is SQLResult && obj.data is Array)
+				for each(var a:Object in obj.data)
+				{
+					var book:Bookmark = new Bookmark(a.sura+1, a.aya+1, 0, 3, 0, a.text);
+					book.isSearch = true;
+					book.colorList = getColorList(a.text, userModel.searchPatt);
+					wordCount += (book.colorList.length-1)/2;
+					book.index = l;
+					resultList.push(book);
+					l ++;
+				}
+			searchSubtitle.result = resultList.length== 0 ? loc("search_no") : StrTools.getNumberFromLocale(resultList.length) + " " + loc('search_item') + " " + StrTools.getNumberFromLocale(resultList.length) + " " + loc('verses_in')
+			list.dataProvider = new ListCollection(resultList);
+			searchMode(true);
 		}
 	}
 }

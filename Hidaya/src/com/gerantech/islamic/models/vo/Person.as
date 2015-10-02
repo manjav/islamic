@@ -42,18 +42,18 @@ package com.gerantech.islamic.models.vo
 		public var path:String;
 		public var percent:Number = 0;
 		
-		public var name:String;
-		public var ename:String;
-		public var url:String;
-		public var localPath:String;
-		public var pic:String;
+		public var name:String = "";
+		public var ename:String = "";
+		public var url:String = "";
+		public var localPath:String = "";
+		//public var pic:String = "";
 		public var size:Number = 1200;
 		
-		public var mode:String;
-		public var type:String;
+		public var mode:String = "";
+		public var type:String = "";
 		
-		public var iconUrl:String;
-		public var iconPath:String;
+		public var iconUrl:String = "";
+		public var iconPath:String = "";
 
 		public var flag:Local;
 		
@@ -81,11 +81,14 @@ package com.gerantech.islamic.models.vo
 		
 		public function set person(value:Object):void
 		{
+			if(value==null)
+				return;
+			
 			this.ename = value.ename;
 			this.name = value.name;
 			this.path = value.path;
 			this.url = value.url;
-			this.pic = value.pic;
+			//this.pic = value.pic;
 			this.size = value.size;
 			this.mode = value.mode;
 			//htmlMode = value.name=="Transliteration"
@@ -98,7 +101,7 @@ package com.gerantech.islamic.models.vo
 		
 		
 		//Load Person Image ---------------------------------
-		public function loadImage(imageUrl:String):void
+		public function loadImage():void
 		{
 			loadTime ++;
 			if(loadTime>2 || imageLoading)
@@ -150,6 +153,10 @@ package com.gerantech.islamic.models.vo
 		public function checkState():String
 		{
 			var ret:String = state;
+			
+			if(localPath=="" || localPath==null)
+				return NO_FILE;
+			
 			if(type==TYPE_TRANSLATOR)
 			{
 				existsFile = new File(localPath).exists;

@@ -154,7 +154,7 @@ package com.gerantech.islamic.views.items
 				addChild(devider);
 				if(translator.iconTexture==null)
 				{
-					translator.loadImage(translator.iconUrl);
+					translator.loadImage();
 					translator.addEventListener(Person.ICON_LOADED, translator_iconLoadedHandler);
 				}
 				else

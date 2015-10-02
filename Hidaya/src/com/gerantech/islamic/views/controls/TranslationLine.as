@@ -101,7 +101,7 @@ package com.gerantech.islamic.views.controls
 			addChild(icon);
 			if(translator.iconTexture==null)
 			{
-				translator.loadImage(translator.iconUrl);
+				translator.loadImage();
 				translator.addEventListener(Person.ICON_LOADED, iconLoaded);
 			}
 			else

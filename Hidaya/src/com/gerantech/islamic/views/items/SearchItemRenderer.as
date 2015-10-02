@@ -1,6 +1,5 @@
 package com.gerantech.islamic.views.items
 {
-	import com.greensock.TweenLite;
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
@@ -10,6 +9,7 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
+	import com.greensock.TweenLite;
 	
 	import mx.resources.ResourceManager;
 	
@@ -24,6 +24,8 @@ package com.gerantech.islamic.views.items
 		
 		private var nameDisplay:RTLLabel;
 		private var quranTextField:RTLLabel;
+
+		private var myLayout:VerticalLayout;
 		
 		public function SearchItemRenderer()
 		{
@@ -40,7 +42,7 @@ package com.gerantech.islamic.views.items
 			deleyCommit = true;
 			height = appModel.sizes.threeLineItem;
 			
-			var myLayout:VerticalLayout = new VerticalLayout();
+			myLayout = new VerticalLayout();
 			myLayout.padding = appModel.sizes.border*4;
 			myLayout.paddingTop = appModel.sizes.border*2;
 			layout = myLayout;
@@ -58,8 +60,11 @@ package com.gerantech.islamic.views.items
 		{
 			if(_data==null || _owner==null)
 				return;
-			
 			bookmark = Bookmark.getFromObject(_data);
+			var firstPadding:uint = bookmark.index==0 ? appModel.sizes.DP24 : 0;
+			height = appModel.sizes.threeLineItem+firstPadding;
+			myLayout.paddingTop = appModel.sizes.border*2+firstPadding;
+				
 			var sura:Sura = ResourceModel.instance.suraList[bookmark.sura-1];
 			nameDisplay.text = StrTools.getNumberFromLocale(String(index+1)) + ". " + ResourceManager.getInstance().getString("loc", "sura_l")+" "+ (appModel.ltr?(sura.tname+","):sura.name) + " "+ResourceManager.getInstance().getString("loc", "verse_l")+" "+ StrTools.getNumberFromLocale(bookmark.aya);
 			quranTextField.visible = false;
@@ -68,8 +73,8 @@ package com.gerantech.islamic.views.items
 		
 		override protected function commitAfterStopScrolling():void
 		{
-			var text:String = ResourceModel.instance.simpleQuran[bookmark.sura-1][bookmark.aya-1];
-			quranTextField.text = changeColor(text);
+	//		var text:String = ResourceModel.instance.simpleQuran[bookmark.sura-1][bookmark.aya-1];
+			quranTextField.text = changeColor(bookmark.text);
 			quranTextField.visible = true;
 			quranTextField.alpha = 0;
 			TweenLite.to(quranTextField, 0.3, {alpha:1});

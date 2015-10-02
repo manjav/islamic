@@ -262,7 +262,7 @@ package com.gerantech.islamic.views.headers
 			var reciter:Person = event.data as Person;
 			if(reciter.iconTexture==null)
 			{
-				reciter.loadImage(reciter.iconUrl);
+				reciter.loadImage();
 				reciter.addEventListener(Person.ICON_LOADED, reciter_iconLoadHandler);
 				return;
 			}
