@@ -102,7 +102,7 @@ package com.gerantech.islamic.views.items
 						ret += str.substring(bookmark.colorList[i+1], bookmark.colorList[i+2]);
 				}
 				ret += str.substr(bookmark.colorList[len-1]);
-			}
+			}//trace(ret)
 			return ret;
 		}
 	}

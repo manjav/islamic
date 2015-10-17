@@ -39,6 +39,7 @@ package com.gerantech.islamic.views.popups
 		
 		override protected function initialize():void
 		{
+			trace("SearchSettingPopup.initialize()");
 			
 			title = loc("search_set_title");
 			message = loc("search_set_message");
@@ -69,8 +70,6 @@ package com.gerantech.islamic.views.popups
 				return loc("sura_l") + " " + (appModel.ltr ? ResourceModel.instance.suraList[item.index].tname : ResourceModel.instance.suraList[item.index].name);
 			};
 			suraPicker.dataProvider = new ListCollection(ResourceModel.instance.popupSuraList);
-			suraPicker.selectedIndex = userModel.searchSura;
-			suraPicker.addEventListener(Event.CHANGE, suraPicker.closeList);
 			suraPicker.listProperties.itemRendererFactory = function():IListItemRenderer
 			{
 				var i:SettingItemRenderer = new SettingItemRenderer();
@@ -89,8 +88,6 @@ package com.gerantech.islamic.views.popups
 				return loc("juze_l") + " " + loc("j_"+(item.index+1));
 			};
 			juzePicker.dataProvider = new ListCollection(ResourceModel.instance.juzeList);
-			juzePicker.selectedIndex = userModel.searchJuze;
-			juzePicker.addEventListener(Event.CHANGE, juzePicker.closeList);
 			juzePicker.listProperties.itemRendererFactory = function():IListItemRenderer
 			{
 				var i:SettingItemRenderer = new SettingItemRenderer();
@@ -100,9 +97,30 @@ package com.gerantech.islamic.views.popups
 				};
 				return i;
 			}
-			scopePanel_changeHandler(null);
 			acceptCallback = acceptCallbackHandler;
+			
+			addEventListener(Event.ADDED_TO_STAGE, popup_addedToStageHandler);
+			popup_addedToStageHandler(null);
 		}
+		
+		protected function popup_addedToStageHandler(event:Event):void
+		{
+			suraPicker.removeEventListener(Event.CHANGE, suraPicker.closeList);
+			suraPicker.selectedIndex = userModel.searchSura;
+			suraPicker.addEventListener(Event.CHANGE, suraPicker.closeList);
+			
+			juzePicker.removeEventListener(Event.CHANGE, juzePicker.closeList);
+			juzePicker.selectedIndex = userModel.searchJuze;
+			juzePicker.addEventListener(Event.CHANGE, juzePicker.closeList);
+			
+			sourcePanel.list.selectedIndex = userModel.searchSource;
+			scopePanel.list.selectedIndex = userModel.searchScope;
+			scopePanel_changeHandler(null);
+			
+			if(event!=null)
+				show();			
+		}
+				
 		
 		private function scopePanel_changeHandler(event:Event):void
 		{

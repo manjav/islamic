@@ -2,7 +2,9 @@ package com.gerantech.islamic.views.screens
 {
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
+	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Bookmark;
+	import com.gerantech.islamic.models.vo.Juze;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.models.vo.Translator;
 	import com.gerantech.islamic.models.vo.Word;
@@ -38,6 +40,7 @@ package com.gerantech.islamic.views.screens
 			
 			searchSubtitle = new SearchSubtitle();
 			searchSubtitle.layoutData = new AnchorLayoutData(NaN,0,NaN,0);
+			searchSubtitle.addEventListener(Event.CHANGE, searchSubtitle_changeHandler);
 			
 			var listLayout: VerticalLayout = new VerticalLayout();
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
@@ -71,6 +74,11 @@ package com.gerantech.islamic.views.screens
 			
 			addChild(searchSubtitle);
 		}	
+		
+		private function searchSubtitle_changeHandler():void
+		{
+			updateSuggests(userModel.searchPatt);
+		}
 		
 		private function listScrollHandler():void
 		{
@@ -113,10 +121,9 @@ package com.gerantech.islamic.views.screens
 				searchSubtitle.result = loc("search_error");
 				return;
 			}
-			
 			if(userModel.searchSource>0)
 			{
-				userModel.searchPatt = input;
+				userModel.searchPatt = StrTools.getSimpleForDB(input);
 				startTranslationSearch()
 				return;
 			}
@@ -192,6 +199,7 @@ package com.gerantech.islamic.views.screens
 			if(loadingTranslation)
 				return;
 			
+			
 			var tr:Translator = ConfigModel.instance.searchSources[userModel.searchSource];
 			if(tr.loadingState!=Translator.L_LOADED)
 			{
@@ -201,6 +209,7 @@ package com.gerantech.islamic.views.screens
 				tr.loadTransltaion();
 				return;
 			}
+			
 			tr.search(userModel.searchPatt, searchResponder);
 		}
 		
@@ -227,20 +236,49 @@ package com.gerantech.islamic.views.screens
 				searchSubtitle.result = obj as String;
 				return;
 			}
+			
 			var wordCount:uint;
 			resultList = new Array();
 			var l:uint;
+
+			var j:Juze;
+			var jLen:uint;
+			var firstAya:uint;
+			var lastAya:uint;
+			var firstSura:uint;
+			var lastSura:uint;
+			var skip:Boolean;
+			
+			if(userModel.searchScope==2)
+			{
+				j = ResourceModel.instance.juzeList[UserModel.instance.searchJuze];
+				jLen = j.ayas.length;
+				firstAya = j.ayas[0].aya-1;
+				lastAya = j.ayas[jLen-1].aya-1;
+				firstSura = j.ayas[0].sura-1;
+				lastSura = j.ayas[jLen-1].sura-1;
+			}
+
 			if(obj is SQLResult && obj.data is Array)
+			{
 				for each(var a:Object in obj.data)
 				{
-					var book:Bookmark = new Bookmark(a.sura+1, a.aya+1, 0, 3, 0, a.text);
-					book.isSearch = true;
-					book.colorList = getColorList(a.text, userModel.searchPatt);
-					wordCount += (book.colorList.length-1)/2;
-					book.index = l;
-					resultList.push(book);
-					l ++;
+					//trace(firstSura, firstAya, " ", lastSura, lastAya, " -> ", a.sura, a.aya);
+					if(userModel.searchScope==2)
+						skip = (a.sura==firstSura && a.aya<firstAya) || (a.sura==lastSura && a.aya>lastAya);
+
+					if(!skip)
+					{
+						var book:Bookmark = new Bookmark(a.sura+1, a.aya+1, 0, 3, 0, a.text);
+						book.isSearch = true;
+						book.colorList = getColorList(a.text, userModel.searchPatt);
+						wordCount += (book.colorList.length-1)/2;
+						book.index = l;
+						resultList.push(book);
+						l ++;
+					}
 				}
+			}
 			searchSubtitle.result = resultList.length== 0 ? loc("search_no") : StrTools.getNumberFromLocale(resultList.length) + " " + loc('search_item') + " " + StrTools.getNumberFromLocale(resultList.length) + " " + loc('verses_in')
 			list.dataProvider = new ListCollection(resultList);
 			searchMode(true);

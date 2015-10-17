@@ -1,11 +1,9 @@
 package com.gerantech.islamic.views.items
 {
-	import com.greensock.TweenLite;
-	import com.greensock.TweenMax;
-	import com.greensock.easing.EaseLookup;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.controls.Tute_0;
+	import com.greensock.TweenMax;
 	
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;

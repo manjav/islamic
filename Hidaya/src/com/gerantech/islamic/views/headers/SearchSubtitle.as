@@ -10,7 +10,6 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	import com.gerantech.islamic.views.lists.TranslatorPickerList;
 	import com.gerantech.islamic.views.popups.SearchSettingPopup;
 	
 	import mx.resources.ResourceManager;
@@ -20,8 +19,6 @@ package com.gerantech.islamic.views.headers
 	import feathers.core.PopUpManager;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	import feathers.layout.VerticalLayout;
-	import feathers.layout.VerticalLayoutData;
 	
 	import starling.display.DisplayObject;
 	import starling.display.Image;
@@ -132,6 +129,7 @@ package com.gerantech.islamic.views.headers
 				PopUpManager.removePopUp(searchPopUp);
 			
 			setElementsData();
+			dispatchEventWith(Event.CHANGE);
 		}
 		
 		private function setElementsData():void

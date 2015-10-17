@@ -36,7 +36,6 @@ package com.gerantech.islamic.models
 		
 		public static function getTexture(name:String):Texture
 		{
-
 			return AppModel.instance.assetManager.getTexture(name);
 		}
 		

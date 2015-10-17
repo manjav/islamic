@@ -1,7 +1,7 @@
 package com.gerantech.islamic.views.items
 {
-	import com.gerantech.islamic.managers.BillingManager;
 	import com.gerantech.islamic.events.UserEvent;
+	import com.gerantech.islamic.managers.BillingManager;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
@@ -51,6 +51,7 @@ package com.gerantech.islamic.views.items
 			var button:Button = new Button();
 			button.name = "purchase";
 			button.label = loc("purchase_popup_accept_label");
+			button.height = AppModel.instance.sizes.singleLineItem;
 			button.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
 			button.addEventListener(Event.TRIGGERED, buttons_triggerHandler);
 			addChild(button);

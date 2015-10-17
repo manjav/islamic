@@ -81,7 +81,7 @@ package com.gerantech.islamic.models.vo
 			sqlConnection = new SQLConnection();
 			sqlConnection.addEventListener(SQLEvent.OPEN, sqlConnection_openHandler); 
 			sqlConnection.addEventListener(SQLErrorEvent.ERROR, sqlConnection_errorHandler); 
-			sqlConnection.openAsync(dbFile, SQLMode.READ, null, false, 1024, AppModel.instance.byteArraySec); 
+			sqlConnection.openAsync(dbFile, SQLMode.UPDATE, null, false, 1024, AppModel.instance.byteArraySec); 
 		}
 		
 		protected function sqlConnection_errorHandler(event:SQLErrorEvent):void
@@ -95,11 +95,44 @@ package com.gerantech.islamic.models.vo
 		{//trace(event)
 			loadingState = L_LOADED;
 			state = SELECTED ;
+			//query("SELECT text,sura,aya FROM quran WHERE sura=1 AND aya=1", asd);
+			query("UPDATE quran SET text = replace( text, 'ي', 'ی' ) WHERE text LIKE 'ي';", asd);
 			dispatchEventWith(TRANSLATION_LOADED);
 			if(ConfigModel.instance.selectedTranslators[0]==this)
 				remindeFirstTranslate();
 		}
 		
+		private function asd(obj:Object):void
+		{
+			trace(obj)
+		}
+		
+		private function query(query:String, response:Function):void
+		{
+			var createStmt:SQLStatement = new SQLStatement(); 
+			createStmt.sqlConnection = sqlConnection; 
+			createStmt.text = query ;
+			
+			createStmt.addEventListener(SQLEvent.RESULT, createResult); 
+			createStmt.addEventListener(SQLErrorEvent.ERROR, createError); 
+			if(sqlConnection.connected)
+				createStmt.execute(); 
+			else
+			{
+				setTimeout(response, 1, "SQL Connection not found.");
+				return;
+			}
+			
+			function createError(event:SQLErrorEvent):void
+			{
+				response(event.text);
+			}
+			
+			function createResult(event:SQLEvent):void
+			{
+				response(createStmt.getResult());
+			}			
+		}		
 		
 		
 		private function dbLoadSaver_ioErrorHandler(event:IOErrorEvent):void
@@ -124,9 +157,26 @@ package com.gerantech.islamic.models.vo
 		
 		public function search(pattern:String, response:Function):void
 		{
+			var query:String = "SELECT text,sura,aya FROM quran WHERE text LIKE '%"+pattern+"%'";
+			var extraQuery:String = "";
+			
+			if(UserModel.instance.searchScope==1)
+				extraQuery = " AND sura="+UserModel.instance.searchSura;
+			else if(UserModel.instance.searchScope==2)
+			{
+				var j:Juze = ResourceModel.instance.juzeList[UserModel.instance.searchJuze];
+				if(j.ayas == null)
+					j.complete();
+				
+				query = "SELECT text,sura,aya FROM quran WHERE text LIKE '%"+pattern+"%' AND sura>="+(j.ayas[0].sura-1)+" AND sura<="+(j.ayas[j.ayas.length-1].sura-1);
+				//for (var i:uint=1; i<j.ayas.length; i++)
+					//query += " UNION SELECT text,sura,aya FROM quran WHERE text LIKE '%"+pattern+"%' AND sura="+(j.ayas[i].sura-1)+" AND aya="+(j.ayas[i].aya-1);
+			}
+			
 			var createStmt:SQLStatement = new SQLStatement(); 
 			createStmt.sqlConnection = sqlConnection; 
-			createStmt.text = "SELECT text,sura,aya FROM quran WHERE text LIKE '%"+pattern+"%'";
+			createStmt.text = query + extraQuery;
+			
 			createStmt.addEventListener(SQLEvent.RESULT, createResult); 
 			createStmt.addEventListener(SQLErrorEvent.ERROR, createError); 
 			if(sqlConnection.connected)
