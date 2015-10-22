@@ -1,9 +1,16 @@
 package com.gerantech.islamic.views.popups
 {
-	import com.greensock.TweenLite;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.UserModel;
+	import com.gerantech.islamic.views.controls.RTLLabel;
+	import com.greensock.TweenLite;
+	
+	import flash.text.engine.ElementFormat;
+	import flash.text.engine.FontDescription;
+	import flash.text.engine.FontLookup;
+	import flash.text.engine.FontPosture;
+	import flash.text.engine.FontWeight;
 	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
@@ -14,12 +21,6 @@ package com.gerantech.islamic.views.popups
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
 	import feathers.textures.Scale3Textures;
-	
-	import flash.text.engine.ElementFormat;
-	import flash.text.engine.FontDescription;
-	import flash.text.engine.FontLookup;
-	import flash.text.engine.FontPosture;
-	import flash.text.engine.FontWeight;
 	
 	import starling.display.DisplayObjectContainer;
 	import starling.events.Touch;
@@ -63,12 +64,12 @@ package com.gerantech.islamic.views.popups
 			hGroup.layoutData = new AnchorLayoutData(0,0,0,0)
 			addChild(hGroup);
 			
-			var textField:TextBlockTextRenderer = new TextBlockTextRenderer();
-			textField.text = label;
+			var textField:RTLLabel = new RTLLabel(label, 1);
+			/*textField.text = label;
 			var fd:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
 			textField.bidiLevel = AppModel.instance.ltr?0:1;
 			textField.textAlign = AppModel.instance.align;
-			textField.elementFormat = new ElementFormat(fd, UserModel.instance.fontSize, 0xFFFFFF);
+			textField.elementFormat = new ElementFormat(fd, UserModel.instance.fontSize, 0xFFFFFF);*/
 			textField.layoutData = new HorizontalLayoutData(100);
 			hGroup.addChild(textField);
 			

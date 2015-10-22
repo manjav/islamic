@@ -64,7 +64,6 @@ package com.gerantech.islamic.views.controls
 			setTimeout(startSplash, 1000);
 			skeleton.state.onComplete.add(animationCompleted);
 			skeleton.state.onEvent.add(animationEventHandler);
-			skeleton.timeScale = 0.1;
 		}
 		
 		private function animationEventHandler(trackIndex:int, event:spine.Event):void

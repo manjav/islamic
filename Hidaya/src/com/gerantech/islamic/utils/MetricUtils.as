@@ -28,6 +28,7 @@ package com.gerantech.islamic.utils
 			
 			_DP72 = getPixelByDP(72);
 			_DP64 = getPixelByDP(64);
+			_DP56 = getPixelByDP(56);
 			_DP48 = getPixelByDP(48);
 			_DP40 = getPixelByDP(40);
 			_DP36 = getPixelByDP(36);
@@ -75,6 +76,9 @@ package com.gerantech.islamic.utils
 		
 		private var _DP64:Number;
 		public function get DP64():uint{return _DP64;}
+		
+		private var _DP56:Number;
+		public function get DP56():uint{return _DP56;}
 		
 		private var _DP48:Number;
 		public function get DP48():uint{return _DP48;}

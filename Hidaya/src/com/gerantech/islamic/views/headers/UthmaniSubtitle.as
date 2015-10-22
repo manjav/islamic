@@ -4,6 +4,7 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.BaseQData;
 	import com.gerantech.islamic.models.vo.Juze;
+	import com.gerantech.islamic.views.controls.RTLLabel;
 	
 	import flash.text.engine.CFFHinting;
 	import flash.text.engine.ElementFormat;
@@ -22,7 +23,7 @@ package com.gerantech.islamic.views.headers
 	{
 		private var juzeImage:ImageLoader;
 		private var suraImage:ImageLoader;
-		private var numLabel:TextBlockTextRenderer;
+		private var numLabel:RTLLabel;
 				
 		public function UthmaniSubtitle()
 		{			
@@ -34,10 +35,7 @@ package com.gerantech.islamic.views.headers
 
 			if(UserModel.instance.navigationMode.value=="page_navi")
 			{
-				numLabel = new TextBlockTextRenderer();
-				numLabel.textAlign = "center";
-				var fontDescription:FontDescription = new FontDescription( "mequran", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE );
-				numLabel.elementFormat = new ElementFormat(fontDescription, UserModel.instance.fontSize*1.6, 0);
+				numLabel = new RTLLabel("", 0, "center", null, false, null, appModel.sizes.orginalFontSize*1.4, "mequran");
 				numLabel.layoutData = new AnchorLayoutData(NaN, 0, NaN, 0, 0, 0);
 				addChild(numLabel);
 			}

@@ -1478,8 +1478,8 @@ package com.gerantech.islamic.themes
 
 		protected function setHeaderStyles(header:Header):void
 		{
-			header.minWidth = uint(this.gridSize*1.2);
-			header.minHeight = AppModel.instance.sizes.toolbar;// uint(this.gridSize*1.2);
+			header.minWidth = this.gridSize//uint(this.gridSize*1.2);
+			header.minHeight = this.gridSize// uint(this.gridSize*1.2);
 			header.padding = this.smallGutterSize;
 			header.gap = this.smallGutterSize;
 			header.titleGap = this.smallGutterSize;

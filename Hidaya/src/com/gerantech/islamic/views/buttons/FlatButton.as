@@ -97,7 +97,7 @@ package com.gerantech.islamic.views.buttons
 			layout = new AnchorLayout();
 			this.hitAlphaNormal = hitAlphaNormal;
 			this.hitAlphaDown = hitAlphaDown;
-			width = height = AppModel.instance.theme.controlsSize;
+			width = height = AppModel.instance.sizes.getPixelByDP(58);
 			if(hit!=null)
 			{
 				backgroundSkin = new Image(Assets.getTexture(hit));

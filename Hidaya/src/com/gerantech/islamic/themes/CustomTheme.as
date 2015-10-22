@@ -1,6 +1,7 @@
 package com.gerantech.islamic.themes
 {
 	import com.gerantech.islamic.models.AppModel;
+	import com.gerantech.islamic.utils.MetricUtils;
 	
 	import flash.text.engine.CFFHinting;
 	import flash.text.engine.ElementFormat;
@@ -21,19 +22,32 @@ package com.gerantech.islamic.themes
 	
 	public class CustomTheme extends MaterialTheme
 	{
-		public var controlsSize:int;
 		
 		public function CustomTheme(scaleToDPI:Boolean=true)
 		{
 			super(scaleToDPI);
-			controlsSize = controlSize;
+		}
+		
+		override protected function initializeDimensions():void
+		{
+			var sizes:MetricUtils = AppModel.instance.sizes;
+			
+			this.gridSize = sizes.DP56;// Math.round(88 * this.scale);
+			this.smallGutterSize = sizes.DP4;//Math.round(11 * this.scale);
+			this.gutterSize = sizes.DP16;//Math.round(22 * this.scale);
+			this.controlSize = sizes.DP48;// Math.round(58 * this.scale);
+			this.smallControlSize = sizes.DP16;//Math.round(22 * this.scale);
+			this.popUpFillSize = Math.round(552 * this.scale);
+			this.calloutBackgroundMinSize = sizes.DP8;//Math.round(11 * this.scale);
+			this.scrollBarGutterSize = Math.round(4 * this.scale);
+			this.wideControlSize = this.gridSize * 3 + this.gutterSize * 2;
 		}
 		
 		
 		override protected function setPickerListButtonStyles(button:Button):void
 		{
 			this.setButtonStyles(button);
-			
+			return;
 			var iconSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
 			iconSelector.setValueTypeHandler(SubTexture, textureValueTypeHandler);
 			iconSelector.defaultValue = this.pickerListButtonIconTexture;
@@ -49,7 +63,8 @@ package com.gerantech.islamic.themes
 			button.minGap = this.gutterSize;
 			button.padding = AppModel.instance.sizes.border;
 			button.iconPosition = Button.ICON_POSITION_LEFT;
-				
+			
+			trace("aaaaaaa", AppModel.instance.sizes.orginalFontSize)
 			var fd:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);
 			var ef:ElementFormat = new ElementFormat(fd, uint(AppModel.instance.sizes.orginalFontSize*0.9), BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
 			button.defaultLabelProperties.elementFormat = ef;			

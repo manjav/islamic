@@ -24,12 +24,7 @@
  */
 package com.gerantech.islamic.themes
 {
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-
 	import starling.events.Event;
-	import starling.textures.Texture;
-	import starling.textures.TextureAtlas;
 
 	/**
 	 * The "Metal Works" theme for mobile Feathers apps.

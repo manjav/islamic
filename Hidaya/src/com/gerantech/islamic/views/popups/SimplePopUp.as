@@ -73,7 +73,7 @@ package com.gerantech.islamic.views.popups
 			container.autoSizeMode = AUTO_SIZE_MODE_CONTENT; 
 			container.layoutData = new VerticalLayoutData(100);
 			container.horizontalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
-			container.maxHeight = maxHeight - vLayout.paddingBottom - vLayout.paddingTop - appModel.theme.controlsSize*2 - appModel.sizes.border*4;
+			container.maxHeight = maxHeight - vLayout.paddingBottom - vLayout.paddingTop -  appModel.sizes.twoLineItem;
 			addChild(container);
 			
 			var spacer:LayoutGroup = new LayoutGroup();

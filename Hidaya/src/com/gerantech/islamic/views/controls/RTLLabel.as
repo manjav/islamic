@@ -1,7 +1,6 @@
 package com.gerantech.islamic.views.controls
 {
 	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	
 	import flash.text.engine.ElementFormat;
@@ -9,7 +8,6 @@ package com.gerantech.islamic.views.controls
 	import flash.text.engine.FontLookup;
 	import flash.text.engine.LineJustification;
 	import flash.text.engine.SpaceJustifier;
-	import flash.utils.setTimeout;
 	
 	import feathers.controls.text.TextBlockTextRenderer;
 	

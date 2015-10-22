@@ -51,22 +51,22 @@ package com.gerantech.islamic.views.items
 			var button:Button = new Button();
 			button.name = "purchase";
 			button.label = loc("purchase_popup_accept_label");
-			button.height = AppModel.instance.sizes.singleLineItem;
-			button.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
+			//button.height = AppModel.instance.sizes.singleLineItem;
+		//	button.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
 			button.addEventListener(Event.TRIGGERED, buttons_triggerHandler);
 			addChild(button);
 			
 			var rbutton:Button = new Button();
 			rbutton.name = "sura";
 			rbutton.label = loc("sura_navi");
-			rbutton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
+			//rbutton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
 			rbutton.addEventListener(Event.TRIGGERED, buttons_triggerHandler);
 			addChild(rbutton);	
 			
 			var fbutton:Button = new Button();
 			fbutton.name = "first";
 			fbutton.label = loc("goto_popup") + " " + loc("sura_l") + " " + loc("j_1");
-			fbutton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
+			//fbutton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
 			fbutton.addEventListener(Event.TRIGGERED, buttons_triggerHandler);
 			addChild(fbutton);
 		}
