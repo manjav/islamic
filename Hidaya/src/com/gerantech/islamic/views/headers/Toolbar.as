@@ -121,8 +121,8 @@ package com.gerantech.islamic.views.headers
 		public function setLayout():void
 		{
 			width = appModel.sizes.width;
-			searchInput.width = appModel.sizes.width - gap - padding;
-			searchInput.x = appModel.ltr ? gap : padding ;
+			searchInput.x = appModel.ltr ? gap :0;
+			searchInput.width = appModel.sizes.width - gap;
 			for(var i:uint; i<buttons.length; i++) 
 			{
 				buttons[i].x = appModel.ltr?appModel.sizes.width-i*gap-padding:i*gap+padding;

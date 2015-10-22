@@ -11,7 +11,6 @@ package com.gerantech.islamic.views.controls
 	
 	import flash.text.ReturnKeyLabel;
 	import flash.text.SoftKeyboardType;
-	import flash.utils.setTimeout;
 	
 	import mx.resources.ResourceManager;
 	
@@ -67,9 +66,9 @@ package com.gerantech.islamic.views.controls
 			addChild(searchText);
 			
 			clearButton = new FlatButton("close_w");
-			clearButton.iconScale = 0.6;
+			clearButton.iconScale = 0.3;
 			clearButton.addEventListener(Event.TRIGGERED, clearButton_triggerHandler);
-			//clearButton.layoutData = new AnchorLayoutData(0, AppModel.instance.leftDrawer?NaN:0, 0, AppModel.instance.leftDrawer?0:NaN)
+			clearButton.layoutData = new AnchorLayoutData(0, AppModel.instance.ltr?0:NaN, 0, AppModel.instance.ltr?NaN:0);
 			addChild(clearButton);
 			searchInput_changeHandler();
 		}

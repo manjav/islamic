@@ -39,8 +39,6 @@ package com.gerantech.islamic.views.popups
 		
 		override protected function initialize():void
 		{
-			trace("SearchSettingPopup.initialize()");
-			
 			title = loc("search_set_title");
 			message = loc("search_set_message");
 			acceptButtonLabel = loc("ok_button");

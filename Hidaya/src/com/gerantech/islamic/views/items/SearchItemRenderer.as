@@ -2,7 +2,6 @@ package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.ResourceModel;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Bookmark;
 	import com.gerantech.islamic.models.vo.Sura;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;

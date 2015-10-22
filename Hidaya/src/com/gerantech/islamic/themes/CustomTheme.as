@@ -47,7 +47,6 @@ package com.gerantech.islamic.themes
 		override protected function setPickerListButtonStyles(button:Button):void
 		{
 			this.setButtonStyles(button);
-			return;
 			var iconSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
 			iconSelector.setValueTypeHandler(SubTexture, textureValueTypeHandler);
 			iconSelector.defaultValue = this.pickerListButtonIconTexture;
@@ -64,7 +63,6 @@ package com.gerantech.islamic.themes
 			button.padding = AppModel.instance.sizes.border;
 			button.iconPosition = Button.ICON_POSITION_LEFT;
 			
-			trace("aaaaaaa", AppModel.instance.sizes.orginalFontSize)
 			var fd:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);
 			var ef:ElementFormat = new ElementFormat(fd, uint(AppModel.instance.sizes.orginalFontSize*0.9), BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
 			button.defaultLabelProperties.elementFormat = ef;			

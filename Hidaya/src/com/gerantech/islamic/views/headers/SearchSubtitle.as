@@ -104,20 +104,24 @@ package com.gerantech.islamic.views.headers
 			for each(var p:Person in ConfigModel.instance.selectedTranslators)
 				ConfigModel.instance.searchSources.push(p);
 			
-			setElementsData();
+			updateElements();
 		}
 
 		
 		private function actionButton_triggerd():void
 		{
-			searchPopUp = new SearchSettingPopup();
-			searchPopUp.addEventListener(Event.CLOSE, searchPopUp_closeHandler);
-			PopUpManager.overlayFactory = function():DisplayObject
+			if(searchPopUp == null)
 			{
-				overlay = new FlatButton(null, null, true, 0.3, 0.3, 0);
-				overlay.addEventListener(Event.TRIGGERED, searchPopUp.close);
-				return overlay;
-			};
+				searchPopUp = new SearchSettingPopup();
+
+				PopUpManager.overlayFactory = function():DisplayObject
+				{
+					overlay = new FlatButton(null, null, true, 0.3, 0.3, 0);
+					overlay.addEventListener(Event.TRIGGERED, searchPopUp.close);
+					return overlay;
+				};
+			}
+			searchPopUp.addEventListener(Event.CLOSE, searchPopUp_closeHandler);
 			PopUpManager.addPopUp(searchPopUp);
 		}		
 		
@@ -128,11 +132,11 @@ package com.gerantech.islamic.views.headers
 			if(PopUpManager.isPopUp(searchPopUp))
 				PopUpManager.removePopUp(searchPopUp);
 			
-			setElementsData();
+			updateElements();
 			dispatchEventWith(Event.CHANGE);
 		}
 		
-		private function setElementsData():void
+		private function updateElements():void
 		{
 			var obj:Translator  = ConfigModel.instance.searchSources[UserModel.instance.searchSource];
 			translatorImage.source = obj.iconTexture;

@@ -657,7 +657,7 @@ package com.gerantech.islamic.themes
 				}
 			}
 			this.scale = scaledDPI / this._originalDPI;
-			trace("DeviceCapabilities", DeviceCapabilities.dpi, Starling.contentScaleFactor, scaledDPI, _originalDPI, scale)
+			//trace("DeviceCapabilities", DeviceCapabilities.dpi, Starling.contentScaleFactor, scaledDPI, _originalDPI, scale)
 		}
 
 		/**

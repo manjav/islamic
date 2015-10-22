@@ -37,12 +37,10 @@ package com.gerantech.islamic.views.items
 				translator.addEventListener(Person.ICON_LOADED, translator_iconLoaded);
 				translator.loadImage();
 			}
-			trace(translator.iconTexture)
 		}
 		
 		private function translator_iconLoaded():void
 		{
-			trace(translator.iconTexture)
 			translator.removeEventListener(Person.ICON_LOADED, translator_iconLoaded);
 			iconDisplay.source = translator.iconTexture;
 		}
