@@ -4,7 +4,6 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.models.vo.Translator;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
@@ -98,12 +97,15 @@ package com.gerantech.islamic.views.headers
 			var q:Translator = new Translator();
 			q.name = ResourceManager.getInstance().getString("loc", "quran_t");
 			q.iconUrl = "app:/com/gerantech/islamic/assets/images/icon/icon-192.png";
-			q.iconPath = UserModel.instance.TRANSLATOR_PATH + "quran/quran.pbqr";
+			q.iconPath = userModel.TRANSLATOR_PATH + "quran/quran.pbqr";
 
 			ConfigModel.instance.searchSources = new Array(q);
 			for each(var p:Person in ConfigModel.instance.selectedTranslators)
 				ConfigModel.instance.searchSources.push(p);
 			
+			if(userModel.searchSource>ConfigModel.instance.searchSources.length-1)
+				userModel.searchSource = 0;
+				
 			updateElements();
 		}
 
@@ -138,19 +140,25 @@ package com.gerantech.islamic.views.headers
 		
 		private function updateElements():void
 		{
-			var obj:Translator  = ConfigModel.instance.searchSources[UserModel.instance.searchSource];
+			var obj:Translator  = ConfigModel.instance.searchSources[userModel.searchSource];
 			translatorImage.source = obj.iconTexture;
+			//obj.addEventListener(Person.ICON_LOADED, ddd);
 			var des:String = loc("search_set_source") + ": " + obj.name + " - ";
 			
 			des += loc("search_set_scope") + ": ";
-			if(UserModel.instance.searchScope==1)
-				des += loc("sura_l") + " " + (appModel.ltr ? ResourceModel.instance.suraList[UserModel.instance.searchSura].tname : ResourceModel.instance.suraList[UserModel.instance.searchSura].name);
-			else if(UserModel.instance.searchScope==2)
-				des += loc("juze_l") + " " + loc("j_"+(UserModel.instance.searchJuze+1));
+			if(userModel.searchScope==1)
+				des += loc("sura_l") + " " + (appModel.ltr ? ResourceModel.instance.suraList[userModel.searchSura].tname : ResourceModel.instance.suraList[userModel.searchSura].name);
+			else if(userModel.searchScope==2)
+				des += loc("juze_l") + " " + loc("j_"+(userModel.searchJuze+1));
 			else
 				des += loc("search_set_scope_0");
 			
 			titleLabel.text = des;
+		}
+		
+		private function ddd():void
+		{
+			trace("sdfdsf");
 		}
 		
 	}

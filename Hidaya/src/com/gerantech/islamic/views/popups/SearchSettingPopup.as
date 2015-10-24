@@ -2,23 +2,15 @@ package com.gerantech.islamic.views.popups
 {
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
-	import com.gerantech.islamic.models.UserModel;
-	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.SettingPanel;
 	import com.gerantech.islamic.views.items.SearchSourceItemRenderer;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	
-	import flash.utils.setTimeout;
-	
-	import mx.resources.ResourceManager;
-	
 	import feathers.controls.Button;
 	import feathers.controls.PickerList;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
-	import feathers.layout.AnchorLayoutData;
-	import feathers.layout.HorizontalLayoutData;
 	import feathers.layout.VerticalLayout;
 	
 	import starling.events.Event;
@@ -34,16 +26,14 @@ package com.gerantech.islamic.views.popups
 		
 		public function SearchSettingPopup()
 		{
-			super();
-		}
-		
-		override protected function initialize():void
-		{
 			title = loc("search_set_title");
 			message = loc("search_set_message");
 			acceptButtonLabel = loc("ok_button");
 			cancelButtonLabel = loc("cancel_button");
-			
+		}
+		
+		override protected function initialize():void
+		{
 			super.initialize();
 			
 			var clayout:VerticalLayout = new VerticalLayout();
@@ -63,11 +53,11 @@ package com.gerantech.islamic.views.popups
 			suraPicker = new PickerList();
 			suraPicker.buttonProperties.iconPosition = appModel.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
 			suraPicker.listProperties.width = appModel.sizes.twoLineItem*3;
+			suraPicker.listProperties.maxHeight = Math.min(appModel.sizes.height, appModel.sizes.width)-appModel.sizes.DP32;
 			suraPicker.labelFunction = function( item:Object ):String
 			{
 				return loc("sura_l") + " " + (appModel.ltr ? ResourceModel.instance.suraList[item.index].tname : ResourceModel.instance.suraList[item.index].name);
 			};
-			suraPicker.dataProvider = new ListCollection(ResourceModel.instance.popupSuraList);
 			suraPicker.listProperties.itemRendererFactory = function():IListItemRenderer
 			{
 				var i:SettingItemRenderer = new SettingItemRenderer();
@@ -77,15 +67,16 @@ package com.gerantech.islamic.views.popups
 				};
 				return i;
 			}
+			suraPicker.dataProvider = new ListCollection(ResourceModel.instance.popupSuraList);
 				
 			juzePicker = new PickerList();
 			juzePicker.buttonProperties.iconPosition = appModel.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
 			juzePicker.listProperties.width = appModel.sizes.twoLineItem*3;
+			juzePicker.listProperties.maxHeight = Math.min(appModel.sizes.height, appModel.sizes.width)-appModel.sizes.DP32;
 			juzePicker.labelFunction = function( item:Object ):String
 			{
 				return loc("juze_l") + " " + loc("j_"+(item.index+1));
 			};
-			juzePicker.dataProvider = new ListCollection(ResourceModel.instance.juzeList);
 			juzePicker.listProperties.itemRendererFactory = function():IListItemRenderer
 			{
 				var i:SettingItemRenderer = new SettingItemRenderer();
@@ -95,6 +86,7 @@ package com.gerantech.islamic.views.popups
 				};
 				return i;
 			}
+			juzePicker.dataProvider = new ListCollection(ResourceModel.instance.juzeList);
 			acceptCallback = acceptCallbackHandler;
 			
 			addEventListener(Event.ADDED_TO_STAGE, popup_addedToStageHandler);

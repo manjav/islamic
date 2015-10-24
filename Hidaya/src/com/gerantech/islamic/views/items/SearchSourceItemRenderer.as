@@ -2,10 +2,6 @@ package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.models.vo.Translator;
-	
-	import mx.resources.ResourceManager;
-	
-	import starling.events.Event;
 
 	public class SearchSourceItemRenderer extends SettingItemRenderer
 	{
@@ -26,7 +22,6 @@ package com.gerantech.islamic.views.items
 		{
 			if(_data==null || _owner==null)
 				return;
-			
 			translator = _data as Translator;
 			
 			titleDisplay.text = translator.name;

@@ -2,9 +2,7 @@ package com.gerantech.islamic.views.controls
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
-	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.buttons.FlatButton;
-	import com.gerantech.islamic.views.popups.Alert;
 	import com.gerantech.islamic.views.screens.FilteredPersonScreen;
 	import com.gerantech.islamic.views.screens.IndexScreen;
 	import com.gerantech.islamic.views.screens.SearchScreen;
@@ -19,6 +17,7 @@ package com.gerantech.islamic.views.controls
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
+	import starling.core.Starling;
 	import starling.events.Event;
 	
 	public class SearchInput extends LayoutGroup
@@ -70,20 +69,20 @@ package com.gerantech.islamic.views.controls
 			clearButton.addEventListener(Event.TRIGGERED, clearButton_triggerHandler);
 			clearButton.layoutData = new AnchorLayoutData(0, AppModel.instance.ltr?0:NaN, 0, AppModel.instance.ltr?NaN:0);
 			addChild(clearButton);
-			searchInput_changeHandler();
+			searchInput_changeHandler(null);
 		}
 		
-		private function searchInput_changeHandler():void
+		private function searchInput_changeHandler(event:Event):void
 		{
 //			searchTimeoutId = setTimeout(startSearch, 500, searchText.text)
 			changeHeader(searchText.text.length>0);
 			switch(AppModel.instance.navigator.activeScreenID)
 			{
 				case AppModel.instance.PAGE_SEARCH: 
-					SearchScreen(AppModel.instance.navigator.activeScreen).updateSuggests(StrTools.getSimpleString(searchText.text).toLowerCase()); 
+					SearchScreen(AppModel.instance.navigator.activeScreen).updateSuggests(searchText.text); 
 					break;
 				case AppModel.instance.PAGE_INDEX: 
-					IndexScreen(AppModel.instance.navigator.activeScreen).startSearch(StrTools.getSimpleString(searchText.text).toLowerCase()); 
+					IndexScreen(AppModel.instance.navigator.activeScreen).startSearch(searchText.text); 
 					break;
 				case AppModel.instance.PAGE_FILTERED: 
 					FilteredPersonScreen(AppModel.instance.navigator.activeScreen).startSearch(searchText.text); 
@@ -106,14 +105,9 @@ package com.gerantech.islamic.views.controls
 		{
 			if(!searchPage)
 				return;
-			if(searchText.text.length<2)
-			{
-				new Alert(this, ResourceManager.getInstance().getString("loc", "search_error"));
-				return;
-			}
-			UserModel.instance.searchPatt = StrTools.getSimpleString(searchText.text).toLowerCase();//, userModel.translator.flag.path
-			SearchScreen(AppModel.instance.navigator.activeScreen).startSearch();
-			//	dispatchEventWith("searchStarted");
+
+			SearchScreen(AppModel.instance.navigator.activeScreen).startSearch(searchText.text);
+			Starling.current.nativeStage.focus = null;
 		}
 	}
 }

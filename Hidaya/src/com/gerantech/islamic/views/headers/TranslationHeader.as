@@ -55,18 +55,6 @@ package com.gerantech.islamic.views.headers
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
 			backgroundSkin.alpha = 0.8//UserModel.instance.nightMode ? 0.9 : 0.7;
 			
-			/*var slayout:HorizontalLayout = new HorizontalLayout();
-			slayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_CENTER;
-			slayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			
-			var suraGroup:LayoutGroup = new LayoutGroup();
-			suraGroup.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
-			suraGroup.layout = slayout;
-			addChild(suraGroup);
-			
-			ayaLabel = new RTLLabel("", 0, null, null, false, null, appModel.sizes.itemHeight*0.5, "mequran");
-			suraGroup.addChild(ayaLabel);*/
-			
 			suraImage = new ImageLoader();
 			suraImage.delayTextureCreation = true;
 			suraImage.height = uint(height*0.6);

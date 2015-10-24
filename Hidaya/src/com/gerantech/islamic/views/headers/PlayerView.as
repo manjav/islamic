@@ -138,7 +138,7 @@ package com.gerantech.islamic.views.headers
 			toucher.layoutData = new AnchorLayoutData(0, 0, 0, 0);
 			addChild(toucher);
 						
-			timeLabel = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
+			timeLabel = new RTLLabel("", 0);
 			timeLabel.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0) ;
 			timeLabel.visible = false;
 			addChild(timeLabel);

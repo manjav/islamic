@@ -1,6 +1,5 @@
 package com.gerantech.islamic.views.popups
 {
-	import com.greensock.TweenLite;
 	import com.gerantech.islamic.events.UserEvent;
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.vo.Page;
@@ -8,18 +7,13 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.CustomTextInput;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	import com.gerantech.islamic.views.controls.Spacer;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
+	import com.greensock.TweenLite;
 	
 	import flash.text.ReturnKeyLabel;
 	import flash.text.SoftKeyboardType;
-	import flash.text.engine.CFFHinting;
-	import flash.text.engine.ElementFormat;
-	import flash.text.engine.FontDescription;
-	import flash.text.engine.FontLookup;
 	import flash.text.engine.FontPosture;
 	import flash.text.engine.FontWeight;
-	import flash.text.engine.RenderingMode;
 	import flash.utils.setTimeout;
 	
 	import feathers.controls.Button;
@@ -27,16 +21,14 @@ package com.gerantech.islamic.views.popups
 	import feathers.controls.PickerList;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
-	import feathers.events.FeathersEventType;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
-	import feathers.skins.SmartDisplayObjectStateValueSelector;
 	
 	import starling.events.Event;
 
-	public class GotoPopUp extends SimplePopUp
+	public class GotoPopUp extends InfoPopUp
 	{
 
 		private var pageLabel:RTLLabel;
@@ -58,8 +50,9 @@ package com.gerantech.islamic.views.popups
 
 		public function GotoPopUp()
 		{
-			super();
 			title = loc("goto_popup");
+			acceptButtonLabel = loc("goto_button");
+			cancelButtonLabel = loc("cancel_button");
 		}
 		
 		override protected function initialize():void
@@ -73,13 +66,14 @@ package com.gerantech.islamic.views.popups
 			var cLayout:VerticalLayout = new VerticalLayout();
 			cLayout.gap = appModel.sizes.border*3;
 			cLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
+			cLayout.paddingBottom = appModel.sizes.DP16;
 			container.layout = cLayout;
 			
 			var hLayout:HorizontalLayout = new HorizontalLayout();
 			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_BOTTOM;
 			hLayout.gap = appModel.sizes.border*3;
 			
-			pageMode = userModel.navigationMode.value=="page_navi"
+			pageMode = userModel.navigationMode.value=="page_navi";
 			if(pageMode)
 			{
 				pageGroup = new LayoutGroup();
@@ -90,7 +84,7 @@ package com.gerantech.islamic.views.popups
 				pageLabel = new RTLLabel(loc("page_l"), BaseMaterialTheme.DARK_TEXT_COLOR, null, null, false, null, 0, null, FontWeight.BOLD, FontPosture.NORMAL);
 				pageLabel.layoutData = new VerticalLayoutData(100);
 								
-				pageInput = new CustomTextInput(SoftKeyboardType.NUMBER, ReturnKeyLabel.DONE, BaseMaterialTheme.DARK_TEXT_COLOR);
+				pageInput = new CustomTextInput(SoftKeyboardType.NUMBER, ReturnKeyLabel.DONE, BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
 				pageInput.maxChars = 3;
 				pageInput.width = width*0.5;
 				//pageInput.addEventListener(FeathersEventType.FOCUS_IN, pageInput_focusHandler);
@@ -112,6 +106,7 @@ package com.gerantech.islamic.views.popups
 			suraPicker.buttonProperties.iconPosition = appModel.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
 			suraPicker.layoutData = new HorizontalLayoutData(70);
 			suraPicker.listProperties.width = appModel.sizes.twoLineItem*3;
+			suraPicker.listProperties.maxHeight = Math.min(appModel.sizes.height, appModel.sizes.width)-appModel.sizes.DP32;
 			suraPicker.labelFunction = function( item:Object ):String
 			{
 				return (appModel.ltr ? resModel.suraList[item.index].tname : resModel.suraList[item.index].name);
@@ -133,6 +128,7 @@ package com.gerantech.islamic.views.popups
 			ayaPicker.buttonProperties.iconPosition = appModel.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
 			ayaPicker.layoutData = new HorizontalLayoutData(30);
 			ayaPicker.listProperties.width = appModel.sizes.twoLineItem*2;
+			ayaPicker.listProperties.maxHeight = Math.min(appModel.sizes.height, appModel.sizes.width)-appModel.sizes.DP32;
 			ayaPicker.labelField = "name";
 			initAyaPicker(suraPicker.selectedIndex);
 			ayaPicker.listProperties.itemRendererFactory = function():IListItemRenderer
@@ -142,7 +138,7 @@ package com.gerantech.islamic.views.popups
 
 			suraGroup.addChild(appModel.ltr?suraPicker:ayaPicker);
 			suraGroup.addChild(appModel.ltr?ayaPicker:suraPicker);
-			
+			/*
 			var spacer:Spacer = new Spacer();
 			spacer.height = appModel.sizes.twoLineItem/2;
 			container.addChild(spacer);
@@ -158,14 +154,15 @@ package com.gerantech.islamic.views.popups
 			secondButton.addEventListener(Event.TRIGGERED, close);
 
 			buttonBar.addChild(appModel.ltr?secondButton:firstButton);
-			buttonBar.addChild(appModel.ltr?firstButton:secondButton);
+			buttonBar.addChild(appModel.ltr?firstButton:secondButton);*/
 			
+			acceptCallback = buttons_triggerHandler;
 			hideAssets();
 			setTimeout(assetsFadeIn, 1);
 			inited = true;
 		}
 		
-		private function buttons_creationCompjleteHandler(event:Event):void
+		/*private function buttons_creationCompjleteHandler(event:Event):void
 		{
 			var btn:Button = event.currentTarget as Button;
 			var fd2:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);
@@ -177,7 +174,7 @@ package com.gerantech.islamic.views.popups
 			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
 			skinSelector.defaultValue = null;
 			btn.stateToSkinFunction = skinSelector.updateValue;
-		}
+		}*/
 
 		private function pageInput_focusHandler():void
 		{
@@ -228,7 +225,7 @@ package com.gerantech.islamic.views.popups
 				pageInput.text = p.page.toString();
 		}
 		
-		private function buttons_triggerHandler(event:Event):void
+		private function buttons_triggerHandler():void
 		{
 			if(pageMode && isPage)
 			{

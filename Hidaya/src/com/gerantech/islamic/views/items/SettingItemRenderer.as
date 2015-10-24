@@ -61,7 +61,7 @@ package com.gerantech.islamic.views.items
 		{
 			if(_data==null || _owner==null)
 				return;
-
+			
 			if(iconFunction!=null)
 			{
 				iconDisplay.source = iconFunction(_data);

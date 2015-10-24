@@ -32,7 +32,9 @@ package com.gerantech.islamic.views.screens
 		private var searchSubtitle:SearchSubtitle;
 		private var startScrollBarIndicator:Number = 0;
 		private var loadingTranslation:Boolean;
+		private var _suggestMode:Boolean = true;
 		
+
 		override protected function initialize():void
 		{
 			super.initialize();
@@ -59,7 +61,7 @@ package com.gerantech.islamic.views.screens
 			}
 			list.addEventListener(Event.CHANGE, listChangeHandler);
 			list.addEventListener(Event.SCROLL, listScrollHandler);
-			list.decelerationRate = 0.999;
+			list.decelerationRate = 0.9985;
 			addChild(list);
 			
 			wordList = new List();
@@ -75,11 +77,9 @@ package com.gerantech.islamic.views.screens
 			addChild(searchSubtitle);
 		}	
 		
-		private function searchSubtitle_changeHandler():void
-		{
-			updateSuggests(userModel.searchPatt);
-		}
-		
+		/**
+		 * Change subtitle position with lists scrolling
+		 */
 		private function listScrollHandler():void
 		{
 			var scrollPos:Number = Math.max(0, list.verticalScrollPosition);
@@ -91,57 +91,68 @@ package com.gerantech.islamic.views.screens
 			startScrollBarIndicator = scrollPos;			
 		}
 		
-		private function searchMode(param0:Boolean):void
+		private function searchSubtitle_changeHandler():void
 		{
-			list.visible = param0;
-			wordList.visible = !param0;
+			if(userModel.searchSource==0)
+				updateSuggests(userModel.searchPatt);
+			else
+				startTranslationSearch(userModel.searchPatt);
 		}
-		
-		private function wordList_changeHandler():void
-		{
-			if(wordList.selectedIndex==-1)
-				return;
-			userModel.searchPatt = wordList.selectedItem.text
-			startSearch()
-		}
-		
-		private function listChangeHandler():void
-		{
-			var item:Bookmark = Bookmark.getFromObject(list.selectedItem);//trace(item.sura, item.aya)
-			userModel.setLastItem(item.sura, item.aya);
-			appModel.navigator.popScreen();
-		}		
-
 		
 		public function updateSuggests(input:String):void
 		{
-			searchMode(false);
+			suggestMode = userModel.searchSource==0;
 			if(input.length<2)
 			{
 				searchSubtitle.result = loc("search_error");
 				return;
 			}
 			if(userModel.searchSource>0)
-			{
-				userModel.searchPatt = StrTools.getSimpleForDB(input);
-				startTranslationSearch()
 				return;
-			}
 			
 			var inputs:Array = input.split(" ");
 			var words:Array = new Array();
 			
 			for each(var w:Word in ResourceModel.instance.wordList)
-				for each(var inp:String in inputs)
-					if(inp.length>1 && w.text.search(inp)>-1 && words.indexOf(w)==-1)
-						words.push(w);
+			for each(var inp:String in inputs)
+			if(inp.length>1 && w.text.search(inp)>-1 && words.indexOf(w)==-1)
+				words.push(w);
 			
 			wordList.dataProvider = new ListCollection(words);
 		}
 		
-		public function startSearch():void
+		/**
+		 * Show and hide suggest list
+		 */
+		private function set suggestMode(value:Boolean):void
 		{
-			resultList = new Array  ;
+			if(_suggestMode == value)
+				return;
+			
+			_suggestMode = value;
+			list.visible = !_suggestMode;
+			wordList.visible = _suggestMode;
+		}
+
+		
+		private function wordList_changeHandler():void
+		{
+			if(wordList.selectedIndex==-1)
+				return;
+			
+			startSearch(wordList.selectedItem.text);
+		}
+		
+		public function startSearch(pattern:String):void
+		{
+			suggestMode = false;
+			if(userModel.searchSource>0)
+			{
+				startTranslationSearch(pattern);
+				return;
+			}
+			userModel.searchPatt = StrTools.getSimpleString(pattern);
+			resultList = new Array ();
 			var wordCount:uint;//trace(userModel.translator.flag.path)
 			var s:uint;
 			var a:uint;
@@ -173,32 +184,13 @@ package com.gerantech.islamic.views.screens
 			
 			searchSubtitle.result = wordCount== 0 ? loc("search_no") : StrTools.getNumberFromLocale(wordCount) + " " + loc('search_item') + " " + StrTools.getNumberFromLocale(resultList.length) + " " + loc('verses_in')
 			list.dataProvider = new ListCollection(resultList);
-			searchMode(true);
 		}
 
-		private function getColorList(text:String, searchPatt:String):Array
-		{
-			var firstPoint:int=0;
-			var secondPoint:int=-1;
-			var colorList:Array = new Array()
-			colorList.push(0)
-			while(colorList.length<50)
-			{
-				firstPoint = StrTools.getSimpleString(text).indexOf(userModel.searchPatt, secondPoint+1);
-				if(firstPoint == -1)break;
-				secondPoint = firstPoint + userModel.searchPatt.length;
-				colorList.push(firstPoint);
-				colorList.push(secondPoint);
-			}
-			return colorList;
-		}
-		
 				
-		private function startTranslationSearch():void
+		private function startTranslationSearch(pattern:String):void
 		{
 			if(loadingTranslation)
 				return;
-			
 			
 			var tr:Translator = ConfigModel.instance.searchSources[userModel.searchSource];
 			if(tr.loadingState!=Translator.L_LOADED)
@@ -210,6 +202,8 @@ package com.gerantech.islamic.views.screens
 				return;
 			}
 			
+			suggestMode = false;
+			userModel.searchPatt = StrTools.getSimpleForDB(pattern);
 			tr.search(userModel.searchPatt, searchResponder);
 		}
 		
@@ -226,7 +220,7 @@ package com.gerantech.islamic.views.screens
 			loadingTranslation = false;
 			event.currentTarget.removeEventListener(Person.TRANSLATION_LOADED, translationLoaded);
 			event.currentTarget.removeEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
-			startTranslationSearch();
+			startTranslationSearch(userModel.searchPatt);
 		}
 		
 		private function searchResponder(obj:Object):void
@@ -281,7 +275,31 @@ package com.gerantech.islamic.views.screens
 			}
 			searchSubtitle.result = resultList.length== 0 ? loc("search_no") : StrTools.getNumberFromLocale(resultList.length) + " " + loc('search_item') + " " + StrTools.getNumberFromLocale(resultList.length) + " " + loc('verses_in')
 			list.dataProvider = new ListCollection(resultList);
-			searchMode(true);
+			suggestMode = false;
+		}
+		
+		private function getColorList(text:String, searchPatt:String):Array
+		{
+			var firstPoint:int=0;
+			var secondPoint:int=-1;
+			var colorList:Array = new Array()
+			colorList.push(0)
+			while(colorList.length<50)
+			{
+				firstPoint = StrTools.getSimpleString(text).indexOf(userModel.searchPatt, secondPoint+1);
+				if(firstPoint == -1)break;
+				secondPoint = firstPoint + userModel.searchPatt.length;
+				colorList.push(firstPoint);
+				colorList.push(secondPoint);
+			}
+			return colorList;
+		}
+		
+		private function listChangeHandler():void
+		{
+			var item:Bookmark = Bookmark.getFromObject(list.selectedItem);//trace(item.sura, item.aya)
+			userModel.setLastItem(item.sura, item.aya);
+			appModel.navigator.popScreen();
 		}
 	}
 }

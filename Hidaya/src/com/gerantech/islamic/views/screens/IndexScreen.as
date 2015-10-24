@@ -130,6 +130,7 @@ package com.gerantech.islamic.views.screens
 		
 		public function startSearch(patt:String):void
 		{
+			patt = StrTools.getSimpleString(patt).toLowerCase();
 			filteredArray = new Array();
 			for each(var s:Sura in suraArray)
 				if(StrTools.getSimpleString(s.name).indexOf(patt)>-1 || StrTools.getSimpleString(s.tname).indexOf(patt)>-1)

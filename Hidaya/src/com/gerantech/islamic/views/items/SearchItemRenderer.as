@@ -44,6 +44,7 @@ package com.gerantech.islamic.views.items
 			myLayout = new VerticalLayout();
 			myLayout.padding = appModel.sizes.border*4;
 			myLayout.paddingTop = appModel.sizes.border*2;
+			myLayout.paddingTop = appModel.sizes.border*2;
 			layout = myLayout;
 			
 			nameDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0, null, "bold");
@@ -59,10 +60,13 @@ package com.gerantech.islamic.views.items
 		{
 			if(_data==null || _owner==null)
 				return;
+			
 			bookmark = Bookmark.getFromObject(_data);
-			var firstPadding:uint = bookmark.index==0 ? appModel.sizes.DP24 : 0;
-			height = appModel.sizes.threeLineItem+firstPadding;
-			myLayout.paddingTop = appModel.sizes.border*2+firstPadding;
+			if(bookmark.index==0)
+			{
+				height = appModel.sizes.threeLineItem+appModel.sizes.DP24;
+				myLayout.paddingTop = appModel.sizes.border*2+appModel.sizes.DP24;
+			}
 				
 			var sura:Sura = ResourceModel.instance.suraList[bookmark.sura-1];
 			nameDisplay.text = StrTools.getNumberFromLocale(String(index+1)) + ". " + ResourceManager.getInstance().getString("loc", "sura_l")+" "+ (appModel.ltr?(sura.tname+","):sura.name) + " "+ResourceManager.getInstance().getString("loc", "verse_l")+" "+ StrTools.getNumberFromLocale(bookmark.aya);

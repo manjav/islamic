@@ -14,12 +14,14 @@ package com.gerantech.islamic.views.headers
 	{
 		public var _height:uint = 56;
 		protected var appModel:AppModel;
+		protected var userModel:UserModel;
 		
 		public function BaseSubtitle()
 		{
 			super();
 			
 			appModel = AppModel.instance;
+			userModel = UserModel.instance;
 			
 			height = _height = AppModel.instance.sizes.subtitle;
 			backgroundSkin = new Quad(1, 1, UserModel.instance.nightMode ? BaseMaterialTheme.DESCRIPTION_TEXT_COLOR : BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);

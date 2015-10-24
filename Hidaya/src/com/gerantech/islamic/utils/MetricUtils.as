@@ -19,7 +19,7 @@ package com.gerantech.islamic.utils
 			_twoLineItem = getPixelByDP(isTablet?64:72);
 			_threeLineItem = getPixelByDP(88);
 			_menuItem = getPixelByDP(isTablet?48:48);
-			_orginalFontSize = getPixelByDP(14);//uint(height/40+2);
+			_orginalFontSize = getPixelByDP(14.4);//uint(height/40+2);
 			_border = getPixelByDP(4);
 			
 			width = _orginalWidth = stage.stageWidth;
