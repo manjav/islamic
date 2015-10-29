@@ -41,7 +41,7 @@ package com.gerantech.islamic.views.buttons
 		public function SimpleLayoutButton()
 		{
 			super();
-		//	this.isQuickHitAreaEnabled = true;
+			this.isQuickHitAreaEnabled = true;
 			this.addEventListener(TouchEvent.TOUCH, button_touchHandler);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, button_removedFromStageHandler);
 		}

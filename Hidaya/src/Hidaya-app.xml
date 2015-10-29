@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<application xmlns="http://ns.adobe.com/air/application/18.0">
+<application xmlns="http://ns.adobe.com/air/application/19.0">
 
 <!-- Adobe AIR Application Descriptor File Template.
 
@@ -138,18 +138,18 @@
 	<!-- The icon the system uses for the application. For at least one resolution,
 	specify the path to a PNG file included in the AIR package. Optional. -->
 	<icon>
-		<image48x48>com/gerantech/islamic/assets/images/icon/icon-48.png</image48x48>
+<!-- 		<image48x48>com/gerantech/islamic/assets/images/icon/icon-48.png</image48x48>
 		<image72x72>com/gerantech/islamic/assets/images/icon/icon-72.png</image72x72>
 		<image96x96>com/gerantech/islamic/assets/images/icon/icon-96.png</image96x96>
 		<image144x144>com/gerantech/islamic/assets/images/icon/icon-144.png</image144x144>
-		<image192x192>com/gerantech/islamic/assets/images/icon/icon-192.png</image192x192>
+		<image192x192>com/gerantech/islamic/assets/images/icon/icon-192.png</image192x192> -->
 
-<!-- 		<image40x40>com/gerantech/islamic/assets/images/icon/icon-40-ios.png</image40x40> -->
-<!-- 		<image58x58>com/gerantech/islamic/assets/images/icon/icon-58-ios.png</image58x58> -->
-<!-- 		<image76x76>com/gerantech/islamic/assets/images/icon/icon-76-ios.png</image76x76> -->
-<!-- 		<image80x80>com/gerantech/islamic/assets/images/icon/icon-80-ios.png</image80x80> -->
-<!-- 		<image120x120>com/gerantech/islamic/assets/images/icon/icon-120-ios.png</image120x120> -->
-<!-- 		<image152x152>com/gerantech/islamic/assets/images/icon/icon-152-ios.png</image152x152> -->
+ 		<image40x40>com/gerantech/islamic/assets/images/icon/icon-40-ios.png</image40x40>
+ 		<image58x58>com/gerantech/islamic/assets/images/icon/icon-58-ios.png</image58x58>
+ 		<image76x76>com/gerantech/islamic/assets/images/icon/icon-76-ios.png</image76x76>
+ 		<image80x80>com/gerantech/islamic/assets/images/icon/icon-80-ios.png</image80x80>
+ 		<image120x120>com/gerantech/islamic/assets/images/icon/icon-120-ios.png</image120x120>
+ 		<image152x152>com/gerantech/islamic/assets/images/icon/icon-152-ios.png</image152x152>
 		
 <!-- 		<image16x16></image16x16> -->
 <!-- 		<image29x29></image29x29> -->

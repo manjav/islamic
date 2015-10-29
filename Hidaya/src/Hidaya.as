@@ -59,8 +59,8 @@ package
 			if(stage)
 			{
 				stage.scaleMode = StageScaleMode.NO_SCALE;
-			//	stage.quality = StageQuality.LOW;
 				stage.align = StageAlign.TOP_LEFT;
+			//	stage.quality = StageQuality.LOW;
 				stage.setOrientation(StageOrientation.DEFAULT);
 				stage.autoOrients=false;
 			}
@@ -72,6 +72,8 @@ package
 		
 		private function loaderInfo_completeHandler(event:Event):void
 		{
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.align = StageAlign.TOP_LEFT;
 			loaderInfo.removeEventListener(Event.COMPLETE, loaderInfo_completeHandler);
 
 			appModel = AppModel.instance;

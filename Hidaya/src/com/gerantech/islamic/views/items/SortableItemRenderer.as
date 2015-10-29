@@ -8,7 +8,6 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.controls.Spacer;
 	
-	import flash.geom.Point;
 	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
@@ -24,8 +23,6 @@ package com.gerantech.islamic.views.items
 	
 	public class SortableItemRenderer extends LayoutGroup
 	{
-		private var touchID:int = -1;
-		private static const HELPER_POINT:Point = new Point();
 		private var deleteButton:FlatButton;
 		private var mainContents:LayoutGroup;
 		private var personImage:ImageLoader;
