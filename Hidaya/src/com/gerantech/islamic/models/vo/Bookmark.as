@@ -8,6 +8,7 @@ package com.gerantech.islamic.models.vo
 		public var sura:uint;
 		public var aya:uint;
 		public var text:String;
+		public var processedText:String;
 		
 		public var used:uint;
 		

@@ -119,25 +119,6 @@
 			return str.toLowerCase();
 		}
 		
-		public static function getSimpleForDB (str:String):String
-		{
-			var signs:Array = "َُِّْٰۭٓۢۚۖۗۦًٌٍۙۘۜۥ".split("");
-			for(var i:uint=0; i<signs.length; i++)
-				str = str.split(signs[i]).join("");
-			
-			var alefs:Array = "إأٱآ".split("");
-			for(i=0; i<alefs.length; i++)
-				str = str.split(alefs[i]).join("ا");
-			
-			str = str.split("ة").join("ه");
-			str = str.split("ؤ").join("و");
-			str = str.split("ي").join("ى");
-			str = str.split("ی").join("ى");
-			//str = str.split("ی").join("ي");
-			str = str.split("ک").join("ك");
-			return str.toLowerCase();
-		}
-		
 		public static function  getFullPath (path:String, sura:uint, aya:uint, post:String="dat"):String
 		{
 			return (path+"/"+getZeroNum(sura.toString())+"/"+getZeroNum(sura.toString())+getZeroNum(aya.toString())+"."+post);

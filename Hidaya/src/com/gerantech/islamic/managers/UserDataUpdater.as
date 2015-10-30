@@ -12,7 +12,6 @@ package com.gerantech.islamic.managers
 	
 	import mx.resources.ResourceManager;
 	
-	import gt.events.MySQLEvent;
 	import gt.php.MySQL;
 	import gt.php.PHPInterface;
 

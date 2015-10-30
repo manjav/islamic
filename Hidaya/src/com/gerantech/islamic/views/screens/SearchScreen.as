@@ -46,6 +46,7 @@ package com.gerantech.islamic.views.screens
 			
 			var listLayout: VerticalLayout = new VerticalLayout();
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			listLayout.hasVariableItemDimensions = true;
 			listLayout.paddingTop = searchSubtitle._height+appModel.sizes.DP4;
 			
 			var wLayout: VerticalLayout = new VerticalLayout();
@@ -61,7 +62,7 @@ package com.gerantech.islamic.views.screens
 			}
 			list.addEventListener(Event.CHANGE, listChangeHandler);
 			list.addEventListener(Event.SCROLL, listScrollHandler);
-			list.decelerationRate = 0.9985;
+			//list.decelerationRate = 0.9985;
 			addChild(list);
 			
 			wordList = new List();
@@ -146,12 +147,12 @@ package com.gerantech.islamic.views.screens
 		public function startSearch(pattern:String):void
 		{
 			suggestMode = false;
+			userModel.searchPatt = StrTools.getSimpleString(pattern);//trace(pattern, userModel.searchPatt)
 			if(userModel.searchSource>0)
 			{
 				startTranslationSearch(pattern);
 				return;
 			}
-			userModel.searchPatt = StrTools.getSimpleString(pattern);
 			resultList = new Array ();
 			var wordCount:uint;//trace(userModel.translator.flag.path)
 			var s:uint;
@@ -203,7 +204,6 @@ package com.gerantech.islamic.views.screens
 			}
 			
 			suggestMode = false;
-			userModel.searchPatt = StrTools.getSimpleForDB(pattern);
 			tr.search(userModel.searchPatt, searchResponder);
 		}
 		
@@ -273,7 +273,7 @@ package com.gerantech.islamic.views.screens
 					}
 				}
 			}
-			searchSubtitle.result = resultList.length== 0 ? loc("search_no") : StrTools.getNumberFromLocale(resultList.length) + " " + loc('search_item') + " " + StrTools.getNumberFromLocale(resultList.length) + " " + loc('verses_in')
+			searchSubtitle.result = resultList.length== 0 ? loc("search_no") : StrTools.getNumberFromLocale(wordCount) + " " + loc('search_item') + " " + StrTools.getNumberFromLocale(resultList.length) + " " + loc('verses_in')
 			list.dataProvider = new ListCollection(resultList);
 			suggestMode = false;
 		}
@@ -286,7 +286,7 @@ package com.gerantech.islamic.views.screens
 			colorList.push(0)
 			while(colorList.length<50)
 			{
-				firstPoint = StrTools.getSimpleString(text).indexOf(userModel.searchPatt, secondPoint+1);
+				firstPoint = text.indexOf(userModel.searchPatt, secondPoint+1);
 				if(firstPoint == -1)break;
 				secondPoint = firstPoint + userModel.searchPatt.length;
 				colorList.push(firstPoint);

@@ -11,11 +11,13 @@ package com.gerantech.islamic.models.vo
 	import flash.data.SQLConnection;
 	import flash.data.SQLMode;
 	import flash.data.SQLStatement;
+	import flash.errors.SQLError;
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.events.SQLErrorEvent;
 	import flash.events.SQLEvent;
 	import flash.filesystem.File;
+	import flash.utils.getTimer;
 	import flash.utils.setTimeout;
 
 	public class Translator extends Person
@@ -24,6 +26,7 @@ package com.gerantech.islamic.models.vo
 		private var dbLoadSaver:LoadAndSaver;
 		private var sqlConnection:SQLConnection;
 		private var randomItem:Item;
+		private var replaceIndex:int;
 		
 		public var loadingState:int = -1;
 		
@@ -95,17 +98,52 @@ package com.gerantech.islamic.models.vo
 		{//trace(event)
 			loadingState = L_LOADED;
 			state = SELECTED ;
-			//query("SELECT text,sura,aya FROM quran WHERE sura=1 AND aya=1", asd);
-			query("UPDATE quran SET text = replace( text, 'ي', 'ی' ) WHERE text LIKE 'ي';", asd);
-			dispatchEventWith(TRANSLATION_LOADED);
-			if(ConfigModel.instance.selectedTranslators[0]==this)
-				remindeFirstTranslate();
+			
+			replaceIndex = 0;
+			query("SELECT version FROM matadata", checkDBVersion);
 		}
 		
-		private function asd(obj:Object):void
+		/**
+		 * Check version of translation databases in metadata table
+		 */
+		private function checkDBVersion(obj:Object):void
 		{
-			trace(obj)
+			if(obj is SQLErrorEvent)
+			{
+				if(SQLErrorEvent(obj).errorID==3115)
+					replaceResponder(null);
+			}
+			else 
+				dispatchEventWith(TRANSLATION_LOADED);
 		}
+		
+		/**
+		 * Replace "ي", "ى" and "ك" characters in persian databases for search functionality
+		 */
+		private function replaceResponder(obj:Object):void
+		{
+/*			if(replaceIndex==0)timmmm = getTimer();trace(name, flag.path, replaceIndex, getTimer()-timmmm);*/
+			if(replaceIndex>2 || flag.path!="fa")
+			{
+				query("CREATE TABLE IF NOT EXISTS matadata (version INTEGER);", function():void{query("INSERT INTO 'matadata' VALUES (1);", trace)});
+				dispatchEventWith(TRANSLATION_LOADED);
+				if(ConfigModel.instance.selectedTranslators[0]==this)
+					remindeFirstTranslate();
+				return;
+			}
+			
+			var p_1:String;
+			var p_2:String;
+			switch(replaceIndex)
+			{
+				case 0: p_1 = "ي"; p_2="ی"; break;
+				case 1: p_1 = "ى"; p_2="ی"; break;
+				case 2: p_1 = "ك"; p_2="ک"; break;
+			}
+			replaceIndex ++;
+			query("UPDATE quran SET text = replace( text, '"+p_1+"', '"+p_2+"' ) WHERE text LIKE '%"+p_1+"%';", replaceResponder);
+		}
+		
 		
 		private function query(query:String, response:Function):void
 		{
@@ -119,13 +157,13 @@ package com.gerantech.islamic.models.vo
 				createStmt.execute(); 
 			else
 			{
-				setTimeout(response, 1, "SQL Connection not found.");
+				setTimeout(response, 1, new SQLErrorEvent(SQLErrorEvent.ERROR, false, false, new SQLError("execute", "SQL Connection not found.")));
 				return;
 			}
 			
 			function createError(event:SQLErrorEvent):void
 			{
-				response(event.text);
+				response(event);
 			}
 			
 			function createResult(event:SQLEvent):void
@@ -154,7 +192,12 @@ package com.gerantech.islamic.models.vo
 			//testFile(itemRenderer);//loadingState = "noFile";
 		}
 		
-		
+		/**
+		 * Search pattern in translatin data base 
+		 
+		 * return text, sura and aya in objects contain in array
+		 * all abjects in array that in response`s argument
+		 */
 		public function search(pattern:String, response:Function):void
 		{
 			var query:String = "SELECT text,sura,aya FROM quran WHERE text LIKE '%"+pattern+"%'";
