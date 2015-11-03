@@ -43,7 +43,10 @@ package com.gerantech.islamic.models.vo
 		
 		public function loadTransltaion():void
 		{
-			trace("loadTransltaion", loadingState)
+			trace("loadTransltaion", loadingState, state)
+			if(loadingState==1 && state==HAS_FILE)
+				state = SELECTED;
+
 			if(loadingState>-1)
 				return;
 			

@@ -22,6 +22,7 @@ package com.gerantech.islamic.views.headers
 		public function ShopHeader()
 		{
 			super();
+			isQuickHitAreaEnabled = false
 		}
 		
 		override protected function initialize():void

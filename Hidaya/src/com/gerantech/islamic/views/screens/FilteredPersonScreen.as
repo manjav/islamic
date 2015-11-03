@@ -59,7 +59,6 @@ package com.gerantech.islamic.views.screens
 			{
 				list.addEventListener(Event.SCROLL, list_scrollHandler);
 				shopHeader = new ShopHeader();
-				shopHeader.layout = new AnchorLayout();
 				shopHeader.layoutData = new AnchorLayoutData(NaN, 0, NaN, 0);
 				shopHeader.addEventListener(Event.TRIGGERED, showPurchaseAlert);
 				shopHeader.addEventListener(Event.CLOSE, shopHeader_closeHandler);
