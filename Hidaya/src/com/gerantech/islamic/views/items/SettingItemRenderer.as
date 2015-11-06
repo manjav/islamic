@@ -2,6 +2,7 @@ package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
+	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	
 	import flash.text.engine.ElementFormat;
@@ -84,10 +85,10 @@ package com.gerantech.islamic.views.items
 			}
 			if(labelFunction!=null)
 			{
-				titleDisplay.text = labelFunction(_data);
+				titleDisplay.text = StrTools.getNumberFromLocale(labelFunction(_data));
 			}
 			else
-				titleDisplay.text = _data.name;
+				titleDisplay.text = StrTools.getNumberFromLocale(_data.name);
 			
 			super.commitData();
 		}

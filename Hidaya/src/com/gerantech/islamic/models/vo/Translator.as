@@ -17,7 +17,6 @@ package com.gerantech.islamic.models.vo
 	import flash.events.SQLErrorEvent;
 	import flash.events.SQLEvent;
 	import flash.filesystem.File;
-	import flash.utils.getTimer;
 	import flash.utils.setTimeout;
 
 	public class Translator extends Person
@@ -252,7 +251,7 @@ package com.gerantech.islamic.models.vo
 			createStmt.text = "SELECT text FROM quran WHERE sura="+(aya.sura-1)+" AND aya="+(aya.aya-1);
 			createStmt.addEventListener(SQLEvent.RESULT, createResult); 
 			createStmt.addEventListener(SQLErrorEvent.ERROR, createError); 
-			if(sqlConnection.connected)
+			if(sqlConnection!=null && sqlConnection.connected)
 				createStmt.execute(); 
 			else
 			{

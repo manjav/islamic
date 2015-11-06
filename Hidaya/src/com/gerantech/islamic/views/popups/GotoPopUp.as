@@ -131,6 +131,10 @@ package com.gerantech.islamic.views.popups
 			ayaPicker.listProperties.maxHeight = Math.min(appModel.sizes.height, appModel.sizes.width)-appModel.sizes.DP32;
 			ayaPicker.labelField = "name";
 			initAyaPicker(suraPicker.selectedIndex);
+			ayaPicker.labelFunction = function( item:Object ):String
+			{
+				return StrTools.getNumberFromLocale(item.name);
+			};
 			ayaPicker.listProperties.itemRendererFactory = function():IListItemRenderer
 			{
 				return new SettingItemRenderer();

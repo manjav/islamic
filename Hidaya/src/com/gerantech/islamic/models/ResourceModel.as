@@ -13,7 +13,7 @@ package com.gerantech.islamic.models
 	{
 		public var quranXML:XML;
 		public var metaXML:XML;
-		public var simpleQuran:Object;
+		public var simpleQuran:Array;
 		/*[Embed("../assets/contents/quran-uthmani.xml", encoding="utf-8")]
 		private static const quranClass:Class;
 		

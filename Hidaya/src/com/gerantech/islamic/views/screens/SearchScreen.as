@@ -158,11 +158,45 @@ package com.gerantech.islamic.views.screens
 			var s:uint;
 			var a:uint;
 			var l:uint;
-			for each (var sr:Array in ResourceModel.instance.simpleQuran)
+			
+			var j:Juze;
+			var jLen:uint;
+			var firstAya:uint;
+			var lastAya:uint;
+			var firstSura:uint;
+			var lastSura:uint;
+			var skip:Boolean;
+			var searchScope:Array;
+			
+			if(userModel.searchScope==2)
+			{
+				j = ResourceModel.instance.juzeList[UserModel.instance.searchJuze];
+				if(j.ayas==null)
+					j.complete();
+				jLen = j.ayas.length;
+				firstAya = j.ayas[0].aya-1;
+				lastAya = j.ayas[jLen-1].aya-1;
+				s = firstSura = j.ayas[0].sura-1;
+				lastSura = j.ayas[jLen-1].sura-1;
+				searchScope = ResourceModel.instance.simpleQuran.slice(firstSura, lastSura+1);
+			}
+			else if(userModel.searchScope==1)
+			{
+				s = userModel.searchSura;
+				searchScope = [ResourceModel.instance.simpleQuran[userModel.searchSura]];
+			}
+			else
+				searchScope = ResourceModel.instance.simpleQuran;
+				
+			for each (var sr:Array in searchScope)
 			{
 				for each (var ay:String in sr)
 				{
-					if (ay.search(userModel.searchPatt) != -1)
+					//trace(firstSura, firstAya, " ", lastSura, lastAya, " -> ", a.sura, a.aya);
+					if(userModel.searchScope==2)
+						skip = (s==firstSura && a<firstAya) || (s==lastSura && a>lastAya);
+					
+					if(!skip && ay.search(userModel.searchPatt) > -1)
 					{
 						var book:Bookmark = new Bookmark(s+1, a+1, 0, 3, 0, ay);//serachItemList.length+1, , ay.@text, pattern);
 						book.isSearch = true;
