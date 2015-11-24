@@ -92,9 +92,6 @@ package com.gerantech.islamic.models
 		private var _main:Hidaya;
 		public function get main():Hidaya{return _main;}
 
-		private var _isTablet:Boolean;
-		public function get isTablet():Boolean{return _isTablet;}
-
 		private var _isAndroid:Boolean;
 		public function get isAndroid():Boolean{return _isAndroid;}
 

@@ -28,7 +28,7 @@ package com.gerantech.islamic.views.controls
 		{
 			if(fontSize==0)
 				this.fontSize = AppModel.instance.sizes.orginalFontSize;
-			else if(fontSize<1)
+			else if(fontSize<4)
 				this.fontSize = fontSize*AppModel.instance.sizes.orginalFontSize;
 			else
 				this.fontSize = fontSize;

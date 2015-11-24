@@ -152,7 +152,7 @@ package com.gerantech.islamic.views.controls
 			}
 			txt = (translator.path=="fa.gharaati") ? StrTools.getRepTranslate(txt) : txt;
 			//txt = txt.replace(/[\u000d\u000a\u0008]+/g,""); 
-			newLine = Math.min(txt.indexOf("\n")-1, UserModel.instance.fontSize*(AppModel.instance.isTablet?10:6));
+			newLine = Math.min(txt.indexOf("\n")-1, UserModel.instance.fontSize*(AppModel.instance.sizes.isTablet?10:6));
 			if(newLine>0)
 				txt = txt.substr(0, newLine) + " ...";
 			

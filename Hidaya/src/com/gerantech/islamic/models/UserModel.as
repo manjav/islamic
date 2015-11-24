@@ -293,7 +293,7 @@ package com.gerantech.islamic.models
 			switch(navigationMode.value)
 			{
 				case "page_navi":
-					if(!appModel.upside && appModel.isTablet&& !configModel.hasTranslator)
+					if(!appModel.upside && appModel.sizes.isTablet&& !configModel.hasTranslator)
 						ret = (604-lastItem.page)/2;
 					else
 						ret = 604-lastItem.page;

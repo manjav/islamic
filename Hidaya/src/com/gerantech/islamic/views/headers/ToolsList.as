@@ -37,34 +37,12 @@ package com.gerantech.islamic.views.headers
 		private var scaleFactor:Number = 1;
 		private var _selected:Boolean;
 		private var lastHeight:uint;
+		private var initialized:Boolean;
 		public function ToolsList()
 		{
 			super();
 		}
 		
-		public function get selected():Boolean
-		{
-			return _selected;
-		}
-
-		public function set selected(value:Boolean):void
-		{
-			if(_selected==value)
-				return;
-			
-			_selected = value;
-			
-			shareButton.visible = _selected;
-			bookmarkButton.visible = _selected;
-			
-			if(_selected)
-			{
-				shareButton.alpha = 0;
-				TweenLite.to(shareButton, 0.3, {alpha:1, delay:0.25});
-				bookmarkButton.alpha = 0;
-				TweenLite.to(bookmarkButton, 0.3, {alpha:1, delay:0.20});
-			}
-		}
 
 		override protected function initialize():void
 		{
@@ -100,17 +78,11 @@ package com.gerantech.islamic.views.headers
 			numContainer.addChild(numTextField);
 			
 		//	UserModel.instance.addEventListener(UserEvent.FONT_SIZE_CHANGE_END, user_fontChangedHandler);
-			if(aya!=null)
-				setAya(aya);
+			initialized = true;
 			
-			selected = true;
-			user_fontChangedHandler();
-		}
-		
-		
-		
-		private function user_fontChangedHandler():void
-		{
+			if(aya!=null)
+				setData(aya, _selected);
+
 		//	var ih:Number = AppModel.instance.sizes.twoLineItem;
 			var _h:uint = height = AppModel.instance.sizes.DP36;//uint(Math.min(Math.max(ih/1.6, UserModel.instance.fontSize*2.6),ih/1.2));
 			if(lastHeight==_h)
@@ -124,9 +96,6 @@ package com.gerantech.islamic.views.headers
 			numTextField.fontSize = uint(_h*0.6);
 			//numContainer.x = width-_h*scaleFactor;
 			
-			if(!selected)
-				return;
-			
 			bookmarkButton.width = bookmarkButton.height = _h;
 			bookmarkButton.layoutData = new AnchorLayoutData(NaN, NaN, NaN, 0, NaN, 0);
 			
@@ -135,28 +104,39 @@ package com.gerantech.islamic.views.headers
 			shareButton.iconHorizontalCenter = -_h/22;
 		}
 		
-		public function setAya(aya:Aya):void
+		public function setData(aya:Aya, _selected:Boolean=false):void
 		{
-			selected = false;
-			this.aya = aya;
-			if(numContainer==null)
+			if(aya==null)
 				return;
+			
+			this.aya = aya;
+			this._selected = _selected;
+			
+			if(!initialized)
+				return;
+			
 			numContainer.visible = aya.aya!=1
 			if(numContainer.visible)
-			{
 				numTextField.text = aya.aya.toString();
-				//numTextField.x = (height-numTextField.width)/2
-				//numTextField.y = (height-numTextField.height)/2;
-			}
+			
 			bookmarkButton.texture =aya.bookmarked?"bookmark_on":"bookmark_off";
-			//img2.width = img2.height = height*0.8;
-			//bookmarkButton.defaultIcon = img2;
-			/*if(playButton)
+			
+			shareButton.visible = _selected;
+			bookmarkButton.visible = _selected || aya.bookmarked;
+			
+			if(_selected)
 			{
-				playButton.texture = SoundPlayer.instance.ayaSound!=null&&SoundPlayer.instance.ayaSound.equals(aya)&&SoundPlayer.instance.playing ? "pause_circle" : "play_circle";
-				SoundPlayer.instance.addEventListener("toggle", soundPlayer_toggleHandler);
-			}*/
-			//setTimeout(user_fontChangedHandler, 200);
+				shareButton.alpha = 0;
+				TweenLite.to(shareButton, 0.3, {alpha:1, delay:0.25});
+				bookmarkButton.alpha = 0;
+				TweenLite.to(bookmarkButton, 0.3, {alpha:1, delay:0.20});
+			}			
+		}
+		
+		
+		public function get selected():Boolean
+		{
+			return _selected;
 		}
 		
 		private function share_triggerHandler(event:Event):void
@@ -177,7 +157,7 @@ package com.gerantech.islamic.views.headers
 				UserModel.instance.bookmarks.addItem(new Bookmark(aya.sura, aya.aya));
 			
 			aya.bookmarked = !aya.bookmarked;
-			setAya(aya);
+			setData(aya, _selected);
 		}
 		private function playButton_triggerHandler(event:Event):void
 		{
@@ -203,5 +183,10 @@ package com.gerantech.islamic.views.headers
 
 		}*/
 
+		public function setBookmark(_data:Object):void
+		{
+			// TODO Auto Generated method stub
+			
+		}
 	}
 }

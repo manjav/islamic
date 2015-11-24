@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
 <!-- $TexturePacker:SmartUpdate:f1cc71a2d0d8e976aecd4fba1ab0e707:b61ee20d6fe140a2f36a7d62884ce877:2d4c0b8fb3f397352d33e3a185150016$ -->
-<TextureAtlas imagePath="skins.atf" width="512" height="1024">
+<TextureAtlas imagePath="skins.png" width="512" height="1024">
     <SubTexture name="action" x="2" y="132" width="172" height="172" frameX="-2" frameY="-2" frameWidth="176" frameHeight="176"/>
     <SubTexture name="action_accent" x="250" y="204" width="172" height="172" frameX="-2" frameY="-2" frameWidth="176" frameHeight="176"/>
     <SubTexture name="action_danger" x="172" y="512" width="66" height="57" frameX="-5" frameY="0" frameWidth="76" frameHeight="76"/>
