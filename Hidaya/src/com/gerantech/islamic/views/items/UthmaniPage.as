@@ -130,7 +130,7 @@
 			var _w:Number = mainWidth;
 			var _h:Number = mainHeight;
 			var rate:Number = 1;
-			if(mainHeight>512 && mainHeight<1024)
+			/*if(mainHeight>512 && mainHeight<1024)
 			{
 				rate = 512/mainHeight;
 				_h = 512;
@@ -141,7 +141,7 @@
 				rate = 1024/mainHeight;
 				_h = 1024;
 				_w *= rate;
-			}//trace(_w, _h, mainWidth, mainHeight, rate)
+			}*///trace(_w, _h, mainWidth, mainHeight, rate)
 			
 			var mat:Matrix = new Matrix();
 			mat.scale(rate, rate);

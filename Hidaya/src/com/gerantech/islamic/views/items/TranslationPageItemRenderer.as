@@ -211,7 +211,7 @@ package com.gerantech.islamic.views.items
 						break;
 					
 					default:
-						if(textTemp.length<userModel.fontSize*(appModel.isTablet?20:10))
+						if(textTemp.length<userModel.fontSize*(appModel.sizes.isTablet?20:10))
 							textTemp += (t+".");
 						else
 						{

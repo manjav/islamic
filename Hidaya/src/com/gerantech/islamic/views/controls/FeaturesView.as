@@ -78,7 +78,6 @@ package com.gerantech.islamic.views.controls
 			{
 				case "appear":
 					state = ("listen");
-					showButton();
 					break;
 				
 				case "listen":
@@ -91,6 +90,8 @@ package com.gerantech.islamic.views.controls
 				
 				case "search":
 					state = ("listen");
+					if(startButton==null)
+						showButton();
 					break;
 			}
 			skeleton.state.setAnimationByName(0, state, false);
@@ -103,11 +104,11 @@ package com.gerantech.islamic.views.controls
 			Starling.juggler.add(skeleton);		
 			addChild(skeleton);
 			
-			titleDisplay = new RTLLabel("", BaseMaterialTheme.CHROME_COLOR, "center", null, true, null, 0, null, "bold");
+			titleDisplay = new RTLLabel("", BaseMaterialTheme.CHROME_COLOR, "center", null, true, null, 1.4, null, "bold");
 		//	titleDisplay.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0);
 			titleDisplay.x = (width)/2
 			titleDisplay.y = AppModel.instance.sizes.twoLineItem;
-			titleDisplay.width = width-AppModel.instance.sizes.twoLineItem*2;
+			titleDisplay.width = width-AppModel.instance.sizes.singleLineItem;
 			titleDisplay.pivotX = titleDisplay.width/2;
 			addChild(titleDisplay);
 			

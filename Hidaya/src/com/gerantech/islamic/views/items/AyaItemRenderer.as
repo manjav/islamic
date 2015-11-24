@@ -71,7 +71,7 @@ package com.gerantech.islamic.views.items
 			bismHeader = new BismHeader();
 			bismHeader.layoutData = new VerticalLayoutData(100);
 						
-			quranTextRenderer = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, "justify", "rtl", true, "right", userModel.fontSize*1.3, "mequran");
+			quranTextRenderer = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, "justify", "rtl", true, "center", userModel.fontSize*1.3, "mequran");
 			//quranTextRenderer.height = 122
 			quranTextRenderer.layoutData = new VerticalLayoutData(100);
 			addChild(quranTextRenderer);
@@ -141,8 +141,8 @@ package com.gerantech.islamic.views.items
 			else
 				bismHeader.removeFromParent();
 			
-			toolsList.setAya(aya);
-			toolsList.selected = currentState==STATE_SELECTED;
+			toolsList.setData(aya, currentState==STATE_SELECTED);
+			
 			
 			//quranTextRenderer.alpha = 0.1;
 			if(aya.text==null)
@@ -240,7 +240,7 @@ package com.gerantech.islamic.views.items
 				backgroundSkin = new Scale9Image(Assets.getItemTextures(value));//||value==STATE_SELECTED
 			
 			if(value!=STATE_DOWN)
-				toolsList.selected = value==STATE_SELECTED;
+				toolsList.setData(aya, value==STATE_SELECTED);
 			/*if(hasTranslation && touch && touch.phase==TouchPhase.ENDED && touch.getLocation(this).y>height-appModel.sizes.itemHeight)
 			{
 				trace(touch.getLocation(moreStrip))

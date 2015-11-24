@@ -107,12 +107,12 @@ package com.gerantech.islamic.views.items
 		{
 			
 			height = _owner.height;
-			if(!appModel.upside && appModel.isTablet && !ConfigModel.instance.hasTranslator)
+			if(!appModel.upside && appModel.sizes.isTablet && !ConfigModel.instance.hasTranslator)
 				width = appModel.sizes.width/2;
 			else
 				width = appModel.sizes.width;
 			shadowImage.width = width*0.02;
-			//trace("isTablet", appModel.isTablet, appModel.upside, ConfigModel.instance.selectedTranslators.length, width, height)
+			//trace("isTablet", appModel.sizes.isTablet, "upside", appModel.upside, "translator", ConfigModel.instance.selectedTranslators.length, width, height)
 		}
 		
 		override protected function commitAfterStopScrolling():void
@@ -121,7 +121,7 @@ package com.gerantech.islamic.views.items
 			if(!userModel.premiumMode && _qdata.sura>2)
 				return;
 			
-			if(!appModel.upside && appModel.isTablet)
+			if(!appModel.upside && appModel.sizes.isTablet)
 			{
 				
 				if(!ConfigModel.instance.hasTranslator)

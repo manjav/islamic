@@ -10,17 +10,17 @@ package com.gerantech.islamic.utils
 		{
 			_dpi = dpi;
 			_scale = _dpi/160;
-			var isTablet:Boolean = DeviceCapabilities.isTablet(stage);
+			_isTablet = DeviceCapabilities.isTablet(stage);
 			
 			//trace("scale", _scale, "dpi", _dpi)
 			_toolbar = getPixelByDP(56);
 			_subtitle = getPixelByDP(48);
-			_singleLineItem = getPixelByDP(isTablet?48:56);
-			_twoLineItem = getPixelByDP(isTablet?64:72);
+			_singleLineItem = getPixelByDP(_isTablet?48:56);
+			_twoLineItem = getPixelByDP(_isTablet?72:72);
 			_threeLineItem = getPixelByDP(88);
-			_menuItem = getPixelByDP(isTablet?48:48);
-			_orginalFontSize = getPixelByDP(14.4);//uint(height/40+2);
+			_menuItem = getPixelByDP(_isTablet?48:48);
 			_border = getPixelByDP(4);
+			_orginalFontSize = getPixelByDP(_isTablet ? 18 : 14.4);//uint(height/40+2);
 			
 			width = _orginalWidth = stage.stageWidth;
 			_orginalHeightFull = heightFull = stage.stageHeight;
@@ -116,6 +116,8 @@ package com.gerantech.islamic.utils
 		private var _orginalHeightFull:Number;
 		public function get orginalHeightFull():Number{return _orginalHeightFull;}
 		
+		private var _isTablet:Boolean;
+		public function get isTablet():Boolean{return _isTablet;}
 		
 		public var width:Number;
 		public var height:Number;
