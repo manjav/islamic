@@ -35,7 +35,7 @@ package com.gerantech.islamic.views.items
 			addChild(tute);
 			
 			nextButton = new FlatButton("arrow_g_"+(appModel.ltr?"right":"left"), null, true);
-			nextButton.width = nextButton.height = appModel.sizes.DP56;
+			nextButton.width = nextButton.height = appModel.sizes.DP48;
 			nextButton.layoutData = new AnchorLayoutData(NaN, appModel.ltr?appModel.sizes.border:NaN, appModel.sizes.border, appModel.ltr?NaN:appModel.sizes.border);
 			nextButton.addEventListener(Event.TRIGGERED, nextButton_triggeredHandler);
 			addChild(nextButton);

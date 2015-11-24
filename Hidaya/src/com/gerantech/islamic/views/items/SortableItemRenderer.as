@@ -47,7 +47,8 @@ package com.gerantech.islamic.views.items
 			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			myLayout.paddingLeft = myLayout.paddingRight = appModel.sizes.DP8;
+			myLayout.gap = myLayout.paddingRight = appModel.sizes.DP4;
+			myLayout.firstGap = myLayout.paddingLeft = appModel.sizes.DP8;
 			layout = myLayout;
 			
 			deleteButton = new FlatButton("remove", null, true);

@@ -72,8 +72,8 @@ package com.gerantech.islamic.views.items
 			mainContents.layout = mLayout;
 			addChild(mainContents);
 
-			var fontSize:uint = uint(_height/4.6);
-			nameDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, fontSize, null, "bold");
+			var fontSize:uint = uint(_height/4.5);
+			nameDisplay = new RTLLabel("", 1, null, null, false, null, fontSize, null, "bold");
 			nameDisplay.layoutData = new VerticalLayoutData(100, 55);
 			mainContents.addChild(nameDisplay);
 			
@@ -82,7 +82,7 @@ package com.gerantech.islamic.views.items
 			progressBar.layoutData = new VerticalLayoutData(100);
 			mainContents.addChild(progressBar);
 			
-			messageDisplay = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, false, null, fontSize*0.8, null);
+			messageDisplay = new RTLLabel("", 1, null, null, false, null, fontSize*0.8, null);
 			messageDisplay.layoutData = new VerticalLayoutData(100, 40);
 			mainContents.addChild(messageDisplay);
 			
