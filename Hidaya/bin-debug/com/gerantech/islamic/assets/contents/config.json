@@ -20,22 +20,16 @@
         ],
         "fonts": [
             {
-                "name": "Default"
+                "value": "mequran",
+                "scale" : 1
             },
             {
-                "name": "Tahoma"
+                "value": "scheherazade",
+                "scale" : 1.5
             },
             {
-                "name": "Mitra"
-            },
-            {
-                "name": "Roya"
-            },
-            {
-                "name": "Teraffic"
-            },
-            {
-                "name": "Yagut"
+                "value": "nabi",
+                "scale" : 0.9
             }
         ]
     },

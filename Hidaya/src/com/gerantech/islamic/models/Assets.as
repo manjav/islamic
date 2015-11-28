@@ -22,12 +22,15 @@ package com.gerantech.islamic.models
 		private static var allScaled3Textures:Dictionary = new Dictionary();
 		private static var allScaled9Textures:Dictionary = new Dictionary();
 		
-
-		[Embed(source="../assets/fonts/me_quran.ttf", fontFamily="mequrandev", fontWeight="normal", mimeType="application/x-font", embedAsCFF="false")]
-		protected static const ME_QURAN_DEV:Class;
 		
 		[Embed(source="../assets/fonts/me_quran.ttf", fontFamily="mequran", fontWeight="normal", mimeType="application/x-font", embedAsCFF="true")]
 		protected static const ME_QURAN:Class;
+		
+		[Embed(source="../assets/fonts/scheherazade.ttf", fontFamily="scheherazade", fontWeight="normal", mimeType="application/x-font", embedAsCFF="true")]
+		protected static const SCHEHERAZADE:Class;
+		
+		[Embed(source="../assets/fonts/nabi.ttf", fontFamily="nabi", fontWeight="normal", mimeType="application/x-font", embedAsCFF="true")]
+		protected static const NABI:Class;
 		
 		private static var sclaed9Names:Array;
 		private static var sclaed9NamesComplete:Function;

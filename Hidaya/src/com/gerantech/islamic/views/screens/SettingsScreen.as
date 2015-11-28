@@ -4,6 +4,7 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.views.controls.CheckPanel;
 	import com.gerantech.islamic.views.controls.SettingPanel;
+	import com.gerantech.islamic.views.items.FontItemRenderer;
 	
 	import flash.utils.setTimeout;
 	
@@ -62,6 +63,16 @@ package com.gerantech.islamic.views.screens
 			nightModePanel = new CheckPanel("night_mode", userModel.nightMode);
 			nightModePanel.addEventListener(Event.CHANGE, nightModePanel_changeHandler);
 			addChild(nightModePanel);
+			
+			fontPanel = new SettingPanel("select_font", ConfigModel.instance.fonts, userModel.font, FontItemRenderer);
+			fontPanel.addEventListener(Event.CHANGE, fontPanel_changeHandler);
+			addChild(fontPanel);
+		}
+		
+		private function fontPanel_changeHandler(event:Event):void
+		{
+			userModel.font = fontPanel.list.selectedItem;
+			fontPanel.list.closeList();
 		}
 		
 		private function remindePanel_changeHandler():void

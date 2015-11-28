@@ -113,7 +113,7 @@
 			quran_txt.text = page.text;//trace(page.text)
 			
 			formatLayout = new TextLayoutFormat();
-			formatLayout.fontFamily = "mequran";
+			formatLayout.fontFamily = UserModel.instance.font.value;
 			formatLayout.fontLookup = FontLookup.EMBEDDED_CFF;
 			formatLayout.color = BaseMaterialTheme.PRIMARY_TEXT_COLOR;
 			formatLayout.direction = Direction.RTL;

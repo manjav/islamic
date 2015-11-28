@@ -77,7 +77,7 @@ package com.gerantech.islamic.views.items
 			}
 			
 
-			uthmaniFont = new FontDescription( "mequran", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
+			uthmaniFont = new FontDescription( userModel.font.value, FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
 			translateFont = new FontDescription( "SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
 			
 			rtlText = new TextBlockTextRenderer();
@@ -132,7 +132,7 @@ package com.gerantech.islamic.views.items
 					return;
 				
 				rtlText.layoutData = new AnchorLayoutData((aya.hasBism?AppModel.instance.sizes.twoLineItem:0), border*2, NaN, border*2);
-				rtlText.elementFormat = new ElementFormat(uthmaniFont, UserModel.instance.fontSize*1.2, BaseMaterialTheme.PRIMARY_TEXT_COLOR);
+				rtlText.elementFormat = new ElementFormat(uthmaniFont, UserModel.instance.fontSize*1.2*userModel.font.scale, BaseMaterialTheme.PRIMARY_TEXT_COLOR);
 				rtlText.textAlign = "right";
 				rtlText.text = aya.aya + ". " + ResourceModel.instance.quranXML.sura[aya.sura-1].aya[aya.aya-1].@text;
 				addChild(rtlText);

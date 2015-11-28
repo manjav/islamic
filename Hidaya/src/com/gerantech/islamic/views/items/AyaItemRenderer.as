@@ -71,7 +71,7 @@ package com.gerantech.islamic.views.items
 			bismHeader = new BismHeader();
 			bismHeader.layoutData = new VerticalLayoutData(100);
 						
-			quranTextRenderer = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, "justify", "rtl", true, "center", userModel.fontSize*1.3, "mequran");
+			quranTextRenderer = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, "justify", "rtl", true, "center", userModel.fontSize*1.3*userModel.font.scale, userModel.font.value);
 			//quranTextRenderer.height = 122
 			quranTextRenderer.layoutData = new VerticalLayoutData(100);
 			addChild(quranTextRenderer);
@@ -147,7 +147,7 @@ package com.gerantech.islamic.views.items
 			//quranTextRenderer.alpha = 0.1;
 			if(aya.text==null)
 				aya.text = ResourceModel.instance.quranXML.sura[aya.sura-1].aya[aya.index].@text;
-			quranTextRenderer.text = aya.text;
+			quranTextRenderer.text = aya.text;//trace(aya.text)
 			
 			//(aya.aya==1?(aya.aya + " . "):"") + 	
 			if(!hasTranslation)
@@ -218,7 +218,7 @@ package com.gerantech.islamic.views.items
 			}
 			
 			if(isShow)
-				quranTextRenderer.elementFormat = new ElementFormat(quranTextRenderer.fontDescription, uint(userModel.fontSize*1.3), BaseMaterialTheme.PRIMARY_TEXT_COLOR);
+				quranTextRenderer.elementFormat = new ElementFormat(quranTextRenderer.fontDescription, uint(userModel.fontSize*1.3*userModel.font.scale), BaseMaterialTheme.PRIMARY_TEXT_COLOR);
 			
 			if(event.type==UserEvent.FONT_SIZE_CHANGE_END)
 			{

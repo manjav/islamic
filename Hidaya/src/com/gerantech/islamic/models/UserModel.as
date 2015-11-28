@@ -48,6 +48,7 @@ package com.gerantech.islamic.models
 		public var loaded:Boolean;
 
 
+		
 		public static function get instance():UserModel
 		{
 			if(_this == null)
@@ -118,6 +119,8 @@ package com.gerantech.islamic.models
 		public function set fontSize(value:uint):void{if(value==user.fontSize)return; user.fontSize=value, activeSaver(), dispatchEventWith(UserEvent.FONT_SIZE_CHANGING)};
 		public function get fontSize():uint{return user.fontSize};
 		
+		public function set font(value:Object):void{if(value==user.font)return; user.font=value, activeSaver()}
+		public function get font():Object{return user.font;}
 		
 /*		public function set fontFamily(value:String):void{appController.setFontFamily(user.fontFamily=value), activeSaver()}
 		public function get fontFamily():String{return user.fontFamily};

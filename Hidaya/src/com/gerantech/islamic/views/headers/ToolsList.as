@@ -8,6 +8,7 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.models.vo.Aya;
 	import com.gerantech.islamic.models.vo.Bookmark;
 	import com.gerantech.islamic.views.buttons.FlatButton;
+	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.greensock.TweenLite;
 	
 	import flash.utils.setTimeout;
@@ -31,7 +32,7 @@ package com.gerantech.islamic.views.headers
 		private var aya:Aya;
 
 		private var numContainer:LayoutGroup;
-		private var numTextField:TextField;
+		private var numTextField:RTLLabel;
 		//private var playButton:FlatButton;
 
 		private var scaleFactor:Number = 1;
@@ -70,11 +71,11 @@ package com.gerantech.islamic.views.headers
 			
 			numContainer = new LayoutGroup();
 			numContainer.backgroundSkin = new Image(Assets.getTexture("circle"));
+			numContainer.layout = new AnchorLayout();
 			addChild(numContainer);
 			
-			numTextField = new TextField(height, height, "", "mequrandev", uint(UserModel.instance.fontSize*1.5), 0x6d6d6d);
-			numTextField.hAlign = HAlign.CENTER;
-			numTextField.vAlign = VAlign.CENTER;
+			numTextField = new RTLLabel("", 0x6d6d6d, "center", null, false, "center", 1.5, "mequran");
+			numTextField.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, -numTextField.fontSize/5); 
 			numContainer.addChild(numTextField);
 			
 		//	UserModel.instance.addEventListener(UserEvent.FONT_SIZE_CHANGE_END, user_fontChangedHandler);

@@ -1,7 +1,5 @@
 package com.gerantech.islamic.models.vo
 {
-	
-
 	public class User
 	{
 		public var profile:Profile = new Profile();
@@ -53,6 +51,7 @@ package com.gerantech.islamic.models.vo
 		public var nightMode:Boolean;
 		public var remniderTime:Object = {value:"reminder_1"};
 		public var inbox:Array = [];
+		public var font:Object = {value:"mequran", scale:1};
 		
 		public function get navigationMode():Object
 		{
