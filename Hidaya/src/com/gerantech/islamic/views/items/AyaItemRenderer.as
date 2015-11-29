@@ -42,6 +42,7 @@ package com.gerantech.islamic.views.items
 
 		private var devider:Devider;
 		private var moreStrip:SimpleLayoutButton;
+		private var reservedFontSize:uint;
 
 		override protected function initialize():void
 		{
@@ -143,7 +144,9 @@ package com.gerantech.islamic.views.items
 			
 			toolsList.setData(aya, currentState==STATE_SELECTED);
 			
-			
+			if(reservedFontSize != userModel.fontSize)
+				quranTextRenderer.elementFormat = new ElementFormat(quranTextRenderer.fontDescription, uint(userModel.fontSize*1.3*userModel.font.scale), BaseMaterialTheme.PRIMARY_TEXT_COLOR);
+
 			//quranTextRenderer.alpha = 0.1;
 			if(aya.text==null)
 				aya.text = ResourceModel.instance.quranXML.sura[aya.sura-1].aya[aya.index].@text;
@@ -217,8 +220,11 @@ package com.gerantech.islamic.views.items
 				return;
 			}
 			
-			if(isShow)
+			if(isShow && reservedFontSize!=userModel.fontSize)
+			{
 				quranTextRenderer.elementFormat = new ElementFormat(quranTextRenderer.fontDescription, uint(userModel.fontSize*1.3*userModel.font.scale), BaseMaterialTheme.PRIMARY_TEXT_COLOR);
+				reservedFontSize = userModel.fontSize;
+			}
 			
 			if(event.type==UserEvent.FONT_SIZE_CHANGE_END)
 			{

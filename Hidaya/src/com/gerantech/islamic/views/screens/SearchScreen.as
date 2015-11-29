@@ -105,7 +105,7 @@ package com.gerantech.islamic.views.screens
 			suggestMode = userModel.searchSource==0;
 			if(input.length<2)
 			{
-				searchSubtitle.result = loc("search_error");
+				searchSubtitle.log(loc("search_error"), 0xFF0000);
 				return;
 			}
 			if(userModel.searchSource>0)
@@ -146,6 +146,12 @@ package com.gerantech.islamic.views.screens
 		
 		public function startSearch(pattern:String):void
 		{
+			if(pattern.length<2)
+			{
+				searchSubtitle.log(loc("search_error"), 0xFF0000);
+				return;
+			}
+			
 			suggestMode = false;
 			userModel.searchPatt = StrTools.getSimpleString(pattern);//trace(pattern, userModel.searchPatt)
 			if(userModel.searchSource>0)
@@ -217,7 +223,7 @@ package com.gerantech.islamic.views.screens
 			else
 				new Alert(this, loc("search_no"));*/
 			
-			searchSubtitle.result = wordCount== 0 ? loc("search_no") : StrTools.getNumberFromLocale(wordCount) + " " + loc('search_item') + " " + StrTools.getNumberFromLocale(resultList.length) + " " + loc('verses_in')
+			searchSubtitle.log(wordCount== 0 ? loc("search_no") : StrTools.getNumberFromLocale(wordCount) + " " + loc('search_item') + " " + StrTools.getNumberFromLocale(resultList.length) + " " + loc('verses_in'));
 			list.dataProvider = new ListCollection(resultList);
 		}
 
@@ -244,7 +250,7 @@ package com.gerantech.islamic.views.screens
 		private function translationErrorHandler(event:Event):void
 		{
 			loadingTranslation = false;
-			searchSubtitle.result = "translationErrorHandler";
+			searchSubtitle.log("translationErrorHandler", 0xFF0000);
 			event.currentTarget.removeEventListener(Person.TRANSLATION_LOADED, translationLoaded);
 			event.currentTarget.removeEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
 		}
@@ -261,7 +267,7 @@ package com.gerantech.islamic.views.screens
 		{
 			if(obj is String)
 			{
-				searchSubtitle.result = obj as String;
+				searchSubtitle.log(obj as String, 0xFF0000);
 				return;
 			}
 			
@@ -307,7 +313,7 @@ package com.gerantech.islamic.views.screens
 					}
 				}
 			}
-			searchSubtitle.result = resultList.length== 0 ? loc("search_no") : StrTools.getNumberFromLocale(wordCount) + " " + loc('search_item') + " " + StrTools.getNumberFromLocale(resultList.length) + " " + loc('verses_in')
+			searchSubtitle.log(resultList.length== 0 ? loc("search_no") : StrTools.getNumberFromLocale(wordCount) + " " + loc('search_item') + " " + StrTools.getNumberFromLocale(resultList.length) + " " + loc('verses_in'));
 			list.dataProvider = new ListCollection(resultList);
 			suggestMode = false;
 		}

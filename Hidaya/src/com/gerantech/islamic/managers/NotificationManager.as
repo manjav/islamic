@@ -42,14 +42,16 @@ package com.gerantech.islamic.managers
 			//pushwoosh.scheduleLocalNotification(12, "{\"alertBody\": \""++"\", \"alertAction\":\"Collect!\", \"soundName\":\"sound.caf\", \"badge\": 5, \"custom\": {\"a\":\"json\"}}");
 		}
 		
-		public function scheduleLocalNotification(seconds:uint, message:String, clearPreviouses:Boolean=true):void
+		public function scheduleLocalNotification(seconds:uint, message:String, clearPreviouses:Boolean=true, repeatCount:uint=1):void
 		{
 			if(!AppModel.instance.isAndroid)
 				return;
 		
 			if(clearPreviouses)
 				pushwoosh.clearLocalNotifications();
-			pushwoosh.scheduleLocalNotification(seconds, message);
+			
+			for (var n:uint=1; n<=repeatCount; n++)
+				pushwoosh.scheduleLocalNotification(n*seconds, message);
 		}		
 		
 		private function pushwoosh_givenTokenHandler(e:PushNotificationEvent):void

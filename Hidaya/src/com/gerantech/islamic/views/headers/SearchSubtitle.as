@@ -11,6 +11,8 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.popups.SearchSettingPopup;
 	
+	import flash.text.engine.ElementFormat;
+	
 	import mx.resources.ResourceManager;
 	
 	import feathers.controls.ImageLoader;
@@ -44,15 +46,6 @@ package com.gerantech.islamic.views.headers
 			height = _height = AppModel.instance.sizes.twoLineItem;
 		}
 		
-		public function set result(value:String):void
-		{
-			if(_result==value)
-				return;
-			
-			_result = value;
-			resultLabel.text = _result;
-		}
-
 		override protected function initialize():void
 		{
 			super.initialize();
@@ -161,5 +154,15 @@ package com.gerantech.islamic.views.headers
 			trace("sdfdsf");
 		}
 		
+		public function log(value:String, color:uint=0):void
+		{
+			if(_result==value)
+				return;
+			
+			_result = value;
+			if(resultLabel.color!=color)
+				resultLabel.elementFormat = new ElementFormat(resultLabel.fontDescription, resultLabel.fontSize, color);
+			resultLabel.text = _result;	
+		}
 	}
 }

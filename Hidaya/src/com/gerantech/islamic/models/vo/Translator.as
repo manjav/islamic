@@ -323,8 +323,8 @@ package com.gerantech.islamic.models.vo
 			var time:uint = uint(UserModel.instance.remniderTime.value.substr(9))*24*3600;
 			time = time;//24/60;trace(time)
 			
-			var msg:String = "{\"alertBody\": \""+text+"\" , \"custom\": {\"type\":\"goto\", \"sura\":\""+randomItem.sura+"\", \"aya\":\""+randomItem.aya+"\"}}"
-			NotificationManager.instance.scheduleLocalNotification(time, msg, true);//'{"alertBody": "'+text+'", "custom": {"type":"goto"}"}', true);
+			var msg:String = "{\"alertBody\": \""+text+"\" , \"custom\": {\"type\":\"goto\", \"sura\":\""+randomItem.sura+"\", \"aya\":\""+randomItem.aya+"\"}}";
+			NotificationManager.instance.scheduleLocalNotification(time, msg, true, 10);//'{"alertBody": "'+text+'", "custom": {"type":"goto"}"}', true);
 		}
 		
 		private function getRandomTranslate():Item

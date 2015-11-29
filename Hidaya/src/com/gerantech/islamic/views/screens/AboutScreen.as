@@ -1,10 +1,6 @@
 package com.gerantech.islamic.views.screens
 {
-	CONFIG::Android 
-		{
-		import com.gerantech.extensions.AndroidExtension;
-		}
-		
+	
 	import com.gerantech.islamic.managers.BillingManager;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;

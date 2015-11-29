@@ -56,10 +56,7 @@ package com.gerantech.islamic.managers
 		protected function php_completeHandler(event:Event):void
 		{
 			trace(UserModel.instance.user.profile.gid+loc("user_backup_complete"))
-			CONFIG::Android 
-			{
-				AndroidExtension.instance.showToast(loc("user_backup_complete"), 1);
-			}
+			AndroidExtension.instance.showToast(loc("user_backup_complete"), 1);
 		}		
 		
 		// Restore user data ----------------------------------
@@ -86,18 +83,11 @@ package com.gerantech.islamic.managers
 			{
 				UserModel.instance.loadByObject(u);
 				trace(UserModel.instance.user.profile.gid+loc("user_restored"));
-				CONFIG::Android 
-				{
-					AndroidExtension.instance.showToast(loc("user_restored"), 1);
-				}
+				AndroidExtension.instance.showToast(loc("user_restored"), 1);
 			}
 			else
 			{
 				trace(UserModel.instance.user.profile.gid+loc("user_restore_out_date"))
-				/*CONFIG::Android 
-				{
-					AndroidExtension.instance.showToast(loc("user_restore_out_date"), 1);
-				}*/
 			}
 		}		
 		

@@ -2,9 +2,7 @@ package com.gerantech.islamic.managers
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
-	import com.gerantech.islamic.models.vo.User;
 	
-	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
 	
 	import mx.resources.ResourceManager;

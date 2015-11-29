@@ -1,17 +1,14 @@
 package com.gerantech.islamic.views.lists
 {
-	CONFIG::Android 
-		{
-			import com.gerantech.extensions.AndroidExtension;
-		}
-	import com.greensock.TweenLite;
-	import com.greensock.easing.Sine;
+	import com.gerantech.extensions.AndroidExtension;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.views.items.SortableItemRenderer;
 	import com.gerantech.islamic.views.popups.Alert;
+	import com.greensock.TweenLite;
+	import com.greensock.easing.Sine;
 	
 	import flash.geom.Point;
 	import flash.utils.setTimeout;
@@ -138,10 +135,8 @@ package com.gerantech.islamic.views.lists
 				return;
 			if(touch.phase == TouchPhase.BEGAN)
 			{
-				CONFIG::Android 
-					{				
+				
 				AndroidExtension.instance.vibrate(10);
-					}
 				itemContainer.verticalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
 				tempY = touch.globalY-obj.y;
 				obj.filter = BlurFilter.createGlow(0, 0.5);
