@@ -42,7 +42,7 @@ package com.gerantech.islamic.models.vo
 		
 		public function loadTransltaion():void
 		{
-			trace("loadTransltaion", loadingState, state)
+			//trace("loadTransltaion", loadingState, state)
 			if(loadingState==1 && state==HAS_FILE)
 				state = SELECTED;
 
@@ -186,7 +186,8 @@ package com.gerantech.islamic.models.vo
 		{
 			//isTranslateDownloading = false;
 			percent = 0;
-			state = NO_FILE;                                                                                                                    
+			state = NO_FILE;    
+			loadingState = L_NOT_LOADED;
 			dbLoadSaver.closeLoader();
 			dbLoadSaver.removeEventListener("complete", dbLoadSaver_CompleteHandler);
 			dbLoadSaver.removeEventListener(IOErrorEvent.IO_ERROR, dbLoadSaver_ioErrorHandler);

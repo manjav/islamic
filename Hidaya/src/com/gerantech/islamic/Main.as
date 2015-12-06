@@ -20,6 +20,8 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.views.screens.SearchScreen;
 	import com.gerantech.islamic.views.screens.SettingsScreen;
 	
+	import flash.utils.getTimer;
+	
 	import feathers.controls.StackScreenNavigator;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.core.PopUpManager;
@@ -37,11 +39,6 @@ package com.gerantech.islamic
 		public function Main()
 		{
 			appModel = AppModel.instance;
-		}
-		
-		public function createScreens():void
-		{
-			appModel.theme = new CustomTheme();
 			
 			appModel.navigator = new StackScreenNavigator();
 			appModel.navigator.autoSizeMode = StackScreenNavigator.AUTO_SIZE_MODE_STAGE;
@@ -99,7 +96,12 @@ package com.gerantech.islamic
 			downloadItem.pushTransition = Cover.createCoverUpTransition();
 			downloadItem.popTransition = Reveal.createRevealDownTransition();
 			appModel.navigator.addScreen(appModel.PAGE_DOWNLOAD, downloadItem);
-
+				
+		}
+		
+		public function createScreens():void
+		{
+			appModel.theme = new CustomTheme();
 			appModel.drawers = new CustomDrawers();
 			appModel.myDrawer = new DrawerList(appModel.ltr);
 			
@@ -135,7 +137,6 @@ package com.gerantech.islamic
 			
 			appModel.navigator.rootScreenID = appModel.PAGE_QURAN;
 			appModel.dispatchEventWith(AppEvent.PUSH_FIRST_SCREEN);
-
 		}
 	}
 }

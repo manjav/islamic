@@ -46,15 +46,13 @@ package
 		private var appController:AppController;
 		
 		private var validateScreenTimeoutID:uint;
-		private var tt:int;
+		//public static var ft:int;
 
 		public function Hidaya()
 		{
-			tt = getTimer();
+			//ft = getTimer();
 			trace(ResourceManager.getInstance().getString("loc", "quran_t"))//, String.fromCharCode(0x25b8));
 			mouseEnabled = mouseChildren = false;
-			
-			
 			
 			if(stage)
 			{
@@ -127,7 +125,7 @@ package
 		}
 		
 		private function scaled9TexturesLoaded():void
-		{//trace(getTimer()-tt)
+		{
 			appController = AppController.instance;
 			configModel = ConfigModel.instance;
 			

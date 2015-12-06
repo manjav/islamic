@@ -11,24 +11,32 @@ package com.gerantech.islamic.models.vo
 	//	public var soundList:Vector.<SoundAya>;
 		public var checksums:Vector.<Checksum>;
 		public var breaks:String;
-		public var packages:Vector.<DownloadPackage>;
+		private var _packages:Vector.<DownloadPackage>;
 	
 		private var checksumLoadSaver:LoadAndSaver;
 		
 		public function Reciter(person:Object=null, type:String="translator", flag:Local=null)
 		{
 			super(person, type, flag);
-			packages = new Vector.<DownloadPackage>();
-			for each(var s:Sura in ResourceModel.instance.suraList)
-			{
-				if(s.ayas==null)
-					s.complete();
-				packages[s.index] = new DownloadPackage(s.tname, s.name);
-				for each(var a:Aya in s.ayas)
-					packages[s.index].ayas.push(new SoundAya(a.sura, a.aya, a.order, a.page, a.juze, this));
-			}
 		}
 		
+		public function get packages():Vector.<DownloadPackage>
+		{
+			if(_packages==null)
+			{
+				_packages = new Vector.<DownloadPackage>();
+				for each(var s:Sura in ResourceModel.instance.suraList)
+				{
+					if(s.ayas==null)
+						s.complete();
+					_packages[s.index] = new DownloadPackage(s.tname, s.name);
+					for each(var a:Aya in s.ayas)
+						_packages[s.index].ayas.push(new SoundAya(a.sura, a.aya, a.order, a.page, a.juze, this));
+				}
+			}
+			return _packages;
+		}
+
 		override public function set person(value:Object):void
 		{
 			super.person = value;

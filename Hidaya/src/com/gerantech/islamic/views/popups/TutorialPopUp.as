@@ -63,11 +63,12 @@ package com.gerantech.islamic.views.popups
 			list.snapToPages = true;
 			list.autoHideBackground = true;
 			list.verticalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
-			list.horizontalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
+			//list.horizontalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
 			//list.addEventListener("addAya", list_ayaChangedHandler);
 			list.addEventListener("next", list_nextHandler);
 			list.scrollToPageIndex(selectedTute, 0, 0);
-			addChild(list);		}
+			addChild(list);
+		}
 		
 		private function list_nextHandler():void
 		{
