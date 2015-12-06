@@ -64,6 +64,8 @@
 		
 		private var _padding:Number;
 		private var appModel:AppModel;
+
+		private var bitmapData:BitmapData;
 		
 		public function UthmaniPage(page:Page, width:Number, headerHeight:Number = 30, r:Number=0)
 		{
@@ -130,22 +132,25 @@
 			var _w:Number = mainWidth;
 			var _h:Number = mainHeight;
 			var rate:Number = 1;
-			/*if(mainHeight>512 && mainHeight<1024)
-			{
-				rate = 512/mainHeight;
-				_h = 512;
-				_w *= rate;
-			}
-			else if(mainHeight>=1024)
+			/*if(mainHeight>1024 && mainHeight<2048)
 			{
 				rate = 1024/mainHeight;
 				_h = 1024;
 				_w *= rate;
-			}*///trace(_w, _h, mainWidth, mainHeight, rate)
+			}
+			else */if(mainHeight>=2048)
+			{
+				rate = 2048/mainHeight;
+				_h = 2048;
+				_w *= rate;
+			}//trace(_w, _h, mainWidth, mainHeight, rate)
 			
 			var mat:Matrix = new Matrix();
 			mat.scale(rate, rate);
-			var bitmapData:BitmapData = new BitmapData(_w, _h, true, 0)
+			if(bitmapData!=null)
+				bitmapData.dispose();
+			
+			bitmapData = new BitmapData(_w, _h, true, 0)
 			bitmapData.draw(quran_txt, mat);
 			
 			var image:Image = new Image(Texture.fromBitmapData(bitmapData));
