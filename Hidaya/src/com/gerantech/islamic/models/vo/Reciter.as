@@ -15,9 +15,9 @@ package com.gerantech.islamic.models.vo
 	
 		private var checksumLoadSaver:LoadAndSaver;
 		
-		public function Reciter(person:Object=null, type:String="translator", flag:Local=null)
+		public function Reciter(person:Object=null, flag:Local=null)
 		{
-			super(person, type, flag);
+			super(person, TYPE_RECITER, flag);
 		}
 		
 		public function get packages():Vector.<DownloadPackage>
@@ -37,10 +37,6 @@ package com.gerantech.islamic.models.vo
 			return _packages;
 		}
 
-		override public function set person(value:Object):void
-		{
-			super.person = value;
-		}
 		
 		/*public function addSoundAya(aya:Aya):SoundAya
 		{

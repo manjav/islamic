@@ -89,7 +89,7 @@ package com.gerantech.islamic.models
 			var i:uint=0;
 			for each(var p:Object in config.reciters)
 			{
-				recit = new Reciter(p, "reciter", getFlagByPath(p.flag));
+				recit = new Reciter(p, getFlagByPath(p.flag));
 				recit.index = i;
 				recit.free = freeReciters.indexOf(recit.path)>-1;
 				reciters.push(recit);
@@ -181,11 +181,10 @@ package com.gerantech.islamic.models
 			var i:uint=0;
 			for each(var tr:Object in config.translators)
 			{
-				trans = new Translator(tr, Person.TYPE_TRANSLATOR, getFlagByPath(tr.flag));
+				trans = new Translator(tr, getFlagByPath(tr.flag));
 				//trans.compressed = tr.compressed;
 				trans.index = i;
 				trans.free = freeTranslators.indexOf(trans.path)>-1;
-				trans.localPath = userModel.TRANSLATOR_PATH + tr.path + "/" + tr.path + ".idb"//(trans.compressed?".db":".db");//xbqr
 				translators.push(trans);
 				i++;
 			}

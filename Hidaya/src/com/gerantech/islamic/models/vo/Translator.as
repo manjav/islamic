@@ -34,9 +34,9 @@ package com.gerantech.islamic.models.vo
 		public static const L_LOADED:int = 1;
 		public static const L_LOAD_ERROR:int = 2;
 		
-		public function Translator(person:Object=null, type:String="translator", flag:Local=null)
+		public function Translator(person:Object=null, flag:Local=null)
 		{
-			super(person, type, flag);
+			super(person, TYPE_TRANSLATOR, flag);
 		}
 		
 		

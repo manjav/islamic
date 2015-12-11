@@ -45,7 +45,6 @@ package com.gerantech.islamic.models.vo
 		public var name:String = "";
 		public var ename:String = "";
 		public var url:String = "";
-		public var localPath:String = "";
 		//public var pic:String = "";
 		public var size:Number = 1200;
 		
@@ -67,19 +66,21 @@ package com.gerantech.islamic.models.vo
 
 		public var free:Boolean;
 		
-		private var rm:IResourceManager;
-		private var _state:String = null;
+		protected var localPath:String = "";
+		protected var rm:IResourceManager;
+		protected var _state:String = null;
+		
 		private var imageLoading:Boolean;
 		private var iconLoadSaver:LoadAndSaver;
 
 		public function Person(person:Object=null, type:String="translator", flag:Local=null)
 		{
 			this.type = type;
-			this.person = person;
 			this.flag = flag;
+			setPerson(person);
 		}
 		
-		public function set person(value:Object):void
+		private function setPerson(value:Object):void
 		{
 			if(value==null)
 				return;
@@ -88,13 +89,15 @@ package com.gerantech.islamic.models.vo
 			this.name = value.name;
 			this.path = value.path;
 			this.url = value.url;
-			//this.pic = value.pic;
 			this.size = value.size;
 			this.mode = value.mode;
-			//htmlMode = value.name=="Transliteration"
-			//this.iconUrl = "com/gerantech/islamic/assets/images/"+type+"s/"+value.path.split(" ").join("-")+".png";
 			this.iconUrl = "http://gerantech.com/islamic/images/"+type+"s/"+value.path.split(" ").join("-")+".png";
 			this.iconPath = (type==TYPE_TRANSLATOR?UserModel.instance.TRANSLATOR_PATH:UserModel.instance.SOUNDS_PATH) + path + "/" + path + ".pbqr";
+			if(type==TYPE_TRANSLATOR)
+				this.localPath = UserModel.instance.TRANSLATOR_PATH + path + "/" + path + ".idb" ;
+			else
+				this.localPath = UserModel.instance.SOUNDS_PATH + path + "/" ;
+			this.state = checkState();
 			rm = ResourceManager.getInstance();
 			//message = getcurrentMessage();
 		}
@@ -112,7 +115,6 @@ package com.gerantech.islamic.models.vo
 			iconLoadSaver = new LoadAndSaver(iconPath, iconUrl, null, true);
 			iconLoadSaver.addEventListener("complete", iconLoadSaver_completeHandler);
 			iconLoadSaver.addEventListener("ioError", iconLoadSaver_ioErrorHandler);
-			//var gtstreamer:GTStreamer = new GTStreamer(File.applicationDirectory.resolvePath(imageUrl), imageLoaded, imageNotLoaded, null, true);
 		}
 		
 		protected function iconLoadSaver_ioErrorHandler(event:IOErrorEvent):void
@@ -131,29 +133,17 @@ package com.gerantech.islamic.models.vo
 				iconTexture = Texture.fromBitmap(iconLoadSaver.fileLoader.content as Bitmap);
 			iconTextureCreated();
 		}
-		/*private function imageLoaded(g:GTStreamer):void
-		{
-			iconTexture = Texture.fromBitmap(g.loader.content as Bitmap);
-			iconTextureCreated();
-		}*/
-		private function imageNotLoaded():void
-		{
-			iconTexture = Person.getDefaultImage();
-			iconTextureCreated();
-		}
+
 		private function iconTextureCreated():void
 		{
 			hasIcon = true;
 			imageLoading = false;
-			state = checkState();
 			dispatchEventWith(ICON_LOADED);			
 		}
-		
 		
 		public function checkState():String
 		{
 			var ret:String = state;
-			
 			if(localPath=="" || localPath==null)
 				return NO_FILE;
 			
@@ -166,6 +156,7 @@ package com.gerantech.islamic.models.vo
 			else if(ret != SELECTED)
 				ret = HAS_FILE;
 			
+			//trace(localPath, ret, type)
 			return ret;
 		}
 		

@@ -202,7 +202,7 @@ package com.gerantech.islamic.views.items
 				AppController.instance.alert("purchase_popup_title", "purchase_popup_message", "cancel_button", "purchase_popup_accept_label", BillingManager.instance.purchase);
 				return;
 			}*/
-			
+			trace(person.type)
 			super.isSelected = value;
 			//trace(index, value,person.state);
 			switch(person.state)
