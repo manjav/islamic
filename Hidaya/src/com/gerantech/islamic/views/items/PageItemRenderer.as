@@ -133,7 +133,7 @@ package com.gerantech.islamic.views.items
 			if(changes<0)
 			{
 				changes /=2;
-				headerBaseLine = scrollPos-scrollOffset>appModel.sizes.orginalHeightFull*2 ? 0 : appModel.sizes.toolbar;
+				headerBaseLine = scrollPos-scrollOffset>appModel.sizes.orginalHeightFull*3 ? 0 : appModel.sizes.toolbar;
 			}
 			else
 			{

@@ -59,6 +59,7 @@ package com.gerantech.islamic.views.screens
 			userModel = UserModel.instance;
 			
 			appModel.drawers.isEnabled = true;
+			backButtonHandler = null;
 			//menuButtonHandler = menuButtonFunction;
 			//searchButtonHandler = searchButtonFunction;
 			addEventListener(FeathersEventType.TRANSITION_IN_COMPLETE, transitionInCompleteHandler);
