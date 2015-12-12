@@ -20,7 +20,7 @@ package com.gerantech.islamic.views.screens
 	import starling.display.Quad;
 	import starling.events.Event;
 	
-	public class PersonsScreen extends BaseScreen
+	public class PersonsScreen extends BasePanelScreen
 	{
 		private var selectedPersonList:List;
 		private var footers:LayoutGroup;

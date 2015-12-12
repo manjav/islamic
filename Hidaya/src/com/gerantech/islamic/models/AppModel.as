@@ -33,6 +33,7 @@ package com.gerantech.islamic.models
 	public class AppModel extends EventDispatcher
 	{
 		
+		public const PAGE_DASHBOARD:String = "page_dashboard";
 		public const PAGE_QURAN:String = "page_quran";
 		public const PAGE_INDEX:String = "page_index";
 		public const PAGE_BOOKMARKS:String = "page_bookmarks";

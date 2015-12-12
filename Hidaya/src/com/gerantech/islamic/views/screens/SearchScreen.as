@@ -24,7 +24,7 @@ package com.gerantech.islamic.views.screens
 	
 	import starling.events.Event;
 	
-	public class SearchScreen extends BaseScreen
+	public class SearchScreen extends BasePanelScreen
 	{
 		private var list:List;
 		private var resultList:Array;

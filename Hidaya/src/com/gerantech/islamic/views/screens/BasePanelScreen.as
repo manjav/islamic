@@ -8,9 +8,9 @@ package com.gerantech.islamic.views.screens
 	
 	import mx.resources.ResourceManager;
 	
-	import feathers.controls.Screen;
+	import feathers.controls.PanelScreen;
 	
-	public class BaseScreen extends Screen
+	public class BasePanelScreen extends PanelScreen
 	{
 		protected var appModel:AppModel;
 		protected var userModel:UserModel;
@@ -25,11 +25,24 @@ package com.gerantech.islamic.views.screens
 			userModel = UserModel.instance;
 			
 			appModel.drawers.isEnabled = false;
+/*			width = appModel.sizes.width;
+			height = appModel.sizes.height;*/
+		//	headerFactory = customHeaderFactory;
 			backButtonHandler = backButtonFunction;
 			searchButtonHandler = searchButtonFunction;
 			
 			Flurry.getInstance().logEvent(getQualifiedClassName(this).split("::")[1], {type:type});
 		}
+		/*
+		protected function customHeaderFactory():Header
+		{
+			var header:Header = new Header();
+			header.visible = false
+			//header.backgroundSkin = new Quad( 10, 10, 0xff0000 );
+			
+			return header;
+		}*/
+		
 		
 		protected function backButtonFunction():void
 		{

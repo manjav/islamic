@@ -24,6 +24,9 @@ package com.gerantech.islamic.views.headers
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
+	import starling.animation.Transitions;
+	import starling.animation.Tween;
+	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
 	import starling.filters.BlurFilter;
@@ -54,6 +57,8 @@ package com.gerantech.islamic.views.headers
 			autoSizeMode = AUTO_SIZE_MODE_STAGE;
 			appModel = AppModel.instance;
 			backgroundSkin = new Quad(1,1,BaseMaterialTheme.CHROME_COLOR);
+			
+			addEventListener("moveToolbar", moveToolbarHandler);
 			
 			height = appModel.sizes.toolbar;
 			gap = Math.min(appModel.sizes.toolbar*1.2, appModel.sizes.orginalWidth/5);
@@ -99,6 +104,12 @@ package com.gerantech.islamic.views.headers
 			setLayout();
 		}
 		
+		private function moveToolbarHandler(event:Event):void
+		{
+			y = Math.max(-appModel.sizes.toolbar, Math.min(event.data as Number, 0));
+			visible = y>-appModel.sizes.toolbar;
+		}
+		
 		private function drawers_changeHandler(event:Event):void
 		{
 			if(event.type==Event.OPEN)
@@ -141,6 +152,7 @@ package com.gerantech.islamic.views.headers
 		{
 			fadeOut();
 			setTimeout(fadeIn, 500);
+			y=0;
 		}
 		
 		public function fadeOut():void
@@ -185,19 +197,19 @@ package com.gerantech.islamic.views.headers
 				addChild(activeButtons[i]);
 				TweenLite.to(activeButtons[i], 0.3, {alpha:1, x:appModel.ltr?appModel.sizes.width-i*gap-padding:i*gap+padding, delay:i*0.05});
 			}
+
 			var naviIcon:String = "arrow_w_"+appModel.align;
 			switch(appModel.navigator.activeScreenID)
 			{
 				case appModel.PAGE_QURAN:
 					naviIcon = "menu";
 					break;
-				/*case appModel.PAGE_PERSON:
-				case appModel.PAGE_FILTERED:
-					naviIcon = "arrow_w_up";
-					break;*/
 			}
 			navigateButton.texture = naviIcon;
 			TweenLite.to(navigateButton, 0.3, {alpha:1, scaleX:1, scaleY:1});
+			
+			
+			
 			
 			if(appModel.navigator.activeScreenID==appModel.PAGE_SEARCH || appModel.navigator.activeScreenID==appModel.PAGE_INDEX || appModel.navigator.activeScreenID==appModel.PAGE_FILTERED)
 			{

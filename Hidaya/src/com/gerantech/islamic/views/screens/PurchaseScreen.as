@@ -12,7 +12,7 @@ package com.gerantech.islamic.views.screens
 
 
 	
-	public class PurchaseScreen extends BaseScreen
+	public class PurchaseScreen extends BasePanelScreen
 	{
 		
 		public static const RECITER:uint = 0;

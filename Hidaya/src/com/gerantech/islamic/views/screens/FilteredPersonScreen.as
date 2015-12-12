@@ -22,7 +22,7 @@ package com.gerantech.islamic.views.screens
 	import starling.events.Event;
 	import com.gerantech.islamic.views.headers.ShopHeader;
 	
-	public class FilteredPersonScreen extends BaseScreen
+	public class FilteredPersonScreen extends BasePanelScreen
 	{
 		public var mode:Local;
 		public var flags:Array;

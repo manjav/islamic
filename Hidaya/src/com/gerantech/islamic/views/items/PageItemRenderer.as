@@ -31,6 +31,8 @@ package com.gerantech.islamic.views.items
 		private var findingMode:Boolean;
 		private var findRatio:Number = 1;
 		private var findTime:int;
+		private var headerBaseLine:int;
+		private var scrollOffset:Number = 0;
 		
 		override protected function initialize():void
 		{
@@ -39,7 +41,7 @@ package com.gerantech.islamic.views.items
 			var listLayout: VerticalLayout = new VerticalLayout();
 			listLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
-			listLayout.paddingTop = appModel.sizes.border+header._height;
+			listLayout.paddingTop = appModel.sizes.border + appModel.sizes.subtitle + appModel.sizes.toolbar;
 			listLayout.paddingBottom = ConfigModel.instance.hasReciter?appModel.sizes.toolbar+appModel.sizes.border:appModel.sizes.border
 			listLayout.hasVariableItemDimensions = true;
 			//listLayout.gap = appModel.sizes.border;
@@ -61,7 +63,7 @@ package com.gerantech.islamic.views.items
 			//list.isQuickHitAreaEnabled = true;
 			list.addEventListener(Event.SELECT, list_selectHandler);
 			list.addEventListener(Event.CHANGE, list_changedHandler);
-			list.addEventListener(Event.SCROLL, list_scrollChangedHandler);
+			list.addEventListener(Event.SCROLL, list_scrollHandler);
 			//list.addEventListener(FeathersEventType.SCROLL_START, list_scrollHandler);
 			//list.addEventListener(FeathersEventType.SCROLL_COMPLETE, list_scrollHandler);
 			addChild(list);
@@ -118,18 +120,32 @@ package com.gerantech.islamic.views.items
 				_owner.dispatchEventWith("changeTranslation", false, aya);
 		}
 		
-		private function list_scrollChangedHandler():void
+		private function list_scrollHandler():void
 		{
 			if(findingMode || !list.visible || !isShow)
 				return;
-			
-			var scrollPos:Number = Math.max(0,list.verticalScrollPosition);
+			var scrollPos:Number = Math.max(0, list.verticalScrollPosition);
 			var changes:Number = startScrollBarIndicator-scrollPos;
-			if(changes<0)
-				changes /=2;
-			
-			headerContainer.y = Math.max(-header._height, Math.min(0, headerContainer.y+changes));
 			startScrollBarIndicator = scrollPos;
+			if(changes==0)
+				return;
+			
+			if(changes<0)
+			{
+				changes /=2;
+				headerBaseLine = scrollPos-scrollOffset>appModel.sizes.orginalHeightFull*2 ? 0 : appModel.sizes.toolbar;
+			}
+			else
+			{
+				scrollOffset = scrollPos;
+				headerBaseLine = appModel.sizes.toolbar;
+			}
+			var y:Number = Math.max(headerBaseLine-appModel.sizes.subtitle, Math.min(headerBaseLine, headerContainer.y+changes))
+			headerContainer.y = y;
+			if(headerBaseLine<=0 || changes>0)
+				appModel.toolbar.dispatchEventWith("moveToolbar", false, y-appModel.sizes.toolbar);
+			//trace(changes, headerBaseLine, y);
+			headerContainer.visible = y > -appModel.sizes.subtitle;
 			Player.instance.dispatchEventWith(Player.APPEARANCE_CHANGED, false, changes);
 		}
 		
@@ -148,6 +164,7 @@ package com.gerantech.islamic.views.items
 				_owner.addEventListener("requestChangeItems", _owner_requestChangeItemsHandler);
 
 			list.visible = false;
+
 		}
 		
 		override protected function commitAfterStopScrolling():void

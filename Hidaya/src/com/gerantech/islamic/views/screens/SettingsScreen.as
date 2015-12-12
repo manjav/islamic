@@ -12,7 +12,7 @@ package com.gerantech.islamic.views.screens
 	
 	import starling.events.Event;
 	
-	public class SettingsScreen extends BaseScreen
+	public class SettingsScreen extends BasePanelScreen
 	{
 		private var locPanel:SettingPanel;
 		private var idlePanel:SettingPanel;

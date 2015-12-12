@@ -19,7 +19,7 @@ package com.gerantech.islamic.views.screens
 	
 	import starling.events.Event;
 
-	public class BookmarksScreen extends BaseScreen
+	public class BookmarksScreen extends BasePanelScreen
 	{
 		private var list:List;
 

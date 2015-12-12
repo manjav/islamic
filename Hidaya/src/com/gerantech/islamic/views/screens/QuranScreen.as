@@ -33,14 +33,11 @@ package com.gerantech.islamic.views.screens
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+
 	
-	[Event(name="complete", type="starling.events.Event")]
-	[Event(name="showSettings", type="starling.events.Event")]
-	
-	public class QuranScreen extends PanelScreen
+	public class QuranScreen extends BaseScreen
 	{
-		public static const SHOW_SETTINGS:String = "showSettings";
-		
+	
 		private var list:List;
 		private var translatorsList:PersonsScreen;
 		private var recitersList:PersonsScreen;		
@@ -62,7 +59,6 @@ package com.gerantech.islamic.views.screens
 			userModel = UserModel.instance;
 			
 			appModel.drawers.isEnabled = true;
-			headerFactory = customHeaderFactory;
 			//menuButtonHandler = menuButtonFunction;
 			//searchButtonHandler = searchButtonFunction;
 			addEventListener(FeathersEventType.TRANSITION_IN_COMPLETE, transitionInCompleteHandler);
@@ -130,12 +126,18 @@ package com.gerantech.islamic.views.screens
 			list.snapToPages = true;
 			list.autoHideBackground = true;
 			list.verticalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
+			list.addEventListener(Event.SCROLL, list_scrollHandler);
 			list.addEventListener("showTranslation", list_showTranslationHandler);
 			list.addEventListener("changeTranslation", list_changeTranslationHandler);
 			list.addEventListener(TouchEvent.TOUCH, onTouch);
 			//list.addEventListener("addAya", list_ayaChangedHandler);
 			//list.addEventListener("removeAya", list_ayaChangedHandler);
 			addChild(list);
+		}
+		
+		private function list_scrollHandler():void
+		{
+			appModel.toolbar.dispatchEventWith("moveToolbar", false, 0);
 		}
 		
 		private function list_showTranslationHandler(event:Event):void
@@ -182,22 +184,7 @@ package com.gerantech.islamic.views.screens
 			addChild(player);
 			translationsPage = null;
 		}
-		
-		
-		
-		protected function customHeaderFactory():Header
-		{
-			var header:Header = new Header();
-			header.visible = false;
-			return header;
-		}
-		
-		/*protected function menuButtonHandler():void
-		{
-			AppController.instance.toggleDrawer();
-			super.menuButtonHandler
-		}*/	
-				
+
 		protected function app_setItemHandler(event:Event):void
 		{
 			var index:int;

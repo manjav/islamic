@@ -23,12 +23,12 @@ package com.gerantech.islamic.views.items
 		override protected function initialize():void
 		{
 			super.initialize();
-			
 			layout = new AnchorLayout();
 			
 			headerContainer = new LayoutGroup();
+			headerContainer.y = appModel.sizes.toolbar;
 			headerContainer.layout = new AnchorLayout();
-			headerContainer.layoutData = new AnchorLayoutData(NaN, 0, NaN, 0);
+			headerContainer.layoutData = new AnchorLayoutData(NaN, 0, NaN, 0)
 			addChild(headerContainer);
 			
 			header = new UthmaniSubtitle();

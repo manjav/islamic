@@ -12,7 +12,7 @@ package com.gerantech.islamic.views.screens
 	import starling.events.Event;
 	import com.gerantech.islamic.views.items.InboxItemRenderer;
 
-	public class InboxScreen extends BaseScreen
+	public class InboxScreen extends BasePanelScreen
 	{
 		private var list:List;
 		public function InboxScreen()
