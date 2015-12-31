@@ -10,8 +10,6 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.headers.TranslationHeader;
 	import com.gerantech.islamic.views.items.TranslationPageItemRenderer;
-	import com.greensock.TweenLite;
-	import com.greensock.easing.Sine;
 	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -25,6 +23,8 @@ package com.gerantech.islamic.views.popups
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalLayout;
 	
+	import starling.animation.Transitions;
+	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
 
@@ -60,13 +60,15 @@ package com.gerantech.islamic.views.popups
 				background.y = startRect.y;
 				addChildAt(background, 0);
 				
-				TweenLite.to(background, 0.3, {y:0, height:actualHeight, ease:Sine.easeIn, onComplete:onEndShowTween});
+				Starling.juggler.tween(background, 0.3, {y:0, height:actualHeight, onComplete:onEndShowTween, transition:Transitions.EASE_IN});
+				//TweenLite.to(background, 0.3, {y:0, height:actualHeight, ease:Sine.easeIn, onComplete:onEndShowTween});
 			}
 			
 			if(header)
 			{
 				header.alpha = 0;
-				TweenLite.to(header, 0.3, {alpha:1, delay:0.3});
+				Starling.juggler.tween(header, 0.3, {alpha:1, delay:0.3});
+				//TweenLite.to(header, 0.3, {alpha:1, delay:0.3});
 			}
 		}
 		private function onEndShowTween():void
@@ -174,11 +176,13 @@ package com.gerantech.islamic.views.popups
 		{
 			dispatchEventWith("startClosing");
 			removeChildren(1);
-			TweenLite.to(background, 0.3, {y:startRect.y, height:startRect.height, onComplete:backgroundCollapsed, ease:Sine.easeOut});
+			Starling.juggler.tween(background, 0.3, {y:startRect.y, height:startRect.height, onComplete:backgroundCollapsed, transition:Transitions.EASE_OUT_IN});
+			//TweenLite.to(background, 0.3, {y:startRect.y, height:startRect.height, onComplete:backgroundCollapsed, ease:Sine.easeOut});
 		}
 		private function backgroundCollapsed():void
 		{
-			TweenLite.to(background, 0.2, {alpha:0, onComplete:super.close});
+			Starling.juggler.tween(background, 0.2, {alpha:0, onComplete:super.close});
+			//TweenLite.to(background, 0.2, {alpha:0, onComplete:super.close});
 		}			
 		
 		// Fade in-out header
@@ -187,11 +191,13 @@ package com.gerantech.islamic.views.popups
 			if(event.type == FeathersEventType.SCROLL_START)
 			{
 				header.alpha = 0;
-				TweenLite.killTweensOf(header);
+				Starling.juggler.removeTweens(header);
+				//TweenLite.killTweensOf(header);
 			}
 			else
 			{
-				TweenLite.to(header, 1, {alpha:1});
+				Starling.juggler.tween(header, 1, {alpha:1});
+				//TweenLite.to(header, 1, {alpha:1});
 			}
 		}
 		

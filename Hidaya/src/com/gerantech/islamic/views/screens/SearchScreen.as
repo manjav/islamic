@@ -23,6 +23,7 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.VerticalLayout;
 	
 	import starling.events.Event;
+	import com.gerantech.islamic.views.controls.SearchInput;
 	
 	public class SearchScreen extends BasePanelScreen
 	{
@@ -341,5 +342,12 @@ package com.gerantech.islamic.views.screens
 			userModel.setLastItem(item.sura, item.aya);
 			appModel.navigator.popScreen();
 		}
+		
+		override protected function createToolbarItems():void
+		{
+			super.createToolbarItems();
+			appModel.toolbar.centerItem = new SearchInput();
+		}
+		
 	}
 }

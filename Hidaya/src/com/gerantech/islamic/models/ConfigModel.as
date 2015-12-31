@@ -22,6 +22,7 @@ package com.gerantech.islamic.models
 		public var recitersModes:Array;
 		
 		public var locals:Array;
+		public var parts:Array;
 		public var views:Array;
 		public var fonts:Array;
 		public var languages:Array;
@@ -58,6 +59,7 @@ package com.gerantech.islamic.models
 			locals = getLocals();
 			fonts = config.application.fonts;
 			views = config.application.views;
+			parts = config.application.parts;
 			languages = config.languages;
 
 			setReciters();

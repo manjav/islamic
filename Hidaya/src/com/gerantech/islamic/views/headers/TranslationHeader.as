@@ -51,20 +51,20 @@ package com.gerantech.islamic.views.headers
 			super.initialize();
 			layout = new AnchorLayout();
 			
-			height = appModel.sizes.subtitle;
+			height = appModel.sizes.toolbar;
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
 			backgroundSkin.alpha = 0.8//UserModel.instance.nightMode ? 0.9 : 0.7;
 			
 			suraImage = new ImageLoader();
 			suraImage.delayTextureCreation = true;
-			suraImage.height = uint(height*0.6);
+			suraImage.height = uint(height*0.5);
 			suraImage.layoutData = new AnchorLayoutData(NaN,NaN,NaN,NaN,0,0);
 			addChild(suraImage);
 			
 			var closeButton:FlatButton = new FlatButton("arrow_w_right", null, true);
 			closeButton.layoutData = new AnchorLayoutData(0,0,0);
 			closeButton.width = height;
-			closeButton.iconScale = 0.5;
+			closeButton.iconScale = 0.4;
 			closeButton.addEventListener(Event.TRIGGERED, closeButton_triggeredHandler);
 			addChild(closeButton);
 		}

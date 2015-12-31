@@ -1,14 +1,11 @@
 package com.gerantech.islamic.views.actions
 {
-	import com.greensock.TweenLite;
-	import com.greensock.easing.Back;
-	import com.greensock.easing.Elastic;
 	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
+	import com.gerantech.islamic.views.actions.items.ActionItemRenderer;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	
 	import flash.geom.Point;
@@ -18,14 +15,14 @@ package com.gerantech.islamic.views.actions
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
 	
-	import starling.display.Button;
+	import starling.animation.Transitions;
+	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	import starling.filters.BlurFilter;
-	import com.gerantech.islamic.views.actions.items.ActionItemRenderer;
 	
 	
 	public class ModeActionList extends LayoutGroup
@@ -39,7 +36,7 @@ package com.gerantech.islamic.views.actions
 		
 		private var personModes:Vector.<ActionItemRenderer>;
 		private var timeoutID:uint;
-		private var background:Quad;
+		private var overlay:Quad;
 		public var actionButton:FlatButton;
 		
 		public function ModeActionList(type:String)
@@ -54,8 +51,8 @@ package com.gerantech.islamic.views.actions
 			actionButton.y = actualHeight-AppModel.instance.sizes.subtitle;
 			/*if(opened)
 				animateButtons(true);*/
-			background.width = actualWidth;
-			background.height = actualHeight;
+			overlay.width = actualWidth;
+			overlay.height = actualHeight;
 		}
 		
 		override protected function initialize():void
@@ -63,8 +60,8 @@ package com.gerantech.islamic.views.actions
 			super.initialize();
 			layout = new AnchorLayout();
 			
-			background = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
-			background.alpha = 0;
+			overlay = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
+			overlay.alpha = 0;
 			//background.layoutData = new AnchorLayoutData(0,0,0,0);
 			
 			
@@ -118,7 +115,8 @@ package com.gerantech.islamic.views.actions
 		private function animateButtons(opened:Boolean):void
 		{
 			clearTimeout(timeoutID);
-			TweenLite.to(actionButton, 1, {rotation:(opened?135:0)*(Math.PI/180), ease:Elastic.easeOut});
+			Starling.juggler.tween(actionButton, 1, {rotation:(opened?Math.PI/4:0), transition:Transitions.EASE_OUT_ELASTIC});
+			//TweenLite.to(actionButton, 1, {rotation:(opened?135:0)*(Math.PI/180), ease:Elastic.easeOut});
 			if(personModes==null)
 			{	
 				personModes = new Vector.<ActionItemRenderer>();
@@ -138,13 +136,15 @@ package com.gerantech.islamic.views.actions
 					personModes[i].alpha = 0;
 				}
 				bY = opened ? actionButton.y-AppModel.instance.sizes.toolbar*(1.8+i) : actionButton.y;
-				TweenLite.to(personModes[i], opened?0.3:0.2, {delay:i*0.05, alpha:opened?1:0, y:bY, ease:opened?Back.easeOut:Back.easeIn});
+				Starling.juggler.tween(personModes[i], opened?0.3:0.2, {delay:i*0.05, alpha:opened?1:0, y:bY, transition:opened?Transitions.EASE_OUT_BACK:Transitions.EASE_IN_BACK});
+//				TweenLite.to(personModes[i], opened?0.3:0.2, {delay:i*0.05, alpha:opened?1:0, y:bY, ease:opened?Back.easeOut:Back.easeIn});
 			}
-			TweenLite.to(background, 0.5, {alpha:(opened?0.9:0)});
-			
+
+			Starling.juggler.tween(overlay, 0.3, {alpha:(opened?0.9:0)});
+			//TweenLite.to(overlay, 0.5, {alpha:(opened?0.9:0)});
 			if(opened)
 			{
-				addChildAt(background, 0);
+				addChildAt(overlay, 0);
 				setTimeout(addEventListener, 500, TouchEvent.TOUCH, bg_touchHandler);
 			}
 			else
@@ -160,7 +160,7 @@ package com.gerantech.islamic.views.actions
 				if(personModes[i].parent==this)
 					removeChild(personModes[i]);
 			
-			removeChild(background);
+			removeChild(overlay);
 		}
 		/*
 		public function resize(width:Number, height:Number):void
@@ -172,7 +172,6 @@ package com.gerantech.islamic.views.actions
 				hideTypes();
 				setTimeout(animateButtons, 500, opened);
 			}
-		}
-		*/
+		}*/
 	}
 }

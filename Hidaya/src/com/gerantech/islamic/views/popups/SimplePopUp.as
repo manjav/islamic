@@ -4,7 +4,6 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	import com.greensock.TweenLite;
 	
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.ScrollContainer;
@@ -13,6 +12,8 @@ package com.gerantech.islamic.views.popups
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 	
+	import starling.animation.Tween;
+	import starling.core.Starling;
 	import starling.filters.BlurFilter;
 
 	public class SimplePopUp extends BasePopUp
@@ -81,10 +82,10 @@ package com.gerantech.islamic.views.popups
 			addChild(spacer);
 			
 			var buttonLayout:HorizontalLayout = new HorizontalLayout();
-			buttonLayout.padding = -appModel.sizes.twoLineItem*0.2;
+			buttonLayout.padding = -appModel.sizes.DP16;
 			//buttonLayout.paddingTop = -appModel.sizes.itemHeight*0.3;
 			buttonLayout.horizontalAlign = appModel.ltr ? "right" : "left";
-			buttonLayout.gap = appModel.sizes.border;
+			buttonLayout.gap = -appModel.sizes.DP8
 			
 			buttonBar = new LayoutGroup();
 			buttonBar.layout = buttonLayout;
@@ -106,13 +107,22 @@ package com.gerantech.islamic.views.popups
 		
 		public function show():void
 		{
-			TweenLite.to(this, 0.3, {alpha:1, onComplete:initializeCompleted});
+			var tw:Tween = new Tween(this, 0.3);
+			tw.fadeTo(1);
+			tw.onComplete = initializeCompleted;
+			Starling.juggler.add(tw);
 		}
 		
 		override public function close():void
 		{
 			AppController.instance.removeEventListener(AppEvent.ORIENTATION_CHANGED, orientationChangedHandler);
-			TweenLite.to(this, 0.2, {alpha:0, onComplete:super.close});
+			if(hasEventListener("startClosing"))
+				dispatchEventWith("startClosing"); 
+			
+			var tw:Tween = new Tween(this, 0.2);
+			tw.fadeTo(0);
+			tw.onComplete = super.close;
+			Starling.juggler.add(tw);
 		}		
 		
 		/*override protected function feathersControl_addedToStageHandler(event:Event):void

@@ -1,14 +1,12 @@
 package com.gerantech.islamic.views.lists
 {
-	import com.gerantech.extensions.AndroidExtension;
+	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.views.items.SortableItemRenderer;
-	import com.gerantech.islamic.views.popups.Alert;
-	import com.greensock.TweenLite;
-	import com.greensock.easing.Sine;
+	import com.gerantech.islamic.views.popups.UndoAlert;
 	
 	import flash.geom.Point;
 	import flash.utils.setTimeout;
@@ -17,9 +15,13 @@ package com.gerantech.islamic.views.lists
 	
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.ScrollContainer;
+	import feathers.core.PopUpManager;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
+	import starling.animation.Transitions;
+	import starling.animation.Tween;
+	import starling.core.Starling;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -97,22 +99,32 @@ package com.gerantech.islamic.views.lists
 			var deleted:SortableItemRenderer = itemsList.splice(deleteIndex, 1)[0];
 			deleted.filter = null;
 			deleted.includeInLayout = deleted.isEnabled = false;
-			TweenLite.to(deleted, 0.5, {x:width, onComplete:removeItem, ease:Sine.easeIn, onCompleteParams:[deleted, deleteIndex]})
+			Starling.juggler.tween(deleted, 0.5, {x:width, transition:Transitions.EASE_IN, onComplete:removeItem, onCompleteArgs:[deleted, deleteIndex]});
+			//TweenLite.to(deleted, 0.5, {x:width, onComplete:removeItem, ease:Sine.easeIn, onCompleteParams:[deleted, deleteIndex]})
 			setTimeout(srotList, 300);
 		}
 		
 		private function removeItem(item:SortableItemRenderer, index:uint):void
 		{
 			itemContainer.removeChild(item);
-			new Alert(parent, ResourceManager.getInstance().getString("loc", "undo_remove"), undoDeleteCaller, [item,index]);
+			var undoAlert:UndoAlert = new UndoAlert(ResourceManager.getInstance().getString("loc", "undo_remove"), undoDeleteCaller, 2, 1, [item,index]);
+			undoAlert.addEventListener(Event.CLOSE, undoAlert_closeHandler);
+			PopUpManager.addPopUp(undoAlert, false);
+			//new Alert(parent, ResourceManager.getInstance().getString("loc", "undo_remove"), undoDeleteCaller, [item,index]);
+			function undoAlert_closeHandler(event:Event):void
+			{
+				PopUpManager.removePopUp(event.currentTarget as UndoAlert, true);
+			}
 		}
+		
 		
 		private function undoDeleteCaller(item:SortableItemRenderer, index:uint):void
 		{
 			itemsList.splice(index, 0, item);
 			itemContainer.addChild(item);
 			item.x = width;
-			TweenLite.to(item, 0.5, {x:0, ease:Sine.easeOut})
+			Starling.juggler.tween(item, 0.5, {x:0, transition:Transitions.EASE_IN});
+			//TweenLite.to(item, 0.5, {x:0, ease:Sine.easeOut})
 			setTimeout(srotList, 300);
 		}
 		
@@ -136,7 +148,7 @@ package com.gerantech.islamic.views.lists
 			if(touch.phase == TouchPhase.BEGAN)
 			{
 				
-				AndroidExtension.instance.vibrate(10);
+				NativeAbilities.instance.vibrate(10);
 				itemContainer.verticalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
 				tempY = touch.globalY-obj.y;
 				obj.filter = BlurFilter.createGlow(0, 0.5);
@@ -163,7 +175,8 @@ package com.gerantech.islamic.views.lists
 			for each(var a:SortableItemRenderer in itemsList)
 			{
 				a.includeInLayout = a.isEnabled = true;
-				TweenLite.to(a, 0.3, {y:itemHeight*i});
+				Starling.juggler.tween(a, 0.3, {y:itemHeight*i});
+				//TweenLite.to(a, 0.3, {y:itemHeight*i});
 				sortedPersons.push(a.person);
 				i++;
 			}

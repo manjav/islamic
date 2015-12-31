@@ -2,7 +2,6 @@ package com.gerantech.islamic.views.controls
 {
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.vo.DownloadPackage;
-	import com.greensock.easing.Elastic;
 	
 	import flash.utils.setTimeout;
 	

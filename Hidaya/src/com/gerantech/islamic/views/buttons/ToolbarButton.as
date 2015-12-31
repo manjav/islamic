@@ -1,6 +1,7 @@
 package com.gerantech.islamic.views.buttons
 {
 	import com.gerantech.islamic.models.Assets;
+	import com.gerantech.islamic.models.vo.ToolbarButtonData;
 	
 	import starling.display.Image;
 
@@ -11,12 +12,12 @@ package com.gerantech.islamic.views.buttons
 		private var backgroundSkin:Image;
 		private var icon:Image;
 		private var _iconScale:Number = 0.44;
-		private var _texture:String;
+		private var _data:ToolbarButtonData;
 		private var _buttonHeight:Number = 48;
 		private var _buttonWidth:Number = 48;
 		public var screens:Array;
 		
-		public function ToolbarButton(texture:String)
+		public function ToolbarButton(data:ToolbarButtonData)
 		{
 			backgroundSkin = new Image(Assets.getTexture("toolbar_button_bg"));
 			backgroundSkin.pivotX = backgroundSkin.width/2;
@@ -24,8 +25,8 @@ package com.gerantech.islamic.views.buttons
 			backgroundSkin.alpha = 0;
 			addChild(backgroundSkin);
 			
-			if(texture!=null)
-				this.texture = texture;
+			if(data!=null)
+				this.data = data;
 		}
 				
 		
@@ -67,27 +68,30 @@ package com.gerantech.islamic.views.buttons
 		
 		
 		
-		public function get texture():String
+		public function get data():ToolbarButtonData
 		{
-			return _texture;
+			return _data;
 		}		
-		public function set texture(value:String):void
+		public function set data(value:ToolbarButtonData):void
 		{
-			if(_texture==value)
+			if(_data==value)
 				return;
 			
-			_texture = value;
+			_data = value;
+			
+			if(_data.icon == null)
+				return;
 			
 			if(icon==null)
 			{
-				icon = new Image(Assets.getTexture(value));
+				icon = new Image(Assets.getTexture(_data.icon));
 				icon.pivotX = icon.width/2
 				icon.pivotY = icon.height/2
 				addChild(icon);
 			}
 			else
 			{
-				icon.texture = Assets.getTexture(value);
+				icon.texture = Assets.getTexture(_data.icon);
 			}
 			//icon.delayTextureCreation = true;
 			draw();

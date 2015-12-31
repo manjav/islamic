@@ -12,7 +12,6 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.views.controls.TranslationLine;
 	import com.gerantech.islamic.views.headers.BismHeader;
 	import com.gerantech.islamic.views.headers.ToolsList;
-	import com.greensock.TweenLite;
 	
 	import flash.text.engine.ElementFormat;
 	import flash.utils.clearTimeout;
@@ -23,6 +22,7 @@ package com.gerantech.islamic.views.items
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 	
+	import starling.core.Starling;
 	import starling.events.Event;
 	
 	public class AyaItemRenderer extends BaseCustomItemRenderer
@@ -175,7 +175,8 @@ package com.gerantech.islamic.views.items
 				return;
 			
 			moreStrip.visible = true;
-			TweenLite.to(moreStrip, 0.5, {delay:0.5, alpha:1});
+			Starling.juggler.tween(moreStrip, 0.5, {delay:0.5, alpha:1});
+			//TweenLite.to(moreStrip, 0.5, {delay:0.5, alpha:1});
 			
 			translatIndex = 0;
 			setTimeout(setNextTranslation, FAST_COMMIT_TIMEOUT);

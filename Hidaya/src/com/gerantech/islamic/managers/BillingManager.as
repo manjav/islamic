@@ -1,6 +1,6 @@
 package com.gerantech.islamic.managers
 {
-	import com.gerantech.extensions.AndroidExtension;
+	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.pozirk.payment.android.InAppPurchase;
@@ -76,7 +76,7 @@ package com.gerantech.islamic.managers
 		protected function onInitSuccess(event:InAppPurchaseEvent):void
 		{
 			inited = true;
-		//	AndroidExtension.instance.showToast("Billing_extension_test.onInitSuccess", 1)
+		//	NativeAbilities.instance.showToast("Billing_extension_test.onInitSuccess", 1)
 			restore();
 			trace("Billing_extension_test.onInitSuccess(event)", event.data);
 		}
@@ -117,7 +117,7 @@ package com.gerantech.islamic.managers
 			
 		private function lostMarket():void
 		{
-			AndroidExtension.instance.showToast(ResourceManager.getInstance().getString("loc", "purchase_lost"), 1);
+			NativeAbilities.instance.showToast(ResourceManager.getInstance().getString("loc", "purchase_lost"), 1);
 			init();
 		}
 
@@ -141,7 +141,7 @@ package com.gerantech.islamic.managers
 			var premiumPurchase:InAppPurchaseDetails = _iap.getPurchaseDetails(premium);
 			if(premiumPurchase)
 			{
-				//AndroidExtension.instance.showToast("Restore premium "+ premiumPurchase._json, 1);
+				//NativeAbilities.instance.showToast("Restore premium "+ premiumPurchase._json, 1);
 				UserModel.instance.premiumMode = true;
 				
 			}
@@ -149,7 +149,7 @@ package com.gerantech.islamic.managers
 		}
 		protected function onRestoreError(event:InAppPurchaseEvent):void
 		{
-			//AndroidExtension.instance.showToast("onRestoreError", 1)
+			//NativeAbilities.instance.showToast("onRestoreError", 1)
 			trace("onRestoreError", event.data); //trace error message
 		}
 	
@@ -158,7 +158,7 @@ package com.gerantech.islamic.managers
 		{
 			if(!inited)
 			{
-				AndroidExtension.instance.showToast(ResourceManager.getInstance().getString("loc", "purchase_lost"), 1);
+				NativeAbilities.instance.showToast(ResourceManager.getInstance().getString("loc", "purchase_lost"), 1);
 				return;
 			}
 			_iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreAllSuccess);
@@ -216,7 +216,7 @@ package com.gerantech.islamic.managers
 					break;
 				
 				case "cafebazaar":
-					AndroidExtension.instance.runIntent("android.intent.action.EDIT", "bazaar://details?id=air."+AppModel.instance.descriptor.id);
+					NativeAbilities.instance.runIntent("android.intent.action.EDIT", "bazaar://details?id=air."+AppModel.instance.descriptor.id);
 					break;
 				
 				case "myket":
@@ -254,7 +254,7 @@ package com.gerantech.islamic.managers
 					link = 'cando://details?id=air.'+AppModel.instance.descriptor.id;			
 					break;
 			}			
-			AndroidExtension.instance.shareText(ResourceManager.getInstance().getString("loc", "app_title"), ResourceManager.getInstance().getString("loc", "app_descript")+"\n"+link);
+			NativeAbilities.instance.shareText(ResourceManager.getInstance().getString("loc", "app_title"), ResourceManager.getInstance().getString("loc", "app_descript")+"\n"+link);
 		}
 	}
 }

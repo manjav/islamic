@@ -1,7 +1,7 @@
 package com.gerantech.islamic.views.headers
 {
 
-	import com.gerantech.extensions.AndroidExtension;
+	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.vo.Aya;
@@ -37,7 +37,7 @@ package com.gerantech.islamic.views.headers
 			if(personIndex == ConfigModel.instance.selectedTranslators.length)
 			{trace(shareTitle, shareText)
 				if(AppModel.instance.isAndroid)
-					AndroidExtension.instance.shareText(shareTitle, shareText);
+					NativeAbilities.instance.shareText(shareTitle, shareText);
 				return;
 			}
 			currentPerson = Translator(ConfigModel.instance.selectedTranslators[personIndex]);

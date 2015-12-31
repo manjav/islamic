@@ -2,19 +2,10 @@ package com.gerantech.islamic.views.popups
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	import com.greensock.TweenLite;
-	
-	import flash.text.engine.ElementFormat;
-	import flash.text.engine.FontDescription;
-	import flash.text.engine.FontLookup;
-	import flash.text.engine.FontPosture;
-	import flash.text.engine.FontWeight;
 	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
-	import feathers.controls.text.TextBlockTextRenderer;
 	import feathers.display.Scale3Image;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
@@ -22,6 +13,7 @@ package com.gerantech.islamic.views.popups
 	import feathers.layout.HorizontalLayoutData;
 	import feathers.textures.Scale3Textures;
 	
+	import starling.core.Starling;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -30,6 +22,7 @@ package com.gerantech.islamic.views.popups
 	{
 		private var background:Scale3Image;
 		private var callback:Function;
+		private var params:Array;
 		
 		override protected function draw():void
 		{
@@ -40,8 +33,9 @@ package com.gerantech.islamic.views.popups
 		
 		
 		
-		public function UndoAlert(label:String, callback:Function, duration:Number=2, delay:Number=1)
+		public function UndoAlert(label:String, callback:Function, duration:Number=2, delay:Number=1, params:Array=null)
 		{
+			this.params = params;
 			this.callback = callback;
 			height = uint(AppModel.instance.sizes.twoLineItem*0.8);
 			
@@ -76,8 +70,8 @@ package com.gerantech.islamic.views.popups
 			sign.height = height/2.4
 			sign.source = Assets.getTexture("undo_sign");
 			hGroup.addChild(sign);
-			
-			TweenLite.to(this, duration, {delay:delay, alpha:0, onComplete:close});
+			Starling.juggler.tween(this, duration, {delay:delay, alpha:0, onComplete:close});
+			//TweenLite.to(this, duration, {delay:delay, alpha:0, onComplete:close});
 			addEventListener(TouchEvent.TOUCH, touchHandler);
 		}
 		
@@ -98,7 +92,7 @@ package com.gerantech.islamic.views.popups
 			else if(touch.phase == TouchPhase.ENDED)
 			{
 				if(callback!=null)
-					callback();
+					callback.apply(null, params);
 				close();
 			}
 		}		

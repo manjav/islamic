@@ -4,6 +4,7 @@ package com.gerantech.islamic.models
 	import com.gerantech.islamic.models.vo.Descriptor;
 	import com.gerantech.islamic.themes.CustomTheme;
 	import com.gerantech.islamic.utils.MetricUtils;
+	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.views.controls.CustomDrawers;
 	import com.gerantech.islamic.views.headers.Toolbar;
 	import com.gerantech.islamic.views.lists.DrawerList;
@@ -17,6 +18,9 @@ package com.gerantech.islamic.models
 	import feathers.motion.Cover;
 	import feathers.motion.Reveal;
 	import feathers.system.DeviceCapabilities;
+	
+	import org.praytimes.PrayTime;
+	import org.praytimes.constants.CalculationMethod;
 	
 	import starling.events.EventDispatcher;
 	import starling.utils.AssetManager;
@@ -34,17 +38,22 @@ package com.gerantech.islamic.models
 	{
 		
 		public const PAGE_DASHBOARD:String = "page_dashboard";
+		public const PAGE_SETTINGS:String = "page_settings";
+		public const PAGE_ABOUT:String = "page_about";
+		public const PAGE_PURCHASE:String = "page_purchase";
+		
 		public const PAGE_QURAN:String = "page_quran";
 		public const PAGE_INDEX:String = "page_index";
 		public const PAGE_BOOKMARKS:String = "page_bookmarks";
-		public const PAGE_SETTINGS:String = "page_settings";
 		public const PAGE_SEARCH:String = "page_search";
-		public const PAGE_ABOUT:String = "page_about";
 		public const PAGE_PERSON:String = "page_person";
 		public const PAGE_FILTERED:String = "page_filtered";
 		public const PAGE_OMEN:String = "page_omen";
-		public const PAGE_PURCHASE:String = "page_purchase";
 		public const PAGE_DOWNLOAD:String = "page_download";
+		
+		
+		public const PAGE_COMPASS:String = "page_compass";
+		public const PAGE_CITY:String = "page_city";
 
 		
 		public var theme:CustomTheme;
@@ -53,7 +62,6 @@ package com.gerantech.islamic.models
 		public var myDrawer:DrawerList;
 		public var navigator:StackScreenNavigator;
 		public var descriptor:Descriptor ;
-		public var gotoPopUP:GotoPopUp;
 		public var assetManager:AssetManager;
 		public var byteArraySec:ByteArray;
 
@@ -71,6 +79,7 @@ package com.gerantech.islamic.models
 			byteArraySec = new ByteArray();
 			byteArraySec.writeUTFBytes("d@t@B@53_53cur3d");
 			_isAndroid = Capabilities.os.substr(0, 5)=="Linux";
+			date = new MultiDate();
 		}
 
 		public var upside:Boolean = true;
@@ -106,6 +115,8 @@ package com.gerantech.islamic.models
 		public var preventPurchaseWarning:Boolean;
 
 		public var sizes:MetricUtils;
+		public var date:MultiDate;
+		public var prayTimes:PrayTime;
 		
 		public function get pushTransition():Function
 		{

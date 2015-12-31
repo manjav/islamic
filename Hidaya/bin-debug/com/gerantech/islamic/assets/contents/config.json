@@ -1,5 +1,44 @@
 ﻿{
     "application": {
+		
+        "parts": [
+            {
+                "icon": "ic_clock",
+                "title": "page_times"
+            },
+            {
+                "icon": "ic_quran",
+                "title": "page_quran"
+            },
+            {
+                "icon": "ic_compass",
+                "title": "page_compass"
+            },
+            {
+                "icon": "ic_finder",
+                "title": "page_finder"
+            },
+            {
+                "icon": "ic_calendar",
+                "title": "page_calendar"
+            },
+            {
+                "icon": "ic_pray",
+                "title": "page_prays"
+            },
+            {
+                "icon": "ic_inbox",
+                "title": "page_inbox"
+            },
+            {
+                "icon": "ic_wallpaper",
+                "title": "page_wallpaper"
+            },
+            {
+                "icon": "ic_greeting",
+                "title": "page_greeting"
+            }
+        ],
         "views": [
             {
                 "icon": "list_bulleted",

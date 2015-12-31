@@ -53,7 +53,6 @@ package
 			//ft = getTimer();
 			trace(ResourceManager.getInstance().getString("loc", "quran_t"))//, String.fromCharCode(0x25b8));
 			mouseEnabled = mouseChildren = false;
-			
 			if(stage)
 			{
 				stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -78,7 +77,7 @@ package
 			appModel.init(this as Hidaya);
 			
 			graphics.beginFill(0x009688);
-			graphics.drawRect(0,0,appModel.sizes.width, appModel.sizes.toolbar);
+			graphics.drawRect(0,0,appModel.sizes.width, appModel.sizes.heightFull);
 			
 			//Flurry initialising ----------------------------------------------------
 			//Flurry.getInstance().logEnabled = true

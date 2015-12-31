@@ -1,6 +1,5 @@
 package com.gerantech.islamic.views.headers
 {
-	import com.gerantech.islamic.events.UserEvent;
 	import com.gerantech.islamic.managers.Player;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
@@ -9,20 +8,15 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.models.vo.Bookmark;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	import com.greensock.TweenLite;
-	
-	import flash.utils.setTimeout;
 	
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
+	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.events.Event;
 	import starling.filters.ColorMatrixFilter;
-	import starling.text.TextField;
-	import starling.utils.HAlign;
-	import starling.utils.VAlign;
 
 	public class ToolsList extends LayoutGroup
 	{
@@ -128,9 +122,12 @@ package com.gerantech.islamic.views.headers
 			if(_selected)
 			{
 				shareButton.alpha = 0;
-				TweenLite.to(shareButton, 0.3, {alpha:1, delay:0.25});
 				bookmarkButton.alpha = 0;
-				TweenLite.to(bookmarkButton, 0.3, {alpha:1, delay:0.20});
+				
+				Starling.juggler.tween(shareButton, 0.3, {alpha:1, delay:0.25});
+				Starling.juggler.tween(bookmarkButton, 0.3, {alpha:1, delay:0.20});
+				//TweenLite.to(shareButton, 0.3, {alpha:1, delay:0.25});
+				//TweenLite.to(bookmarkButton, 0.3, {alpha:1, delay:0.20});
 			}			
 		}
 		

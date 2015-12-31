@@ -4,6 +4,7 @@ package com.gerantech.islamic.managers
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.lists.DrawerList;
+	import com.gerantech.islamic.views.popups.BasePopUp;
 	import com.gerantech.islamic.views.popups.InfoPopUp;
 	
 	import flash.desktop.NativeApplication;
@@ -17,6 +18,7 @@ package com.gerantech.islamic.managers
 	
 	import feathers.core.PopUpManager;
 	
+	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Event;
@@ -24,12 +26,6 @@ package com.gerantech.islamic.managers
 	public class AppController extends EventDispatcher
 	{
 		private var appModel:AppModel;
-		
-		
-		private var infoPopUp:InfoPopUp;
-		private var overlay:FlatButton;
-
-		
 		
 		private static var _this:AppController;
 		private var idleTimeout:uint;
@@ -149,6 +145,39 @@ package com.gerantech.islamic.managers
 			}
 				
 		}
+		public function addPopup(popupClass:Class, closeCallback:Function=null, closable:Boolean=true):BasePopUp
+		{		
+			var overlay:FlatButton;
+			var popup:BasePopUp = new popupClass();
+			popup.closable = closable;
+			popup.addEventListener(Event.CLOSE, popup_closeHandler);
+			PopUpManager.addPopUp(popup, true, true, geoPopup_overlayFactory);
+			
+			function geoPopup_overlayFactory():DisplayObject
+			{
+				overlay = new FlatButton(null, null, true, 0.3, 0.3, 0);
+				if(closable)
+					overlay.addEventListener(Event.TRIGGERED, popup.close);
+				return overlay;
+			}
+			function popup_closeHandler():void
+			{
+				if(closeCallback!=null)
+					closeCallback();
+				
+				var tw:Tween = new Tween(overlay, 0.2);
+				tw.fadeTo(0);
+				tw.onComplete = fadeToCompleteHandler;
+				Starling.juggler.add(tw);
+			}
+			function fadeToCompleteHandler():void
+			{
+				overlay.removeEventListener(Event.TRIGGERED, popup.close);
+				if(PopUpManager.isPopUp(popup))
+					PopUpManager.removePopUp(popup);
+			}
+			return popup;
+		}
 		
 		public function alert(title:String, message:String, cancelButtonLabel:String="know_button", acceptButtonLabel:String="", acceptCallback:Function=null, cancelCallback:Function=null, closable:Boolean=true):void
 		{
@@ -160,7 +189,8 @@ package com.gerantech.islamic.managers
 			if(msg==null)
 				msg = message;
 			
-			infoPopUp = new InfoPopUp();
+			var overlay:FlatButton;
+			var infoPopUp:InfoPopUp = new InfoPopUp();
 			infoPopUp.closable = closable;
 			infoPopUp.title = ttl;
 			infoPopUp.message = msg;
@@ -169,22 +199,31 @@ package com.gerantech.islamic.managers
 			infoPopUp.acceptButtonLabel = ResourceManager.getInstance().getString("loc", acceptButtonLabel);
 			infoPopUp.acceptCallback = acceptCallback;
 			infoPopUp.addEventListener(Event.CLOSE, infoPopUp_closeHandler);
-			PopUpManager.overlayFactory = function():DisplayObject
+			PopUpManager.addPopUp(infoPopUp, true, true, infoPopUp_overlayFactory);
+			
+			function infoPopUp_overlayFactory():DisplayObject
 			{
 				overlay = new FlatButton(null, null, true, 0.3, 0.3, 0);
 				if(infoPopUp.closable)
 					overlay.addEventListener(Event.TRIGGERED, infoPopUp.close);
 				return overlay;
 			};
-			PopUpManager.addPopUp(infoPopUp);
+			function infoPopUp_closeHandler(event:Event):void
+			{
+				var tw:Tween = new Tween(overlay, 0.2);
+				tw.fadeTo(0);
+				tw.onComplete = fadeToCompleteHandler;
+				Starling.juggler.add(tw);
+			}
+			function fadeToCompleteHandler():void
+			{
+				overlay.removeEventListener(Event.TRIGGERED, infoPopUp.close);
+				if(PopUpManager.isPopUp(infoPopUp))
+					PopUpManager.removePopUp(infoPopUp);
+			}
 		}
 		
-		private function infoPopUp_closeHandler(event:Event):void
-		{
-			if(PopUpManager.isPopUp(infoPopUp))
-				PopUpManager.removePopUp(infoPopUp);
-			overlay.removeEventListener(Event.TRIGGERED, infoPopUp_closeHandler);
-		}
+
 
 		public function resetIdle():void
 		{

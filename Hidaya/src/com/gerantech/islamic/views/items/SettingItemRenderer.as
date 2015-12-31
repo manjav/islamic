@@ -1,6 +1,7 @@
 package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.models.AppModel;
+	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.RTLLabel;
@@ -54,7 +55,7 @@ package com.gerantech.islamic.views.items
 			titleDisplay.layoutData = new HorizontalLayoutData(100);
 			
 			iconDisplay = new ImageLoader();
-			iconDisplay.width = iconDisplay.height = height/2
+			iconDisplay.width = iconDisplay.height = height/2;
 			iconDisplay.delayTextureCreation = true;
 		}
 		
@@ -71,7 +72,11 @@ package com.gerantech.islamic.views.items
 			}
 			else if(_data.hasOwnProperty("icon"))
 			{
-				iconDisplay.source = _data.icon
+				if(_data.icon is String && _data.icon.indexOf(".")==-1)
+					iconDisplay.source = Assets.getTexture(_data.icon);
+				else
+					iconDisplay.source = _data.icon;
+
 				addChild(appModel.ltr?iconDisplay:titleDisplay);
 				addChild(appModel.ltr?titleDisplay:iconDisplay);
 			}

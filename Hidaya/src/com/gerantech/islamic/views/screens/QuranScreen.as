@@ -7,21 +7,24 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Aya;
+	import com.gerantech.islamic.models.vo.Person;
+	import com.gerantech.islamic.models.vo.ToolbarButtonData;
+	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.headers.PlayerView;
 	import com.gerantech.islamic.views.items.AyaItemRenderer;
 	import com.gerantech.islamic.views.items.PageItemRenderer;
 	import com.gerantech.islamic.views.items.UthmaniPageItemRenderer;
+	import com.gerantech.islamic.views.popups.GotoPopUp;
 	import com.gerantech.islamic.views.popups.TranslationPopUp;
 	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
-	import feathers.controls.Header;
+	import feathers.controls.Callout;
 	import feathers.controls.List;
-	import feathers.controls.PanelScreen;
 	import feathers.controls.ScrollContainer;
+	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
@@ -46,8 +49,8 @@ package com.gerantech.islamic.views.screens
 		private var translationsPage:TranslationPopUp;
 		private var fontScale:Number = 1;
 		private var touchEnded:Boolean = true ;
-		private var appModel:AppModel;
-		private var userModel:UserModel;
+		private var callout:Callout;
+		private var overlay:FlatButton;
 		
 		override protected function initialize():void
 		{
@@ -55,11 +58,8 @@ package com.gerantech.islamic.views.screens
 			
 			layout = new AnchorLayout();
 			
-			appModel = AppModel.instance;
-			userModel = UserModel.instance;
-			
 			appModel.drawers.isEnabled = true;
-			backButtonHandler = null;
+			//backButtonHandler = null;
 			//menuButtonHandler = menuButtonFunction;
 			//searchButtonHandler = searchButtonFunction;
 			addEventListener(FeathersEventType.TRANSITION_IN_COMPLETE, transitionInCompleteHandler);
@@ -161,11 +161,11 @@ package com.gerantech.islamic.views.screens
 		private function translationsPage_endShowingHandler():void
 		{
 			translationsPage.show();
-			list.visible = false;
+			appModel.toolbar.visible = list.visible = false;
 		}
 		private function translationsPage_startClosingHandler():void
 		{
-			list.visible = true;
+			appModel.toolbar.visible = list.visible = true;
 		}
 		
 		private function list_changeTranslationHandler(event:Event):void
@@ -267,5 +267,45 @@ package com.gerantech.islamic.views.screens
 				userModel.fontSize = Math.round(appModel.sizes.orginalFontSize*fontScale/2)*2;
 			}
 		}
+		
+		
+		override protected function createToolbarItems():void
+		{
+			super.createToolbarItems();
+			
+			var searchButton:ToolbarButtonData = new ToolbarButtonData("page_search", "search", toolbarButtons_triggerdHandler);
+			var indexButton:ToolbarButtonData = new ToolbarButtonData("page_index", "menu", toolbarButtons_triggerdHandler);
+			var jumpButton:ToolbarButtonData = new ToolbarButtonData("goto_popup", "jump", toolbarButtons_triggerdHandler);
+			var translateButton:ToolbarButtonData = new ToolbarButtonData("translation", "translation", toolbarButtons_triggerdHandler);
+			var reciterButton:ToolbarButtonData = new ToolbarButtonData("recitation", "recitation", toolbarButtons_triggerdHandler);
+			var bookmarkButton:ToolbarButtonData = new ToolbarButtonData("page_bookmarks", "bookmark_off", toolbarButtons_triggerdHandler);
+			var omenButton:ToolbarButtonData = new ToolbarButtonData("page_omen", "book_open", toolbarButtons_triggerdHandler);
+			var settingButton:ToolbarButtonData = new ToolbarButtonData("page_settings", "setting", toolbarButtons_triggerdHandler);
+			var aboutButton:ToolbarButtonData = new ToolbarButtonData("page_about", "info", toolbarButtons_triggerdHandler);
+
+			appModel.toolbar.accessoriesData.push(searchButton, indexButton, translateButton, reciterButton, jumpButton, bookmarkButton, omenButton, settingButton, aboutButton);
+		}
+		
+		private function toolbarButtons_triggerdHandler(item:ToolbarButtonData):void
+		{
+			switch(item.name)
+			{
+				default:
+					AppModel.instance.navigator.pushScreen(item.name);
+					break;
+				
+				case "recitation":
+				case "translation":
+					var screenItem:StackScreenNavigatorItem = AppModel.instance.navigator.getScreen(appModel.PAGE_PERSON);
+					screenItem.properties = {type:item.name=="recitation"?Person.TYPE_RECITER:Person.TYPE_TRANSLATOR};
+					AppModel.instance.navigator.pushScreen(appModel.PAGE_PERSON);
+					break;
+			
+				case "goto_popup":
+					AppController.instance.addPopup(GotoPopUp);
+					break;
+			}
+		}
+
 	}
 }

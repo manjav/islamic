@@ -2,7 +2,6 @@ package com.gerantech.islamic.views.popups
 {
 	import com.gerantech.islamic.views.controls.FeaturesView;
 	import com.gerantech.islamic.views.items.TutorialItemRenderer;
-	import com.greensock.TweenLite;
 	
 	import feathers.controls.List;
 	import feathers.controls.ScrollContainer;
@@ -12,6 +11,7 @@ package com.gerantech.islamic.views.popups
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalLayout;
 	
+	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
 
@@ -78,10 +78,10 @@ package com.gerantech.islamic.views.popups
 				selectedTute--;
 				
 			if(selectedTute==-1||selectedTute==tutes.length)
-				TweenLite.to(this, 0.4, {alpha:0, onComplete:close});
+				Starling.juggler.tween(this, 0.4, {alpha:0, onComplete:close});
+				//TweenLite.to(this, 0.4, {alpha:0, onComplete:close});
 				
 			list.scrollToPageIndex(selectedTute, 0, 0.5);
 		}		
-		
 	}
 }

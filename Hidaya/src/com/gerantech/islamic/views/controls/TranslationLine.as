@@ -8,7 +8,6 @@ package com.gerantech.islamic.views.controls
 	import com.gerantech.islamic.models.vo.Translator;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.StrTools;
-	import com.greensock.TweenLite;
 	
 	import flash.text.TextFormat;
 	import flash.text.engine.ElementFormat;
@@ -21,6 +20,7 @@ package com.gerantech.islamic.views.controls
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
 	
+	import starling.core.Starling;
 	import starling.events.Event;
 	
 	public class TranslationLine extends LayoutGroup
@@ -174,7 +174,8 @@ package com.gerantech.islamic.views.controls
 		{
 			label.visible = true;
 			label.alpha = 0;
-			TweenLite.to(label, 1.5, {alpha:1});
+			Starling.juggler.tween(label, 1.5, {alpha:1});
+			//TweenLite.to(label, 1.5, {alpha:1});
 		}
 		
 		private function translationLoaded(event:Event):void

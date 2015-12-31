@@ -1,14 +1,16 @@
 ﻿package com.gerantech.islamic.utils
 {
 	import com.gerantech.islamic.models.AppModel;
+	import com.gerantech.islamic.models.UserModel;
 	
 	import flash.system.Capabilities;
 
 	public class StrTools
 	{
-
-		public static function getArabicNumber(_str:String):String
+		
+		public static function getArabicNumber(input:Object):String
 		{
+			var _str:String = input.toString();
 			_str = _str.split('0').join('٠')
 			_str = _str.split('1').join('١')
 			_str = _str.split('2').join('٢')
@@ -21,7 +23,30 @@
 			_str = _str.split('9').join('٩');
 			return(_str)
 		}
-		
+		public static function getPersianNumber(input:Object):String
+		{
+			var _str:String = input+"";
+			_str = _str.split('0').join('٠')
+			_str = _str.split('1').join('١')
+			_str = _str.split('2').join('٢')
+			_str = _str.split('3').join('٣')
+			_str = _str.split('4').join('۴')
+			_str = _str.split('5').join('۵')
+			_str = _str.split('6').join('۶')
+			_str = _str.split('7').join('٧')
+			_str = _str.split('8').join('٨')
+			_str = _str.split('9').join('٩');
+			return(_str)
+		}
+		public static function getNumber(input:Object):String
+		{
+			if(UserModel.instance.locale.value=="ar_SA")
+				return getArabicNumber(input);
+			else if(UserModel.instance.locale.dir=="rtl")
+				return getPersianNumber(input);
+			else
+				return input.toString();
+		}
 		public static function getNumberFromLocale(str:Object, dir:String=""):String
 		{
 			if(str==null)
@@ -29,13 +54,9 @@
 			
 			var direction:String = dir=="" ? AppModel.instance.direction : dir;
 			if(direction=='ltr')
-			{
 				return str.toString();
-			}
 			else
-			{
 				return getArabicNumber(str.toString());
-			}
 		}
 		
 		public static function join(_str:String, lines:Array, _patt:String):String
@@ -149,6 +170,5 @@
 			}
 			return ret;
 		}
-
 	}
 }

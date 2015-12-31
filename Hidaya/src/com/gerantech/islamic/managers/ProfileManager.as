@@ -1,5 +1,6 @@
 package com.gerantech.islamic.managers
 {
+	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
 	
@@ -9,7 +10,6 @@ package com.gerantech.islamic.managers
 
 	CONFIG::Android 
 	{
-		import com.gerantech.extensions.AndroidExtension;
 		import com.gerantech.extensions.gplus.GPlusExtension;
 		import com.gerantech.extensions.gplus.events.GPlusEvent;
 		import com.gerantech.extensions.gplus.models.Person;
@@ -67,15 +67,15 @@ package com.gerantech.islamic.managers
 				case Result.LOGIN_FAILED:
 				case Result.NETWORK_ERROR:
 				case Result.REVOKE_ACCESS:
-					AndroidExtension.instance.showToast(event.result.message, 2);
+					NativeAbilities.instance.showToast(event.result.message, 2);
 					break;
 				case Result.PERSON_NULL:
-					AndroidExtension.instance.showToast(ResourceManager.getInstance().getString("loc", "person_null"), 1);
+					NativeAbilities.instance.showToast(ResourceManager.getInstance().getString("loc", "person_null"), 1);
 					break;
 				case Result.PERSON_INFORMATION:
 					var p:Person = event.result.person;
 					profile.setGPlusParams(p.id, p.name, p.email, p.photoUrl, p.gender, p.birtdate);
-					AndroidExtension.instance.showToast(p.name+ p.email, 1);
+					NativeAbilities.instance.showToast(p.name+ p.email, 1);
 					insertUser();
 					break;
 			}

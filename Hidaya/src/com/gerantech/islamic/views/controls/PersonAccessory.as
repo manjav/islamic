@@ -1,13 +1,13 @@
 package com.gerantech.islamic.views.controls
 {
-	import com.greensock.TweenLite;
-	import com.greensock.TweenMax;
-	import com.greensock.easing.Elastic;
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.vo.Person;
 	
 	import feathers.controls.LayoutGroup;
 	
+	import starling.animation.Transitions;
+	import starling.animation.Tween;
+	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -77,13 +77,19 @@ package com.gerantech.islamic.views.controls
 				setPercent(0);
 			
 			image.texture = getTexture();
-			
+			Starling.juggler.removeTweens(image);
 			if(time>0)
 			{
 				image.width = image.height = _height*iconScale*1.4;
-				var tw:TweenMax = TweenMax.to(image, time, {delay:0.02, width:_height*iconScale, height:_height*iconScale, ease:Elastic.easeOut});//, onUpdate:resizeHandler, onUpdateParams:[null]
+				var tw:Tween = new Tween(image, time, Transitions.EASE_OUT_ELASTIC);
+				tw.delay = 0.02;
+				tw.animate("width", _height*iconScale);
+				tw.animate("height", _height*iconScale);
+				//var tw:TweenMax = TweenMax.to(image, time, {delay:0.02, width:_height*iconScale, height:_height*iconScale, ease:Elastic.easeOut});//, onUpdate:resizeHandler, onUpdateParams:[null]
 				if(value==Person.PREPARING)
-					tw.yoyo = true;
+					tw.repeatCount = 10;
+					//tw.yoyo = true;
+				Starling.juggler.add(tw);
 			}
 			else
 				image.width = image.height = _height*iconScale;

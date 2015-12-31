@@ -23,7 +23,6 @@ package com.gerantech.islamic.views.headers
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.StackScreenNavigatorItem;
-	import feathers.core.PopUpManager;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
@@ -32,7 +31,6 @@ package com.gerantech.islamic.views.headers
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
-	import starling.display.DisplayObject;
 	import starling.display.Quad;
 	import starling.events.Event;
 	import starling.filters.BlurFilter;
@@ -45,8 +43,6 @@ package com.gerantech.islamic.views.headers
 		private var reciterLabel:RTLLabel;
 		private var dataProgress:Quad;
 		private var playProgress:Quad;
-		private var playerPopUp:PlayerPopUp;
-		private var popupOverlay:FlatButton;
 		private var isShow:Boolean = true;
 		private var isShowElements:Boolean = true;
 		private var player:Player;
@@ -299,24 +295,7 @@ package com.gerantech.islamic.views.headers
 				return;
 			}
 			
-			playerPopUp = new PlayerPopUp();
-			playerPopUp.addEventListener(Event.CLOSE, playerPopUp_closeHandler);
-			PopUpManager.overlayFactory = function():DisplayObject
-			{
-				popupOverlay = new FlatButton(null, null, true, 0.3, 0.3, 0);
-				popupOverlay.addEventListener(Event.TRIGGERED, playerPopUp.close);
-				return popupOverlay;
-			};
-			PopUpManager.addPopUp(playerPopUp);
-		}
-		private function playerPopUp_closeHandler():void
-		{
-			if(playerPopUp==null)
-				return;
-			
-			popupOverlay.removeEventListener(Event.TRIGGERED, playerPopUp_closeHandler);
-			PopUpManager.removePopUp(playerPopUp);
-			playerPopUp = null;
+			AppController.instance.addPopup(PlayerPopUp);
 		}
 		
 		// Appearance --------------------------------------------

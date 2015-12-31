@@ -1,7 +1,5 @@
 package com.gerantech.islamic.views.screens
 {
-	import com.greensock.TweenLite;
-	import com.greensock.easing.Expo;
 	import com.gerantech.islamic.models.vo.Item;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.buttons.SimpleLayoutButton;
@@ -14,6 +12,7 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
+	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
 
@@ -68,8 +67,10 @@ package com.gerantech.islamic.views.screens
 		
 		private function button_triggredHandler():void
 		{
-			TweenLite.to(button, 0.5, {alpha:1});
-			TweenLite.to(waitingIcon, 0.8, {alpha:0, delay:0.5});
+			Starling.juggler.tween(button, 0.5, {alpha:1});
+			Starling.juggler.tween(waitingIcon, 0.8, {alpha:0, delay:0.5});
+			//TweenLite.to(button, 0.5, {alpha:1});
+			//TweenLite.to(waitingIcon, 0.8, {alpha:0, delay:0.5});
 			setTimeout(startOmen, 1200);
 		}		
 		

@@ -7,11 +7,11 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	import com.greensock.TweenLite;
 	
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 	
+	import starling.core.Starling;
 	import starling.display.Quad;
 
 	public class SearchItemRenderer extends BaseCustomItemRenderer
@@ -86,7 +86,8 @@ package com.gerantech.islamic.views.items
 			quranTextField.text = bookmark.processedText;
 			quranTextField.visible = true;
 			quranTextField.alpha = 0;
-			TweenLite.to(quranTextField, 0.3, {alpha:1});
+			Starling.juggler.tween(quranTextField, 0.3, {alpha:1});
+			//TweenLite.to(quranTextField, 0.3, {alpha:1});
 		}
 		
 		/*override public function set currentState(value:String):void

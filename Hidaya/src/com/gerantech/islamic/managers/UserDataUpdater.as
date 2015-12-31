@@ -1,6 +1,6 @@
 package com.gerantech.islamic.managers
 {
-	import com.gerantech.extensions.AndroidExtension;
+	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.User;
 	
@@ -56,7 +56,7 @@ package com.gerantech.islamic.managers
 		protected function php_completeHandler(event:Event):void
 		{
 			trace(UserModel.instance.user.profile.gid+loc("user_backup_complete"))
-			AndroidExtension.instance.showToast(loc("user_backup_complete"), 1);
+			NativeAbilities.instance.showToast(loc("user_backup_complete"), 1);
 		}		
 		
 		// Restore user data ----------------------------------
@@ -83,7 +83,7 @@ package com.gerantech.islamic.managers
 			{
 				UserModel.instance.loadByObject(u);
 				trace(UserModel.instance.user.profile.gid+loc("user_restored"));
-				AndroidExtension.instance.showToast(loc("user_restored"), 1);
+				NativeAbilities.instance.showToast(loc("user_restored"), 1);
 			}
 			else
 			{

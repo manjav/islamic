@@ -3,6 +3,7 @@ package com.gerantech.islamic.views.screens
 	import com.freshplanet.nativeExtensions.Flurry;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
+	import com.gerantech.islamic.views.buttons.ToolbarButton;
 	
 	import flash.utils.getQualifiedClassName;
 	
@@ -10,23 +11,20 @@ package com.gerantech.islamic.views.screens
 	
 	import feathers.controls.Screen;
 	
+	import starling.events.Event;
+	
 	public class BaseScreen extends Screen
 	{
-		protected var appModel:AppModel;
-		protected var userModel:UserModel;
 		public var type:String = "";
 
-		
 		override protected function initialize():void
 		{
 			super.initialize();
 			
-			appModel = AppModel.instance;
-			userModel = UserModel.instance;
-			
 			appModel.drawers.isEnabled = false;
 			backButtonHandler = backButtonFunction;
 			searchButtonHandler = searchButtonFunction;
+			createToolbarItems();
 			
 			Flurry.getInstance().logEvent(getQualifiedClassName(this).split("::")[1], {type:type});
 		}
@@ -40,10 +38,21 @@ package com.gerantech.islamic.views.screens
 			appModel.navigator.pushScreen(appModel.PAGE_SEARCH);
 		}
 		
+		protected function createToolbarItems():void
+		{
+			appModel.toolbar.resetItem();
+			appModel.toolbar.navigationCallback = backButtonFunction;
+		}
+		
+		
+		
 		protected function loc(str:String):String
 		{
 			return ResourceManager.getInstance().getString("loc", str);
 		}
+		
+		protected function get userModel():UserModel { return UserModel.instance; }
+		protected function get appModel():AppModel { return AppModel.instance; }
 		
 	}
 }

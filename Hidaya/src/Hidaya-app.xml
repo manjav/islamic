@@ -288,6 +288,7 @@
 			    <uses-permission android:name="android.permission.VIBRATE"/>
 			    <uses-permission android:name="android.permission.WAKE_LOCK" />
 			    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+ 				<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 			    
 			    <!--<uses-permission android:name="android.permission.CAMERA"/>-->
 			    <!--<uses-permission android:name="android.permission.RECORD_AUDIO"/>-->
@@ -303,10 +304,12 @@
 
 
 	<extensions>
-        <extensionID>com.gerantech.extensions</extensionID>
         <extensionID>com.pozirk.AndroidInAppPurchase</extensionID>
         <extensionID>com.gerantech.extensions.gplus</extensionID>
     	<extensionID>com.pushwoosh.PushNotification</extensionID>
-    <extensionID>com.freshplanet.AirFlurry</extensionID>
+    	<extensionID>com.freshplanet.AirFlurry</extensionID>
+    	<extensionID>com.gerantech.extensions.compass</extensionID>
+    <extensionID>com.gerantech.extensions</extensionID>
+    <extensionID>com.gerantech.extensions.nativeabilities</extensionID>
     </extensions>
 </application>

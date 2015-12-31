@@ -1,12 +1,13 @@
 package com.gerantech.islamic.views.screens
 {
-	import com.greensock.TweenLite;
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.managers.BillingManager;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.utils.StrTools;
+	import com.gerantech.islamic.views.controls.SearchInput;
+	import com.gerantech.islamic.views.headers.ShopHeader;
 	import com.gerantech.islamic.views.items.PersonItemRenderer;
 	
 	import flash.utils.clearTimeout;
@@ -19,8 +20,8 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.VerticalLayout;
 	
+	import starling.core.Starling;
 	import starling.events.Event;
-	import com.gerantech.islamic.views.headers.ShopHeader;
 	
 	public class FilteredPersonScreen extends BasePanelScreen
 	{
@@ -30,7 +31,7 @@ package com.gerantech.islamic.views.screens
 		private var list:List;
 		private var listData:Array;		
 		private var changeTID:uint;
-		private var backwardEnabled:Boolean;
+		//private var backwardEnabled:Boolean;
 		private var searchPattern:String = "";
 		private var startScrollBarIndicator:Number = 0;
 		private var shopHeader:ShopHeader;
@@ -81,8 +82,8 @@ package com.gerantech.islamic.views.screens
 
 		private function shopHeader_closeHandler():void
 		{
-			TweenLite.to(listLayout, 0.4, {paddingTop:0});
-			//listLayout.paddingTop = 0;
+			Starling.juggler.tween(listLayout, 0.4, {paddingTop:0});
+			//TweenLite.to(listLayout, 0.4, {paddingTop:0});
 			shopHeader.removeEventListener(Event.CLOSE, shopHeader_closeHandler);
 			shopHeader.removeFromParent(true);
 			appModel.preventPurchaseWarning = true;
@@ -98,7 +99,7 @@ package com.gerantech.islamic.views.screens
 		
 		private function list_changedHandler(event:Event):void
 		{
-			backwardEnabled = false;
+			//backwardEnabled = false;
 			clearTimeout(changeTID);
 			changeTID = setTimeout(waitingForPersonsChanging, 500);
 		}
@@ -125,13 +126,13 @@ package com.gerantech.islamic.views.screens
 					ret.push(ps);*/
 			
 			type==Person.TYPE_TRANSLATOR ? ConfigModel.instance.selectedTranslators = sampleList : ConfigModel.instance.selectedReciters = sampleList;
-			backwardEnabled = true;
+			///backwardEnabled = true;
 		}		
 		
 		override protected function backButtonFunction():void
 		{
-			if(!backwardEnabled)
-				return;
+			//if(!backwardEnabled)
+			//	return;
 			super.backButtonFunction();
 		}
 		
@@ -179,6 +180,11 @@ package com.gerantech.islamic.views.screens
 		}
 		
 		
+		override protected function createToolbarItems():void
+		{
+			super.createToolbarItems();
+			appModel.toolbar.centerItem = new SearchInput();
+		}
 		
 	}
 }

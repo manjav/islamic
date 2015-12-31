@@ -1,6 +1,6 @@
 package com.gerantech.islamic.managers
 {
-	import com.gerantech.extensions.AndroidExtension;
+	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.events.UserEvent;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
@@ -61,12 +61,12 @@ package com.gerantech.islamic.managers
 		
 		private function pushwoosh_ErrorHandler(e:PushNotificationEvent):void
 		{
-			AndroidExtension.instance.showToast("onError "+e.errorMessage, 1);
+			NativeAbilities.instance.showToast("onError "+e.errorMessage, 1);
 		}
 		
 		private function pushwoosh_pushRecievedHandler(e:PushNotificationEvent):void
 		{
-			//AndroidExtension.instance.showToast(JSON.stringify(e.parameters), 1);
+			//NativeAbilities.instance.showToast(JSON.stringify(e.parameters), 1);
 			var user:UserModel = UserModel.instance;
 			var data:Object = e.parameters.userdata;
 			var pushed:Boolean;
@@ -89,7 +89,7 @@ package com.gerantech.islamic.managers
 			
 			function gotoReminderAya():void
 			{
-				//AndroidExtension.instance.showToast(data.type+data.sura+data.aya, 1);
+				//NativeAbilities.instance.showToast(data.type+data.sura+data.aya, 1);
 				UserModel.instance.removeEventListener(UserEvent.LOAD_DATA_COMPLETE, gotoReminderAya);
 				UserModel.instance.setLastItem(data.sura, data.aya);
 				UserModel.instance.dispatchEventWith(UserEvent.SET_ITEM);
@@ -110,7 +110,7 @@ package com.gerantech.islamic.managers
 		
 		private function showNotify():void
 		{
-			//AndroidExtension.instance.showToast(JSON.stringify(lastMessage), 1);
+			//NativeAbilities.instance.showToast(JSON.stringify(lastMessage), 1);
 			UserModel.instance.removeEventListener(UserEvent.LOAD_DATA_COMPLETE, showNotify);
 			UserModel.instance.inbox.push(lastMessage);
 			AppController.instance.alert(lastMessage.title, lastMessage.message);

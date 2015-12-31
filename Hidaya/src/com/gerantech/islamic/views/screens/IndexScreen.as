@@ -1,12 +1,10 @@
 package com.gerantech.islamic.views.screens
 {
-	import com.gerantech.islamic.managers.Player;
-	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.vo.Hizb;
 	import com.gerantech.islamic.models.vo.Sura;
-	import com.gerantech.islamic.utils.MetricUtils;
 	import com.gerantech.islamic.utils.StrTools;
+	import com.gerantech.islamic.views.controls.SearchInput;
 	import com.gerantech.islamic.views.headers.IndexHeader;
 	import com.gerantech.islamic.views.items.HizbItemRenderer;
 	import com.gerantech.islamic.views.items.SuraItemRenderer;
@@ -193,6 +191,11 @@ package com.gerantech.islamic.views.screens
 				
 			surasList.dataProvider = new ListCollection(filteredArray);
 		}
-
+		
+		override protected function createToolbarItems():void
+		{
+			super.createToolbarItems();
+			appModel.toolbar.centerItem = new SearchInput();
+		}
 	}
 }

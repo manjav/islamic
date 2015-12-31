@@ -1,6 +1,6 @@
 package com.gerantech.islamic.managers
 {
-	import com.gerantech.extensions.AndroidExtension;
+	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.extensions.events.AndroidEvent;
 	import com.gerantech.islamic.events.AppEvent;
 	import com.gerantech.islamic.models.AppModel;
@@ -69,8 +69,8 @@ package com.gerantech.islamic.managers
 			conf = ConfigModel.instance;
 			userModel = UserModel.instance;
 	
-			AndroidExtension.instance.init();
-			AndroidExtension.instance.addEventListener(AndroidEvent.CALL_STATE_CHANGED, phone_callStateChanged);
+			NativeAbilities.instance.init();
+			NativeAbilities.instance.addEventListener(AndroidEvent.CALL_STATE_CHANGED, phone_callStateChanged);
 		}
 
 		public function get playing():Boolean
@@ -102,12 +102,12 @@ package com.gerantech.islamic.managers
 
 		protected function phone_callStateChanged(event:AndroidEvent):void
 		{
-			if(_state==STATE_PLAY && event.state!=AndroidExtension.CALL_STATE_IDLE)
+			if(_state==STATE_PLAY && int(event.data)!=NativeAbilities.CALL_STATE_IDLE)
 			{
 				pauseForCall = true;
 				pause();
 			}
-			if(pauseForCall && event.state==AndroidExtension.CALL_STATE_IDLE)
+			if(pauseForCall && int(event.data)==NativeAbilities.CALL_STATE_IDLE)
 			{
 				pauseForCall = false;
 				play();

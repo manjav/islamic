@@ -10,6 +10,9 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.views.popups.TutorialPopUp;
 	import com.gerantech.islamic.views.screens.AboutScreen;
 	import com.gerantech.islamic.views.screens.BookmarksScreen;
+	import com.gerantech.islamic.views.screens.CityScreen;
+	import com.gerantech.islamic.views.screens.CompassScreen;
+	import com.gerantech.islamic.views.screens.DashboardScreen;
 	import com.gerantech.islamic.views.screens.DownloadScreen;
 	import com.gerantech.islamic.views.screens.FilteredPersonScreen;
 	import com.gerantech.islamic.views.screens.IndexScreen;
@@ -19,8 +22,6 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.views.screens.QuranScreen;
 	import com.gerantech.islamic.views.screens.SearchScreen;
 	import com.gerantech.islamic.views.screens.SettingsScreen;
-	
-	import flash.utils.getTimer;
 	
 	import feathers.controls.StackScreenNavigator;
 	import feathers.controls.StackScreenNavigatorItem;
@@ -44,7 +45,24 @@ package com.gerantech.islamic
 			appModel.navigator.autoSizeMode = StackScreenNavigator.AUTO_SIZE_MODE_STAGE;
 			appModel.navigator.clipContent = true;
 			
+			var dashItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(DashboardScreen);
+			appModel.navigator.addScreen(appModel.PAGE_DASHBOARD, dashItem);
+			
+			
+			var settingItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(SettingsScreen);
+			settingItem.pushTransition = appModel.pushTransition;
+			settingItem.popTransition = appModel.popTransition;
+			appModel.navigator.addScreen(appModel.PAGE_SETTINGS, settingItem);		
+			
+			var aboutItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(AboutScreen);
+			aboutItem.pushTransition = appModel.pushTransition;
+			aboutItem.popTransition = appModel.popTransition;
+			appModel.navigator.addScreen(appModel.PAGE_ABOUT, aboutItem);		
+			
+			// Quran --------------------------------------------------
 			var quranItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(QuranScreen);
+			quranItem.pushTransition = Cover.createCoverUpTransition();
+			quranItem.popTransition = Reveal.createRevealDownTransition();
 			appModel.navigator.addScreen(appModel.PAGE_QURAN, quranItem);
 			
 			var indexItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(IndexScreen);
@@ -57,20 +75,10 @@ package com.gerantech.islamic
 			bookmarkItem.popTransition = appModel.popTransition;
 			appModel.navigator.addScreen(appModel.PAGE_BOOKMARKS, bookmarkItem);		
 			
-			var settingItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(SettingsScreen);
-			settingItem.pushTransition = appModel.pushTransition;
-			settingItem.popTransition = appModel.popTransition;
-			appModel.navigator.addScreen(appModel.PAGE_SETTINGS, settingItem);		
-			
 			var searchItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(SearchScreen);
 			searchItem.pushTransition = appModel.pushTransition;
 			searchItem.popTransition = appModel.popTransition;
 			appModel.navigator.addScreen(appModel.PAGE_SEARCH, searchItem);		
-			
-			var aboutItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(AboutScreen);
-			aboutItem.pushTransition = appModel.pushTransition;
-			aboutItem.popTransition = appModel.popTransition;
-			appModel.navigator.addScreen(appModel.PAGE_ABOUT, aboutItem);		
 			
 			var personItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(PersonsScreen);
 			personItem.pushTransition = Cover.createCoverUpTransition();
@@ -97,6 +105,17 @@ package com.gerantech.islamic
 			downloadItem.popTransition = Reveal.createRevealDownTransition();
 			appModel.navigator.addScreen(appModel.PAGE_DOWNLOAD, downloadItem);
 				
+		
+			var compassItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(CompassScreen);
+			compassItem.pushTransition = Cover.createCoverUpTransition();
+			compassItem.popTransition = Reveal.createRevealDownTransition();
+			appModel.navigator.addScreen(appModel.PAGE_COMPASS, compassItem);
+			
+			var cityItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(CityScreen);
+			cityItem.pushTransition = Cover.createCoverUpTransition();
+			cityItem.popTransition = Reveal.createRevealDownTransition();
+			appModel.navigator.addScreen(appModel.PAGE_CITY, cityItem);
+
 		}
 		
 		public function createScreens():void
@@ -135,7 +154,7 @@ package com.gerantech.islamic
 			//appModel.toolbar.layoutData = new AnchorLayoutData(0,0,NaN,0);
 			addChild(appModel.toolbar);
 			
-			appModel.navigator.rootScreenID = appModel.PAGE_QURAN;
+			appModel.navigator.rootScreenID = appModel.PAGE_DASHBOARD;
 			appModel.dispatchEventWith(AppEvent.PUSH_FIRST_SCREEN);
 		}
 	}

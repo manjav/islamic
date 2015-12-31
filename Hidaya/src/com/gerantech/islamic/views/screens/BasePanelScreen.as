@@ -3,12 +3,18 @@ package com.gerantech.islamic.views.screens
 	import com.freshplanet.nativeExtensions.Flurry;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
+	import com.gerantech.islamic.views.buttons.ToolbarButton;
+	import com.gerantech.islamic.views.controls.RTLLabel;
 	
 	import flash.utils.getQualifiedClassName;
 	
 	import mx.resources.ResourceManager;
 	
+	import feathers.controls.Header;
 	import feathers.controls.PanelScreen;
+	import feathers.core.FeathersControl;
+	
+	import starling.events.Event;
 	
 	public class BasePanelScreen extends PanelScreen
 	{
@@ -27,14 +33,29 @@ package com.gerantech.islamic.views.screens
 			appModel.drawers.isEnabled = false;
 /*			width = appModel.sizes.width;
 			height = appModel.sizes.height;*/
-		//	headerFactory = customHeaderFactory;
+			headerFactory = customHeaderFactory;
 			backButtonHandler = backButtonFunction;
 			searchButtonHandler = searchButtonFunction;
+			createToolbarItems();
 			
 			Flurry.getInstance().logEvent(getQualifiedClassName(this).split("::")[1], {type:type});
 		}
-		/*
-		protected function customHeaderFactory():Header
+		
+		private function customHeaderFactory():Header
+		{
+			var h:Header = new Header();
+			h.visible = false;
+			return h;
+		}
+		
+		protected function createToolbarItems():void
+		{
+			appModel.toolbar.resetItem();
+			appModel.toolbar.navigationCallback = backButtonFunction;
+		}
+
+
+		/*protected function customHeaderFactory():Header
 		{
 			var header:Header = new Header();
 			header.visible = false

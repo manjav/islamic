@@ -9,10 +9,6 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.views.controls.DownloadAccessory;
 	import com.gerantech.islamic.views.controls.LinierProgressBar;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	import com.greensock.TweenLite;
-	import com.greensock.easing.Expo;
-	
-	import flash.utils.setTimeout;
 	
 	import mx.resources.ResourceManager;
 	
@@ -24,6 +20,7 @@ package com.gerantech.islamic.views.items
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 	
+	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.display.Quad;
@@ -126,7 +123,8 @@ package com.gerantech.islamic.views.items
 			checkButton.touchable = !downloadManager.downloading;
 			
 			progressBar.enabled = false;
-			TweenLite.killTweensOf(progressBar);
+			Starling.juggler.removeTweens(progressBar);
+			//TweenLite.killTweensOf(progressBar);
 			nameDisplay.text = StrTools.getNumberFromLocale(String(index+1)) + ". " + ResourceManager.getInstance().getString("loc", "sura_l")+" "+ (appModel.ltr?(download.tname+","):download.name);
 			
 			messageDisplay.visible = false;
@@ -151,7 +149,13 @@ package com.gerantech.islamic.views.items
 		{
 			progressBar.enabled = true;
 			if(percent>0)
-				TweenLite.to(progressBar, 0.8, {delay:0.1, progress:percent, ease:Expo.easeOut});
+			{
+				var tw:Tween = new Tween(progressBar, 0.8, Transitions.EASE_IN_OUT);
+				tw.animate("progress", percent);
+				tw.delay = 0.1;
+				Starling.juggler.add(tw);
+				//TweenLite.to(progressBar, 0.8, {delay:0.1, progress:percent, ease:Expo.easeOut});
+			}
 			else
 				progressBar.progress = 0;
 			

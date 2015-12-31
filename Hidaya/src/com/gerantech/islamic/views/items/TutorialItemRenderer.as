@@ -3,11 +3,11 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.controls.Tute_0;
-	import com.greensock.TweenMax;
 	
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
+	import starling.core.Starling;
 	import starling.events.Event;
 
 	public class TutorialItemRenderer extends BasePageItemRenderer
@@ -49,7 +49,8 @@ package com.gerantech.islamic.views.items
 		override protected function selfRemovedHandler(event:Event):void
 		{
 			super.selfRemovedHandler(event);
-			TweenMax.killAll();
+			Starling.juggler.removeTweens(nextButton);
+			//TweenMax.killAll();
 		}
 		
 		override protected function commitAfterStopScrolling():void
@@ -62,8 +63,10 @@ package com.gerantech.islamic.views.items
 			nextButton.icon.filter = color;*/
 			
 			nextButton.icon.alpha = 0;
-			var tm:TweenMax = TweenMax.to(nextButton.icon, 2, {alpha:1, ease:"easenone"});
-			tm.repeat = 7;
+			Starling.juggler.tween(nextButton.icon, 2, {alpha:1, repeatCount:7});
+			//tw.repeatCount = 7;
+			//var tm:TweenMax = TweenMax.to(nextButton.icon, 2, {alpha:1, ease:"easenone"});
+			//tm.repeat = 7;
 		}
 		
 		

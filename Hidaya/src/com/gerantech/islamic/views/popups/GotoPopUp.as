@@ -8,7 +8,6 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.views.controls.CustomTextInput;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
-	import com.greensock.TweenLite;
 	
 	import flash.text.ReturnKeyLabel;
 	import flash.text.SoftKeyboardType;
@@ -26,18 +25,17 @@ package com.gerantech.islamic.views.popups
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 	
+	import starling.core.Starling;
 	import starling.events.Event;
 
 	public class GotoPopUp extends InfoPopUp
 	{
-
 		private var pageLabel:RTLLabel;
 		private var pageInput:CustomTextInput;
 
 		private var suraPicker:PickerList;
 		private var ayaPicker:PickerList;
 		private var isPage:Boolean = true;
-
 
 		private var pageGroup:LayoutGroup;
 		private var suraGroup:LayoutGroup;
@@ -142,23 +140,6 @@ package com.gerantech.islamic.views.popups
 
 			suraGroup.addChild(appModel.ltr?suraPicker:ayaPicker);
 			suraGroup.addChild(appModel.ltr?ayaPicker:suraPicker);
-			/*
-			var spacer:Spacer = new Spacer();
-			spacer.height = appModel.sizes.twoLineItem/2;
-			container.addChild(spacer);
-			
-			firstButton = new Button();
-			firstButton.label = loc("goto_button");
-			firstButton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
-			firstButton.addEventListener(Event.TRIGGERED, buttons_triggerHandler);
-			
-			secondButton = new Button();
-			secondButton.label = loc("cancel_button");
-			secondButton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
-			secondButton.addEventListener(Event.TRIGGERED, close);
-
-			buttonBar.addChild(appModel.ltr?secondButton:firstButton);
-			buttonBar.addChild(appModel.ltr?firstButton:secondButton);*/
 			
 			acceptCallback = buttons_triggerHandler;
 			hideAssets();
@@ -166,20 +147,6 @@ package com.gerantech.islamic.views.popups
 			inited = true;
 		}
 		
-		/*private function buttons_creationCompjleteHandler(event:Event):void
-		{
-			var btn:Button = event.currentTarget as Button;
-			var fd2:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);
-			var fe:ElementFormat = new ElementFormat(fd2, appModel.sizes.orginalFontSize, BaseMaterialTheme.SELECTED_TEXT_COLOR);
-			btn.defaultLabelProperties.elementFormat = fe;
-			btn.downLabelProperties.elementFormat = fe;
-			btn.disabledLabelProperties.elementFormat = fe;
-			
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = null;
-			btn.stateToSkinFunction = skinSelector.updateValue;
-		}*/
-
 		private function pageInput_focusHandler():void
 		{
 			isPage = true;
@@ -211,11 +178,14 @@ package com.gerantech.islamic.views.popups
 		private function assetsFadeIn():void
 		{
 			if(pageMode)
-				TweenLite.to(pageGroup, 0.5, {alpha:1});
+				Starling.juggler.tween(pageGroup, 0.5, {alpha:1});
+				//TweenLite.to(pageGroup, 0.5, {alpha:1});
 			
-			TweenLite.to(suraGroup, 0.5, {delay:(pageMode?0.1:0), alpha:1});
+			Starling.juggler.tween(suraGroup, 0.5, {delay:(pageMode?0.1:0), alpha:1});
+			Starling.juggler.tween(buttonBar, 0.5, {delay:(pageMode?0.3:0.1), alpha:1});
 			
-			TweenLite.to(buttonBar, 0.5, {delay:(pageMode?0.3:0.1), alpha:1});
+			//TweenLite.to(suraGroup, 0.5, {delay:(pageMode?0.1:0), alpha:1});
+			//TweenLite.to(buttonBar, 0.5, {delay:(pageMode?0.3:0.1), alpha:1});
 		}
 		
 		private function ayaPicker_changeHandler():void

@@ -19,6 +19,7 @@ package com.gerantech.islamic.utils
 			_twoLineItem = getPixelByDP(_isTablet?72:72);
 			_threeLineItem = getPixelByDP(88);
 			_menuItem = getPixelByDP(_isTablet?48:48);
+			_dashboard = getPixelByDP(128);
 			_border = getPixelByDP(4);
 			_orginalFontSize = getPixelByDP(_isTablet ? 18 : 14.4);//uint(height/40+2);
 			
@@ -67,6 +68,9 @@ package com.gerantech.islamic.utils
 		
 		private var _threeLineItem:uint = 88;
 		public function get threeLineItem():uint{return _threeLineItem;}
+		
+		private var _dashboard:uint = 88;
+		public function get dashboard():uint{return _dashboard;}
 		
 		private var _border:uint = 0;
 		public function get border():uint{return _border;}

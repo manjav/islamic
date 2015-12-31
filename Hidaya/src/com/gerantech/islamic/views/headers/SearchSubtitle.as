@@ -1,5 +1,6 @@
 package com.gerantech.islamic.views.headers
 {
+	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.ConfigModel;
@@ -17,11 +18,9 @@ package com.gerantech.islamic.views.headers
 	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
-	import feathers.core.PopUpManager;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
-	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.events.Event;
@@ -35,10 +34,6 @@ package com.gerantech.islamic.views.headers
 		private var resultLabel:RTLLabel;
 		private var actionButton:FlatButton;
 		private var _result:String;
-
-		private var overlay:FlatButton;
-
-		private var searchPopUp:SearchSettingPopup;
 		
 		public function SearchSubtitle()
 		{
@@ -105,28 +100,10 @@ package com.gerantech.islamic.views.headers
 		
 		private function actionButton_triggerd():void
 		{
-			if(searchPopUp == null)
-			{
-				searchPopUp = new SearchSettingPopup();
-
-				PopUpManager.overlayFactory = function():DisplayObject
-				{
-					overlay = new FlatButton(null, null, true, 0.3, 0.3, 0);
-					overlay.addEventListener(Event.TRIGGERED, searchPopUp.close);
-					return overlay;
-				};
-			}
-			searchPopUp.addEventListener(Event.CLOSE, searchPopUp_closeHandler);
-			PopUpManager.addPopUp(searchPopUp);
+			AppController.instance.addPopup(SearchSettingPopup, searchPopUp_closeCallback);
 		}		
-		
-		private function searchPopUp_closeHandler():void
+		private function searchPopUp_closeCallback():void
 		{
-			overlay.removeEventListener(Event.TRIGGERED, searchPopUp.close);
-			searchPopUp.removeEventListener(Event.CLOSE, searchPopUp_closeHandler);
-			if(PopUpManager.isPopUp(searchPopUp))
-				PopUpManager.removePopUp(searchPopUp);
-			
 			updateElements();
 			dispatchEventWith(Event.CHANGE);
 		}
@@ -135,7 +112,6 @@ package com.gerantech.islamic.views.headers
 		{
 			var obj:Translator  = ConfigModel.instance.searchSources[userModel.searchSource];
 			translatorImage.source = obj.iconTexture;
-			//obj.addEventListener(Person.ICON_LOADED, ddd);
 			var des:String = loc("search_set_source") + ": " + obj.name + " - ";
 			
 			des += loc("search_set_scope") + ": ";
@@ -147,11 +123,6 @@ package com.gerantech.islamic.views.headers
 				des += loc("search_set_scope_0");
 			
 			titleLabel.text = des;
-		}
-		
-		private function ddd():void
-		{
-			trace("sdfdsf");
 		}
 		
 		public function log(value:String, color:uint=0):void

@@ -1,11 +1,10 @@
 package com.gerantech.islamic.views.actions
 {
-	import com.greensock.TweenLite;
-	import com.greensock.easing.Back;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
+	import com.gerantech.islamic.views.actions.items.ActionItemRenderer;
 	
 	import flash.geom.Point;
 	import flash.utils.clearTimeout;
@@ -14,12 +13,13 @@ package com.gerantech.islamic.views.actions
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
 	
+	import starling.animation.Transitions;
+	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import com.gerantech.islamic.views.actions.items.ActionItemRenderer;
 	
 	public class LanguageActionList extends LayoutGroup
 	{
@@ -30,7 +30,7 @@ package com.gerantech.islamic.views.actions
 		
 		private var personModes:Vector.<ActionItemRenderer>;
 		private var timeoutID:uint;
-		private var background:Quad;
+		private var overlay:Quad;
 		private var startPoint:Point;
 		
 		public function LanguageActionList(startPoint:Point)
@@ -41,8 +41,8 @@ package com.gerantech.islamic.views.actions
 		override protected function draw():void
 		{
 			super.draw();
-			background.width = actualWidth;
-			background.height = actualHeight;
+			overlay.width = actualWidth;
+			overlay.height = actualHeight;
 		}
 		
 		override protected function initialize():void
@@ -50,8 +50,8 @@ package com.gerantech.islamic.views.actions
 			super.initialize();
 			layout = new AnchorLayout();
 			
-			background = new Quad(1,1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
-			background.alpha = 0;
+			overlay = new Quad(1,1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
+			overlay.alpha = 0;
 			setTimeout(animateButtons, 0.3, opened = true);
 		}		
 		
@@ -104,13 +104,16 @@ package com.gerantech.islamic.views.actions
 					personModes[i].alpha = 0;
 				}					
 				bY = opened ? startPoint.y-gap*(i)-personModes[i].height/2 : startPoint.y;
-				TweenLite.to(personModes[i], 0.2, {delay:i*0.02, alpha:opened?1:0, y:bY, ease:opened?Back.easeOut:Back.easeIn});
+				
+				Starling.juggler.tween(personModes[i], 0.2, {delay:i*0.02, alpha:opened?1:0, y:bY, transition:opened?Transitions.EASE_OUT_BACK:Transitions.EASE_IN_BACK});
+				//TweenLite.to(personModes[i], 0.2, {delay:i*0.02, alpha:opened?1:0, y:bY, ease:opened?Back.easeOut:Back.easeIn});
 			}
-			TweenLite.to(background, 0.5, {alpha:(opened?0.9:0)});
+			Starling.juggler.tween(overlay, 0.3, {alpha:(opened?0.9:0)});
+			//TweenLite.to(overlay, 0.5, {alpha:(opened?0.9:0)});
 			
 			if(opened)
 			{
-				addChildAt(background, 0);
+				addChildAt(overlay, 0);
 				setTimeout(addEventListener, 500, TouchEvent.TOUCH, bg_touchHandler);
 			}
 			else
@@ -126,7 +129,7 @@ package com.gerantech.islamic.views.actions
 				if(personModes[i].parent==this)
 					removeChild(personModes[i]);
 			
-			removeChild(background);
+			removeChild(overlay);
 		}
 		
 		public function close():void

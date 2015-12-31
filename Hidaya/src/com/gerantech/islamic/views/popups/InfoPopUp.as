@@ -68,7 +68,7 @@ package com.gerantech.islamic.views.popups
 */			
 			var cancelButton:Button = new Button();
 			cancelButton.label = cancelButtonLabel;
-			cancelButton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
+			cancelButton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompleteHandler);
 			cancelButton.addEventListener(Event.TRIGGERED, buttons_triggerHandler);
 			
 			if(acceptButtonLabel==null)
@@ -78,7 +78,7 @@ package com.gerantech.islamic.views.popups
 			{
 				var acceptButton:Button = new Button();
 				acceptButton.label = acceptButtonLabel;
-				acceptButton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
+				acceptButton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompleteHandler);
 				acceptButton.addEventListener(Event.TRIGGERED, buttons_triggerHandler);
 				
 				buttonBar.addChild(appModel.ltr?cancelButton:acceptButton);
@@ -88,7 +88,7 @@ package com.gerantech.islamic.views.popups
 			show();
 		}
 		
-		private function buttons_creationCompjleteHandler(event:Event):void
+		protected function buttons_creationCompleteHandler(event:Event):void
 		{
 			var btn:Button = event.currentTarget as Button;
 			var fd2:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);

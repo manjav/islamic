@@ -1,71 +1,60 @@
 package com.gerantech.islamic.views.headers
 {
 	import com.gerantech.islamic.events.UserEvent;
-	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
-	import com.gerantech.islamic.models.vo.Person;
+	import com.gerantech.islamic.models.vo.ToolbarButtonData;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
-	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.buttons.ToolbarButton;
-	import com.gerantech.islamic.views.controls.RTLLabel;
-	import com.gerantech.islamic.views.controls.SearchInput;
 	import com.gerantech.islamic.views.lists.MenuList;
-	import com.gerantech.islamic.views.popups.GotoPopUp;
-	import com.greensock.TweenLite;
 	
 	import flash.utils.setTimeout;
 	
-	import mx.resources.ResourceManager;
-	
 	import feathers.controls.Callout;
 	import feathers.controls.LayoutGroup;
-	import feathers.controls.StackScreenNavigatorItem;
+	import feathers.core.FeathersControl;
+	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
-	import starling.animation.Transitions;
-	import starling.animation.Tween;
-	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
 	import starling.filters.BlurFilter;
 		
 	public class Toolbar extends LayoutGroup
 	{
-		private var buttons:Vector.<ToolbarButton>;
-		private var activeButtons:Vector.<ToolbarButton>;
+		
+		public var navigationCallback:Function;
+		public var accessoriesData:Vector.<ToolbarButtonData>;
+		public var centerItem:FeathersControl;
 		
 		private var gap:Number;
 		private var padding:Number;
-
-		private var navigateButton:ToolbarButton;
 		private var appModel:AppModel;
-
-		private var searchInput:SearchInput;
-
-		private var gotoPopUP:GotoPopUp;
-
-		private var overlay:FlatButton;
-
+		
+		private var accessories:Vector.<ToolbarButton>;
+		private var navigatorButton:ToolbarButton;
+		private var moreButton:ToolbarButton;
+		private var moreList:MenuList;
 		private var callout:Callout;
-		private var screenTitle:RTLLabel;
-		private var currentPersonType:String;
+		private var moreListData:Array;
 		
 		public function Toolbar()
 		{
 			autoSizeMode = AUTO_SIZE_MODE_STAGE;
 			appModel = AppModel.instance;
-			backgroundSkin = new Quad(1,1,BaseMaterialTheme.CHROME_COLOR);
+			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.CHROME_COLOR);
 			
-			addEventListener("moveToolbar", moveToolbarHandler);
 			
 			height = appModel.sizes.toolbar;
-			gap = Math.min(appModel.sizes.toolbar*1.2, appModel.sizes.orginalWidth/5);
-			padding = appModel.sizes.toolbar/3;
+			gap = appModel.sizes.toolbar;
+			padding = appModel.sizes.toolbar/2;
 			
 			layout = new AnchorLayout();
-			buttons = new Vector.<ToolbarButton>();
+			
+			resetItem();
+			
+			/*buttons = new Vector.<ToolbarButton>();
 			activeButtons = new Vector.<ToolbarButton>();
 			
 			screenTitle = new RTLLabel("", 0xFFFFFF, "center", null, false, null, 0, null, "bold");
@@ -95,14 +84,17 @@ package com.gerantech.islamic.views.headers
 			
 			searchInput = new SearchInput();
 			searchInput.layoutData = new AnchorLayoutData(appModel.sizes.border, NaN, appModel.sizes.border, NaN);
-			
+			*/
 			appModel.navigator.addEventListener(Event.CHANGE, navigator_changeHandler);
 			appModel.drawers.addEventListener(Event.CLOSE, drawers_changeHandler);
 			appModel.drawers.addEventListener(Event.OPEN, drawers_changeHandler);
 			UserModel.instance.addEventListener(UserEvent.CHANGE_COLOR, userModel_changeColorHandler);
+			addEventListener("moveToolbar", moveToolbarHandler);
 						
 			setLayout();
 		}
+		
+		
 		
 		private function moveToolbarHandler(event:Event):void
 		{
@@ -113,14 +105,9 @@ package com.gerantech.islamic.views.headers
 		private function drawers_changeHandler(event:Event):void
 		{
 			if(event.type==Event.OPEN)
-			{
 				fadeOut();
-			}
 			else
-			{
 				fadeIn();
-			}
-
 		}
 		
 		override protected function stage_resizeHandler(event:Event):void
@@ -131,8 +118,54 @@ package com.gerantech.islamic.views.headers
 		
 		public function setLayout():void
 		{
+			removeChildren();
 			width = appModel.sizes.width;
-			searchInput.x = appModel.ltr ? gap :0;
+			
+			var len:int = Math.min(accessoriesData.length, Math.floor(appModel.sizes.width/gap)-1);
+			var limited:Boolean = len<accessoriesData.length;
+			
+			//trace(appModel.navigator.activeScreenID, leftItems.length, rightItems.length)
+			accessories = new Vector.<ToolbarButton>();
+			for(var i:uint=0; i<len; i++) 
+			{
+				accessories[i] = new ToolbarButton(accessoriesData[i]);
+				accessories[i].x = appModel.ltr ? appModel.sizes.width-i*gap-(limited?gap:padding) : i*gap+(limited?gap:padding);
+				addItem(accessories[i])
+			}
+			
+			if(limited)
+			{
+				if(moreButton ==null)
+					moreButton = new ToolbarButton(new ToolbarButtonData("more", "dots", null));
+				
+				moreButton.x = appModel.ltr ? appModel.sizes.width-padding/2 : padding/2;
+				moreButton.addEventListener(Event.TRIGGERED, moreButton_triggeredHAndler);
+				addItem(moreButton);
+				
+				//Create more list with remaining buttons
+				moreListData = new Array();
+				for(i=len; i<accessoriesData.length; i++) 
+					moreListData.push(accessoriesData[i]);
+			}
+			
+			if(navigationCallback != null)
+			{
+				if(navigatorButton==null)
+				{
+					navigatorButton = new ToolbarButton(new ToolbarButtonData("", "arrow_w_"+appModel.align, null));
+					navigatorButton.addEventListener(Event.TRIGGERED, navigationCallback);
+				}
+				
+				navigatorButton.x = appModel.ltr ? padding : appModel.sizes.width-padding;
+				addItem(navigatorButton);
+			}
+			
+			if(centerItem != null)
+			{
+				centerItem.layoutData = new AnchorLayoutData(appModel.sizes.DP4, appModel.ltr?accessories.length*gap:gap, appModel.sizes.DP4, appModel.ltr?gap:accessories.length*gap);
+				addChild(centerItem);
+			}
+			/*searchInput.x = appModel.ltr ? gap :0;
 			searchInput.width = appModel.sizes.width - gap;
 			for(var i:uint; i<buttons.length; i++) 
 			{
@@ -145,19 +178,31 @@ package com.gerantech.islamic.views.headers
 			navigateButton.x = appModel.ltr ? padding*1.5 : appModel.sizes.width-padding*1.5;
 			navigateButton.y = appModel.sizes.toolbar/2;
 			navigateButton.buttonWidth = gap;
-			navigateButton.buttonHeight = appModel.sizes.toolbar;
+			navigateButton.buttonHeight = appModel.sizes.toolbar;*/
+		}
+		
+		private function moreButton_triggeredHAndler():void
+		{
+			moreList = new MenuList();
+			moreList.dataProvider = new ListCollection(moreListData);
+			moreList.addEventListener(Event.CLOSE, callout_closeHandler);
+			
+			callout = Callout.show(moreList, moreButton);
+			callout.filter = BlurFilter.createDropShadow(appModel.sizes.border, 90*(Math.PI/180), 0, 0.5, 3);
 		}
 		
 		private function navigator_changeHandler(event:Event):void
 		{
+			setLayout();
+			y=0;
+			return;
 			fadeOut();
 			setTimeout(fadeIn, 500);
-			y=0;
 		}
 		
 		public function fadeOut():void
 		{
-			TweenLite.to(screenTitle, 0.3, {alpha:0, onComplete:screenTitle.removeFromParent});
+/*			TweenLite.to(screenTitle, 0.3, {alpha:0, onComplete:screenTitle.removeFromParent});
 			
 			for(var i:uint; i<activeButtons.length; i++) 
 				TweenLite.to(activeButtons[i], 0.3, {alpha:0, x:appModel.ltr?appModel.sizes.width-i*gap:i*gap, delay:i*0.06});
@@ -165,12 +210,13 @@ package com.gerantech.islamic.views.headers
 			TweenLite.to(navigateButton, 0.3, {alpha:0, scaleX:0, scaleY:0});
 			
 			if(searchInput.parent)
-				TweenLite.to(searchInput, 0.3, {alpha:0, onComplete:searchInput.removeFromParent});
+				TweenLite.to(searchInput, 0.3, {alpha:0, onComplete:searchInput.removeFromParent});*/
 		}
 		
 		public function fadeIn():void
 		{
-			for each(var b:ToolbarButton in activeButtons)
+			return;
+			/*for each(var b:ToolbarButton in activeButtons)
 				b.removeFromParent();
 				
 			if(hasTitle)
@@ -217,9 +263,9 @@ package com.gerantech.islamic.views.headers
 				addChild(searchInput);
 				searchInput.alpha = 0;
 				TweenLite.to(searchInput, 0.3, {alpha:1});
-			}
+			}*/
 		}
-		
+		/*
 		private function activeButtons_triggerdHandler(event:Event):void
 		{
 			var btn:ToolbarButton = ToolbarButton(event.currentTarget);
@@ -246,12 +292,7 @@ package com.gerantech.islamic.views.headers
 					AppModel.instance.navigator.pushScreen(appModel.PAGE_PERSON);
 					break;
 			}
-		}
-		
-		private function callout_closeHandler(event:Event):void
-		{
-			callout.close();
-		}
+
 		
 		private function navigateButton_triggeredHandler(event:Event):void
 		{
@@ -261,11 +302,13 @@ package com.gerantech.islamic.views.headers
 				appModel.navigator.popScreen();
 		}
 		
+		
+		
 		public function get hasTitle():Boolean
 		{
 			var p:String = appModel.navigator.activeScreenID;
 			return(p==appModel.PAGE_ABOUT || p==appModel.PAGE_BOOKMARKS || p==appModel.PAGE_PERSON || p==appModel.PAGE_SETTINGS || p==appModel.PAGE_OMEN || p==appModel.PAGE_DOWNLOAD);
-		}
+		}*/
 		
 		/*public function validateSize():void
 		{
@@ -276,10 +319,37 @@ package com.gerantech.islamic.views.headers
 		}*/
 		
 		
+		private function callout_closeHandler(event:Event):void
+		{
+			callout.close();
+		}
+		
 		private function userModel_changeColorHandler():void
 		{
-			backgroundSkin = new Quad(1,1,BaseMaterialTheme.CHROME_COLOR);
+			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.CHROME_COLOR);
 		}
-
+		
+		private function addItem(item:ToolbarButton):void
+		{
+			item.y = appModel.sizes.toolbar/2;
+			item.buttonWidth = gap*1.2;
+			item.buttonHeight = appModel.sizes.toolbar;
+			item.addEventListener(Event.TRIGGERED, accessories_triggerHandler);
+			addChild(item);
+		}
+		
+		private function accessories_triggerHandler(event:Event):void
+		{
+			var item:ToolbarButton = event.currentTarget as ToolbarButton;
+			if(item.data.callback)
+				item.data.callback(item.data);
+		}
+		
+		public function resetItem():void
+		{
+			centerItem = null;
+			navigationCallback = null;
+			accessoriesData = new Vector.<ToolbarButtonData>();
+		}
 	}
 }

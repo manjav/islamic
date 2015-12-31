@@ -1,15 +1,13 @@
 package com.gerantech.islamic.views.controls
 {
-	import com.greensock.TweenLite;
-	
-	import flash.events.Event;
-	
 	import mx.resources.ResourceManager;
 	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
+	
+	import starling.core.Starling;
 	
 	public class Tute_0 extends LayoutGroup
 	{
@@ -48,12 +46,14 @@ package com.gerantech.islamic.views.controls
 			if(image)
 			{
 				image.source = "com/gerantech/islamic/assets/images/tutorial/"+_data+".png";
-				TweenLite.to(image, 0.5 ,{alpha:1});
+				Starling.juggler.tween(image, 0.5 ,{alpha:1});
+				//TweenLite.to(image, 0.5 ,{alpha:1});
 			}
 			if(tip)
 			{
 				tip.text = ResourceManager.getInstance().getString("loc", _data);
-				TweenLite.to(tip, 0.5 ,{alpha:1, delay:0.2});
+				Starling.juggler.tween(tip, 0.5 ,{alpha:1, delay:0.2});
+				//TweenLite.to(tip, 0.5 ,{alpha:1, delay:0.2});
 			}
 		}
 
