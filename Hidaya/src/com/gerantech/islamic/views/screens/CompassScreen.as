@@ -22,7 +22,7 @@ package com.gerantech.islamic.views.screens
 	import starling.core.Starling;
 	import starling.events.EnterFrameEvent;
 	
-	public class CompassScreen extends BasePanelScreen
+	public class CompassScreen extends BaseCustomPanelScreen
 	{
 		private var canvas:CompassCanvas;
 		private var compass:CompassExtension;

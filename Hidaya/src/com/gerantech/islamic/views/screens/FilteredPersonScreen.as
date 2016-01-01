@@ -23,7 +23,7 @@ package com.gerantech.islamic.views.screens
 	import starling.core.Starling;
 	import starling.events.Event;
 	
-	public class FilteredPersonScreen extends BasePanelScreen
+	public class FilteredPersonScreen extends BaseCustomPanelScreen
 	{
 		public var mode:Local;
 		public var flags:Array;

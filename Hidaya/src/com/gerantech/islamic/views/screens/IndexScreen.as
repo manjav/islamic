@@ -19,7 +19,7 @@ package com.gerantech.islamic.views.screens
 	
 	import starling.events.Event;
 
-	public class IndexScreen extends BaseScreen
+	public class IndexScreen extends BaseCustomScreen
 	{
 		private var suraCollection:ListCollection;
 		private var indexHeader:IndexHeader;

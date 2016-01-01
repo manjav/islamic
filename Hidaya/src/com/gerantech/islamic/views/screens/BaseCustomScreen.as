@@ -13,7 +13,7 @@ package com.gerantech.islamic.views.screens
 	
 	import starling.events.Event;
 	
-	public class BaseScreen extends Screen
+	public class BaseCustomScreen extends Screen
 	{
 		public var type:String = "";
 

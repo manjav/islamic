@@ -16,7 +16,7 @@ package com.gerantech.islamic.views.screens
 	import starling.display.Quad;
 	import starling.events.Event;
 
-	public class OmenScreen extends BasePanelScreen
+	public class OmenScreen extends BaseCustomPanelScreen
 	{
 		private var hint:RTLLabel;
 		private var button:SimpleLayoutButton;

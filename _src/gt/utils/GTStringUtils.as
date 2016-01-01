@@ -31,10 +31,62 @@
 			}
 			return myTextField;
 		}
-
-		//  UINT TO TIME _________________________________________________________________________
-		public static function uintToTime(_time:uint, _mode:String='Second', separator:String=" : "):String
+		
+		public static function getNumber(input:Object, local:String="en"):String
 		{
+			var _str:String = input+"";
+			if(local=="en")
+				return _str;
+			
+			_str = _str.split('0').join('٠');
+			_str = _str.split('1').join('١');
+			_str = _str.split('2').join('٢');
+			_str = _str.split('3').join('٣');
+			_str = _str.split('4').join('٤');
+			_str = _str.split('5').join('٥');
+			_str = _str.split('6').join('٦');
+			_str = _str.split('7').join('٧');
+			_str = _str.split('8').join('٨');
+			_str = _str.split('9').join('٩');
+			return(_str)
+		}
+		
+		public static function getExtendedNumber(input:Object, local:String="en"):String
+		{
+			var _str:String = input+"";
+			if(local=="en")
+				return _str;
+			
+			_str = _str.split('0').join('۰');
+			_str = _str.split('1').join('۱');
+			_str = _str.split('2').join('۲');
+			_str = _str.split('3').join('۳');
+			_str = _str.split('4').join('۴');
+			_str = _str.split('5').join('۵');
+			_str = _str.split('6').join('۶');
+			_str = _str.split('7').join('۷');
+			_str = _str.split('8').join('۸');
+			_str = _str.split('9').join('۹');
+			return(_str)
+		}
+		
+		
+		//  UINT TO TIME _________________________________________________________________________
+		public static function dateToTime(date:Date, _mode:String='Second', separator:String=":"):String
+		{
+			var time:uint = date.hours*3600+date.minutes*60+date.seconds;
+			if (_mode == 'Milisecond')
+			{
+				time *= 1000;
+				time += date.milliseconds;
+			}
+			return uintToTime(time, _mode, separator); 
+		}
+		
+		//  UINT TO TIME _________________________________________________________________________
+		public static function uintToTime(_time:uint, _mode:String='Second', separator:String=":"):String
+		{
+
 			var ret:String;
 			var mili:uint;
 			if (_mode == 'Milisecond')

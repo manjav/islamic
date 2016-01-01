@@ -3,7 +3,6 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.events.UserEvent;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	

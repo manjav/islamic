@@ -3,8 +3,6 @@ package com.gerantech.islamic.views.screens
 	import com.freshplanet.nativeExtensions.Flurry;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
-	import com.gerantech.islamic.views.buttons.ToolbarButton;
-	import com.gerantech.islamic.views.controls.RTLLabel;
 	
 	import flash.utils.getQualifiedClassName;
 	
@@ -12,11 +10,8 @@ package com.gerantech.islamic.views.screens
 	
 	import feathers.controls.Header;
 	import feathers.controls.PanelScreen;
-	import feathers.core.FeathersControl;
 	
-	import starling.events.Event;
-	
-	public class BasePanelScreen extends PanelScreen
+	public class BaseCustomPanelScreen extends PanelScreen
 	{
 		protected var appModel:AppModel;
 		protected var userModel:UserModel;

@@ -4,6 +4,7 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.themes.CustomTheme;
+	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.views.controls.CustomDrawers;
 	import com.gerantech.islamic.views.headers.Toolbar;
 	import com.gerantech.islamic.views.lists.DrawerList;
@@ -22,12 +23,16 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.views.screens.QuranScreen;
 	import com.gerantech.islamic.views.screens.SearchScreen;
 	import com.gerantech.islamic.views.screens.SettingsScreen;
+	import com.gerantech.islamic.views.screens.TimesScreen;
 	
 	import feathers.controls.StackScreenNavigator;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.core.PopUpManager;
 	import feathers.motion.Cover;
 	import feathers.motion.Reveal;
+	
+	import org.praytimes.PrayTime;
+	import org.praytimes.constants.CalculationMethod;
 	
 	import starling.core.Starling;
 	import starling.display.Sprite;
@@ -115,6 +120,11 @@ package com.gerantech.islamic
 			cityItem.pushTransition = Cover.createCoverUpTransition();
 			cityItem.popTransition = Reveal.createRevealDownTransition();
 			appModel.navigator.addScreen(appModel.PAGE_CITY, cityItem);
+			
+			var timesItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(TimesScreen);
+			timesItem.pushTransition = Cover.createCoverUpTransition();
+			timesItem.popTransition = Reveal.createRevealDownTransition();
+			appModel.navigator.addScreen(appModel.PAGE_TIMES, timesItem);
 
 		}
 		
@@ -122,15 +132,20 @@ package com.gerantech.islamic
 		{
 			appModel.theme = new CustomTheme();
 			appModel.drawers = new CustomDrawers();
-			appModel.myDrawer = new DrawerList(appModel.ltr);
+			/*appModel.myDrawer = new DrawerList(appModel.ltr);
 			
 			if(appModel.ltr)
 				appModel.drawers.leftDrawer = appModel.myDrawer;
 			else
-				appModel.drawers.rightDrawer = appModel.myDrawer;
+				appModel.drawers.rightDrawer = appModel.myDrawer;*/
 			
-			appModel.drawers.content = appModel.navigator;
 			addChild(appModel.drawers);
+			appModel.drawers.content = appModel.navigator;
+			
+			appModel.date = new MultiDate();
+			appModel.prayTimes = new PrayTime(CalculationMethod.TEHRAN, UserModel.instance.city.latitude, UserModel.instance.city.longitude);
+
+			trace(UserModel.instance.city.name)
 			
 			if(UserModel.instance.user.profile.numRun==1)
 			{

@@ -11,7 +11,7 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 
-	public class CityScreen extends BasePanelScreen
+	public class CityScreen extends BaseCustomPanelScreen
 	{
 		private var list:List;
 

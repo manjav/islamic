@@ -8,7 +8,6 @@ package com.gerantech.islamic.models
 	import com.gerantech.islamic.views.controls.CustomDrawers;
 	import com.gerantech.islamic.views.headers.Toolbar;
 	import com.gerantech.islamic.views.lists.DrawerList;
-	import com.gerantech.islamic.views.popups.GotoPopUp;
 	
 	import flash.desktop.NativeApplication;
 	import flash.system.Capabilities;
@@ -17,10 +16,8 @@ package com.gerantech.islamic.models
 	import feathers.controls.StackScreenNavigator;
 	import feathers.motion.Cover;
 	import feathers.motion.Reveal;
-	import feathers.system.DeviceCapabilities;
 	
 	import org.praytimes.PrayTime;
-	import org.praytimes.constants.CalculationMethod;
 	
 	import starling.events.EventDispatcher;
 	import starling.utils.AssetManager;
@@ -54,6 +51,7 @@ package com.gerantech.islamic.models
 		
 		public const PAGE_COMPASS:String = "page_compass";
 		public const PAGE_CITY:String = "page_city";
+		public const PAGE_TIMES:String = "page_times";
 
 		
 		public var theme:CustomTheme;
@@ -79,7 +77,6 @@ package com.gerantech.islamic.models
 			byteArraySec = new ByteArray();
 			byteArraySec.writeUTFBytes("d@t@B@53_53cur3d");
 			_isAndroid = Capabilities.os.substr(0, 5)=="Linux";
-			date = new MultiDate();
 		}
 
 		public var upside:Boolean = true;

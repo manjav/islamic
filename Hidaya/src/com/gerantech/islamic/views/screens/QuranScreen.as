@@ -38,7 +38,7 @@ package com.gerantech.islamic.views.screens
 	import starling.events.TouchPhase;
 
 	
-	public class QuranScreen extends BaseScreen
+	public class QuranScreen extends BaseCustomScreen
 	{
 	
 		private var list:List;

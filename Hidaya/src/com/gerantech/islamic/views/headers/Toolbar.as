@@ -86,8 +86,8 @@ package com.gerantech.islamic.views.headers
 			searchInput.layoutData = new AnchorLayoutData(appModel.sizes.border, NaN, appModel.sizes.border, NaN);
 			*/
 			appModel.navigator.addEventListener(Event.CHANGE, navigator_changeHandler);
-			appModel.drawers.addEventListener(Event.CLOSE, drawers_changeHandler);
-			appModel.drawers.addEventListener(Event.OPEN, drawers_changeHandler);
+			//appModel.drawers.addEventListener(Event.CLOSE, drawers_changeHandler);
+			//appModel.drawers.addEventListener(Event.OPEN, drawers_changeHandler);
 			UserModel.instance.addEventListener(UserEvent.CHANGE_COLOR, userModel_changeColorHandler);
 			addEventListener("moveToolbar", moveToolbarHandler);
 						
@@ -102,13 +102,13 @@ package com.gerantech.islamic.views.headers
 			visible = y>-appModel.sizes.toolbar;
 		}
 		
-		private function drawers_changeHandler(event:Event):void
+		/*private function drawers_changeHandler(event:Event):void
 		{
 			if(event.type==Event.OPEN)
 				fadeOut();
 			else
 				fadeIn();
-		}
+		}*/
 		
 		override protected function stage_resizeHandler(event:Event):void
 		{

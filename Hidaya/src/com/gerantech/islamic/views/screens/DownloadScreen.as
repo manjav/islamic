@@ -18,7 +18,7 @@ package com.gerantech.islamic.views.screens
 	
 	import starling.events.Event;
 	
-	public class DownloadScreen extends BasePanelScreen
+	public class DownloadScreen extends BaseCustomPanelScreen
 	{
 		public var reciter:Reciter;
 		

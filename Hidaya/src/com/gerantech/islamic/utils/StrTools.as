@@ -26,16 +26,16 @@
 		public static function getPersianNumber(input:Object):String
 		{
 			var _str:String = input+"";
-			_str = _str.split('0').join('٠')
-			_str = _str.split('1').join('١')
-			_str = _str.split('2').join('٢')
-			_str = _str.split('3').join('٣')
-			_str = _str.split('4').join('۴')
-			_str = _str.split('5').join('۵')
-			_str = _str.split('6').join('۶')
-			_str = _str.split('7').join('٧')
-			_str = _str.split('8').join('٨')
-			_str = _str.split('9').join('٩');
+			_str = _str.split('0').join('۰');
+			_str = _str.split('1').join('۱');
+			_str = _str.split('2').join('۲');
+			_str = _str.split('3').join('۳');
+			_str = _str.split('4').join('۴');
+			_str = _str.split('5').join('۵');
+			_str = _str.split('6').join('۶');
+			_str = _str.split('7').join('۷');
+			_str = _str.split('8').join('۸');
+			_str = _str.split('9').join('۹');
 			return(_str)
 		}
 		public static function getNumber(input:Object):String

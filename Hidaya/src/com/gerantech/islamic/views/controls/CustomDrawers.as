@@ -12,7 +12,7 @@ package com.gerantech.islamic.views.controls
 		{
 			super(content);
 		}
-		
+		/*
 		override protected function leftDrawerOpenOrCloseTween_onUpdate():void
 		{
 			//trace("CustomDrawer.leftDrawerOpenOrCloseTween_onUpdate()");
@@ -27,7 +27,7 @@ package com.gerantech.islamic.views.controls
 			AppModel.instance.toolbar.x = this._content.x
 		}
 		
-		
+		*/
 		
 	}
 }

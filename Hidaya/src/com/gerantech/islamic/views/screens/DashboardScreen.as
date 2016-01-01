@@ -4,6 +4,7 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.vo.Location;
+	import com.gerantech.islamic.models.vo.ToolbarButtonData;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.controls.Dashboard;
 	import com.gerantech.islamic.views.items.DashboardItemRenderer;
@@ -25,7 +26,7 @@ package com.gerantech.islamic.views.screens
 	import starling.display.Quad;
 	import starling.events.Event;
 
-	public class DashboardScreen extends BaseScreen
+	public class DashboardScreen extends BaseCustomScreen
 	{
 		private var list:List;
 		private var listLayout:TiledRowsLayout;
@@ -105,7 +106,14 @@ package com.gerantech.islamic.views.screens
 		override protected function createToolbarItems():void
 		{
 			appModel.toolbar.resetItem();
+			appModel.toolbar.accessoriesData.push(new ToolbarButtonData("page_about", "info", toolbarButtons_triggerdHandler));
+		}
+		private function toolbarButtons_triggerdHandler(item:ToolbarButtonData):void
+		{
+			appModel.navigator.pushScreen(item.name);
 		}
 	}
+	
+
 	
 }

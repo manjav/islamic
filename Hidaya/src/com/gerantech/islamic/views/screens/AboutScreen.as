@@ -23,7 +23,7 @@ package com.gerantech.islamic.views.screens
 	
 	import starling.events.Event;
 	
-	public class AboutScreen extends BasePanelScreen
+	public class AboutScreen extends BaseCustomPanelScreen
 	{
 		private var list:List;
 		

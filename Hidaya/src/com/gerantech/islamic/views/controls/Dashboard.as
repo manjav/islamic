@@ -2,9 +2,12 @@ package com.gerantech.islamic.views.controls
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
+	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.utils.StrTools;
 	
+	import flash.desktop.NativeApplication;
+	import flash.events.Event;
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
 	
@@ -14,6 +17,8 @@ package com.gerantech.islamic.views.controls
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.VerticalLayout;
+	
+	import gt.utils.GTStringUtils;
 	
 	import org.praytimes.PrayTime;
 	import org.praytimes.constants.CalculationMethod;
@@ -25,25 +30,25 @@ package com.gerantech.islamic.views.controls
 		private var details:LayoutGroup;
 		private var resultLabel:RTLLabel;
 		private var nextTime:Date;
-		private var remainingTimeString:String;
+		private var nextTimeString:String;
 		private var intervalID:uint;
+
+		private var clock:Clock;
+		private var locationLabel:RTLLabel;
 		
 		override protected function initialize():void
 		{
 			super.initialize();
 			layout = new AnchorLayout();
 			appModel = AppModel.instance;
-			appModel.prayTimes = new PrayTime(CalculationMethod.TEHRAN, UserModel.instance.city.latitude, UserModel.instance.city.longitude);
-			
 			height = appModel.sizes.dashboard;
 			
 			// Add clock -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-			
-			var clock:Clock = new Clock();
-			clock.scaleX = clock.scaleY = height/2/512*1.7;
-			padding = (height-clock.width)/2;
-			clock.x = clock.width/2 + padding;
-			clock.y = height/2;
+			clock = new Clock();
+			clock.addEventListener("invokeNewParties", clock_invokeNewPartiesHandler);
+			clock.scaleX = clock.scaleY = height/2/512*1.4;
+			padding = (height-clock.width)/4;
+			clock.y = clock.x = clock.width/2 + padding;
 			addChild(clock);
 			
 			var detailsLayout:VerticalLayout = new VerticalLayout();
@@ -79,7 +84,7 @@ package com.gerantech.islamic.views.controls
 					dateText_2.text = num(date.dateShamsi)+" "+datePersianStr;
 					break;
 				default:
-					dateText_0.text = loc("week_day_"+date.day)+", "+date.date+" "+dateGergoriStr;
+					dateText_0.text = loc("week_day_"+date.day)+" "+date.date+" "+dateGergoriStr;
 					dateText_1.text = num(date.dateQamari)+" "+dateIslamicStr;
 					dateText_2.text = num(date.dateShamsi)+" "+datePersianStr;
 					break;
@@ -91,53 +96,63 @@ package com.gerantech.islamic.views.controls
 			details.addChild(new Spacer());
 			
 			// Type times -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-
-			nextTime = getNextTime();
+			nextTime = getNextTime()[1];
 			if(nextTime != null)
 			{
-				var txt:String = "وقت شرعی بعدی به افق " + UserModel.instance.city.name
-				var locationLabel:RTLLabel = new RTLLabel(txt, 0xFFFFFF, null, null, false, null, 0.9);
-				details.addChild(locationLabel);  
-			
-				resultLabel = new RTLLabel("", 0xFFFFFF, null, null, false, null, 0.8);
-				details.addChild(resultLabel);  
-				intervalID = setInterval(printNextTimeRemainig, 1000);
-				printNextTimeRemainig();
+				var txt:String = nextTimeString+" "+loc("time_of")+" "+UserModel.instance.city.name+" "+ StrTools.getNumber(GTStringUtils.dateToTime(nextTime,"Second",":"));
+				locationLabel = new RTLLabel(txt, 0xFFFFFF, null, "ltr", false, null, 0.9);
+				locationLabel.layoutData = new AnchorLayoutData(NaN, padding, padding, padding);
+				addChild(locationLabel);  
 			}
-		
 		}
-		
-		private function printNextTimeRemainig():void
-		{
-			var now:Date = new Date();
-			var dif:uint = (nextTime.getTime() - now.getTime())/1000;
-			var h:Number = Math.floor(dif/3600);
-			var m:Number = Math.floor((dif%3600)/ 60);
-			var s:Number = dif - h*3600 - m*60;
 
-			resultLabel.text = remainingTimeString+" "+timed(nextTime.hours, true)+":"+timed(nextTime.minutes)+":"+timed(nextTime.seconds)+" , فرصت: "+" "+timed(h, true)+":"+timed(m)+":"+timed(s);
-		}
-		
-		private function timed(time:Number, isHour:Boolean=false):String
+		protected function nativeApplication_activateHandler(event:Event):void
 		{
-			var ret:String = time.toString();
-			if(time<10 && !isHour)
-				ret = "0"+time;
-			return StrTools.getNumber(ret);
+			nextTime = getNextTime()[1];
+			locationLabel.text = nextTimeString+" "+loc("time_of")+" "+UserModel.instance.city.name+" "+ StrTools.getNumber(GTStringUtils.dateToTime(nextTime,"Second",":"));
 		}
+
+
 		
-		private function getNextTime():Date
+		
+		private function clock_invokeNewPartiesHandler():void
 		{
-			var times:Vector.<Date> = appModel.prayTimes.getTimes(new Date()).toDates();
-			for(var t:uint=1; t<times.length; t++)
+			nextTime = getNextTime()[1];
+			locationLabel.text = nextTimeString+" "+loc("time_of")+" "+UserModel.instance.city.name+" "+ StrTools.getNumber(GTStringUtils.dateToTime(nextTime,"Second",":"));
+		}
+		private function getNextTime():Vector.<Date>
+		{
+			var ret:Vector.<Date> = new Vector.<Date>(2);
+			var now:Date = new Date();
+			var nowTime:Number = now.getTime();
+			var times:Vector.<Date> = AppModel.instance.prayTimes.getTimes(now).toDates();
+			for(var t:uint=0; t<times.length; t++)
 			{
-				if(times[t].hours>appModel.date.hours)
+				if(times[t].getTime()>nowTime)
 				{
-					remainingTimeString = loc("pray_time_"+t);
-					return times[t];
+					if(t==0)
+					{
+						ret[1] = times[0];
+						now.setTime(nowTime - (1000 * 60 * 60 * 24));
+						ret[0] = AppModel.instance.prayTimes.getTimes(now).toDates()[8];
+					}
+					else if(t==8)
+					{
+						ret[0] = times[8];
+						now.setTime(nowTime + (1000 * 60 * 60 * 24));
+						ret[1] = AppModel.instance.prayTimes.getTimes(now).toDates()[0];
+					}
+					else
+					{
+						ret[0] = times[t-1];
+						ret[1] = times[t];
+					}
+					nextTimeString = loc("pray_time_"+t);
+					break;
 				}
 			}
-			return null;
+			clock.createParties(ret);
+			return ret;
 		}		
 		
 		
