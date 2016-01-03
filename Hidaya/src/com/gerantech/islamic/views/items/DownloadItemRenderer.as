@@ -12,8 +12,6 @@ package com.gerantech.islamic.views.items
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Expo;
 	
-	import flash.utils.setTimeout;
-	
 	import mx.resources.ResourceManager;
 	
 	import feathers.controls.LayoutGroup;

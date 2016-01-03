@@ -112,6 +112,7 @@ package
 			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/atlases"));
 			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/bitmaps"));
 			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/contents"));
+			appModel.assetManager.enqueue(File.documentsDirectory.resolvePath("islamic/texts/config-data.json"));
 			appModel.assetManager.loadQueue(loadQueueHandler);
 		}
 		

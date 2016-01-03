@@ -5,7 +5,6 @@ package com.gerantech.islamic.views.lists
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.ConfigModel;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.views.controls.AboutView;
 	import com.gerantech.islamic.views.controls.ProfileView;
 	import com.gerantech.islamic.views.controls.Spacer;
@@ -54,9 +53,9 @@ package com.gerantech.islamic.views.lists
 			profileView = new ProfileView();
 			addChild(profileView);
 			
-			if(!UserModel.instance.premiumMode && ConfigModel.instance.views[ConfigModel.instance.views.length-1].icon!="cart_grey")
+			/*if(!UserModel.instance.premiumMode && ConfigModel.instance.views[ConfigModel.instance.views.length-1].icon!="cart_grey")
 				ConfigModel.instance.views.push({icon: "cart_grey", title: "purchase_popup_accept_label"});		
-
+*/
 			
 			var listLayout:VerticalLayout = new VerticalLayout();
 			listLayout.gap = listLayout.padding = 0;

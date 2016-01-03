@@ -47,13 +47,13 @@ package com.gerantech.islamic.managers
 				if(dp.state==DownloadPackage.SELECTED) 
 					dp.state = DownloadPackage.WAITING;
 		
-			if(reciter.checksums==null)
+			/*if(reciter.checksums==null)
 			{
 				reciter.addEventListener(Person.CHECKSUM_LOADED, reciter_checksumLoaded);
 				reciter.addEventListener(Person.CHECKSUM_ERROR, reciter_checksumLoaded);
 				reciter.loadChecksum();
 				return;
-			}
+			}*/
 				
 			dispatchEventWith("toggleDownloading", false, downloading);
 			for(var i:uint=0; i<3; i++)

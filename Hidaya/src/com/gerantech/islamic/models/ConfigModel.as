@@ -1,9 +1,15 @@
 package com.gerantech.islamic.models
 {
 	import com.gerantech.islamic.models.vo.Local;
-	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.models.vo.Reciter;
 	import com.gerantech.islamic.models.vo.Translator;
+	
+	import flash.events.Event;
+	import flash.filesystem.File;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
+	
+	import gt.utils.GTStreamer;
 
 	public class ConfigModel
 	{
@@ -46,23 +52,23 @@ package com.gerantech.islamic.models
 			}
 			return (_this);
 		}
-		
-		public function ConfigModel()
-		{
-		}
+
 
 		public function setAssets(appModel:AppModel, userModel:UserModel):void
 		{
-			config = appModel.assetManager.getObject("config");
+			var configFile:File = new File(userModel.storagePath+"/islamic/texts/config-data.json");
+			if(configFile.exists)
+				config = appModel.assetManager.getObject("config-data");
+			else
+				config = appModel.assetManager.getObject("config");
 			
 			locals = getLocals();
 			fonts = config.application.fonts;
 			views = config.application.views;
 			languages = config.languages;
-
-			setReciters();
-			setTranslators(appModel, userModel);
 			
+			setReciters();
+			setTranslators();					
 			/*if(userModel.locale==null)
 			{
 				switch(appModel.descriptor.description)
@@ -78,6 +84,19 @@ package com.gerantech.islamic.models
 						break;
 				}
 			}*/
+			var urlStream:URLLoader = new URLLoader(new URLRequest("http://gerantech.com/islamic/config-data.xml"))
+			urlStream.addEventListener(Event.COMPLETE, configLoader_completeHandler);
+		}
+		
+		protected function configLoader_completeHandler(event:Event):void
+		{
+			var gtStreamer:GTStreamer = new GTStreamer(UserModel.instance.storagePath+"/islamic/texts/config-data.json", onSave, null, null, false, false);
+			gtStreamer.save(URLLoader(event.currentTarget).data);
+		}
+		
+		private function onSave(gtStreamer:GTStreamer):void
+		{
+			trace("saved")
 		}
 		
 		//RECITERS ______________________________________________________________________________________________________
@@ -172,7 +191,7 @@ package com.gerantech.islamic.models
 		}
 		
 		//TRANSLATORS ______________________________________________________________________________________________________
-		private function setTranslators(appModel:AppModel, userModel:UserModel):void
+		private function setTranslators():void
 		{
 			translators = new Array();
 			selectedTranslators = new Array();
@@ -191,7 +210,7 @@ package com.gerantech.islamic.models
 			
 			createTransFlags();
 			createTransModes();
-			for each(var ut:String in userModel.user.translators)
+			for each(var ut:String in UserModel.instance.user.translators)
 			for each(var t:Translator in translators)
 			if(t.path==ut)
 				selectedTranslators.push(t);
@@ -207,13 +226,9 @@ package com.gerantech.islamic.models
 				{
 					flag = transFlags[i] as Local;
 					if(flag.name == tr.flag.name)
-					{
 						flag.num ++;
-					}
 					else if(i==len-1)
-					{
 						transFlags.push(new Local(tr.flag.name, tr.flag.path))
-					}
 				}
 				if(len==0)
 					transFlags.push(new Local(tr.flag.name, tr.flag.path));

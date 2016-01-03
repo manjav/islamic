@@ -130,8 +130,8 @@ package com.gerantech.islamic.models.vo
 				return;
 			}
 			var path:String = StrTools.getZeroNum(ayas[downloadIndex].sura.toString())+StrTools.getZeroNum(ayas[downloadIndex].aya.toString());
-			var check:Checksum = downloadManager.reciter.getChecksum(path);
-			saver = new LoadAndSaver(ayas[downloadIndex].soundPath, ayas[downloadIndex].soundURL, check.md5);
+			//var check:Checksum = downloadManager.reciter.getChecksum(path);
+			saver = new LoadAndSaver(ayas[downloadIndex].soundPath, ayas[downloadIndex].soundURL);//, check.md5);
 			saver.addEventListener("complete", saver_completeHandler); 
 			saver.addEventListener(IOErrorEvent.IO_ERROR, saver_ioErrorHandler); 
 			state = DOWNLOADING;
