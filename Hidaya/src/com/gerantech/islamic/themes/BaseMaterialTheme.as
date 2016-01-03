@@ -145,7 +145,7 @@ package com.gerantech.islamic.themes
 		public static var DESCRIPTION_TEXT_COLOR:uint = 0x6d6d6d;//0xE0F2F1;
 		public static var SECONDARY_BACKGROUND_COLOR:uint = 0xE0F2F1;//0xE0F2F1;
 		public static var CHROME_COLOR:uint = 0x009688;//0xE0F2F1;
-		public static var ACCENT_COLOR:uint = 0x96000E;
+		public static var ACCENT_COLOR:uint = 0xeeba4c;//0x96000E;
 		
 		public static var LIGHT_TEXT_COLOR:uint = 0xFFFFFF//0xa6a6a6;
 		public static var DARK_TEXT_COLOR:uint = 0x666666;

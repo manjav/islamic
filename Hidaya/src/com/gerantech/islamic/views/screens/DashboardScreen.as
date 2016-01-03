@@ -72,7 +72,7 @@ package com.gerantech.islamic.views.screens
 		{
 			var scrollPos:Number = appModel.sizes.dashboard-list.verticalScrollPosition-appModel.sizes.toolbar;
 			appModel.toolbar.y = Math.min(0, Math.max(-appModel.sizes.toolbar, -scrollPos));
-			dashboard.alpha = scrollPos/(appModel.sizes.dashboard-appModel.sizes.toolbar);
+			//dashboard.alpha = scrollPos/(appModel.sizes.dashboard-appModel.sizes.toolbar);
 		}
 		
 		private function list_creationCompleteHandler():void

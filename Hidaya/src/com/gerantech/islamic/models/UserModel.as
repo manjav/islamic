@@ -14,7 +14,6 @@ package com.gerantech.islamic.models
 	import com.gerantech.islamic.utils.StrTools;
 	
 	import flash.net.SharedObject;
-	import flash.net.dns.AAAARecord;
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
 	

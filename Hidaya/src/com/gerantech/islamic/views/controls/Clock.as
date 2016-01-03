@@ -1,12 +1,18 @@
 package com.gerantech.islamic.views.controls
 {
+	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
+	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.StrTools;
 	
+	import flash.desktop.NativeApplication;
+	import flash.events.Event;
 	import flash.text.engine.SpaceJustifier;
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
+	
+	import mx.resources.ResourceManager;
 	
 	import gt.utils.GTStringUtils;
 	
@@ -21,18 +27,16 @@ package com.gerantech.islamic.views.controls
 	
 	public class Clock extends Sprite
 	{
-		
-		
 		private var needleHour:Image;
 		private var needleMinutes:Image;
 		private var needleSecond:Image;
 
 		private var now:Date;
 		private var intervalID:uint;
+		private var nextTime:Date;
+		private var nextTimeString:String;
 		private var partiesContainer:Sprite;
 		private var remainingLabel:RTLLabel;
-		private var nextTime:Date;
-		private var nextTimeUTC:Number = -1;
 		
 		public function Clock()
 		{
@@ -67,16 +71,17 @@ package com.gerantech.islamic.views.controls
 			circle.filter = cmf;
 			addChild(circle);*/
 			
-			remainingLabel = new RTLLabel("", 0xFFFFFF, "center", "ltr", false, null, 64);
+			remainingLabel = new RTLLabel("", BaseMaterialTheme.ACCENT_COLOR, "center", "ltr", false, null, 60, null, "bold");
 			remainingLabel.width = 512;
 			remainingLabel.x = -256;
-			remainingLabel.y = 300;
-			remainingLabel.textJustifier = new SpaceJustifier("ar", "unjustified", true)
+			remainingLabel.y = 320;
 			addChild(remainingLabel);
 			
-			
+			updateTimes();
 			intervalID = setInterval(perSecondeCallback, 1000);
 			perSecondeCallback();
+			
+			NativeApplication.nativeApplication.addEventListener(Event.ACTIVATE, nativeApplication_activateHandler);
 		}
 		
 		
@@ -92,13 +97,14 @@ package com.gerantech.islamic.views.controls
 			needleMinutes.rotation = deg2rad((m * 6));
 			needleSecond.rotation = deg2rad((s * 6));
 			
-			if(nextTimeUTC==-1)
+			if(nextTime == null)
 				return;
 			
-			if(nextTimeUTC<=now.getTime())
-				dispatchEventWith("invokeNewParties");
+			if(nextTime.getTime() <= now.getTime())
+				updateTimes();
 			
-			remainingLabel.text = StrTools.getNumber(GTStringUtils.uintToTime((nextTimeUTC - now.getTime())/1000, "Second", ":"));
+			remainingLabel.text = nextTimeString+" "+StrTools.getNumber(GTStringUtils.dateToTime(nextTime,"Second",":") +"\n"+ 
+				StrTools.getNumber(GTStringUtils.uintToTime((nextTime.getTime() - now.getTime())/1000, "Second", ":")));
 		}
 		
 		private function createNeedle(width:int, height:int):Image
@@ -113,33 +119,80 @@ package com.gerantech.islamic.views.controls
 			addChild(ret);
 			return ret;
 		}
-		
-		public function createParties(times:Vector.<Date>):void
+
+		protected function nativeApplication_activateHandler(event:Event):void
 		{
+			updateTimes();
+		}
+
+		private function updateTimes():void
+		{
+			var ret:Vector.<Date> = new Vector.<Date>(2);
+			var now:Date = new Date();
+			var nowTime:Number = now.getTime();
+			var times:Vector.<Date> = AppModel.instance.prayTimes.getTimes(now).toDates();
+			for(var t:uint=0; t<times.length; t++)
+			{
+				if(times[t].getTime()>nowTime)
+				{
+					if(t==0)
+					{
+						ret[1] = times[0];
+						now.setTime(nowTime - (1000 * 60 * 60 * 24));
+						ret[0] = AppModel.instance.prayTimes.getTimes(now).toDates()[8];
+						nextTimeString = loc("pray_time_"+t);
+					}
+					else if(t<=8)
+					{
+						ret[0] = times[t-1];
+						ret[1] = times[t];
+						nextTimeString = loc("pray_time_"+t);
+					}
+					break;
+				}
+			}
+			if(ret[0] == null)
+			{
+				ret[0] = times[8];
+				now.setTime(nowTime + (1000 * 60 * 60 * 24));
+				ret[1] = AppModel.instance.prayTimes.getTimes(now).toDates()[0];
+				nextTimeString = loc("pray_time_"+0);
+			}
+			
+			//Trace parties -----
 			partiesContainer.removeChildren()
-			nextTimeUTC = times[1].getTime();
-			for(var t:int=0; t<times.length; t++)
+			nextTime = ret[1];
+			for(t=0; t<ret.length; t++)
 			{
 				var p:Quad = createPoints();
-				p.rotation = deg2rad((times[0].getHours()*30) + (times[0].getMinutes()/2));
+				p.rotation = deg2rad((ret[0].getHours()*30) + (ret[0].getMinutes()/2));
 				if(t==1)
-					Starling.juggler.tween(p, 1.5, {delay:2, rotation:deg2rad((times[t].getHours()*30) + (times[t].getMinutes()/2)), transition:Transitions.EASE_IN_OUT})
-				
+					Starling.juggler.tween(p, 1.5, {delay:2, rotation:deg2rad((ret[t].getHours()*30) + (ret[t].getMinutes()/2)), transition:Transitions.EASE_IN_OUT})
 			}
-		}
+		}		
+		
+		
 		//  Create times points ---------------------------------------
 		private function createPoints():Quad
 		{
 			var ret:Quad = new Quad(10, 248, BaseMaterialTheme.ACCENT_COLOR);
 			//ret.smoothing = TextureSmoothing.BILINEAR;
 			ret.pivotX = ret.width/2;
-			ret.alpha = 0.3;
+			//ret.alpha = 0.3;
 			//	ret.height = ret.width = 12;
 			ret.pivotY = 248/ret.scaleY;
 			partiesContainer.addChildAt(ret, 0);
 			return ret;
 		}
 		
+		protected function loc(str:String, parameters:Array=null, locale:String=null):String
+		{
+			return ResourceManager.getInstance().getString("loc", str, parameters, locale);
+		}
+		protected function num(input:Object):String
+		{
+			return StrTools.getNumber(input);
+		}
 		override public function dispose():void
 		{
 			clearInterval(intervalID);

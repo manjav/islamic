@@ -84,10 +84,10 @@ package com.gerantech.islamic.views.headers
 			
 			downloadImage = new ImageLoader();
 			downloadImage.layoutData = new HorizontalLayoutData(NaN, 100);
-			downloadImage.source = Assets.getTexture("download_w");
+			downloadImage.source = Assets.getTexture("download_g");
 			downloadButton.addChild(downloadImage);
 			
-			downloadLabel = new RTLLabel(loc("download_link"), 0xE0F2F1, null, null, false, null, 0.8, null, "bold");
+			downloadLabel = new RTLLabel(loc("download_link"), BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, false, null, 0.8, null, "bold");
 			downloadLabel.layoutData = new HorizontalLayoutData(100);
 			downloadButton.addChild(downloadLabel);
 			
@@ -136,7 +136,7 @@ package com.gerantech.islamic.views.headers
 		
 		public function setDownloadButtonMode(downloading:Boolean):void
 		{
-			downloadImage.source = Assets.getTexture(downloading ? "close_w" : "download_w");
+			downloadImage.source = Assets.getTexture(downloading ? "close_g" : "download_g");
 			downloadLabel.text = loc(downloading ? "cancel_button" : "download_link");
 			selectionButton.touchable = !downloading;
 		}

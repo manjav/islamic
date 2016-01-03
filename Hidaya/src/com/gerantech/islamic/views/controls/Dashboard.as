@@ -2,14 +2,10 @@ package com.gerantech.islamic.views.controls
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
-	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.utils.StrTools;
 	
-	import flash.desktop.NativeApplication;
-	import flash.events.Event;
 	import flash.utils.clearInterval;
-	import flash.utils.setInterval;
 	
 	import mx.resources.ResourceManager;
 	
@@ -18,23 +14,13 @@ package com.gerantech.islamic.views.controls
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.VerticalLayout;
 	
-	import gt.utils.GTStringUtils;
-	
-	import org.praytimes.PrayTime;
-	import org.praytimes.constants.CalculationMethod;
-	
 	public class Dashboard extends LayoutGroup
 	{
 		private var appModel:AppModel;
 		private var padding:Number;
 		private var details:LayoutGroup;
-		private var resultLabel:RTLLabel;
-		private var nextTime:Date;
-		private var nextTimeString:String;
 		private var intervalID:uint;
-
 		private var clock:Clock;
-		private var locationLabel:RTLLabel;
 		
 		override protected function initialize():void
 		{
@@ -45,9 +31,8 @@ package com.gerantech.islamic.views.controls
 			
 			// Add clock -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 			clock = new Clock();
-			clock.addEventListener("invokeNewParties", clock_invokeNewPartiesHandler);
-			clock.scaleX = clock.scaleY = height/2/512*1.4;
-			padding = (height-clock.width)/4;
+			clock.scaleX = clock.scaleY = height/2/512;
+			padding = (height-clock.width)/6;
 			clock.y = clock.x = clock.width/2 + padding;
 			addChild(clock);
 			
@@ -93,71 +78,10 @@ package com.gerantech.islamic.views.controls
 			details.addChild(dateText_1);
 			details.addChild(dateText_2);
 			
-			details.addChild(new Spacer());
-			
-			// Type times -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-			nextTime = getNextTime()[1];
-			if(nextTime != null)
-			{
-				var txt:String = nextTimeString+" "+loc("time_of")+" "+UserModel.instance.city.name+" "+ StrTools.getNumber(GTStringUtils.dateToTime(nextTime,"Second",":"));
-				locationLabel = new RTLLabel(txt, 0xFFFFFF, null, "ltr", false, null, 0.9);
-				locationLabel.layoutData = new AnchorLayoutData(NaN, padding, padding, padding);
-				addChild(locationLabel);  
-			}
-		}
-
-		protected function nativeApplication_activateHandler(event:Event):void
-		{
-			nextTime = getNextTime()[1];
-			locationLabel.text = nextTimeString+" "+loc("time_of")+" "+UserModel.instance.city.name+" "+ StrTools.getNumber(GTStringUtils.dateToTime(nextTime,"Second",":"));
+			//details.addChild(new Spacer());
 		}
 
 
-		
-		
-		private function clock_invokeNewPartiesHandler():void
-		{
-			nextTime = getNextTime()[1];
-			locationLabel.text = nextTimeString+" "+loc("time_of")+" "+UserModel.instance.city.name+" "+ StrTools.getNumber(GTStringUtils.dateToTime(nextTime,"Second",":"));
-		}
-		private function getNextTime():Vector.<Date>
-		{
-			var ret:Vector.<Date> = new Vector.<Date>(2);
-			var now:Date = new Date();
-			var nowTime:Number = now.getTime();
-			var times:Vector.<Date> = AppModel.instance.prayTimes.getTimes(now).toDates();
-			for(var t:uint=0; t<times.length; t++)
-			{
-				if(times[t].getTime()>nowTime)
-				{
-					if(t==0)
-					{
-						ret[1] = times[0];
-						now.setTime(nowTime - (1000 * 60 * 60 * 24));
-						ret[0] = AppModel.instance.prayTimes.getTimes(now).toDates()[8];
-					}
-					else if(t==8)
-					{
-						ret[0] = times[8];
-						now.setTime(nowTime + (1000 * 60 * 60 * 24));
-						ret[1] = AppModel.instance.prayTimes.getTimes(now).toDates()[0];
-					}
-					else
-					{
-						ret[0] = times[t-1];
-						ret[1] = times[t];
-					}
-					nextTimeString = loc("pray_time_"+t);
-					break;
-				}
-			}
-			clock.createParties(ret);
-			return ret;
-		}		
-		
-		
-		
-		
 		protected function loc(str:String, parameters:Array=null, locale:String=null):String
 		{
 			return ResourceManager.getInstance().getString("loc", str, parameters, locale);
