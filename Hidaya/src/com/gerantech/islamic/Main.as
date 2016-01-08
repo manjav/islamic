@@ -7,7 +7,6 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.views.controls.CustomDrawers;
 	import com.gerantech.islamic.views.headers.Toolbar;
-	import com.gerantech.islamic.views.lists.DrawerList;
 	import com.gerantech.islamic.views.popups.TutorialPopUp;
 	import com.gerantech.islamic.views.screens.AboutScreen;
 	import com.gerantech.islamic.views.screens.BookmarksScreen;
@@ -125,7 +124,6 @@ package com.gerantech.islamic
 			timesItem.pushTransition = Cover.createCoverUpTransition();
 			timesItem.popTransition = Reveal.createRevealDownTransition();
 			appModel.navigator.addScreen(appModel.PAGE_TIMES, timesItem);
-
 		}
 		
 		public function createScreens():void

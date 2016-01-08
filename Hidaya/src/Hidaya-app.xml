@@ -309,7 +309,7 @@
     	<extensionID>com.pushwoosh.PushNotification</extensionID>
     	<extensionID>com.freshplanet.AirFlurry</extensionID>
     	<extensionID>com.gerantech.extensions.compass</extensionID>
-    <extensionID>com.gerantech.extensions</extensionID>
+    
     <extensionID>com.gerantech.extensions.nativeabilities</extensionID>
     </extensions>
 </application>

@@ -79,8 +79,8 @@ package com.gerantech.islamic.managers
 					insertUser();
 					break;
 			}
-			if(event.result.response==Result.REVOKE_ACCESS||event.result.response==Result.PERSON_INFORMATION)
-				AppModel.instance.myDrawer.resetContent();
+			/*if(event.result.response==Result.REVOKE_ACCESS||event.result.response==Result.PERSON_INFORMATION)
+				AppModel.instance.myDrawer.resetContent();*/
 		}					
 		}
 

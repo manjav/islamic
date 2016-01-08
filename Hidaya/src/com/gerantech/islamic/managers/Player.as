@@ -164,14 +164,14 @@ package com.gerantech.islamic.managers
 		private function loadSoundFile():void
 		{
 			state = STATE_WAITING;
-			if(currentReciter.checksums==null)
+			/*if(currentReciter.checksums==null)
 			{
 				currentReciter.addEventListener(Person.CHECKSUM_LOADED, reciter_checksumLoaded);
 				currentReciter.addEventListener(Person.CHECKSUM_ERROR, reciter_checksumLoaded);
 				currentReciter.loadChecksum();
 				return;
 			}
-			
+			*/
 			ayaSound.load();
 			ayaSound.sound.addEventListener(Event.OPEN, sound_openHandler);
 			ayaSound.sound.addEventListener(IOErrorEvent.IO_ERROR, sound_errorHandler);

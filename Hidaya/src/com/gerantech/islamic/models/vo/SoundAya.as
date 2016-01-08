@@ -56,9 +56,9 @@ package com.gerantech.islamic.models.vo
 		}
 		
 		protected function sound_completeHandler(event:Event):void
-		{
+		{//trace(soundURL, sound.length)
 			var path:String = StrTools.getZeroNum(sura.toString())+StrTools.getZeroNum(aya.toString());
-			var check:Checksum = reciter.getChecksum(path);
+			var check:Checksum// = reciter.getChecksum(path);
 			saver = new LoadAndSaver(soundPath, soundURL, check==null?null:check.md5);
 			loaded = true;
 		}

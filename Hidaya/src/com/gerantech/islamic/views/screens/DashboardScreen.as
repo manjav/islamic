@@ -11,11 +11,10 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.popups.BasePopUp;
 	import com.gerantech.islamic.views.popups.GeoPopup;
 	
-	import flash.utils.setTimeout;
-	
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
+	import feathers.events.FeathersEventType;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.TiledRowsLayout;
@@ -65,21 +64,20 @@ package com.gerantech.islamic.views.screens
 			list.addEventListener(Event.CHANGE, list_changHandler);
 			list.addEventListener(Event.SCROLL, list_scrollHandler);
 			addChild(list);
-			setTimeout(list_creationCompleteHandler, 10);
+			appModel.toolbar.y = -appModel.sizes.toolbar;
+			addEventListener(FeathersEventType.TRANSITION_IN_START, transitionInStartHandler);
 		}
 		
 		private function list_scrollHandler():void
 		{
 			var scrollPos:Number = appModel.sizes.dashboard-list.verticalScrollPosition-appModel.sizes.toolbar;
-			appModel.toolbar.y = Math.min(0, Math.max(-appModel.sizes.toolbar, -scrollPos));
-			//dashboard.alpha = scrollPos/(appModel.sizes.dashboard-appModel.sizes.toolbar);
+			appModel.toolbar.y = Math.min(0, Math.max(-appModel.sizes.toolbar, -scrollPos));//trace(appModel.toolbar.y)
+			dashboard.alpha = scrollPos/(appModel.sizes.dashboard-appModel.sizes.toolbar);
 		}
 		
-		private function list_creationCompleteHandler():void
+		private function transitionInStartHandler():void
 		{
-			var tw:Tween = new Tween(listLayout, 1, Transitions.EASE_OUT);
-			tw.animate("paddingTop", appModel.sizes.dashboard);
-			Starling.juggler.add(tw);
+			Starling.juggler.tween(listLayout, 0.7, {delay:0.3, paddingTop:appModel.sizes.dashboard, transition:Transitions.EASE_OUT});
 		}
 		
 		private function list_changHandler(event:Event):void

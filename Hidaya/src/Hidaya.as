@@ -53,6 +53,7 @@ package
 			//ft = getTimer();
 			trace(ResourceManager.getInstance().getString("loc", "quran_t"))//, String.fromCharCode(0x25b8));
 			mouseEnabled = mouseChildren = false;
+			
 			if(stage)
 			{
 				stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -111,6 +112,7 @@ package
 			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/atlases"));
 			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/bitmaps"));
 			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/contents"));
+			appModel.assetManager.enqueue(File.documentsDirectory.resolvePath("islamic/texts/config-data.json"));
 			appModel.assetManager.loadQueue(loadQueueHandler);
 		}
 		

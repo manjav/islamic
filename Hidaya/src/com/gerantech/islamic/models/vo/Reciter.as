@@ -52,8 +52,8 @@ package com.gerantech.islamic.models.vo
 		
 		 * Load Check sum for all ayas of reciter
 		 */
-		public function loadChecksum():void
-		{
+		/*public function loadChecksum():void
+		{//trace(url+"/000_checksum.md5", UserModel.instance.SOUNDS_PATH+path+"/000_checksum.md5")
 			checksumLoadSaver = new LoadAndSaver(UserModel.instance.SOUNDS_PATH+path+"/000_checksum.md5", url+"/000_checksum.md5");
 			checksumLoadSaver.addEventListener("complete", checksum_CompleteHandler);
 			checksumLoadSaver.addEventListener(IOErrorEvent.IO_ERROR, checksum_ioErrorHandler);
@@ -74,7 +74,7 @@ package com.gerantech.islamic.models.vo
 			
 			checksums = new Vector.<Checksum>();
 			for each(var line:String in cvsLines)
-			checksums.push(new Checksum(line));
+				checksums.push(new Checksum(line));
 			
 			dispatchEventWith(CHECKSUM_LOADED);
 		}
@@ -87,7 +87,7 @@ package com.gerantech.islamic.models.vo
 					return c;
 			}
 			return null;
-		}
+		}*/
 		
 		public function getSoundAya(aya:Aya):SoundAya
 		{

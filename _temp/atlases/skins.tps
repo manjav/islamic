@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.9.4</string>
+        <string>3.9.1</string>
         <key>fileName</key>
-        <string>E:/_PROJECTS/_FLEX_Flash/hidaya-project/_temp/atlases/skins.tps</string>
+        <string>D:/_PROJECTS/_FLEX/Bayan_projects/hidaya-project/_temp/atlases/skins.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -190,7 +190,6 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../skin/action_danger.png</filename>
             <filename>../skin/action_item_0.png</filename>
             <filename>../skin/action_item_1.png</filename>
             <filename>../skin/action_item_2.png</filename>
@@ -207,32 +206,53 @@
             <filename>../skin/bookmark_off.png</filename>
             <filename>../skin/bookmark_on.png</filename>
             <filename>../skin/cancel_download.png</filename>
+            <filename>../skin/cart_grey.png</filename>
+            <filename>../skin/check.png</filename>
             <filename>../skin/check_off.png</filename>
             <filename>../skin/check_on.png</filename>
             <filename>../skin/chevron_g.png</filename>
             <filename>../skin/chevron_w.png</filename>
             <filename>../skin/circle.png</filename>
-            <filename>../skin/circle_mask.png</filename>
             <filename>../skin/close_g.png</filename>
             <filename>../skin/close_w.png</filename>
             <filename>../skin/compass.png</filename>
             <filename>../skin/dots.png</filename>
             <filename>../skin/download.png</filename>
+            <filename>../skin/download_g.png</filename>
+            <filename>../skin/download_w.png</filename>
             <filename>../skin/drag.png</filename>
             <filename>../skin/email.png</filename>
             <filename>../skin/hizb_0_4.png</filename>
             <filename>../skin/hizb_1_4.png</filename>
             <filename>../skin/hizb_2_4.png</filename>
             <filename>../skin/hizb_3_4.png</filename>
+            <filename>../skin/ic_calendar.png</filename>
+            <filename>../skin/ic_clock.png</filename>
+            <filename>../skin/ic_compass.png</filename>
+            <filename>../skin/ic_finder.png</filename>
+            <filename>../skin/ic_greeting.png</filename>
+            <filename>../skin/ic_inbox.png</filename>
+            <filename>../skin/ic_map_marker_radius.png</filename>
+            <filename>../skin/ic_pray.png</filename>
+            <filename>../skin/ic_quran.png</filename>
+            <filename>../skin/ic_wallpaper.png</filename>
             <filename>../skin/info.png</filename>
             <filename>../skin/jump.png</filename>
+            <filename>../skin/kaaba.png</filename>
+            <filename>../skin/letter_e.png</filename>
+            <filename>../skin/letter_n.png</filename>
+            <filename>../skin/letter_s.png</filename>
+            <filename>../skin/letter_w.png</filename>
             <filename>../skin/list_bulleted.png</filename>
             <filename>../skin/logout.png</filename>
             <filename>../skin/meccan_icon.png</filename>
             <filename>../skin/medinan_icon.png</filename>
             <filename>../skin/menu.png</filename>
+            <filename>../skin/pencil_white.png</filename>
+            <filename>../skin/radian.png</filename>
             <filename>../skin/recitation.png</filename>
             <filename>../skin/remove.png</filename>
+            <filename>../skin/repeat_black.png</filename>
             <filename>../skin/round_alert.png</filename>
             <filename>../skin/search.png</filename>
             <filename>../skin/setting.png</filename>
@@ -243,17 +263,13 @@
             <filename>../skin/shadow_right.png</filename>
             <filename>../skin/share_variant.png</filename>
             <filename>../skin/star.png</filename>
+            <filename>../skin/timer_grey.png</filename>
             <filename>../skin/toolbar_button_bg.png</filename>
             <filename>../skin/translation.png</filename>
             <filename>../skin/undo_sign.png</filename>
-            <filename>../theme/metalworks/background-disabled-skin.png</filename>
-            <filename>../theme/metalworks/background-down-skin.png</filename>
-            <filename>../theme/metalworks/background-focused-skin.png</filename>
-            <filename>../theme/metalworks/background-inset-skin.png</filename>
-            <filename>../theme/metalworks/background-popup-skin.png</filename>
-            <filename>../theme/metalworks/background-skin.png</filename>
-            <filename>../theme/metalworks/button-back-disabled-skin.png</filename>
-            <filename>../theme/metalworks/button-back-down-skin.png</filename>
+            <filename>../skin/action.png</filename>
+            <filename>../skin/action_accent.png</filename>
+            <filename>../skin/action_danger.png</filename>
             <filename>../theme/metalworks/button-back-up-skin.png</filename>
             <filename>../theme/metalworks/button-call-to-action-down-skin.png</filename>
             <filename>../theme/metalworks/button-call-to-action-up-skin.png</filename>
@@ -299,15 +315,15 @@
             <filename>../theme/metalworks/tab-selected-disabled-skin.png</filename>
             <filename>../theme/metalworks/tab-selected-skin.png</filename>
             <filename>../theme/metalworks/vertical-scroll-bar-thumb-skin.png</filename>
-            <filename>../skin/timer_grey.png</filename>
-            <filename>../skin/check.png</filename>
-            <filename>../skin/download_w.png</filename>
-            <filename>../skin/download_g.png</filename>
-            <filename>../skin/cart_grey.png</filename>
-            <filename>../skin/repeat_black.png</filename>
-            <filename>../skin/action_accent.png</filename>
-            <filename>../skin/pencil_white.png</filename>
-            <filename>../skin/action.png</filename>
+            <filename>../theme/metalworks/background-disabled-skin.png</filename>
+            <filename>../theme/metalworks/background-down-skin.png</filename>
+            <filename>../theme/metalworks/background-focused-skin.png</filename>
+            <filename>../theme/metalworks/background-inset-skin.png</filename>
+            <filename>../theme/metalworks/background-popup-skin.png</filename>
+            <filename>../theme/metalworks/background-skin.png</filename>
+            <filename>../theme/metalworks/button-back-disabled-skin.png</filename>
+            <filename>../theme/metalworks/button-back-down-skin.png</filename>
+            <filename>../skin/circle_mask.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

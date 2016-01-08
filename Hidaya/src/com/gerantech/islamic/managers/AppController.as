@@ -3,7 +3,6 @@ package com.gerantech.islamic.managers
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.views.buttons.FlatButton;
-	import com.gerantech.islamic.views.lists.DrawerList;
 	import com.gerantech.islamic.views.popups.BasePopUp;
 	import com.gerantech.islamic.views.popups.InfoPopUp;
 	
@@ -55,7 +54,7 @@ package com.gerantech.islamic.managers
 			ResourceManager.getInstance().localeChain = [value.value];
 			appModel.direction = value.dir;
 			
-			if(appModel.drawers!=null)
+			/*if(appModel.drawers!=null)
 			{
 				appModel.myDrawer = new DrawerList(appModel.ltr);
 				appModel.drawers.rightDrawer = appModel.drawers.leftDrawer = null;
@@ -64,7 +63,7 @@ package com.gerantech.islamic.managers
 					appModel.drawers.leftDrawer = appModel.myDrawer;
 				else
 					appModel.drawers.rightDrawer = appModel.myDrawer;
-			}
+			}*/
 			
 			if(appModel.toolbar!=null)
 				appModel.toolbar.setLayout();

@@ -7,7 +7,6 @@ package com.gerantech.islamic.models
 	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.views.controls.CustomDrawers;
 	import com.gerantech.islamic.views.headers.Toolbar;
-	import com.gerantech.islamic.views.lists.DrawerList;
 	
 	import flash.desktop.NativeApplication;
 	import flash.system.Capabilities;
@@ -21,19 +20,9 @@ package com.gerantech.islamic.models
 	
 	import starling.events.EventDispatcher;
 	import starling.utils.AssetManager;
-
-	/*[Event(name="appFullScreen", type="com.gerantech.islamic.events.AppEvent")]
-	[Event(name="appautoOrientsDisabled", type="com.gerantech.islamic.events.AppEvent")]
-	[Event(name="appOrientationChanged", type="com.gerantech.islamic.events.AppEvent")]
-	[Event(name="appDirectionChanged", type="com.gerantech.islamic.events.AppEvent")]
-	[Event(name="appIdleModeChanged", type="com.gerantech.islamic.events.AppEvent")]
-	
-	[Event(name="playerSelectAya", type="com.gerantech.islamic.events.AppEvent")]*/
-	
 	
 	public class AppModel extends EventDispatcher
 	{
-		
 		public const PAGE_DASHBOARD:String = "page_dashboard";
 		public const PAGE_SETTINGS:String = "page_settings";
 		public const PAGE_ABOUT:String = "page_about";
@@ -48,7 +37,6 @@ package com.gerantech.islamic.models
 		public const PAGE_OMEN:String = "page_omen";
 		public const PAGE_DOWNLOAD:String = "page_download";
 		
-		
 		public const PAGE_COMPASS:String = "page_compass";
 		public const PAGE_CITY:String = "page_city";
 		public const PAGE_TIMES:String = "page_times";
@@ -57,7 +45,7 @@ package com.gerantech.islamic.models
 		public var theme:CustomTheme;
 		public var toolbar:Toolbar;
 		public var drawers:CustomDrawers;
-		public var myDrawer:DrawerList;
+		//public var myDrawer:DrawerList;
 		public var navigator:StackScreenNavigator;
 		public var descriptor:Descriptor ;
 		public var assetManager:AssetManager;
@@ -82,7 +70,6 @@ package com.gerantech.islamic.models
 		public var upside:Boolean = true;
 		public var align:String = "left";
 		public var ltr:Boolean;
-		
 		
 		private var _direction:String = "ltr";
 		public function set direction(value:String):void
