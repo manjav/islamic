@@ -96,7 +96,7 @@ package com.gerantech.islamic.models
 		
 		private function onSave(gtStreamer:GTStreamer):void
 		{
-			trace("saved")
+			trace("config-data.json saved")
 		}
 		
 		//RECITERS ______________________________________________________________________________________________________
