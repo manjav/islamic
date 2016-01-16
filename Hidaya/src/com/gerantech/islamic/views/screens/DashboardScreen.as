@@ -11,6 +11,8 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.popups.BasePopUp;
 	import com.gerantech.islamic.views.popups.GeoPopup;
 	
+	import flash.net.FileReference;
+	
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
@@ -20,7 +22,6 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.TiledRowsLayout;
 	
 	import starling.animation.Transitions;
-	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
@@ -61,7 +62,7 @@ package com.gerantech.islamic.views.screens
 				return new DashboardItemRenderer();
 			}
 			list.dataProvider = new ListCollection(ConfigModel.instance.parts);
-			list.addEventListener(Event.CHANGE, list_changHandler);
+			list.addEventListener(Event.CHANGE, list_changeHandler);
 			list.addEventListener(Event.SCROLL, list_scrollHandler);
 			addChild(list);
 			appModel.toolbar.y = -appModel.sizes.toolbar;
@@ -80,10 +81,13 @@ package com.gerantech.islamic.views.screens
 			Starling.juggler.tween(listLayout, 0.7, {delay:0.3, paddingTop:appModel.sizes.dashboard, transition:Transitions.EASE_OUT});
 		}
 		
-		private function list_changHandler(event:Event):void
+		private function list_changeHandler(event:Event):void
 		{
 			switch(list.selectedItem.title)
 			{
+				case "page_greeting":
+					new FileReference().browse();
+					break;
 				case "page_finder":
 					var geoPopup:BasePopUp = AppController.instance.addPopup(GeoPopup);
 					geoPopup.addEventListener(Event.COMPLETE, geoPopup_completeHandler);
@@ -92,6 +96,9 @@ package com.gerantech.islamic.views.screens
 					appModel.navigator.pushScreen(list.selectedItem.title);
 					break;
 			}
+			list.removeEventListener(Event.CHANGE, list_changeHandler);
+			list.selectedIndex = -1;
+			list.addEventListener(Event.CHANGE, list_changeHandler);
 		}
 		
 		private function geoPopup_completeHandler(event:Event):void

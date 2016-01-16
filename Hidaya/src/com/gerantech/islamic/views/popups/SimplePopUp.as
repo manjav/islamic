@@ -56,7 +56,7 @@ package com.gerantech.islamic.views.popups
 			alpha = 0;
 			width = Math.min(appModel.sizes.orginalWidth, appModel.sizes.orginalHeightFull)-appModel.sizes.DP48;
 			minHeight = appModel.sizes.twoLineItem;
-			maxHeight = appModel.sizes.heightFull//;Math.round(Math.min(appModel.sizes.orginalWidth, appModel.sizes.orginalHeightFull));
+			maxHeight = appModel.sizes.height//;Math.round(Math.min(appModel.sizes.orginalWidth, appModel.sizes.orginalHeightFull));
 			
 			vLayout = new VerticalLayout();
 			vLayout.padding = appModel.sizes.getPixelByDP(24);

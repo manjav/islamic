@@ -9,6 +9,7 @@ package com.gerantech.islamic.models
 	import com.gerantech.islamic.models.vo.Juze;
 	import com.gerantech.islamic.models.vo.Location;
 	import com.gerantech.islamic.models.vo.Page;
+	import com.gerantech.islamic.models.vo.Time;
 	import com.gerantech.islamic.models.vo.User;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.StrTools;
@@ -46,6 +47,7 @@ package com.gerantech.islamic.models
 		public var bookmarks:BookmarkCollection;
 		private var _lastItem:Aya;
 		public var loaded:Boolean;
+		public var timesModel:TimesModel;
 
 		public static function get instance():UserModel
 		{
@@ -60,6 +62,7 @@ package com.gerantech.islamic.models
 			bookmarks = new BookmarkCollection(user.bookmarks);
 			userUpdater = new UserDataUpdater();
 			profileManager = new ProfileManager();
+			timesModel = new TimesModel();
 		}
 				
 		public function get idleMode():Object{return user.idleMode};
@@ -112,7 +115,7 @@ package com.gerantech.islamic.models
 		
 		public function get personRepeat():uint{return user.personRepeat}
 		public function set personRepeat(value:uint):void{user.personRepeat=value, activeSaver()}
-
+		
 		/*public function set breakRepeat(value:uint):void{user.breakRepeat=value, activeSaver()}
 		public function get breakRepeat():uint{return user.breakRepeat}
 		public function set fontFamily(value:String):void{appController.setFontFamily(user.fontFamily=value), activeSaver()}
@@ -226,9 +229,7 @@ package com.gerantech.islamic.models
 						//user.profile[n.substr(2)] = loadData[n];
 					}
 					else if(user.hasOwnProperty(n))
-					{
 						user[n] = loadData[n];
-					}
 				}
 			}
 			setDefualtValue();			
@@ -239,6 +240,7 @@ package com.gerantech.islamic.models
 			ResourceModel.instance.load();
 			appController.setPaths(this, storagePath);
 			configModel.setAssets(appModel, this);
+			timesModel.data = user.times;
 			setLastItem(user.sura, user.aya);			
 			locale	= user.local;
 			bookmarks = new BookmarkCollection(user.bookmarks);
@@ -272,7 +274,8 @@ package com.gerantech.islamic.models
 			user.bookmarks = 			bookmarks.data as Array;
 			user.translators = 			configModel.selectedTranslators;
 			user.reciters = 			configModel.selectedReciters;
-			
+			user.times = 				timesModel.data;
+
 			var so:SharedObject = SharedObject.getLocal("user-data");
 			so.data.user = user;
 			so.flush(100000);

@@ -84,7 +84,7 @@ package com.gerantech.islamic.views.items
 				addChild(titleDisplay);
 
 			
-			if(!_data.name)
+			if(_data.hasOwnProperty("value") && !data.hasOwnProperty("name"))
 			{
 				_data.name = ResourceManager.getInstance().getString("loc", String(_data.value));
 			}
@@ -92,8 +92,10 @@ package com.gerantech.islamic.views.items
 			{
 				titleDisplay.text = StrTools.getNumberFromLocale(labelFunction(_data));
 			}
-			else
+			else if(data.hasOwnProperty("name"))
 				titleDisplay.text = StrTools.getNumberFromLocale(_data.name);
+			else
+				titleDisplay.text = _data.toString();
 			
 			super.commitData();
 		}

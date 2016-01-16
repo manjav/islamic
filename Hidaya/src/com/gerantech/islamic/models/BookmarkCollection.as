@@ -1,8 +1,5 @@
 package com.gerantech.islamic.models
 {	
-	import com.gerantech.islamic.models.vo.Aya;
-	import com.gerantech.islamic.models.vo.Bookmark;
-	
 	import feathers.data.ListCollection;
 	
 	

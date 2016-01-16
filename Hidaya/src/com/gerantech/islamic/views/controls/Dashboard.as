@@ -59,17 +59,17 @@ package com.gerantech.islamic.views.controls
 			switch(UserModel.instance.locale.value)
 			{
 				case "fa_IR":
-					dateText_0.text = loc("week_day_"+date.day)+" "+loc("j_"+date.dateShamsi)+" "+datePersianStr;
+					dateText_0.text = loc("week_day_"+(date.day-1))+" "+loc("j_"+date.dateShamsi)+" "+datePersianStr;
 					dateText_1.text = num(date.dateQamari)+" "+dateIslamicStr;
 					dateText_2.text = num(date.date)+" "+dateGergoriStr;
 					break;
 				case "ar_SA":
-					dateText_0.text = loc("week_day_"+date.day)+" "+loc("j_"+date.dateQamari)+" "+dateIslamicStr;
+					dateText_0.text = loc("week_day_"+(date.day-1))+" "+loc("j_"+date.dateQamari)+" "+dateIslamicStr;
 					dateText_1.text = num(date.date)+" "+dateGergoriStr;
 					dateText_2.text = num(date.dateShamsi)+" "+datePersianStr;
 					break;
 				default:
-					dateText_0.text = loc("week_day_"+date.day)+" "+date.date+" "+dateGergoriStr;
+					dateText_0.text = loc("week_day_"+(date.day-1))+" "+date.date+" "+dateGergoriStr;
 					dateText_1.text = num(date.dateQamari)+" "+dateIslamicStr;
 					dateText_2.text = num(date.dateShamsi)+" "+datePersianStr;
 					break;

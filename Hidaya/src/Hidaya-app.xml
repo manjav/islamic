@@ -26,9 +26,9 @@
   <name>قرآن هدایت</name>
 		
 	<!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade. --> 
-	<versionNumber>0.7.1</versionNumber>
+	<versionNumber>0.8.0</versionNumber>
 	<!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
-	<versionLabel>0.7.1</versionLabel>
+	<versionLabel>0.8.0</versionLabel>
 
 
 	<!-- Description, displayed in the AIR application installer.
@@ -281,6 +281,7 @@
 			        </activity>
 					<service android:name="com.arellomobile.android.push.PushGCMIntentService"/>
 					<receiver android:name="com.arellomobile.android.push.AlarmReceiver"/>
+			        <receiver android:name="com.gerantech.extensions.recievers.LocalNotificationReceiver"/>
 
  				</application>		
 			
@@ -309,7 +310,6 @@
     	<extensionID>com.pushwoosh.PushNotification</extensionID>
     	<extensionID>com.freshplanet.AirFlurry</extensionID>
     	<extensionID>com.gerantech.extensions.compass</extensionID>
-    
-    <extensionID>com.gerantech.extensions.nativeabilities</extensionID>
+    	<extensionID>com.gerantech.extensions.nativeabilities</extensionID>
     </extensions>
 </application>

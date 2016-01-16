@@ -131,9 +131,10 @@ package com.gerantech.islamic.views.controls
 			var now:Date = new Date();
 			var nowTime:Number = now.getTime();
 			var times:Vector.<Date> = AppModel.instance.prayTimes.getTimes(now).toDates();
-			for(var t:uint=0; t<times.length; t++)
+			times.splice(0, 1);
+			for(var t:uint=0; t < times.length; t++)
 			{
-				if(times[t].getTime()>nowTime)
+				if(times[t].getTime() > nowTime)
 				{
 					if(t==0)
 					{

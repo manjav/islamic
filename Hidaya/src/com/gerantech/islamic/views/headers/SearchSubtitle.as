@@ -75,7 +75,7 @@ package com.gerantech.islamic.views.headers
 			
 			actionButton = new FlatButton("pencil_white", "action_accent", false, 1, 0.8);
 			actionButton.iconScale = 0.4;
-			actionButton.width = actionButton.height = appModel.sizes.toolbar;
+			actionButton.width = actionButton.height = appModel.sizes.DP48;
 			actionButton.pivotY = actionButton.pivotX = actionButton.width/2;
 			actionButton.filter = BlurFilter.createDropShadow(border/8, 90*(Math.PI/180), 0, 0.6, border/16);
 			actionButton.addEventListener(Event.TRIGGERED, actionButton_triggerd);
