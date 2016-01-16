@@ -47,7 +47,6 @@ package com.gerantech.islamic.views.screens
 			indexHeader.y = appModel.sizes.toolbar;
 			indexHeader.addEventListener(Event.CHANGE, indexHeader_changeHandler);
 			lastSortMode = indexHeader.sortMode;
-			
 
 			//Create hizb list on right of page
 			var hizbsLayout: VerticalLayout = new VerticalLayout();
@@ -76,7 +75,7 @@ package com.gerantech.islamic.views.screens
 			
 			surasList = new List();
 			surasList.layout = surasLayout;
-			surasList.layoutData = new AnchorLayoutData(0, 0, 0);
+			surasList.layoutData = new AnchorLayoutData(0, 0, 0, appModel.sizes.subtitle);
 			surasList.itemRendererFactory = function():IListItemRenderer
 			{
 				return new SuraItemRenderer();

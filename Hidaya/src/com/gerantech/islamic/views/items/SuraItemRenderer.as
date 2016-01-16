@@ -63,8 +63,10 @@ package com.gerantech.islamic.views.items
 		//	myLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_RIGHT
 			layout = myLayout;
 			
+			grid *= 0.9;
+			
 			textRenderer = new RTLLabel("32 322 234", BaseMaterialTheme.PRIMARY_TEXT_COLOR, "justify", "rtl", true, "justify", fontSize, "mequran");
-			textRenderer.width = grid*2.4+appModel.sizes.border;
+			textRenderer.width = grid*3;
 			addChild(textRenderer);
 			
 			spacer = new LayoutGroup();
@@ -74,7 +76,7 @@ package com.gerantech.islamic.views.items
 			
 			suraImage = new ImageLoader();
 			suraImage.delayTextureCreation = true;
-			suraImage.height = grid*0.56;
+			suraImage.height = grid*0.6;
 			suraImage.scaleX = suraImage.scaleY;
 			addChild(suraImage);
 			

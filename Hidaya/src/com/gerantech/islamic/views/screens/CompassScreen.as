@@ -7,7 +7,6 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.models.vo.Location;
 	import com.gerantech.islamic.views.buttons.EiditableButton;
 	import com.gerantech.islamic.views.controls.CompassCanvas;
-	import com.gerantech.islamic.views.popups.BasePopUp;
 	import com.gerantech.islamic.views.popups.GeoCityPopup;
 	
 	import flash.desktop.NativeApplication;

@@ -50,9 +50,9 @@ package com.gerantech.islamic.views.buttons
 			addChild(labelDisplay);
 			
 			iconDisplay = new ImageLoader();
-			iconDisplay.source = Assets.getTexture("chevron_g");
+			iconDisplay.source = Assets.getTexture("pencil_gray");
 			iconDisplay.layoutData = new AnchorLayoutData(NaN, 0, NaN, NaN, NaN, 0);
-			iconDisplay.height = minHeight*0.6;
+			iconDisplay.height = minHeight*0.4;
 			addChild(iconDisplay);
 		}
 		

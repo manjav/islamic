@@ -44,7 +44,7 @@ package com.gerantech.islamic.views.headers
 			height = _height = appModel.sizes.subtitle;
 
 			myLayout = new HorizontalLayout();
-			myLayout.gap = appModel.sizes.border/2;
+			//myLayout.gap = appModel.sizes.border/2;
 			//myLayout.firstGap = appModel.sizes.border/2+_width;
 			//myLayout.paddingLeft = appModel.sizes.itemHeight+_width
 			layout = myLayout;
@@ -57,7 +57,7 @@ package com.gerantech.islamic.views.headers
 			hizbSorter.addEventListener(Event.TRIGGERED, buttons_triggeredHandler);
 			addChild(hizbSorter);
 			
-			_width = (_width+appModel.sizes.border)*0.8;
+			_width *= 0.9;
 			
 			pageSorter = new IndexSorter();
 			pageSorter.width = _width;
