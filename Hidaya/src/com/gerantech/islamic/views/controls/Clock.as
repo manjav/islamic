@@ -143,7 +143,7 @@ package com.gerantech.islamic.views.controls
 						ret[0] = AppModel.instance.prayTimes.getTimes(now).toDates()[8];
 						nextTimeString = loc("pray_time_"+t);
 					}
-					else if(t<=8)
+					else if(t<=7)
 					{
 						ret[0] = times[t-1];
 						ret[1] = times[t];
@@ -154,7 +154,7 @@ package com.gerantech.islamic.views.controls
 			}
 			if(ret[0] == null)
 			{
-				ret[0] = times[8];
+				ret[0] = times[7];
 				now.setTime(nowTime + (1000 * 60 * 60 * 24));
 				ret[1] = AppModel.instance.prayTimes.getTimes(now).toDates()[0];
 				nextTimeString = loc("pray_time_"+0);
