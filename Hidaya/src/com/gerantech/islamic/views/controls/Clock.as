@@ -2,13 +2,11 @@ package com.gerantech.islamic.views.controls
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.StrTools;
 	
 	import flash.desktop.NativeApplication;
 	import flash.events.Event;
-	import flash.text.engine.SpaceJustifier;
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
 	
@@ -168,7 +166,7 @@ package com.gerantech.islamic.views.controls
 				var p:Quad = createPoints();
 				p.rotation = deg2rad((ret[0].getHours()*30) + (ret[0].getMinutes()/2));
 				if(t==1)
-					Starling.juggler.tween(p, 1.5, {delay:2, rotation:deg2rad((ret[t].getHours()*30) + (ret[t].getMinutes()/2)), transition:Transitions.EASE_IN_OUT})
+					Starling.juggler.tween(p, 1.5, {delay:2, rotation:deg2rad((ret[t].hours%12)*30 + (ret[t].getMinutes()/2)), transition:Transitions.EASE_IN_OUT})
 			}
 		}		
 		

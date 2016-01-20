@@ -26,7 +26,7 @@ package com.gerantech.islamic.models.vo
 			if (alert == 1000)
 				return loc("alert_none");
 			else if (alert == 0)
-				return loc("alert_sync");
+				return loc("alert_sync") + " " + loc("pray_time_"+index);
 			else if (alert>0)
 				return alert + " " + loc("alert_after") + " " + loc("pray_time_"+index);
 			else

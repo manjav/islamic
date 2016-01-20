@@ -211,6 +211,7 @@ package com.gerantech.islamic.models
 			setMarketData();
 			loadByObject(so.data.user);
 			userUpdater.restore(user);
+			premiumMode = true;
 			loaded = true;
 		}
 		

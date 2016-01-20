@@ -32,10 +32,6 @@ package com.gerantech.islamic.views.screens
 		private var suraScrollPosition:Number = 0;
 		private var hizbScrollPosition:Number = 0;
 		
-		//private var hizbLayout:VerticalLayout;
-		//private var suraLayout:VerticalLayout;
-
-		
 		override protected function initialize():void
 		{
 			super.initialize();
@@ -48,7 +44,7 @@ package com.gerantech.islamic.views.screens
 			indexHeader.addEventListener(Event.CHANGE, indexHeader_changeHandler);
 			lastSortMode = indexHeader.sortMode;
 
-			//Create hizb list on right of page
+			//Create hizb list on right of the page
 			var hizbsLayout: VerticalLayout = new VerticalLayout();
 			hizbsLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
 			hizbsLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
@@ -66,8 +62,7 @@ package com.gerantech.islamic.views.screens
 			//hizbsList.addEventListener(Event.SCROLL, hizbsList_scrollHandler);
 			addChild(hizbsList);
 		
-
-			//Create sura list on left of page
+			//Create sura list on left of the page
 			var surasLayout: VerticalLayout = new VerticalLayout();
 			surasLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
 			surasLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
@@ -129,8 +124,6 @@ package com.gerantech.islamic.views.screens
 			indexHeader.y = y;
 			appModel.toolbar.dispatchEventWith("moveToolbar", false, y-appModel.sizes.toolbar);
 		}
-		
-		
 		
 		private function hizbsList_changeHandler():void
 		{

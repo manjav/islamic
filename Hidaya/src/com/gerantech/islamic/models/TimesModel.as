@@ -25,19 +25,19 @@ package com.gerantech.islamic.models
 		public function updateNotfications():void
 		{
 			var alarmTime:Number = 0;
-			NativeAbilities.instance.cancelLocalNotifications(-1);
+			NativeAbilities.instance.cancelLocalNotifications();
+			var d:Date = new Date();
 			for each(var t:Time in times)
 			{
 				for each(var a:int in t.alerts)
 				{
-					var d:Date = new Date();
-					alarmTime = t.date.time + a*60000;
-					if(d.time>alarmTime)
+					alarmTime = t.date.getTime() + a*60000;
+					if(d.getTime()>alarmTime)
 						alarmTime += 86400000;
-					NativeAbilities.instance.scheduleLocalNotification(loc("pray_time_"+t.index), loc("pray_time_"+t.index), t.getAlertTitle(a), alarmTime, 86400000, "", "", true);
+					NativeAbilities.instance.scheduleLocalNotification(loc("pray_time_"+t.index), loc("pray_time_"+t.index), t.getAlertTitle(a), alarmTime, 86400000, "", "", false);
 
-					d.time = alarmTime;
-					trace(t.index, d, t.date, alarmTime, a);
+					//d.time = alarmTime;
+					//trace(t.index, d, t.date, alarmTime, a);
 				}
 			}
 		}
