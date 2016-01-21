@@ -97,14 +97,12 @@ package
 			//_starling.showStats = true;
 			//_starling.showStatsAt(HAlign.CENTER, VAlign.BOTTOM);
 			_starling.addEventListener("rootCreated", starling_rootCreatedHandler);
-			//_starling.addEventListener("context3DCreate", starling_rootCreatedHandler);
 			_starling.start();
 		}
 		
 		private function starling_rootCreatedHandler():void
 		{
 			_starling.removeEventListener("rootCreated", starling_rootCreatedHandler);
-			//_starling.removeEventListener("context3DCreate", starling_rootCreatedHandler);
 			validateScreenSize();
 			//Load Assets --------------------------------------------------------
 			appModel.assetManager = new AssetManager();
