@@ -16,8 +16,10 @@ package com.gerantech.islamic.themes
 	import feathers.controls.Scroller;
 	import feathers.controls.SimpleScrollBar;
 	import feathers.controls.ToggleButton;
+	import feathers.events.FeathersEventType;
 	import feathers.skins.SmartDisplayObjectStateValueSelector;
 	
+	import starling.events.Event;
 	import starling.textures.SubTexture;
 	
 	public class CustomTheme extends MaterialTheme
@@ -152,5 +154,32 @@ package com.gerantech.islamic.themes
 			//backgroundSkin.visible = false
 			//list.backgroundSkin = backgroundSkin;
 		}
+		
+		
+		
+		public function setSimpleButtonStyle(button:Button):void
+		{
+			button.addEventListener(FeathersEventType.CREATION_COMPLETE, button_creationCompleteHandler);
+		}
+		
+		private function button_creationCompleteHandler(event:Event):void
+		{
+			var button:Button = event.currentTarget as Button;
+			button.removeEventListener(FeathersEventType.CREATION_COMPLETE, button_creationCompleteHandler);
+			
+			var fd2:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);
+			var fe:ElementFormat = new ElementFormat(fd2, AppModel.instance.sizes.orginalFontSize, BaseMaterialTheme.SELECTED_TEXT_COLOR);
+			var fd:ElementFormat = new ElementFormat(fd2, AppModel.instance.sizes.orginalFontSize, BaseMaterialTheme.DARK_DISABLED_TEXT_COLOR);
+			button.disabledLabelProperties.bidiLevel = button.downLabelProperties.bidiLevel = button.defaultLabelProperties.bidiLevel = AppModel.instance.ltr ? 0 : 1;
+			button.defaultLabelProperties.elementFormat = fe;
+			button.downLabelProperties.elementFormat = fd;
+			button.disabledLabelProperties.elementFormat = fe;
+			
+			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
+			skinSelector.defaultValue = null;
+			skinSelector.displayObjectProperties.textureScale = 0.2;
+			button.stateToSkinFunction = skinSelector.updateValue;
+		}
+		
 	}
 }

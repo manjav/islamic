@@ -9,6 +9,7 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.views.headers.Toolbar;
 	import com.gerantech.islamic.views.popups.TutorialPopUp;
 	import com.gerantech.islamic.views.screens.AboutScreen;
+	import com.gerantech.islamic.views.screens.AlertScreen;
 	import com.gerantech.islamic.views.screens.BookmarksScreen;
 	import com.gerantech.islamic.views.screens.CityScreen;
 	import com.gerantech.islamic.views.screens.CompassScreen;
@@ -124,6 +125,11 @@ package com.gerantech.islamic
 			timesItem.pushTransition = Cover.createCoverUpTransition();
 			timesItem.popTransition = Reveal.createRevealDownTransition();
 			appModel.navigator.addScreen(appModel.PAGE_TIMES, timesItem);
+			
+			var alertItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(AlertScreen);
+			alertItem.pushTransition = Cover.createCoverUpTransition();
+			alertItem.popTransition = Reveal.createRevealDownTransition();
+			appModel.navigator.addScreen(appModel.PAGE_ALERT, alertItem);
 		}
 		
 		public function createScreens():void

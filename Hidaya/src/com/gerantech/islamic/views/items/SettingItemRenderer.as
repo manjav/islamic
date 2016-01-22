@@ -31,6 +31,8 @@ package com.gerantech.islamic.views.items
 		public var iconFunction:Function;
 
 		protected var lastState:String;
+
+		protected var myLayout:HorizontalLayout;
 		
 		public function SettingItemRenderer(height:Number=0)
 		{
@@ -46,7 +48,7 @@ package com.gerantech.islamic.views.items
 			if(height==0)
 				height = AppModel.instance.sizes.singleLineItem;
 			
-			var myLayout:HorizontalLayout = new HorizontalLayout();
+			myLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
 			myLayout.gap = myLayout.padding = AppModel.instance.sizes.DP16;
 			layout = myLayout;

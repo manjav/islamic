@@ -32,6 +32,7 @@ package com.gerantech.islamic.views.screens
 		override protected function initialize():void
 		{
 			super.initialize();
+			horizontalScrollPolicy = verticalScrollPolicy = SCROLL_POLICY_OFF;
 			LocationManager.instance;
 			
 			cityButton = new EiditableButton();

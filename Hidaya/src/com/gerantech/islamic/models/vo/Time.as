@@ -4,16 +4,16 @@ package com.gerantech.islamic.models.vo
 
 	public class Time
 	{
-		public static const ALERT_PEAKS:Array = new Array(1000, -120, -90, -60, -45, -30, -20, -15, -10, -5, 0, 5, 10, 15, 20, 30, 45, 60, 90, 120);
+		public static const ALERT_PEAKS:Array = new Array(-120, -90, -60, -45, -30, -20, -15, -10, -5, 0, 5, 10, 15, 20, 30, 45, 60, 90, 120);
 		
-		public var alerts:Vector.<int>;
+		public var alerts:Vector.<Alert>;
 		public var date:Date;
 		public var index:uint;
 		
 		public function Time(index:uint)
 		{
 			this.index = index;
-			alerts = new Vector.<int>();
+			alerts = new Vector.<Alert>();
 		}
 		
 		public function get enabled():Boolean
@@ -23,9 +23,7 @@ package com.gerantech.islamic.models.vo
 		
 		public function getAlertTitle(alert:int):String
 		{
-			if (alert == 1000)
-				return loc("alert_none");
-			else if (alert == 0)
+			if (alert == 0)
 				return loc("alert_sync") + " " + loc("pray_time_"+index);
 			else if (alert>0)
 				return alert + " " + loc("alert_after") + " " + loc("pray_time_"+index);

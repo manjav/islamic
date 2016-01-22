@@ -1,6 +1,7 @@
 package com.gerantech.islamic.models
 {
 	import com.gerantech.extensions.NativeAbilities;
+	import com.gerantech.islamic.models.vo.Alert;
 	import com.gerantech.islamic.models.vo.Time;
 	
 	import mx.resources.ResourceManager;
@@ -16,9 +17,9 @@ package com.gerantech.islamic.models
 			for(var i:uint=0; i<times.length; i++)
 				times[i] = new Time(i);
 
-			times[0].alerts[0] = 0;
-			times[2].alerts[0] = 0;
-			times[5].alerts[0] = 0;
+			times[0].alerts[0] = new Alert(0, Alert.TYPE_NOTIFICATION, times[0]);
+			times[2].alerts[0] = new Alert(0, Alert.TYPE_NOTIFICATION, times[2]);
+			times[5].alerts[0] = new Alert(0, Alert.TYPE_NOTIFICATION, times[5]);
 			//updateNotfications();
 		}
 		
@@ -32,7 +33,7 @@ package com.gerantech.islamic.models
 				for each(var a:int in t.alerts)
 				{
 					alarmTime = t.date.getTime() + a*60000;
-					if(d.getTime()>alarmTime)
+					if(d.getTime() > alarmTime)
 						alarmTime += 86400000;
 					NativeAbilities.instance.scheduleLocalNotification(loc("pray_time_"+t.index), loc("pray_time_"+t.index), t.getAlertTitle(a), alarmTime, 86400000, "", "", false);
 
@@ -48,7 +49,9 @@ package com.gerantech.islamic.models
 			for(var t:uint=0; t<value.length; t++)
 			{
 				times[t] = new Time(t);
-				times[t].alerts = value[t];
+				times[t].alerts = new Vector.<Alert>();
+				for (var a:uint=0; a<value[t].length; a++)
+					times[t].alerts.push(new Alert(value[t][a].offset, value[t][a].type, times[t]));
 			}
 			//updateNotfications();
 		}
@@ -56,9 +59,7 @@ package com.gerantech.islamic.models
 		{
 			var ret:Array = new Array();
 			for(var t:uint=0; t<times.length; t++)
-			{
 				ret[t] = times[t].alerts;
-			}
 			return ret;
 		}
 		

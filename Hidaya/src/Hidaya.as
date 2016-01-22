@@ -130,8 +130,8 @@ package
 			
 			/*graphics.clear();
 			graphics.beginFill(0x009688);
-			graphics.drawRect(0,0,Math.max(stage.stageWidth, stage.stageHeight), appModel.sizes.itemHeight);
-			*/			
+			graphics.drawRect(0,0,Math.max(stage.stageWidth, stage.stageHeight), appModel.sizes.itemHeight);*/
+						
 			userModel = UserModel.instance;
 			userModel.addEventListener(UserEvent.LOAD_DATA_COMPLETE, user_completeHandler);
 			userModel.addEventListener(UserEvent.LOAD_DATA_ERROR, user_completeHandler);

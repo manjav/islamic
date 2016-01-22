@@ -90,18 +90,7 @@ package com.gerantech.islamic.views.popups
 		
 		protected function buttons_creationCompleteHandler(event:Event):void
 		{
-			var btn:Button = event.currentTarget as Button;
-			var fd2:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);
-			var fe:ElementFormat = new ElementFormat(fd2, appModel.sizes.orginalFontSize, BaseMaterialTheme.SELECTED_TEXT_COLOR);
-			var fd:ElementFormat = new ElementFormat(fd2, appModel.sizes.orginalFontSize, BaseMaterialTheme.DARK_DISABLED_TEXT_COLOR);
-			btn.disabledLabelProperties.bidiLevel = btn.downLabelProperties.bidiLevel = btn.defaultLabelProperties.bidiLevel = appModel.ltr ? 0 : 1;
-			btn.defaultLabelProperties.elementFormat = fe;
-			btn.downLabelProperties.elementFormat = fd;
-			btn.disabledLabelProperties.elementFormat = fe;
-			
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = null;
-			btn.stateToSkinFunction = skinSelector.updateValue;
+			appModel.theme.setSimpleButtonStyle(event.currentTarget as Button);
 		}
 		
 		private function buttons_triggerHandler(event:Event):void

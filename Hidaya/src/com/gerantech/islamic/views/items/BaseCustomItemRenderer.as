@@ -1,6 +1,8 @@
 package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.models.AppModel;
+	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
 	
 	import flash.geom.Point;
@@ -37,21 +39,12 @@ package com.gerantech.islamic.views.items
 		private var touchID:int = -1;
 		private static const HELPER_POINT:Point = new Point();
 		private var tempY:Number;
-
-		protected var appModel:AppModel;
-		protected var userModel:UserModel;
 		
 		private var screenRect:Rectangle;
 		private var commitPhase:uint;
 
 		protected var touch:Touch;
 		
-		public function BaseCustomItemRenderer()
-		{
-			appModel = AppModel.instance;
-			userModel = UserModel.instance;
-			super();
-		}
 		override protected function initialize():void
 		{
 			addEventListener( TouchEvent.TOUCH, touchHandler);
@@ -189,6 +182,10 @@ package com.gerantech.islamic.views.items
 		{
 			return ResourceManager.getInstance().getString("loc", resourceName, parameters, locale);
 		}
+		protected function get appModel():		AppModel		{	return AppModel.instance;		}
+		protected function get userModel():		UserModel		{	return UserModel.instance;		}
+		protected function get configModel():	ConfigModel		{	return ConfigModel.instance;	}
+		protected function get resourceModel():	ResourceModel	{	return ResourceModel.instance;	}
 		
 		
 	}

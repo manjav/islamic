@@ -162,7 +162,8 @@ package com.gerantech.islamic.views.headers
 			
 			if(centerItem != null)
 			{
-				centerItem.layoutData = new AnchorLayoutData(appModel.sizes.DP4, appModel.ltr?accessories.length*gap:gap, appModel.sizes.DP4, appModel.ltr?gap:accessories.length*gap);
+				if(centerItem.layoutData==null)
+					centerItem.layoutData = new AnchorLayoutData(appModel.sizes.DP4, appModel.ltr?accessories.length*gap:gap, appModel.sizes.DP4, appModel.ltr?gap:accessories.length*gap);
 				addChild(centerItem);
 			}
 			/*searchInput.x = appModel.ltr ? gap :0;
@@ -194,8 +195,9 @@ package com.gerantech.islamic.views.headers
 		private function navigator_changeHandler(event:Event):void
 		{
 			setLayout();
+			UserModel.instance.activeSaver();
 			if(appModel.navigator.activeScreenID != appModel.PAGE_DASHBOARD)
-			y=0;
+				y=0;
 			return;
 			fadeOut();
 			setTimeout(fadeIn, 500);

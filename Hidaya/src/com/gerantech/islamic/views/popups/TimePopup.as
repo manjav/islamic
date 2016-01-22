@@ -123,7 +123,7 @@ package com.gerantech.islamic.views.popups
 			picker.removeEventListener(Event.CHANGE, picker_changeHandler);
 			
 			picker.openList();		
-			picker.selectedIndex = Time.ALERT_PEAKS.indexOf(0);
+			//picker.selectedIndex = Time.ALERT_PEAKS.indexOf(0);
 			picker.getList().scrollToDisplayIndex(picker.selectedIndex);
 			picker.addEventListener(Event.CHANGE, picker_addHandler);
 		}		

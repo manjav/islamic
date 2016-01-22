@@ -102,8 +102,5 @@ package com.gerantech.islamic.views.screens
 			else
 				super.backButtonFunction();
 		}
-		
-		
-		
 	}
 }
