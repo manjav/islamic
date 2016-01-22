@@ -16,19 +16,22 @@ package com.gerantech.islamic.views.screens
 
 	public class TimesScreen extends BaseCustomPanelScreen
 	{
+		public var date:MultiDate;
+		
 		private var list:List;
 		private var data:Vector.<Date>;
 		
 		override protected function initialize():void
 		{
 			super.initialize();
-			layout = new AnchorLayout();
 			
-			var dates:Vector.<Date> = appModel.prayTimes.getTimes().toDates();
+			var dates:Vector.<Date> = appModel.prayTimes.getTimes(date.dateClass).toDates();
 			for (var i:uint=0; i<userModel.timesModel.times.length; i++)
 				userModel.timesModel.times[i].date = dates[i+1];
+			
 			title = getDateString();
 			
+			layout = new AnchorLayout();
 			list = new List();
 			list.itemRendererFactory = function():IListItemRenderer
 			{
@@ -42,7 +45,6 @@ package com.gerantech.islamic.views.screens
 		
 		private function getDateString():String
 		{
-			var date:MultiDate = appModel.date;
 			switch(UserModel.instance.locale.value)
 			{
 				case "fa_IR":

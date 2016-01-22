@@ -31,7 +31,7 @@ package com.gerantech.islamic.views.popups
 			
 			var searchButton:Button = new Button();
 			searchButton.label = loc("city_search");
-			searchButton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompleteHandler);
+			appModel.theme.setSimpleButtonStyle(searchButton);
 			searchButton.addEventListener("triggered", searchButton_triggerHandler);
 			buttonBar.addChild(searchButton);
 			buttonBar.addChild(enableButton);

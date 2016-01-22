@@ -59,14 +59,14 @@ package com.gerantech.islamic.views.popups
 			
 			enableButton = new Button();
 			enableButton.label = loc("geo_enable");
-			enableButton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompleteHandler);
 			enableButton.addEventListener("triggered", enableButton_triggeredHandler);
+			appModel.theme.setSimpleButtonStyle(enableButton);
 			buttonBar.addChild(enableButton);
 			
 			retryButton = new Button();
 			retryButton.label = loc("geo_retry");
-			retryButton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompleteHandler);
 			retryButton.addEventListener("triggered", startFinding);
+			appModel.theme.setSimpleButtonStyle(retryButton);
 			buttonBar.addChild(retryButton);
 			
 			startFinding();

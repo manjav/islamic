@@ -25,7 +25,7 @@ package com.gerantech.islamic.utils
 		
 		public function get day():Number { return dateClass.day; }
 
-		private var dateClass:Date;
+		public var dateClass:Date;
 		
 		public var fullYearQamari:Number;
 		public var monthQamari:Number;
@@ -42,6 +42,12 @@ package com.gerantech.islamic.utils
 			else
 				dateClass = new Date(year, month, date, hours, minutes, seconds, ms);
 			
+			calculate();
+		}
+		
+		public function setTime(time:*):void
+		{
+			dateClass.setTime(time);
 			calculate();
 		}
 		

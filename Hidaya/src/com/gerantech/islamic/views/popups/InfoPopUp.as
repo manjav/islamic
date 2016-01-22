@@ -4,19 +4,10 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	
-	import flash.text.engine.CFFHinting;
-	import flash.text.engine.ElementFormat;
-	import flash.text.engine.FontDescription;
-	import flash.text.engine.FontLookup;
-	import flash.text.engine.FontPosture;
-	import flash.text.engine.FontWeight;
-	import flash.text.engine.RenderingMode;
-	
 	import feathers.controls.Button;
 	import feathers.events.FeathersEventType;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	import feathers.skins.SmartDisplayObjectStateValueSelector;
 	
 	import starling.events.Event;
 	
@@ -68,7 +59,7 @@ package com.gerantech.islamic.views.popups
 */			
 			var cancelButton:Button = new Button();
 			cancelButton.label = cancelButtonLabel;
-			cancelButton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompleteHandler);
+			appModel.theme.setSimpleButtonStyle(cancelButton);
 			cancelButton.addEventListener(Event.TRIGGERED, buttons_triggerHandler);
 			
 			if(acceptButtonLabel==null)
@@ -78,7 +69,7 @@ package com.gerantech.islamic.views.popups
 			{
 				var acceptButton:Button = new Button();
 				acceptButton.label = acceptButtonLabel;
-				acceptButton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompleteHandler);
+				appModel.theme.setSimpleButtonStyle(acceptButton);
 				acceptButton.addEventListener(Event.TRIGGERED, buttons_triggerHandler);
 				
 				buttonBar.addChild(appModel.ltr?cancelButton:acceptButton);
@@ -87,11 +78,7 @@ package com.gerantech.islamic.views.popups
 			
 			show();
 		}
-		
-		protected function buttons_creationCompleteHandler(event:Event):void
-		{
-			appModel.theme.setSimpleButtonStyle(event.currentTarget as Button);
-		}
+
 		
 		private function buttons_triggerHandler(event:Event):void
 		{

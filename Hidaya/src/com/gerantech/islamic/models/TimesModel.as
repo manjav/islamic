@@ -34,8 +34,8 @@ package com.gerantech.islamic.models
 				{
 					alarmTime = t.date.getTime() + a*60000;
 					if(d.getTime() > alarmTime)
-						alarmTime += 86400000;
-					NativeAbilities.instance.scheduleLocalNotification(loc("pray_time_"+t.index), loc("pray_time_"+t.index), t.getAlertTitle(a), alarmTime, 86400000, "", "", false);
+						alarmTime += Time.DAY_TIME_LEN;
+					NativeAbilities.instance.scheduleLocalNotification(loc("pray_time_"+t.index), loc("pray_time_"+t.index), t.getAlertTitle(a), alarmTime, Time.DAY_TIME_LEN, "", "", false);
 
 					//d.time = alarmTime;
 					//trace(t.index, d, t.date, alarmTime, a);

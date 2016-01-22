@@ -14,6 +14,7 @@ package com.gerantech.islamic.views.screens
 	import flash.net.FileReference;
 	
 	import feathers.controls.List;
+	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
@@ -91,6 +92,11 @@ package com.gerantech.islamic.views.screens
 				case "page_finder":
 					var geoPopup:BasePopUp = AppController.instance.addPopup(GeoPopup);
 					geoPopup.addEventListener(Event.COMPLETE, geoPopup_completeHandler);
+					break;
+				case appModel.PAGE_TIMES:
+					var screenItem:StackScreenNavigatorItem = appModel.navigator.getScreen(appModel.PAGE_TIMES);
+					screenItem.properties = {date:appModel.date};
+					appModel.navigator.pushScreen(appModel.PAGE_TIMES); 
 					break;
 				default:
 					appModel.navigator.pushScreen(list.selectedItem.title);

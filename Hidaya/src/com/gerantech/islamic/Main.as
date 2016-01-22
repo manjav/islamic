@@ -11,6 +11,7 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.views.screens.AboutScreen;
 	import com.gerantech.islamic.views.screens.AlertScreen;
 	import com.gerantech.islamic.views.screens.BookmarksScreen;
+	import com.gerantech.islamic.views.screens.CalendarScreen;
 	import com.gerantech.islamic.views.screens.CityScreen;
 	import com.gerantech.islamic.views.screens.CompassScreen;
 	import com.gerantech.islamic.views.screens.DashboardScreen;
@@ -53,84 +54,38 @@ package com.gerantech.islamic
 			var dashItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(DashboardScreen);
 			appModel.navigator.addScreen(appModel.PAGE_DASHBOARD, dashItem);
 			
+			addModal(appModel.PAGE_SETTINGS,	SettingsScreen);
+			addModal(appModel.PAGE_ABOUT,		AboutScreen);
+
+			addModal(appModel.PAGE_QURAN,		QuranScreen);
+			addModal(appModel.PAGE_INDEX,		IndexScreen);
+			addModal(appModel.PAGE_BOOKMARKS,	BookmarksScreen);
+			addModal(appModel.PAGE_SEARCH,		SearchScreen);
+			addModal(appModel.PAGE_PERSON,		PersonsScreen);
+			addModal(appModel.PAGE_FILTERED,	FilteredPersonScreen);
+			addModal(appModel.PAGE_OMEN,		OmenScreen);
 			
-			var settingItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(SettingsScreen);
-			settingItem.pushTransition = appModel.pushTransition;
-			settingItem.popTransition = appModel.popTransition;
-			appModel.navigator.addScreen(appModel.PAGE_SETTINGS, settingItem);		
-			
-			var aboutItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(AboutScreen);
-			aboutItem.pushTransition = appModel.pushTransition;
-			aboutItem.popTransition = appModel.popTransition;
-			appModel.navigator.addScreen(appModel.PAGE_ABOUT, aboutItem);		
-			
-			// Quran --------------------------------------------------
-			var quranItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(QuranScreen);
-			quranItem.pushTransition = Cover.createCoverUpTransition();
-			quranItem.popTransition = Reveal.createRevealDownTransition();
-			appModel.navigator.addScreen(appModel.PAGE_QURAN, quranItem);
-			
-			var indexItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(IndexScreen);
-			indexItem.pushTransition = appModel.pushTransition;
-			indexItem.popTransition = appModel.popTransition;
-			appModel.navigator.addScreen(appModel.PAGE_INDEX, indexItem);		
-			
-			var bookmarkItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(BookmarksScreen);
-			bookmarkItem.pushTransition = appModel.pushTransition;
-			bookmarkItem.popTransition = appModel.popTransition;
-			appModel.navigator.addScreen(appModel.PAGE_BOOKMARKS, bookmarkItem);		
-			
-			var searchItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(SearchScreen);
-			searchItem.pushTransition = appModel.pushTransition;
-			searchItem.popTransition = appModel.popTransition;
-			appModel.navigator.addScreen(appModel.PAGE_SEARCH, searchItem);		
-			
-			var personItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(PersonsScreen);
-			personItem.pushTransition = Cover.createCoverUpTransition();
-			personItem.popTransition = Reveal.createRevealDownTransition();
-			appModel.navigator.addScreen(appModel.PAGE_PERSON, personItem);
-			
-			var filterItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(FilteredPersonScreen);
-			filterItem.pushTransition = Cover.createCoverUpTransition();
-			filterItem.popTransition = Reveal.createRevealDownTransition();
-			appModel.navigator.addScreen(appModel.PAGE_FILTERED, filterItem);	
-			
-			var omenItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(OmenScreen);
-			omenItem.pushTransition = appModel.pushTransition;
-			omenItem.popTransition = appModel.popTransition;
-			appModel.navigator.addScreen(appModel.PAGE_OMEN, omenItem);
-			
-			var purchaseItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(PurchaseScreen);
-			purchaseItem.pushTransition = Cover.createCoverUpTransition();
-			purchaseItem.popTransition = Reveal.createRevealDownTransition();
-			appModel.navigator.addScreen(appModel.PAGE_PURCHASE, purchaseItem);
-			
-			var downloadItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(DownloadScreen);
-			downloadItem.pushTransition = Cover.createCoverUpTransition();
-			downloadItem.popTransition = Reveal.createRevealDownTransition();
-			appModel.navigator.addScreen(appModel.PAGE_DOWNLOAD, downloadItem);
-				
-		
-			var compassItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(CompassScreen);
-			compassItem.pushTransition = Cover.createCoverUpTransition();
-			compassItem.popTransition = Reveal.createRevealDownTransition();
-			appModel.navigator.addScreen(appModel.PAGE_COMPASS, compassItem);
-			
-			var cityItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(CityScreen);
-			cityItem.pushTransition = Cover.createCoverUpTransition();
-			cityItem.popTransition = Reveal.createRevealDownTransition();
-			appModel.navigator.addScreen(appModel.PAGE_CITY, cityItem);
-			
-			var timesItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(TimesScreen);
-			timesItem.pushTransition = Cover.createCoverUpTransition();
-			timesItem.popTransition = Reveal.createRevealDownTransition();
-			appModel.navigator.addScreen(appModel.PAGE_TIMES, timesItem);
-			
-			var alertItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(AlertScreen);
-			alertItem.pushTransition = Cover.createCoverUpTransition();
-			alertItem.popTransition = Reveal.createRevealDownTransition();
-			appModel.navigator.addScreen(appModel.PAGE_ALERT, alertItem);
+			addModal(appModel.PAGE_PURCHASE,	PurchaseScreen);
+			addModal(appModel.PAGE_DOWNLOAD,	DownloadScreen);
+			addModal(appModel.PAGE_COMPASS,		CompassScreen);
+			addModal(appModel.PAGE_CITY,		CityScreen);
+			addModal(appModel.PAGE_TIMES,		TimesScreen);
+			addModal(appModel.PAGE_ALERT,		AlertScreen);
+			addModal(appModel.PAGE_CALENDAR, 	CalendarScreen);
 		}
+		
+		private function addModal(screenId:String, screenClass:Class, pushTransition:Function=null, popTransition:Function=null):void
+		{
+			if(pushTransition==null)
+				pushTransition = Cover.createCoverUpTransition();
+			if(popTransition==null)
+				popTransition = Reveal.createRevealDownTransition();
+			
+			var item:StackScreenNavigatorItem = new StackScreenNavigatorItem(screenClass);
+			item.pushTransition = pushTransition;
+			item.popTransition = popTransition;
+			appModel.navigator.addScreen(screenId, item);
+		}		
 		
 		public function createScreens():void
 		{

@@ -5,6 +5,7 @@ package com.gerantech.islamic.models.vo
 	public class Time
 	{
 		public static const ALERT_PEAKS:Array = new Array(-120, -90, -60, -45, -30, -20, -15, -10, -5, 0, 5, 10, 15, 20, 30, 45, 60, 90, 120);
+		public static const DAY_TIME_LEN:int = 86400000;
 		
 		public var alerts:Vector.<Alert>;
 		public var date:Date;
