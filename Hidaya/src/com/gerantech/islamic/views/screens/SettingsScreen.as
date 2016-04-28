@@ -1,74 +1,171 @@
 package com.gerantech.islamic.views.screens
 {
 	import com.gerantech.islamic.events.UserEvent;
+	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.vo.Location;
+	import com.gerantech.islamic.themes.BaseMaterialTheme;
+	import com.gerantech.islamic.views.buttons.EiditableButton;
 	import com.gerantech.islamic.views.controls.CheckPanel;
+	import com.gerantech.islamic.views.controls.Devider;
+	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.controls.SettingPanel;
+	import com.gerantech.islamic.views.controls.Spacer;
 	import com.gerantech.islamic.views.items.FontItemRenderer;
+	import com.gerantech.islamic.views.popups.GeoCityPopup;
 	
+	import flash.sensors.Geolocation;
 	import flash.utils.setTimeout;
 	
+	import feathers.layout.AnchorLayout;
+	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.VerticalLayout;
+	import feathers.layout.VerticalLayoutData;
 	
 	import starling.events.Event;
 	
 	public class SettingsScreen extends BaseCustomPanelScreen
 	{
-		private var locPanel:SettingPanel;
-		private var idlePanel:SettingPanel;
+		public static const MODE_QURAN:String = "modeQuran";
+		public static const MODE_CALENDAR:String = "modeCalendar";
+		public static const MODE_TIMES:String = "modeTimes";
+		public static const MODE_COMPASS:String = "modeCompass";
+		
+		public var mode:String = "";
+		
+		private var naviModes:Array;
+		private var naviPanel:SettingPanel;
 		private var fontPanel:SettingPanel;
 		private var remindePanel:SettingPanel;
-		private var nightModePanel:CheckPanel;
-
-		private var naviModes:Array;
+		private var remindeTimes:Array;
 
 		private var idleModes:Array;
-		private var remindeTimes:Array;
+		private var locPanel:SettingPanel;
+		private var idlePanel:SettingPanel;
+		private var nightModePanel:CheckPanel;
+		private var cityButton:EiditableButton;
 		
 		override protected function initialize():void
 		{
 			super.initialize();
 			
 			var mLayout:VerticalLayout = new VerticalLayout();
-			mLayout.padding = appModel.sizes.DP16;
-			mLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			//mLayout.padding = appModel.sizes.DP16;
+			mLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			//mLayout.gap = appModel.sizes.DP8;
 			layout = mLayout;
 			
-			rejustLayout();
-		}	
-		
-		private function rejustLayout():void
-		{
+			var ld:VerticalLayoutData = new VerticalLayoutData(92);
+			
 			removeChildren();
+			
+			switch(mode)
+			{
+				case MODE_CALENDAR:
+					break
+				
+				case MODE_COMPASS:
+				case MODE_TIMES:
+					var spacer:Spacer = new Spacer();
+					spacer.height = appModel.sizes.DP8;
+					spacer.layoutData = ld;
+					addChild(spacer);
+					
+					var ciyLabel:RTLLabel = new RTLLabel("label", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0.9, null, "bold")
+					ciyLabel.layoutData = ld;
+					addChild(ciyLabel);
+					
+					cityButton = new EiditableButton();
+					cityButton.label = userModel.city.name;
+					cityButton.addEventListener("triggered", cityButton_triggeredHandler);
+					cityButton.layoutData = ld;
+					addChild(cityButton);
+
+					break
+
+				case MODE_QURAN:
+					naviModes = [{value:"page_navi"}, {value:"sura_navi"}, {value:"juze_navi"}]; 
+					naviPanel = new SettingPanel("page_mode", naviModes, userModel.navigationMode);
+					naviPanel.addEventListener(Event.CHANGE, naviPanel_changeHandler);
+					naviPanel.layoutData = ld;
+					addChild(naviPanel);
+					
+					fontPanel = new SettingPanel("select_font", ConfigModel.instance.fonts, userModel.font, FontItemRenderer);
+					fontPanel.addEventListener(Event.CHANGE, fontPanel_changeHandler);
+					fontPanel.layoutData = ld;
+					addChild(fontPanel);
+					
+					remindeTimes = [{value:"reminder_1"}, {value:"reminder_2"}, {value:"reminder_3"}, {value:"reminder_7"}, {value:"reminder_never"}]; 
+					remindePanel = new SettingPanel("reminder_title", remindeTimes, userModel.remniderTime);
+					remindePanel.addEventListener(Event.CHANGE, remindePanel_changeHandler);
+					remindePanel.layoutData = ld;
+					addChild(remindePanel);
+					break;
+				
+				case MODE_TIMES:
+					break
+			}
+			
+			if(mode != "")
+			{
+				var spacer2:Spacer = new Spacer();
+				spacer2.height = appModel.sizes.DP8;
+				spacer2.layoutData = ld;
+				addChild(spacer2);
+				
+				var  devider:Devider = new Devider(BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, appModel.sizes.DP32);
+				devider.height = appModel.sizes.DP40;
+				devider.layoutData = new VerticalLayoutData(100);
+				devider.layout = new AnchorLayout();
+				addChild(devider);
+				
+				var publicLabel:RTLLabel = new RTLLabel(loc("setting_header"), BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
+				publicLabel.layoutData = new AnchorLayoutData(NaN, appModel.sizes.DP16, NaN, appModel.sizes.DP16, NaN, 0);
+				devider.addChild(publicLabel);
+			}
 			
 			locPanel = new SettingPanel("select_loc", ConfigModel.instance.languages, userModel.locale);
 			locPanel.addEventListener(Event.CHANGE, locPanel_changeHandler);
+			locPanel.layoutData = ld;
 			addChild(locPanel);
 			
-			/*naviModes = [{value:"page_navi"}, {value:"sura_navi"}, {value:"juze_navi"}]; 
-			naviPanel = new SettingPanel("page_mode", naviModes, userModel.navigationMode);
-			naviPanel.addEventListener(Event.CHANGE, naviPanel_changeHandler);
-			addChild(naviPanel);
-			*/			
 			idleModes = [{value:"awake_of"}, {value:"awake_on"}, {value:"while_playing"}]; 
 			idlePanel = new SettingPanel("display_timeout", idleModes, userModel.idleMode);
 			idlePanel.addEventListener(Event.CHANGE, idlePanel_changeHandler);
+			idlePanel.layoutData = ld;
 			addChild(idlePanel);
-			
-			remindeTimes = [{value:"reminder_1"}, {value:"reminder_2"}, {value:"reminder_3"}, {value:"reminder_7"}, {value:"reminder_never"}]; 
-			remindePanel = new SettingPanel("reminder_title", remindeTimes, userModel.remniderTime);
-			remindePanel.addEventListener(Event.CHANGE, remindePanel_changeHandler);
-			addChild(remindePanel);
 			
 			nightModePanel = new CheckPanel("night_mode", userModel.nightMode);
 			nightModePanel.addEventListener(Event.CHANGE, nightModePanel_changeHandler);
+			nightModePanel.layoutData = ld;
 			addChild(nightModePanel);
-			
-			fontPanel = new SettingPanel("select_font", ConfigModel.instance.fonts, userModel.font, FontItemRenderer);
-			fontPanel.addEventListener(Event.CHANGE, fontPanel_changeHandler);
-			addChild(fontPanel);
 		}
 		
+		//Select City -------------------------------------------------------------
+		private function cityButton_triggeredHandler():void
+		{
+			if(!Geolocation.isSupported)
+				appModel.navigator.pushScreen(appModel.PAGE_CITY);
+			else
+				AppController.instance.addPopup(GeoCityPopup).addEventListener("complete", geoPopup_completeHandler);
+		}
+		private function geoPopup_completeHandler(event:*):void
+		{
+			event.currentTarget.removeEventListener("complete", geoPopup_completeHandler);
+			userModel.city = event.data as Location;
+			cityButton.label = userModel.city.name;
+		}		
+		
+		
+		
+		// quran settings --------------------------------------------------------
+		
+		private function naviPanel_changeHandler():void
+		{
+			userModel.navigationMode = naviPanel.list.selectedItem;
+			naviPanel.list.closeList();
+		}		
+	
 		private function fontPanel_changeHandler(event:Event):void
 		{
 			userModel.font = fontPanel.list.selectedItem;
@@ -84,11 +181,12 @@ package com.gerantech.islamic.views.screens
 				ConfigModel.instance.selectedTranslators[0].remindeFirstTranslate();
 		}
 		
+		// base settings --------------------------------------------------------
 		private function locPanel_changeHandler(event:Event):void
 		{
 			userModel.locale = locPanel.list.selectedItem;
 			locPanel.list.closeList();
-			setTimeout(rejustLayout, 100);
+			setTimeout(initialize, 100);
 			/*locPanel.resetContent();
 			//naviPanel.resetContent();
 			idlePanel.resetContent();
@@ -108,7 +206,7 @@ package com.gerantech.islamic.views.screens
 		private function nightModePanel_changeHandler(event:Event):void
 		{
 			userModel.nightMode = nightModePanel.checked;
-			setTimeout(rejustLayout, 100);
+			setTimeout(initialize, 100);
 			userModel.dispatchEventWith(UserEvent.CHANGE_COLOR);
 		}		
 		

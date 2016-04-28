@@ -278,7 +278,7 @@ package com.gerantech.islamic.views.screens
 			var jumpButton:ToolbarButtonData = new ToolbarButtonData("goto_popup", "jump", toolbarButtons_triggerdHandler);
 			var translateButton:ToolbarButtonData = new ToolbarButtonData("translation", "translation", toolbarButtons_triggerdHandler);
 			var reciterButton:ToolbarButtonData = new ToolbarButtonData("recitation", "recitation", toolbarButtons_triggerdHandler);
-			var bookmarkButton:ToolbarButtonData = new ToolbarButtonData("page_bookmarks", "bookmark_off", toolbarButtons_triggerdHandler);
+			var bookmarkButton:ToolbarButtonData = new ToolbarButtonData("page_bookmarks", "bookmark_outline_white", toolbarButtons_triggerdHandler);
 			var omenButton:ToolbarButtonData = new ToolbarButtonData("page_omen", "book_open", toolbarButtons_triggerdHandler);
 			var settingButton:ToolbarButtonData = new ToolbarButtonData("page_settings", "setting", toolbarButtons_triggerdHandler);
 			var aboutButton:ToolbarButtonData = new ToolbarButtonData("page_about", "info", toolbarButtons_triggerdHandler);
@@ -291,16 +291,22 @@ package com.gerantech.islamic.views.screens
 			switch(item.name)
 			{
 				default:
-					AppModel.instance.navigator.pushScreen(item.name);
+					appModel.navigator.pushScreen(item.name);
 					break;
 				
 				case "recitation":
 				case "translation":
 					var screenItem:StackScreenNavigatorItem = AppModel.instance.navigator.getScreen(appModel.PAGE_PERSON);
 					screenItem.properties = {type:item.name=="recitation"?Person.TYPE_RECITER:Person.TYPE_TRANSLATOR};
-					AppModel.instance.navigator.pushScreen(appModel.PAGE_PERSON);
+					appModel.navigator.pushScreen(appModel.PAGE_PERSON);
 					break;
-			
+				
+				case "page_settings":
+					screenItem = appModel.navigator.getScreen(appModel.PAGE_SETTINGS);
+					screenItem.properties = {mode : SettingsScreen.MODE_QURAN};
+					appModel.navigator.pushScreen(appModel.PAGE_SETTINGS);
+					break;
+				
 				case "goto_popup":
 					AppController.instance.addPopup(GotoPopUp);
 					break;

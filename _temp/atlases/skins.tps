@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.9.1</string>
+        <string>3.6.0</string>
         <key>fileName</key>
         <string>D:/_PROJECTS/_FLEX/Bayan_projects/hidaya-project/_temp/atlases/skins.tps</string>
         <key>autoSDSettings</key>
@@ -43,8 +43,6 @@
         <false/>
         <key>pvrCompressionQuality</key>
         <enum type="SettingsBase::PvrCompressionQuality">PVR_QUALITY_NORMAL</enum>
-        <key>atfCompressData</key>
-        <false/>
         <key>mipMapMinSize</key>
         <uint>32768</uint>
         <key>etc1CompressionQuality</key>
@@ -190,7 +188,6 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../skin/action_item_0.png</filename>
             <filename>../skin/action_item_1.png</filename>
             <filename>../skin/action_item_2.png</filename>
             <filename>../skin/action_item_3.png</filename>
@@ -198,6 +195,7 @@
             <filename>../skin/action_play.png</filename>
             <filename>../skin/action_plus.png</filename>
             <filename>../skin/action_timer.png</filename>
+            <filename>../skin/alarm_grey.png</filename>
             <filename>../skin/arrow_g_left.png</filename>
             <filename>../skin/arrow_g_right.png</filename>
             <filename>../skin/arrow_w_left.png</filename>
@@ -205,6 +203,8 @@
             <filename>../skin/book_open.png</filename>
             <filename>../skin/bookmark_off.png</filename>
             <filename>../skin/bookmark_on.png</filename>
+            <filename>../skin/bookmark_outline_white.png</filename>
+            <filename>../skin/calendar_today_white.png</filename>
             <filename>../skin/cancel_download.png</filename>
             <filename>../skin/cart_grey.png</filename>
             <filename>../skin/check.png</filename>
@@ -213,8 +213,10 @@
             <filename>../skin/chevron_g.png</filename>
             <filename>../skin/chevron_w.png</filename>
             <filename>../skin/circle.png</filename>
+            <filename>../skin/circle_mask.png</filename>
             <filename>../skin/close_g.png</filename>
             <filename>../skin/close_w.png</filename>
+            <filename>../skin/comment_alert.png</filename>
             <filename>../skin/compass.png</filename>
             <filename>../skin/dots.png</filename>
             <filename>../skin/download.png</filename>
@@ -248,6 +250,7 @@
             <filename>../skin/meccan_icon.png</filename>
             <filename>../skin/medinan_icon.png</filename>
             <filename>../skin/menu.png</filename>
+            <filename>../skin/pencil_gray.png</filename>
             <filename>../skin/pencil_white.png</filename>
             <filename>../skin/radian.png</filename>
             <filename>../skin/recitation.png</filename>
@@ -263,6 +266,14 @@
             <filename>../skin/shadow_right.png</filename>
             <filename>../skin/share_variant.png</filename>
             <filename>../skin/star.png</filename>
+            <filename>../skin/time-0.png</filename>
+            <filename>../skin/time-1.png</filename>
+            <filename>../skin/time-2.png</filename>
+            <filename>../skin/time-3.png</filename>
+            <filename>../skin/time-4.png</filename>
+            <filename>../skin/time-5.png</filename>
+            <filename>../skin/time-6.png</filename>
+            <filename>../skin/time-7.png</filename>
             <filename>../skin/timer_grey.png</filename>
             <filename>../skin/toolbar_button_bg.png</filename>
             <filename>../skin/translation.png</filename>
@@ -270,6 +281,27 @@
             <filename>../skin/action.png</filename>
             <filename>../skin/action_accent.png</filename>
             <filename>../skin/action_danger.png</filename>
+            <filename>../skin/action_item_0.png</filename>
+            <filename>../theme/metalworks/picker-list-icon.png</filename>
+            <filename>../theme/metalworks/picker-list-icon-disabled.png</filename>
+            <filename>../theme/metalworks/picker-list-item-selected-icon.png</filename>
+            <filename>../theme/metalworks/radio-selected-disabled-icon.png</filename>
+            <filename>../theme/metalworks/radio-selected-down-icon.png</filename>
+            <filename>../theme/metalworks/radio-selected-up-icon.png</filename>
+            <filename>../theme/metalworks/search-icon.png</filename>
+            <filename>../theme/metalworks/search-icon-disabled.png</filename>
+            <filename>../theme/metalworks/tab-down-skin.png</filename>
+            <filename>../theme/metalworks/tab-selected-disabled-skin.png</filename>
+            <filename>../theme/metalworks/tab-selected-skin.png</filename>
+            <filename>../theme/metalworks/vertical-scroll-bar-thumb-skin.png</filename>
+            <filename>../theme/metalworks/background-disabled-skin.png</filename>
+            <filename>../theme/metalworks/background-down-skin.png</filename>
+            <filename>../theme/metalworks/background-focused-skin.png</filename>
+            <filename>../theme/metalworks/background-inset-skin.png</filename>
+            <filename>../theme/metalworks/background-popup-skin.png</filename>
+            <filename>../theme/metalworks/background-skin.png</filename>
+            <filename>../theme/metalworks/button-back-disabled-skin.png</filename>
+            <filename>../theme/metalworks/button-back-down-skin.png</filename>
             <filename>../theme/metalworks/button-back-up-skin.png</filename>
             <filename>../theme/metalworks/button-call-to-action-down-skin.png</filename>
             <filename>../theme/metalworks/button-call-to-action-up-skin.png</filename>
@@ -303,27 +335,6 @@
             <filename>../theme/metalworks/list-item-up-skin.png</filename>
             <filename>../theme/metalworks/page-indicator-normal-skin.png</filename>
             <filename>../theme/metalworks/page-indicator-selected-skin.png</filename>
-            <filename>../theme/metalworks/picker-list-icon.png</filename>
-            <filename>../theme/metalworks/picker-list-icon-disabled.png</filename>
-            <filename>../theme/metalworks/picker-list-item-selected-icon.png</filename>
-            <filename>../theme/metalworks/radio-selected-disabled-icon.png</filename>
-            <filename>../theme/metalworks/radio-selected-down-icon.png</filename>
-            <filename>../theme/metalworks/radio-selected-up-icon.png</filename>
-            <filename>../theme/metalworks/search-icon.png</filename>
-            <filename>../theme/metalworks/search-icon-disabled.png</filename>
-            <filename>../theme/metalworks/tab-down-skin.png</filename>
-            <filename>../theme/metalworks/tab-selected-disabled-skin.png</filename>
-            <filename>../theme/metalworks/tab-selected-skin.png</filename>
-            <filename>../theme/metalworks/vertical-scroll-bar-thumb-skin.png</filename>
-            <filename>../theme/metalworks/background-disabled-skin.png</filename>
-            <filename>../theme/metalworks/background-down-skin.png</filename>
-            <filename>../theme/metalworks/background-focused-skin.png</filename>
-            <filename>../theme/metalworks/background-inset-skin.png</filename>
-            <filename>../theme/metalworks/background-popup-skin.png</filename>
-            <filename>../theme/metalworks/background-skin.png</filename>
-            <filename>../theme/metalworks/button-back-disabled-skin.png</filename>
-            <filename>../theme/metalworks/button-back-down-skin.png</filename>
-            <filename>../skin/circle_mask.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
@@ -335,15 +346,5 @@
         <uint>1</uint>
         <key>commonDivisorY</key>
         <uint>1</uint>
-        <key>packNormalMaps</key>
-        <false/>
-        <key>autodetectNormalMaps</key>
-        <true/>
-        <key>normalMapFilter</key>
-        <string></string>
-        <key>normalMapSuffix</key>
-        <string></string>
-        <key>normalMapSheetFileName</key>
-        <filename></filename>
     </struct>
 </data>

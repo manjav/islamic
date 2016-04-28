@@ -47,8 +47,6 @@ package com.gerantech.islamic.views.screens
 			
 			listLayout = new TiledRowsLayout();
 			listLayout.useSquareTiles = false;
-			//listLayout.verticalAlign = TiledRowsLayout.VERTICAL_ALIGN_BOTTOM
-			//listLayout.tileVerticalAlign = TiledRowsLayout.TILE_VERTICAL_ALIGN_BOTTOM;
 			listLayout.paddingTop = appModel.sizes.orginalHeightFull//-appModel.sizes.orginalHeight/1.5;
 			listLayout.typicalItemWidth = listLayout.typicalItemHeight = appModel.sizes.DP72*3;
 			
@@ -79,11 +77,13 @@ package com.gerantech.islamic.views.screens
 		
 		private function transitionInStartHandler():void
 		{
-			Starling.juggler.tween(listLayout, 0.7, {delay:0.3, paddingTop:appModel.sizes.dashboard, transition:Transitions.EASE_OUT});
+			Starling.juggler.tween(listLayout, 0.7, {delay:0.6, paddingTop:appModel.sizes.dashboard, transition:Transitions.EASE_OUT});
 		}
 		
 		private function list_changeHandler(event:Event):void
 		{
+			if(!list.selectedItem.enabled)
+				return;
 			switch(list.selectedItem.title)
 			{
 				case "page_greeting":
@@ -93,8 +93,13 @@ package com.gerantech.islamic.views.screens
 					var geoPopup:BasePopUp = AppController.instance.addPopup(GeoPopup);
 					geoPopup.addEventListener(Event.COMPLETE, geoPopup_completeHandler);
 					break;
+				case appModel.PAGE_CALENDAR:
+					var screenItem:StackScreenNavigatorItem = appModel.navigator.getScreen(appModel.PAGE_CALENDAR);
+					screenItem.properties = {date : new Date(appModel.date.fullYear, appModel.date.month, appModel.date.date, 12)};
+					appModel.navigator.pushScreen(appModel.PAGE_CALENDAR); 
+					break;
 				case appModel.PAGE_TIMES:
-					var screenItem:StackScreenNavigatorItem = appModel.navigator.getScreen(appModel.PAGE_TIMES);
+					screenItem = appModel.navigator.getScreen(appModel.PAGE_TIMES);
 					screenItem.properties = {date:appModel.date};
 					appModel.navigator.pushScreen(appModel.PAGE_TIMES); 
 					break;
@@ -117,10 +122,17 @@ package com.gerantech.islamic.views.screens
 		override protected function createToolbarItems():void
 		{
 			appModel.toolbar.resetItem();
-			appModel.toolbar.accessoriesData.push(new ToolbarButtonData("page_about", "info", toolbarButtons_triggerdHandler));
+			appModel.toolbar.accessoriesData.push(new ToolbarButtonData(appModel.PAGE_ABOUT,	"info",		toolbarButtons_triggerdHandler));
+			appModel.toolbar.accessoriesData.push(new ToolbarButtonData(appModel.PAGE_SETTINGS,	"setting",	toolbarButtons_triggerdHandler));
 		}
 		private function toolbarButtons_triggerdHandler(item:ToolbarButtonData):void
 		{
+			var screenItem:StackScreenNavigatorItem;
+			if(item.name == appModel.PAGE_SETTINGS)
+			{
+				screenItem = appModel.navigator.getScreen(item.name);
+				screenItem.properties = {mode : ""};
+			}
 			appModel.navigator.pushScreen(item.name);
 		}
 	}

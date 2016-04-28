@@ -4,6 +4,7 @@ package com.gerantech.islamic.views.lists
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.ToolbarButtonData;
 	import com.gerantech.islamic.views.buttons.FlatButton;
+	import com.gerantech.islamic.views.items.MenuItemRenderer;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	
 	import feathers.controls.List;
@@ -36,7 +37,7 @@ package com.gerantech.islamic.views.lists
 
 			itemRendererFactory = function():IListItemRenderer
 			{
-				return new SettingItemRenderer( AppModel.instance.sizes.getPixelByDP(48));
+				return new MenuItemRenderer( AppModel.instance.sizes.getPixelByDP(48));
 			}
 			selectedIndex = getSelectedIndex();
 			addEventListener(Event.CHANGE, changeHandler);

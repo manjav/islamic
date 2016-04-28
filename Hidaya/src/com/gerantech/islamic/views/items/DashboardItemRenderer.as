@@ -54,8 +54,8 @@ package com.gerantech.islamic.views.items
 		override protected function commitData():void
 		{
 			super.commitData();
-			
 			iconDisplay.source = Assets.getTexture(data.icon);
+			titleDisplay.alpha = iconDisplay.alpha = data.enabled ? 1 : 0.66;
 			titleDisplay.text = loc(data.title);
 		}
 		

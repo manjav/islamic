@@ -42,7 +42,6 @@ package com.gerantech.islamic.models
 		public const PAGE_TIMES:String = "page_times";
 		public const PAGE_ALERT:String = "page_alert";
 		public const PAGE_CALENDAR:String = "page_calendar";
-
 		
 		public var theme:CustomTheme;
 		public var toolbar:Toolbar;

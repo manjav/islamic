@@ -42,7 +42,7 @@ package com.gerantech.islamic.views.items
 			var elements:Array = new Array();
 			
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
-			height = sizes.singleLineItem;
+			height = sizes.DP48;
 			
 			iconDisplay = new ImageLoader();
 			iconDisplay.layoutData = new HorizontalLayoutData(NaN, 100);

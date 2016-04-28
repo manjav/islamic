@@ -121,6 +121,7 @@ package com.gerantech.islamic.views.items
 					var isInBounds:Boolean = this.contains( this.stage.hitTest( HELPER_POINT, true ) );
 					if( isInBounds )
 					{
+						dispatchEventWith(Event.TRIGGERED);
 						if(_owner.allowMultipleSelection)
 							this.isSelected = !isSelected;
 						else

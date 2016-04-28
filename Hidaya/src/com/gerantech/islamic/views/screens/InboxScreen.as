@@ -1,16 +1,14 @@
 package com.gerantech.islamic.views.screens
 {
-	import com.gerantech.islamic.views.items.DrawerItemRenderer;
+	import com.gerantech.islamic.views.items.InboxItemRenderer;
 	
 	import feathers.controls.List;
-	import feathers.controls.ScrollContainer;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
 	import starling.events.Event;
-	import com.gerantech.islamic.views.items.InboxItemRenderer;
 
 	public class InboxScreen extends BaseCustomPanelScreen
 	{

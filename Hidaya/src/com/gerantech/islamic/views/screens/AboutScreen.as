@@ -30,6 +30,7 @@ package com.gerantech.islamic.views.screens
 		override protected function initialize():void
 		{
 			super.initialize();
+			verticalScrollPolicy = SCROLL_POLICY_AUTO;
 			
 			var mlayout:VerticalLayout = new VerticalLayout();
 			mlayout.lastGap = mlayout.firstGap = appModel.sizes.border;

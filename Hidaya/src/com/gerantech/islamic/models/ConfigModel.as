@@ -5,6 +5,7 @@ package com.gerantech.islamic.models
 	import com.gerantech.islamic.models.vo.Translator;
 	
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.filesystem.File;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
@@ -29,11 +30,13 @@ package com.gerantech.islamic.models
 		
 		public var locals:Array;
 		public var parts:Array;
-		//public var views:Array;
 		public var fonts:Array;
 		public var languages:Array;
 		public var supportEmail:String;
 		public var market:String;
+		
+		[Embed(source = "../assets/contents/config-embeded.json", mimeType="application/octet-stream")]
+		private static const YourJSON:Class;
 		
 		
 		private static var _this:ConfigModel;
@@ -57,17 +60,20 @@ package com.gerantech.islamic.models
 
 		public function setAssets(appModel:AppModel, userModel:UserModel):void
 		{
-			var configFile:File = new File(userModel.storagePath+"/islamic/texts/config-data.json");
+			config = JSON.parse(new YourJSON());
+			/*var configFile:File = new File(userModel.storagePath+"/islamic/texts/config-data.json");
 			if(configFile.exists)
 				config = appModel.assetManager.getObject("config-data");
 			else
-				config = appModel.assetManager.getObject("config-embeded");
+				config = appModel.assetManager.getObject("config-embeded");*/
 			
 			locals = getLocals();
 			parts = config.application.parts;
 			fonts = config.application.fonts;
-			//views = config.application.views;
 			languages = config.languages;
+			
+			for(var i:uint=0; i<parts.length; i++)
+				parts[i].enabled = i<5;
 			
 			setReciters();
 			setTranslators();					
@@ -88,6 +94,12 @@ package com.gerantech.islamic.models
 			}*/
 			var urlStream:URLLoader = new URLLoader(new URLRequest("http://gerantech.com/islamic/config-data.xml"))
 			urlStream.addEventListener(Event.COMPLETE, configLoader_completeHandler);
+			urlStream.addEventListener(IOErrorEvent.IO_ERROR, configLoader_ioErrorHandler);
+		}
+		
+		protected function configLoader_ioErrorHandler(event:IOErrorEvent):void
+		{
+			trace("http://gerantech.com/islamic/config-data.xml not found.");
 		}
 		
 		protected function configLoader_completeHandler(event:Event):void

@@ -8,23 +8,7 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.views.controls.CustomDrawers;
 	import com.gerantech.islamic.views.headers.Toolbar;
 	import com.gerantech.islamic.views.popups.TutorialPopUp;
-	import com.gerantech.islamic.views.screens.AboutScreen;
-	import com.gerantech.islamic.views.screens.AlertScreen;
-	import com.gerantech.islamic.views.screens.BookmarksScreen;
-	import com.gerantech.islamic.views.screens.CalendarScreen;
-	import com.gerantech.islamic.views.screens.CityScreen;
-	import com.gerantech.islamic.views.screens.CompassScreen;
-	import com.gerantech.islamic.views.screens.DashboardScreen;
-	import com.gerantech.islamic.views.screens.DownloadScreen;
-	import com.gerantech.islamic.views.screens.FilteredPersonScreen;
-	import com.gerantech.islamic.views.screens.IndexScreen;
-	import com.gerantech.islamic.views.screens.OmenScreen;
-	import com.gerantech.islamic.views.screens.PersonsScreen;
-	import com.gerantech.islamic.views.screens.PurchaseScreen;
-	import com.gerantech.islamic.views.screens.QuranScreen;
-	import com.gerantech.islamic.views.screens.SearchScreen;
-	import com.gerantech.islamic.views.screens.SettingsScreen;
-	import com.gerantech.islamic.views.screens.TimesScreen;
+	import com.gerantech.islamic.views.screens.*;
 	
 	import feathers.controls.StackScreenNavigator;
 	import feathers.controls.StackScreenNavigatorItem;
@@ -54,24 +38,24 @@ package com.gerantech.islamic
 			var dashItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(DashboardScreen);
 			appModel.navigator.addScreen(appModel.PAGE_DASHBOARD, dashItem);
 			
-			addModal(appModel.PAGE_SETTINGS,	SettingsScreen);
-			addModal(appModel.PAGE_ABOUT,		AboutScreen);
+			addModal(appModel.PAGE_SETTINGS,			SettingsScreen);
+			addModal(appModel.PAGE_ABOUT,				AboutScreen);
 
-			addModal(appModel.PAGE_QURAN,		QuranScreen);
-			addModal(appModel.PAGE_INDEX,		IndexScreen);
-			addModal(appModel.PAGE_BOOKMARKS,	BookmarksScreen);
-			addModal(appModel.PAGE_SEARCH,		SearchScreen);
-			addModal(appModel.PAGE_PERSON,		PersonsScreen);
-			addModal(appModel.PAGE_FILTERED,	FilteredPersonScreen);
-			addModal(appModel.PAGE_OMEN,		OmenScreen);
+			addModal(appModel.PAGE_QURAN,				QuranScreen);
+			addModal(appModel.PAGE_INDEX,				IndexScreen);
+			addModal(appModel.PAGE_BOOKMARKS,			BookmarksScreen);
+			addModal(appModel.PAGE_SEARCH,				SearchScreen);
+			addModal(appModel.PAGE_PERSON,				PersonsScreen);
+			addModal(appModel.PAGE_FILTERED,			FilteredPersonScreen);
+			addModal(appModel.PAGE_OMEN,				OmenScreen);
 			
-			addModal(appModel.PAGE_PURCHASE,	PurchaseScreen);
-			addModal(appModel.PAGE_DOWNLOAD,	DownloadScreen);
-			addModal(appModel.PAGE_COMPASS,		CompassScreen);
-			addModal(appModel.PAGE_CITY,		CityScreen);
-			addModal(appModel.PAGE_TIMES,		TimesScreen);
-			addModal(appModel.PAGE_ALERT,		AlertScreen);
-			addModal(appModel.PAGE_CALENDAR, 	CalendarScreen);
+			addModal(appModel.PAGE_PURCHASE,			PurchaseScreen);
+			addModal(appModel.PAGE_DOWNLOAD,			DownloadScreen);
+			addModal(appModel.PAGE_COMPASS,				CompassScreen);
+			addModal(appModel.PAGE_CITY,				CityScreen);
+			addModal(appModel.PAGE_TIMES,				TimesScreen);
+			addModal(appModel.PAGE_ALERT,				AlertScreen);
+			addModal(appModel.PAGE_CALENDAR, 			CalendarScreen);
 		}
 		
 		private function addModal(screenId:String, screenClass:Class, pushTransition:Function=null, popTransition:Function=null):void
@@ -89,7 +73,7 @@ package com.gerantech.islamic
 		
 		public function createScreens():void
 		{
-			appModel.theme = new CustomTheme();
+			//appModel.theme = new CustomTheme();
 			appModel.drawers = new CustomDrawers();
 			/*appModel.myDrawer = new DrawerList(appModel.ltr);
 			

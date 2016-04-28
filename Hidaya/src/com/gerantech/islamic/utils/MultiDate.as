@@ -35,6 +35,9 @@ package com.gerantech.islamic.utils
 		public var monthShamsi:Number;
 		public var dateShamsi:Number;
 		
+		public var firstTime:Number;
+		public var middleTime:Number;
+
 		public function MultiDate(year:*=null, month:*=null, date:*=null, hours:*=null, minutes:*=null, seconds:*=null, ms:*=null)
 		{
 			if(year==null)
@@ -66,7 +69,9 @@ package com.gerantech.islamic.utils
 			
 			fullYearShamsi	= shamsi[0];
 			monthShamsi		= shamsi[1] - 1;
-			dateShamsi 		= shamsi[2];			
+			dateShamsi 		= shamsi[2];
+			firstTime = new Date(fullYear, month, date).getTime();
+			middleTime = firstTime + 43200000;
 		}
 		
 		public  function toString():String

@@ -4,8 +4,6 @@ package com.gerantech.islamic.views.controls
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.UserModel;
-	import com.gerantech.islamic.models.vo.Aya;
-	import com.gerantech.islamic.models.vo.Person;
 	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;

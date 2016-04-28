@@ -1,71 +1,81 @@
 package com.gerantech.islamic.views.items
 {
-	import com.gerantech.islamic.models.UserModel;
+	import com.gerantech.islamic.models.AppModel;
+	import com.gerantech.islamic.models.vo.DayDataProvider;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
-	import com.gerantech.islamic.themes.MaterialTheme;
-	import com.gerantech.islamic.utils.MultiDate;
-	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	
-	import flash.globalization.StringTools;
-	import flash.text.engine.ElementFormat;
-	import flash.text.engine.FontDescription;
-	import flash.text.engine.FontLookup;
-	
-	import mx.utils.StringUtil;
-	
+	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
+	import feathers.layout.VerticalLayout;
+	import feathers.layout.VerticalLayoutData;
+	
+	import starling.display.Quad;
+	import starling.events.Event;
 
 	public class CalendarItemRenderer extends BaseCustomItemRenderer
 	{
 		private var titleDiplay:RTLLabel;
-		private var date:MultiDate;
-		private var color:uint;
+		private var messageDisplay:RTLLabel;
+		private var vlayout:VerticalLayout;
+		private var header:LayoutGroup;
+		private var todaySkin:Quad;
+		private var otherSkin:Quad;
+
+		private var dayData:DayDataProvider;
 		
-		override protected function initialize():void
+
+		public static function get HEIGHT():uint
 		{
+			return AppModel.instance.sizes.threeLineItem;
+		}
+
+		override protected function initialize():void
+		{			
 			super.initialize();
-			layout = new AnchorLayout();
-			height = appModel.sizes.singleLineItem;
+			vlayout = new VerticalLayout();
+			vlayout.gap = vlayout.paddingTop = vlayout.paddingBottom = appModel.sizes.DP4;
+			//vlayout.paddingLeft = vlayout.paddingRight = appModel.sizes.DP16;
+			vlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			layout = vlayout;
+			height = HEIGHT;
 			
-			date = new MultiDate();
+			dayData = new DayDataProvider();
+			dayData.addEventListener("update", dayData_updateHandler);
 			
-			titleDiplay = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
-			titleDiplay.layoutData = new AnchorLayoutData(NaN, appModel.sizes.DP16, NaN, appModel.sizes.DP16, NaN, 0);
-			addChild(titleDiplay);
+			todaySkin = new Quad(1,1, BaseMaterialTheme.ACCENT_COLOR);
+			otherSkin = new Quad(1,1, BaseMaterialTheme.CHROME_COLOR);
+			
+			header = new LayoutGroup();
+			header.layoutData = new VerticalLayoutData(100);
+			header.layout = new AnchorLayout();
+			addChild(header);
+			
+			titleDiplay = new RTLLabel("", 0xFFFFFF, null, null, true, null, 1, null, "bold");
+			titleDiplay.layoutData = new AnchorLayoutData(0,appModel.sizes.DP16,0,appModel.sizes.DP16);
+			header.addChild(titleDiplay);
+			
+			messageDisplay = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, true, null, 0.8);
+			messageDisplay.layoutData = new VerticalLayoutData(((appModel.sizes.width-appModel.sizes.DP32)/appModel.sizes.width)*100, 100);
+			addChild(messageDisplay);
 		}
 		
 		override protected function commitData():void
 		{
 			super.commitData();
-			
-			date.setTime(_data);
-			setTitleStyle(date.date==appModel.date.date && date.month==appModel.date.month ? BaseMaterialTheme.CHROME_COLOR : BaseMaterialTheme.DESCRIPTION_TEXT_COLOR); 
-			switch(userModel.locale.value)
-			{
-				case "fa_IR":
-					titleDiplay.text =  loc("week_day_"+date.day)+" "+StrTools.getNumber(date.dateShamsi)+" "+loc("month_p_"+date.monthShamsi)	+ " " + StrTools.getNumber(date.fullYearShamsi);
-					break;
-				case "ar_SA":
-					titleDiplay.text =  loc("week_day_"+date.day)+" "+StrTools.getNumber(date.dateQamari)+" "+loc("month_i_"+date.monthQamari)	+ " " + StrTools.getNumber(date.fullYearQamari);
-					break;
-				default:
-					titleDiplay.text =  loc("week_day_"+date.day)+" "+date.date+" "+loc("month_g_"+date.month) + ", " + StrTools.getNumber(date.fullYear);
-					break;
-			}	
+			dayData.setTime(_data);
+			header.backgroundSkin = dayData.isToday ? todaySkin : otherSkin;
 		}
 		
-		private function setTitleStyle(color:uint):void
-		{
-			if(this.color == color)
-				return;
-			
-			this.color = color;
-			titleDiplay.fontDescription = new FontDescription(titleDiplay.fontFamily, color==BaseMaterialTheme.CHROME_COLOR?"bold":"normal", titleDiplay.fontPosture, FontLookup.EMBEDDED_CFF);
-			titleDiplay.elementFormat = new ElementFormat(titleDiplay.fontDescription, titleDiplay.fontSize, color);
+		private function dayData_updateHandler(event:Event):void
+		{//trace(dayData.mainDateString, dayData.currentDate);
+			titleDiplay.text = dayData.mainDateString;
+			messageDisplay.text = dayData.secondaryDatesString + "\n" + dayData.eventsString + "\n" + dayData.googleEventsString;
+			/*if(message.length>0)
+				message += "\n"+ evStr;
+			messageDisplay.text = message;*/
 		}
-		
-		
+	
 	}
 }

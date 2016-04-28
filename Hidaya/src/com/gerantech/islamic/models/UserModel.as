@@ -211,7 +211,7 @@ package com.gerantech.islamic.models
 			setMarketData();
 			loadByObject(so.data.user);
 			userUpdater.restore(user);
-			premiumMode = true;
+			//premiumMode = true;
 			loaded = true;
 		}
 		
@@ -233,25 +233,17 @@ package com.gerantech.islamic.models
 						user[n] = loadData[n];
 				}
 			}
-			setDefualtValue();			
-		}
-		
-		private function setDefualtValue():void
-		{
-			ResourceModel.instance.load();
+
+			//ResourceModel.instance.load();
 			appController.setPaths(this, storagePath);
 			configModel.setAssets(appModel, this);
 			timesModel.data = user.times;
-			setLastItem(user.sura, user.aya);			
+			//setLastItem(user.sura, user.aya);			
 			locale	= user.local;
 			bookmarks = new BookmarkCollection(user.bookmarks);
-			nightMode = user.nightMode;
+			//nightMode = user.nightMode;
 			appController.setIdleMode(user.idleMode);
-			navigationMode = user.navigationMode;
-			
-			//appModel.overlay.alpha = user.overlayAlpha;
-			//appController.setFontSize(user.fontSize);
-			//appController.setFontFamily(user.fontFamily);
+			//navigationMode = user.navigationMode;
 			
 			user.profile.numRun ++;
 			if(!user.rated)

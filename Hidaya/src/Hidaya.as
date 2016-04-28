@@ -46,11 +46,11 @@ package
 		private var appController:AppController;
 		
 		private var validateScreenTimeoutID:uint;
-		//public static var ft:int;
+		public static var ft:int;
 
 		public function Hidaya()
 		{
-			//ft = getTimer();
+			ft = getTimer();
 			trace(ResourceManager.getInstance().getString("loc", "quran_t"))//, String.fromCharCode(0x25b8));
 			mouseEnabled = mouseChildren = false;
 			
@@ -66,6 +66,17 @@ package
 
 			//Add Splash -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 			loaderInfo.addEventListener(Event.COMPLETE, loaderInfo_completeHandler);
+			
+			appModel = AppModel.instance;
+			//Load Assets --------------------------------------------------------
+			trace("1", getTimer()-ft);
+			appModel.assetManager = new AssetManager();
+			appModel.assetManager.verbose = false
+			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/atlases/skins.png"));
+			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/atlases/skins.xml"));
+			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/bitmaps"));
+			//appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/contents/config-embeded.json"));
+			//appModel.assetManager.enqueue(File.documentsDirectory.resolvePath("islamic/texts/config-data.json"));
 		}
 		
 		private function loaderInfo_completeHandler(event:Event):void
@@ -73,9 +84,16 @@ package
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.align = StageAlign.TOP_LEFT;
 			loaderInfo.removeEventListener(Event.COMPLETE, loaderInfo_completeHandler);
-
-			appModel = AppModel.instance;
+			
 			appModel.init(this as Hidaya);
+			
+			appController = AppController.instance;
+			configModel = ConfigModel.instance;
+
+			userModel = UserModel.instance;
+			userModel.addEventListener(UserEvent.LOAD_DATA_COMPLETE, user_completeHandler);
+			userModel.addEventListener(UserEvent.LOAD_DATA_ERROR, user_completeHandler);
+			loadUserData()
 			
 			graphics.beginFill(0x009688);
 			graphics.drawRect(0,0,appModel.sizes.width, appModel.sizes.heightFull);
@@ -104,14 +122,8 @@ package
 		{
 			_starling.removeEventListener("rootCreated", starling_rootCreatedHandler);
 			validateScreenSize();
-			//Load Assets --------------------------------------------------------
-			appModel.assetManager = new AssetManager();
-			appModel.assetManager.verbose = false
-			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/atlases"));
-			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/bitmaps"));
-			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/contents"));
-			appModel.assetManager.enqueue(File.documentsDirectory.resolvePath("islamic/texts/config-data.json"));
 			appModel.assetManager.loadQueue(loadQueueHandler);
+			trace("2", getTimer()-ft);
 		}
 		
 		private function loadQueueHandler(ratio:Number):void
@@ -122,29 +134,16 @@ package
 			scaled9TexturesLoaded();
 			Assets.loadSclaed9Textures(["dialog", "i_dialog", "item_roundrect_down", "item_roundrect_normal", "item_roundrect_selected", "i_item_roundrect_down", "i_item_roundrect_normal", "i_item_roundrect_selected"], null);
 		}
-		
-		private function scaled9TexturesLoaded():void
-		{
-			appController = AppController.instance;
-			configModel = ConfigModel.instance;
-			
-			/*graphics.clear();
-			graphics.beginFill(0x009688);
-			graphics.drawRect(0,0,Math.max(stage.stageWidth, stage.stageHeight), appModel.sizes.itemHeight);*/
-						
-			userModel = UserModel.instance;
-			userModel.addEventListener(UserEvent.LOAD_DATA_COMPLETE, user_completeHandler);
-			userModel.addEventListener(UserEvent.LOAD_DATA_ERROR, user_completeHandler);
-			loadUserData()
-		}
-		
+
 		private function loadUserData():void
 		{
+			trace("3", getTimer()-ft);
 			if(ResourceManager.getInstance().localeChain==null)
 			{
 				setTimeout(loadUserData, 1);
 				return;
 			}
+			trace("4", getTimer()-ft);
 			userModel.load(appModel, appController, configModel);
 		}
 		
@@ -158,12 +157,18 @@ package
 			//	trace(appModel.sizes.orginalFontSize, userModel.fontSize)
 			//	UserModel.instance.premiumMode = Capabilities.cpuArchitecture=="x86"
 			}
-
+		}
+		
+		private function scaled9TexturesLoaded():void
+		{
 			stage.addEventListener(Event.DEACTIVATE, stage_deactivateHandler, false, 0, true);
+			trace("5", getTimer()-ft);
 			Main(_starling.root).createScreens();
 			graphics.clear();
 			stage.addEventListener(Event.RESIZE, stage_resizeHandler, false, int.MAX_VALUE, true);
+			trace("6", getTimer()-ft);
 		}
+		
 		
 		private function stage_resizeHandler(event:Event):void
 		{

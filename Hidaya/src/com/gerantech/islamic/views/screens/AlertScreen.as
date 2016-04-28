@@ -85,6 +85,7 @@ package com.gerantech.islamic.views.screens
 		{
 			_time.alerts.splice(event.data as int, 1);
 			list.dataProvider = new ListCollection(_time.alerts);
+			update();
 		}
 		
 		private function list_eventSelectHandler(event:Event):void
@@ -107,6 +108,7 @@ package com.gerantech.islamic.views.screens
 			
 			time.alerts[selectedAlartIndex].offset = picker.selectedItem as int;
 			list.dataProvider = new ListCollection(_time.alerts);
+			update();
 			
 			picker.addEventListener(Event.CHANGE, picker_changeHandler);
 		}
@@ -144,6 +146,7 @@ package com.gerantech.islamic.views.screens
 				_time.alerts.push(new Alert(t, Alert.TYPE_NOTIFICATION, _time));
 				list.dataProvider = new ListCollection(_time.alerts);
 			}
+			update();
 			picker.addEventListener(Event.CHANGE, picker_changeHandler);
 		}
 		/*
@@ -156,6 +159,11 @@ package com.gerantech.islamic.views.screens
 		private function getAlertTitle(item:Object):String
 		{
 			return _time.getAlertTitle(int(item));
+		}
+		
+		private function update():void
+		{
+			userModel.timesModel.updateNotfications();
 		}
 		
 	}

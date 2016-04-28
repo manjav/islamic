@@ -1,16 +1,19 @@
 package com.gerantech.islamic.views.screens
 {
-	import com.gerantech.islamic.models.UserModel;
+	import com.gerantech.islamic.models.vo.DayDataProvider;
+	import com.gerantech.islamic.models.vo.ToolbarButtonData;
+	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.utils.StrTools;
+	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.items.TimeItemRenderer;
 	
 	import feathers.controls.List;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
-	import feathers.layout.AnchorLayout;
-	import feathers.layout.AnchorLayoutData;
+	import feathers.layout.VerticalLayout;
+	import feathers.layout.VerticalLayoutData;
 	
 	import starling.events.Event;
 
@@ -20,41 +23,70 @@ package com.gerantech.islamic.views.screens
 		
 		private var list:List;
 		private var data:Vector.<Date>;
+		private var eventsLabel:RTLLabel;
+		private var dayData:DayDataProvider;
+
+		private var mainDateLabel:RTLLabel;
+
+		private var secondaryDateLabel:RTLLabel;
 		
 		override protected function initialize():void
 		{
 			super.initialize();
+			verticalScrollPolicy = horizontalScrollPolicy = SCROLL_POLICY_OFF;
+			
+			var vlayout:VerticalLayout = new VerticalLayout();
+			vlayout.paddingTop = appModel.sizes.DP8; 
+			vlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			layout = vlayout;
+			
+			mainDateLabel = new RTLLabel("", 1, null, null, false, null, 0.9);
+			addChild(mainDateLabel);
+			secondaryDateLabel = new RTLLabel("", 1, "center", null, false, null, 0.9);
+			addChild(secondaryDateLabel);
+
+			eventsLabel = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, false, null, 0.8);
+			eventsLabel.layoutData = new VerticalLayoutData(((appModel.sizes.width-appModel.sizes.DP32)/appModel.sizes.width)*100);
+			addChild(eventsLabel);
+			
+			dayData = new DayDataProvider();
+			dayData.addEventListener("update", dayData_updateHandler);
+			dayData.setTime(date.dateClass.getTime());
 			
 			var dates:Vector.<Date> = appModel.prayTimes.getTimes(date.dateClass).toDates();
 			for (var i:uint=0; i<userModel.timesModel.times.length; i++)
 				userModel.timesModel.times[i].date = dates[i+1];
 			
-			title = getDateString();
-			
-			layout = new AnchorLayout();
 			list = new List();
 			list.itemRendererFactory = function():IListItemRenderer
 			{
 				return new TimeItemRenderer();
 			}
-			list.layoutData = new AnchorLayoutData(0,0,0,0);
+			list.layoutData = new VerticalLayoutData(100, 100);
 			list.dataProvider = new ListCollection(userModel.timesModel.times);
 			list.addEventListener(Event.CHANGE, list_changeHandler);
 			addChild(list);
 		}
 		
-		private function getDateString():String
+		override protected function createToolbarItems():void
 		{
-			switch(UserModel.instance.locale.value)
-			{
-				case "fa_IR":
-					return loc("week_day_"+date.day)+" "+num(date.dateShamsi)+" "+loc("month_p_"+date.monthShamsi)	+ " " + num(date.fullYearShamsi);
-				case "ar_SA":
-					return loc("week_day_"+date.day)+" "+num(date.dateQamari)+" "+loc("month_i_"+date.monthQamari)	+ " " + num(date.fullYearQamari);
-				default:
-					return loc("week_day_"+date.day)+" "+date.date+" "+loc("month_g_"+date.month) + ", " + num(date.fullYear);
-			}	
-			return null;
+			super.createToolbarItems();
+			appModel.toolbar.accessoriesData.push(new ToolbarButtonData(appModel.PAGE_SETTINGS,	"setting",	toolbarButtons_triggerdHandler));
+		}
+		
+		private function toolbarButtons_triggerdHandler(item:ToolbarButtonData):void
+		{
+			var screenItem:StackScreenNavigatorItem = appModel.navigator.getScreen(item.name);
+			screenItem.properties = {mode : SettingsScreen.MODE_TIMES};
+			appModel.navigator.pushScreen(item.name);
+		}
+		
+		private function dayData_updateHandler():void
+		{
+			mainDateLabel.text = dayData.mainDateString;
+			secondaryDateLabel.text = dayData.secondaryDatesString+(dayData.eventsString.length+dayData.googleEventsString.length>0?"\n\n"+loc("day_events"):"");
+			if(dayData.eventsString.length+dayData.googleEventsString.length>0)
+				eventsLabel.text = dayData.eventsString+"\n"+ dayData.googleEventsString;		
 		}
 		
 		private function list_changeHandler():void
@@ -83,6 +115,5 @@ package com.gerantech.islamic.views.screens
 		{
 			return StrTools.getNumber(input);
 		}
-		
 	}
 }

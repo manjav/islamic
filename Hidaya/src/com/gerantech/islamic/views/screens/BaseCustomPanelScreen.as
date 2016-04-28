@@ -25,6 +25,8 @@ package com.gerantech.islamic.views.screens
 		override protected function initialize():void
 		{
 			super.initialize();
+			horizontalScrollPolicy = verticalScrollPolicy = SCROLL_POLICY_OFF;
+			autoSizeMode = AUTO_SIZE_MODE_STAGE;
 			
 			appModel.drawers.isEnabled = false;
 /*			width = appModel.sizes.width;
