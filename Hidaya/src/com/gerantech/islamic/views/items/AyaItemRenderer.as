@@ -138,7 +138,7 @@ package com.gerantech.islamic.views.items
 			aya.bookmarked = userModel.bookmarks.exist(aya)>-1;
 			if(aya.hasBism)
 			{
-				bismHeader.aya = aya;
+				//bismHeader.aya = aya;
 				addChildAt(bismHeader, 1);
 			}
 			else

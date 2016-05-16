@@ -17,7 +17,7 @@ package com.gerantech.islamic.views.headers
 		private var suraImage:ImageLoader;
 		private var bismImage:ImageLoader;
 		private var mlayout:AnchorLayout;
-		private var _aya:Aya;
+		//private var _aya:Aya;
 
 		private var colorFilter:ColorMatrixFilter;
 		
@@ -33,7 +33,7 @@ package com.gerantech.islamic.views.headers
 			colorFilter = new ColorMatrixFilter();
 			colorFilter.invert();
 			
-			suraImage = new ImageLoader();
+			/*suraImage = new ImageLoader();
 			suraImage.delayTextureCreation = true;
 			suraImage.height = height*0.8;
 			//suraImage.includeInLayout  = false
@@ -41,7 +41,7 @@ package com.gerantech.islamic.views.headers
 			addChild(suraImage)
 			
 			if(UserModel.instance.nightMode)
-				suraImage.filter = colorFilter;
+				suraImage.filter = colorFilter;*/
 			
 			bismImage = new ImageLoader();
 			bismImage.delayTextureCreation = true;
@@ -53,11 +53,11 @@ package com.gerantech.islamic.views.headers
 			if(UserModel.instance.nightMode)
 				bismImage.filter = colorFilter;
 		}
-		
+		/*
 		public function set aya(value:Aya):void
 		{
 			_aya = value;
 			suraImage.source = Assets.getTexture(_aya.sura.toString());
-		}
+		}*/
 	}
 }

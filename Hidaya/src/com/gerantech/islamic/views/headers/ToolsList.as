@@ -67,7 +67,7 @@ package com.gerantech.islamic.views.headers
 			addChild(numContainer);
 			
 			numTextField = new RTLLabel("", 0x6d6d6d, "center", null, false, "center", _h*0.6, "mequran");
-			numTextField.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, -numTextField.fontSize/3.2); 
+			numTextField.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0); 
 			numContainer.addChild(numTextField);
 			
 			initialized = true;

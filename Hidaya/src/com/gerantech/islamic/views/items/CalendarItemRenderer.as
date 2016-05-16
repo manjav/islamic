@@ -52,8 +52,8 @@ package com.gerantech.islamic.views.items
 			header.layout = new AnchorLayout();
 			addChild(header);
 			
-			titleDiplay = new RTLLabel("", 0xFFFFFF, null, null, true, null, 1, null, "bold");
-			titleDiplay.layoutData = new AnchorLayoutData(0,appModel.sizes.DP16,0,appModel.sizes.DP16);
+			titleDiplay = new RTLLabel("", userModel.nightMode ? BaseMaterialTheme.PRIMARY_TEXT_COLOR : BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR, null, null, true, null, 1, null, "bold");
+			titleDiplay.layoutData = new AnchorLayoutData(appModel.sizes.DP8, appModel.sizes.DP16,appModel.sizes.DP8, appModel.sizes.DP16);
 			header.addChild(titleDiplay);
 			
 			messageDisplay = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, true, null, 0.8);

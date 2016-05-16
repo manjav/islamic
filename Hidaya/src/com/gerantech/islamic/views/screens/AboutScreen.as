@@ -40,6 +40,7 @@ package com.gerantech.islamic.views.screens
 			layout = mlayout;
 			
 			createAboutHeader();
+			addChild(new Spacer());
 			
 			var dec:RTLLabel = new RTLLabel(loc("app_descript")+"\n"+loc("alpha_popup_message")+"\n\n", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "justify", null, true, null, 0.9);
 			dec.layoutData = new VerticalLayoutData(94);
@@ -60,16 +61,15 @@ package com.gerantech.islamic.views.screens
 			
 			var appName:RTLLabel = new RTLLabel(loc("app_title"), BaseMaterialTheme.PRIMARY_TEXT_COLOR, "center", null, true, null, 0, null, "bold");
 			addChild(appName);
+			addChild(new Spacer());
 			
 			var appVersion:RTLLabel = new RTLLabel(StrTools.getNumberFromLocale(appModel.descriptor.versionLabel), BaseMaterialTheme.PRIMARY_TEXT_COLOR, "center", null, false, null, 0.8);
 			addChild(appVersion);
+			addChild(new Spacer());
 			
 			var appCopyRight:RTLLabel = new RTLLabel(ConfigModel.instance.market, BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, "center", null, false, null, 0.7);
 			addChild(appCopyRight);
-			
-			var headerSpacer:LayoutGroup = new LayoutGroup();
-			headerSpacer.height = appModel.sizes.border*4;
-			addChild(headerSpacer);			
+		
 		}/*
 		
 		private function createAboutHeader():void

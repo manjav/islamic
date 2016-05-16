@@ -48,14 +48,13 @@ package
 		public static var ft:int;
 
 		/**
-		 * Firts method runs in app.
+		 * First method runs in app.
 		 */
 		public function Hidaya()
 		{
 			ft = getTimer();
 			trace(ResourceManager.getInstance().getString("loc", "quran_t"))//, String.fromCharCode(0x25b8));
 			mouseEnabled = mouseChildren = false;
-			
 			
 			graphics.beginFill(0x009688);
 			graphics.drawRect(0, 0, Capabilities.screenResolutionX, Capabilities.screenResolutionY);
