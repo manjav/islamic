@@ -45,10 +45,11 @@ package com.gerantech.islamic.views.items
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
 			myLayout.gap = myLayout.padding = appModel.sizes.DP16;
-			myLayout.paddingLeft = appModel.sizes.DP8;
+			//myLayout.paddingRight = appModel.sizes.DP8;
 			layout = myLayout;
 			
 			accessory = new PersonAccessory();
+			accessory.width = appModel.sizes.DP40;
 			accessory.layoutData = new HorizontalLayoutData(NaN, 100);
 			addChild(accessory);
 			

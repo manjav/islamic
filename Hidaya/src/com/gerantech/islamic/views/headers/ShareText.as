@@ -4,6 +4,7 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.vo.Aya;
 	import com.gerantech.islamic.models.vo.Translator;
 	import com.gerantech.islamic.utils.StrTools;
@@ -34,13 +35,13 @@ package com.gerantech.islamic.views.headers
 		
 		private function addPersonText():void
 		{
-			if(personIndex == ConfigModel.instance.selectedTranslators.length)
+			if(personIndex == ResourceModel.instance.selectedTranslators.length)
 			{trace(shareTitle, shareText)
 				if(AppModel.instance.isAndroid)
 					NativeAbilities.instance.shareText(shareTitle, shareText);
 				return;
 			}
-			currentPerson = Translator(ConfigModel.instance.selectedTranslators[personIndex]);
+			currentPerson = Translator(ResourceModel.instance.selectedTranslators[personIndex]);
 			currentPerson.getAyaText(aya, ayaResponder);
 		}
 		

@@ -1,7 +1,7 @@
 package com.gerantech.islamic.views.actions
 {
 	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
@@ -22,8 +22,7 @@ package com.gerantech.islamic.views.actions
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import starling.filters.BlurFilter;
-	
+	import starling.filters.DropShadowFilter;
 	
 	public class ModeActionList extends LayoutGroup
 	{
@@ -70,11 +69,11 @@ package com.gerantech.islamic.views.actions
 			actionButton.iconScale = 0.3;
 			actionButton.width = actionButton.height = AppModel.instance.sizes.toolbar;
 			actionButton.pivotY = actionButton.pivotX = actionButton.width/2;
-			actionButton.filter = BlurFilter.createDropShadow(AppModel.instance.sizes.border, 90*(Math.PI/180), 0, 0.4, 3);
+			actionButton.filter = new DropShadowFilter(AppModel.instance.sizes.border, 90*(Math.PI/180), 0, 0.4, 3);
 			actionButton.addEventListener(Event.TRIGGERED, actionButton_triggerd);
 			addChild(actionButton);
 			
-			modes = type==Person.TYPE_TRANSLATOR?ConfigModel.instance.transModes:ConfigModel.instance.recitersModes;
+			modes = type==Person.TYPE_TRANSLATOR?ResourceModel.instance.transModes:ResourceModel.instance.recitersModes;
 		}
 
 		
@@ -92,7 +91,7 @@ package com.gerantech.islamic.views.actions
 			if(!touch)
 				return;
 			touch.getLocation(this.stage, HELPER_POINT);
-			if(contains(this.stage.hitTest(HELPER_POINT, true)))
+			if(contains(this.stage.hitTest(HELPER_POINT)))
 				close();
 		}
 		private function modes_triggerd(event:Event):void

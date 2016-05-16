@@ -43,7 +43,7 @@ package com.gerantech.islamic.views.headers
 				ayaLabel.text = "   -   "+_aya.aya;*/
 			
 			if(suraImage)
-				suraImage.source = Assets.getTexture(_aya.sura.toString());//StrTools.getZeroNum((sura-1).toString(), 3)
+				suraImage.source = Assets.getTexture(_aya.sura.toString(), "surajuze");//StrTools.getZeroNum((sura-1).toString(), 3)
 		}
 
 		override protected function initialize():void

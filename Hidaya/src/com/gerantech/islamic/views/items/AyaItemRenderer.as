@@ -2,7 +2,6 @@ package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.events.UserEvent;
 	import com.gerantech.islamic.models.Assets;
-	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.vo.Aya;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
@@ -13,14 +12,15 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.views.headers.BismHeader;
 	import com.gerantech.islamic.views.headers.ToolsList;
 	
+	import flash.geom.Rectangle;
 	import flash.text.engine.ElementFormat;
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
 	
 	import feathers.controls.ImageLoader;
-	import feathers.display.Scale9Image;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
+	import feathers.skins.ImageSkin;
 	
 	import starling.core.Starling;
 	import starling.events.Event;
@@ -43,13 +43,20 @@ package com.gerantech.islamic.views.items
 		private var devider:Devider;
 		private var moreStrip:SimpleLayoutButton;
 		private var reservedFontSize:uint;
+		private var skin:ImageSkin;
 
 		override protected function initialize():void
 		{
 			super.initialize();
-			backgroundSkin = new Scale9Image(Assets.getItemTextures(STATE_NORMAL));
 			
-			hasTranslation = ConfigModel.instance.hasTranslator;
+			skin = new ImageSkin(Assets.getItemTextures(STATE_NORMAL));
+			skin.setTextureForState( STATE_NORMAL, Assets.getItemTextures(STATE_NORMAL) );
+			skin.setTextureForState( STATE_SELECTED, Assets.getItemTextures(STATE_SELECTED) );
+			skin.setTextureForState( STATE_DOWN, Assets.getItemTextures(STATE_DOWN) );
+			skin.scale9Grid = new Rectangle(skin.width/2-1, skin.height/2-1, 2, 2);
+			backgroundSkin = skin
+			
+			hasTranslation = ResourceModel.instance.hasTranslator;
 			deleyCommit = true;
 			
 			userModel.addEventListener(UserEvent.FONT_SIZE_CHANGE_START, user_fontSizeChangeHandler);
@@ -64,8 +71,7 @@ package com.gerantech.islamic.views.items
 			layout = vLayout
 			
 			toolsList = new ToolsList();
-			//toolsList.x = appModel.sizes.border*2;
-			toolsList.y = appModel.sizes.border;
+			toolsList.height = appModel.sizes.DP36;
 			toolsList.layoutData = new VerticalLayoutData(100);
 			addChild(toolsList);
 			
@@ -73,7 +79,6 @@ package com.gerantech.islamic.views.items
 			bismHeader.layoutData = new VerticalLayoutData(100);
 						
 			quranTextRenderer = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, "justify", "rtl", true, "center", userModel.fontSize*1.3*userModel.font.scale, userModel.font.value);
-			//quranTextRenderer.height = 122
 			quranTextRenderer.layoutData = new VerticalLayoutData(100);
 			addChild(quranTextRenderer);
 			
@@ -85,26 +90,23 @@ package com.gerantech.islamic.views.items
 			addChild(devider);
 			
 			translations = new Vector.<TranslationLine>();
-			var len:uint = Math.min(2, ConfigModel.instance.selectedTranslators.length);
+			var len:uint = Math.min(2, ResourceModel.instance.selectedTranslators.length);
 			for (var i:uint; i<len; i++)
 			{
-				var ttr:TranslationLine = new TranslationLine(ConfigModel.instance.selectedTranslators[i]);
+				var ttr:TranslationLine = new TranslationLine(ResourceModel.instance.selectedTranslators[i]);
 				ttr.layoutData = new VerticalLayoutData(100);
 				translations.push(ttr);
 				addChild(ttr);
 			}
 			
 			moreStrip = new SimpleLayoutButton();
-			//moreStrip.backgroundSkin.alpha = 0.1;
 			moreStrip.layoutData = new VerticalLayoutData(100)
 			moreStrip.addEventListener(Event.TRIGGERED, moreStrip_triggeredHandler);
 			moreStrip.height = appModel.sizes.singleLineItem/2;
-			//moreStrip.layout = new AnchorLayout();
 			addChild(moreStrip);
 			
 			var moreStripImage:ImageLoader = new ImageLoader();
 			moreStripImage.source =  Assets.getTexture("chevron_g");
-			//moreStripImage.layoutData = new VerticalLayoutData(100, 100)
 			moreStrip.backgroundSkin = moreStripImage;
 			
 			FAST_COMMIT_TIMEOUT = 10;
@@ -195,6 +197,7 @@ package com.gerantech.islamic.views.items
 				/*if(hasMore)
 				{*/
 				vLayout.paddingBottom = vLayout.gap*2;
+				//vLayout.resetVariableVirtualCache();
 				//addChild(moreStrip);
 				//moreStrip.visible = true;
 				/*}
@@ -231,7 +234,6 @@ package com.gerantech.islamic.views.items
 			{
 				vLayout.gap = Math.round(Math.min(appModel.sizes.border*3, userModel.fontSize*1.2))*0.7;
 				moreStrip.visible = true;
-
 				//setTimeout(setNextTranslation, FAST_COMMIT_TIMEOUT);
 			}		
 		}
@@ -241,18 +243,13 @@ package com.gerantech.islamic.views.items
 			var lastState:String = super.currentState;
 			super.currentState = value;
 			
-			if(value==lastState)
+			if(value == lastState)
 				return;
-			//if(limited)
-				backgroundSkin = new Scale9Image(Assets.getItemTextures(value));//||value==STATE_SELECTED
 			
-			if(value!=STATE_DOWN)
+			skin.defaultTexture = skin.getTextureForState(value);
+			//backgroundSkin = new Scale9Image(Assets.getItemTextures(value));//||value==STATE_SELECTED
+			if(value != STATE_DOWN)
 				toolsList.setData(aya, value==STATE_SELECTED);
-			/*if(hasTranslation && touch && touch.phase==TouchPhase.ENDED && touch.getLocation(this).y>height-appModel.sizes.itemHeight)
-			{
-				trace(touch.getLocation(moreStrip))
-				_owner.dispatchEventWith(Event.SELECT, false, this);
-			}	*/
 		}	
 
 	}

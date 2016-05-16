@@ -42,8 +42,8 @@ package com.gerantech.islamic.views.screens
 			switch(mode)
 			{
 				case 0:
-					for each(var r:String in ConfigModel.instance.freeReciters)
-						persons.push(ConfigModel.instance.getReciterByPath(r).name);
+					for each(var r:String in resourceModel.freeReciters)
+						persons.push(resourceModel.getReciterByPath(r).name);
 					
 					purchaseMessage = loc("purchase_player_1")+"\n"+bullet+" ";
 					purchaseMessage+= (persons.join("\n"+bullet+" "));
@@ -51,8 +51,8 @@ package com.gerantech.islamic.views.screens
 					break;
 				
 				case 1:
-					for each(var t:String in ConfigModel.instance.freeTranslators)
-						persons.push(ConfigModel.instance.getTranslatorByPath(t).name);
+					for each(var t:String in resourceModel.freeTranslators)
+						persons.push(resourceModel.getTranslatorByPath(t).name);
 					
 					purchaseMessage = loc("purchase_translate_1")+"\n"+bullet+" ";
 					purchaseMessage+= (persons.join("\n"+bullet+" "));

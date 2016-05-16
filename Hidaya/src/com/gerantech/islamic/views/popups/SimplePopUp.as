@@ -5,16 +5,18 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	
+	import flash.geom.Rectangle;
+	
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.ScrollContainer;
-	import feathers.display.Scale9Image;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 	
 	import starling.animation.Tween;
 	import starling.core.Starling;
-	import starling.filters.BlurFilter;
+	import starling.display.Image;
+	import starling.filters.DropShadowFilter;
 
 	public class SimplePopUp extends BasePopUp
 	{
@@ -50,8 +52,10 @@ package com.gerantech.islamic.views.popups
 			removeChildren();
 			super.initialize();
 			autoSizeMode = AUTO_SIZE_MODE_CONTENT; 
-			backgroundSkin = new Scale9Image(Assets.getSclaed9Textures(userModel.nightMode?"i_dialog":"dialog"));
-			filter = BlurFilter.createDropShadow(appModel.sizes.DP4/2, 90*(Math.PI/180), 0, 0.4, appModel.sizes.DP4/2);
+			var skin:Image = new Image(Assets.getSclaed9Textures(userModel.nightMode?"i_dialog":"dialog"));
+			skin.scale9Grid = new Rectangle(skin.width/2-1, skin.height/2-1, 2, 2);
+			backgroundSkin = skin;//new Scale9Image(Assets.getSclaed9Textures(userModel.nightMode?"i_dialog":"dialog"));
+			filter = new DropShadowFilter(appModel.sizes.DP4/2, 90*(Math.PI/180), 0, 0.4, appModel.sizes.DP4/2);
 			
 			alpha = 0;
 			width = Math.min(appModel.sizes.orginalWidth, appModel.sizes.orginalHeightFull)-appModel.sizes.DP48;

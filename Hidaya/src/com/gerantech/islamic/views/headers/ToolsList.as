@@ -22,27 +22,18 @@ package com.gerantech.islamic.views.headers
 	{
 		private var shareButton:FlatButton;
 		private var bookmarkButton:FlatButton;
-		
-		private var aya:Aya;
-
 		private var numContainer:LayoutGroup;
 		private var numTextField:RTLLabel;
-		//private var playButton:FlatButton;
-
-		private var scaleFactor:Number = 1;
-		private var _selected:Boolean;
-		private var lastHeight:uint;
-		private var initialized:Boolean;
-		public function ToolsList()
-		{
-			super();
-		}
 		
+		private var aya:Aya;
+		private var initialized:Boolean;
+		private var _selected:Boolean;
 
 		override protected function initialize():void
 		{
 			super.initialize();
 			layout = new AnchorLayout();
+			var _h:Number = height;
 						
 			if(UserModel.instance.nightMode)
 			{
@@ -53,50 +44,36 @@ package com.gerantech.islamic.views.headers
 			
 			bookmarkButton = new FlatButton(null, "circle", false, 1);
 			bookmarkButton.iconScale = 0.7;
+			bookmarkButton.width = _h;
+			bookmarkButton.layoutData = new AnchorLayoutData(0, NaN, 0, 0);
 			bookmarkButton.addEventListener(Event.TRIGGERED, bookmark_triggerHandler);
 			bookmarkButton.visible = false;
 			addChild(bookmarkButton);
 			
 			shareButton = new FlatButton("share_variant", "circle", false, 1);
 			shareButton.iconScale = 0.7;
+			shareButton.width = _h;
+			shareButton.layoutData = new AnchorLayoutData(0, NaN, 0, _h*1.2);
+			shareButton.iconHorizontalCenter = -_h/22;
 			shareButton.addEventListener(Event.TRIGGERED, share_triggerHandler);
 			shareButton.visible = false;
 			addChild(shareButton);
 			
 			numContainer = new LayoutGroup();
+			numContainer.width = _h;
+			numContainer.layoutData = new AnchorLayoutData(0, 0, 0, NaN);
 			numContainer.backgroundSkin = new Image(Assets.getTexture("circle"));
 			numContainer.layout = new AnchorLayout();
 			addChild(numContainer);
 			
-			numTextField = new RTLLabel("", 0x6d6d6d, "center", null, false, "center", 1.5, "mequran");
-			numTextField.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, -numTextField.fontSize/5); 
+			numTextField = new RTLLabel("", 0x6d6d6d, "center", null, false, "center", _h*0.6, "mequran");
+			numTextField.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, -numTextField.fontSize/3.2); 
 			numContainer.addChild(numTextField);
 			
-		//	UserModel.instance.addEventListener(UserEvent.FONT_SIZE_CHANGE_END, user_fontChangedHandler);
 			initialized = true;
 			
 			if(aya!=null)
 				setData(aya, _selected);
-
-		//	var ih:Number = AppModel.instance.sizes.twoLineItem;
-			var _h:uint = height = AppModel.instance.sizes.DP36;//uint(Math.min(Math.max(ih/1.6, UserModel.instance.fontSize*2.6),ih/1.2));
-			if(lastHeight==_h)
-				return;
-			
-			lastHeight = _h;
-			numContainer.width = numContainer.height = _h*scaleFactor;
-			numContainer.layoutData = new AnchorLayoutData(NaN, 0, NaN, NaN, NaN, 0);
-		//	numCircle.width = numCircle.height = _h*scaleFactor;
-			numTextField.width = numTextField.height = _h*scaleFactor;
-			numTextField.fontSize = uint(_h*0.6);
-			//numContainer.x = width-_h*scaleFactor;
-			
-			bookmarkButton.width = bookmarkButton.height = _h;
-			bookmarkButton.layoutData = new AnchorLayoutData(NaN, NaN, NaN, 0, NaN, 0);
-			
-			shareButton.width = shareButton.height = _h;
-			shareButton.layoutData = new AnchorLayoutData(NaN, NaN, NaN, _h*1.2, NaN, 0);
-			shareButton.iconHorizontalCenter = -_h/22;
 		}
 		
 		public function setData(aya:Aya, _selected:Boolean=false):void

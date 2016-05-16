@@ -131,6 +131,5 @@ package com.gerantech.islamic.views.popups
 			NativeAbilities.instance.runIntent("android.settings.LOCATION_SOURCE_SETTINGS", null);
 		}
 
- 
 	}
 }

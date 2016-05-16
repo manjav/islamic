@@ -1,11 +1,10 @@
 package com.gerantech.islamic.views.lists
 {
-	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	
 	import starling.display.DisplayObject;
 	
-	public class QList extends List
+	public class QList extends FastList
 	{
 		private var _layoutItems:Vector.<DisplayObject>;
 		

@@ -8,6 +8,7 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.headers.IndexHeader;
 	import com.gerantech.islamic.views.items.HizbItemRenderer;
 	import com.gerantech.islamic.views.items.SuraItemRenderer;
+	import com.gerantech.islamic.views.lists.FastList;
 	
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
@@ -23,10 +24,10 @@ package com.gerantech.islamic.views.screens
 	{
 		private var suraCollection:ListCollection;
 		private var indexHeader:IndexHeader;
-		private var surasList:List;
+		private var surasList:FastList;
 		private var suraArray:Array;
 		private var lastSortMode:String;
-		private var hizbsList:List;
+		private var hizbsList:FastList;
 		private var hizbArray:Array;
 		private var filteredArray:Array;
 		private var suraScrollPosition:Number = 0;
@@ -50,7 +51,7 @@ package com.gerantech.islamic.views.screens
 			hizbsLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			hizbsLayout.paddingTop = appModel.sizes.subtitle + appModel.sizes.toolbar;
 			
-			hizbsList = new List();
+			hizbsList = new FastList();
 			hizbsList.layout = hizbsLayout;
 			hizbsList.layoutData = new AnchorLayoutData(0, NaN, 0, 0);
 			hizbsList.width = appModel.sizes.subtitle;
@@ -68,7 +69,7 @@ package com.gerantech.islamic.views.screens
 			surasLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			surasLayout.paddingTop = appModel.sizes.subtitle + appModel.sizes.toolbar;
 			
-			surasList = new List();
+			surasList = new FastList();
 			surasList.layout = surasLayout;
 			surasList.layoutData = new AnchorLayoutData(0, 0, 0, appModel.sizes.subtitle);
 			surasList.itemRendererFactory = function():IListItemRenderer

@@ -45,7 +45,7 @@ package com.gerantech.islamic.views.headers
 			
 			bismImage = new ImageLoader();
 			bismImage.delayTextureCreation = true;
-			bismImage.source = Assets.getTexture("bism_header");
+			bismImage.source = Assets.getTexture("bism_header", "surajuze");
 			bismImage.height = height*0.8;
 			bismImage.layoutData = new AnchorLayoutData(NaN,0,0,0);
 			addChild(bismImage)

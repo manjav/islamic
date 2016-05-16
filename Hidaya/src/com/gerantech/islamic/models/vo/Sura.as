@@ -17,7 +17,7 @@
 		
 		public var person:Person;
 		
-		public var sura_texture:Texture;
+		//public var sura_texture:Texture;
 		
 		
 		public function Sura(xml:XML)

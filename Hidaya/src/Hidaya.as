@@ -10,7 +10,6 @@ package
 	import com.gerantech.islamic.managers.NotificationManager;
 	import com.gerantech.islamic.managers.Player;
 	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.UserModel;
 	
@@ -20,8 +19,9 @@ package
 	import flash.display.StageAlign;
 	import flash.display.StageOrientation;
 	import flash.display.StageScaleMode;
+	import flash.display3D.Context3DProfile;
+	import flash.display3D.Context3DRenderMode;
 	import flash.events.Event;
-	import flash.filesystem.File;
 	import flash.geom.Rectangle;
 	import flash.system.Capabilities;
 	import flash.utils.clearTimeout;
@@ -31,9 +31,8 @@ package
 	import mx.resources.ResourceManager;
 	
 	import starling.core.Starling;
-	import starling.utils.AssetManager;
 
-	[SWF(frameRate="60")]
+	[SWF(frameRate="60")]//,backgroundColor="#009688"
 	
 	[ResourceBundle("loc")]
 
@@ -48,11 +47,18 @@ package
 		private var validateScreenTimeoutID:uint;
 		public static var ft:int;
 
+		/**
+		 * Firts method runs in app.
+		 */
 		public function Hidaya()
 		{
 			ft = getTimer();
 			trace(ResourceManager.getInstance().getString("loc", "quran_t"))//, String.fromCharCode(0x25b8));
 			mouseEnabled = mouseChildren = false;
+			
+			
+			graphics.beginFill(0x009688);
+			graphics.drawRect(0, 0, Capabilities.screenResolutionX, Capabilities.screenResolutionY);
 			
 			if(stage)
 			{
@@ -67,88 +73,71 @@ package
 			//Add Splash -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 			loaderInfo.addEventListener(Event.COMPLETE, loaderInfo_completeHandler);
 			
-			appModel = AppModel.instance;
 			//Load Assets --------------------------------------------------------
-			trace("1", getTimer()-ft);
-			appModel.assetManager = new AssetManager();
-			appModel.assetManager.verbose = false
-			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/atlases/skins.png"));
-			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/atlases/skins.xml"));
-			appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/bitmaps"));
+			trace(" --  Hidaya", getTimer()-ft);
+			//appModel.assetManager = new AssetManager();
+			//appModel.assetManager.verbose = false
+			//appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/atlases/skins.png"));
+			//appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/atlases/skins.xml"));
+			//appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/bitmaps"));
 			//appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/contents/config-embeded.json"));
 			//appModel.assetManager.enqueue(File.documentsDirectory.resolvePath("islamic/texts/config-data.json"));
+			//Assets.loadSclaed9Textures(["dialog", "i_dialog", "item_roundrect_down", "item_roundrect_normal", "item_roundrect_selected", "i_item_roundrect_down", "i_item_roundrect_normal", "i_item_roundrect_selected"], null);
+			//scaled9TexturesLoaded();
 		}
 		
 		private function loaderInfo_completeHandler(event:Event):void
 		{
+			trace(" --  loaderInfo_completeHandler", getTimer()-ft);
+			loaderInfo.removeEventListener(Event.COMPLETE, loaderInfo_completeHandler);
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.align = StageAlign.TOP_LEFT;
-			loaderInfo.removeEventListener(Event.COMPLETE, loaderInfo_completeHandler);
 			
+			appModel = AppModel.instance;
 			appModel.init(this as Hidaya);
-			
 			appController = AppController.instance;
 			configModel = ConfigModel.instance;
-
-			userModel = UserModel.instance;
-			userModel.addEventListener(UserEvent.LOAD_DATA_COMPLETE, user_completeHandler);
-			userModel.addEventListener(UserEvent.LOAD_DATA_ERROR, user_completeHandler);
-			loadUserData()
-			
-			graphics.beginFill(0x009688);
-			graphics.drawRect(0,0,appModel.sizes.width, appModel.sizes.heightFull);
-			
-			//Flurry initialising ----------------------------------------------------
-			//Flurry.getInstance().logEnabled = true
-			Flurry.getInstance().setAndroidAPIKey("34RKN4HMZ7C8YWW9BD52");
-			Flurry.getInstance().startSession();
-			Flurry.getInstance().setAppVersion(appModel.descriptor.versionNumber);
-			
-			//NotificationManager initialising ----------------------------------------
-			NotificationManager.instance;
 			
 			//Start Starling ----------------------------------------------------------
-			Starling.handleLostContext = true;
 			Starling.multitouchEnabled = true;
-			_starling = new Starling(Main, stage);
+			_starling = new Starling(Main, stage, null, null, Context3DRenderMode.AUTO, Context3DProfile.BASELINE);
+			_starling.supportHighResolutions = true;
+			_starling.skipUnchangedFrames = true;
 			_starling.enableErrorChecking = false;
 			//_starling.showStats = true;
 			//_starling.showStatsAt(HAlign.CENTER, VAlign.BOTTOM);
 			_starling.addEventListener("rootCreated", starling_rootCreatedHandler);
 			_starling.start();
 		}
-		
+
 		private function starling_rootCreatedHandler():void
 		{
 			_starling.removeEventListener("rootCreated", starling_rootCreatedHandler);
-			validateScreenSize();
-			appModel.assetManager.loadQueue(loadQueueHandler);
-			trace("2", getTimer()-ft);
-		}
-		
-		private function loadQueueHandler(ratio:Number):void
-		{
-			if (ratio < 1.0)
-				return;
-			
-			scaled9TexturesLoaded();
-			Assets.loadSclaed9Textures(["dialog", "i_dialog", "item_roundrect_down", "item_roundrect_normal", "item_roundrect_selected", "i_item_roundrect_down", "i_item_roundrect_normal", "i_item_roundrect_selected"], null);
-		}
-
-		private function loadUserData():void
-		{
-			trace("3", getTimer()-ft);
-			if(ResourceManager.getInstance().localeChain==null)
-			{
-				setTimeout(loadUserData, 1);
-				return;
-			}
-			trace("4", getTimer()-ft);
+			trace(" --  starling_rootCreatedHandler", getTimer()-ft);
+			userModel = UserModel.instance;
+			userModel.addEventListener(UserEvent.LOAD_DATA_COMPLETE, user_completeHandler);
+			userModel.addEventListener(UserEvent.LOAD_DATA_ERROR, user_completeHandler);
 			userModel.load(appModel, appController, configModel);
+
+			stage.addEventListener(Event.DEACTIVATE, stage_deactivateHandler, false, 0, true);
+			stage.addEventListener(Event.RESIZE, stage_resizeHandler, false, int.MAX_VALUE, true);
+			stage_resizeHandler();
 		}
 		
 		protected function user_completeHandler():void
 		{
+			trace(" --  user_completeHandler", getTimer()-ft);
+			
+			// Flurry initialising ----------------------------------------------------
+			// Flurry.getInstance().logEnabled = true
+			Flurry.getInstance().setAndroidAPIKey("34RKN4HMZ7C8YWW9BD52");
+			Flurry.getInstance().startSession();
+			Flurry.getInstance().setAppVersion(appModel.descriptor.versionNumber);
+			
+			// NotificationManager initialising ----------------------------------------
+			NotificationManager.instance;
+			
+			// BillingManager initialising ----------------------------------------
 			BillingManager.instance.init();
 			
 			if(Capabilities.cpuArchitecture=="x86" || userModel.fontSize==12)
@@ -157,25 +146,16 @@ package
 			//	trace(appModel.sizes.orginalFontSize, userModel.fontSize)
 			//	UserModel.instance.premiumMode = Capabilities.cpuArchitecture=="x86"
 			}
-		}
-		
-		private function scaled9TexturesLoaded():void
-		{
-			stage.addEventListener(Event.DEACTIVATE, stage_deactivateHandler, false, 0, true);
 			trace("5", getTimer()-ft);
 			Main(_starling.root).createScreens();
 			graphics.clear();
-			stage.addEventListener(Event.RESIZE, stage_resizeHandler, false, int.MAX_VALUE, true);
 			trace("6", getTimer()-ft);
+			//stage.quality = StageQuality.BEST;
+			//Assets.save();
 		}
 		
 		
-		private function stage_resizeHandler(event:Event):void
-		{
-			validateScreenSize();
-		}
-		
-		public function validateScreenSize():void
+		private function stage_resizeHandler(event:Event=null):void
 		{
 			stage.removeEventListener(Event.RESIZE, stage_resizeHandler, false);
 			appModel.sizes.resize(stage.stageWidth, stage.stageHeight);

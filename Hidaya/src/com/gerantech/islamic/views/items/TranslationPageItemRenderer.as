@@ -3,6 +3,7 @@ package com.gerantech.islamic.views.items
 	import com.freshplanet.nativeExtensions.Flurry;
 	import com.gerantech.islamic.managers.Player;
 	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.vo.Aya;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.models.vo.Translator;
@@ -54,7 +55,7 @@ package com.gerantech.islamic.views.items
 			listLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			listLayout.padding = appModel.sizes.border*2;
-			listLayout.paddingBottom = ConfigModel.instance.hasReciter?appModel.sizes.toolbar*1.5+appModel.sizes.border:appModel.sizes.border
+			listLayout.paddingBottom = ResourceModel.instance.hasReciter?appModel.sizes.toolbar*1.5+appModel.sizes.border:appModel.sizes.border
 			listLayout.hasVariableItemDimensions = true;
 			listLayout.useVirtualLayout = true;
 			
@@ -77,7 +78,7 @@ package com.gerantech.islamic.views.items
 			var changes:Number = startScrollBarIndicator-scrollPos;
 			startScrollBarIndicator = scrollPos;
 			//trace(changes)
-			if(ConfigModel.instance.hasReciter)
+			if(ResourceModel.instance.hasReciter)
 			{
 				Player.instance.dispatchEventWith(Player.APPEARANCE_CHANGED, false, changes);
 /*				if(changes>1)
@@ -130,7 +131,7 @@ package com.gerantech.islamic.views.items
 		
 		private function addTranslationText():void
 		{
-			if (translatorIndex<ConfigModel.instance.selectedTranslators.length)
+			if (translatorIndex<ResourceModel.instance.selectedTranslators.length)
 				loadTranslator();
 			else
 			{
@@ -143,7 +144,7 @@ package com.gerantech.islamic.views.items
 		
 		private function loadTranslator():void
 		{
-			currentTranslator = ConfigModel.instance.selectedTranslators[translatorIndex];
+			currentTranslator = ResourceModel.instance.selectedTranslators[translatorIndex];
 			currentTranslator.removeEventListener(Person.TRANSLATION_LOADED, loadTranslator);
 			currentTranslator.removeEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
 			

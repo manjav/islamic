@@ -6,6 +6,7 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
@@ -33,7 +34,7 @@ package com.gerantech.islamic.views.headers
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
-	import starling.filters.BlurFilter;
+	import starling.filters.DropShadowFilter;
 	
 	public class PlayerView extends LayoutGroup
 	{
@@ -61,7 +62,7 @@ package com.gerantech.islamic.views.headers
 		private var reciterLayoutdata:AnchorLayoutData;
 		private var reciterLabelLayoutData:AnchorLayoutData;
 		private var appearTimeout:uint;
-		private var shadow:BlurFilter;
+		private var shadow:DropShadowFilter;
 		
 		public function PlayerView()
 		{
@@ -95,7 +96,7 @@ package com.gerantech.islamic.views.headers
 			
 			background = new LayoutGroup();
 			background.backgroundSkin = new Quad(1, 1, UserModel.instance.nightMode ? BaseMaterialTheme.DESCRIPTION_TEXT_COLOR : BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
-			background.filter = BlurFilter.createGlow(0, 0.5, appModel.sizes.border/2);
+			//background.filter = new FilterChain(new DropShadowFilter(0, 0, 0, 1, appModel.sizes.border/2));
 			background.layoutData = backgroundLayoutData;
 			addChild(background);
 			
@@ -119,11 +120,11 @@ package com.gerantech.islamic.views.headers
 			
 			reciterImage = new ImageLoader();
 			reciterImage.width = reciterImage.height = _height*0.8;
-			reciterImage.source = configModel.hasReciter?configModel.selectedReciters[0].iconTexture : null;
+			reciterImage.source = ResourceModel.instance.hasReciter?ResourceModel.instance.selectedReciters[0].iconTexture : null;
 			reciterImage.layoutData = reciterLayoutdata;
 			addChild(reciterImage);
 			
-			reciterLabel = new RTLLabel(configModel.hasReciter?configModel.selectedReciters[0].name:"", 0, "left", "rtl", false, null, 0.9)
+			reciterLabel = new RTLLabel(ResourceModel.instance.hasReciter?ResourceModel.instance.selectedReciters[0].name:"", 0, "left", "rtl", false, null, 0.9)
 			reciterLabelLayoutData = new AnchorLayoutData(NaN, NaN, NaN, _height*2, NaN, 0);
 			reciterLabel.layoutData = reciterLabelLayoutData;
 			addChild(reciterLabel);
@@ -146,7 +147,7 @@ package com.gerantech.islamic.views.headers
 			playerButton.pivotY = playerButton.pivotX = playerButton.width/2;
 			playerButton.addEventListener("triggered", playerButton_triggeredHandler);
 			playerButton.includeInLayout = false;
-			shadow = BlurFilter.createDropShadow(AppModel.instance.sizes.DP4/2, 90*(Math.PI/180), 0, 0.4, AppModel.instance.sizes.DP4/4);
+			shadow = new DropShadowFilter(appModel.sizes.DP4/2, 90*(Math.PI/180), 0, 0.4, appModel.sizes.DP4/4);
 			playerButton.filter = shadow;
 			addChild(playerButton);
 			
@@ -373,7 +374,7 @@ package com.gerantech.islamic.views.headers
 		{
 			//reciterLabel.visible = reciterImage.visible = 
 			settingIcon.visible = isShow;
-			playerButton.filter = isShow ? shadow : null;
+			//playerButton.filter = isShow ? shadow : null;
 			timeLabel.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, isShow?0:_height/4);
 		}
 		

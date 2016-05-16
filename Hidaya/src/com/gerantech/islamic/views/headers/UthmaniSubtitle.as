@@ -51,9 +51,9 @@ package com.gerantech.islamic.views.headers
 			if(numLabel)
 				numLabel.text = (data.index+1).toString();
 			if(suraImage)
-				suraImage.source = Assets.getTexture(data.sura.toString());//StrTools.getZeroNum((sura-1).toString(), 3)
+				suraImage.source = Assets.getTexture(data.sura.toString(), "surajuze");//StrTools.getZeroNum((sura-1).toString(), 3)
 			if(juzeImage)
-				juzeImage.source = Assets.getTexture("j_"+Juze.getByPage(data.page).juze);
+				juzeImage.source = Assets.getTexture("j_"+Juze.getByPage(data.page).juze, "surajuze");
 
 		}
 	}

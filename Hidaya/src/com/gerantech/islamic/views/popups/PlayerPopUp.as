@@ -47,7 +47,7 @@ package com.gerantech.islamic.views.popups
 			container.addChild(personPanel);*/
 			
 			ayaPanel = new SettingPanel("player_popup_aya", numRepeats, {value:userModel.ayaRepeat});
-			ayaPanel.list.listProperties.width = appModel.sizes.toolbar*2;
+			ayaPanel.picker.listProperties.width = appModel.sizes.toolbar*2;
 			ayaPanel.addEventListener(Event.CHANGE, ayaPanel_changeHandler);
 			container.addChild(ayaPanel);
 			
@@ -59,7 +59,7 @@ package com.gerantech.islamic.views.popups
 				case "juze_navi": pageLabel += loc("juze_l"); break;
 			}
 			pagePanel = new SettingPanel(pageLabel , numRepeats, {value:userModel.pageRepeat});
-			pagePanel.list.listProperties.width = appModel.sizes.toolbar*2;
+			pagePanel.picker.listProperties.width = appModel.sizes.toolbar*2;
 			pagePanel.addEventListener(Event.CHANGE, pagePanel_changeHandler);
 			container.addChild(pagePanel);
 			
@@ -69,14 +69,14 @@ package com.gerantech.islamic.views.popups
 		
 		private function pagePanel_changeHandler():void
 		{
-			pagePanel.list.closeList();
-			userModel.pageRepeat = pagePanel.list.selectedItem.value;
+			pagePanel.picker.closeList();
+			userModel.pageRepeat = pagePanel.picker.selectedItem.value;
 		}
 		
 		private function ayaPanel_changeHandler():void
 		{
-			ayaPanel.list.closeList();
-			userModel.ayaRepeat = ayaPanel.list.selectedItem.value;
+			ayaPanel.picker.closeList();
+			userModel.ayaRepeat = ayaPanel.picker.selectedItem.value;
 		}
 		
 		/*private function personPanel_changeHandler():void

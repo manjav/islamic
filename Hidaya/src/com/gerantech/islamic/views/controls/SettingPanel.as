@@ -3,6 +3,7 @@ package com.gerantech.islamic.views.controls
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
+	import com.gerantech.islamic.views.lists.QList;
 	
 	import mx.resources.ResourceManager;
 	
@@ -20,7 +21,7 @@ package com.gerantech.islamic.views.controls
 	public class SettingPanel extends LayoutGroup
 	{
 		private var titleDisplay:RTLLabel;
-		public var list:PickerList;
+		public var picker:PickerList;
 		private var label:String;
 
 		private var spacer:Spacer;
@@ -59,28 +60,35 @@ package com.gerantech.islamic.views.controls
 			spacer = new Spacer()
 			spacer.layoutData =  new HorizontalLayoutData(100);
 			
-			list = new PickerList();
+			picker = new PickerList();
 			//list.layoutData = new HorizontalLayoutData(100);
-			list.buttonProperties.iconPosition = AppModel.instance.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
-			list.labelField = "name";
-			list.listProperties.width = AppModel.instance.sizes.width*0.8;
-			list.listProperties.itemRendererFactory = function():IListItemRenderer
+			picker.buttonProperties.iconPosition = AppModel.instance.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
+			picker.labelField = "name";
+			picker.listFactory = function () : QList
+			{
+				var list:QList = new QList();
+				//list.addEventListener(Event.CHANGE, picker_changeHandler);
+				return list;
+			}
+			//picker.listProperties.width = AppModel.instance.sizes.width*0.8;
+			picker.listProperties.itemRendererFactory = function():IListItemRenderer
 			{
 				return new itemRendererFactory();
 			}
-			list.dataProvider = new ListCollection(data);
-			list.selectedIndex = selectedIndex;
-			list.addEventListener(Event.CHANGE, picker_changeHandler);
+			picker.dataProvider = new ListCollection(data);
+			picker.selectedIndex = selectedIndex;
+			picker.addEventListener(Event.CHANGE, picker_changeHandler);
 			resetContent();
 
 		}	
 
 		private function picker_changeHandler():void
 		{
-			if(list.selectedItem)
+			if(picker.selectedItem)
 			{
 				dispatchEventWith(Event.CHANGE);
-				//list.closeList();
+				//picker.popUpContentManager.close();
+				trace("aaa");
 			}
 		}
 		
@@ -91,9 +99,9 @@ package com.gerantech.islamic.views.controls
 			
 			var els:Array;
 			if(AppModel.instance.ltr)
-				els = new Array(titleDisplay, spacer, list) ;
+				els = new Array(titleDisplay, spacer, picker) ;
 			else
-				els = new Array(list, spacer, titleDisplay) ;
+				els = new Array(picker, spacer, titleDisplay) ;
 
 			removeChildren();
 			for each(var c:FeathersControl in els)

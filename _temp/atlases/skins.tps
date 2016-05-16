@@ -2,9 +2,9 @@
 <data version="1.0">
     <struct type="Settings">
         <key>fileFormatVersion</key>
-        <int>3</int>
+        <int>4</int>
         <key>texturePackerVersion</key>
-        <string>3.6.0</string>
+        <string>4.2.1</string>
         <key>fileName</key>
         <string>D:/_PROJECTS/_FLEX/Bayan_projects/hidaya-project/_temp/atlases/skins.tps</string>
         <key>autoSDSettings</key>
@@ -29,8 +29,6 @@
         </array>
         <key>allowRotation</key>
         <false/>
-        <key>premultiplyAlpha</key>
-        <false/>
         <key>shapeDebug</key>
         <false/>
         <key>dpi</key>
@@ -43,6 +41,8 @@
         <false/>
         <key>pvrCompressionQuality</key>
         <enum type="SettingsBase::PvrCompressionQuality">PVR_QUALITY_NORMAL</enum>
+        <key>atfCompressData</key>
+        <false/>
         <key>mipMapMinSize</key>
         <uint>32768</uint>
         <key>etc1CompressionQuality</key>
@@ -97,8 +97,6 @@
             <key>height</key>
             <int>-1</int>
         </QSize>
-        <key>reduceBorderArtifacts</key>
-        <false/>
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
@@ -108,8 +106,6 @@
             <key>sizeConstraints</key>
             <enum type="AlgorithmSettings::SizeConstraints">POT</enum>
             <key>forceSquared</key>
-            <false/>
-            <key>forceWordAligned</key>
             <false/>
             <key>maxRects</key>
             <struct type="AlgorithmMaxRectsSettings">
@@ -153,7 +149,9 @@
         <key>forceIdenticalLayout</key>
         <false/>
         <key>outputFormat</key>
-        <enum type="SettingsBase::OutputFormat">RGBA8888</enum>
+        <enum type="SettingsBase::OutputFormat">RGBA4444</enum>
+        <key>alphaHandling</key>
+        <enum type="SettingsBase::AlphaHandling">ClearTransparentPixels</enum>
         <key>contentProtection</key>
         <struct type="ContentProtection">
             <key>key</key>
@@ -165,27 +163,183 @@
         <false/>
         <key>prependSmartFolderName</key>
         <false/>
-        <key>cleanTransparentPixels</key>
-        <true/>
         <key>globalSpriteSettings</key>
         <struct type="SpriteSettings">
             <key>scale</key>
             <double>1</double>
             <key>scaleMode</key>
             <enum type="ScaleMode">Smooth</enum>
-            <key>innerPadding</key>
-            <uint>0</uint>
             <key>extrude</key>
             <uint>0</uint>
             <key>trimThreshold</key>
             <uint>1</uint>
+            <key>trimMargin</key>
+            <uint>1</uint>
             <key>trimMode</key>
             <enum type="SpriteSettings::TrimMode">Trim</enum>
+            <key>tracerTolerance</key>
+            <int>200</int>
             <key>heuristicMask</key>
             <false/>
-            <key>pivotPoint</key>
-            <enum type="SpriteSettings::PivotPoint">Center</enum>
+            <key>defaultPivotPoint</key>
+            <point_f>0.5,0.5</point_f>
+            <key>writePivotPoints</key>
+            <false/>
         </struct>
+        <key>individualSpriteSettings</key>
+        <map type="IndividualSpriteSettingsMap">
+            <key type="filename">../skin/action.png</key>
+            <key type="filename">../skin/action_accent.png</key>
+            <key type="filename">../skin/action_danger.png</key>
+            <key type="filename">../skin/action_item_0.png</key>
+            <key type="filename">../skin/action_item_1.png</key>
+            <key type="filename">../skin/action_item_2.png</key>
+            <key type="filename">../skin/action_item_3.png</key>
+            <key type="filename">../skin/action_pause.png</key>
+            <key type="filename">../skin/action_play.png</key>
+            <key type="filename">../skin/action_plus.png</key>
+            <key type="filename">../skin/action_timer.png</key>
+            <key type="filename">../skin/alarm_grey.png</key>
+            <key type="filename">../skin/arrow_g_left.png</key>
+            <key type="filename">../skin/arrow_g_right.png</key>
+            <key type="filename">../skin/arrow_w_left.png</key>
+            <key type="filename">../skin/arrow_w_right.png</key>
+            <key type="filename">../skin/book_open.png</key>
+            <key type="filename">../skin/bookmark_off.png</key>
+            <key type="filename">../skin/bookmark_on.png</key>
+            <key type="filename">../skin/bookmark_outline_white.png</key>
+            <key type="filename">../skin/calendar_today_white.png</key>
+            <key type="filename">../skin/cancel_download.png</key>
+            <key type="filename">../skin/cart_grey.png</key>
+            <key type="filename">../skin/check.png</key>
+            <key type="filename">../skin/check_off.png</key>
+            <key type="filename">../skin/check_on.png</key>
+            <key type="filename">../skin/chevron_g.png</key>
+            <key type="filename">../skin/chevron_w.png</key>
+            <key type="filename">../skin/circle.png</key>
+            <key type="filename">../skin/circle_mask.png</key>
+            <key type="filename">../skin/close_g.png</key>
+            <key type="filename">../skin/close_w.png</key>
+            <key type="filename">../skin/comment_alert.png</key>
+            <key type="filename">../skin/compass.png</key>
+            <key type="filename">../skin/dots.png</key>
+            <key type="filename">../skin/download.png</key>
+            <key type="filename">../skin/download_g.png</key>
+            <key type="filename">../skin/download_w.png</key>
+            <key type="filename">../skin/drag.png</key>
+            <key type="filename">../skin/email.png</key>
+            <key type="filename">../skin/hizb_0_4.png</key>
+            <key type="filename">../skin/hizb_1_4.png</key>
+            <key type="filename">../skin/hizb_2_4.png</key>
+            <key type="filename">../skin/hizb_3_4.png</key>
+            <key type="filename">../skin/ic_calendar.png</key>
+            <key type="filename">../skin/ic_clock.png</key>
+            <key type="filename">../skin/ic_compass.png</key>
+            <key type="filename">../skin/ic_finder.png</key>
+            <key type="filename">../skin/ic_greeting.png</key>
+            <key type="filename">../skin/ic_inbox.png</key>
+            <key type="filename">../skin/ic_map_marker_radius.png</key>
+            <key type="filename">../skin/ic_pray.png</key>
+            <key type="filename">../skin/ic_quran.png</key>
+            <key type="filename">../skin/ic_wallpaper.png</key>
+            <key type="filename">../skin/info.png</key>
+            <key type="filename">../skin/jump.png</key>
+            <key type="filename">../skin/kaaba.png</key>
+            <key type="filename">../skin/letter_e.png</key>
+            <key type="filename">../skin/letter_n.png</key>
+            <key type="filename">../skin/letter_s.png</key>
+            <key type="filename">../skin/letter_w.png</key>
+            <key type="filename">../skin/list_bulleted.png</key>
+            <key type="filename">../skin/logout.png</key>
+            <key type="filename">../skin/meccan_icon.png</key>
+            <key type="filename">../skin/medinan_icon.png</key>
+            <key type="filename">../skin/menu.png</key>
+            <key type="filename">../skin/pencil_gray.png</key>
+            <key type="filename">../skin/pencil_white.png</key>
+            <key type="filename">../skin/radian.png</key>
+            <key type="filename">../skin/recitation.png</key>
+            <key type="filename">../skin/remove.png</key>
+            <key type="filename">../skin/repeat_black.png</key>
+            <key type="filename">../skin/round_alert.png</key>
+            <key type="filename">../skin/search.png</key>
+            <key type="filename">../skin/setting.png</key>
+            <key type="filename">../skin/shadow.png</key>
+            <key type="filename">../skin/shadow_left.png</key>
+            <key type="filename">../skin/shadow_paper_left.png</key>
+            <key type="filename">../skin/shadow_paper_right.png</key>
+            <key type="filename">../skin/shadow_right.png</key>
+            <key type="filename">../skin/share_variant.png</key>
+            <key type="filename">../skin/star.png</key>
+            <key type="filename">../skin/time-0.png</key>
+            <key type="filename">../skin/time-1.png</key>
+            <key type="filename">../skin/time-2.png</key>
+            <key type="filename">../skin/time-3.png</key>
+            <key type="filename">../skin/time-4.png</key>
+            <key type="filename">../skin/time-5.png</key>
+            <key type="filename">../skin/time-6.png</key>
+            <key type="filename">../skin/time-7.png</key>
+            <key type="filename">../skin/timer_grey.png</key>
+            <key type="filename">../skin/toolbar_button_bg.png</key>
+            <key type="filename">../skin/translation.png</key>
+            <key type="filename">../skin/undo_sign.png</key>
+            <key type="filename">../theme/metalworks/background-disabled-skin.png</key>
+            <key type="filename">../theme/metalworks/background-down-skin.png</key>
+            <key type="filename">../theme/metalworks/background-focused-skin.png</key>
+            <key type="filename">../theme/metalworks/background-inset-skin.png</key>
+            <key type="filename">../theme/metalworks/background-popup-skin.png</key>
+            <key type="filename">../theme/metalworks/background-skin.png</key>
+            <key type="filename">../theme/metalworks/button-back-disabled-skin.png</key>
+            <key type="filename">../theme/metalworks/button-back-down-skin.png</key>
+            <key type="filename">../theme/metalworks/button-back-up-skin.png</key>
+            <key type="filename">../theme/metalworks/button-call-to-action-down-skin.png</key>
+            <key type="filename">../theme/metalworks/button-call-to-action-up-skin.png</key>
+            <key type="filename">../theme/metalworks/button-danger-down-skin.png</key>
+            <key type="filename">../theme/metalworks/button-danger-up-skin.png</key>
+            <key type="filename">../theme/metalworks/button-disabled-skin.png</key>
+            <key type="filename">../theme/metalworks/button-down-skin.png</key>
+            <key type="filename">../theme/metalworks/button-forward-disabled-skin.png</key>
+            <key type="filename">../theme/metalworks/button-forward-down-skin.png</key>
+            <key type="filename">../theme/metalworks/button-forward-up-skin.png</key>
+            <key type="filename">../theme/metalworks/button-selected-disabled-skin.png</key>
+            <key type="filename">../theme/metalworks/button-selected-up-skin.png</key>
+            <key type="filename">../theme/metalworks/button-up-skin.png</key>
+            <key type="filename">../theme/metalworks/callout-arrow-bottom-skin.png</key>
+            <key type="filename">../theme/metalworks/callout-arrow-left-skin.png</key>
+            <key type="filename">../theme/metalworks/callout-arrow-right-skin.png</key>
+            <key type="filename">../theme/metalworks/callout-arrow-top-skin.png</key>
+            <key type="filename">../theme/metalworks/check-selected-disabled-icon.png</key>
+            <key type="filename">../theme/metalworks/check-selected-down-icon.png</key>
+            <key type="filename">../theme/metalworks/check-selected-up-icon.png</key>
+            <key type="filename">../theme/metalworks/header-background-skin.png</key>
+            <key type="filename">../theme/metalworks/horizontal-scroll-bar-thumb-skin.png</key>
+            <key type="filename">../theme/metalworks/list-accessory-drill-down-icon.png</key>
+            <key type="filename">../theme/metalworks/list-inset-item-first-selected-skin.png</key>
+            <key type="filename">../theme/metalworks/list-inset-item-first-up-skin.png</key>
+            <key type="filename">../theme/metalworks/list-inset-item-last-selected-skin.png</key>
+            <key type="filename">../theme/metalworks/list-inset-item-last-up-skin.png</key>
+            <key type="filename">../theme/metalworks/list-inset-item-single-selected-skin.png</key>
+            <key type="filename">../theme/metalworks/list-inset-item-single-up-skin.png</key>
+            <key type="filename">../theme/metalworks/list-item-selected-skin.png</key>
+            <key type="filename">../theme/metalworks/list-item-up-skin.png</key>
+            <key type="filename">../theme/metalworks/page-indicator-normal-skin.png</key>
+            <key type="filename">../theme/metalworks/page-indicator-selected-skin.png</key>
+            <key type="filename">../theme/metalworks/picker-list-icon-disabled.png</key>
+            <key type="filename">../theme/metalworks/picker-list-icon.png</key>
+            <key type="filename">../theme/metalworks/picker-list-item-selected-icon.png</key>
+            <key type="filename">../theme/metalworks/radio-selected-disabled-icon.png</key>
+            <key type="filename">../theme/metalworks/radio-selected-down-icon.png</key>
+            <key type="filename">../theme/metalworks/radio-selected-up-icon.png</key>
+            <key type="filename">../theme/metalworks/search-icon-disabled.png</key>
+            <key type="filename">../theme/metalworks/search-icon.png</key>
+            <key type="filename">../theme/metalworks/tab-down-skin.png</key>
+            <key type="filename">../theme/metalworks/tab-selected-disabled-skin.png</key>
+            <key type="filename">../theme/metalworks/tab-selected-skin.png</key>
+            <key type="filename">../theme/metalworks/vertical-scroll-bar-thumb-skin.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+            </struct>
+        </map>
         <key>fileList</key>
         <array>
             <filename>../skin/action_item_1.png</filename>
@@ -346,5 +500,15 @@
         <uint>1</uint>
         <key>commonDivisorY</key>
         <uint>1</uint>
+        <key>packNormalMaps</key>
+        <false/>
+        <key>autodetectNormalMaps</key>
+        <true/>
+        <key>normalMapFilter</key>
+        <string></string>
+        <key>normalMapSuffix</key>
+        <string></string>
+        <key>normalMapSheetFileName</key>
+        <filename></filename>
     </struct>
 </data>

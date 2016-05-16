@@ -51,9 +51,9 @@ package com.gerantech.islamic.themes
 		/**
 		 * Constructor.
 		 */
-		public function MaterialTheme(scaleToDPI:Boolean = true)
+		public function MaterialTheme()
 		{
-			super(scaleToDPI);
+			super();
 			this.initialize();
 			this.dispatchEventWith(Event.COMPLETE);
 		}

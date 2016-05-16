@@ -10,6 +10,7 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.headers.CalendarHeader;
 	import com.gerantech.islamic.views.items.CalendarItemRenderer;
 	import com.gerantech.islamic.views.items.WeekCalItemRenderer;
+	import com.gerantech.islamic.views.lists.FastList;
 	import com.gerantech.islamic.views.lists.QList;
 	
 	import feathers.controls.ImageLoader;
@@ -27,13 +28,12 @@ package com.gerantech.islamic.views.screens
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
-	import starling.events.ResizeEvent;
-	import starling.filters.BlurFilter;
+	import starling.filters.DropShadowFilter;
 
 	public class CalendarScreen extends BaseCustomPanelScreen
 	{
 		public var date:Date;
-		private var weekList:List;
+		private var weekList:FastList;
 		private var weekLayout:TiledRowsLayout;
 		private var times:Vector.<Number>;
 		private var calHeader:CalendarHeader;
@@ -65,9 +65,11 @@ package com.gerantech.islamic.views.screens
 			weekLayout.typicalItemWidth = weekLayout.typicalItemHeight = Math.min(appModel.sizes.width, appModel.sizes.height)/7;
 			weekLayout.requestedColumnCount = 7;
 
-			weekList = new List();
+			weekList = new FastList();
 			weekList.backgroundSkin = new Quad(1, 1, BaseMaterialTheme.CHROME_COLOR);
 			weekList.backgroundSkin.alpha = 0.1;
+			weekList.visible = false;
+			weekList.alpha = 0;
 			weekList.layout = weekLayout;
 			weekList.layoutData = new AnchorLayoutData(calHeader.height, 0, NaN, 0);
 			weekList.height = appModel.sizes.getPixelByDP(100);
@@ -76,8 +78,6 @@ package com.gerantech.islamic.views.screens
 			{
 				return new WeekCalItemRenderer();
 			}
-			weekList.scaleX = appModel.ltr ? 1 : -1;
-			weekList.pivotX = appModel.sizes.width/2
 			weekList.dataProvider = new ListCollection(times);
 			weekList.scrollToDisplayIndex(calLen);
 			weekList.selectedIndex = calLen;
@@ -110,7 +110,7 @@ package com.gerantech.islamic.views.screens
 			actionButton = new FlatButton("calendar_today_white", "action_accent", false, 1, 1);
 			actionButton.iconScale = 0.3;
 			actionButton.width = actionButton.height = AppModel.instance.sizes.toolbar;
-			actionButton.filter = BlurFilter.createDropShadow(AppModel.instance.sizes.getPixelByDP(2), 90*(Math.PI/180), 0, 0.4, 3);
+			actionButton.filter = new DropShadowFilter(AppModel.instance.sizes.getPixelByDP(2), 90*(Math.PI/180), 0, 0.4, 3);
 			actionButton.addEventListener(Event.TRIGGERED, actionButton_triggerd);
 			actionButton.layoutData = new AnchorLayoutData(NaN, appModel.sizes.DP16, NaN);
 			//actionButton.visible = false;
@@ -122,12 +122,17 @@ package com.gerantech.islamic.views.screens
 		
 		override protected function stage_resizeHandler(event:Event):void
 		{
-			weekList.pivotX = appModel.sizes.width/2
+			//weekList.pivotX = appModel.sizes.width/2
 			super.stage_resizeHandler(event);
 		}
 		
 		private function transitionInCompleteHandler():void
 		{
+			weekList.scaleX = appModel.ltr ? 1 : -1;
+			weekList.alignPivot("right", "top");
+			weekList.visible = true;
+			Starling.juggler.tween(weekList, 0.3, {alpha:1});
+
 			list.visible = true;
 			Starling.juggler.tween(list, 0.4, {alpha:1, delay:0.1});
 			list.verticalScrollPosition = times.length/2*CalendarItemRenderer.HEIGHT;
@@ -221,9 +226,19 @@ package com.gerantech.islamic.views.screens
 		
 		private function toolbarButtons_triggerdHandler(item:ToolbarButtonData):void
 		{
-			appModel.navigator.pushScreen(item.name);
-		}		
-		
+			switch(item.name)
+			{
+				case appModel.PAGE_SETTINGS:
+					var screenItem:StackScreenNavigatorItem = appModel.navigator.getScreen(appModel.PAGE_SETTINGS);
+					screenItem.properties = {mode : SettingsScreen.MODE_CALENDAR};
+					appModel.navigator.pushScreen(appModel.PAGE_SETTINGS);
+					break;
+				
+				default:
+					appModel.navigator.pushScreen(item.name);
+					break;
+			}
+		}
 		
 	}
 }

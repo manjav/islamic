@@ -49,7 +49,7 @@ package com.gerantech.islamic.models
 		//public var myDrawer:DrawerList;
 		public var navigator:StackScreenNavigator;
 		public var descriptor:Descriptor ;
-		public var assetManager:AssetManager;
+		//public var assetManager:AssetManager;
 		public var byteArraySec:ByteArray;
 
 		private static var _this:AppModel;

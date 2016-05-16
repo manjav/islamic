@@ -2,9 +2,10 @@ package com.gerantech.islamic.views.lists
 {
 	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Person;
+	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.items.SortableItemRenderer;
 	import com.gerantech.islamic.views.popups.UndoAlert;
 	
@@ -19,14 +20,16 @@ package com.gerantech.islamic.views.lists
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
+	import flashx.textLayout.tlf_internal;
+	
 	import starling.animation.Transitions;
-	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import starling.filters.BlurFilter;
+	import starling.filters.DropShadowFilter;
+	import starling.filters.FilterChain;
 	
 	public class SortablePersonList extends LayoutGroup
 	{
@@ -70,7 +73,7 @@ package com.gerantech.islamic.views.lists
 		
 		public function resetList():void
 		{
-			personList = type==Person.TYPE_TRANSLATOR ? ConfigModel.instance.selectedTranslators : ConfigModel.instance.selectedReciters;
+			personList = type==Person.TYPE_TRANSLATOR ? ResourceModel.instance.selectedTranslators : ResourceModel.instance.selectedReciters;
 			for each(var a:SortableItemRenderer in itemsList)
 				a.removeFromParent(true);
 			
@@ -147,11 +150,10 @@ package com.gerantech.islamic.views.lists
 				return;
 			if(touch.phase == TouchPhase.BEGAN)
 			{
-				
 				NativeAbilities.instance.vibrate(10);
 				itemContainer.verticalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
 				tempY = touch.globalY-obj.y;
-				obj.filter = BlurFilter.createGlow(0, 0.5);
+				obj.filter = new FilterChain(new DropShadowFilter(0, 0, BaseMaterialTheme.PRIMARY_TEXT_COLOR, 0.5, 1));//  BlurFilter.createGlow(0, 0.5);
 				itemContainer.setChildIndex(obj, itemContainer.numChildren-1);
 			}
 			if(touch.phase == TouchPhase.MOVED)
@@ -181,7 +183,7 @@ package com.gerantech.islamic.views.lists
 				i++;
 			}
 			
-			type==Person.TYPE_TRANSLATOR ? ConfigModel.instance.selectedTranslators=sortedPersons : ConfigModel.instance.selectedReciters=sortedPersons;
+			type==Person.TYPE_TRANSLATOR ? ResourceModel.instance.selectedTranslators=sortedPersons : ResourceModel.instance.selectedReciters=sortedPersons;
 			UserModel.instance.activeSaver();
 			
 			empty.y = itemsList.length*itemHeight;

@@ -44,6 +44,8 @@ package com.gerantech.islamic.views.screens
 		private var idlePanel:SettingPanel;
 		private var nightModePanel:CheckPanel;
 		private var cityButton:EiditableButton;
+		private var hijriOffsets:Array;
+		private var hijriOffsetsPanel:SettingPanel;
 		
 		override protected function initialize():void
 		{
@@ -62,6 +64,12 @@ package com.gerantech.islamic.views.screens
 			switch(mode)
 			{
 				case MODE_CALENDAR:
+					trace(userModel.hijriOffset)
+					hijriOffsets = []//{valuae:"offset_0"}, {valuae:"offset_1"}, {valuae:"offset_2"}, {valuae:"offset_3"}, {valuae:"offset_4"}]; 
+					hijriOffsetsPanel = new SettingPanel("hijri_offset", hijriOffsets, 0);
+					hijriOffsetsPanel.addEventListener(Event.CHANGE, hijriOffsetsPanel_changeHandler);
+					hijriOffsetsPanel.layoutData = ld;
+					addChild(hijriOffsetsPanel);
 					break
 				
 				case MODE_COMPASS:
@@ -141,6 +149,11 @@ package com.gerantech.islamic.views.screens
 			addChild(nightModePanel);
 		}
 		
+		private function hijriOffsetsPanel_changeHandler():void
+		{
+			userModel.hijriOffset = hijriOffsetsPanel.picker.selectedItem;
+		}
+		
 		//Select City -------------------------------------------------------------
 		private function cityButton_triggeredHandler():void
 		{
@@ -162,30 +175,30 @@ package com.gerantech.islamic.views.screens
 		
 		private function naviPanel_changeHandler():void
 		{
-			userModel.navigationMode = naviPanel.list.selectedItem;
-			naviPanel.list.closeList();
+			userModel.navigationMode = naviPanel.picker.selectedItem;
+			naviPanel.picker.closeList();
 		}		
 	
 		private function fontPanel_changeHandler(event:Event):void
 		{
-			userModel.font = fontPanel.list.selectedItem;
-			fontPanel.list.closeList();
+			userModel.font = fontPanel.picker.selectedItem;
+			fontPanel.picker.closeList();
 		}
 		
 		private function remindePanel_changeHandler():void
 		{
-			userModel.remniderTime = remindePanel.list.selectedItem;
-			remindePanel.list.closeList();
+			userModel.remniderTime = remindePanel.picker.selectedItem;
+			remindePanel.picker.closeList();
 			
-			if(ConfigModel.instance.hasTranslator)
-				ConfigModel.instance.selectedTranslators[0].remindeFirstTranslate();
+			if(resourceModel.hasTranslator)
+				resourceModel.selectedTranslators[0].remindeFirstTranslate();
 		}
 		
 		// base settings --------------------------------------------------------
 		private function locPanel_changeHandler(event:Event):void
 		{
-			userModel.locale = locPanel.list.selectedItem;
-			locPanel.list.closeList();
+			userModel.locale = locPanel.picker.selectedItem;
+			locPanel.picker.closeList();
 			setTimeout(initialize, 100);
 			/*locPanel.resetContent();
 			//naviPanel.resetContent();
@@ -199,8 +212,8 @@ package com.gerantech.islamic.views.screens
 		}*/
 		private function idlePanel_changeHandler():void
 		{
-			userModel.idleMode = idlePanel.list.selectedItem;
-			idlePanel.list.closeList();
+			userModel.idleMode = idlePanel.picker.selectedItem;
+			idlePanel.picker.closeList();
 		}
 		
 		private function nightModePanel_changeHandler(event:Event):void

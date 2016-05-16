@@ -46,7 +46,6 @@ package com.gerantech.islamic.views.controls
 			addChild(details);
 			
 			// Type dates -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
-			
 			var dateText_0:RTLLabel = new RTLLabel("", 0xFFFFFF, null, null, false, null, 1.1);
 			var dateText_1:RTLLabel = new RTLLabel("", 0xFFFFFF, null, null, false, null, 1);
 			var dateText_2:RTLLabel = new RTLLabel("", 0xFFFFFF, null, null, false, null, 0.9);
@@ -59,13 +58,11 @@ package com.gerantech.islamic.views.controls
 			switch(UserModel.instance.locale.value)
 			{
 				case "fa_IR":
-					//dateText_0.text = loc("week_day_"+date.day)+" "+loc("j_"+date.dateShamsi)+" "+datePersianStr;
 					dateText_0.text = loc("week_day_"+date.day)+" "+num(date.dateShamsi)+" "+datePersianStr;
 					dateText_1.text = num(date.dateQamari)+" "+dateIslamicStr;
 					dateText_2.text = num(date.date)+" "+dateGergoriStr;
 					break;
 				case "ar_SA":
-					//dateText_0.text = loc("week_day_"+date.day)+" "+loc("j_"+date.dateQamari)+" "+dateIslamicStr;
 					dateText_0.text = loc("week_day_"+date.day)+" "+num(date.dateQamari)+" "+dateIslamicStr;
 					dateText_1.text = num(date.date)+" "+dateGergoriStr;
 					dateText_2.text = num(date.dateShamsi)+" "+datePersianStr;

@@ -9,7 +9,6 @@ package com.gerantech.islamic.models
 	import com.gerantech.islamic.models.vo.Juze;
 	import com.gerantech.islamic.models.vo.Location;
 	import com.gerantech.islamic.models.vo.Page;
-	import com.gerantech.islamic.models.vo.Time;
 	import com.gerantech.islamic.models.vo.User;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.StrTools;
@@ -48,6 +47,7 @@ package com.gerantech.islamic.models
 		private var _lastItem:Aya;
 		public var loaded:Boolean;
 		public var timesModel:TimesModel;
+		private var resourceInited:Boolean;
 
 		public static function get instance():UserModel
 		{
@@ -116,6 +116,11 @@ package com.gerantech.islamic.models
 		public function get personRepeat():uint{return user.personRepeat}
 		public function set personRepeat(value:uint):void{user.personRepeat=value, activeSaver()}
 		
+		public function get hijriOffset():Object{return user.hijriOffset}
+		public function set hijriOffset(value:Object):void{user.hijriOffset=value, activeSaver()}
+		
+
+		
 		/*public function set breakRepeat(value:uint):void{user.breakRepeat=value, activeSaver()}
 		public function get breakRepeat():uint{return user.breakRepeat}
 		public function set fontFamily(value:String):void{appController.setFontFamily(user.fontFamily=value), activeSaver()}
@@ -178,7 +183,7 @@ package com.gerantech.islamic.models
 			switch(navigationMode.value)
 			{
 				case "page_navi":
-					if(!appModel.upside && appModel.sizes.isTablet&& !configModel.hasTranslator)
+					if(!appModel.upside && appModel.sizes.isTablet&& !ResourceModel.instance.hasTranslator)
 						ret = (604-lastItem.page)/2;
 					else
 						ret = 604-lastItem.page;
@@ -198,6 +203,17 @@ package com.gerantech.islamic.models
 		/**
 		 *Controlers ___________________________________ 
 		 */		
+		public function initResources():void
+		{
+			if(resourceInited)
+				return;
+			
+			resourceInited = preventSaver = true;
+			ResourceModel.instance.load();
+			setLastItem(user.sura, user.aya);			
+			navigationMode = user.navigationMode;
+			preventSaver = false;
+		}
 		
 		public function load(appModel:AppModel, appController:AppController, configModel:ConfigModel):void
 		{
@@ -234,16 +250,13 @@ package com.gerantech.islamic.models
 				}
 			}
 
-			//ResourceModel.instance.load();
 			appController.setPaths(this, storagePath);
 			configModel.setAssets(appModel, this);
 			timesModel.data = user.times;
-			//setLastItem(user.sura, user.aya);			
 			locale	= user.local;
 			bookmarks = new BookmarkCollection(user.bookmarks);
-			//nightMode = user.nightMode;
+			nightMode = user.nightMode;
 			appController.setIdleMode(user.idleMode);
-			//navigationMode = user.navigationMode;
 			
 			user.profile.numRun ++;
 			if(!user.rated)
@@ -265,8 +278,8 @@ package com.gerantech.islamic.models
 			trace('final saving');
 			
 			user.bookmarks = 			bookmarks.data as Array;
-			user.translators = 			configModel.selectedTranslators;
-			user.reciters = 			configModel.selectedReciters;
+			user.translators = 			ResourceModel.instance.selectedTranslators;
+			user.reciters = 			ResourceModel.instance.selectedReciters;
 			user.times = 				timesModel.data;
 
 			var so:SharedObject = SharedObject.getLocal("user-data");
@@ -276,9 +289,9 @@ package com.gerantech.islamic.models
 		
 		public function activeSaver():void
 		{
+			clearTimeout(saveTimeout);
 			if(preventSaver)
 				return;
-			clearTimeout(saveTimeout);
 			saveTimeout = setTimeout(save, 3000);
 			
 		}		
@@ -297,15 +310,9 @@ package com.gerantech.islamic.models
 		
 		private function setMarketData():void
 		{
-			var freeTranslators:Array;
-			var freeReciters:Array;
-			
 			switch(appModel.descriptor.market)
 			{
 				case "google":
-					var translators:Array;
-					translators = freeTranslators = ["en.transliteration"];//, "en.sahih"];
-					user.reciters = freeReciters = ["mishary_rashid_alafasy"];//,"ibrahim_walk"];
 					user.local = StrTools.getLocal();
 					break;
 				
@@ -313,15 +320,9 @@ package com.gerantech.islamic.models
 				case "myket":
 				case "cando":
 				case "sibche":
-					user.translators = freeTranslators = ["fa.fooladvand"];//, "en.sahih"];
-					user.reciters = freeReciters = ["shahriar_parhizgar","mahdi_fooladvand"];//,"ibrahim_walk"];
 					user.local = {value:"fa_IR", dir:"rtl"};
 					break;
 			}
-			configModel.freeTranslators = freeTranslators;
-			configModel.freeReciters = freeReciters;
-			//if(user.profile.numRun==1)
-				
 		}
 	}
 }

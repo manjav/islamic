@@ -67,7 +67,7 @@ package com.gerantech.islamic.views.items
 			bismHeader = new ImageLoader();
 			bismHeader.delayTextureCreation = true;
 			bismHeader.height = AppModel.instance.sizes.DP24;
-			bismHeader.source = Assets.getTexture("bism_header");
+			bismHeader.source = Assets.getTexture("bism_header", "surajuze");
 			bismHeader.layoutData = new AnchorLayoutData(0, NaN, NaN, NaN, 0);
 			if(UserModel.instance.nightMode)
 			{

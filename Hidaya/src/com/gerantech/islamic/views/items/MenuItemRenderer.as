@@ -3,20 +3,22 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	
 	import starling.filters.ColorMatrixFilter;
+	
 
 	public class MenuItemRenderer extends SettingItemRenderer
 	{
+		
 		public function MenuItemRenderer(height:Number=0)
 		{
 			super(height);
 		}
 		
-		override protected function initialize():void
+		override protected function addElements(hasIcon:Boolean):void
 		{
-			super.initialize();
-			var iconFilter:ColorMatrixFilter = new ColorMatrixFilter();
-			iconFilter.tint(BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
-			iconDisplay.filter = iconFilter;
+			super.addElements(hasIcon);
+			var cmf:ColorMatrixFilter = new ColorMatrixFilter();
+			cmf.tint(BaseMaterialTheme.DARK_TEXT_COLOR);
+			iconDisplay.filter = cmf;
 		}
 		
 		override protected function commitData():void
@@ -28,7 +30,5 @@ package com.gerantech.islamic.views.items
 			
 			titleDisplay.text = loc(_data.name);
 		}
-		
-		
 	}
 }

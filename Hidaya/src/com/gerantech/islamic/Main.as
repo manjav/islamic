@@ -8,7 +8,23 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.views.controls.CustomDrawers;
 	import com.gerantech.islamic.views.headers.Toolbar;
 	import com.gerantech.islamic.views.popups.TutorialPopUp;
-	import com.gerantech.islamic.views.screens.*;
+	import com.gerantech.islamic.views.screens.AboutScreen;
+	import com.gerantech.islamic.views.screens.AlertScreen;
+	import com.gerantech.islamic.views.screens.BookmarksScreen;
+	import com.gerantech.islamic.views.screens.CalendarScreen;
+	import com.gerantech.islamic.views.screens.CityScreen;
+	import com.gerantech.islamic.views.screens.CompassScreen;
+	import com.gerantech.islamic.views.screens.DashboardScreen;
+	import com.gerantech.islamic.views.screens.DownloadScreen;
+	import com.gerantech.islamic.views.screens.FilteredPersonScreen;
+	import com.gerantech.islamic.views.screens.IndexScreen;
+	import com.gerantech.islamic.views.screens.OmenScreen;
+	import com.gerantech.islamic.views.screens.PersonsScreen;
+	import com.gerantech.islamic.views.screens.PurchaseScreen;
+	import com.gerantech.islamic.views.screens.QuranScreen;
+	import com.gerantech.islamic.views.screens.SearchScreen;
+	import com.gerantech.islamic.views.screens.SettingsScreen;
+	import com.gerantech.islamic.views.screens.TimesScreen;
 	
 	import feathers.controls.StackScreenNavigator;
 	import feathers.controls.StackScreenNavigatorItem;
@@ -73,32 +89,22 @@ package com.gerantech.islamic
 		
 		public function createScreens():void
 		{
-			//appModel.theme = new CustomTheme();
+			appModel.theme = new CustomTheme();
 			appModel.drawers = new CustomDrawers();
-			/*appModel.myDrawer = new DrawerList(appModel.ltr);
-			
-			if(appModel.ltr)
-				appModel.drawers.leftDrawer = appModel.myDrawer;
-			else
-				appModel.drawers.rightDrawer = appModel.myDrawer;*/
-			
 			addChild(appModel.drawers);
 			appModel.drawers.content = appModel.navigator;
 			
 			appModel.date = new MultiDate();
 			appModel.prayTimes = new PrayTime(CalculationMethod.TEHRAN, UserModel.instance.city.latitude, UserModel.instance.city.longitude);
 
-			trace(UserModel.instance.city.name)
-			
-			if(UserModel.instance.user.profile.numRun==1)
+			/*if(UserModel.instance.user.profile.numRun==1)
 			{
 				var tute:TutorialPopUp = new TutorialPopUp();
 				tute.addEventListener(Event.CLOSE, tute_closeHandler);
 				PopUpManager.addPopUp(tute);
 			}
-			else
+			else*/
 				tute_closeHandler(null)
-			
 		}
 
 		
@@ -109,7 +115,6 @@ package com.gerantech.islamic
 			Starling.current.nativeStage.autoOrients=true;
 			
 			appModel.toolbar = new Toolbar();
-			//appModel.toolbar.layoutData = new AnchorLayoutData(0,0,NaN,0);
 			addChild(appModel.toolbar);
 			
 			appModel.navigator.rootScreenID = appModel.PAGE_DASHBOARD;

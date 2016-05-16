@@ -3,7 +3,6 @@
 	
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
-	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Aya;
@@ -80,7 +79,7 @@
 			scrollLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
 			scrollLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
 			scrollLayout.paddingTop = headerHeight;
-			scrollLayout.paddingBottom = ConfigModel.instance.selectedReciters.length>0?AppModel.instance.sizes.toolbar*1.6:0
+			scrollLayout.paddingBottom = ResourceModel.instance.selectedReciters.length>0?AppModel.instance.sizes.toolbar*1.6:0
 			layout = scrollLayout;
 			
 			scrollBarDisplayMode = SCROLL_BAR_DISPLAY_MODE_NONE;
@@ -213,11 +212,6 @@
 					sh.y = quran_txt.getCharBoundaries(page.surasList[s]-s).y  + _padding/2//-uint(quran_txt.paddingTop)/2;
 				else
 					sh.y = quran_txt.height - sh.height;
-				
-				/*if(sh.y<lineHeight)
-					sh.y = _padding;
-				if(sh.y>mainHeight-lineHeight)
-					sh.y = mainHeight-lineHeight;*/
 				
 				headerContainer.addChild(sh);
 				

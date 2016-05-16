@@ -1,34 +1,32 @@
 /*
- Copyright (c) 2014 Josh Tynjala
+Copyright 2012-2016 Bowler Hat LLC
 
- Permission is hereby granted, free of charge, to any person
- obtaining a copy of this software and associated documentation
- files (the "Software"), to deal in the Software without
- restriction, including without limitation the rights to use,
- copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the
- Software is furnished to do so, subject to the following
- conditions:
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
 
- The above copyright notice and this permission notice shall be
- included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- OTHER DEALINGS IN THE SOFTWARE.
- */
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+*/
 package com.gerantech.islamic.themes
 {
-	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
 	
 	import flash.geom.Rectangle;
-	import flash.system.Capabilities;
 	import flash.text.TextFormat;
 	import flash.text.engine.CFFHinting;
 	import flash.text.engine.ElementFormat;
@@ -41,8 +39,10 @@ package com.gerantech.islamic.themes
 	import feathers.controls.Alert;
 	import feathers.controls.Button;
 	import feathers.controls.ButtonGroup;
+	import feathers.controls.ButtonState;
 	import feathers.controls.Callout;
 	import feathers.controls.Check;
+	import feathers.controls.DateTimeSpinner;
 	import feathers.controls.Drawers;
 	import feathers.controls.GroupedList;
 	import feathers.controls.Header;
@@ -58,43 +58,54 @@ package com.gerantech.islamic.themes
 	import feathers.controls.ProgressBar;
 	import feathers.controls.Radio;
 	import feathers.controls.ScrollContainer;
+	import feathers.controls.ScrollScreen;
 	import feathers.controls.ScrollText;
 	import feathers.controls.Scroller;
 	import feathers.controls.SimpleScrollBar;
 	import feathers.controls.Slider;
+	import feathers.controls.SpinnerList;
 	import feathers.controls.TabBar;
 	import feathers.controls.TextArea;
+	import feathers.controls.TextCallout;
 	import feathers.controls.TextInput;
+	import feathers.controls.TextInputState;
 	import feathers.controls.ToggleButton;
 	import feathers.controls.ToggleSwitch;
+	import feathers.controls.TrackLayoutMode;
+	import feathers.controls.popups.BottomDrawerPopUpContentManager;
 	import feathers.controls.popups.CalloutPopUpContentManager;
-	import feathers.controls.popups.VerticalCenteredPopUpContentManager;
 	import feathers.controls.renderers.BaseDefaultItemRenderer;
 	import feathers.controls.renderers.DefaultGroupedListHeaderOrFooterRenderer;
 	import feathers.controls.renderers.DefaultGroupedListItemRenderer;
 	import feathers.controls.renderers.DefaultListItemRenderer;
+	import feathers.controls.text.ITextEditorViewPort;
 	import feathers.controls.text.StageTextTextEditor;
 	import feathers.controls.text.TextBlockTextEditor;
 	import feathers.controls.text.TextBlockTextRenderer;
+	import feathers.controls.text.TextFieldTextEditorViewPort;
 	import feathers.core.FeathersControl;
+	import feathers.core.ITextEditor;
+	import feathers.core.ITextRenderer;
 	import feathers.core.PopUpManager;
-	import feathers.display.Scale3Image;
-	import feathers.display.Scale9Image;
-	import feathers.display.TiledImage;
+	import feathers.layout.Direction;
+	import feathers.layout.HorizontalAlign;
 	import feathers.layout.HorizontalLayout;
+	import feathers.layout.RelativePosition;
+	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
-	import feathers.skins.SmartDisplayObjectStateValueSelector;
-	import feathers.skins.StandardIcons;
+	import feathers.media.FullScreenToggleButton;
+	import feathers.media.MuteToggleButton;
+	import feathers.media.PlayPauseToggleButton;
+	import feathers.media.SeekSlider;
+	import feathers.media.VolumeSlider;
+	import feathers.skins.ImageSkin;
 	import feathers.system.DeviceCapabilities;
-	import feathers.textures.Scale3Textures;
-	import feathers.textures.Scale9Textures;
 	import feathers.themes.StyleNameFunctionTheme;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Quad;
-	import starling.textures.SubTexture;
 	import starling.textures.Texture;
 
 	/**
@@ -106,19 +117,6 @@ package com.gerantech.islamic.themes
 	 */
 	public class BaseMaterialTheme extends StyleNameFunctionTheme
 	{
-		/*[Embed(source="/../assets/fonts/Soltan_Gothic.ttf",fontFamily="SourceSans",fontWeight="normal",fontStyle="normal",mimeType="application/x-font",embedAsCFF="false")]
-		protected static const SOURCE_SANS_REGULAR:Class;
-		[Embed(source="/../assets/fonts/Soltan_Gothic_Bold.ttf",fontFamily="SourceSans",fontWeight="bold",fontStyle="normal",mimeType="application/x-font",embedAsCFF="false")]
-		protected static const SOURCE_SANS_BOLD:Class;
-		[Embed(source="/../assets/fonts/Gothic_Soltan_Italic.ttf",fontFamily="SourceSans",fontWeight="normal",fontStyle="italic",mimeType="application/x-font",embedAsCFF="false")]
-		protected static const SOURCE_SANS_ITALIC:Class;
-		[Embed(source="/../assets/fonts/Gothic_Soltan_Bold_Italic.ttf",fontFamily="SourceSans",fontWeight="bold",fontStyle="italic",mimeType="application/x-font",embedAsCFF="false")]
-		protected static const SOURCE_SANS_BOLD_ITALIC:Class;
-
-		[Embed(source="/../assets/fonts/Soltan_Gothic.ttf",fontFamily="SourceSansPro",fontWeight="normal",mimeType="application/x-font",embedAsCFF="true")]
-		protected static const SOURCE_SANS_PRO_REGULAR:Class;
-		[Embed(source="/../assets/fonts/Soltan_Gothic_Bold.ttf",fontFamily="SourceSansPro",fontWeight="bold",mimeType="application/x-font",embedAsCFF="true")]
-		protected static const SOURCE_SANS_PRO_SEMIBOLD:Class;*/
 		
 		[Embed(source="/../assets/fonts/segoeadan.ttf",fontFamily="SourceSans", fontWeight="normal", fontStyle="normal", mimeType="application/x-font",embedAsCFF="false")]
 		protected static const SOURCE_SANS_REGULAR:Class;
@@ -131,8 +129,7 @@ package com.gerantech.islamic.themes
 		
 		[Embed(source="/../assets/fonts/segoeadanb.ttf",fontFamily="SourceSansPro", fontWeight="bold", fontStyle="normal", mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_SANS_PRO_BOLD:Class;
-		
-		
+
 		/**
 		 * The name of the embedded font used by controls in this theme. Comes
 		 * in normal and bold weights.
@@ -140,62 +137,115 @@ package com.gerantech.islamic.themes
 		public static const FONT_NAME:String = "SourceSansPro";
 
 		public static var PRIMARY_BACKGROUND_COLOR:uint = 0xFFFFFF;//0xE0F2F1;
+		public static var LIGHT_TEXT_COLOR:uint = 0xFFFFFF;
+		public static var DARK_TEXT_COLOR:uint = 0x666666;
+		public static var SELECTED_TEXT_COLOR:uint = 0x009688;
+		public static var DISABLED_TEXT_COLOR:uint = 0x8a8a8a;
+		public static var DARK_DISABLED_TEXT_COLOR:uint = 0x304040;
+		public static var LIST_BACKGROUND_COLOR:uint = 0xFFFFFF;
+		public static var GROUPED_LIST_HEADER_BACKGROUND_COLOR:uint = 0x304040;
+
+		public static var GROUPED_LIST_FOOTER_BACKGROUND_COLOR:uint = 0x304040;
+		public static var MODAL_OVERLAY_COLOR:uint = 0x304040;
+		public static var MODAL_OVERLAY_ALPHA:Number = 0.5;
+		public static var DRAWER_OVERLAY_COLOR:uint = 0xFFFFFF;
+		public static var DRAWER_OVERLAY_ALPHA:Number = 0.6;
+		public static var VIDEO_OVERLAY_COLOR:uint = 0x1a1816;
+		public static var VIDEO_OVERLAY_ALPHA:Number = 0.2;
+
 		public static var SELECTED_BACKGROUND_COLOR:uint = 0x80cbc4;
 		public static var PRIMARY_TEXT_COLOR:uint = 0x212121;//0xE0F2F1;
 		public static var DESCRIPTION_TEXT_COLOR:uint = 0x6d6d6d;//0xE0F2F1;
 		public static var SECONDARY_BACKGROUND_COLOR:uint = 0xE0F2F1;//0xE0F2F1;
 		public static var CHROME_COLOR:uint = 0x009688;//0xE0F2F1;
 		public static var ACCENT_COLOR:uint = 0xeeba4c;//0x96000E;
-		
-		public static var LIGHT_TEXT_COLOR:uint = 0xFFFFFF//0xa6a6a6;
-		public static var DARK_TEXT_COLOR:uint = 0x666666;
-		public static var SELECTED_TEXT_COLOR:uint = 0x009688;
-		public static var DISABLED_TEXT_COLOR:uint = 0x8a8a8a;
-		public static var DARK_DISABLED_TEXT_COLOR:uint = 0x304040;
-		public static var LIST_BACKGROUND_COLOR:uint = 0xFFFFFF;
-		public static var TAB_BACKGROUND_COLOR:uint = 0x304040;
-		public static var TAB_DISABLED_BACKGROUND_COLOR:uint = 0x304040;
-		public static var GROUPED_LIST_HEADER_BACKGROUND_COLOR:uint = 0x304040;
-		public static var GROUPED_LIST_FOOTER_BACKGROUND_COLOR:uint = 0x304040;
-		public static var MODAL_OVERLAY_COLOR:uint = 0x304040;
-		public static var MODAL_OVERLAY_ALPHA:Number = 0.5;
-		public static var DRAWER_OVERLAY_COLOR:uint = 0xFFFFFF;
-		public static var DRAWER_OVERLAY_ALPHA:Number = 0.6;
 
-		/**
-		 * The screen density of an iPhone with Retina display. The textures
-		 * used by this theme are designed for this density and scale for other
-		 * densities.
-		 */
-		protected static var ORIGINAL_DPI_IPHONE_RETINA:int = 326;
-
-		/**
-		 * The screen density of an iPad with Retina display. The textures used
-		 * by this theme are designed for this density and scale for other
-		 * densities.
-		 */
-		protected static var ORIGINAL_DPI_IPAD_RETINA:int = 264;
-
-		protected static const DEFAULT_SCALE9_GRID:Rectangle = new Rectangle(5, 5, 22, 22);
+		protected static const DEFAULT_BACKGROUND_SCALE9_GRID:Rectangle = new Rectangle(2, 2, 14, 14);
 		protected static const BUTTON_SCALE9_GRID:Rectangle = new Rectangle(5, 5, 50, 50);
-		protected static const BUTTON_SELECTED_SCALE9_GRID:Rectangle = new Rectangle(8, 8, 44, 44);
-		protected static const BACK_BUTTON_SCALE3_REGION1:Number = 24;
-		protected static const BACK_BUTTON_SCALE3_REGION2:Number = 6;
-		protected static const FORWARD_BUTTON_SCALE3_REGION1:Number = 6;
-		protected static const FORWARD_BUTTON_SCALE3_REGION2:Number = 6;
-		protected static const ITEM_RENDERER_SCALE9_GRID:Rectangle = new Rectangle(13, 0, 2, 82);
-		protected static const INSET_ITEM_RENDERER_FIRST_SCALE9_GRID:Rectangle = new Rectangle(13, 13, 3, 70);
-		protected static const INSET_ITEM_RENDERER_LAST_SCALE9_GRID:Rectangle = new Rectangle(13, 0, 3, 75);
-		protected static const INSET_ITEM_RENDERER_SINGLE_SCALE9_GRID:Rectangle = new Rectangle(13, 13, 3, 62);
-		protected static const TAB_SCALE9_GRID:Rectangle = new Rectangle(19, 19, 50, 50);
-		protected static const SCROLL_BAR_THUMB_REGION1:int = 5;
-		protected static const SCROLL_BAR_THUMB_REGION2:int = 14;
+		protected static const SMALL_BACKGROUND_SCALE9_GRID:Rectangle = new Rectangle(2, 2, 1, 1);
+		protected static const BACK_BUTTON_SCALE9_GRID:Rectangle = new Rectangle(13, 0, 1, 28);
+		protected static const FORWARD_BUTTON_SCALE9_GRID:Rectangle = new Rectangle(3, 0, 1, 28);
+		protected static const ITEM_RENDERER_SCALE9_GRID:Rectangle = new Rectangle(1, 1, 1, 42);
+		protected static const INSET_ITEM_RENDERER_MIDDLE_SCALE9_GRID:Rectangle = new Rectangle(2, 2, 1, 40);
+		protected static const INSET_ITEM_RENDERER_FIRST_SCALE9_GRID:Rectangle = new Rectangle(7, 7, 1, 35);
+		protected static const INSET_ITEM_RENDERER_LAST_SCALE9_GRID:Rectangle = new Rectangle(7, 2, 1, 35);
+		protected static const INSET_ITEM_RENDERER_SINGLE_SCALE9_GRID:Rectangle = new Rectangle(7, 7, 1, 30);
+		protected static const TAB_SCALE9_GRID:Rectangle = new Rectangle(11, 11, 1, 22);
+		protected static const SPINNER_LIST_SELECTION_OVERLAY_SCALE9_GRID:Rectangle = new Rectangle(2, 6, 1, 32);
+		protected static const HORIZONTAL_SCROLL_BAR_THUMB_SCALE9_GRID:Rectangle = new Rectangle(1, 1, 24, 8);
+		protected static const VERTICAL_SCROLL_BAR_THUMB_SCALE9_GRID:Rectangle = new Rectangle(1, 1, 8, 24);
+
+		protected static const HEADER_SKIN_TEXTURE_REGION:Rectangle = new Rectangle(1, 1, 128, 64);
+		protected static const TAB_SKIN_TEXTURE_REGION:Rectangle = new Rectangle(1, 0, 22, 44);
+		
+		/**
+		 * @private
+		 * The theme's custom style name for a "quiet" button's label text renderer.
+		 */
+		protected static const THEME_STYLE_NAME_QUIET_BUTTON_LABEL:String = "metal-works-mobile-quiet-button-label";
 
 		/**
 		 * @private
-		 * The theme's custom style name for item renderers in a PickerList.
+		 * The theme's custom style name for a ButtonGroup button's label text renderer.
 		 */
-		protected static const THEME_STYLE_NAME_PICKER_LIST_ITEM_RENDERER:String = "metal-works-mobile-picker-list-item-renderer";
+		protected static const THEME_STYLE_NAME_BUTTON_GROUP_BUTTON_LABEL:String = "metal-works-mobile-button-group-button-label";
+
+		/**
+		 * @private
+		 * The theme's custom style name for a tab's label text renderer.
+		 */
+		protected static const THEME_STYLE_NAME_TAB_LABEL:String = "metal-works-mobile-tab-label";
+
+		/**
+		 * @private
+		 * The theme's custom style name for a GroupedList footer's label text renderer.
+		 */
+		protected static const THEME_STYLE_NAME_GROUPED_LIST_FOOTER_CONTENT_LABEL:String = "metal-works-mobile-grouped-list-footer-content-label";
+
+		/**
+		 * @private
+		 * The theme's custom style name for the label text renderer of an item
+		 * renderer with the "check" style.
+		 */
+		protected static const THEME_STYLE_NAME_CHECK_ITEM_RENDERER_LABEL:String = "metal-works-mobile-check-item-renderer-label";
+
+		/**
+		 * @private
+		 * The theme's custom style name for the icon label text renderer of an
+		 * item renderer with the "check" style.
+		 */
+		protected static const THEME_STYLE_NAME_CHECK_ITEM_RENDERER_ICON_LABEL:String = "metal-works-mobile-check-item-renderer-icon-label";
+
+		/**
+		 * @private
+		 * The theme's custom style name for the accessory label text renderer
+		 * of an item renderer with the "check" style.
+		 */
+		protected static const THEME_STYLE_NAME_CHECK_ITEM_RENDERER_ACCESSORY_LABEL:String = "metal-works-mobile-check-item-renderer-accessory-label";
+
+		/**
+		 * @private
+		 * The theme's custom style name for item renderers in a SpinnerList.
+		 */
+		protected static const THEME_STYLE_NAME_SPINNER_LIST_ITEM_RENDERER:String = "metal-works-mobile-spinner-list-item-renderer";
+
+		/**
+		 * @private
+		 * The theme's custom style name for the SpinnerList's item renderer's label text renderer.
+		 */
+		protected static const THEME_STYLE_NAME_SPINNER_LIST_ITEM_RENDERER_LABEL:String = "metal-works-mobile-spinner-list-item-renderer-label";
+
+		/**
+		 * @private
+		 * The theme's custom style name for the SpinnerList's item renderer's icon label text renderer.
+		 */
+		protected static const THEME_STYLE_NAME_SPINNER_LIST_ITEM_RENDERER_ICON_LABEL:String = "metal-works-mobile-spinner-list-item-renderer-icon-label";
+
+		/**
+		 * @private
+		 * The theme's custom style name for the SpinnerList's item renderer's accessory label text renderer.
+		 */
+		protected static const THEME_STYLE_NAME_SPINNER_LIST_ITEM_RENDERER_ACCESSORY_LABEL:String = "metal-works-mobile-spinner-list-item-renderer-accessory-label";
 
 		/**
 		 * @private
@@ -238,12 +288,24 @@ package com.gerantech.islamic.themes
 		 * The theme's custom style name for the maximum track of a vertical slider.
 		 */
 		protected static const THEME_STYLE_NAME_VERTICAL_SLIDER_MAXIMUM_TRACK:String = "metal-works-mobile-vertical-slider-maximum-track";
+		
+		/**
+		 * @private
+		 * The theme's custom style name for the text editor of the NumericStepper's TextInput.
+		 */
+		protected static const THEME_STYLE_NAME_NUMERIC_STEPPER_TEXT_INPUT_EDITOR:String = "metal-works-mobile-numeric-stepper-text-input-editor";
+
+		/**
+		 * @private
+		 * The theme's custom style name for the item renderer of the DateTimeSpinner's SpinnerLists.
+		 */
+		protected static const THEME_STYLE_NAME_DATE_TIME_SPINNER_LIST_ITEM_RENDERER:String = "metal-works-mobile-date-time-spinner-list-item-renderer";
 
 		/**
 		 * The default global text renderer factory for this theme creates a
 		 * TextBlockTextRenderer.
 		 */
-		protected static function textRendererFactory():TextBlockTextRenderer
+		protected static function textRendererFactory():ITextRenderer
 		{
 			return new TextBlockTextRenderer();
 		}
@@ -252,9 +314,18 @@ package com.gerantech.islamic.themes
 		 * The default global text editor factory for this theme creates a
 		 * StageTextTextEditor.
 		 */
-		protected static function textEditorFactory():StageTextTextEditor
+		protected static function textEditorFactory():ITextEditor
 		{
 			return new StageTextTextEditor();
+		}
+
+		/**
+		 * The text editor factory for a TextArea creates a
+		 * TextFieldTextEditorViewPort.
+		 */
+		protected static function textAreaTextEditorFactory():ITextEditorViewPort
+		{
+			return new TextFieldTextEditorViewPort();
 		}
 
 		/**
@@ -268,6 +339,14 @@ package com.gerantech.islamic.themes
 			//suitable for mobile use if the TextInput needs to be editable
 			//because it can't use the soft keyboard or other mobile-friendly UI
 			return new TextBlockTextEditor();
+		}
+
+		/**
+		 * The pop-up factory for a PickerList creates a SpinnerList.
+		 */
+		protected static function pickerListSpinnerListFactory():SpinnerList
+		{
+			return new SpinnerList();
 		}
 
 		/**
@@ -286,62 +365,12 @@ package com.gerantech.islamic.themes
 		}
 
 		/**
-		 * SmartDisplayObjectValueSelectors will use ImageLoader instead of
-		 * Image so that we can use extra features like pixel snapping.
-		 */
-		protected static function textureValueTypeHandler(value:Texture, oldDisplayObject:DisplayObject = null):DisplayObject
-		{
-			var displayObject:ImageLoader = oldDisplayObject as ImageLoader;
-			if(!displayObject)
-			{
-				displayObject = new ImageLoader();
-			}
-			displayObject.source = value;
-			return displayObject;
-		}
-
-		/**
 		 * Constructor.
-		 *
-		 * @param scaleToDPI Determines if the theme's skins will be scaled based on the screen density and content scale factor.
 		 */
-		public function BaseMaterialTheme(scaleToDPI:Boolean = true)
+		public function BaseMaterialTheme()
 		{
-			this._scaleToDPI = scaleToDPI;
+			super();
 		}
-
-		/**
-		 * @private
-		 */
-		protected var _originalDPI:int;
-
-		/**
-		 * The original screen density used for scaling.
-		 */
-		public function get originalDPI():int
-		{
-			return this._originalDPI;
-		}
-
-		/**
-		 * @private
-		 */
-		protected var _scaleToDPI:Boolean;
-
-		/**
-		 * Indicates if the theme scales skins to match the screen density of
-		 * the device.
-		 */
-		public function get scaleToDPI():Boolean
-		{
-			return this._scaleToDPI;
-		}
-
-		/**
-		 * Skins are scaled by a value based on the screen density on the
-		 * content scale factor.
-		 */
-		protected var scale:Number = 1;
 
 		/**
 		 * A smaller font size for details.
@@ -396,8 +425,14 @@ package com.gerantech.islamic.themes
 		 */
 		protected var smallControlSize:int;
 
+		/**
+		 * The size, in pixels, of borders;
+		 */
+		protected var borderSize:int;
+
 		protected var popUpFillSize:int;
 		protected var calloutBackgroundMinSize:int;
+		protected var calloutArrowOverlapGap:int;
 		protected var scrollBarGutterSize:int;
 
 		/**
@@ -424,6 +459,11 @@ package com.gerantech.islamic.themes
 		 * An ElementFormat used for Header components.
 		 */
 		protected var headerElementFormat:ElementFormat;
+
+		/**
+		 * An ElementFormat used for Header components when disabled.
+		 */
+		protected var headerDisabledElementFormat:ElementFormat;
 
 		/**
 		 * An ElementFormat with a dark tint meant for UI controls.
@@ -523,63 +563,101 @@ package com.gerantech.islamic.themes
 		 
 		protected var atlas:TextureAtlas;
 */
-		public var headerBackgroundSkinTexture:Texture;
-		public var backgroundSkinTextures:Scale9Textures;
-		public var backgroundInsetSkinTextures:Scale9Textures;
-		public var backgroundDisabledSkinTextures:Scale9Textures;
-		public var backgroundFocusedSkinTextures:Scale9Textures;
-		public var buttonUpSkinTextures:Scale9Textures;
-		public var buttonDownSkinTextures:Scale9Textures;
-		public var buttonDisabledSkinTextures:Scale9Textures;
-		public var buttonSelectedUpSkinTextures:Scale9Textures;
-		public var buttonSelectedDisabledSkinTextures:Scale9Textures;
-		public var buttonCallToActionUpSkinTextures:Scale9Textures;
-		public var buttonCallToActionDownSkinTextures:Scale9Textures;
-		public var buttonDangerUpSkinTextures:Scale9Textures;
-		public var buttonDangerDownSkinTextures:Scale9Textures;
-		public var buttonBackUpSkinTextures:Scale3Textures;
-		public var buttonBackDownSkinTextures:Scale3Textures;
-		public var buttonBackDisabledSkinTextures:Scale3Textures;
-		public var buttonForwardUpSkinTextures:Scale3Textures;
-		public var buttonForwardDownSkinTextures:Scale3Textures;
-		public var buttonForwardDisabledSkinTextures:Scale3Textures;
-		public var pickerListButtonIconTexture:Texture;
-		public var pickerListButtonIconDisabledTexture:Texture;
-		public var tabDownSkinTextures:Scale9Textures;
-		public var tabSelectedSkinTextures:Scale9Textures;
-		public var tabSelectedDisabledSkinTextures:Scale9Textures;
-		public var pickerListItemSelectedIconTexture:Texture;
-		public var radioUpIconTexture:Texture;
-		public var radioDownIconTexture:Texture;
-		public var radioDisabledIconTexture:Texture;
-		public var radioSelectedUpIconTexture:Texture;
-		public var radioSelectedDownIconTexture:Texture;
-		public var radioSelectedDisabledIconTexture:Texture;
-		public var checkUpIconTexture:Texture;
-		public var checkDownIconTexture:Texture;
-		public var checkDisabledIconTexture:Texture;
-		public var checkSelectedUpIconTexture:Texture;
-		public var checkSelectedDownIconTexture:Texture;
-		public var checkSelectedDisabledIconTexture:Texture;
-		public var pageIndicatorNormalSkinTexture:Texture;
-		public var pageIndicatorSelectedSkinTexture:Texture;
-		public var itemRendererUpSkinTextures:Scale9Textures;
-		public var itemRendererSelectedSkinTextures:Scale9Textures;
-		public var insetItemRendererFirstUpSkinTextures:Scale9Textures;
-		public var insetItemRendererFirstSelectedSkinTextures:Scale9Textures;
-		public var insetItemRendererLastUpSkinTextures:Scale9Textures;
-		public var insetItemRendererLastSelectedSkinTextures:Scale9Textures;
-		public var insetItemRendererSingleUpSkinTextures:Scale9Textures;
-		public var insetItemRendererSingleSelectedSkinTextures:Scale9Textures;
-		public var backgroundPopUpSkinTextures:Scale9Textures;
-		public var calloutTopArrowSkinTexture:Texture;
-		public var calloutRightArrowSkinTexture:Texture;
-		public var calloutBottomArrowSkinTexture:Texture;
-		public var calloutLeftArrowSkinTexture:Texture;
-		public var verticalScrollBarThumbSkinTextures:Scale3Textures;
-		public var horizontalScrollBarThumbSkinTextures:Scale3Textures;
-		public var searchIconTexture:Texture;
-		public var searchIconDisabledTexture:Texture;
+
+		protected var headerBackgroundSkinTexture:Texture;
+		protected var popUpHeaderBackgroundSkinTexture:Texture;
+		protected var backgroundSkinTexture:Texture;
+		protected var backgroundLightSkinTexture:Texture;
+		protected var backgroundDisabledSkinTexture:Texture;
+		protected var backgroundInsetSkinTexture:Texture;
+		protected var backgroundInsetDisabledSkinTexture:Texture;
+		protected var backgroundInsetFocusedSkinTexture:Texture;
+		protected var backgroundInsetDangerSkinTexture:Texture;
+		protected var backgroundLightBorderSkinTexture:Texture;
+		protected var backgroundDarkBorderSkinTexture:Texture;
+		protected var backgroundDangerBorderSkinTexture:Texture;
+		protected var buttonUpSkinTexture:Texture;
+		protected var buttonDownSkinTexture:Texture;
+		protected var buttonDisabledSkinTexture:Texture;
+		protected var buttonSelectedUpSkinTexture:Texture;
+		protected var buttonSelectedDisabledSkinTexture:Texture;
+		protected var buttonCallToActionUpSkinTexture:Texture;
+		protected var buttonCallToActionDownSkinTexture:Texture;
+		protected var buttonDangerUpSkinTexture:Texture;
+		protected var buttonDangerDownSkinTexture:Texture;
+		protected var buttonBackUpSkinTexture:Texture;
+		protected var buttonBackDownSkinTexture:Texture;
+		protected var buttonBackDisabledSkinTexture:Texture;
+		protected var buttonForwardUpSkinTexture:Texture;
+		protected var buttonForwardDownSkinTexture:Texture;
+		protected var buttonForwardDisabledSkinTexture:Texture;
+		protected var pickerListButtonIconTexture:Texture;
+		protected var pickerListButtonSelectedIconTexture:Texture;
+		protected var pickerListButtonIconDisabledTexture:Texture;
+		protected var tabUpSkinTexture:Texture;
+		protected var tabDownSkinTexture:Texture;
+		protected var tabDisabledSkinTexture:Texture;
+		protected var tabSelectedUpSkinTexture:Texture;
+		protected var tabSelectedDisabledSkinTexture:Texture;
+		protected var pickerListItemSelectedIconTexture:Texture;
+		protected var spinnerListSelectionOverlaySkinTexture:Texture;
+		protected var radioUpIconTexture:Texture;
+		protected var radioDownIconTexture:Texture;
+		protected var radioDisabledIconTexture:Texture;
+		protected var radioSelectedUpIconTexture:Texture;
+		protected var radioSelectedDownIconTexture:Texture;
+		protected var radioSelectedDisabledIconTexture:Texture;
+		protected var checkUpIconTexture:Texture;
+		protected var checkDownIconTexture:Texture;
+		protected var checkDisabledIconTexture:Texture;
+		protected var checkSelectedUpIconTexture:Texture;
+		protected var checkSelectedDownIconTexture:Texture;
+		protected var checkSelectedDisabledIconTexture:Texture;
+		protected var pageIndicatorNormalSkinTexture:Texture;
+		protected var pageIndicatorSelectedSkinTexture:Texture;
+		protected var itemRendererUpSkinTexture:Texture;
+		protected var itemRendererSelectedSkinTexture:Texture;
+		protected var insetItemRendererUpSkinTexture:Texture;
+		protected var insetItemRendererSelectedSkinTexture:Texture;
+		protected var insetItemRendererFirstUpSkinTexture:Texture;
+		protected var insetItemRendererFirstSelectedSkinTexture:Texture;
+		protected var insetItemRendererLastUpSkinTexture:Texture;
+		protected var insetItemRendererLastSelectedSkinTexture:Texture;
+		protected var insetItemRendererSingleUpSkinTexture:Texture;
+		protected var insetItemRendererSingleSelectedSkinTexture:Texture;
+		protected var calloutTopArrowSkinTexture:Texture;
+		protected var calloutRightArrowSkinTexture:Texture;
+		protected var calloutBottomArrowSkinTexture:Texture;
+		protected var calloutLeftArrowSkinTexture:Texture;
+		protected var dangerCalloutTopArrowSkinTexture:Texture;
+		protected var dangerCalloutRightArrowSkinTexture:Texture;
+		protected var dangerCalloutBottomArrowSkinTexture:Texture;
+		protected var dangerCalloutLeftArrowSkinTexture:Texture;
+		protected var verticalScrollBarThumbSkinTexture:Texture;
+		protected var horizontalScrollBarThumbSkinTexture:Texture;
+		protected var searchIconTexture:Texture;
+		protected var searchIconDisabledTexture:Texture;
+		protected var listDrillDownAccessoryTexture:Texture;
+		protected var listDrillDownAccessorySelectedTexture:Texture;
+		
+		//media textures
+		protected var playPauseButtonPlayUpIconTexture:Texture;
+		protected var playPauseButtonPlayDownIconTexture:Texture;
+		protected var playPauseButtonPauseUpIconTexture:Texture;
+		protected var playPauseButtonPauseDownIconTexture:Texture;
+		protected var overlayPlayPauseButtonPlayUpIconTexture:Texture;
+		protected var overlayPlayPauseButtonPlayDownIconTexture:Texture;
+		protected var fullScreenToggleButtonEnterUpIconTexture:Texture;
+		protected var fullScreenToggleButtonEnterDownIconTexture:Texture;
+		protected var fullScreenToggleButtonExitUpIconTexture:Texture;
+		protected var fullScreenToggleButtonExitDownIconTexture:Texture;
+		protected var muteToggleButtonLoudUpIconTexture:Texture;
+		protected var muteToggleButtonLoudDownIconTexture:Texture;
+		protected var muteToggleButtonMutedUpIconTexture:Texture;
+		protected var muteToggleButtonMutedDownIconTexture:Texture;
+		protected var volumeSliderMinimumTrackSkinTexture:Texture;
+		protected var volumeSliderMaximumTrackSkinTexture:Texture;
+		protected var seekSliderProgressSkinTexture:Texture;
 
 		/**
 		 * Disposes the atlas before calling super.dispose()
@@ -602,7 +680,6 @@ package com.gerantech.islamic.themes
 		 */
 		protected function initialize():void
 		{
-			this.initializeScale();
 			this.initializeDimensions();
 			this.initializeFonts();
 			this.initializeTextures();
@@ -633,47 +710,21 @@ package com.gerantech.islamic.themes
 		}
 
 		/**
-		 * Initializes the scale value based on the screen density and content
-		 * scale factor.
-		 */
-		protected function initializeScale():void
-		{
-			
-		//	326 264
-			ORIGINAL_DPI_IPAD_RETINA = Capabilities.os.substr(0,2)=="iP" ? 264 : 240;
-			ORIGINAL_DPI_IPHONE_RETINA = Capabilities.os.substr(0,2)=="iP" ? 326 : 320;
-			
-			var scaledDPI:int = DeviceCapabilities.dpi / Starling.contentScaleFactor;
-			this._originalDPI = scaledDPI;
-			if(this._scaleToDPI)
-			{
-				if(DeviceCapabilities.isTablet(Starling.current.nativeStage))
-				{
-					this._originalDPI = ORIGINAL_DPI_IPAD_RETINA;
-				}
-				else
-				{
-					this._originalDPI = ORIGINAL_DPI_IPHONE_RETINA;
-				}
-			}
-			this.scale = scaledDPI / this._originalDPI;
-			//trace("DeviceCapabilities", DeviceCapabilities.dpi, Starling.contentScaleFactor, scaledDPI, _originalDPI, scale)
-		}
-
-		/**
 		 * Initializes common values used for setting the dimensions of components.
 		 */
 		protected function initializeDimensions():void
 		{
-			this.gridSize = Math.round(88 * this.scale);
-			this.smallGutterSize = Math.round(11 * this.scale);
-			this.gutterSize = Math.round(22 * this.scale);
-			this.controlSize = Math.round(58 * this.scale);
-			this.smallControlSize = Math.round(22 * this.scale);
-			this.popUpFillSize = Math.round(552 * this.scale);
-			this.calloutBackgroundMinSize = Math.round(11 * this.scale);
-			this.scrollBarGutterSize = Math.round(4 * this.scale);
+			this.gridSize = 44;//88
+			this.smallGutterSize = 8;//11
+			this.gutterSize = 12;//22
+			this.controlSize = 28;//58
+			this.smallControlSize = 12;//22
+			this.popUpFillSize = 276;//552
+			this.calloutBackgroundMinSize = 12;
+			this.calloutArrowOverlapGap = -2;
+			this.scrollBarGutterSize = 2;
 			this.wideControlSize = this.gridSize * 3 + this.gutterSize * 2;
+			this.borderSize = 1;
 		}
 
 		/**
@@ -681,19 +732,20 @@ package com.gerantech.islamic.themes
 		 */
 		protected function initializeFonts():void
 		{
-			this.smallFontSize = Math.round(18 * this.scale);
-			this.regularFontSize = Math.round(24 * this.scale);
-			this.largeFontSize = Math.round(28 * this.scale);
-			this.extraLargeFontSize = Math.round(36 * this.scale);
+			this.smallFontSize = 10;//18
+			this.regularFontSize = 12;//24
+			this.largeFontSize = 14;//28
+			this.extraLargeFontSize = 18;//36
 
 			//these are for components that don't use FTE
-			this.scrollTextTextFormat = new TextFormat("SourceSans", this.regularFontSize, LIGHT_TEXT_COLOR);
-			this.scrollTextDisabledTextFormat = new TextFormat("SourceSans", this.regularFontSize, DISABLED_TEXT_COLOR);
+			this.scrollTextTextFormat = new TextFormat(FONT_NAME, this.regularFontSize, LIGHT_TEXT_COLOR);
+			this.scrollTextDisabledTextFormat = new TextFormat(FONT_NAME, this.regularFontSize, DISABLED_TEXT_COLOR);
 
 			this.regularFontDescription = new FontDescription(FONT_NAME, FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);
 			this.boldFontDescription = new FontDescription(FONT_NAME, FontWeight.BOLD, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);
 
 			this.headerElementFormat = new ElementFormat(this.boldFontDescription, this.extraLargeFontSize, LIGHT_TEXT_COLOR);
+			this.headerDisabledElementFormat = new ElementFormat(this.boldFontDescription, this.extraLargeFontSize, DISABLED_TEXT_COLOR);
 
 			this.darkUIElementFormat = new ElementFormat(this.boldFontDescription, this.regularFontSize, DARK_TEXT_COLOR);
 			this.lightUIElementFormat = new ElementFormat(this.boldFontDescription, this.regularFontSize, LIGHT_TEXT_COLOR);
@@ -725,83 +777,114 @@ package com.gerantech.islamic.themes
 		 */
 		protected function initializeTextures():void
 		{
-			var backgroundSkinTexture:Texture = Assets.getTexture("background-skin");
-			var backgroundInsetSkinTexture:Texture = Assets.getTexture("background-inset-skin");
-			var backgroundDownSkinTexture:Texture = Assets.getTexture("background-down-skin");
-			var backgroundDisabledSkinTexture:Texture = Assets.getTexture("background-disabled-skin");
-			var backgroundFocusedSkinTexture:Texture = Assets.getTexture("background-focused-skin");
-			var backgroundPopUpSkinTexture:Texture = Assets.getTexture("background-popup-skin");
+			this.backgroundSkinTexture = Assets.getTexture("background-skin");
+			this.backgroundLightSkinTexture = Assets.getTexture("background-light-skin");
+			this.backgroundDisabledSkinTexture = Assets.getTexture("background-disabled-skin");
+			this.backgroundInsetSkinTexture = Assets.getTexture("background-inset-skin");
+			this.backgroundInsetDisabledSkinTexture = Assets.getTexture("background-inset-disabled-skin");
+			this.backgroundInsetFocusedSkinTexture = Assets.getTexture("background-focused-skin");
+			this.backgroundInsetDangerSkinTexture = Assets.getTexture("background-inset-danger-skin");
+			this.backgroundLightBorderSkinTexture = Assets.getTexture("background-light-border-skin");
+			this.backgroundDarkBorderSkinTexture = Assets.getTexture("background-dark-border-skin");
+			this.backgroundDangerBorderSkinTexture = Assets.getTexture("background-danger-border-skin");
 
-			this.backgroundSkinTextures = new Scale9Textures(backgroundSkinTexture, DEFAULT_SCALE9_GRID);
-			this.backgroundInsetSkinTextures = new Scale9Textures(backgroundInsetSkinTexture, DEFAULT_SCALE9_GRID);
-			this.backgroundDisabledSkinTextures = new Scale9Textures(backgroundDisabledSkinTexture, DEFAULT_SCALE9_GRID);
-			this.backgroundFocusedSkinTextures = new Scale9Textures(backgroundFocusedSkinTexture, DEFAULT_SCALE9_GRID);
-			this.backgroundPopUpSkinTextures = new Scale9Textures(backgroundPopUpSkinTexture, DEFAULT_SCALE9_GRID);
+			this.buttonUpSkinTexture = Assets.getTexture("button-up-skin");
+			this.buttonDownSkinTexture = Assets.getTexture("button-down-skin");
+			this.buttonDisabledSkinTexture = Assets.getTexture("button-disabled-skin");
+			this.buttonSelectedUpSkinTexture = Assets.getTexture("toggle-button-selected-up-skin");
+			this.buttonSelectedDisabledSkinTexture = Assets.getTexture("toggle-button-selected-disabled-skin");
+			this.buttonCallToActionUpSkinTexture = Assets.getTexture("call-to-action-button-up-skin");
+			this.buttonCallToActionDownSkinTexture = Assets.getTexture("call-to-action-button-down-skin");
+			this.buttonDangerUpSkinTexture = Assets.getTexture("danger-button-up-skin");
+			this.buttonDangerDownSkinTexture = Assets.getTexture("danger-button-down-skin");
+			this.buttonBackUpSkinTexture = Assets.getTexture("back-button-up-skin");
+			this.buttonBackDownSkinTexture = Assets.getTexture("back-button-down-skin");
+			this.buttonBackDisabledSkinTexture = Assets.getTexture("back-button-disabled-skin");
+			this.buttonForwardUpSkinTexture = Assets.getTexture("forward-button-up-skin");
+			this.buttonForwardDownSkinTexture = Assets.getTexture("forward-button-down-skin");
+			this.buttonForwardDisabledSkinTexture = Assets.getTexture("forward-button-disabled-skin");
 
-			this.buttonUpSkinTextures = new Scale9Textures(Assets.getTexture("button-up-skin"), BUTTON_SCALE9_GRID);
-			this.buttonDownSkinTextures = new Scale9Textures(Assets.getTexture("button-down-skin"), BUTTON_SCALE9_GRID);
-			this.buttonDisabledSkinTextures = new Scale9Textures(Assets.getTexture("button-disabled-skin"), BUTTON_SCALE9_GRID);
-			this.buttonSelectedUpSkinTextures = new Scale9Textures(Assets.getTexture("button-selected-up-skin"), BUTTON_SELECTED_SCALE9_GRID);
-			this.buttonSelectedDisabledSkinTextures = new Scale9Textures(Assets.getTexture("button-selected-disabled-skin"), BUTTON_SELECTED_SCALE9_GRID);
-			this.buttonCallToActionUpSkinTextures = new Scale9Textures(Assets.getTexture("button-call-to-action-up-skin"), BUTTON_SCALE9_GRID);
-			this.buttonCallToActionDownSkinTextures = new Scale9Textures(Assets.getTexture("button-call-to-action-down-skin"), BUTTON_SCALE9_GRID);
-			this.buttonDangerUpSkinTextures = new Scale9Textures(Assets.getTexture("button-danger-up-skin"), BUTTON_SCALE9_GRID);
-			this.buttonDangerDownSkinTextures = new Scale9Textures(Assets.getTexture("button-danger-down-skin"), BUTTON_SCALE9_GRID);
-			this.buttonBackUpSkinTextures = new Scale3Textures(Assets.getTexture("button-back-up-skin"), BACK_BUTTON_SCALE3_REGION1, BACK_BUTTON_SCALE3_REGION2);
-			this.buttonBackDownSkinTextures = new Scale3Textures(Assets.getTexture("button-back-down-skin"), BACK_BUTTON_SCALE3_REGION1, BACK_BUTTON_SCALE3_REGION2);
-			this.buttonBackDisabledSkinTextures = new Scale3Textures(Assets.getTexture("button-back-disabled-skin"), BACK_BUTTON_SCALE3_REGION1, BACK_BUTTON_SCALE3_REGION2);
-			this.buttonForwardUpSkinTextures = new Scale3Textures(Assets.getTexture("button-forward-up-skin"), FORWARD_BUTTON_SCALE3_REGION1, FORWARD_BUTTON_SCALE3_REGION2);
-			this.buttonForwardDownSkinTextures = new Scale3Textures(Assets.getTexture("button-forward-down-skin"), FORWARD_BUTTON_SCALE3_REGION1, FORWARD_BUTTON_SCALE3_REGION2);
-			this.buttonForwardDisabledSkinTextures = new Scale3Textures(Assets.getTexture("button-forward-disabled-skin"), FORWARD_BUTTON_SCALE3_REGION1, FORWARD_BUTTON_SCALE3_REGION2);
+			this.tabUpSkinTexture = Texture.fromTexture(Assets.getTexture("tab-up-skin"), TAB_SKIN_TEXTURE_REGION);
+			this.tabDownSkinTexture = Texture.fromTexture(Assets.getTexture("tab-down-skin"), TAB_SKIN_TEXTURE_REGION);
+			this.tabDisabledSkinTexture = Texture.fromTexture(Assets.getTexture("tab-disabled-skin"), TAB_SKIN_TEXTURE_REGION);
+			this.tabSelectedUpSkinTexture = Texture.fromTexture(Assets.getTexture("tab-selected-up-skin"), TAB_SKIN_TEXTURE_REGION);
+			this.tabSelectedDisabledSkinTexture = Texture.fromTexture(Assets.getTexture("tab-selected-disabled-skin"), TAB_SKIN_TEXTURE_REGION);
 
-			this.tabDownSkinTextures = new Scale9Textures(Assets.getTexture("tab-down-skin"), TAB_SCALE9_GRID);
-			this.tabSelectedSkinTextures = new Scale9Textures(Assets.getTexture("tab-selected-skin"), TAB_SCALE9_GRID);
-			this.tabSelectedDisabledSkinTextures = new Scale9Textures(Assets.getTexture("tab-selected-disabled-skin"), TAB_SCALE9_GRID);
+			this.pickerListButtonIconTexture = Assets.getTexture("picker-list-button-icon");
+			this.pickerListButtonSelectedIconTexture = Assets.getTexture("picker-list-button-selected-icon");
+			this.pickerListButtonIconDisabledTexture = Assets.getTexture("picker-list-button-disabled-icon");
+			this.pickerListItemSelectedIconTexture = Assets.getTexture("picker-list-item-renderer-selected-icon");
 
-			this.pickerListButtonIconTexture = Assets.getTexture("picker-list-icon");
-			this.pickerListButtonIconDisabledTexture = Assets.getTexture("picker-list-icon-disabled");
-			this.pickerListItemSelectedIconTexture = Assets.getTexture("picker-list-item-selected-icon");
+			this.spinnerListSelectionOverlaySkinTexture = Assets.getTexture("spinner-list-selection-overlay-skin");
 
-			this.radioUpIconTexture = backgroundSkinTexture;
-			this.radioDownIconTexture = backgroundDownSkinTexture;
-			this.radioDisabledIconTexture = backgroundDisabledSkinTexture;
-			this.radioSelectedUpIconTexture = Assets.getTexture("radio-selected-up-icon");
-			this.radioSelectedDownIconTexture = Assets.getTexture("radio-selected-down-icon");
-			this.radioSelectedDisabledIconTexture = Assets.getTexture("radio-selected-disabled-icon");
-
-			this.checkUpIconTexture = backgroundSkinTexture;
-			this.checkDownIconTexture = backgroundDownSkinTexture;
-			this.checkDisabledIconTexture = backgroundDisabledSkinTexture;
+			this.checkUpIconTexture = Assets.getTexture("check-up-icon");
+			this.checkDownIconTexture = Assets.getTexture("check-down-icon");
+			this.checkDisabledIconTexture = Assets.getTexture("check-disabled-icon");
 			this.checkSelectedUpIconTexture = Assets.getTexture("check-selected-up-icon");
 			this.checkSelectedDownIconTexture = Assets.getTexture("check-selected-down-icon");
 			this.checkSelectedDisabledIconTexture = Assets.getTexture("check-selected-disabled-icon");
 
-			this.pageIndicatorSelectedSkinTexture = Assets.getTexture("page-indicator-selected-skin");
-			this.pageIndicatorNormalSkinTexture = Assets.getTexture("page-indicator-normal-skin");
+			this.radioUpIconTexture = this.checkUpIconTexture;
+			this.radioDownIconTexture = this.checkDownIconTexture;
+			this.radioDisabledIconTexture = this.checkDisabledIconTexture;
+			this.radioSelectedUpIconTexture = Assets.getTexture("radio-selected-up-icon");
+			this.radioSelectedDownIconTexture = Assets.getTexture("radio-selected-down-icon");
+			this.radioSelectedDisabledIconTexture = Assets.getTexture("radio-selected-disabled-icon");
+
+			this.pageIndicatorSelectedSkinTexture = Assets.getTexture("page-indicator-selected-symbol");
+			this.pageIndicatorNormalSkinTexture = Assets.getTexture("page-indicator-symbol");
 
 			this.searchIconTexture = Assets.getTexture("search-icon");
-			this.searchIconDisabledTexture = Assets.getTexture("search-icon-disabled");
+			this.searchIconDisabledTexture = Assets.getTexture("search-disabled-icon");
 
-			this.itemRendererUpSkinTextures = new Scale9Textures(Assets.getTexture("list-item-up-skin"), ITEM_RENDERER_SCALE9_GRID);
-			this.itemRendererSelectedSkinTextures = new Scale9Textures(Assets.getTexture("list-item-selected-skin"), ITEM_RENDERER_SCALE9_GRID);
-			this.insetItemRendererFirstUpSkinTextures = new Scale9Textures(Assets.getTexture("list-inset-item-first-up-skin"), INSET_ITEM_RENDERER_FIRST_SCALE9_GRID);
-			this.insetItemRendererFirstSelectedSkinTextures = new Scale9Textures(Assets.getTexture("list-inset-item-first-selected-skin"), INSET_ITEM_RENDERER_FIRST_SCALE9_GRID);
-			this.insetItemRendererLastUpSkinTextures = new Scale9Textures(Assets.getTexture("list-inset-item-last-up-skin"), INSET_ITEM_RENDERER_LAST_SCALE9_GRID);
-			this.insetItemRendererLastSelectedSkinTextures = new Scale9Textures(Assets.getTexture("list-inset-item-last-selected-skin"), INSET_ITEM_RENDERER_LAST_SCALE9_GRID);
-			this.insetItemRendererSingleUpSkinTextures = new Scale9Textures(Assets.getTexture("list-inset-item-single-up-skin"), INSET_ITEM_RENDERER_SINGLE_SCALE9_GRID);
-			this.insetItemRendererSingleSelectedSkinTextures = new Scale9Textures(Assets.getTexture("list-inset-item-single-selected-skin"), INSET_ITEM_RENDERER_SINGLE_SCALE9_GRID);
+			this.itemRendererUpSkinTexture = Assets.getTexture("item-renderer-up-skin");
+			this.itemRendererSelectedSkinTexture = Assets.getTexture("item-renderer-selected-up-skin");
+			this.insetItemRendererUpSkinTexture = Assets.getTexture("inset-item-renderer-up-skin");
+			this.insetItemRendererSelectedSkinTexture = Assets.getTexture("inset-item-renderer-selected-up-skin");
+			this.insetItemRendererFirstUpSkinTexture = Assets.getTexture("first-inset-item-renderer-up-skin");
+			this.insetItemRendererFirstSelectedSkinTexture = Assets.getTexture("first-inset-item-renderer-selected-up-skin");
+			this.insetItemRendererLastUpSkinTexture = Assets.getTexture("last-inset-item-renderer-up-skin");
+			this.insetItemRendererLastSelectedSkinTexture = Assets.getTexture("last-inset-item-renderer-selected-up-skin");
+			this.insetItemRendererSingleUpSkinTexture = Assets.getTexture("single-inset-item-renderer-up-skin");
+			this.insetItemRendererSingleSelectedSkinTexture = Assets.getTexture("single-inset-item-renderer-selected-up-skin");
 
-			this.headerBackgroundSkinTexture = Assets.getTexture("header-background-skin");
+			var headerBackgroundSkinTexture:Texture = Assets.getTexture("header-background-skin");
+			var popUpHeaderBackgroundSkinTexture:Texture = Assets.getTexture("header-popup-background-skin");
+			this.headerBackgroundSkinTexture = Texture.fromTexture(headerBackgroundSkinTexture, HEADER_SKIN_TEXTURE_REGION);
+			this.popUpHeaderBackgroundSkinTexture = Texture.fromTexture(popUpHeaderBackgroundSkinTexture, HEADER_SKIN_TEXTURE_REGION);
 
 			this.calloutTopArrowSkinTexture = Assets.getTexture("callout-arrow-top-skin");
 			this.calloutRightArrowSkinTexture = Assets.getTexture("callout-arrow-right-skin");
 			this.calloutBottomArrowSkinTexture = Assets.getTexture("callout-arrow-bottom-skin");
 			this.calloutLeftArrowSkinTexture = Assets.getTexture("callout-arrow-left-skin");
+			this.dangerCalloutTopArrowSkinTexture = Assets.getTexture("danger-callout-arrow-top-skin");
+			this.dangerCalloutRightArrowSkinTexture = Assets.getTexture("danger-callout-arrow-right-skin");
+			this.dangerCalloutBottomArrowSkinTexture = Assets.getTexture("danger-callout-arrow-bottom-skin");
+			this.dangerCalloutLeftArrowSkinTexture = Assets.getTexture("danger-callout-arrow-left-skin");
 
-			this.horizontalScrollBarThumbSkinTextures = new Scale3Textures(Assets.getTexture("horizontal-scroll-bar-thumb-skin"), SCROLL_BAR_THUMB_REGION1, SCROLL_BAR_THUMB_REGION2, Scale3Textures.DIRECTION_HORIZONTAL);
-			this.verticalScrollBarThumbSkinTextures = new Scale3Textures(Assets.getTexture("vertical-scroll-bar-thumb-skin"), SCROLL_BAR_THUMB_REGION1, SCROLL_BAR_THUMB_REGION2, Scale3Textures.DIRECTION_VERTICAL);
+			this.horizontalScrollBarThumbSkinTexture = Assets.getTexture("horizontal-simple-scroll-bar-thumb-skin");
+			this.verticalScrollBarThumbSkinTexture = Assets.getTexture("vertical-simple-scroll-bar-thumb-skin");
 
-			StandardIcons.listDrillDownAccessoryTexture = Assets.getTexture("list-accessory-drill-down-icon");
+			this.listDrillDownAccessoryTexture = Assets.getTexture("item-renderer-drill-down-accessory-icon");
+			this.listDrillDownAccessorySelectedTexture = Assets.getTexture("item-renderer-drill-down-accessory-selected-icon");
+			
+			this.playPauseButtonPlayUpIconTexture = Assets.getTexture("play-pause-toggle-button-play-up-icon");
+			this.playPauseButtonPlayDownIconTexture = Assets.getTexture("play-pause-toggle-button-play-down-icon");
+			this.playPauseButtonPauseUpIconTexture = Assets.getTexture("play-pause-toggle-button-pause-up-icon");
+			this.playPauseButtonPauseDownIconTexture = Assets.getTexture("play-pause-toggle-button-pause-down-icon");
+			this.overlayPlayPauseButtonPlayUpIconTexture = Assets.getTexture("overlay-play-pause-toggle-button-play-up-icon");
+			this.overlayPlayPauseButtonPlayDownIconTexture = Assets.getTexture("overlay-play-pause-toggle-button-play-down-icon");
+			this.fullScreenToggleButtonEnterUpIconTexture = Assets.getTexture("full-screen-toggle-button-enter-up-icon");
+			this.fullScreenToggleButtonEnterDownIconTexture = Assets.getTexture("full-screen-toggle-button-enter-down-icon");
+			this.fullScreenToggleButtonExitUpIconTexture = Assets.getTexture("full-screen-toggle-button-exit-up-icon");
+			this.fullScreenToggleButtonExitDownIconTexture = Assets.getTexture("full-screen-toggle-button-exit-down-icon");
+			this.muteToggleButtonMutedUpIconTexture = Assets.getTexture("mute-toggle-button-muted-up-icon");
+			this.muteToggleButtonMutedDownIconTexture = Assets.getTexture("mute-toggle-button-muted-down-icon");
+			this.muteToggleButtonLoudUpIconTexture = Assets.getTexture("mute-toggle-button-loud-up-icon");
+			this.muteToggleButtonLoudDownIconTexture = Assets.getTexture("mute-toggle-button-loud-down-icon");
+			this.volumeSliderMinimumTrackSkinTexture = Assets.getTexture("volume-slider-minimum-track-skin");
+			this.volumeSliderMaximumTrackSkinTexture = Assets.getTexture("volume-slider-maximum-track-skin");
+			this.seekSliderProgressSkinTexture = Assets.getTexture("seek-slider-progress-skin");
 		}
 
 		/**
@@ -813,7 +896,7 @@ package com.gerantech.islamic.themes
 			this.getStyleProviderForClass(Alert).defaultStyleFunction = this.setAlertStyles;
 			this.getStyleProviderForClass(ButtonGroup).setFunctionForStyleName(Alert.DEFAULT_CHILD_STYLE_NAME_BUTTON_GROUP, this.setAlertButtonGroupStyles);
 			this.getStyleProviderForClass(Button).setFunctionForStyleName(THEME_STYLE_NAME_ALERT_BUTTON_GROUP_BUTTON, this.setAlertButtonGroupButtonStyles);
-			this.getStyleProviderForClass(Header).setFunctionForStyleName(Alert.DEFAULT_CHILD_STYLE_NAME_HEADER, this.setHeaderWithoutBackgroundStyles);
+			this.getStyleProviderForClass(Header).setFunctionForStyleName(Alert.DEFAULT_CHILD_STYLE_NAME_HEADER, this.setPopUpHeaderStyles);
 			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(Alert.DEFAULT_CHILD_STYLE_NAME_MESSAGE, this.setAlertMessageTextRendererStyles);
 
 			//button
@@ -823,17 +906,25 @@ package com.gerantech.islamic.themes
 			this.getStyleProviderForClass(Button).setFunctionForStyleName(Button.ALTERNATE_STYLE_NAME_DANGER_BUTTON, this.setDangerButtonStyles);
 			this.getStyleProviderForClass(Button).setFunctionForStyleName(Button.ALTERNATE_STYLE_NAME_BACK_BUTTON, this.setBackButtonStyles);
 			this.getStyleProviderForClass(Button).setFunctionForStyleName(Button.ALTERNATE_STYLE_NAME_FORWARD_BUTTON, this.setForwardButtonStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(Button.DEFAULT_CHILD_STYLE_NAME_LABEL, this.setButtonLabelStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(THEME_STYLE_NAME_QUIET_BUTTON_LABEL, this.setQuietButtonLabelStyles);
 
 			//button group
 			this.getStyleProviderForClass(ButtonGroup).defaultStyleFunction = this.setButtonGroupStyles;
 			this.getStyleProviderForClass(Button).setFunctionForStyleName(ButtonGroup.DEFAULT_CHILD_STYLE_NAME_BUTTON, this.setButtonGroupButtonStyles);
 			this.getStyleProviderForClass(ToggleButton).setFunctionForStyleName(ButtonGroup.DEFAULT_CHILD_STYLE_NAME_BUTTON, this.setButtonGroupButtonStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(THEME_STYLE_NAME_BUTTON_GROUP_BUTTON_LABEL, this.setButtonGroupButtonLabelStyles);
 
 			//callout
 			this.getStyleProviderForClass(Callout).defaultStyleFunction = this.setCalloutStyles;
 
 			//check
 			this.getStyleProviderForClass(Check).defaultStyleFunction = this.setCheckStyles;
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(Check.DEFAULT_CHILD_STYLE_NAME_LABEL, this.setCheckLabelStyles);
+			
+			//date time spinner
+			this.getStyleProviderForClass(SpinnerList).setFunctionForStyleName(DateTimeSpinner.DEFAULT_CHILD_STYLE_NAME_LIST, this.setDateTimeSpinnerListStyles);
+			this.getStyleProviderForClass(DefaultListItemRenderer).setFunctionForStyleName(THEME_STYLE_NAME_DATE_TIME_SPINNER_LIST_ITEM_RENDERER, this.setDateTimeSpinnerListItemRendererStyles);
 
 			//drawers
 			this.getStyleProviderForClass(Drawers).defaultStyleFunction = this.setDrawersStyles;
@@ -841,28 +932,27 @@ package com.gerantech.islamic.themes
 			//grouped list (see also: item renderers)
 			this.getStyleProviderForClass(GroupedList).defaultStyleFunction = this.setGroupedListStyles;
 			this.getStyleProviderForClass(GroupedList).setFunctionForStyleName(GroupedList.ALTERNATE_STYLE_NAME_INSET_GROUPED_LIST, this.setInsetGroupedListStyles);
+			this.getStyleProviderForClass(DefaultGroupedListItemRenderer).defaultStyleFunction = this.setItemRendererStyles;
+			this.getStyleProviderForClass(DefaultGroupedListItemRenderer).setFunctionForStyleName(GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_ITEM_RENDERER, this.setInsetGroupedListMiddleItemRendererStyles);
+			this.getStyleProviderForClass(DefaultGroupedListItemRenderer).setFunctionForStyleName(GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_FIRST_ITEM_RENDERER, this.setInsetGroupedListFirstItemRendererStyles);
+			this.getStyleProviderForClass(DefaultGroupedListItemRenderer).setFunctionForStyleName(GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_LAST_ITEM_RENDERER, this.setInsetGroupedListLastItemRendererStyles);
+			this.getStyleProviderForClass(DefaultGroupedListItemRenderer).setFunctionForStyleName(GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_SINGLE_ITEM_RENDERER, this.setInsetGroupedListSingleItemRendererStyles);
+			this.getStyleProviderForClass(DefaultGroupedListItemRenderer).setFunctionForStyleName(DefaultGroupedListItemRenderer.ALTERNATE_STYLE_NAME_DRILL_DOWN, this.setDrillDownItemRendererStyles);
+			this.getStyleProviderForClass(DefaultGroupedListItemRenderer).setFunctionForStyleName(DefaultGroupedListItemRenderer.ALTERNATE_STYLE_NAME_CHECK, this.setCheckItemRendererStyles);
 
 			//header
 			this.getStyleProviderForClass(Header).defaultStyleFunction = this.setHeaderStyles;
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(Header.DEFAULT_CHILD_STYLE_NAME_TITLE, this.setHeaderTitleProperties);
 
 			//header and footer renderers for grouped list
 			this.getStyleProviderForClass(DefaultGroupedListHeaderOrFooterRenderer).defaultStyleFunction = this.setGroupedListHeaderRendererStyles;
 			this.getStyleProviderForClass(DefaultGroupedListHeaderOrFooterRenderer).setFunctionForStyleName(GroupedList.DEFAULT_CHILD_STYLE_NAME_FOOTER_RENDERER, this.setGroupedListFooterRendererStyles);
 			this.getStyleProviderForClass(DefaultGroupedListHeaderOrFooterRenderer).setFunctionForStyleName(GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_HEADER_RENDERER, this.setInsetGroupedListHeaderRendererStyles);
 			this.getStyleProviderForClass(DefaultGroupedListHeaderOrFooterRenderer).setFunctionForStyleName(GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_FOOTER_RENDERER, this.setInsetGroupedListFooterRendererStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(DefaultGroupedListHeaderOrFooterRenderer.DEFAULT_CHILD_STYLE_NAME_CONTENT_LABEL, this.setGroupedListHeaderContentLabelStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(THEME_STYLE_NAME_GROUPED_LIST_FOOTER_CONTENT_LABEL, this.setGroupedListFooterContentLabelStyles);
 
-			//item renderers for lists
-			this.getStyleProviderForClass(DefaultGroupedListItemRenderer).defaultStyleFunction = this.setItemRendererStyles;
-			this.getStyleProviderForClass(DefaultListItemRenderer).defaultStyleFunction = this.setItemRendererStyles;
-			//the picker list has a custom item renderer name defined by the theme
-			this.getStyleProviderForClass(DefaultListItemRenderer).setFunctionForStyleName(THEME_STYLE_NAME_PICKER_LIST_ITEM_RENDERER, this.setPickerListItemRendererStyles);
-			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(BaseDefaultItemRenderer.DEFAULT_CHILD_STYLE_NAME_ACCESSORY_LABEL, this.setItemRendererAccessoryLabelRendererStyles);
-			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(BaseDefaultItemRenderer.DEFAULT_CHILD_STYLE_NAME_ICON_LABEL, this.setItemRendererIconLabelStyles);
 
-			this.getStyleProviderForClass(DefaultGroupedListItemRenderer).setFunctionForStyleName(GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_ITEM_RENDERER, this.setInsetGroupedListMiddleItemRendererStyles);
-			this.getStyleProviderForClass(DefaultGroupedListItemRenderer).setFunctionForStyleName(GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_FIRST_ITEM_RENDERER, this.setInsetGroupedListFirstItemRendererStyles);
-			this.getStyleProviderForClass(DefaultGroupedListItemRenderer).setFunctionForStyleName(GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_LAST_ITEM_RENDERER, this.setInsetGroupedListLastItemRendererStyles);
-			this.getStyleProviderForClass(DefaultGroupedListItemRenderer).setFunctionForStyleName(GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_SINGLE_ITEM_RENDERER, this.setInsetGroupedListSingleItemRendererStyles);
 
 			//labels
 			this.getStyleProviderForClass(Label).defaultStyleFunction = this.setLabelStyles;
@@ -874,10 +964,20 @@ package com.gerantech.islamic.themes
 
 			//list (see also: item renderers)
 			this.getStyleProviderForClass(List).defaultStyleFunction = this.setListStyles;
+			this.getStyleProviderForClass(DefaultListItemRenderer).defaultStyleFunction = this.setItemRendererStyles;
+			this.getStyleProviderForClass(DefaultListItemRenderer).setFunctionForStyleName(DefaultListItemRenderer.ALTERNATE_STYLE_NAME_DRILL_DOWN, this.setDrillDownItemRendererStyles);
+			this.getStyleProviderForClass(DefaultListItemRenderer).setFunctionForStyleName(DefaultListItemRenderer.ALTERNATE_STYLE_NAME_CHECK, this.setCheckItemRendererStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(BaseDefaultItemRenderer.DEFAULT_CHILD_STYLE_NAME_LABEL, this.setItemRendererLabelStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(BaseDefaultItemRenderer.DEFAULT_CHILD_STYLE_NAME_ACCESSORY_LABEL, this.setItemRendererAccessoryLabelStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(BaseDefaultItemRenderer.DEFAULT_CHILD_STYLE_NAME_ICON_LABEL, this.setItemRendererIconLabelStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(THEME_STYLE_NAME_CHECK_ITEM_RENDERER_LABEL, this.setCheckItemRendererLabelStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(THEME_STYLE_NAME_CHECK_ITEM_RENDERER_ICON_LABEL, this.setCheckItemRendererIconLabelStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(THEME_STYLE_NAME_CHECK_ITEM_RENDERER_ACCESSORY_LABEL, this.setCheckItemRendererAccessoryLabelStyles);
 
 			//numeric stepper
 			this.getStyleProviderForClass(NumericStepper).defaultStyleFunction = this.setNumericStepperStyles;
 			this.getStyleProviderForClass(TextInput).setFunctionForStyleName(NumericStepper.DEFAULT_CHILD_STYLE_NAME_TEXT_INPUT, this.setNumericStepperTextInputStyles);
+			this.getStyleProviderForClass(TextBlockTextEditor).setFunctionForStyleName(THEME_STYLE_NAME_NUMERIC_STEPPER_TEXT_INPUT_EDITOR, this.setNumericStepperTextInputEditorStyles);
 			this.getStyleProviderForClass(Button).setFunctionForStyleName(NumericStepper.DEFAULT_CHILD_STYLE_NAME_DECREMENT_BUTTON, this.setNumericStepperButtonStyles);
 			this.getStyleProviderForClass(Button).setFunctionForStyleName(NumericStepper.DEFAULT_CHILD_STYLE_NAME_INCREMENT_BUTTON, this.setNumericStepperButtonStyles);
 
@@ -886,13 +986,15 @@ package com.gerantech.islamic.themes
 
 			//panel
 			this.getStyleProviderForClass(Panel).defaultStyleFunction = this.setPanelStyles;
-			this.getStyleProviderForClass(Header).setFunctionForStyleName(Panel.DEFAULT_CHILD_STYLE_NAME_HEADER, this.setHeaderWithoutBackgroundStyles);
+			this.getStyleProviderForClass(Header).setFunctionForStyleName(Panel.DEFAULT_CHILD_STYLE_NAME_HEADER, this.setPopUpHeaderStyles);
 
 			//panel screen
+			this.getStyleProviderForClass(PanelScreen).defaultStyleFunction = this.setPanelScreenStyles;
 			this.getStyleProviderForClass(Header).setFunctionForStyleName(PanelScreen.DEFAULT_CHILD_STYLE_NAME_HEADER, this.setPanelScreenHeaderStyles);
 
 			//picker list (see also: list and item renderers)
 			this.getStyleProviderForClass(PickerList).defaultStyleFunction = this.setPickerListStyles;
+			this.getStyleProviderForClass(List).setFunctionForStyleName(PickerList.DEFAULT_CHILD_STYLE_NAME_LIST, this.setPickerListPopUpListStyles);
 			this.getStyleProviderForClass(Button).setFunctionForStyleName(PickerList.DEFAULT_CHILD_STYLE_NAME_BUTTON, this.setPickerListButtonStyles);
 			this.getStyleProviderForClass(ToggleButton).setFunctionForStyleName(PickerList.DEFAULT_CHILD_STYLE_NAME_BUTTON, this.setPickerListButtonStyles);
 
@@ -901,10 +1003,14 @@ package com.gerantech.islamic.themes
 
 			//radio
 			this.getStyleProviderForClass(Radio).defaultStyleFunction = this.setRadioStyles;
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(Radio.DEFAULT_CHILD_STYLE_NAME_LABEL, this.setRadioLabelStyles);
 
 			//scroll container
 			this.getStyleProviderForClass(ScrollContainer).defaultStyleFunction = this.setScrollContainerStyles;
 			this.getStyleProviderForClass(ScrollContainer).setFunctionForStyleName(ScrollContainer.ALTERNATE_STYLE_NAME_TOOLBAR, this.setToolbarScrollContainerStyles);
+			
+			//scroll screen
+			this.getStyleProviderForClass(ScrollScreen).defaultStyleFunction = this.setScrollScreenStyles;
 
 			//scroll text
 			this.getStyleProviderForClass(ScrollText).defaultStyleFunction = this.setScrollTextStyles;
@@ -922,35 +1028,77 @@ package com.gerantech.islamic.themes
 			this.getStyleProviderForClass(Button).setFunctionForStyleName(THEME_STYLE_NAME_VERTICAL_SLIDER_MINIMUM_TRACK, this.setVerticalSliderMinimumTrackStyles);
 			this.getStyleProviderForClass(Button).setFunctionForStyleName(THEME_STYLE_NAME_VERTICAL_SLIDER_MAXIMUM_TRACK, this.setVerticalSliderMaximumTrackStyles);
 
+			//spinner list
+			this.getStyleProviderForClass(SpinnerList).defaultStyleFunction = this.setSpinnerListStyles;
+			this.getStyleProviderForClass(DefaultListItemRenderer).setFunctionForStyleName(THEME_STYLE_NAME_SPINNER_LIST_ITEM_RENDERER, this.setSpinnerListItemRendererStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(THEME_STYLE_NAME_SPINNER_LIST_ITEM_RENDERER_LABEL, this.setSpinnerListItemRendererLabelStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(THEME_STYLE_NAME_SPINNER_LIST_ITEM_RENDERER_ICON_LABEL, this.setSpinnerListItemRendererIconLabelStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(THEME_STYLE_NAME_SPINNER_LIST_ITEM_RENDERER_ACCESSORY_LABEL, this.setSpinnerListItemRendererAccessoryLabelStyles);
+
 			//tab bar
 			this.getStyleProviderForClass(TabBar).defaultStyleFunction = this.setTabBarStyles;
 			this.getStyleProviderForClass(ToggleButton).setFunctionForStyleName(TabBar.DEFAULT_CHILD_STYLE_NAME_TAB, this.setTabStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(THEME_STYLE_NAME_TAB_LABEL, this.setTabLabelStyles);
 
 			//text input
 			this.getStyleProviderForClass(TextInput).defaultStyleFunction = this.setTextInputStyles;
 			this.getStyleProviderForClass(TextInput).setFunctionForStyleName(TextInput.ALTERNATE_STYLE_NAME_SEARCH_TEXT_INPUT, this.setSearchTextInputStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(TextInput.DEFAULT_CHILD_STYLE_NAME_PROMPT, this.setTextInputPromptStyles);
+			this.getStyleProviderForClass(StageTextTextEditor).setFunctionForStyleName(TextInput.DEFAULT_CHILD_STYLE_NAME_TEXT_EDITOR, this.setTextInputTextEditorStyles);
+			this.getStyleProviderForClass(TextCallout).setFunctionForStyleName(TextInput.DEFAULT_CHILD_STYLE_NAME_ERROR_CALLOUT, this.setTextInputErrorCalloutStyles);
 
 			//text area
 			this.getStyleProviderForClass(TextArea).defaultStyleFunction = this.setTextAreaStyles;
+			this.getStyleProviderForClass(TextFieldTextEditorViewPort).setFunctionForStyleName(TextArea.DEFAULT_CHILD_STYLE_NAME_TEXT_EDITOR, this.setTextAreaTextEditorStyles);
+			this.getStyleProviderForClass(TextCallout).setFunctionForStyleName(TextArea.DEFAULT_CHILD_STYLE_NAME_ERROR_CALLOUT, this.setTextAreaErrorCalloutStyles);
+
+			//text callout
+			this.getStyleProviderForClass(TextCallout).defaultStyleFunction = this.setTextCalloutStyles;
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(TextCallout.DEFAULT_CHILD_STYLE_NAME_TEXT_RENDERER, this.setTextCalloutTextRendererStyles);
 
 			//toggle button
 			this.getStyleProviderForClass(ToggleButton).defaultStyleFunction = this.setButtonStyles;
-			this.getStyleProviderForClass(ToggleButton).setFunctionForStyleName(Button.ALTERNATE_NAME_QUIET_BUTTON, this.setQuietButtonStyles);
+			this.getStyleProviderForClass(ToggleButton).setFunctionForStyleName(Button.ALTERNATE_STYLE_NAME_QUIET_BUTTON, this.setQuietButtonStyles);
 
 			//toggle switch
 			this.getStyleProviderForClass(ToggleSwitch).defaultStyleFunction = this.setToggleSwitchStyles;
 			this.getStyleProviderForClass(Button).setFunctionForStyleName(ToggleSwitch.DEFAULT_CHILD_STYLE_NAME_THUMB, this.setSimpleButtonStyles);
 			this.getStyleProviderForClass(ToggleButton).setFunctionForStyleName(ToggleSwitch.DEFAULT_CHILD_STYLE_NAME_THUMB, this.setSimpleButtonStyles);
 			this.getStyleProviderForClass(Button).setFunctionForStyleName(ToggleSwitch.DEFAULT_CHILD_STYLE_NAME_ON_TRACK, this.setToggleSwitchTrackStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(ToggleSwitch.DEFAULT_CHILD_STYLE_NAME_OFF_LABEL, this.setToggleSwitchOffLabelStyles);
+			this.getStyleProviderForClass(TextBlockTextRenderer).setFunctionForStyleName(ToggleSwitch.DEFAULT_CHILD_STYLE_NAME_ON_LABEL, this.setToggleSwitchOnLabelStyles);
 			//we don't need a style function for the off track in this theme
 			//the toggle switch layout uses a single track
+			
+			//media controls
+			
+			//play/pause toggle button
+			this.getStyleProviderForClass(PlayPauseToggleButton).defaultStyleFunction = this.setPlayPauseToggleButtonStyles;
+			this.getStyleProviderForClass(PlayPauseToggleButton).setFunctionForStyleName(PlayPauseToggleButton.ALTERNATE_STYLE_NAME_OVERLAY_PLAY_PAUSE_TOGGLE_BUTTON, this.setOverlayPlayPauseToggleButtonStyles);
+
+			//full screen toggle button
+			this.getStyleProviderForClass(FullScreenToggleButton).defaultStyleFunction = this.setFullScreenToggleButtonStyles;
+
+			//mute toggle button
+			this.getStyleProviderForClass(MuteToggleButton).defaultStyleFunction = this.setMuteToggleButtonStyles;
+
+			//seek slider
+			this.getStyleProviderForClass(SeekSlider).defaultStyleFunction = this.setSeekSliderStyles;
+			this.getStyleProviderForClass(Button).setFunctionForStyleName(SeekSlider.DEFAULT_CHILD_STYLE_NAME_THUMB, this.setSeekSliderThumbStyles);
+			this.getStyleProviderForClass(Button).setFunctionForStyleName(SeekSlider.DEFAULT_CHILD_STYLE_NAME_MINIMUM_TRACK, this.setSeekSliderMinimumTrackStyles);
+			this.getStyleProviderForClass(Button).setFunctionForStyleName(SeekSlider.DEFAULT_CHILD_STYLE_NAME_MAXIMUM_TRACK, this.setSeekSliderMaximumTrackStyles);
+
+			//volume slider
+			this.getStyleProviderForClass(VolumeSlider).defaultStyleFunction = this.setVolumeSliderStyles;
+			this.getStyleProviderForClass(Button).setFunctionForStyleName(VolumeSlider.DEFAULT_CHILD_STYLE_NAME_THUMB, this.setVolumeSliderThumbStyles);
+			this.getStyleProviderForClass(Button).setFunctionForStyleName(VolumeSlider.DEFAULT_CHILD_STYLE_NAME_MINIMUM_TRACK, this.setVolumeSliderMinimumTrackStyles);
+			this.getStyleProviderForClass(Button).setFunctionForStyleName(VolumeSlider.DEFAULT_CHILD_STYLE_NAME_MAXIMUM_TRACK, this.setVolumeSliderMaximumTrackStyles);
 		}
 
 		protected function pageIndicatorNormalSymbolFactory():DisplayObject
 		{
 			var symbol:ImageLoader = new ImageLoader();
 			symbol.source = this.pageIndicatorNormalSkinTexture;
-			symbol.textureScale = this.scale;
 			return symbol;
 		}
 
@@ -958,17 +1106,8 @@ package com.gerantech.islamic.themes
 		{
 			var symbol:ImageLoader = new ImageLoader();
 			symbol.source = this.pageIndicatorSelectedSkinTexture;
-			symbol.textureScale = this.scale;
 			return symbol;
 		}
-
-		protected function imageLoaderFactory():ImageLoader
-		{
-			var image:ImageLoader = new ImageLoader();
-			image.textureScale = this.scale;
-			return image;
-		}
-
 	//-------------------------
 	// Shared
 	//-------------------------
@@ -981,17 +1120,14 @@ package com.gerantech.islamic.themes
 
 		protected function setSimpleButtonStyles(button:Button):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.buttonUpSkinTextures;
-			skinSelector.setValueForState(this.buttonDownSkinTextures, Button.STATE_DOWN, false);
-			skinSelector.setValueForState(this.buttonDisabledSkinTextures, Button.STATE_DISABLED, false);
-			skinSelector.displayObjectProperties =
-			{
-				width: this.controlSize,
-				height: this.controlSize,
-				textureScale: this.scale
-			};
-			button.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(this.buttonUpSkinTexture);
+			skin.setTextureForState(ButtonState.DOWN, this.buttonDownSkinTexture);
+			skin.setTextureForState(ButtonState.DISABLED, this.buttonDisabledSkinTexture);
+			skin.scale9Grid = BUTTON_SCALE9_GRID;
+			skin.width = this.controlSize;
+			skin.height = this.controlSize;
+			button.defaultSkin = skin;
+			
 			button.hasLabelTextRenderer = false;
 
 			button.minWidth = button.minHeight = this.controlSize;
@@ -1006,13 +1142,15 @@ package com.gerantech.islamic.themes
 		{
 			this.setScrollerStyles(alert);
 
-			var backgroundSkin:Scale9Image = new Scale9Image(this.backgroundPopUpSkinTextures, this.scale);
+			var backgroundSkin:Image = new Image(this.backgroundLightBorderSkinTexture);
+			backgroundSkin.scale9Grid = SMALL_BACKGROUND_SCALE9_GRID;
 			alert.backgroundSkin = backgroundSkin;
 
-			alert.paddingTop = 0;
+			alert.paddingTop = this.gutterSize;
 			alert.paddingRight = this.gutterSize;
 			alert.paddingBottom = this.smallGutterSize;
 			alert.paddingLeft = this.gutterSize;
+			alert.outerPadding = this.borderSize;
 			alert.gap = this.smallGutterSize;
 			alert.maxWidth = this.popUpFillSize;
 			alert.maxHeight = this.popUpFillSize;
@@ -1022,9 +1160,9 @@ package com.gerantech.islamic.themes
 
 		protected function setAlertButtonGroupStyles(group:ButtonGroup):void
 		{
-			group.direction = ButtonGroup.DIRECTION_HORIZONTAL;
-			group.horizontalAlign = ButtonGroup.HORIZONTAL_ALIGN_CENTER;
-			group.verticalAlign = ButtonGroup.VERTICAL_ALIGN_JUSTIFY;
+			group.direction = Direction.HORIZONTAL;
+			group.horizontalAlign = HorizontalAlign.CENTER;
+			group.verticalAlign = VerticalAlign.JUSTIFY;
 			group.distributeButtonSizes = false;
 			group.gap = this.smallGutterSize;
 			group.padding = this.smallGutterSize;
@@ -1049,15 +1187,6 @@ package com.gerantech.islamic.themes
 
 		protected function setBaseButtonStyles(button:Button):void
 		{
-			button.defaultLabelProperties.elementFormat = this.lightUIElementFormat;
-			button.disabledLabelProperties.elementFormat = this.lightUIDisabledElementFormat;
-			if(button is ToggleButton)
-			{
-				//for convenience, this function can style both a regular button
-				//and a toggle button
-				ToggleButton(button).selectedDisabledLabelProperties.elementFormat = this.darkUIDisabledElementFormat;
-			}
-
 			button.paddingTop = this.smallGutterSize;
 			button.paddingBottom = this.smallGutterSize;
 			button.paddingLeft = this.gutterSize;
@@ -1071,71 +1200,65 @@ package com.gerantech.islamic.themes
 
 		protected function setButtonStyles(button:Button):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.buttonUpSkinTextures;
-			skinSelector.setValueForState(this.buttonDownSkinTextures, Button.STATE_DOWN, false);
-			skinSelector.setValueForState(this.buttonDisabledSkinTextures, Button.STATE_DISABLED, false);
+			var skin:ImageSkin = new ImageSkin(this.buttonUpSkinTexture);
+			skin.setTextureForState(ButtonState.DOWN, this.buttonDownSkinTexture);
+			skin.setTextureForState(ButtonState.DISABLED, this.buttonDisabledSkinTexture);
 			if(button is ToggleButton)
 			{
 				//for convenience, this function can style both a regular button
 				//and a toggle button
-				skinSelector.defaultSelectedValue = this.buttonSelectedUpSkinTextures;
-				skinSelector.setValueForState(this.buttonSelectedDisabledSkinTextures, Button.STATE_DISABLED, true);
+				skin.selectedTexture = this.buttonSelectedUpSkinTexture;
+				skin.setTextureForState(ButtonState.DISABLED_AND_SELECTED, this.buttonSelectedDisabledSkinTexture);
 			}
-			skinSelector.displayObjectProperties =
-			{
-				width: this.controlSize,
-				height: this.controlSize,
-				textureScale: this.scale
-			};
-			button.stateToSkinFunction = skinSelector.updateValue;
+			skin.scale9Grid = BUTTON_SCALE9_GRID;
+			skin.width = this.controlSize;
+			skin.height = this.controlSize;
+			button.defaultSkin = skin;
 			this.setBaseButtonStyles(button);
+		}
+		
+		protected function setButtonLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.darkUIElementFormat;
+			textRenderer.disabledElementFormat = this.darkUIDisabledElementFormat;
 		}
 
 		protected function setCallToActionButtonStyles(button:Button):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.buttonCallToActionUpSkinTextures;
-			skinSelector.setValueForState(this.buttonCallToActionDownSkinTextures, Button.STATE_DOWN, false);
-			skinSelector.setValueForState(this.buttonDisabledSkinTextures, Button.STATE_DISABLED, false);
-			skinSelector.displayObjectProperties =
-			{
-				width: this.controlSize,
-				height: this.controlSize,
-				textureScale: this.scale
-			};
-			button.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(this.buttonCallToActionUpSkinTexture);
+			skin.setTextureForState(ButtonState.DOWN, this.buttonCallToActionDownSkinTexture);
+			skin.setTextureForState(ButtonState.DISABLED, this.buttonDisabledSkinTexture);
+			skin.scale9Grid = BUTTON_SCALE9_GRID;
+			skin.width = this.controlSize;
+			skin.height = this.controlSize;
+			button.defaultSkin = skin;
 			this.setBaseButtonStyles(button);
 		}
 
 		protected function setQuietButtonStyles(button:Button):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = null;
-			skinSelector.setValueForState(this.buttonDownSkinTextures, Button.STATE_DOWN, false);
+			var defaultSkin:Quad = new Quad(this.controlSize, this.controlSize, 0xff00ff);
+			defaultSkin.alpha = 0;
+			button.defaultSkin = defaultSkin;
+			
+			var otherSkin:ImageSkin = new ImageSkin(null);
+			otherSkin.setTextureForState(ButtonState.DOWN, this.buttonDownSkinTexture);
+			otherSkin.setTextureForState(ButtonState.DISABLED, this.buttonDisabledSkinTexture);
+			button.downSkin = otherSkin;
+			button.disabledSkin = otherSkin;
 			if(button is ToggleButton)
 			{
 				//for convenience, this function can style both a regular button
 				//and a toggle button
-				skinSelector.defaultSelectedValue = this.buttonSelectedUpSkinTextures;
+				otherSkin.selectedTexture = this.buttonSelectedUpSkinTexture;
+				ToggleButton(button).defaultSelectedSkin = otherSkin;
 			}
-			skinSelector.displayObjectProperties =
-			{
-				width: this.controlSize,
-				height: this.controlSize,
-				textureScale: this.scale
-			};
-			button.stateToSkinFunction = skinSelector.updateValue;
+			otherSkin.scale9Grid = BUTTON_SCALE9_GRID;
+			otherSkin.width = this.controlSize;
+			otherSkin.height = this.controlSize;
+			
+			button.customLabelStyleName = THEME_STYLE_NAME_QUIET_BUTTON_LABEL;
 
-			button.defaultLabelProperties.elementFormat = this.lightUIElementFormat;
-			button.downLabelProperties.elementFormat = this.darkUIElementFormat;
-			button.disabledLabelProperties.elementFormat = this.lightUIDisabledElementFormat;
-			if(button is ToggleButton)
-			{
-				var toggleButton:ToggleButton = ToggleButton(button);
-				toggleButton.defaultSelectedLabelProperties.elementFormat = this.darkUIElementFormat;
-				toggleButton.selectedDisabledLabelProperties.elementFormat = this.darkUIDisabledElementFormat;
-			}
 
 			button.paddingTop = button.paddingBottom = this.smallGutterSize;
 			button.paddingLeft = button.paddingRight = this.gutterSize;
@@ -1144,54 +1267,60 @@ package com.gerantech.islamic.themes
 			button.minWidth = button.minHeight = this.controlSize;
 			button.minTouchWidth = button.minTouchHeight = this.gridSize;
 		}
+		
+		protected function setQuietButtonLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightUIElementFormat;
+			textRenderer.selectedElementFormat = this.darkUIElementFormat;
+			textRenderer.setElementFormatForState(Button.STATE_DOWN, this.darkUIElementFormat);
+			textRenderer.setElementFormatForState(Button.STATE_DISABLED, this.lightUIDisabledElementFormat);
+			if(textRenderer.stateContext is ToggleButton)
+			{
+				//for convenience, this function can style both a regular button
+				//and a toggle button
+				textRenderer.setElementFormatForState(ToggleButton.STATE_DISABLED_AND_SELECTED, this.darkUIDisabledElementFormat);
+			}
+		}
 
 		protected function setDangerButtonStyles(button:Button):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.buttonDangerUpSkinTextures;
-			skinSelector.setValueForState(this.buttonDangerDownSkinTextures, Button.STATE_DOWN, false);
-			skinSelector.setValueForState(this.buttonDisabledSkinTextures, Button.STATE_DISABLED, false);
-			skinSelector.displayObjectProperties =
-			{
-				width: this.controlSize,
-				height: this.controlSize,
-				textureScale: this.scale
-			};
-			button.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(this.buttonDangerUpSkinTexture);
+			skin.setTextureForState(ButtonState.DOWN, this.buttonDangerDownSkinTexture);
+			skin.setTextureForState(ButtonState.DISABLED, this.buttonDisabledSkinTexture);
+			skin.scale9Grid = BUTTON_SCALE9_GRID;
+			skin.width = this.controlSize;
+			skin.height = this.controlSize;
+			button.defaultSkin = skin;
 			this.setBaseButtonStyles(button);
 		}
 
 		protected function setBackButtonStyles(button:Button):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.buttonBackUpSkinTextures;
-			skinSelector.setValueForState(this.buttonBackDownSkinTextures, Button.STATE_DOWN, false);
-			skinSelector.setValueForState(this.buttonBackDisabledSkinTextures, Button.STATE_DISABLED, false);
-			skinSelector.displayObjectProperties =
-			{
-				width: this.controlSize,
-				height: this.controlSize,
-				textureScale: this.scale
-			};
-			button.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(this.buttonBackUpSkinTexture);
+			skin.setTextureForState(ButtonState.DOWN, this.buttonBackDownSkinTexture);
+			skin.setTextureForState(ButtonState.DISABLED, this.buttonBackDisabledSkinTexture);
+			skin.scale9Grid = BACK_BUTTON_SCALE9_GRID;
+			skin.width = this.controlSize;
+			skin.height = this.controlSize;
+			button.defaultSkin = skin;
+			
 			this.setBaseButtonStyles(button);
+			
 			button.paddingLeft = this.gutterSize + this.smallGutterSize;
 		}
 
 		protected function setForwardButtonStyles(button:Button):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.buttonForwardUpSkinTextures;
-			skinSelector.setValueForState(this.buttonForwardDownSkinTextures, Button.STATE_DOWN, false);
-			skinSelector.setValueForState(this.buttonForwardDisabledSkinTextures, Button.STATE_DISABLED, false);
-			skinSelector.displayObjectProperties =
-			{
-				width: this.controlSize,
-				height: this.controlSize,
-				textureScale: this.scale
-			};
-			button.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(this.buttonForwardUpSkinTexture);
+			skin.setTextureForState(ButtonState.DOWN, this.buttonForwardDownSkinTexture);
+			skin.setTextureForState(ButtonState.DISABLED, this.buttonForwardDisabledSkinTexture);
+			skin.scale9Grid = FORWARD_BUTTON_SCALE9_GRID;
+			skin.width = this.controlSize;
+			skin.height = this.controlSize;
+			button.defaultSkin = skin;
+			
 			this.setBaseButtonStyles(button);
+			
 			button.paddingRight = this.gutterSize + this.smallGutterSize;
 		}
 
@@ -1207,31 +1336,23 @@ package com.gerantech.islamic.themes
 
 		protected function setButtonGroupButtonStyles(button:Button):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.buttonUpSkinTextures;
-			skinSelector.setValueForState(this.buttonDownSkinTextures, Button.STATE_DOWN, false);
-			skinSelector.setValueForState(this.buttonDisabledSkinTextures, Button.STATE_DISABLED, false);
+			var skin:ImageSkin = new ImageSkin(this.buttonUpSkinTexture);
+			skin.setTextureForState(ButtonState.DOWN, this.buttonDownSkinTexture);
+			skin.setTextureForState(ButtonState.DISABLED, this.buttonDisabledSkinTexture);
 			if(button is ToggleButton)
 			{
 				//for convenience, this function can style both a regular button
 				//and a toggle button
-				skinSelector.defaultSelectedValue = this.buttonSelectedUpSkinTextures;
-				skinSelector.setValueForState(this.buttonSelectedDisabledSkinTextures, Button.STATE_DISABLED, true);
+				skin.selectedTexture = this.buttonSelectedUpSkinTexture;
+				skin.setTextureForState(ButtonState.DISABLED_AND_SELECTED, this.buttonSelectedDisabledSkinTexture);
 			}
-			skinSelector.displayObjectProperties =
-			{
-				width: this.gridSize,
-				height: this.gridSize,
-				textureScale: this.scale
-			};
-			button.stateToSkinFunction = skinSelector.updateValue;
+			skin.scale9Grid = BUTTON_SCALE9_GRID;
+			skin.width = this.gridSize;
+			skin.height = this.gridSize;
+			button.defaultSkin = skin;
+			
+			button.customLabelStyleName = THEME_STYLE_NAME_BUTTON_GROUP_BUTTON_LABEL;
 
-			button.defaultLabelProperties.elementFormat = this.largeUIDarkElementFormat;
-			button.disabledLabelProperties.elementFormat = this.largeUIDarkDisabledElementFormat;
-			if(button is ToggleButton)
-			{
-				ToggleButton(button).selectedDisabledLabelProperties.elementFormat = this.largeUIDarkDisabledElementFormat;
-			}
 
 			button.paddingTop = this.smallGutterSize;
 			button.paddingBottom = this.smallGutterSize;
@@ -1244,6 +1365,12 @@ package com.gerantech.islamic.themes
 			button.minTouchWidth = this.gridSize;
 			button.minTouchHeight = this.gridSize;
 		}
+		
+		protected function setButtonGroupButtonLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.largeUIDarkElementFormat;
+			textRenderer.disabledElementFormat = this.largeUIDarkDisabledElementFormat;
+		}
 
 	//-------------------------
 	// Callout
@@ -1251,26 +1378,54 @@ package com.gerantech.islamic.themes
 
 		protected function setCalloutStyles(callout:Callout):void
 		{
-			var backgroundSkin:Scale9Image = new Scale9Image(this.backgroundPopUpSkinTextures, this.scale);
+			var backgroundSkin:Image = new Image(this.backgroundSkinTexture);
+			backgroundSkin.scale9Grid = SMALL_BACKGROUND_SCALE9_GRID;
 			backgroundSkin.width = this.calloutBackgroundMinSize;
 			backgroundSkin.height = this.calloutBackgroundMinSize;
 			callout.backgroundSkin = backgroundSkin;
 
 			var topArrowSkin:Image = new Image(this.calloutTopArrowSkinTexture);
-			topArrowSkin.scaleX = topArrowSkin.scaleY = this.scale;
 			callout.topArrowSkin = topArrowSkin;
+			callout.topArrowGap = this.calloutArrowOverlapGap;
 
 			var rightArrowSkin:Image = new Image(this.calloutRightArrowSkinTexture);
-			rightArrowSkin.scaleX = rightArrowSkin.scaleY = this.scale;
 			callout.rightArrowSkin = rightArrowSkin;
+			callout.rightArrowGap = this.calloutArrowOverlapGap;
 
 			var bottomArrowSkin:Image = new Image(this.calloutBottomArrowSkinTexture);
-			bottomArrowSkin.scaleX = bottomArrowSkin.scaleY = this.scale;
 			callout.bottomArrowSkin = bottomArrowSkin;
+			callout.bottomArrowGap = this.calloutArrowOverlapGap;
 
 			var leftArrowSkin:Image = new Image(this.calloutLeftArrowSkinTexture);
-			leftArrowSkin.scaleX = leftArrowSkin.scaleY = this.scale;
 			callout.leftArrowSkin = leftArrowSkin;
+			callout.leftArrowGap = this.calloutArrowOverlapGap;
+
+			callout.padding = this.smallGutterSize;
+		}
+
+		protected function setDangerCalloutStyles(callout:Callout):void
+		{
+			var backgroundSkin:Image = new Image(this.backgroundDangerBorderSkinTexture);
+			backgroundSkin.scale9Grid = SMALL_BACKGROUND_SCALE9_GRID;
+			backgroundSkin.width = this.calloutBackgroundMinSize;
+			backgroundSkin.height = this.calloutBackgroundMinSize;
+			callout.backgroundSkin = backgroundSkin;
+
+			var topArrowSkin:Image = new Image(this.dangerCalloutTopArrowSkinTexture);
+			callout.topArrowSkin = topArrowSkin;
+			callout.topArrowGap = this.calloutArrowOverlapGap;
+
+			var rightArrowSkin:Image = new Image(this.dangerCalloutRightArrowSkinTexture);
+			callout.rightArrowSkin = rightArrowSkin;
+			callout.rightArrowGap = this.calloutArrowOverlapGap;
+
+			var bottomArrowSkin:Image = new Image(this.dangerCalloutBottomArrowSkinTexture);
+			callout.bottomArrowSkin = bottomArrowSkin;
+			callout.bottomArrowGap = this.calloutArrowOverlapGap;
+
+			var leftArrowSkin:Image = new Image(this.dangerCalloutLeftArrowSkinTexture);
+			callout.leftArrowSkin = leftArrowSkin;
+			callout.leftArrowGap = this.calloutArrowOverlapGap;
 
 			callout.padding = this.smallGutterSize;
 		}
@@ -1281,24 +1436,15 @@ package com.gerantech.islamic.themes
 
 		protected function setCheckStyles(check:Check):void
 		{
-			var iconSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			iconSelector.defaultValue = this.checkUpIconTexture;
-			iconSelector.defaultSelectedValue = this.checkSelectedUpIconTexture;
-			iconSelector.setValueForState(this.checkDownIconTexture, Button.STATE_DOWN, false);
-			iconSelector.setValueForState(this.checkDisabledIconTexture, Button.STATE_DISABLED, false);
-			iconSelector.setValueForState(this.checkSelectedDownIconTexture, Button.STATE_DOWN, true);
-			iconSelector.setValueForState(this.checkSelectedDisabledIconTexture, Button.STATE_DISABLED, true);
-			iconSelector.displayObjectProperties =
-			{
-				scaleX: this.scale,
-				scaleY: this.scale
-			};
-			check.stateToIconFunction = iconSelector.updateValue;
+			var icon:ImageSkin = new ImageSkin(this.checkUpIconTexture);
+			icon.selectedTexture = this.checkSelectedUpIconTexture;
+			icon.setTextureForState(ButtonState.DOWN, this.checkDownIconTexture);
+			icon.setTextureForState(ButtonState.DISABLED, this.checkDisabledIconTexture);
+			icon.setTextureForState(ButtonState.DOWN_AND_SELECTED, this.checkSelectedDownIconTexture);
+			icon.setTextureForState(ButtonState.DISABLED_AND_SELECTED, this.checkSelectedDisabledIconTexture);
+			check.defaultIcon = icon;
 
-			check.defaultLabelProperties.elementFormat = this.lightUIElementFormat;
-			check.disabledLabelProperties.elementFormat = this.lightUIDisabledElementFormat;
-			check.selectedDisabledLabelProperties.elementFormat = this.lightUIDisabledElementFormat;
-
+			check.horizontalAlign = HorizontalAlign.LEFT;
 			check.gap = this.smallGutterSize;
 			check.minWidth = this.controlSize;
 			check.minHeight = this.controlSize;
@@ -1306,6 +1452,32 @@ package com.gerantech.islamic.themes
 			check.minTouchHeight = this.gridSize;
 		}
 
+		protected function setCheckLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightUIElementFormat;
+			textRenderer.disabledElementFormat = this.lightUIDisabledElementFormat;
+		}
+
+	//-------------------------
+	// DateTimeSpinner
+	//-------------------------
+
+		protected function setDateTimeSpinnerListStyles(list:SpinnerList):void
+		{
+			this.setSpinnerListStyles(list);
+			list.customItemRendererStyleName = THEME_STYLE_NAME_DATE_TIME_SPINNER_LIST_ITEM_RENDERER;
+		}
+
+		protected function setDateTimeSpinnerListItemRendererStyles(itemRenderer:DefaultListItemRenderer):void
+		{
+			this.setSpinnerListItemRendererStyles(itemRenderer);
+			itemRenderer.accessoryPosition = RelativePosition.LEFT;
+			itemRenderer.gap = this.smallGutterSize;
+			itemRenderer.minGap = this.smallGutterSize;
+			itemRenderer.accessoryGap = this.smallGutterSize;
+			itemRenderer.minAccessoryGap = this.smallGutterSize;
+		}
+		
 	//-------------------------
 	// Drawers
 	//-------------------------
@@ -1315,6 +1487,18 @@ package com.gerantech.islamic.themes
 			var overlaySkin:Quad = new Quad(10, 10, DRAWER_OVERLAY_COLOR);
 			overlaySkin.alpha = DRAWER_OVERLAY_ALPHA;
 			drawers.overlaySkin = overlaySkin;
+
+			var topDrawerDivider:Quad = new Quad(this.borderSize, this.borderSize, DRAWER_OVERLAY_COLOR);
+			drawers.topDrawerDivider = topDrawerDivider;
+
+			var rightDrawerDivider:Quad = new Quad(this.borderSize, this.borderSize, DRAWER_OVERLAY_COLOR);
+			drawers.rightDrawerDivider = rightDrawerDivider;
+
+			var bottomDrawerDivider:Quad = new Quad(this.borderSize, this.borderSize, DRAWER_OVERLAY_COLOR);
+			drawers.bottomDrawerDivider = bottomDrawerDivider;
+
+			var leftDrawerDivider:Quad = new Quad(this.borderSize, this.borderSize, DRAWER_OVERLAY_COLOR);
+			drawers.leftDrawerDivider = leftDrawerDivider;
 		}
 
 	//-------------------------
@@ -1334,104 +1518,98 @@ package com.gerantech.islamic.themes
 		{
 			renderer.backgroundSkin = new Quad(1, 1, GROUPED_LIST_HEADER_BACKGROUND_COLOR);
 
-			renderer.horizontalAlign = DefaultGroupedListHeaderOrFooterRenderer.HORIZONTAL_ALIGN_LEFT;
-			renderer.contentLabelProperties.elementFormat = this.lightUIElementFormat;
-			renderer.contentLabelProperties.disabledElementFormat = this.lightUIDisabledElementFormat;
+			renderer.horizontalAlign = HorizontalAlign.LEFT;
 			renderer.paddingTop = this.smallGutterSize;
 			renderer.paddingBottom = this.smallGutterSize;
 			renderer.paddingLeft = this.smallGutterSize + this.gutterSize;
 			renderer.paddingRight = this.gutterSize;
-
-			renderer.contentLoaderFactory = this.imageLoaderFactory;
 		}
 
 		protected function setGroupedListFooterRendererStyles(renderer:DefaultGroupedListHeaderOrFooterRenderer):void
 		{
 			renderer.backgroundSkin = new Quad(1, 1, GROUPED_LIST_FOOTER_BACKGROUND_COLOR);
+			
+			renderer.customContentLabelStyleName = THEME_STYLE_NAME_GROUPED_LIST_FOOTER_CONTENT_LABEL;
 
-			renderer.horizontalAlign = DefaultGroupedListHeaderOrFooterRenderer.HORIZONTAL_ALIGN_CENTER;
-			renderer.contentLabelProperties.elementFormat = this.lightElementFormat;
-			renderer.contentLabelProperties.disabledElementFormat = this.disabledElementFormat;
+			renderer.horizontalAlign = HorizontalAlign.CENTER;
 			renderer.paddingTop = renderer.paddingBottom = this.smallGutterSize;
 			renderer.paddingLeft = this.smallGutterSize + this.gutterSize;
 			renderer.paddingRight = this.gutterSize;
+		}
+		
+		protected function setGroupedListHeaderContentLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightUIElementFormat;
+			textRenderer.disabledElementFormat = this.lightUIDisabledElementFormat;
+		}
 
-			renderer.contentLoaderFactory = this.imageLoaderFactory;
+		protected function setGroupedListFooterContentLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightElementFormat;
+			textRenderer.disabledElementFormat = this.disabledElementFormat;
 		}
 
 		protected function setInsetGroupedListStyles(list:GroupedList):void
 		{
-			list.itemRendererName = GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_ITEM_RENDERER;
-			list.firstItemRendererName = GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_FIRST_ITEM_RENDERER;
-			list.lastItemRendererName = GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_LAST_ITEM_RENDERER;
-			list.singleItemRendererName = GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_SINGLE_ITEM_RENDERER;
-			list.headerRendererName = GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_HEADER_RENDERER;
-			list.footerRendererName = GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_FOOTER_RENDERER;
+			list.customItemRendererStyleName = GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_ITEM_RENDERER;
+			list.customFirstItemRendererStyleName = GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_FIRST_ITEM_RENDERER;
+			list.customLastItemRendererStyleName = GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_LAST_ITEM_RENDERER;
+			list.customSingleItemRendererStyleName = GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_SINGLE_ITEM_RENDERER;
+			list.customHeaderRendererStyleName = GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_HEADER_RENDERER;
+			list.customFooterRendererStyleName = GroupedList.ALTERNATE_CHILD_STYLE_NAME_INSET_FOOTER_RENDERER;
 
 			var layout:VerticalLayout = new VerticalLayout();
 			layout.useVirtualLayout = true;
 			layout.padding = this.smallGutterSize;
 			layout.gap = 0;
-			layout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
-			layout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
+			layout.horizontalAlign = HorizontalAlign.JUSTIFY;
+			layout.verticalAlign = VerticalAlign.TOP;
 			list.layout = layout;
 		}
 
-		protected function setInsetGroupedListItemRendererStyles(renderer:DefaultGroupedListItemRenderer, defaultSkinTextures:Scale9Textures, selectedAndDownSkinTextures:Scale9Textures):void
+		protected function setInsetGroupedListItemRendererStyles(renderer:DefaultGroupedListItemRenderer, defaultSkinTexture:Texture, selectedAndDownSkinTexture:Texture, scale9Grid:Rectangle):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = defaultSkinTextures;
-			skinSelector.defaultSelectedValue = selectedAndDownSkinTextures;
-			skinSelector.setValueForState(selectedAndDownSkinTextures, Button.STATE_DOWN, false);
-			skinSelector.displayObjectProperties =
-			{
-				width: this.gridSize,
-				height: this.gridSize,
-				textureScale: this.scale
-			};
-			renderer.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(defaultSkinTexture);
+			skin.selectedTexture = selectedAndDownSkinTexture;
+			skin.setTextureForState(ButtonState.DOWN, selectedAndDownSkinTexture);
+			skin.scale9Grid = scale9Grid;
+			skin.width = this.gridSize;
+			skin.height = this.gridSize;
+			renderer.defaultSkin = skin;
 
-			renderer.defaultLabelProperties.elementFormat = this.largeLightElementFormat;
-			renderer.downLabelProperties.elementFormat = this.largeDarkElementFormat;
-			renderer.defaultSelectedLabelProperties.elementFormat = this.largeDarkElementFormat;
-			renderer.disabledLabelProperties.elementFormat = this.largeDisabledElementFormat;
-
-			renderer.horizontalAlign = Button.HORIZONTAL_ALIGN_LEFT;
+			renderer.horizontalAlign = HorizontalAlign.LEFT;
 			renderer.paddingTop = this.smallGutterSize;
 			renderer.paddingBottom = this.smallGutterSize;
 			renderer.paddingLeft = this.gutterSize + this.smallGutterSize;
 			renderer.paddingRight = this.gutterSize;
 			renderer.gap = this.gutterSize;
 			renderer.minGap = this.gutterSize;
-			renderer.iconPosition = Button.ICON_POSITION_LEFT;
+			renderer.iconPosition = RelativePosition.LEFT;
 			renderer.accessoryGap = Number.POSITIVE_INFINITY;
 			renderer.minAccessoryGap = this.gutterSize;
-			renderer.accessoryPosition = BaseDefaultItemRenderer.ACCESSORY_POSITION_RIGHT;
+			renderer.accessoryPosition = RelativePosition.RIGHT;
 			renderer.minWidth = renderer.minHeight = this.gridSize;
 			renderer.minTouchWidth = renderer.minTouchHeight = this.gridSize;
-
-			renderer.accessoryLoaderFactory = this.imageLoaderFactory;
-			renderer.iconLoaderFactory = this.imageLoaderFactory;
 		}
 
 		protected function setInsetGroupedListMiddleItemRendererStyles(renderer:DefaultGroupedListItemRenderer):void
 		{
-			this.setInsetGroupedListItemRendererStyles(renderer, this.itemRendererUpSkinTextures, this.itemRendererSelectedSkinTextures);
+			this.setInsetGroupedListItemRendererStyles(renderer, this.insetItemRendererUpSkinTexture, this.insetItemRendererSelectedSkinTexture, INSET_ITEM_RENDERER_MIDDLE_SCALE9_GRID);
 		}
 
 		protected function setInsetGroupedListFirstItemRendererStyles(renderer:DefaultGroupedListItemRenderer):void
 		{
-			this.setInsetGroupedListItemRendererStyles(renderer, this.insetItemRendererFirstUpSkinTextures, this.insetItemRendererFirstSelectedSkinTextures);
+			this.setInsetGroupedListItemRendererStyles(renderer, this.insetItemRendererFirstUpSkinTexture, this.insetItemRendererFirstSelectedSkinTexture, INSET_ITEM_RENDERER_FIRST_SCALE9_GRID);
 		}
 
 		protected function setInsetGroupedListLastItemRendererStyles(renderer:DefaultGroupedListItemRenderer):void
 		{
-			this.setInsetGroupedListItemRendererStyles(renderer, this.insetItemRendererLastUpSkinTextures, this.insetItemRendererLastSelectedSkinTextures);
+			this.setInsetGroupedListItemRendererStyles(renderer, this.insetItemRendererLastUpSkinTexture, this.insetItemRendererLastSelectedSkinTexture, INSET_ITEM_RENDERER_LAST_SCALE9_GRID);
 		}
 
 		protected function setInsetGroupedListSingleItemRendererStyles(renderer:DefaultGroupedListItemRenderer):void
 		{
-			this.setInsetGroupedListItemRendererStyles(renderer, this.insetItemRendererSingleUpSkinTextures, this.insetItemRendererSingleSelectedSkinTextures);
+			this.setInsetGroupedListItemRendererStyles(renderer, this.insetItemRendererSingleUpSkinTexture, this.insetItemRendererSingleSelectedSkinTexture, INSET_ITEM_RENDERER_SINGLE_SCALE9_GRID);
 		}
 
 		protected function setInsetGroupedListHeaderRendererStyles(renderer:DefaultGroupedListHeaderOrFooterRenderer):void
@@ -1440,17 +1618,13 @@ package com.gerantech.islamic.themes
 			defaultSkin.alpha = 0;
 			renderer.backgroundSkin = defaultSkin;
 
-			renderer.horizontalAlign = DefaultGroupedListHeaderOrFooterRenderer.HORIZONTAL_ALIGN_LEFT;
-			renderer.contentLabelProperties.elementFormat = this.lightUIElementFormat;
-			renderer.contentLabelProperties.disabledElementFormat = this.lightUIDisabledElementFormat;
+			renderer.horizontalAlign = HorizontalAlign.LEFT;
 			renderer.paddingTop = this.smallGutterSize;
 			renderer.paddingBottom = this.smallGutterSize;
 			renderer.paddingLeft = this.gutterSize + this.smallGutterSize;
 			renderer.paddingRight = this.gutterSize;
 			renderer.minWidth = this.controlSize;
 			renderer.minHeight = this.controlSize;
-
-			renderer.contentLoaderFactory = this.imageLoaderFactory;
 		}
 
 		protected function setInsetGroupedListFooterRendererStyles(renderer:DefaultGroupedListHeaderOrFooterRenderer):void
@@ -1459,17 +1633,15 @@ package com.gerantech.islamic.themes
 			defaultSkin.alpha = 0;
 			renderer.backgroundSkin = defaultSkin;
 
-			renderer.horizontalAlign = DefaultGroupedListHeaderOrFooterRenderer.HORIZONTAL_ALIGN_CENTER;
-			renderer.contentLabelProperties.elementFormat = this.lightElementFormat;
-			renderer.contentLabelProperties.disabledElementFormat = this.disabledElementFormat;
+			renderer.customContentLabelStyleName = THEME_STYLE_NAME_GROUPED_LIST_FOOTER_CONTENT_LABEL;
+
+			renderer.horizontalAlign = HorizontalAlign.CENTER;
 			renderer.paddingTop = this.smallGutterSize;
 			renderer.paddingBottom = this.smallGutterSize;
 			renderer.paddingLeft = this.gutterSize + this.smallGutterSize;
 			renderer.paddingRight = this.gutterSize;
 			renderer.minWidth = this.controlSize;
 			renderer.minHeight = this.controlSize;
-
-			renderer.contentLoaderFactory = this.imageLoaderFactory;
 		}
 
 	//-------------------------
@@ -1478,17 +1650,23 @@ package com.gerantech.islamic.themes
 
 		protected function setHeaderStyles(header:Header):void
 		{
-			header.minWidth = this.gridSize//uint(this.gridSize*1.2);
-			header.minHeight = this.gridSize// uint(this.gridSize*1.2);
+			header.minWidth = this.gridSize;
+			header.minHeight = this.gridSize;
 			header.padding = this.smallGutterSize;
 			header.gap = this.smallGutterSize;
 			header.titleGap = this.smallGutterSize;
 
-			var backgroundSkin:TiledImage = new TiledImage(this.headerBackgroundSkinTexture, this.scale);
+			var backgroundSkin:Image = new Image(this.headerBackgroundSkinTexture);
+			backgroundSkin.tileGrid = new Rectangle();
 			backgroundSkin.width = this.gridSize;
 			backgroundSkin.height = this.gridSize;
 			header.backgroundSkin = backgroundSkin;
-			header.titleProperties.elementFormat = this.headerElementFormat;
+		}
+		
+		protected function setHeaderTitleProperties(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.headerElementFormat;
+			textRenderer.disabledElementFormat = this.headerDisabledElementFormat;
 		}
 
 	//-------------------------
@@ -1524,13 +1702,16 @@ package com.gerantech.islamic.themes
 				var layout:HorizontalLayout = new HorizontalLayout();
 				layout.padding = this.smallGutterSize;
 				layout.gap = this.smallGutterSize;
+				layout.verticalAlign = VerticalAlign.MIDDLE;
 				group.layout = layout;
 			}
 			group.minWidth = this.gridSize;
 			group.minHeight = this.gridSize;
 
-			var backgroundSkin:TiledImage = new TiledImage(this.headerBackgroundSkinTexture, this.scale);
-			backgroundSkin.width = backgroundSkin.height = this.gridSize;
+			var backgroundSkin:Image = new Image(this.headerBackgroundSkinTexture);
+			backgroundSkin.tileGrid = new Rectangle();
+			backgroundSkin.width = this.gridSize;
+			backgroundSkin.height = this.gridSize;
 			group.backgroundSkin = backgroundSkin;
 		}
 
@@ -1547,51 +1728,125 @@ package com.gerantech.islamic.themes
 
 		protected function setItemRendererStyles(renderer:BaseDefaultItemRenderer):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.itemRendererUpSkinTextures;
-			skinSelector.defaultSelectedValue = this.itemRendererSelectedSkinTextures;
-			skinSelector.setValueForState(this.itemRendererSelectedSkinTextures, Button.STATE_DOWN, false);
-			skinSelector.displayObjectProperties =
-			{
-				width: this.gridSize,
-				height: this.gridSize,
-				textureScale: this.scale
-			};
-			renderer.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(this.itemRendererUpSkinTexture);
+			skin.selectedTexture = this.itemRendererSelectedSkinTexture;
+			skin.setTextureForState(ButtonState.DOWN, this.itemRendererSelectedSkinTexture);
+			skin.scale9Grid = ITEM_RENDERER_SCALE9_GRID;
+			skin.width = this.gridSize;
+			skin.height = this.gridSize;
+			renderer.defaultSkin = skin;
 
-			renderer.defaultLabelProperties.elementFormat = this.largeLightElementFormat;
-			renderer.downLabelProperties.elementFormat = this.largeDarkElementFormat;
-			renderer.defaultSelectedLabelProperties.elementFormat = this.largeDarkElementFormat;
-			renderer.disabledLabelProperties.elementFormat = this.largeDisabledElementFormat;
-
-			renderer.horizontalAlign = Button.HORIZONTAL_ALIGN_LEFT;
+			renderer.horizontalAlign = HorizontalAlign.LEFT;
 			renderer.paddingTop = this.smallGutterSize;
 			renderer.paddingBottom = this.smallGutterSize;
-			renderer.paddingLeft = this.gutterSize + this.smallGutterSize;
+			renderer.paddingLeft = this.gutterSize;
 			renderer.paddingRight = this.gutterSize;
 			renderer.gap = this.gutterSize;
 			renderer.minGap = this.gutterSize;
-			renderer.iconPosition = Button.ICON_POSITION_LEFT;
+			renderer.iconPosition = RelativePosition.LEFT;
 			renderer.accessoryGap = Number.POSITIVE_INFINITY;
 			renderer.minAccessoryGap = this.gutterSize;
-			renderer.accessoryPosition = BaseDefaultItemRenderer.ACCESSORY_POSITION_RIGHT;
+			renderer.accessoryPosition = RelativePosition.RIGHT;
 			renderer.minWidth = this.gridSize;
 			renderer.minHeight = this.gridSize;
 			renderer.minTouchWidth = this.gridSize;
 			renderer.minTouchHeight = this.gridSize;
+		}
+		
+		protected function setDrillDownItemRendererStyles(itemRenderer:DefaultListItemRenderer):void
+		{
+			this.setItemRendererStyles(itemRenderer);
+			
+			itemRenderer.itemHasAccessory = false;
 
-			renderer.accessoryLoaderFactory = this.imageLoaderFactory;
-			renderer.iconLoaderFactory = this.imageLoaderFactory;
+			var accessorySkin:ImageSkin = new ImageSkin(this.listDrillDownAccessoryTexture);
+			accessorySkin.selectedTexture = this.listDrillDownAccessorySelectedTexture;
+			accessorySkin.setTextureForState(ButtonState.DOWN, this.listDrillDownAccessorySelectedTexture);
+			itemRenderer.defaultAccessory = accessorySkin;
 		}
 
-		protected function setItemRendererAccessoryLabelRendererStyles(renderer:TextBlockTextRenderer):void
+		protected function setCheckItemRendererStyles(renderer:BaseDefaultItemRenderer):void
 		{
-			renderer.elementFormat = this.lightElementFormat;
+			var skin:ImageSkin = new ImageSkin(this.itemRendererUpSkinTexture);
+			skin.setTextureForState(ButtonState.DOWN, this.itemRendererSelectedSkinTexture);
+			skin.scale9Grid = ITEM_RENDERER_SCALE9_GRID;
+			skin.width = this.gridSize;
+			skin.height = this.gridSize;
+			renderer.defaultSkin = skin;
+
+			var defaultSelectedIcon:ImageLoader = new ImageLoader();
+			defaultSelectedIcon.source = this.pickerListItemSelectedIconTexture;
+			renderer.defaultSelectedIcon = defaultSelectedIcon;
+			defaultSelectedIcon.validate();
+
+			var defaultIcon:Quad = new Quad(defaultSelectedIcon.width, defaultSelectedIcon.height, 0xff00ff);
+			defaultIcon.alpha = 0;
+			renderer.defaultIcon = defaultIcon;
+
+			renderer.customLabelStyleName = THEME_STYLE_NAME_CHECK_ITEM_RENDERER_LABEL;
+			renderer.customIconLabelStyleName = THEME_STYLE_NAME_CHECK_ITEM_RENDERER_ICON_LABEL;
+			renderer.customAccessoryLabelStyleName = THEME_STYLE_NAME_CHECK_ITEM_RENDERER_ACCESSORY_LABEL;
+
+			renderer.itemHasIcon = false;
+			renderer.horizontalAlign = HorizontalAlign.LEFT;
+			renderer.paddingTop = this.smallGutterSize;
+			renderer.paddingBottom = this.smallGutterSize;
+			renderer.paddingLeft = this.gutterSize;
+			renderer.paddingRight = this.gutterSize;
+			renderer.gap = Number.POSITIVE_INFINITY;
+			renderer.minGap = this.gutterSize;
+			renderer.iconPosition = RelativePosition.RIGHT;
+			renderer.accessoryGap = this.smallGutterSize;
+			renderer.minAccessoryGap = this.smallGutterSize;
+			renderer.accessoryPosition = RelativePosition.BOTTOM;
+			renderer.layoutOrder = BaseDefaultItemRenderer.LAYOUT_ORDER_LABEL_ACCESSORY_ICON;
+			renderer.minWidth = this.gridSize;
+			renderer.minHeight = this.gridSize;
+			renderer.minTouchWidth = this.gridSize;
+			renderer.minTouchHeight = this.gridSize;
 		}
 
-		protected function setItemRendererIconLabelStyles(renderer:TextBlockTextRenderer):void
+		protected function setItemRendererLabelStyles(textRenderer:TextBlockTextRenderer):void
 		{
-			renderer.elementFormat = this.lightElementFormat;
+			textRenderer.elementFormat = this.largeLightElementFormat;
+			textRenderer.disabledElementFormat = this.largeDisabledElementFormat;
+			textRenderer.selectedElementFormat = this.largeDarkElementFormat;
+			textRenderer.setElementFormatForState(ToggleButton.STATE_DOWN, this.largeDarkElementFormat);
+		}
+
+		protected function setItemRendererAccessoryLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightElementFormat;
+			textRenderer.disabledElementFormat = this.disabledElementFormat;
+			textRenderer.selectedElementFormat = this.darkElementFormat;
+			textRenderer.setElementFormatForState(ToggleButton.STATE_DOWN, this.darkElementFormat);
+		}
+
+		protected function setItemRendererIconLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightElementFormat;
+			textRenderer.disabledElementFormat = this.disabledElementFormat;
+			textRenderer.selectedElementFormat = this.darkElementFormat;
+			textRenderer.setElementFormatForState(ToggleButton.STATE_DOWN, this.darkElementFormat);
+		}
+
+		protected function setCheckItemRendererLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.largeLightElementFormat;
+			textRenderer.disabledElementFormat = this.largeDisabledElementFormat;
+			textRenderer.setElementFormatForState(ToggleButton.STATE_DOWN, this.largeDarkElementFormat);
+		}
+
+		protected function setCheckItemRendererAccessoryLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightElementFormat;
+			textRenderer.disabledElementFormat = this.disabledElementFormat;
+		}
+
+		protected function setCheckItemRendererIconLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightElementFormat;
+			textRenderer.disabledElementFormat = this.disabledElementFormat;
 		}
 
 	//-------------------------
@@ -1607,30 +1862,40 @@ package com.gerantech.islamic.themes
 
 		protected function setNumericStepperTextInputStyles(input:TextInput):void
 		{
-			var backgroundSkin:Scale9Image = new Scale9Image(this.backgroundSkinTextures, this.scale);
+			var backgroundSkin:Image = new Image(this.backgroundSkinTexture);
+			backgroundSkin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
 			backgroundSkin.width = this.controlSize;
 			backgroundSkin.height = this.controlSize;
 			input.backgroundSkin = backgroundSkin;
 
-			var backgroundDisabledSkin:Scale9Image = new Scale9Image(this.backgroundDisabledSkinTextures, this.scale);
+			var backgroundDisabledSkin:Image = new Image(this.backgroundDisabledSkinTexture);
+			backgroundDisabledSkin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
 			backgroundDisabledSkin.width = this.controlSize;
 			backgroundDisabledSkin.height = this.controlSize;
 			input.backgroundDisabledSkin = backgroundDisabledSkin;
 
-			var backgroundFocusedSkin:Scale9Image = new Scale9Image(this.backgroundFocusedSkinTextures, this.scale);
+			var backgroundFocusedSkin:Image = new Image(this.backgroundInsetFocusedSkinTexture);
+			backgroundFocusedSkin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
 			backgroundFocusedSkin.width = this.controlSize;
 			backgroundFocusedSkin.height = this.controlSize;
 			input.backgroundFocusedSkin = backgroundFocusedSkin;
+
+			input.textEditorFactory = stepperTextEditorFactory;
+			input.customTextEditorStyleName = THEME_STYLE_NAME_NUMERIC_STEPPER_TEXT_INPUT_EDITOR;
 
 			input.minWidth = input.minHeight = this.controlSize;
 			input.minTouchWidth = input.minTouchHeight = this.gridSize;
 			input.gap = this.smallGutterSize;
 			input.padding = this.smallGutterSize;
 			input.isEditable = false;
-			input.textEditorFactory = stepperTextEditorFactory;
-			input.textEditorProperties.elementFormat = this.lightUIElementFormat;
-			input.textEditorProperties.disabledElementFormat = this.lightUIDisabledElementFormat;
-			input.textEditorProperties.textAlign = TextBlockTextEditor.TEXT_ALIGN_CENTER;
+			input.isSelectable = false;
+		}
+		
+		protected function setNumericStepperTextInputEditorStyles(textEditor:TextBlockTextEditor):void
+		{
+			textEditor.elementFormat = this.lightUIElementFormat;
+			textEditor.disabledElementFormat = this.lightUIDisabledElementFormat;
+			textEditor.textAlign = TextBlockTextEditor.TEXT_ALIGN_CENTER;
 		}
 
 		protected function setNumericStepperButtonStyles(button:Button):void
@@ -1649,7 +1914,7 @@ package com.gerantech.islamic.themes
 			pageIndicator.selectedSymbolFactory = this.pageIndicatorSelectedSymbolFactory;
 			pageIndicator.gap = this.smallGutterSize;
 			pageIndicator.padding = this.smallGutterSize;
-			pageIndicator.minTouchWidth = this.smallControlSize * 2
+			pageIndicator.minTouchWidth = this.smallControlSize * 2;
 			pageIndicator.minTouchHeight = this.smallControlSize * 2;
 		}
 
@@ -1661,15 +1926,14 @@ package com.gerantech.islamic.themes
 		{
 			this.setScrollerStyles(panel);
 
-			panel.backgroundSkin = new Scale9Image(this.backgroundPopUpSkinTextures, this.scale);
-
-			panel.paddingTop = 0;
-			panel.paddingRight = this.smallGutterSize;
-			panel.paddingBottom = this.smallGutterSize;
-			panel.paddingLeft = this.smallGutterSize;
+			var backgroundSkin:Image = new Image(this.backgroundLightBorderSkinTexture);
+			backgroundSkin.scale9Grid = SMALL_BACKGROUND_SCALE9_GRID;
+			panel.backgroundSkin = backgroundSkin;
+			panel.padding = this.smallGutterSize;
+			panel.outerPadding = this.borderSize;
 		}
 
-		protected function setHeaderWithoutBackgroundStyles(header:Header):void
+		protected function setPopUpHeaderStyles(header:Header):void
 		{
 			header.minWidth = this.gridSize;
 			header.minHeight = this.gridSize;
@@ -1677,12 +1941,21 @@ package com.gerantech.islamic.themes
 			header.gap = this.smallGutterSize;
 			header.titleGap = this.smallGutterSize;
 
-			header.titleProperties.elementFormat = this.headerElementFormat;
+			var backgroundSkin:Image = new Image(this.popUpHeaderBackgroundSkinTexture);
+			backgroundSkin.tileGrid = new Rectangle();
+			backgroundSkin.width = this.gridSize;
+			backgroundSkin.height = this.gridSize;
+			header.backgroundSkin = backgroundSkin;
 		}
 
 	//-------------------------
 	// PanelScreen
 	//-------------------------
+		
+		protected function setPanelScreenStyles(screen:PanelScreen):void
+		{
+			this.setScrollerStyles(screen);
+		}
 
 		protected function setPanelScreenHeaderStyles(header:Header):void
 		{
@@ -1702,99 +1975,53 @@ package com.gerantech.islamic.themes
 			}
 			else
 			{
-				var centerStage:VerticalCenteredPopUpContentManager = new VerticalCenteredPopUpContentManager();
-				centerStage.marginTop = centerStage.marginRight = centerStage.marginBottom =
-					centerStage.marginLeft = this.gutterSize;
-				list.popUpContentManager = centerStage;
+				list.listFactory = pickerListSpinnerListFactory;
+				list.popUpContentManager = new BottomDrawerPopUpContentManager();
 			}
-
-			var layout:VerticalLayout = new VerticalLayout();
-			layout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_BOTTOM;
-			layout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
-			layout.useVirtualLayout = true;
-			layout.gap = 0;
-			layout.padding = 0;
-			list.listProperties.layout = layout;
-			list.listProperties.verticalScrollPolicy = List.SCROLL_POLICY_ON;
-
+		}
+		
+		protected function setPickerListPopUpListStyles(list:List):void
+		{
 			if(DeviceCapabilities.isTablet(Starling.current.nativeStage))
 			{
-				list.listProperties.minWidth = this.popUpFillSize;
-				list.listProperties.maxHeight = this.popUpFillSize;
+				list.minWidth = this.popUpFillSize;
+				list.maxHeight = this.popUpFillSize;
 			}
-			else
+			else //phone
 			{
-				var backgroundSkin:Scale9Image = new Scale9Image(this.backgroundSkinTextures, this.scale);
+				//the pop-up list should be a SpinnerList in this case, but we
+				//should provide a reasonable fallback skin if the listFactory
+				//on the PickerList returns a List instead. we don't want the
+				//List to be too big for the BottomDrawerPopUpContentManager
+				
+				var backgroundSkin:Image = new Image(this.backgroundSkinTexture);
+				backgroundSkin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
 				backgroundSkin.width = this.gridSize;
 				backgroundSkin.height = this.gridSize;
-				list.listProperties.backgroundSkin = backgroundSkin;
-				list.listProperties.padding = this.smallGutterSize;
+				list.backgroundSkin = backgroundSkin;
+				list.padding = this.smallGutterSize;
+				
+				var layout:VerticalLayout = new VerticalLayout();
+				layout.horizontalAlign = HorizontalAlign.JUSTIFY;
+				layout.requestedRowCount = 4;
+				list.layout = layout;
 			}
 
-			list.listProperties.itemRendererName = THEME_STYLE_NAME_PICKER_LIST_ITEM_RENDERER;
+			list.customItemRendererStyleName = DefaultListItemRenderer.ALTERNATE_STYLE_NAME_CHECK;
 		}
 
 		protected function setPickerListButtonStyles(button:Button):void
 		{
 			this.setButtonStyles(button);
 
-			var iconSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			iconSelector.setValueTypeHandler(SubTexture, textureValueTypeHandler);
-			iconSelector.defaultValue = this.pickerListButtonIconTexture;
-			iconSelector.setValueForState(this.pickerListButtonIconDisabledTexture, Button.STATE_DISABLED, false);
-			iconSelector.displayObjectProperties =
-			{
-				textureScale: this.scale,
-				snapToPixels: true
-			}
-			button.stateToIconFunction = iconSelector.updateValue;
+			var icon:ImageSkin = new ImageSkin(this.pickerListButtonIconTexture);
+			icon.selectedTexture = this.pickerListButtonSelectedIconTexture;
+			icon.setTextureForState(ButtonState.DISABLED, this.pickerListButtonIconDisabledTexture);
+			button.defaultIcon = icon;
 
 			button.gap = Number.POSITIVE_INFINITY;
 			button.minGap = this.gutterSize;
-			button.iconPosition = Button.ICON_POSITION_RIGHT;
-		}
-
-		protected function setPickerListItemRendererStyles(renderer:BaseDefaultItemRenderer):void
-		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.itemRendererUpSkinTextures;
-			skinSelector.setValueForState(this.itemRendererSelectedSkinTextures, Button.STATE_DOWN, false);
-			skinSelector.displayObjectProperties =
-			{
-				width: this.gridSize,
-				height: this.gridSize,
-				textureScale: this.scale
-			};
-			renderer.stateToSkinFunction = skinSelector.updateValue;
-
-			var defaultSelectedIcon:Image = new Image(this.pickerListItemSelectedIconTexture);
-			defaultSelectedIcon.scaleX = defaultSelectedIcon.scaleY = this.scale;
-			renderer.defaultSelectedIcon = defaultSelectedIcon;
-
-			var defaultIcon:Quad = new Quad(defaultSelectedIcon.width, defaultSelectedIcon.height, 0xff00ff);
-			defaultIcon.alpha = 0;
-			renderer.defaultIcon = defaultIcon;
-
-			renderer.defaultLabelProperties.elementFormat = this.largeLightElementFormat;
-			renderer.downLabelProperties.elementFormat = this.largeDarkElementFormat;
-			renderer.disabledLabelProperties.elementFormat = this.largeDisabledElementFormat;
-
-			renderer.itemHasIcon = false;
-			renderer.horizontalAlign = Button.HORIZONTAL_ALIGN_LEFT;
-			renderer.paddingTop = this.smallGutterSize;
-			renderer.paddingBottom = this.smallGutterSize;
-			renderer.paddingLeft = this.gutterSize + this.smallGutterSize;
-			renderer.paddingRight = this.smallGutterSize;
-			renderer.gap = Number.POSITIVE_INFINITY;
-			renderer.minGap = this.gutterSize;
-			renderer.iconPosition = Button.ICON_POSITION_RIGHT;
-			renderer.accessoryGap = Number.POSITIVE_INFINITY;
-			renderer.minAccessoryGap = this.gutterSize;
-			renderer.accessoryPosition = BaseDefaultItemRenderer.ACCESSORY_POSITION_RIGHT;
-			renderer.minWidth = this.gridSize;
-			renderer.minHeight = this.gridSize;
-			renderer.minTouchWidth = this.gridSize;
-			renderer.minTouchHeight = this.gridSize;
+			button.iconPosition = RelativePosition.RIGHT;
 		}
 
 	//-------------------------
@@ -1803,8 +2030,9 @@ package com.gerantech.islamic.themes
 
 		protected function setProgressBarStyles(progress:ProgressBar):void
 		{
-			var backgroundSkin:Scale9Image = new Scale9Image(this.backgroundSkinTextures, this.scale);
-			if(progress.direction == ProgressBar.DIRECTION_VERTICAL)
+			var backgroundSkin:Image = new Image(this.backgroundSkinTexture);
+			backgroundSkin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
+			if(progress.direction == Direction.VERTICAL)
 			{
 				backgroundSkin.width = this.smallControlSize;
 				backgroundSkin.height = this.wideControlSize;
@@ -1816,8 +2044,9 @@ package com.gerantech.islamic.themes
 			}
 			progress.backgroundSkin = backgroundSkin;
 
-			var backgroundDisabledSkin:Scale9Image = new Scale9Image(this.backgroundDisabledSkinTextures, this.scale);
-			if(progress.direction == ProgressBar.DIRECTION_VERTICAL)
+			var backgroundDisabledSkin:Image = new Image(this.backgroundDisabledSkinTexture);
+			backgroundDisabledSkin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
+			if(progress.direction == Direction.VERTICAL)
 			{
 				backgroundDisabledSkin.width = this.smallControlSize;
 				backgroundDisabledSkin.height = this.wideControlSize;
@@ -1829,8 +2058,9 @@ package com.gerantech.islamic.themes
 			}
 			progress.backgroundDisabledSkin = backgroundDisabledSkin;
 
-			var fillSkin:Scale9Image = new Scale9Image(this.buttonUpSkinTextures, this.scale);
-			if(progress.direction == ProgressBar.DIRECTION_VERTICAL)
+			var fillSkin:Image = new Image(this.buttonUpSkinTexture);
+			fillSkin.scale9Grid = BUTTON_SCALE9_GRID;
+			if(progress.direction == Direction.VERTICAL)
 			{
 				fillSkin.width = this.smallControlSize;
 				fillSkin.height = this.smallControlSize;
@@ -1842,8 +2072,9 @@ package com.gerantech.islamic.themes
 			}
 			progress.fillSkin = fillSkin;
 
-			var fillDisabledSkin:Scale9Image = new Scale9Image(this.buttonDisabledSkinTextures, this.scale);
-			if(progress.direction == ProgressBar.DIRECTION_VERTICAL)
+			var fillDisabledSkin:Image = new Image(this.buttonDisabledSkinTexture);
+			fillDisabledSkin.scale9Grid = BUTTON_SCALE9_GRID;
+			if(progress.direction == Direction.VERTICAL)
 			{
 				fillDisabledSkin.width = this.smallControlSize;
 				fillDisabledSkin.height = this.smallControlSize;
@@ -1862,29 +2093,26 @@ package com.gerantech.islamic.themes
 
 		protected function setRadioStyles(radio:Radio):void
 		{
-			var iconSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			iconSelector.defaultValue = this.radioUpIconTexture;
-			iconSelector.defaultSelectedValue = this.radioSelectedUpIconTexture;
-			iconSelector.setValueForState(this.radioDownIconTexture, Button.STATE_DOWN, false);
-			iconSelector.setValueForState(this.radioDisabledIconTexture, Button.STATE_DISABLED, false);
-			iconSelector.setValueForState(this.radioSelectedDownIconTexture, Button.STATE_DOWN, true);
-			iconSelector.setValueForState(this.radioSelectedDisabledIconTexture, Button.STATE_DISABLED, true);
-			iconSelector.displayObjectProperties =
-			{
-				scaleX: this.scale,
-				scaleY: this.scale
-			};
-			radio.stateToIconFunction = iconSelector.updateValue;
+			var icon:ImageSkin = new ImageSkin(this.radioUpIconTexture);
+			icon.selectedTexture = this.radioSelectedUpIconTexture;
+			icon.setTextureForState(ButtonState.DOWN, this.radioDownIconTexture);
+			icon.setTextureForState(ButtonState.DISABLED, this.radioDisabledIconTexture);
+			icon.setTextureForState(ButtonState.DOWN_AND_SELECTED, this.radioSelectedDownIconTexture);
+			icon.setTextureForState(ButtonState.DISABLED_AND_SELECTED, this.radioSelectedDisabledIconTexture);
+			radio.defaultIcon = icon;
 
-			radio.defaultLabelProperties.elementFormat = this.lightUIElementFormat;
-			radio.disabledLabelProperties.elementFormat = this.lightUIDisabledElementFormat;
-			radio.selectedDisabledLabelProperties.elementFormat = this.lightUIDisabledElementFormat;
-
+			radio.horizontalAlign = HorizontalAlign.LEFT;
 			radio.gap = this.smallGutterSize;
 			radio.minWidth = this.controlSize;
 			radio.minHeight = this.controlSize;
 			radio.minTouchWidth = this.gridSize;
 			radio.minTouchHeight = this.gridSize;
+		}
+		
+		protected function setRadioLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightUIElementFormat;
+			textRenderer.disabledElementFormat = this.lightUIDisabledElementFormat;
 		}
 
 	//-------------------------
@@ -1904,14 +2132,26 @@ package com.gerantech.islamic.themes
 				var layout:HorizontalLayout = new HorizontalLayout();
 				layout.padding = this.smallGutterSize;
 				layout.gap = this.smallGutterSize;
+				layout.verticalAlign = VerticalAlign.MIDDLE;
 				container.layout = layout;
 			}
 			container.minWidth = this.gridSize;
 			container.minHeight = this.gridSize;
 
-			var backgroundSkin:TiledImage = new TiledImage(this.headerBackgroundSkinTexture, this.scale);
-			backgroundSkin.width = backgroundSkin.height = this.gridSize;
+			var backgroundSkin:Image = new Image(this.headerBackgroundSkinTexture);
+			backgroundSkin.tileGrid = new Rectangle();
+			backgroundSkin.width = this.gridSize;
+			backgroundSkin.height = this.gridSize;
 			container.backgroundSkin = backgroundSkin;
+		}
+
+	//-------------------------
+	// ScrollScreen
+	//-------------------------
+
+		protected function setScrollScreenStyles(screen:ScrollScreen):void
+		{
+			this.setScrollerStyles(screen);
 		}
 
 	//-------------------------
@@ -1934,7 +2174,7 @@ package com.gerantech.islamic.themes
 
 		protected function setSimpleScrollBarStyles(scrollBar:SimpleScrollBar):void
 		{
-			if(scrollBar.direction == SimpleScrollBar.DIRECTION_HORIZONTAL)
+			if(scrollBar.direction == Direction.HORIZONTAL)
 			{
 				scrollBar.paddingRight = this.scrollBarGutterSize;
 				scrollBar.paddingBottom = this.scrollBarGutterSize;
@@ -1952,7 +2192,8 @@ package com.gerantech.islamic.themes
 
 		protected function setHorizontalSimpleScrollBarThumbStyles(thumb:Button):void
 		{
-			var defaultSkin:Scale3Image = new Scale3Image(this.horizontalScrollBarThumbSkinTextures, this.scale/2);
+			var defaultSkin:Image = new Image(this.horizontalScrollBarThumbSkinTexture);
+			defaultSkin.scale9Grid = HORIZONTAL_SCROLL_BAR_THUMB_SCALE9_GRID;
 			defaultSkin.width = this.smallGutterSize;
 			thumb.defaultSkin = defaultSkin;
 			thumb.hasLabelTextRenderer = false;
@@ -1960,7 +2201,8 @@ package com.gerantech.islamic.themes
 
 		protected function setVerticalSimpleScrollBarThumbStyles(thumb:Button):void
 		{
-			var defaultSkin:Scale3Image = new Scale3Image(this.verticalScrollBarThumbSkinTextures, this.scale/2);
+			var defaultSkin:Image = new Image(this.verticalScrollBarThumbSkinTexture);
+			defaultSkin.scale9Grid = VERTICAL_SCROLL_BAR_THUMB_SCALE9_GRID;
 			defaultSkin.height = this.smallGutterSize;
 			thumb.defaultSkin = defaultSkin;
 			thumb.hasLabelTextRenderer = false;
@@ -1972,77 +2214,134 @@ package com.gerantech.islamic.themes
 
 		protected function setSliderStyles(slider:Slider):void
 		{
-			slider.trackLayoutMode = Slider.TRACK_LAYOUT_MODE_MIN_MAX;
-			if(slider.direction == Slider.DIRECTION_VERTICAL)
+			slider.trackLayoutMode = TrackLayoutMode.SPLIT;
+			if(slider.direction == Direction.VERTICAL)
 			{
 				slider.customMinimumTrackStyleName = THEME_STYLE_NAME_VERTICAL_SLIDER_MINIMUM_TRACK;
 				slider.customMaximumTrackStyleName = THEME_STYLE_NAME_VERTICAL_SLIDER_MAXIMUM_TRACK;
+				slider.minWidth = this.controlSize;
 			}
-			else
+			else //horizontal
 			{
 				slider.customMinimumTrackStyleName = THEME_STYLE_NAME_HORIZONTAL_SLIDER_MINIMUM_TRACK;
 				slider.customMaximumTrackStyleName = THEME_STYLE_NAME_HORIZONTAL_SLIDER_MAXIMUM_TRACK;
+				slider.minHeight = this.controlSize;
 			}
 		}
 
 		protected function setHorizontalSliderMinimumTrackStyles(track:Button):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.backgroundSkinTextures;
-			skinSelector.setValueForState(this.backgroundDisabledSkinTextures, Button.STATE_DISABLED, false);
-			skinSelector.displayObjectProperties =
-			{
-				textureScale: this.scale
-			};
-			skinSelector.displayObjectProperties.width = this.wideControlSize;
-			skinSelector.displayObjectProperties.height = this.controlSize;
-			track.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(this.backgroundSkinTexture);
+			skin.disabledTexture = this.backgroundDisabledSkinTexture;
+			skin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
+			skin.width = this.wideControlSize;
+			skin.height = this.controlSize;
+			track.defaultSkin = skin;
+			
 			track.hasLabelTextRenderer = false;
 		}
 
 		protected function setHorizontalSliderMaximumTrackStyles(track:Button):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.backgroundSkinTextures;
-			skinSelector.setValueForState(this.backgroundDisabledSkinTextures, Button.STATE_DISABLED, false);
-			skinSelector.displayObjectProperties =
-			{
-				textureScale: this.scale
-			};
-			skinSelector.displayObjectProperties.width = this.wideControlSize;
-			skinSelector.displayObjectProperties.height = this.controlSize;
-			track.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(this.backgroundSkinTexture);
+			skin.disabledTexture = this.backgroundDisabledSkinTexture;
+			skin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
+			skin.width = this.wideControlSize;
+			skin.height = this.controlSize;
+			track.defaultSkin = skin;
+			
 			track.hasLabelTextRenderer = false;
 		}
 
 		protected function setVerticalSliderMinimumTrackStyles(track:Button):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.backgroundSkinTextures;
-			skinSelector.setValueForState(this.backgroundDisabledSkinTextures, Button.STATE_DISABLED, false);
-			skinSelector.displayObjectProperties =
-			{
-				textureScale: this.scale
-			};
-			skinSelector.displayObjectProperties.width = this.controlSize;
-			skinSelector.displayObjectProperties.height = this.wideControlSize;
-			track.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(this.backgroundSkinTexture);
+			skin.disabledTexture = this.backgroundDisabledSkinTexture;
+			skin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
+			skin.width = this.controlSize;
+			skin.height = this.wideControlSize;
+			track.defaultSkin = skin;
+			
 			track.hasLabelTextRenderer = false;
 		}
 
 		protected function setVerticalSliderMaximumTrackStyles(track:Button):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.backgroundSkinTextures;
-			skinSelector.setValueForState(this.backgroundDisabledSkinTextures, Button.STATE_DISABLED, false);
-			skinSelector.displayObjectProperties =
-			{
-				textureScale: this.scale
-			};
-			skinSelector.displayObjectProperties.width = this.controlSize;
-			skinSelector.displayObjectProperties.height = this.wideControlSize;
-			track.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(this.backgroundSkinTexture);
+			skin.disabledTexture = this.backgroundDisabledSkinTexture;
+			skin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
+			skin.width = this.controlSize;
+			skin.height = this.wideControlSize;
+			track.defaultSkin = skin;
+			
 			track.hasLabelTextRenderer = false;
+		}
+
+	//-------------------------
+	// SpinnerList
+	//-------------------------
+
+		protected function setSpinnerListStyles(list:SpinnerList):void
+		{
+			this.setScrollerStyles(list);
+			
+			var backgroundSkin:Image = new Image(this.backgroundLightSkinTexture);
+			backgroundSkin.scale9Grid = SMALL_BACKGROUND_SCALE9_GRID;
+			list.backgroundSkin = backgroundSkin;
+			
+			var selectionOverlaySkin:Image = new Image(this.spinnerListSelectionOverlaySkinTexture);
+			selectionOverlaySkin.scale9Grid = SPINNER_LIST_SELECTION_OVERLAY_SCALE9_GRID;
+			list.selectionOverlaySkin = selectionOverlaySkin;
+			
+			list.customItemRendererStyleName = THEME_STYLE_NAME_SPINNER_LIST_ITEM_RENDERER;
+
+			list.paddingTop = this.borderSize;
+			list.paddingBottom = this.borderSize;
+		}
+
+		protected function setSpinnerListItemRendererStyles(renderer:DefaultListItemRenderer):void
+		{
+			var defaultSkin:Quad = new Quad(1, 1, 0xff00ff);
+			defaultSkin.alpha = 0;
+			renderer.defaultSkin = defaultSkin;
+			
+			renderer.customLabelStyleName = THEME_STYLE_NAME_SPINNER_LIST_ITEM_RENDERER_LABEL;
+			renderer.customIconLabelStyleName = THEME_STYLE_NAME_SPINNER_LIST_ITEM_RENDERER_ICON_LABEL;
+			renderer.customAccessoryLabelStyleName = THEME_STYLE_NAME_SPINNER_LIST_ITEM_RENDERER_ACCESSORY_LABEL;
+
+			renderer.horizontalAlign = HorizontalAlign.LEFT;
+			renderer.paddingTop = this.smallGutterSize;
+			renderer.paddingBottom = this.smallGutterSize;
+			renderer.paddingLeft = this.gutterSize;
+			renderer.paddingRight = this.gutterSize;
+			renderer.gap = this.gutterSize;
+			renderer.minGap = this.gutterSize;
+			renderer.iconPosition = RelativePosition.LEFT;
+			renderer.accessoryGap = Number.POSITIVE_INFINITY;
+			renderer.minAccessoryGap = this.gutterSize;
+			renderer.accessoryPosition = RelativePosition.RIGHT;
+			renderer.minWidth = this.gridSize;
+			renderer.minHeight = this.gridSize;
+			renderer.minTouchWidth = this.gridSize;
+			renderer.minTouchHeight = this.gridSize;
+		}
+		
+		protected function setSpinnerListItemRendererLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.largeLightElementFormat;
+			textRenderer.disabledElementFormat = this.largeDisabledElementFormat;
+		}
+
+		protected function setSpinnerListItemRendererIconLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightElementFormat;
+			textRenderer.disabledElementFormat = this.disabledElementFormat;
+		}
+
+		protected function setSpinnerListItemRendererAccessoryLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightElementFormat;
+			textRenderer.disabledElementFormat = this.disabledElementFormat;
 		}
 
 	//-------------------------
@@ -2056,25 +2355,17 @@ package com.gerantech.islamic.themes
 
 		protected function setTabStyles(tab:ToggleButton):void
 		{
-			var defaultSkin:Quad = new Quad(this.gridSize, this.gridSize, TAB_BACKGROUND_COLOR);
-			tab.defaultSkin = defaultSkin;
-
-			var downSkin:Scale9Image = new Scale9Image(this.tabDownSkinTextures, this.scale);
-			tab.downSkin = downSkin;
-
-			var defaultSelectedSkin:Scale9Image = new Scale9Image(this.tabSelectedSkinTextures, this.scale);
-			tab.defaultSelectedSkin = defaultSelectedSkin;
-
-			var disabledSkin:Quad = new Quad(this.gridSize, this.gridSize, TAB_DISABLED_BACKGROUND_COLOR);
-			tab.disabledSkin = disabledSkin;
-
-			var selectedDisabledSkin:Scale9Image = new Scale9Image(this.tabSelectedDisabledSkinTextures, this.scale);
-			tab.selectedDisabledSkin = selectedDisabledSkin;
-
-			tab.defaultLabelProperties.elementFormat = this.lightUIElementFormat;
-			tab.defaultSelectedLabelProperties.elementFormat = this.darkUIElementFormat;
-			tab.disabledLabelProperties.elementFormat = this.lightUIDisabledElementFormat;
-			tab.selectedDisabledLabelProperties.elementFormat = this.darkUIDisabledElementFormat;
+			var skin:ImageSkin = new ImageSkin(this.tabUpSkinTexture);
+			skin.selectedTexture = this.tabSelectedUpSkinTexture;
+			skin.setTextureForState(ButtonState.DOWN, this.tabDownSkinTexture);
+			skin.setTextureForState(ButtonState.DISABLED, this.tabDisabledSkinTexture);
+			skin.setTextureForState(ButtonState.DISABLED_AND_SELECTED, this.tabSelectedDisabledSkinTexture);
+			skin.scale9Grid = TAB_SCALE9_GRID;
+			skin.width = this.gridSize;
+			skin.height = this.gridSize;
+			tab.defaultSkin = skin;
+			
+			tab.customLabelStyleName = THEME_STYLE_NAME_TAB_LABEL;
 
 			tab.paddingTop = this.smallGutterSize;
 			tab.paddingBottom = this.smallGutterSize;
@@ -2086,6 +2377,13 @@ package com.gerantech.islamic.themes
 			tab.minTouchWidth = tab.minTouchHeight = this.gridSize;
 		}
 
+		protected function setTabLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightUIElementFormat;
+			textRenderer.disabledElementFormat = this.lightUIDisabledElementFormat;
+			textRenderer.selectedElementFormat = this.darkUIElementFormat;
+		}
+
 	//-------------------------
 	// TextArea
 	//-------------------------
@@ -2094,22 +2392,45 @@ package com.gerantech.islamic.themes
 		{
 			this.setScrollerStyles(textArea);
 
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.backgroundInsetSkinTextures;
-			skinSelector.setValueForState(this.backgroundDisabledSkinTextures, TextArea.STATE_DISABLED);
-			skinSelector.setValueForState(this.backgroundFocusedSkinTextures, TextArea.STATE_FOCUSED);
-			skinSelector.displayObjectProperties =
-			{
-				width: this.wideControlSize,
-				height: this.controlSize * 2,
-				textureScale: this.scale
-			};
-			textArea.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(this.backgroundInsetSkinTexture);
+			skin.setTextureForState(TextInputState.DISABLED, this.backgroundDisabledSkinTexture);
+			skin.setTextureForState(TextInputState.FOCUSED, this.backgroundInsetFocusedSkinTexture);
+			skin.setTextureForState(TextInputState.ERROR, this.backgroundInsetDangerSkinTexture);
+			skin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
+			skin.width = this.wideControlSize;
+			skin.height = this.wideControlSize;
+			textArea.backgroundSkin = skin;
+			
+			textArea.textEditorFactory = textAreaTextEditorFactory;
+		}
+		
+		protected function setTextAreaTextEditorStyles(textEditor:TextFieldTextEditorViewPort):void
+		{
+			textEditor.textFormat = this.scrollTextTextFormat;
+			textEditor.disabledTextFormat = this.scrollTextDisabledTextFormat;
+			
+			textEditor.padding = this.smallGutterSize;
+		}
 
-			textArea.padding = this.smallGutterSize;
+		protected function setTextAreaErrorCalloutStyles(callout:TextCallout):void
+		{
+			this.setDangerCalloutStyles(callout);
+			callout.horizontalAlign = HorizontalAlign.LEFT;
+			callout.verticalAlign = VerticalAlign.TOP;
+		}
 
-			textArea.textEditorProperties.textFormat = this.scrollTextTextFormat;
-			textArea.textEditorProperties.disabledTextFormat = this.scrollTextDisabledTextFormat;
+	//-------------------------
+	// TextCallout
+	//-------------------------
+
+		protected function setTextCalloutStyles(callout:TextCallout):void
+		{
+			this.setCalloutStyles(callout);
+		}
+
+		protected function setTextCalloutTextRendererStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightElementFormat;
 		}
 
 	//-------------------------
@@ -2118,17 +2439,14 @@ package com.gerantech.islamic.themes
 
 		protected function setBaseTextInputStyles(input:TextInput):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.backgroundInsetSkinTextures;
-			skinSelector.setValueForState(this.backgroundDisabledSkinTextures, TextInput.STATE_DISABLED);
-			skinSelector.setValueForState(this.backgroundFocusedSkinTextures, TextInput.STATE_FOCUSED);
-			skinSelector.displayObjectProperties =
-			{
-				width: this.wideControlSize,
-				height: this.controlSize,
-				textureScale: this.scale
-			};
-			input.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(this.backgroundInsetSkinTexture);
+			skin.setTextureForState(TextInputState.DISABLED, this.backgroundInsetDisabledSkinTexture);
+			skin.setTextureForState(TextInputState.FOCUSED, this.backgroundInsetFocusedSkinTexture);
+			skin.setTextureForState(TextInputState.ERROR, this.backgroundInsetDangerSkinTexture);
+			skin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
+			skin.width = this.wideControlSize;
+			skin.height = this.controlSize;
+			input.backgroundSkin = skin;
 
 			input.minWidth = this.controlSize;
 			input.minHeight = this.controlSize;
@@ -2136,35 +2454,42 @@ package com.gerantech.islamic.themes
 			input.minTouchHeight = this.gridSize;
 			input.gap = this.smallGutterSize;
 			input.padding = this.smallGutterSize;
-
-			input.textEditorProperties.fontFamily = "Helvetica";
-			input.textEditorProperties.fontSize = this.regularFontSize;
-			input.textEditorProperties.color = LIGHT_TEXT_COLOR;
-			input.textEditorProperties.disabledColor = DISABLED_TEXT_COLOR;
-
-			input.promptProperties.elementFormat = this.lightElementFormat;
-			input.promptProperties.disabledElementFormat = this.disabledElementFormat;
+			input.verticalAlign = VerticalAlign.MIDDLE;
 		}
 
 		protected function setTextInputStyles(input:TextInput):void
 		{
 			this.setBaseTextInputStyles(input);
 		}
+		
+		protected function setTextInputTextEditorStyles(textEditor:StageTextTextEditor):void
+		{
+			textEditor.fontFamily = "Helvetica";
+			textEditor.fontSize = this.regularFontSize;
+			textEditor.color = LIGHT_TEXT_COLOR;
+			textEditor.disabledColor = DISABLED_TEXT_COLOR;
+		}
+
+		protected function setTextInputPromptStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightElementFormat;
+			textRenderer.disabledElementFormat = this.disabledElementFormat;
+		}
+
+		protected function setTextInputErrorCalloutStyles(callout:TextCallout):void
+		{
+			this.setDangerCalloutStyles(callout);
+			callout.horizontalAlign = HorizontalAlign.LEFT;
+			callout.verticalAlign = VerticalAlign.TOP;
+		}
 
 		protected function setSearchTextInputStyles(input:TextInput):void
 		{
 			this.setBaseTextInputStyles(input);
 
-			var iconSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			iconSelector.setValueTypeHandler(SubTexture, textureValueTypeHandler);
-			iconSelector.defaultValue = this.searchIconTexture;
-			iconSelector.setValueForState(this.searchIconDisabledTexture, TextInput.STATE_DISABLED, false);
-			iconSelector.displayObjectProperties =
-			{
-				textureScale: this.scale,
-				snapToPixels: true
-			}
-			input.stateToIconFunction = iconSelector.updateValue;
+			var icon:ImageSkin = new ImageSkin(this.searchIconTexture);
+			icon.setTextureForState(TextInputState.DISABLED, this.searchIconDisabledTexture);
+			input.defaultIcon = icon;
 		}
 
 	//-------------------------
@@ -2173,29 +2498,211 @@ package com.gerantech.islamic.themes
 
 		protected function setToggleSwitchStyles(toggle:ToggleSwitch):void
 		{
-			toggle.trackLayoutMode = ToggleSwitch.TRACK_LAYOUT_MODE_SINGLE;
-
-			toggle.defaultLabelProperties.elementFormat = this.lightUIElementFormat;
-			toggle.onLabelProperties.elementFormat = this.selectedUIElementFormat;
-			toggle.disabledLabelProperties.elementFormat = this.lightUIDisabledElementFormat;
+			toggle.trackLayoutMode = TrackLayoutMode.SINGLE;
 		}
 
 		//see Shared section for thumb styles
 
 		protected function setToggleSwitchTrackStyles(track:Button):void
 		{
-			var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
-			skinSelector.defaultValue = this.backgroundSkinTextures;
-			skinSelector.setValueForState(this.backgroundDisabledSkinTextures, Button.STATE_DISABLED, false);
-			skinSelector.displayObjectProperties =
-			{
-				width: Math.round(this.controlSize * 2.5),
-				height: this.controlSize,
-				textureScale: this.scale
-			};
-			track.stateToSkinFunction = skinSelector.updateValue;
+			var skin:ImageSkin = new ImageSkin(this.backgroundSkinTexture);
+			skin.disabledTexture = this.backgroundDisabledSkinTexture;
+			skin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
+			skin.width = Math.round(this.controlSize * 2.5);
+			skin.height = this.controlSize;
+			track.defaultSkin = skin;
 			track.hasLabelTextRenderer = false;
 		}
+
+		protected function setToggleSwitchOffLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.lightUIElementFormat;
+			textRenderer.disabledElementFormat = this.lightUIDisabledElementFormat;
+		}
+		
+		protected function setToggleSwitchOnLabelStyles(textRenderer:TextBlockTextRenderer):void
+		{
+			textRenderer.elementFormat = this.selectedUIElementFormat;
+			textRenderer.disabledElementFormat = this.lightUIDisabledElementFormat;
+		}
+
+	//-------------------------
+	// PlayPauseToggleButton
+	//-------------------------
+		
+		protected function setPlayPauseToggleButtonStyles(button:PlayPauseToggleButton):void
+		{
+			var icon:ImageSkin = new ImageSkin(this.playPauseButtonPlayUpIconTexture);
+			icon.selectedTexture = this.playPauseButtonPauseUpIconTexture;
+			icon.setTextureForState(ButtonState.DOWN, this.playPauseButtonPlayDownIconTexture);
+			icon.setTextureForState(ButtonState.DOWN_AND_SELECTED, this.playPauseButtonPauseDownIconTexture);
+			button.defaultIcon = icon;
+
+			button.hasLabelTextRenderer = false;
+
+			button.minWidth = this.controlSize;
+			button.minHeight = this.controlSize;
+			button.minTouchWidth = this.gridSize;
+			button.minTouchHeight = this.gridSize;
+		}
+
+		protected function setOverlayPlayPauseToggleButtonStyles(button:PlayPauseToggleButton):void
+		{
+			var icon:ImageSkin = new ImageSkin(null);
+			icon.setTextureForState(ButtonState.UP, this.overlayPlayPauseButtonPlayUpIconTexture);
+			icon.setTextureForState(ButtonState.HOVER, this.overlayPlayPauseButtonPlayUpIconTexture);
+			icon.setTextureForState(ButtonState.DOWN, this.overlayPlayPauseButtonPlayDownIconTexture);
+			button.defaultIcon = icon;
+
+			button.hasLabelTextRenderer = false;
+			
+			var overlaySkin:Quad = new Quad(1, 1, VIDEO_OVERLAY_COLOR);
+			overlaySkin.alpha = VIDEO_OVERLAY_ALPHA;
+			button.upSkin = overlaySkin;
+			button.hoverSkin = overlaySkin;
+		}
+
+	//-------------------------
+	// FullScreenToggleButton
+	//-------------------------
+
+		protected function setFullScreenToggleButtonStyles(button:FullScreenToggleButton):void
+		{
+			var icon:ImageSkin = new ImageSkin(this.fullScreenToggleButtonEnterUpIconTexture);
+			icon.selectedTexture = this.fullScreenToggleButtonExitUpIconTexture;
+			icon.setTextureForState(ButtonState.DOWN, this.fullScreenToggleButtonEnterDownIconTexture);
+			icon.setTextureForState(ButtonState.DOWN_AND_SELECTED, this.fullScreenToggleButtonExitDownIconTexture);
+			button.defaultIcon = icon;
+
+			button.hasLabelTextRenderer = false;
+
+			button.minWidth = this.controlSize;
+			button.minHeight = this.controlSize;
+			button.minTouchWidth = this.gridSize;
+			button.minTouchHeight = this.gridSize;
+		}
+
+	//-------------------------
+	// MuteToggleButton
+	//-------------------------
+
+		protected function setMuteToggleButtonStyles(button:MuteToggleButton):void
+		{
+			var icon:ImageSkin = new ImageSkin(this.muteToggleButtonLoudUpIconTexture);
+			icon.selectedTexture = this.muteToggleButtonMutedUpIconTexture;
+			icon.setTextureForState(ButtonState.DOWN, this.muteToggleButtonLoudDownIconTexture);
+			icon.setTextureForState(ButtonState.DOWN_AND_SELECTED, this.muteToggleButtonMutedDownIconTexture);
+			button.defaultIcon = icon;
+
+			button.hasLabelTextRenderer = false;
+			button.showVolumeSliderOnHover = false;
+
+			button.minWidth = this.controlSize;
+			button.minHeight = this.controlSize;
+			button.minTouchWidth = this.gridSize;
+			button.minTouchHeight = this.gridSize;
+		}
+
+	//-------------------------
+	// SeekSlider
+	//-------------------------
+
+		protected function setSeekSliderStyles(slider:SeekSlider):void
+		{
+			slider.trackLayoutMode = TrackLayoutMode.SPLIT;
+			slider.showThumb = false;
+			if(slider.direction == Direction.VERTICAL)
+			{
+				slider.minWidth = this.smallControlSize;
+				slider.minHeight = this.controlSize;
+			}
+			else //horizontal
+			{
+				slider.minWidth = this.controlSize;
+				slider.minHeight = this.smallControlSize;
+			}
+			var progressSkin:Image = new Image(this.seekSliderProgressSkinTexture);
+			progressSkin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
+			progressSkin.width = this.smallControlSize;
+			progressSkin.height = this.smallControlSize;
+			slider.progressSkin = progressSkin;
+		}
+
+		protected function setSeekSliderThumbStyles(thumb:Button):void
+		{
+			var thumbSize:Number = 6;
+			thumb.defaultSkin = new Quad(thumbSize, thumbSize);
+			thumb.hasLabelTextRenderer = false;
+			thumb.minTouchWidth = this.gridSize;
+			thumb.minTouchHeight = this.gridSize;
+		}
+
+		protected function setSeekSliderMinimumTrackStyles(track:Button):void
+		{
+			var defaultSkin:Image = new Image(this.buttonUpSkinTexture);
+			defaultSkin.scale9Grid = BUTTON_SCALE9_GRID;
+			defaultSkin.width = this.wideControlSize;
+			defaultSkin.height = this.smallControlSize;
+			track.defaultSkin = defaultSkin;
+			track.hasLabelTextRenderer = false;
+			track.minTouchHeight = this.gridSize;
+		}
+
+		protected function setSeekSliderMaximumTrackStyles(track:Button):void
+		{
+			var defaultSkin:Image = new Image(this.backgroundSkinTexture);
+			defaultSkin.scale9Grid = DEFAULT_BACKGROUND_SCALE9_GRID;
+			defaultSkin.width = this.wideControlSize;
+			defaultSkin.height = this.smallControlSize;
+			track.defaultSkin = defaultSkin;
+			track.hasLabelTextRenderer = false;
+			track.minTouchHeight = this.gridSize;
+		}
+
+	//-------------------------
+	// VolumeSlider
+	//-------------------------
+
+		protected function setVolumeSliderStyles(slider:VolumeSlider):void
+		{
+			slider.direction = Direction.HORIZONTAL;
+			slider.trackLayoutMode = TrackLayoutMode.SPLIT;
+			slider.showThumb = false;
+			slider.minWidth = this.volumeSliderMinimumTrackSkinTexture.width;
+			slider.minHeight = this.volumeSliderMinimumTrackSkinTexture.height;
+		}
+
+		protected function setVolumeSliderThumbStyles(thumb:Button):void
+		{
+			var thumbSize:Number = 6;
+			var defaultSkin:Quad = new Quad(thumbSize, thumbSize);
+			defaultSkin.width = 0;
+			defaultSkin.height = 0;
+			thumb.defaultSkin = defaultSkin;
+			thumb.hasLabelTextRenderer = false;
+		}
+
+		protected function setVolumeSliderMinimumTrackStyles(track:Button):void
+		{
+			var defaultSkin:ImageLoader = new ImageLoader();
+			defaultSkin.scaleContent = false;
+			defaultSkin.source = this.volumeSliderMinimumTrackSkinTexture;
+			track.defaultSkin = defaultSkin;
+			track.hasLabelTextRenderer = false;
+			track.minTouchHeight = this.gridSize;
+		}
+
+		protected function setVolumeSliderMaximumTrackStyles(track:Button):void
+		{
+			var defaultSkin:ImageLoader = new ImageLoader();
+			defaultSkin.scaleContent = false;
+			defaultSkin.horizontalAlign = HorizontalAlign.RIGHT;
+			defaultSkin.source = this.volumeSliderMaximumTrackSkinTexture;
+			track.defaultSkin = defaultSkin;
+			track.hasLabelTextRenderer = false;
+			track.minTouchHeight = this.gridSize;
+		}
+		
 
 	}
 }

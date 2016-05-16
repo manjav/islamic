@@ -24,7 +24,8 @@ package com.gerantech.islamic.views.headers
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.events.Event;
-	import starling.filters.BlurFilter;
+	import starling.filters.DropShadowFilter;
+	import starling.filters.FilterChain;
 	
 	public class SearchSubtitle extends BaseSubtitle
 	{
@@ -77,7 +78,7 @@ package com.gerantech.islamic.views.headers
 			actionButton.iconScale = 0.4;
 			actionButton.width = actionButton.height = appModel.sizes.DP48;
 			actionButton.pivotY = actionButton.pivotX = actionButton.width/2;
-			actionButton.filter = BlurFilter.createDropShadow(border/8, 90*(Math.PI/180), 0, 0.6, border/16);
+			actionButton.filter = new FilterChain(new DropShadowFilter(border/8, 90*(Math.PI/180), 0, 0.6, border/16));
 			actionButton.addEventListener(Event.TRIGGERED, actionButton_triggerd);
 			actionButton.layoutData = new AnchorLayoutData(NaN, border*2, -appModel.sizes.toolbar/2, NaN);
 			addChild(actionButton);
@@ -88,7 +89,7 @@ package com.gerantech.islamic.views.headers
 			q.iconPath = userModel.TRANSLATOR_PATH + "quran/quran.pbqr";
 
 			ConfigModel.instance.searchSources = new Array(q);
-			for each(var p:Person in ConfigModel.instance.selectedTranslators)
+			for each(var p:Person in ResourceModel.instance.selectedTranslators)
 				ConfigModel.instance.searchSources.push(p);
 			
 			if(userModel.searchSource>ConfigModel.instance.searchSources.length-1)

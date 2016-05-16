@@ -5,7 +5,6 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.events.UserEvent;
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.vo.Aya;
 	import com.gerantech.islamic.models.vo.Person;
@@ -36,12 +35,13 @@ package com.gerantech.islamic.views.screens
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import com.gerantech.islamic.views.lists.FastList;
 
 	
 	public class QuranScreen extends BaseCustomScreen
 	{
 	
-		private var list:List;
+		private var list:FastList;
 		private var translatorsList:PersonsScreen;
 		private var recitersList:PersonsScreen;		
 		private var selectedIndex:uint;
@@ -79,7 +79,7 @@ package com.gerantech.islamic.views.screens
 			
 			removeChildren();
 			createList();
-			if(ConfigModel.instance.selectedReciters.length>0)
+			if(resourceModel.selectedReciters.length>0)
 			{
 				addChild(player);
 				//player.reload();
@@ -115,7 +115,7 @@ package com.gerantech.islamic.views.screens
 			}
 			selectedIndex = userModel.getSelectedByLastItem();
 			
-			list = new List();
+			list = new FastList();
 			list.layout = listLayout;
 			list.layoutData = new AnchorLayoutData(0, 0, 0, 0);
 			list.itemRendererFactory = function():IListItemRenderer

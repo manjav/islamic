@@ -19,15 +19,14 @@ package com.gerantech.islamic.views.controls
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Sprite;
-	import starling.filters.ColorMatrixFilter;
-	import starling.textures.TextureSmoothing;
 	import starling.utils.deg2rad;
+	import starling.utils.rad2deg;
 	
 	public class Clock extends Sprite
 	{
-		private var needleHour:Image;
-		private var needleMinutes:Image;
-		private var needleSecond:Image;
+		private var needleHour:Quad;
+		private var needleMinutes:Quad;
+		private var needleSecond:Quad;
 
 		private var now:Date;
 		private var intervalID:uint;
@@ -42,17 +41,17 @@ package com.gerantech.islamic.views.controls
 			addChild(partiesContainer);
 			
 			//  Create outline circle ---------------------------------------
-			var cmf:ColorMatrixFilter = new ColorMatrixFilter();
-			cmf.adjustBrightness(1);
+			//var cmf:ColorMatrixFilter = new ColorMatrixFilter();
+			//cmf.adjustBrightness(1);
 			for(var i:uint=0; i<8; i++)
 			{
 				var slice:Sprite = new Sprite();
-				var image:Image = new Image(Assets.getTexture("radian"));
+				var image:Image = new Image(Assets.getTexture("radian_white"));
 				image.y = -256;
 				image.x = -image.width/2;
 				slice.addChild(image);
 				slice.rotation = i*22.5*(Math.PI/90);
-				slice.filter = cmf;
+				//slice.filter = cmf;
 				addChild(slice);
 			}
 			
@@ -91,10 +90,10 @@ package com.gerantech.islamic.views.controls
 			var m:uint = now.getMinutes();
 			var h:uint = now.getHours();
 			/*CLOCK ONE*/
-			needleHour.rotation = deg2rad((h * 30) + (m / 2));	
-			needleMinutes.rotation = deg2rad((m * 6));
-			needleSecond.rotation = deg2rad((s * 6));
-			
+			needleHour.rotation = deg2rad((h * 30) + (m / 2) + 180);	
+			needleMinutes.rotation = deg2rad( m * 6 + 180);
+			needleSecond.rotation = deg2rad(s * 6+180);
+			//trace(rad2deg(rotation), rad2deg(needleSecond.rotation))
 			if(nextTime == null)
 				return;
 			
@@ -105,15 +104,17 @@ package com.gerantech.islamic.views.controls
 				StrTools.getNumber(GTStringUtils.uintToTime((nextTime.getTime() - now.getTime())/1000, "Second", ":")));
 		}
 		
-		private function createNeedle(width:int, height:int):Image
+		private function createNeedle(width:int, height:int):Quad
 		{
-			var ret:Image = new Image(Assets.getTexture("list-item-selected-skin"));
-			ret.smoothing = TextureSmoothing.BILINEAR;
-			ret.pivotX = ret.width/2;
-			ret.pivotY = ret.height-ret.width/2;
+			/*var ret:Image = new Image(Assets.getTexture("list-item-selected-skin"));
+			//ret.smoothing = TextureSmoothing.BILINEAR;
+			//ret.pivotX = ret.width/2;
 			ret.width = width;
 			ret.height = height;
-			//var ret:Quad = new Quad(width, height, 0xFFFFFF);
+			//ret.pivotY = width/2;*/
+			var ret:Quad = new Quad(width, height, 0xFFFFFF);
+			ret.alignPivot("center", "center");
+			ret.pivotY = 16;
 			addChild(ret);
 			return ret;
 		}

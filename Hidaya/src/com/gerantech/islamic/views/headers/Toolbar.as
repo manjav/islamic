@@ -19,11 +19,11 @@ package com.gerantech.islamic.views.headers
 	
 	import starling.display.Quad;
 	import starling.events.Event;
-	import starling.filters.BlurFilter;
+	import starling.filters.DropShadowFilter;
+	import starling.filters.FilterChain;
 		
 	public class Toolbar extends LayoutGroup
 	{
-		
 		public var navigationCallback:Function;
 		public var accessoriesData:Vector.<ToolbarButtonData>;
 		public var centerItem:FeathersControl;
@@ -44,8 +44,7 @@ package com.gerantech.islamic.views.headers
 			autoSizeMode = AUTO_SIZE_MODE_STAGE;
 			appModel = AppModel.instance;
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.CHROME_COLOR);
-			
-			
+						
 			height = appModel.sizes.toolbar;
 			gap = appModel.sizes.toolbar;
 			padding = appModel.sizes.toolbar/2;
@@ -189,7 +188,8 @@ package com.gerantech.islamic.views.headers
 			moreList.addEventListener(Event.CLOSE, callout_closeHandler);
 			
 			callout = Callout.show(moreList, moreButton);
-			callout.filter = BlurFilter.createDropShadow(appModel.sizes.border, 90*(Math.PI/180), 0, 0.5, 3);
+			callout.width = Math.min(appModel.sizes.twoLineItem*2, appModel.sizes.orginalWidth*0.8)
+			callout.filter = new FilterChain(new DropShadowFilter(appModel.sizes.border, 90*(Math.PI/180), 0, 0.5, 3));
 		}
 		
 		private function navigator_changeHandler(event:Event):void

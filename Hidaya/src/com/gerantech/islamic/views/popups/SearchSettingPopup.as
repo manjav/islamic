@@ -42,7 +42,7 @@ package com.gerantech.islamic.views.popups
 			container.layout = clayout;
 			
 			sourcePanel = new SettingPanel (loc("search_set_source"), ConfigModel.instance.searchSources, userModel.searchSource, SearchSourceItemRenderer);
-			sourcePanel.addEventListener(Event.CHANGE, sourcePanel.list.closeList);
+			sourcePanel.addEventListener(Event.CHANGE, sourcePanel.picker.closeList);
 			container.addChild(sourcePanel);
 			
 			var scopeData:Array = new Array({name:loc("search_set_scope_0")}, {name:loc("search_set_scope_1")}, {name:loc("search_set_scope_2")});
@@ -103,8 +103,8 @@ package com.gerantech.islamic.views.popups
 			juzePicker.selectedIndex = userModel.searchJuze;
 			juzePicker.addEventListener(Event.CHANGE, juzePicker.closeList);
 			
-			sourcePanel.list.selectedIndex = userModel.searchSource;
-			scopePanel.list.selectedIndex = userModel.searchScope;
+			sourcePanel.picker.selectedIndex = userModel.searchSource;
+			scopePanel.picker.selectedIndex = userModel.searchScope;
 			scopePanel_changeHandler(null);
 			
 			if(event!=null)
@@ -115,18 +115,18 @@ package com.gerantech.islamic.views.popups
 		private function scopePanel_changeHandler(event:Event):void
 		{
 			container.removeChildren(3);
-			if(scopePanel.list.selectedIndex==1)
+			if(scopePanel.picker.selectedIndex==1)
 				container.addChild(suraPicker);
-			else if(scopePanel.list.selectedIndex==2)
+			else if(scopePanel.picker.selectedIndex==2)
 				container.addChild(juzePicker);
 			
-			scopePanel.list.closeList();
+			scopePanel.picker.closeList();
 		}
 		
 		private function acceptCallbackHandler():void
 		{
-			userModel.searchSource = sourcePanel.list.selectedIndex;
-			userModel.searchScope = scopePanel.list.selectedIndex;
+			userModel.searchSource = sourcePanel.picker.selectedIndex;
+			userModel.searchScope = scopePanel.picker.selectedIndex;
 			userModel.searchSura = suraPicker.selectedIndex;
 			userModel.searchJuze = juzePicker.selectedIndex;
 		}

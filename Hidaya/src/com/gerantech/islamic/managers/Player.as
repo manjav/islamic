@@ -5,6 +5,7 @@ package com.gerantech.islamic.managers
 	import com.gerantech.islamic.events.AppEvent;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Aya;
 	import com.gerantech.islamic.models.vo.BaseQData;
@@ -50,6 +51,7 @@ package com.gerantech.islamic.managers
 		private var app:AppModel;
 		private var conf:ConfigModel;
 		private var userModel:UserModel;
+		private var resModel:ResourceModel;
 		private var intervalID:uint;
 		private var _state:String;
 		private var _playEnabled:Boolean = true;
@@ -68,6 +70,7 @@ package com.gerantech.islamic.managers
 			app = AppModel.instance;
 			conf = ConfigModel.instance;
 			userModel = UserModel.instance;
+			resModel = ResourceModel.instance;
 	
 			NativeAbilities.instance.init();
 			NativeAbilities.instance.addEventListener(AndroidEvent.CALL_STATE_CHANGED, phone_callStateChanged);
@@ -122,7 +125,7 @@ package com.gerantech.islamic.managers
 			var reciterChanged:Boolean = true;
 			if(ayaSound)
 			{
-				reciterChanged = ayaSound.reciter!=conf.selectedReciters[reciterIndex];
+				reciterChanged = ayaSound.reciter!=resModel.selectedReciters[reciterIndex];
 				if(!reciterChanged && ayaRepeat==userModel.ayaRepeat && ayaSound.equals(aya))
 					return;
 			}
@@ -135,7 +138,7 @@ package com.gerantech.islamic.managers
 					currentReciter.addEventListener(Person.CHECKSUM_LOADED, reciter_checksumLoaded);
 					currentReciter.addEventListener(Person.CHECKSUM_ERROR, reciter_checksumLoaded);
 				}
-				currentReciter = conf.selectedReciters[reciterIndex];
+				currentReciter = resModel.selectedReciters[reciterIndex];
 				dispatchEventWith(RECITER_CHANGED, false, currentReciter);
 			}
 			ayaSound = currentReciter.getSoundAya(aya);
@@ -280,7 +283,7 @@ package com.gerantech.islamic.managers
 			//playProgress.width = dataProgress.width = app.width;
 			stop();
 			
-			if(reciterIndex<conf.selectedReciters.length-1)
+			if(reciterIndex<resModel.selectedReciters.length-1)
 			{
 				reciterIndex ++;
 				load(ayaSound);

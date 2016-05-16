@@ -5,15 +5,13 @@ package com.gerantech.islamic.views.lists
 	import com.gerantech.islamic.models.vo.ToolbarButtonData;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.items.MenuItemRenderer;
-	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	
-	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.layout.VerticalLayout;
 	
 	import starling.events.Event;
 	
-	public class MenuList extends List
+	public class MenuList extends QList
 	{
 		private var overlay:FlatButton;
 		private var array:Array;
@@ -28,12 +26,8 @@ package com.gerantech.islamic.views.lists
 			super.initialize();
 			
 			var llaouyt:VerticalLayout = new VerticalLayout();
-			//llaouyt.firstGap = AppModel.instance.sizes.twoLineItem/4;
 			llaouyt.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			layout = llaouyt;
-			
-			//{value:"sura_navi"}, {value:"juze_navi"}, {value:"page_navi"}
-			width = Math.min(AppModel.instance.sizes.twoLineItem*6, AppModel.instance.sizes.orginalWidth*0.8);
 
 			itemRendererFactory = function():IListItemRenderer
 			{

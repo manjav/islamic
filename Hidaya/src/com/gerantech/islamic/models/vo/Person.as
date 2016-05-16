@@ -1,6 +1,6 @@
 package com.gerantech.islamic.models.vo
 {	
-	import com.gerantech.islamic.models.AppModel;
+	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.utils.LoadAndSaver;
 	import com.gerantech.islamic.utils.StrTools;
@@ -197,7 +197,7 @@ package com.gerantech.islamic.models.vo
 			if(_defaultImage == null)
 			{
 				//var ba:ByteArray = AppModel.instance.assetManager.getByteArray("unknown");
-				_defaultImage = AppModel.instance.assetManager.getTexture("unknown");
+				_defaultImage = Assets.getTexture("unknown");
 				//ba.clear();
 			}
 			return _defaultImage;

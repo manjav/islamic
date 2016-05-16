@@ -56,6 +56,7 @@ package com.gerantech.islamic.models.vo
 		public var inbox:Array = [];
 		public var font:Object = {value:"mequran", scale:1};
 		public var city:Object = new Location();
+		public var hijriOffset:Object = {value:"offset_2"};
 		
 		public function get navigationMode():Object
 		{

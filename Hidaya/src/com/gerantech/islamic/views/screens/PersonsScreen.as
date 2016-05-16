@@ -1,6 +1,5 @@
 package com.gerantech.islamic.views.screens
 {
-	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
@@ -64,12 +63,12 @@ package com.gerantech.islamic.views.screens
 		{
 			if(type==Person.TYPE_RECITER)
 			{
-				addPersonScreen(modeSelector.selectedMode, ConfigModel.instance.recitersFlags);
+				addPersonScreen(modeSelector.selectedMode, resourceModel.recitersFlags);
 				return;
 			}
 			if(type==Person.TYPE_TRANSLATOR && modeSelector.selectedMode.name!="trans_t")
 			{
-				addPersonScreen(modeSelector.selectedMode, ConfigModel.instance.transFlags);
+				addPersonScreen(modeSelector.selectedMode, resourceModel.transFlags);
 				return;
 			}
 			
@@ -83,7 +82,7 @@ package com.gerantech.islamic.views.screens
 		{
 			if(event.type == Event.CLOSE)
 				return;
-			addPersonScreen(modeSelector.selectedMode, languageSelector.selectedLanguage.name=="ot_fl"?ConfigModel.instance.singleTransFlags:[languageSelector.selectedLanguage]);
+			addPersonScreen(modeSelector.selectedMode, languageSelector.selectedLanguage.name=="ot_fl"?resourceModel.singleTransFlags:[languageSelector.selectedLanguage]);
 		}
 		
 		private function addPersonScreen(mode:Local, flags:Array):void

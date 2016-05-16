@@ -2,6 +2,7 @@ package com.gerantech.islamic.views.actions
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.actions.items.ActionItemRenderer;
@@ -57,7 +58,7 @@ package com.gerantech.islamic.views.actions
 		
 		private function getTypeButton(index:uint):ActionItemRenderer
 		{
-			var ret:ActionItemRenderer  = new ActionItemRenderer(ConfigModel.instance.multiTransFlags[index], index);
+			var ret:ActionItemRenderer  = new ActionItemRenderer(ResourceModel.instance.multiTransFlags[index], index);
 			ret.addEventListener(Event.TRIGGERED, language_triggeredHandler);
 			return ret;
 		}		
@@ -69,7 +70,7 @@ package com.gerantech.islamic.views.actions
 			if(!touch)
 				return;
 			touch.getLocation(this.stage, HELPER_POINT);
-			if(contains(this.stage.hitTest(HELPER_POINT, true)))
+			if(contains(this.stage.hitTest(HELPER_POINT)))
 				animateButtons(opened=false);
 		}
 		
@@ -87,7 +88,7 @@ package com.gerantech.islamic.views.actions
 			if(personModes==null)
 			{	
 				personModes = new Vector.<ActionItemRenderer>();
-				for(var i:uint=0; i<ConfigModel.instance.multiTransFlags.length; i++)
+				for(var i:uint=0; i<ResourceModel.instance.multiTransFlags.length; i++)
 					personModes.push(getTypeButton(i));
 				personModes.reverse();
 			}

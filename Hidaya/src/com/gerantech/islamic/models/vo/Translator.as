@@ -129,7 +129,7 @@ package com.gerantech.islamic.models.vo
 			{
 				query("CREATE TABLE IF NOT EXISTS matadata (version INTEGER);", function():void{query("INSERT INTO 'matadata' VALUES (1);", trace)});
 				dispatchEventWith(TRANSLATION_LOADED);
-				if(ConfigModel.instance.selectedTranslators[0]==this)
+				if(ResourceModel.instance.selectedTranslators[0]==this)
 					remindeFirstTranslate();
 				return;
 			}

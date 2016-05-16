@@ -2,6 +2,7 @@ package com.gerantech.islamic.views.lists
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Page;
 	import com.gerantech.islamic.models.vo.Person;
@@ -64,7 +65,7 @@ package com.gerantech.islamic.views.lists
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			listLayout.padding = appModel.sizes.border*2;
 			listLayout.paddingTop = headerHeight;
-			listLayout.paddingBottom = ConfigModel.instance.hasReciter?appModel.sizes.toolbar*1.5+appModel.sizes.border:appModel.sizes.border
+			listLayout.paddingBottom = ResourceModel.instance.hasReciter?appModel.sizes.toolbar*1.5+appModel.sizes.border:appModel.sizes.border
 			listLayout.hasVariableItemDimensions = true;
 			listLayout.useVirtualLayout = true;
 			
@@ -101,7 +102,7 @@ package com.gerantech.islamic.views.lists
 		
 		private function addTranslationText():void
 		{
-			if (translatorIndex<ConfigModel.instance.selectedTranslators.length)
+			if (translatorIndex<ResourceModel.instance.selectedTranslators.length)
 				loadTranslator();
 			else
 			{
@@ -114,7 +115,7 @@ package com.gerantech.islamic.views.lists
 		
 		private function loadTranslator():void
 		{
-			currentTranslator = ConfigModel.instance.selectedTranslators[translatorIndex];
+			currentTranslator = ResourceModel.instance.selectedTranslators[translatorIndex];
 			currentTranslator.removeEventListener(Person.TRANSLATION_LOADED, loadTranslator);
 			currentTranslator.removeEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
 			

@@ -2,18 +2,17 @@ package com.gerantech.islamic.views.screens
 {
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.managers.BillingManager;
-	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.SearchInput;
 	import com.gerantech.islamic.views.headers.ShopHeader;
 	import com.gerantech.islamic.views.items.PersonItemRenderer;
+	import com.gerantech.islamic.views.lists.FastList;
 	
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
 	
-	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayout;
@@ -28,7 +27,7 @@ package com.gerantech.islamic.views.screens
 		public var mode:Local;
 		public var flags:Array;
 		
-		private var list:List;
+		private var list:FastList;
 		private var listData:Array;		
 		private var changeTID:uint;
 		//private var backwardEnabled:Boolean;
@@ -43,7 +42,7 @@ package com.gerantech.islamic.views.screens
 			super.initialize();
 			layout = new AnchorLayout()
 			
-			list = new List();
+			list = new FastList();
 			list.itemRendererFactory = function():IListItemRenderer
 			{
 				return new PersonItemRenderer();
@@ -105,16 +104,13 @@ package com.gerantech.islamic.views.screens
 		}
 		private function waitingForPersonsChanging():void
 		{
-
-			var sampleList:Array = type==Person.TYPE_TRANSLATOR ? ConfigModel.instance.selectedTranslators : ConfigModel.instance.selectedReciters;
+			var sampleList:Array = type==Person.TYPE_TRANSLATOR ? resourceModel.selectedTranslators : resourceModel.selectedReciters;
 			
 			for each(var p:Person in listData)
 			{
 				var ex:int = sampleList.indexOf(p);
 				if(p.state==Person.SELECTED && ex==-1)
-				{
 					sampleList.push(p);
-				}
 				
 				if(ex>-1 && p.state!=Person.SELECTED)
 					sampleList.splice(ex,1);
@@ -125,8 +121,9 @@ package com.gerantech.islamic.views.screens
 				if(ps.state == Person.SELECTED)
 					ret.push(ps);*/
 			
-			type==Person.TYPE_TRANSLATOR ? ConfigModel.instance.selectedTranslators = sampleList : ConfigModel.instance.selectedReciters = sampleList;
+			type==Person.TYPE_TRANSLATOR ? resourceModel.selectedTranslators = sampleList : resourceModel.selectedReciters = sampleList;
 			///backwardEnabled = true;
+			trace(sampleList);
 		}		
 		
 		override protected function backButtonFunction():void
@@ -139,8 +136,8 @@ package com.gerantech.islamic.views.screens
 		private function getFilterList():Array
 		{
 			var ret:Array = new Array();
-			var allPerson:Array = type==Person.TYPE_TRANSLATOR?ConfigModel.instance.translators : ConfigModel.instance.reciters
-			var selectedPerson:Array = type==Person.TYPE_TRANSLATOR?ConfigModel.instance.selectedTranslators : ConfigModel.instance.selectedReciters
+			var allPerson:Array = type==Person.TYPE_TRANSLATOR?resourceModel.translators : resourceModel.reciters
+			var selectedPerson:Array = type==Person.TYPE_TRANSLATOR?resourceModel.selectedTranslators : resourceModel.selectedReciters
 			
 			for each(var p:Person in allPerson)
 				if(existLanguage(p) && p.mode==mode.name && searchText(p))

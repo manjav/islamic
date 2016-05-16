@@ -131,6 +131,8 @@ package com.gerantech.islamic.views.popups
 			initAyaPicker(suraPicker.selectedIndex);
 			ayaPicker.labelFunction = function( item:Object ):String
 			{
+				if(item==null)
+					return "";
 				return StrTools.getNumberFromLocale(item.name);
 			};
 			ayaPicker.listProperties.itemRendererFactory = function():IListItemRenderer

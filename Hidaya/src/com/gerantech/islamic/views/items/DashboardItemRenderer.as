@@ -7,10 +7,9 @@ package com.gerantech.islamic.views.items
 	import flash.geom.Rectangle;
 	
 	import feathers.controls.ImageLoader;
-	import feathers.display.Scale9Image;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	import feathers.textures.Scale9Textures;
+	import feathers.skins.ImageSkin;
 	
 	import starling.display.Quad;
 	
@@ -18,6 +17,7 @@ package com.gerantech.islamic.views.items
 	{
 		private var iconDisplay:ImageLoader;
 		private var titleDisplay:RTLLabel;
+		private var skin:ImageSkin;
 		public function DashboardItemRenderer()
 		{
 			super();
@@ -33,11 +33,15 @@ package com.gerantech.islamic.views.items
 			
 			backgroundSkin = new Quad(1, 1, 0xEEEEEE);
 			
-			var image:Scale9Image = new Scale9Image(new Scale9Textures(Assets.getTexture("background-popup-skin"), new Rectangle(10,10,1,1)));
-			image.x = image.y = 1;
-			image.width = width-2;
-			image.height = height-2;
-			addChild(image);
+			skin = new ImageSkin();//Assets.getTexture("background-popup-skin"));//new Scale9Textures(Assets.getTexture("background-popup-skin"), new Rectangle(10,10,1,1)));
+			skin.setTextureForState( STATE_NORMAL, Assets.getTexture("background-popup-skin") );
+			skin.setTextureForState( STATE_SELECTED, Assets.getTexture("background-disabled-skin") );
+			skin.setTextureForState( STATE_DOWN, Assets.getTexture("background-disabled-skin") );
+			skin.scale9Grid = new Rectangle(10,10,1,1);
+			skin.x = skin.y = 1;
+			skin.width = width-2;
+			skin.height = height-2;
+			addChild(skin);
 			
 			iconDisplay = new ImageLoader();
 			iconDisplay.delayTextureCreation = true;
@@ -59,6 +63,16 @@ package com.gerantech.islamic.views.items
 			titleDisplay.text = loc(data.title);
 		}
 		
+		
+		override public function set currentState(value:String):void
+		{
+			var lastState:String = super.currentState;
+			super.currentState = value;
+			
+			if(value==lastState)
+				return;
+			skin.defaultTexture = skin.getTextureForState(value);
+		}	
 		
 	}
 }

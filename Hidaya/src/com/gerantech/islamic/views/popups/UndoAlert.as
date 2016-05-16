@@ -4,23 +4,23 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	
+	import flash.geom.Rectangle;
+	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
-	import feathers.display.Scale3Image;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	import feathers.textures.Scale3Textures;
 	
 	import starling.core.Starling;
+	import starling.display.Image;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 
 	public class UndoAlert extends BasePopUp
 	{
-		private var background:Scale3Image;
 		private var callback:Function;
 		private var params:Array;
 		
@@ -42,8 +42,10 @@ package com.gerantech.islamic.views.popups
 			layout = new AnchorLayout();
 			//hGroup.layoutData = new AnchorLayoutData(0,AppModel.instance.sizes.itemHeight,0,AppModel.instance.sizes.itemHeight)
 		
-			backgroundSkin = new Scale3Image(new Scale3Textures(Assets.getTexture("round_alert"), 31,2));
-			backgroundSkin.alpha = 0.9;
+			var imageSkin:Image = new Image(Assets.getTexture("round_alert"));//, 31,2));
+			imageSkin.scale9Grid = new Rectangle(31, imageSkin.height/2, 2, 0);
+			imageSkin.alpha = 0.9;
+			backgroundSkin = imageSkin;
 			//addChild(background);
 			
 			var hLayout:HorizontalLayout = new HorizontalLayout();

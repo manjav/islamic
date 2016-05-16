@@ -2,8 +2,9 @@ package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.events.UserEvent;
 	import com.gerantech.islamic.managers.Player;
-	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.vo.Aya;
+	import com.gerantech.islamic.views.lists.FastList;
 	
 	import flash.utils.setTimeout;
 	
@@ -19,7 +20,7 @@ package com.gerantech.islamic.views.items
 	public class PageItemRenderer extends BaseQPageItemRenderer
 	{
 
-		protected var list:List;
+		protected var list:FastList;
 		private var activeAyas:Vector.<Aya>;
 
 		private var currentIndex:uint;
@@ -42,11 +43,11 @@ package com.gerantech.islamic.views.items
 			listLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
 			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
 			listLayout.paddingTop = appModel.sizes.border + appModel.sizes.subtitle + appModel.sizes.toolbar;
-			listLayout.paddingBottom = ConfigModel.instance.hasReciter?appModel.sizes.toolbar+appModel.sizes.border:appModel.sizes.border
+			listLayout.paddingBottom = ResourceModel.instance.hasReciter?appModel.sizes.toolbar+appModel.sizes.border:appModel.sizes.border
 			listLayout.hasVariableItemDimensions = true;
 			//listLayout.gap = appModel.sizes.border;
 			
-			list = new List();
+			list = new FastList();
 			list.verticalScrollBarPosition = List.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
 			list.layout = listLayout;
 			list.layoutData = new AnchorLayoutData(0, 0, 0, 0);
@@ -100,7 +101,7 @@ package com.gerantech.islamic.views.items
 		}
 		private function assignAyaToPlayer(aya:Aya):void
 		{
-			if(ConfigModel.instance.selectedReciters.length==0 || aya==null)
+			if(ResourceModel.instance.selectedReciters.length==0 || aya==null)
 				return;
 			Player.instance.resetRepeatation();
 			Player.instance.load(aya, Player.instance.playing);

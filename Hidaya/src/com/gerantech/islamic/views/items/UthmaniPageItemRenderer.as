@@ -2,7 +2,7 @@ package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.managers.Player;
 	import com.gerantech.islamic.models.Assets;
-	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.vo.Aya;
 	import com.gerantech.islamic.models.vo.Page;
 	import com.gerantech.islamic.models.vo.media.Breakpoint;
@@ -107,7 +107,7 @@ package com.gerantech.islamic.views.items
 		{
 			
 			height = _owner.height;
-			if(!appModel.upside && appModel.sizes.isTablet && !ConfigModel.instance.hasTranslator)
+			if(!appModel.upside && appModel.sizes.isTablet && !ResourceModel.instance.hasTranslator)
 				width = appModel.sizes.width/2;
 			else
 				width = appModel.sizes.width;
@@ -124,7 +124,7 @@ package com.gerantech.islamic.views.items
 			if(!appModel.upside && appModel.sizes.isTablet)
 			{
 				
-				if(!ConfigModel.instance.hasTranslator)
+				if(!ResourceModel.instance.hasTranslator)
 				{
 					uthmaniPage = new UthmaniPage(_qdata as Page, width, header._height, 1.3);
 					uthmaniPage.layoutData = new AnchorLayoutData(0,0,0,0);
@@ -189,7 +189,7 @@ package com.gerantech.islamic.views.items
 		
 		private function assignAyaToPlayer(aya:Aya):void
 		{
-			if(ConfigModel.instance.selectedReciters.length==0 || aya==null)
+			if(ResourceModel.instance.selectedReciters.length==0 || aya==null)
 				return;
 			Player.instance.resetRepeatation();
 			Player.instance.load(aya, Player.instance.playing);

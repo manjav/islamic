@@ -86,6 +86,10 @@ package com.gerantech.islamic.views.screens
 				return;
 			switch(list.selectedItem.title)
 			{
+				case "page_quran":
+					userModel.initResources();
+					appModel.navigator.pushScreen(list.selectedItem.title);
+					break;
 				case "page_greeting":
 					new FileReference().browse();
 					break;

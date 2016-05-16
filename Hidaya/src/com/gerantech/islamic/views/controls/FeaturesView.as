@@ -1,9 +1,6 @@
 package com.gerantech.islamic.views.controls
 {
 	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.themes.BaseMaterialTheme;
-	
-	import flash.utils.setTimeout;
 	
 	import mx.resources.ResourceManager;
 	
@@ -13,13 +10,6 @@ package com.gerantech.islamic.views.controls
 	import feathers.layout.AnchorLayoutData;
 	
 	import spine.Event;
-	import spine.SkeletonData;
-	import spine.SkeletonJson;
-	import spine.animation.AnimationStateData;
-	import spine.atlas.Atlas;
-	import spine.attachments.AtlasAttachmentLoader;
-	import spine.starling.SkeletonAnimation;
-	import spine.starling.StarlingTextureLoader;
 	
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
@@ -31,7 +21,7 @@ package com.gerantech.islamic.views.controls
 		{
 			layout = new AnchorLayout();
 		}
-		
+		/*
 		[Embed(source = "../../assets/images/tutorial/tutorials.atlas", mimeType = "application/octet-stream")]
 		static public const SpineboyAtlasFile:Class;
 		
@@ -41,7 +31,7 @@ package com.gerantech.islamic.views.controls
 		[Embed(source = "../../assets/images/tutorial/tutorials.json", mimeType = "application/octet-stream")]
 		static public const SpineboyJson:Class;
 		
-		private var skeleton:SkeletonAnimation;
+		private var skeleton:SkeletonAnimation;*/
 		private var startButton:Button;
 		private var titleDisplay:RTLLabel;
 		
@@ -50,7 +40,7 @@ package com.gerantech.islamic.views.controls
 			super.initialize();
 			autoSizeMode = AUTO_SIZE_MODE_STAGE;
 			
-			var atlas:Atlas = new Atlas(new SpineboyAtlasFile(), new StarlingTextureLoader(new SpineboyAtlasTexture()));
+			/*var atlas:Atlas = new Atlas(new SpineboyAtlasFile(), new StarlingTextureLoader(new SpineboyAtlasTexture()));
 			var json:SkeletonJson = new SkeletonJson(new AtlasAttachmentLoader(atlas));
 			var skeletonData:SkeletonData = json.readSkeletonData(new SpineboyJson());
 			
@@ -63,7 +53,7 @@ package com.gerantech.islamic.views.controls
 			
 			setTimeout(startSplash, 1000);
 			skeleton.state.onComplete.add(animationCompleted);
-			skeleton.state.onEvent.add(animationEventHandler);
+			skeleton.state.onEvent.add(animationEventHandler);*/
 		}
 		
 		private function animationEventHandler(trackIndex:int, event:spine.Event):void
@@ -71,7 +61,7 @@ package com.gerantech.islamic.views.controls
 			setTitle("tute_"+event.data.name);
 		}
 		
-		private function animationCompleted (trackIndex:int, count:int):void 
+		/*private function animationCompleted (trackIndex:int, count:int):void 
 		{
 			var state:String;
 			switch(skeleton.state.getCurrent(trackIndex).animation.name)
@@ -113,7 +103,7 @@ package com.gerantech.islamic.views.controls
 			addChild(titleDisplay);
 			
 			setTimeout(setTitle, 1500, "app_title");
-		}
+		}*/
 		
 		private function setTitle(str:String):void
 		{

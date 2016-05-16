@@ -127,7 +127,7 @@ package com.gerantech.islamic.views.buttons
 				}
 				
 				touch.getLocation(this.stage, HELPER_POINT);
-				var isInBounds:Boolean = this.contains(this.stage.hitTest(HELPER_POINT, true));
+				var isInBounds:Boolean = this.contains(this.stage.hitTest(HELPER_POINT));
 				if(touch.phase == TouchPhase.MOVED)
 				{
 					if(isInBounds || this.keepDownStateOnRollOut)

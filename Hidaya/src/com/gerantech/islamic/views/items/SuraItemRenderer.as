@@ -84,7 +84,7 @@ package com.gerantech.islamic.views.items
 			{
 				var colorFilter:ColorMatrixFilter = new ColorMatrixFilter();
 				colorFilter.invert();
-				suraImage.filter = colorFilter;
+				//suraImage.filter = colorFilter;
 			}
 						
 			layoutGroup = new LayoutGroup();
@@ -117,11 +117,10 @@ package com.gerantech.islamic.views.items
 			first = (sura==null);
 			sura = _data as Sura;
 			
-			if(sura.sura_texture==null)
-				sura.sura_texture = Assets.getTexture(sura.sura.toString());
+			//if(sura.sura_texture==null)
+			//	sura.sura_texture = Assets.getTexture(sura.sura.toString(), "surajuze");
 			
-			//backgroundSkin = new Quad(AppModel.instance.sizes.width, _height, !isSelected?0xFFFFFF:0xAAFFFF);
-			suraImage.source = sura.sura_texture;
+			suraImage.source = Assets.getTexture(sura.sura.toString(), "surajuze")//sura.sura_texture;
 			//suraImage.readjustSize();
 			indexText.text = sura.sura.toString();//StrTools.getNumberFromLocale(sura.index);
 			super.commitData();

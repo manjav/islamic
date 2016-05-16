@@ -3,96 +3,80 @@ package com.gerantech.islamic.views.controls
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.vo.Person;
 	
+	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
+	import feathers.events.FeathersEventType;
+	import feathers.layout.AnchorLayout;
+	import feathers.layout.AnchorLayoutData;
 	
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
-	import starling.display.Image;
-	import starling.display.Sprite;
-	import starling.events.Event;
 	import starling.textures.Texture;
 	
 	public class PersonAccessory extends LayoutGroup
 	{
 		public var iconScale:Number = 0.7;
-		
-		private var image:Image;
-		private var state:String = Person.HAS_FILE;
-		private var _height:Number;
-		private var container:Sprite;
-		private var slider:CicularProgressBar;
-		
-		public function PersonAccessory(state:String="hasFile")
-		{
-			super();
-			this.state = state;
-			addEventListener(Event.RESIZE, resizeHandler);
-		}
-
+		private var state:String = "";
+		private var slider:CicularProgressBar2;
+		private var icon:ImageLoader;
 		
 		override protected function initialize():void
 		{
 			super.initialize();
+			layout = new AnchorLayout();
 			
-			slider = new CicularProgressBar();
-			addChildAt(slider, 0);
+			slider = new CicularProgressBar2();
+			slider.layoutData = new AnchorLayoutData(0,0,0,0);
+			addChild(slider);
 	
-			container = new Sprite();
-			addChild(container);
-			
-			image = new Image(getTexture());
-			image.pivotX = image.width/2;
-			image.pivotY = image.height/2;
-			//image.alpha = 0.2;
-			container.addChild(image);
-			/*setInterval(setPercenta, 100);
-			
+			icon = new ImageLoader();
+			icon.layoutData = new AnchorLayoutData(NaN,NaN,NaN,NaN,0,0);
+			icon.source = getTexture();
+			addChild(icon);
+
+			addEventListener(FeathersEventType.CREATION_COMPLETE, creationCompleteHandler);
 		}
 		
-		private function setPercenta():void
+		private function creationCompleteHandler():void
 		{
-			slider.drawPieMask(asad, _height/2, _height/1.8);
-			asad += 0.01;*/
+			icon.width = icon.height = iconScale*height;
 		}
 		
 		public function setPercent(value:Number):void
-		{
-			//slider.percent = Math.max(Math.min(value, 1), 0);
-			slider.drawPieMask(value, _height/2, _height/1.8);
+		{trace(value);
+			slider.value = value;
 		}
 		
-		public function setState(value:String, time:Number=0):void
+		public function setState(value:String, animationTime:Number=0):void
 		{
 			if(state==value)
 				return;
 			
 			state = value;
 			
-			if(image==null)
+			if(icon == null)
 				return;
 			
 			slider.visible = state==Person.LOADING;
 			if(slider.visible)
 				setPercent(0);
 			
-			image.texture = getTexture();
-			Starling.juggler.removeTweens(image);
-			if(time>0)
+			icon.source = getTexture();
+			Starling.juggler.removeTweens(icon);
+			if(animationTime>0)
 			{
-				image.width = image.height = _height*iconScale*1.4;
-				var tw:Tween = new Tween(image, time, Transitions.EASE_OUT_ELASTIC);
+				icon.width = icon.height = height*iconScale*1.4;
+				var tw:Tween = new Tween(icon, animationTime, Transitions.EASE_OUT_ELASTIC);
 				tw.delay = 0.02;
-				tw.animate("width", _height*iconScale);
-				tw.animate("height", _height*iconScale);
-				//var tw:TweenMax = TweenMax.to(image, time, {delay:0.02, width:_height*iconScale, height:_height*iconScale, ease:Elastic.easeOut});//, onUpdate:resizeHandler, onUpdateParams:[null]
+				tw.animate("width", height*iconScale);
+				tw.animate("height", height*iconScale);
 				if(value==Person.PREPARING)
 					tw.repeatCount = 10;
-					//tw.yoyo = true;
 				Starling.juggler.add(tw);
 			}
 			else
-				image.width = image.height = _height*iconScale;
+				icon.width = icon.height = height*iconScale;
 		}
 		
 		private function getTexture():Texture
@@ -106,22 +90,5 @@ package com.gerantech.islamic.views.controls
 			}
 			return null;
 		}
-		
-		protected function resizeHandler(event:Event):void
-		{
-			if(event==null)
-				return;
-			
-			_height = width = height;
-			if(image)
-				image.width = image.height = _height*iconScale;
-			if(slider)
-				slider.radius = _height/2.2
-			if(container)
-				container.y = container.x = _height/2
-				
-		}
-		
-		
 	}
 }
