@@ -54,7 +54,7 @@ package com.gerantech.islamic.views.items
 			skin.setTextureForState( STATE_SELECTED, Assets.getItemTextures(STATE_SELECTED) );
 			skin.setTextureForState( STATE_DOWN, Assets.getItemTextures(STATE_DOWN) );
 			skin.scale9Grid = new Rectangle(skin.width/2-1, skin.height/2-1, 2, 2);
-			backgroundSkin = skin
+			backgroundSkin = skin;
 			
 			hasTranslation = ResourceModel.instance.hasTranslator;
 			deleyCommit = true;
@@ -109,7 +109,7 @@ package com.gerantech.islamic.views.items
 			moreStripImage.source =  Assets.getTexture("chevron_g");
 			moreStrip.backgroundSkin = moreStripImage;
 			
-			FAST_COMMIT_TIMEOUT = 10;
+			FAST_COMMIT_TIMEOUT = 0;
 		}
 
 		
@@ -125,6 +125,7 @@ package com.gerantech.islamic.views.items
 				if(aya==_data)
 					return;
 
+				backgroundSkin.height = 10;
 				aya = _data as Aya;
 				
 				clearTimeout(fastTimeout);
@@ -178,7 +179,6 @@ package com.gerantech.islamic.views.items
 			
 			moreStrip.visible = true;
 			Starling.juggler.tween(moreStrip, 0.5, {delay:0.5, alpha:1});
-			//TweenLite.to(moreStrip, 0.5, {delay:0.5, alpha:1});
 			
 			translatIndex = 0;
 			setTimeout(setNextTranslation, FAST_COMMIT_TIMEOUT);
@@ -197,7 +197,6 @@ package com.gerantech.islamic.views.items
 				/*if(hasMore)
 				{*/
 				vLayout.paddingBottom = vLayout.gap*2;
-				//vLayout.resetVariableVirtualCache();
 				//addChild(moreStrip);
 				//moreStrip.visible = true;
 				/*}

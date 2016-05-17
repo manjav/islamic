@@ -39,7 +39,7 @@ package com.gerantech.islamic.views.headers
 			{
 				var invert:ColorMatrixFilter = new ColorMatrixFilter();
 				invert.invert();
-				filter = invert;
+				//filter = invert;
 			}
 			
 			bookmarkButton = new FlatButton(null, "circle", false, 1);
@@ -66,7 +66,7 @@ package com.gerantech.islamic.views.headers
 			numContainer.layout = new AnchorLayout();
 			addChild(numContainer);
 			
-			numTextField = new RTLLabel("", 0x6d6d6d, "center", null, false, "center", _h*0.6, "mequran");
+			numTextField = new RTLLabel("", 0x6d6d6d, "center", null, false, "center", _h*0.55, "mequran");
 			numTextField.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0); 
 			numContainer.addChild(numTextField);
 			
@@ -94,17 +94,18 @@ package com.gerantech.islamic.views.headers
 			bookmarkButton.texture =aya.bookmarked?"bookmark_on":"bookmark_off";
 			
 			shareButton.visible = _selected;
+			numContainer.backgroundSkin.visible = _selected;
 			bookmarkButton.visible = _selected || aya.bookmarked;
 			
 			if(_selected)
 			{
 				shareButton.alpha = 0;
 				bookmarkButton.alpha = 0;
+				numContainer.backgroundSkin.alpha = 0;
 				
 				Starling.juggler.tween(shareButton, 0.3, {alpha:1, delay:0.25});
 				Starling.juggler.tween(bookmarkButton, 0.3, {alpha:1, delay:0.20});
-				//TweenLite.to(shareButton, 0.3, {alpha:1, delay:0.25});
-				//TweenLite.to(bookmarkButton, 0.3, {alpha:1, delay:0.20});
+				Starling.juggler.tween(numContainer.backgroundSkin, 0.3, {alpha:1, delay:0.35});
 			}			
 		}
 		

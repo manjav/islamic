@@ -84,7 +84,7 @@ package com.gerantech.islamic.views.items
 			{
 				var colorFilter:ColorMatrixFilter = new ColorMatrixFilter();
 				colorFilter.invert();
-				//suraImage.filter = colorFilter;
+				suraImage.filter = colorFilter;
 			}
 						
 			layoutGroup = new LayoutGroup();

@@ -52,9 +52,7 @@ package com.gerantech.islamic.views.screens
 			super.initialize();
 			
 			var mLayout:VerticalLayout = new VerticalLayout();
-			//mLayout.padding = appModel.sizes.DP16;
 			mLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
-			//mLayout.gap = appModel.sizes.DP8;
 			layout = mLayout;
 			
 			var ld:VerticalLayoutData = new VerticalLayoutData(92);
@@ -65,8 +63,8 @@ package com.gerantech.islamic.views.screens
 			{
 				case MODE_CALENDAR:
 					trace(userModel.hijriOffset)
-					hijriOffsets = []//{valuae:"offset_0"}, {valuae:"offset_1"}, {valuae:"offset_2"}, {valuae:"offset_3"}, {valuae:"offset_4"}]; 
-					hijriOffsetsPanel = new SettingPanel("hijri_offset", hijriOffsets, 0);
+					hijriOffsets = [{value:"offset_0"}, {value:"offset_1"}, {value:"offset_2"}, {value:"offset_3"}, {value:"offset_4"}]; 
+					hijriOffsetsPanel = new SettingPanel("hijri_offset", hijriOffsets, userModel.hijriOffset);
 					hijriOffsetsPanel.addEventListener(Event.CHANGE, hijriOffsetsPanel_changeHandler);
 					hijriOffsetsPanel.layoutData = ld;
 					addChild(hijriOffsetsPanel);
