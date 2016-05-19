@@ -1,5 +1,6 @@
 package com.gerantech.islamic.utils
 {
+	
 	public class MultiDate
 	{
 		public function get fullYear():Number { return dateClass.fullYear; }
@@ -37,14 +38,18 @@ package com.gerantech.islamic.utils
 		
 		public var firstTime:Number;
 		public var middleTime:Number;
+		
+		public var julianDays:Number;
+		public var hijriOffset:Number = 0;
 
-		public function MultiDate(year:*=null, month:*=null, date:*=null, hours:*=null, minutes:*=null, seconds:*=null, ms:*=null)
+		public function MultiDate(dateInput:Date = null, hijriOffset:Number=0)
 		{
-			if(year==null)
+			if(dateInput==null)
 				dateClass = new Date();
 			else
-				dateClass = new Date(year, month, date, hours, minutes, seconds, ms);
+				dateClass = dateInput;
 			
+			this.hijriOffset = hijriOffset;
 			calculate();
 		}
 		
@@ -59,9 +64,10 @@ package com.gerantech.islamic.utils
 		 */
 		public function calculate():void
 		{
-			var jd:Number = gregorianToJD(dateClass.fullYear, dateClass.month+1, dateClass.date);
-			var qamari:Array = jdToIslamic(jd);
-			var shamsi:Array = jdToPersian(jd);
+			julianDays = gregorianToJD(dateClass.fullYear, dateClass.month+1, dateClass.date);
+
+			var qamari:Array = jdToIslamic(julianDays + hijriOffset);
+			var shamsi:Array = jdToPersian(julianDays);
 			
 			fullYearQamari	= qamari[0];
 			monthQamari		= qamari[1] - 1;
@@ -73,7 +79,7 @@ package com.gerantech.islamic.utils
 			firstTime = new Date(fullYear, month, date).getTime();
 			middleTime = firstTime + 43200000;
 		}
-		
+
 		public  function toString():String
 		{ 
 			return(day+" "+date+" "+(month+1)+" "+fullYear+"  "+dateShamsi+" "+(monthShamsi+1)+" "+fullYearShamsi+"  "+dateQamari+" "+(monthQamari+1)+" "+fullYearQamari+"  "+(hours<10?"0":"")+hours+":"+(minutes<10?"0":"")+minutes); 

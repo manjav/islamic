@@ -92,7 +92,7 @@ package com.gerantech.islamic.models
 				UserModel.instance.user.translators = freeTranslators;
 				UserModel.instance.user.reciters = freeReciters;
 			}
-			
+			trace("ssssss", UserModel.instance.user.translators)
 			createSuraList();
 			createJuzeList();
 			createHizbList();

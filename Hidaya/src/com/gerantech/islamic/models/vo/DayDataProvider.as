@@ -34,7 +34,7 @@ package com.gerantech.islamic.models.vo
 
 		public function DayDataProvider()
 		{
-			date = new MultiDate();
+			date = new MultiDate(null, UserModel.instance.hijriOffset);
 			sqlConnection = new SQLConnection();
 			//sqlConnection.addEventListener(SQLEvent.OPEN, sqlConnection_openHandler); 
 			//sqlConnection.addEventListener(SQLErrorEvent.ERROR, sqlConnection_errorHandler); 

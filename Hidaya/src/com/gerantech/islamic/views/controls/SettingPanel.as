@@ -4,7 +4,6 @@ package com.gerantech.islamic.views.controls
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	import com.gerantech.islamic.views.lists.QList;
-	import com.gerantech.islamic.views.popups.CustomBottomDrawerPopUpContentManager;
 	
 	import mx.resources.ResourceManager;
 	
@@ -89,7 +88,6 @@ package com.gerantech.islamic.views.controls
 			{
 				dispatchEventWith(Event.CHANGE);
 				//picker.popUpContentManager.close();
-				trace("aaa");
 			}
 		}
 		

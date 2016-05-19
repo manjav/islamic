@@ -9,14 +9,10 @@ package com.gerantech.islamic.views.items
 	import flash.geom.Rectangle;
 	import flash.text.engine.ElementFormat;
 	
-	import mx.resources.ResourceManager;
-	
 	import feathers.controls.ImageLoader;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
 	import feathers.skins.ImageSkin;
-	
-	import starling.display.Quad;
 
 	public class SettingItemRenderer extends BaseCustomItemRenderer
 	{		

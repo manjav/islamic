@@ -1,7 +1,6 @@
 package com.gerantech.islamic.views.screens
 {
 	import com.gerantech.islamic.managers.BillingManager;
-	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.controls.Spacer;
 	

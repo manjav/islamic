@@ -184,7 +184,7 @@ package com.gerantech.islamic.views.lists
 			}
 			
 			type==Person.TYPE_TRANSLATOR ? ResourceModel.instance.selectedTranslators=sortedPersons : ResourceModel.instance.selectedReciters=sortedPersons;
-			UserModel.instance.activeSaver();
+			UserModel.instance.scheduleSaving();
 			
 			empty.y = itemsList.length*itemHeight;
 		}

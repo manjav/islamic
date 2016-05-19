@@ -123,7 +123,7 @@ package com.gerantech.islamic.views.screens
 			
 			type==Person.TYPE_TRANSLATOR ? resourceModel.selectedTranslators = sampleList : resourceModel.selectedReciters = sampleList;
 			///backwardEnabled = true;
-			trace(sampleList);
+			userModel.scheduleSaving();
 		}		
 		
 		override protected function backButtonFunction():void

@@ -12,11 +12,13 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.controls.SettingPanel;
 	import com.gerantech.islamic.views.controls.Spacer;
 	import com.gerantech.islamic.views.items.FontItemRenderer;
+	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	import com.gerantech.islamic.views.popups.GeoCityPopup;
 	
 	import flash.sensors.Geolocation;
 	import flash.utils.setTimeout;
 	
+	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.VerticalLayout;
@@ -62,9 +64,29 @@ package com.gerantech.islamic.views.screens
 			switch(mode)
 			{
 				case MODE_CALENDAR:
-					trace(userModel.hijriOffset)
-					hijriOffsets = [{value:"offset_0"}, {value:"offset_1"}, {value:"offset_2"}, {value:"offset_3"}, {value:"offset_4"}]; 
-					hijriOffsetsPanel = new SettingPanel("hijri_offset", hijriOffsets, userModel.hijriOffset);
+					hijriOffsets = [{value:-2},{value:-1},{value:0},{value:1},{value:2}];//
+					//[{value:"offset_0", value:-2}, {value:"offset_1", value:-1}, {value:"offset_2", value:0}, {value:"offset_3", value:1}, {name:"offset_4", value:2}];
+					function getOffsetsIndex():int
+					{
+						for (var i:uint=0; i<hijriOffsets.length; i++)
+							if(hijriOffsets[i].value == userModel.hijriOffset)
+								return i;
+						return -1;
+					}
+					function labelFunction(item:Object):String
+					{
+						trace(item.value, "offset"+item.value, loc("offset"+item.value))
+						return loc("offset"+item.value);
+					}
+					
+					hijriOffsetsPanel = new SettingPanel("hijri_correction", hijriOffsets, getOffsetsIndex());
+					hijriOffsetsPanel.picker.listProperties.itemRendererFactory = function():IListItemRenderer
+					{
+						var ret:SettingItemRenderer = new SettingItemRenderer();
+						ret.labelFunction = labelFunction;
+						return ret;
+					}
+					hijriOffsetsPanel.picker.labelFunction = labelFunction;
 					hijriOffsetsPanel.addEventListener(Event.CHANGE, hijriOffsetsPanel_changeHandler);
 					hijriOffsetsPanel.layoutData = ld;
 					addChild(hijriOffsetsPanel);
@@ -149,7 +171,8 @@ package com.gerantech.islamic.views.screens
 		
 		private function hijriOffsetsPanel_changeHandler():void
 		{
-			userModel.hijriOffset = hijriOffsetsPanel.picker.selectedItem;
+			userModel.hijriOffset = hijriOffsetsPanel.picker.selectedItem.value;
+			trace(hijriOffsetsPanel.picker.selectedIndex, userModel.hijriOffset);
 		}
 		
 		//Select City -------------------------------------------------------------

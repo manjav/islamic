@@ -94,7 +94,7 @@ package com.gerantech.islamic
 			addChild(appModel.drawers);
 			appModel.drawers.content = appModel.navigator;
 			
-			appModel.date = new MultiDate();
+			appModel.date = new MultiDate(null, UserModel.instance.hijriOffset);
 			appModel.prayTimes = new PrayTime(CalculationMethod.TEHRAN, UserModel.instance.city.latitude, UserModel.instance.city.longitude);
 
 			/*if(UserModel.instance.user.profile.numRun==1)

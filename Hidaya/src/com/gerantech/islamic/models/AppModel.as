@@ -19,7 +19,6 @@ package com.gerantech.islamic.models
 	import org.praytimes.PrayTime;
 	
 	import starling.events.EventDispatcher;
-	import starling.utils.AssetManager;
 	
 	public class AppModel extends EventDispatcher
 	{

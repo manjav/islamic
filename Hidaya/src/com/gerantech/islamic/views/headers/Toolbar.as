@@ -195,7 +195,7 @@ package com.gerantech.islamic.views.headers
 		private function navigator_changeHandler(event:Event):void
 		{
 			setLayout();
-			UserModel.instance.activeSaver();
+			UserModel.instance.scheduleSaving();
 			if(appModel.navigator.activeScreenID != appModel.PAGE_DASHBOARD)
 				y=0;
 			return;

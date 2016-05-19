@@ -28,12 +28,12 @@ package com.gerantech.islamic.models
 		override public function addItem(item:Object):void
 		{
 			super.addItem(item);
-			UserModel.instance.activeSaver();
+			UserModel.instance.scheduleSaving();
 		}
 		
 		override public function addItemAt(item:Object, index:int):void
 		{
-			UserModel.instance.activeSaver();
+			UserModel.instance.scheduleSaving();
 			super.addItemAt(item, index);
 		}
 		
@@ -41,12 +41,12 @@ package com.gerantech.islamic.models
 		override public function removeItem(item:Object):void
 		{
 			super.removeItem(item);
-			UserModel.instance.activeSaver();
+			UserModel.instance.scheduleSaving();
 		}
 		
 		override public function removeItemAt(index:int):Object
 		{
-			UserModel.instance.activeSaver();
+			UserModel.instance.scheduleSaving();
 			return super.removeItemAt(index);
 		}
 		

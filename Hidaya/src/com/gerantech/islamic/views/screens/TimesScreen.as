@@ -106,7 +106,7 @@ package com.gerantech.islamic.views.screens
 		
 		private function popup_changeHandler():void
 		{
-			userModel.activeSaver();
+			userModel.scheduleSaving();
 			list.dataProvider = new ListCollection(userModel.timesModel.times);
 			userModel.timesModel.updateNotfications();
 		}

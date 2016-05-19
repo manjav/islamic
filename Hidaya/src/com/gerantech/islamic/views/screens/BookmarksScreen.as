@@ -105,7 +105,7 @@ package com.gerantech.islamic.views.screens
 		{
 			list.dataProvider = userModel.bookmarks;
 			list.validate();
-			userModel.activeSaver();
+			userModel.scheduleSaving();
 		}
 		
 	}

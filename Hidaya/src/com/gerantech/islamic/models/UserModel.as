@@ -66,58 +66,58 @@ package com.gerantech.islamic.models
 		}
 				
 		public function get idleMode():Object{return user.idleMode};
-		public function set idleMode(value:Object):void{appController.setIdleMode(user.idleMode=value); activeSaver()};
+		public function set idleMode(value:Object):void{appController.setIdleMode(user.idleMode=value); scheduleSaving()};
 		
 		public function get remniderTime():Object{return user.remniderTime}
-		public function set remniderTime(value:Object):void{user.remniderTime=value, activeSaver()}
+		public function set remniderTime(value:Object):void{user.remniderTime=value, scheduleSaving()}
 		
 		public function get fontSize():uint{return user.fontSize};
-		public function set fontSize(value:uint):void{if(value==user.fontSize)return; user.fontSize=value, activeSaver(), dispatchEventWith(UserEvent.FONT_SIZE_CHANGING)};
+		public function set fontSize(value:uint):void{if(value==user.fontSize)return; user.fontSize=value, scheduleSaving(), dispatchEventWith(UserEvent.FONT_SIZE_CHANGING)};
 		
 		public function get font():Object{return user.font;}
-		public function set font(value:Object):void{if(value==user.font)return; user.font=value, activeSaver()}
+		public function set font(value:Object):void{if(value==user.font)return; user.font=value, scheduleSaving()}
 
 		public function get storagePath():String{return user.storagePath};
-		public function set storagePath(value:String):void{user.storagePath=value, activeSaver()}
+		public function set storagePath(value:String):void{user.storagePath=value, scheduleSaving()}
 		
-		public function set premiumMode(value:Boolean):void{user.premiumMode = value, activeSaver()}
+		public function set premiumMode(value:Boolean):void{user.premiumMode = value, scheduleSaving()}
 		public function get premiumMode():Boolean{return user.premiumMode;}
 		
-		public function set inbox(value:Array):void{user.inbox = value, activeSaver()}
+		public function set inbox(value:Array):void{user.inbox = value, scheduleSaving()}
 		public function get inbox():Array{return user.inbox;}
 
 		public function get city():Location{return new Location(user.city.name, user.city.latitude, user.city.longitude)};
-		public function set city(value:Location):void { user.city = value; activeSaver();}
+		public function set city(value:Location):void { user.city = value; scheduleSaving();}
 
 		public function get searchPatt():String{return user.searchPatt};
-		public function set searchPatt(value:String):void{if(user.searchPatt==value)return; user.searchPatt=value; activeSaver()};
+		public function set searchPatt(value:String):void{if(user.searchPatt==value)return; user.searchPatt=value; scheduleSaving()};
 		
 		public function get searchSource():uint{return user.searchSource};
-		public function set searchSource(value:uint):void{if(user.searchSource==value)return; user.searchSource=value; activeSaver()};
+		public function set searchSource(value:uint):void{if(user.searchSource==value)return; user.searchSource=value; scheduleSaving()};
 		
 		public function get searchScope():uint{return user.searchScope};
-		public function set searchScope(value:uint):void{if(user.searchScope==value)return; user.searchScope=value; activeSaver()};
+		public function set searchScope(value:uint):void{if(user.searchScope==value)return; user.searchScope=value; scheduleSaving()};
 		
 		public function get searchSura():uint{return user.searchSura};
-		public function set searchSura(value:uint):void{if(user.searchSura==value)return; user.searchSura=value; activeSaver()};
+		public function set searchSura(value:uint):void{if(user.searchSura==value)return; user.searchSura=value; scheduleSaving()};
 		
 		public function get searchJuze():uint{return user.searchJuze};
-		public function set searchJuze(value:uint):void{if(user.searchJuze==value)return; user.searchJuze=value; activeSaver()};
+		public function set searchJuze(value:uint):void{if(user.searchJuze==value)return; user.searchJuze=value; scheduleSaving()};
 		
 		public function get locale():Object{return user.local};
-		public function set locale(value:Object):void{user.local = value;activeSaver();appController.setLanguage(value);}
+		public function set locale(value:Object):void{user.local = value;scheduleSaving();appController.setLanguage(value);}
 		
 		public function get ayaRepeat():uint{return user.ayaRepeat}
-		public function set ayaRepeat(value:uint):void{user.ayaRepeat=value, activeSaver()}
+		public function set ayaRepeat(value:uint):void{user.ayaRepeat=value, scheduleSaving()}
 		
 		public function get pageRepeat():uint{return user.pageRepeat}
-		public function set pageRepeat(value:uint):void{user.pageRepeat=value, activeSaver()}
+		public function set pageRepeat(value:uint):void{user.pageRepeat=value, scheduleSaving()}
 		
 		public function get personRepeat():uint{return user.personRepeat}
-		public function set personRepeat(value:uint):void{user.personRepeat=value, activeSaver()}
+		public function set personRepeat(value:uint):void{user.personRepeat=value, scheduleSaving()}
 		
-		public function get hijriOffset():Object{return user.hijriOffset}
-		public function set hijriOffset(value:Object):void{user.hijriOffset=value, activeSaver()}
+		public function get hijriOffset():int{return user.hijriOffset}
+		public function set hijriOffset(value:int):void{user.hijriOffset=value, appModel.date.hijriOffset=value, appModel.date.calculate(), scheduleSaving()}
 		
 
 		
@@ -133,7 +133,7 @@ package com.gerantech.islamic.models
 			user.sura = sura;
 			user.aya = aya;
 			_lastItem = new Aya(sura, aya, 0, Page.getBySuraAya(sura, aya).page, Juze.getBySuraAya(sura, aya).juze);
-			activeSaver();
+			scheduleSaving();
 		}
 		
 		public function get nightMode():Boolean{return user.nightMode}
@@ -148,7 +148,7 @@ package com.gerantech.islamic.models
 			BaseMaterialTheme.SECONDARY_BACKGROUND_COLOR = value ? 0x00695C : 0xE0F2F1;
 			Starling.current.stage.color = BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR;
 			Starling.current.nativeStage.color = BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR;
-			activeSaver();
+			scheduleSaving();
 		}
 		
 		public function get navigationMode():Object{return user.navigationMode};
@@ -173,7 +173,7 @@ package com.gerantech.islamic.models
 						pagesList.push(ResourceModel.instance.juzeList[29-k]);
 					break;
 			}
-			activeSaver();
+			scheduleSaving();
 		}
 		
 		
@@ -249,7 +249,6 @@ package com.gerantech.islamic.models
 						user[n] = loadData[n];
 				}
 			}
-
 			appController.setPaths(this, storagePath);
 			configModel.setAssets(appModel, this);
 			timesModel.data = user.times;
@@ -257,6 +256,7 @@ package com.gerantech.islamic.models
 			bookmarks = new BookmarkCollection(user.bookmarks);
 			nightMode = user.nightMode;
 			appController.setIdleMode(user.idleMode);
+			trace(user.translators, "translators")
 			
 			user.profile.numRun ++;
 			if(!user.rated)
@@ -281,13 +281,14 @@ package com.gerantech.islamic.models
 			user.translators = 			ResourceModel.instance.selectedTranslators;
 			user.reciters = 			ResourceModel.instance.selectedReciters;
 			user.times = 				timesModel.data;
+			trace(user.translators)
 
 			var so:SharedObject = SharedObject.getLocal("user-data");
 			so.data.user = user;
 			so.flush(100000);
 		}		
 		
-		public function activeSaver():void
+		public function scheduleSaving():void
 		{
 			clearTimeout(saveTimeout);
 			if(preventSaver)
