@@ -10,6 +10,7 @@ package com.gerantech.islamic.models.vo
 		public var alerts:Vector.<Alert>;
 		public var date:Date;
 		public var index:uint;
+		public var pending:Boolean;
 		
 		public function Time(index:uint)
 		{
@@ -20,6 +21,10 @@ package com.gerantech.islamic.models.vo
 		public function get enabled():Boolean
 		{
 			return alerts.length>0;
+		}		
+		public function isPending(_date:Date):Boolean
+		{
+			return date.time >= _date.time;
 		}
 		
 		public function getAlertTitle(alert:int):String

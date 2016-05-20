@@ -17,11 +17,6 @@ package com.gerantech.islamic.views.items
 	{
 		private var iconDisplay:ImageLoader;
 		private var titleDisplay:RTLLabel;
-		private var skin:ImageSkin;
-		public function DashboardItemRenderer()
-		{
-			super();
-		}
 		
 		override protected function initialize():void
 		{
@@ -31,18 +26,14 @@ package com.gerantech.islamic.views.items
 			width = Math.floor(appModel.sizes.orginalWidth/3);
 			height = appModel.sizes.orginalHeight/3;
 			
-			backgroundSkin = new Quad(1, 1, 0xEEEEEE);
-			
-			skin = new ImageSkin();//Assets.getTexture("background-popup-skin"));//new Scale9Textures(Assets.getTexture("background-popup-skin"), new Rectangle(10,10,1,1)));
-			skin.setTextureForState( STATE_NORMAL, Assets.getTexture("background-popup-skin") );
-			skin.setTextureForState( STATE_SELECTED, Assets.getTexture("background-disabled-skin") );
-			skin.setTextureForState( STATE_DOWN, Assets.getTexture("background-disabled-skin") );
-			skin.scale9Grid = new Rectangle(10,10,1,1);
+			createSkin();
 			skin.x = skin.y = 1;
 			skin.width = width-2;
 			skin.height = height-2;
 			addChild(skin);
-			
+		
+			backgroundSkin = new Quad(1, 1, userModel.nightMode ? 0x222222 : 0xEEEEEE);
+						
 			iconDisplay = new ImageLoader();
 			iconDisplay.delayTextureCreation = true;
 			iconDisplay.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, -(height-width)/2);
@@ -59,7 +50,7 @@ package com.gerantech.islamic.views.items
 		{
 			super.commitData();
 			iconDisplay.source = Assets.getTexture(data.icon);
-			titleDisplay.alpha = iconDisplay.alpha = data.enabled ? 1 : 0.66;
+			titleDisplay.alpha = iconDisplay.alpha = data.enabled ? 1 : 0.5;
 			titleDisplay.text = loc(data.title);
 		}
 		
@@ -69,7 +60,7 @@ package com.gerantech.islamic.views.items
 			var lastState:String = super.currentState;
 			super.currentState = value;
 			
-			if(value==lastState)
+			if(value==lastState || !data.enabled)
 				return;
 			skin.defaultTexture = skin.getTextureForState(value);
 		}	

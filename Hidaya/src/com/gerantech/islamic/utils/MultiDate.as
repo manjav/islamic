@@ -189,5 +189,10 @@ package com.gerantech.islamic.utils
 			return new Array(year, month, day);
 		}
 
+		public function equalDay(i_date:Date):Boolean
+		{
+			// TODO Auto Generated method stub
+			return i_date.date == date && i_date.month==month && i_date.fullYear==fullYear;
+		}
 	}
 }

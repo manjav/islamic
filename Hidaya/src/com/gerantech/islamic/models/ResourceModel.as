@@ -9,7 +9,6 @@ package com.gerantech.islamic.models
 	import com.gerantech.islamic.models.vo.Sura;
 	import com.gerantech.islamic.models.vo.Translator;
 	import com.gerantech.islamic.models.vo.Word;
-	import com.gerantech.islamic.utils.StrTools;
 	
 	import flash.utils.ByteArray;
 		
@@ -87,12 +86,11 @@ package com.gerantech.islamic.models
 					freeReciters = ["shahriar_parhizgar","mahdi_fooladvand"];//,"ibrahim_walk"];
 					break;
 			}
-			if(UserModel.instance.user.profile.numRun==1)
+			if(!UserModel.instance.user.quranRead)
 			{
 				UserModel.instance.user.translators = freeTranslators;
 				UserModel.instance.user.reciters = freeReciters;
 			}
-			trace("ssssss", UserModel.instance.user.translators)
 			createSuraList();
 			createJuzeList();
 			createHizbList();
@@ -101,7 +99,11 @@ package com.gerantech.islamic.models
 			createWordList();
 			createReciters();
 			createTranslators();
-			
+			if(!UserModel.instance.user.quranRead)
+			{
+				UserModel.instance.user.quranRead = true;
+				UserModel.instance.scheduleSaving();
+			}
 		}
 		
 		private function createWordList():void

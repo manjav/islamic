@@ -75,7 +75,6 @@ package com.gerantech.islamic.views.screens
 					}
 					function labelFunction(item:Object):String
 					{
-						trace(item.value, "offset"+item.value, loc("offset"+item.value))
 						return loc("offset"+item.value);
 					}
 					
@@ -99,7 +98,7 @@ package com.gerantech.islamic.views.screens
 					spacer.layoutData = ld;
 					addChild(spacer);
 					
-					var ciyLabel:RTLLabel = new RTLLabel("label", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0.9, null, "bold")
+					var ciyLabel:RTLLabel = new RTLLabel(loc("change_city"), BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0.9, null, "bold")
 					ciyLabel.layoutData = ld;
 					addChild(ciyLabel);
 					

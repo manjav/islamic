@@ -1,6 +1,7 @@
 package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.models.AppModel;
+	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
@@ -13,6 +14,7 @@ package com.gerantech.islamic.views.items
 	import mx.resources.ResourceManager;
 	
 	import feathers.controls.renderers.LayoutGroupListItemRenderer;
+	import feathers.skins.ImageSkin;
 	
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -44,11 +46,21 @@ package com.gerantech.islamic.views.items
 		private var commitPhase:uint;
 
 		protected var touch:Touch;
+		protected var skin:ImageSkin;
 		
 		override protected function initialize():void
 		{
 			addEventListener( TouchEvent.TOUCH, touchHandler);
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
+		}
+		
+		protected function createSkin():void
+		{
+			skin = new ImageSkin(Assets.getBackgroundTexture());
+			for each(var s:String in stateNames)
+				skin.setTextureForState(s, Assets.getBackgroundTexture(s));
+			skin.scale9Grid = Assets.BACKGROUND_GRID;
+			backgroundSkin = skin;
 		}
 		
 		override protected function commitData():void

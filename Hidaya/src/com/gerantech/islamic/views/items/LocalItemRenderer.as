@@ -39,7 +39,7 @@ package com.gerantech.islamic.views.items
 		override protected function initialize():void
 		{
 			super.initialize();
-			backgroundSkin = new Scale9Image(Assets.getItemTextures());
+			backgroundSkin = new Scale9Image(Assets.getCardTextures());
 			layout = new AnchorLayout();
 			height = width = uint(AppModel.instance.sizes.twoLineItem*1.5);
 			
@@ -78,7 +78,7 @@ package com.gerantech.islamic.views.items
 			
 			if(value==lastState)
 				return;
-			backgroundSkin = new Scale9Image(Assets.getItemTextures(value==STATE_DOWN||value==STATE_SELECTED));
+			backgroundSkin = new Scale9Image(Assets.getCardTextures(value==STATE_DOWN||value==STATE_SELECTED));
 		}		
 
 	}

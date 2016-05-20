@@ -19,7 +19,7 @@ package com.gerantech.islamic.utils
 			_twoLineItem = getPixelByDP(_isTablet?72:72);
 			_threeLineItem = getPixelByDP(88);
 			_menuItem = getPixelByDP(_isTablet?48:48);
-			_dashboard = getPixelByDP(192);
+			_dashboard = getPixelByDP(154);
 			_border = getPixelByDP(4);
 			_orginalFontSize = getPixelByDP(_isTablet ? 18 : 14.4);//uint(height/40+2);
 			

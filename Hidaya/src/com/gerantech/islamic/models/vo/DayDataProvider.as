@@ -26,9 +26,9 @@ package com.gerantech.islamic.models.vo
 		public var secondaryDatesString:String = "";
 		public var eventsString:String = "";
 		public var googleEventsString:String = "";
+		public var date:MultiDate;
 		
 		private var sqlConnection:SQLConnection;
-		private var date:MultiDate;
 		private var googleEvents:Vector.<CalendarEvent>;
 		private var _time:Object;
 
@@ -135,7 +135,7 @@ package com.gerantech.islamic.models.vo
 		
 		public function get isToday():Boolean
 		{
-			return date.date==AppModel.instance.date.date && date.month==AppModel.instance.date.month;
+			return AppModel.instance.date.equalDay(date.dateClass);
 		}
 		
 		public function get isFirstDay():Boolean

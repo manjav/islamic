@@ -13,7 +13,6 @@ package com.gerantech.islamic.views.popups
 	
 	import feathers.controls.Button;
 	import feathers.controls.ImageLoader;
-	import feathers.events.FeathersEventType;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 	

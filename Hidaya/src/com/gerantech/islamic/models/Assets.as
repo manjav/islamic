@@ -7,6 +7,7 @@ package com.gerantech.islamic.models
 	import flash.filesystem.File;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import flash.utils.Dictionary;
 	
 	import feathers.system.DeviceCapabilities;
@@ -43,7 +44,7 @@ package com.gerantech.islamic.models
 		
 		/**
 		 * Bitmaps for 9 slice textures
-		 */
+		*/
 		[Embed(source="../assets/images/bitmaps/dialog.png")]
 		public static const dialogBitmap:Class;
 		[Embed(source="../assets/images/bitmaps/i_dialog.png")]
@@ -61,6 +62,9 @@ package com.gerantech.islamic.models
 		[Embed(source="../assets/images/bitmaps/i_item_roundrect_selected.png")]
 		public static const i_item_roundrect_selectedBitmap:Class;
 
+		public static const BACKGROUND_GRID:Rectangle = new Rectangle(2,2,6,6);
+
+		
 		private static var allTextures:Dictionary = new Dictionary();
 		private static var allTextureAtlases:Dictionary = new Dictionary();
 		/*private static var allScaled3Textures:Dictionary = new Dictionary();
@@ -109,7 +113,11 @@ package com.gerantech.islamic.models
 			//return AppModel.instance.assetManager.getTexture(name);
 		} 
 		
-		public static function getItemTextures(state:String):Texture
+		public static function getBackgroundTexture(state:String="normal"):Texture
+		{
+			return getTexture("background-small-" + state + "-" + (UserModel.instance.nightMode?"dark-":"") + "skin");
+		}		
+		public static function getCardTextures(state:String):Texture
 		{
 			return getSclaed9Textures((UserModel.instance.nightMode?"i_":"")+"item_roundrect_"+state);
 		}

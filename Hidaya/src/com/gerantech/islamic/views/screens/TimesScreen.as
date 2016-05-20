@@ -5,9 +5,11 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.utils.StrTools;
+	import com.gerantech.islamic.views.controls.Devider;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.items.TimeItemRenderer;
 	
+	import feathers.controls.LayoutGroup;
 	import feathers.controls.List;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.controls.renderers.IListItemRenderer;
@@ -15,6 +17,9 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 	
+	import flashx.textLayout.elements.DivElement;
+	
+	import starling.display.Quad;
 	import starling.events.Event;
 
 	public class TimesScreen extends BaseCustomPanelScreen
@@ -29,6 +34,8 @@ package com.gerantech.islamic.views.screens
 		private var mainDateLabel:RTLLabel;
 
 		private var secondaryDateLabel:RTLLabel;
+
+		private var header2:Devider;
 		
 		override protected function initialize():void
 		{
@@ -36,26 +43,42 @@ package com.gerantech.islamic.views.screens
 			verticalScrollPolicy = horizontalScrollPolicy = SCROLL_POLICY_OFF;
 			
 			var vlayout:VerticalLayout = new VerticalLayout();
-			vlayout.paddingTop = appModel.sizes.DP8; 
+			//vlayout.paddingTop = appModel.sizes.DP8; 
 			vlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
 			layout = vlayout;
 			
-			mainDateLabel = new RTLLabel("", 1, null, null, false, null, 0.9);
-			addChild(mainDateLabel);
-			secondaryDateLabel = new RTLLabel("", 1, "center", null, false, null, 0.9);
-			addChild(secondaryDateLabel);
+			var headerlayout:VerticalLayout = new VerticalLayout();
+			headerlayout.gap = headerlayout.padding = appModel.sizes.DP8; 
+			headerlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			
+			header2 = new Devider(BaseMaterialTheme.CHROME_COLOR, 1);
+			header2.layout = headerlayout;
+			header2.layoutData = new VerticalLayoutData(100);
+			header2.backgroundSkin.alpha = 0.5;
+			addChild(header2);
+			/*
+			mainDateLabel = new RTLLabel("", 1, null, null, false, null, 0.9, null, "bold");
+			header2.addChild(mainDateLabel);
+			*/
+			secondaryDateLabel = new RTLLabel("", 1, "center", null, false, null, 0.9, null, "bold");
+			header2.addChild(secondaryDateLabel);
 
-			eventsLabel = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, false, null, 0.8);
+			eventsLabel = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, true, null, 0.8);
 			eventsLabel.layoutData = new VerticalLayoutData(((appModel.sizes.width-appModel.sizes.DP32)/appModel.sizes.width)*100);
-			addChild(eventsLabel);
 			
 			dayData = new DayDataProvider();
 			dayData.addEventListener("update", dayData_updateHandler);
 			dayData.setTime(date.dateClass.getTime());
 			
+			var nextTimeFound:Boolean;
 			var dates:Vector.<Date> = appModel.prayTimes.getTimes(date.dateClass).toDates();
 			for (var i:uint=0; i<userModel.timesModel.times.length; i++)
-				userModel.timesModel.times[i].date = dates[i+1];
+			{
+				var d:Date = dates[i+1];
+				userModel.timesModel.times[i].date = d;
+				if(!nextTimeFound && dayData.isToday && userModel.timesModel.times[i].isPending(dayData.date.dateClass))
+					userModel.timesModel.times[i].pending = nextTimeFound = true;
+			}
 			
 			list = new List();
 			list.itemRendererFactory = function():IListItemRenderer
@@ -83,10 +106,12 @@ package com.gerantech.islamic.views.screens
 		
 		private function dayData_updateHandler():void
 		{
-			mainDateLabel.text = dayData.mainDateString;
-			secondaryDateLabel.text = dayData.secondaryDatesString+(dayData.eventsString.length+dayData.googleEventsString.length>0?"\n\n"+loc("day_events"):"");
+			secondaryDateLabel.text = dayData.mainDateString + "\n" + dayData.secondaryDatesString;
 			if(dayData.eventsString.length+dayData.googleEventsString.length>0)
-				eventsLabel.text = dayData.eventsString+"\n"+ dayData.googleEventsString;		
+			{
+				header2.addChild(eventsLabel);
+				eventsLabel.text = loc("day_events") + "\n" + dayData.eventsString+"\n"+ dayData.googleEventsString;		
+			}
 		}
 		
 		private function list_changeHandler():void

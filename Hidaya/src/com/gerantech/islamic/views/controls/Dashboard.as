@@ -31,7 +31,7 @@ package com.gerantech.islamic.views.controls
 			
 			// Add clock -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 			clock = new Clock();
-			clock.scaleX = clock.scaleY = height/2/512;
+			clock.scaleX = clock.scaleY = height/1.6/512;
 			padding = (height-clock.width)/6;
 			clock.y = clock.x = clock.width/2 + padding;
 			addChild(clock);

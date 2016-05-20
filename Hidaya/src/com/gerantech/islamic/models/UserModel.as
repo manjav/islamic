@@ -28,10 +28,8 @@ package com.gerantech.islamic.models
 		public var appModel:AppModel;
 		public var appController:AppController;
 		public var configModel:ConfigModel;
-		
 		public var user:User;
 		
-		//public var USER_DATA_PATH:String;
 		public var TRANSLATOR_PATH:String;
 		public var SOUNDS_PATH:String;
 		
@@ -119,14 +117,6 @@ package com.gerantech.islamic.models
 		public function get hijriOffset():int{return user.hijriOffset}
 		public function set hijriOffset(value:int):void{user.hijriOffset=value, appModel.date.hijriOffset=value, appModel.date.calculate(), scheduleSaving()}
 		
-
-		
-		/*public function set breakRepeat(value:uint):void{user.breakRepeat=value, activeSaver()}
-		public function get breakRepeat():uint{return user.breakRepeat}
-		public function set fontFamily(value:String):void{appController.setFontFamily(user.fontFamily=value), activeSaver()}
-		public function get fontFamily():String{return user.fontFamily};
-		*/		
-
 		public function get lastItem():Aya{return _lastItem};
 		public function setLastItem(sura:uint, aya:uint):void
 		{
@@ -217,11 +207,9 @@ package com.gerantech.islamic.models
 		
 		public function load(appModel:AppModel, appController:AppController, configModel:ConfigModel):void
 		{
-			//USER_DATA_PATH = File.documentsDirectory.nativePath + "/bayan/texts/user_data.dbqr";
 			this.appModel = appModel;
 			this.appController = appController;
 			this.configModel = configModel;
-			//var streamer:GTStreamer = new GTStreamer(USER_DATA_PATH, userdata_loadComplete, userData_errorHandler);
 			
 			var so:SharedObject = SharedObject.getLocal("user-data");
 			setMarketData();
@@ -256,7 +244,6 @@ package com.gerantech.islamic.models
 			bookmarks = new BookmarkCollection(user.bookmarks);
 			nightMode = user.nightMode;
 			appController.setIdleMode(user.idleMode);
-			trace(user.translators, "translators")
 			
 			user.profile.numRun ++;
 			if(!user.rated)
@@ -278,10 +265,11 @@ package com.gerantech.islamic.models
 			trace('final saving');
 			
 			user.bookmarks = 			bookmarks.data as Array;
-			user.translators = 			ResourceModel.instance.selectedTranslators;
-			user.reciters = 			ResourceModel.instance.selectedReciters;
+			if(ResourceModel.instance.selectedTranslators && ResourceModel.instance.selectedTranslators.length>0)
+				user.translators = 			ResourceModel.instance.selectedTranslators;
+			if(ResourceModel.instance.selectedReciters && ResourceModel.instance.selectedReciters.length>0)
+				user.reciters = 			ResourceModel.instance.selectedReciters;
 			user.times = 				timesModel.data;
-			trace(user.translators)
 
 			var so:SharedObject = SharedObject.getLocal("user-data");
 			so.data.user = user;

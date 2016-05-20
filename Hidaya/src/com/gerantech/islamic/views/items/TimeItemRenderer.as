@@ -5,7 +5,6 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.MetricUtils;
 	import com.gerantech.islamic.utils.StrTools;
-	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	
 	import feathers.controls.ImageLoader;
@@ -14,8 +13,10 @@ package com.gerantech.islamic.views.items
 	
 	import gt.utils.GTStringUtils;
 	
+	import starling.animation.Transitions;
+	import starling.animation.Tween;
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.display.Quad;
 
 	public class TimeItemRenderer extends BaseCustomItemRenderer
 	{
@@ -41,7 +42,6 @@ package com.gerantech.islamic.views.items
 			
 			var elements:Array = new Array();
 			
-			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			height = sizes.DP48;
 			
 			iconDisplay = new ImageLoader();
@@ -82,6 +82,26 @@ package com.gerantech.islamic.views.items
 			
 			var time:Time = _data as Time;
 			
+			trace(time.pending, time.isPending(appModel.date.dateClass), time.date);
+			if(backgroundSkin == null)
+			{
+				createSkin();
+				if(time.isPending(appModel.date.dateClass))
+				{
+					skin.setTextureForState("normal", Assets.getBackgroundTexture("down"));
+				}
+				if(time.pending)
+				{
+					var skinTween:Tween = new Tween(skin, 1.0, Transitions.EASE_OUT);
+					skin.alpha = 0;
+					skinTween.delay = 1;
+					skinTween.repeatCount = 5;
+					skinTween.fadeTo(1);
+					Starling.juggler.add(skinTween);	
+				}
+				skin.defaultTexture = skin.getTextureForState(currentState);
+			}
+			
 			//alpha = index%3==0 ? 1 : 0.6
 			nameDisplay.text = loc("pray_time_"+index);
 			timeDisplay.text = StrTools.getNumber(GTStringUtils.dateToTime(time.date));
@@ -96,7 +116,7 @@ package com.gerantech.islamic.views.items
 			if(value==lastState)
 				return;
 			
-			backgroundSkin = new Quad(1, 1, value==STATE_DOWN?BaseMaterialTheme.SELECTED_BACKGROUND_COLOR:BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
+			skin.defaultTexture = skin.getTextureForState(value);
 		}
 	}
 }

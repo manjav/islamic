@@ -29,7 +29,6 @@ package com.gerantech.islamic.views.items
 		public var iconFunction:Function;
 
 		protected var lastState:String;
-		protected var skin:ImageSkin;
 
 		protected var myLayout:HorizontalLayout;
 		

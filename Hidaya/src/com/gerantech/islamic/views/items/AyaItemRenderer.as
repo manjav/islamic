@@ -43,16 +43,15 @@ package com.gerantech.islamic.views.items
 		private var devider:Devider;
 		private var moreStrip:SimpleLayoutButton;
 		private var reservedFontSize:uint;
-		private var skin:ImageSkin;
 
 		override protected function initialize():void
 		{
 			super.initialize();
 			
-			skin = new ImageSkin(Assets.getItemTextures(STATE_NORMAL));
-			skin.setTextureForState( STATE_NORMAL, Assets.getItemTextures(STATE_NORMAL) );
-			skin.setTextureForState( STATE_SELECTED, Assets.getItemTextures(STATE_SELECTED) );
-			skin.setTextureForState( STATE_DOWN, Assets.getItemTextures(STATE_DOWN) );
+			skin = new ImageSkin(Assets.getCardTextures(STATE_NORMAL));
+			skin.setTextureForState( STATE_NORMAL, Assets.getCardTextures(STATE_NORMAL) );
+			skin.setTextureForState( STATE_SELECTED, Assets.getCardTextures(STATE_SELECTED) );
+			skin.setTextureForState( STATE_DOWN, Assets.getCardTextures(STATE_DOWN) );
 			skin.scale9Grid = new Rectangle(skin.width/2-1, skin.height/2-1, 2, 2);
 			backgroundSkin = skin;
 			
