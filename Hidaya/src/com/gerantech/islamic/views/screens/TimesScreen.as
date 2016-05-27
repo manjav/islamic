@@ -40,6 +40,7 @@ package com.gerantech.islamic.views.screens
 		override protected function initialize():void
 		{
 			super.initialize();
+			title = loc(appModel.PAGE_TIMES);
 			verticalScrollPolicy = horizontalScrollPolicy = SCROLL_POLICY_OFF;
 			
 			var vlayout:VerticalLayout = new VerticalLayout();

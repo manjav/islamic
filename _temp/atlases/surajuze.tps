@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.9.1</string>
+        <string>3.6.0</string>
         <key>fileName</key>
-        <string>D:/_PROJECTS/_FLEX/Bayan_projects/Bayan_temp/Temp/Images/3/atlases/surajuze.tps</string>
+        <string>D:/_PROJECTS/_FLEX/Bayan_projects/hidaya-project/_temp/atlases/surajuze.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -43,8 +43,6 @@
         <false/>
         <key>pvrCompressionQuality</key>
         <enum type="SettingsBase::PvrCompressionQuality">PVR_QUALITY_NORMAL</enum>
-        <key>atfCompressData</key>
-        <false/>
         <key>mipMapMinSize</key>
         <uint>32768</uint>
         <key>etc1CompressionQuality</key>
@@ -190,151 +188,38 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../../Joze/72/j_1.png</filename>
-            <filename>../../Joze/72/j_2.png</filename>
-            <filename>../../Joze/72/j_3.png</filename>
-            <filename>../../Joze/72/j_4.png</filename>
-            <filename>../../Joze/72/j_5.png</filename>
-            <filename>../../Joze/72/j_6.png</filename>
-            <filename>../../Joze/72/j_7.png</filename>
-            <filename>../../Joze/72/j_8.png</filename>
-            <filename>../../Joze/72/j_09.png</filename>
-            <filename>../../Joze/72/j_10.png</filename>
-            <filename>../../Joze/72/j_11.png</filename>
-            <filename>../../Joze/72/j_12.png</filename>
-            <filename>../../Joze/72/j_13.png</filename>
-            <filename>../../Joze/72/j_14.png</filename>
-            <filename>../../Joze/72/j_15.png</filename>
-            <filename>../../Joze/72/j_16.png</filename>
-            <filename>../../Joze/72/j_17.png</filename>
-            <filename>../../Joze/72/j_18.png</filename>
-            <filename>../../Joze/72/j_19.png</filename>
-            <filename>../../Joze/72/j_20.png</filename>
-            <filename>../../Joze/72/j_21.png</filename>
-            <filename>../../Joze/72/j_22.png</filename>
-            <filename>../../Joze/72/j_23.png</filename>
-            <filename>../../Joze/72/j_24.png</filename>
-            <filename>../../Joze/72/j_25.png</filename>
-            <filename>../../Joze/72/j_26.png</filename>
-            <filename>../../Joze/72/j_27.png</filename>
-            <filename>../../Joze/72/j_28.png</filename>
-            <filename>../../Joze/72/j_29.png</filename>
-            <filename>../../Joze/72/j_30.png</filename>
-            <filename>../../Sura/72/1.png</filename>
-            <filename>../../Sura/72/2.png</filename>
-            <filename>../../Sura/72/3.png</filename>
-            <filename>../../Sura/72/4.png</filename>
-            <filename>../../Sura/72/5.png</filename>
-            <filename>../../Sura/72/6.png</filename>
-            <filename>../../Sura/72/7.png</filename>
-            <filename>../../Sura/72/8.png</filename>
-            <filename>../../Sura/72/9.png</filename>
-            <filename>../../Sura/72/10.png</filename>
-            <filename>../../Sura/72/11.png</filename>
-            <filename>../../Sura/72/12.png</filename>
-            <filename>../../Sura/72/13.png</filename>
-            <filename>../../Sura/72/14.png</filename>
-            <filename>../../Sura/72/15.png</filename>
-            <filename>../../Sura/72/16.png</filename>
-            <filename>../../Sura/72/17.png</filename>
-            <filename>../../Sura/72/18.png</filename>
-            <filename>../../Sura/72/19.png</filename>
-            <filename>../../Sura/72/20.png</filename>
-            <filename>../../Sura/72/21.png</filename>
-            <filename>../../Sura/72/22.png</filename>
-            <filename>../../Sura/72/23.png</filename>
-            <filename>../../Sura/72/24.png</filename>
-            <filename>../../Sura/72/25.png</filename>
-            <filename>../../Sura/72/26.png</filename>
-            <filename>../../Sura/72/27.png</filename>
-            <filename>../../Sura/72/28.png</filename>
-            <filename>../../Sura/72/29.png</filename>
-            <filename>../../Sura/72/30.png</filename>
-            <filename>../../Sura/72/31.png</filename>
-            <filename>../../Sura/72/32.png</filename>
-            <filename>../../Sura/72/33.png</filename>
-            <filename>../../Sura/72/34.png</filename>
-            <filename>../../Sura/72/35.png</filename>
-            <filename>../../Sura/72/36.png</filename>
-            <filename>../../Sura/72/37.png</filename>
-            <filename>../../Sura/72/38.png</filename>
-            <filename>../../Sura/72/39.png</filename>
-            <filename>../../Sura/72/40.png</filename>
-            <filename>../../Sura/72/41.png</filename>
-            <filename>../../Sura/72/42.png</filename>
-            <filename>../../Sura/72/43.png</filename>
-            <filename>../../Sura/72/44.png</filename>
-            <filename>../../Sura/72/45.png</filename>
-            <filename>../../Sura/72/46.png</filename>
-            <filename>../../Sura/72/47.png</filename>
-            <filename>../../Sura/72/48.png</filename>
-            <filename>../../Sura/72/49.png</filename>
-            <filename>../../Sura/72/50.png</filename>
-            <filename>../../Sura/72/51.png</filename>
-            <filename>../../Sura/72/52.png</filename>
-            <filename>../../Sura/72/53.png</filename>
-            <filename>../../Sura/72/54.png</filename>
-            <filename>../../Sura/72/55.png</filename>
-            <filename>../../Sura/72/56.png</filename>
-            <filename>../../Sura/72/57.png</filename>
-            <filename>../../Sura/72/58.png</filename>
-            <filename>../../Sura/72/59.png</filename>
-            <filename>../../Sura/72/60.png</filename>
-            <filename>../../Sura/72/61.png</filename>
-            <filename>../../Sura/72/62.png</filename>
-            <filename>../../Sura/72/63.png</filename>
-            <filename>../../Sura/72/64.png</filename>
-            <filename>../../Sura/72/65.png</filename>
-            <filename>../../Sura/72/66.png</filename>
-            <filename>../../Sura/72/67.png</filename>
-            <filename>../../Sura/72/68.png</filename>
-            <filename>../../Sura/72/69.png</filename>
-            <filename>../../Sura/72/70.png</filename>
-            <filename>../../Sura/72/71.png</filename>
-            <filename>../../Sura/72/72.png</filename>
-            <filename>../../Sura/72/73.png</filename>
-            <filename>../../Sura/72/74.png</filename>
-            <filename>../../Sura/72/75.png</filename>
-            <filename>../../Sura/72/76.png</filename>
-            <filename>../../Sura/72/77.png</filename>
-            <filename>../../Sura/72/78.png</filename>
-            <filename>../../Sura/72/79.png</filename>
-            <filename>../../Sura/72/80.png</filename>
-            <filename>../../Sura/72/81.png</filename>
-            <filename>../../Sura/72/82.png</filename>
-            <filename>../../Sura/72/83.png</filename>
-            <filename>../../Sura/72/84.png</filename>
-            <filename>../../Sura/72/85.png</filename>
-            <filename>../../Sura/72/86.png</filename>
-            <filename>../../Sura/72/87.png</filename>
-            <filename>../../Sura/72/88.png</filename>
-            <filename>../../Sura/72/89.png</filename>
-            <filename>../../Sura/72/90.png</filename>
-            <filename>../../Sura/72/91.png</filename>
-            <filename>../../Sura/72/92.png</filename>
-            <filename>../../Sura/72/93.png</filename>
-            <filename>../../Sura/72/94.png</filename>
-            <filename>../../Sura/72/95.png</filename>
-            <filename>../../Sura/72/96.png</filename>
-            <filename>../../Sura/72/97.png</filename>
-            <filename>../../Sura/72/98.png</filename>
-            <filename>../../Sura/72/99.png</filename>
-            <filename>../../Sura/72/100.png</filename>
-            <filename>../../Sura/72/101.png</filename>
-            <filename>../../Sura/72/102.png</filename>
-            <filename>../../Sura/72/103.png</filename>
-            <filename>../../Sura/72/104.png</filename>
-            <filename>../../Sura/72/105.png</filename>
-            <filename>../../Sura/72/106.png</filename>
-            <filename>../../Sura/72/107.png</filename>
-            <filename>../../Sura/72/108.png</filename>
-            <filename>../../Sura/72/109.png</filename>
-            <filename>../../Sura/72/110.png</filename>
-            <filename>../../Sura/72/111.png</filename>
-            <filename>../../Sura/72/112.png</filename>
-            <filename>../../Sura/72/113.png</filename>
-            <filename>../../Sura/72/114.png</filename>
             <filename>../bism_header.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_10.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_11.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_12.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_13.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_14.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_15.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_16.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_17.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_18.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_19.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_20.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_21.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_22.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_23.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_24.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_25.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_26.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_27.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_28.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_29.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_30.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/juzes.tps</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_1.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_2.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_3.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_4.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_5.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_6.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_7.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_8.png</filename>
+            <filename>../../../Bayan_temp/Temp/Images/Joze/72/j_09.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
@@ -346,15 +231,5 @@
         <uint>1</uint>
         <key>commonDivisorY</key>
         <uint>1</uint>
-        <key>packNormalMaps</key>
-        <false/>
-        <key>autodetectNormalMaps</key>
-        <true/>
-        <key>normalMapFilter</key>
-        <string></string>
-        <key>normalMapSuffix</key>
-        <string></string>
-        <key>normalMapSheetFileName</key>
-        <filename></filename>
     </struct>
 </data>

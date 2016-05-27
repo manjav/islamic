@@ -21,14 +21,14 @@ package com.gerantech.islamic.models
 	{
 		/**
 		 * Fonts 
-		 */		
+		*/		
 		[Embed(source="../assets/fonts/me_quran.ttf", fontFamily="mequran", fontWeight="normal", mimeType="application/x-font", embedAsCFF="true")]
 		protected static const ME_QURAN:Class;
 		[Embed(source="../assets/fonts/scheherazade.ttf", fontFamily="scheherazade", fontWeight="normal", mimeType="application/x-font", embedAsCFF="true")]
 		protected static const SCHEHERAZADE:Class;
 		[Embed(source="../assets/fonts/nabi.ttf", fontFamily="nabi", fontWeight="normal", mimeType="application/x-font", embedAsCFF="true")]
 		protected static const NABI:Class;
-		
+
 		
 		/**
 		 * Texture Atlas 

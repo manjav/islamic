@@ -28,14 +28,10 @@ package com.gerantech.islamic.views.screens
 		private var removedIndex:int;
 		private var undoAlert:UndoAlert;
 		
-		public function BookmarksScreen()
-		{
-			super();
-		}
-		
 		override protected function initialize():void
 		{
 			super.initialize();
+			title = loc(appModel.PAGE_BOOKMARKS);
 			layout = new AnchorLayout();
 			
 			if(userModel.bookmarks.length>0)

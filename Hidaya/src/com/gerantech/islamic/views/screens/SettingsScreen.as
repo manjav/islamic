@@ -52,6 +52,7 @@ package com.gerantech.islamic.views.screens
 		override protected function initialize():void
 		{
 			super.initialize();
+			title = loc(appModel.PAGE_SETTINGS);
 			
 			var mLayout:VerticalLayout = new VerticalLayout();
 			mLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;

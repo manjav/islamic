@@ -6,6 +6,7 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.models.vo.Reciter;
 	import com.gerantech.islamic.views.headers.DownloadHeader;
 	import com.gerantech.islamic.views.items.DownloadItemRenderer;
+	import com.gerantech.islamic.views.lists.FastList;
 	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.List;
@@ -50,7 +51,7 @@ package com.gerantech.islamic.views.screens
 			listLayout.gap = appModel.sizes.twoLineItem/6;
 			listLayout.paddingTop = appModel.sizes.twoLineItem/4;
 			
-			list = new List();
+			list = new FastList();
 			list.layout = listLayout;
 			list.layoutData = new AnchorLayoutData(downloadHeader.height,0,0,0);
 			list.allowMultipleSelection = true;

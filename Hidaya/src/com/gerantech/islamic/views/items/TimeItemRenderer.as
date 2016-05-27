@@ -82,7 +82,6 @@ package com.gerantech.islamic.views.items
 			
 			var time:Time = _data as Time;
 			
-			trace(time.pending, time.isPending(appModel.date.dateClass), time.date);
 			if(backgroundSkin == null)
 			{
 				createSkin();

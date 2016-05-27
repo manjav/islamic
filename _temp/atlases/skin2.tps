@@ -46,7 +46,7 @@
         <key>mipMapMinSize</key>
         <uint>32768</uint>
         <key>etc1CompressionQuality</key>
-        <enum type="SettingsBase::Etc1CompressionQuality">ETC1_QUALITY_LOW_PERCEPTUAL</enum>
+        <enum type="SettingsBase::Etc1CompressionQuality">ETC1_QUALITY_HIGH_PERCEPTUAL</enum>
         <key>dxtCompressionMode</key>
         <enum type="SettingsBase::DxtCompressionMode">DXT_PERCEPTUAL</enum>
         <key>jxrColorFormat</key>
@@ -54,9 +54,9 @@
         <key>jxrTrimFlexBits</key>
         <uint>0</uint>
         <key>jxrCompressionLevel</key>
-        <uint>0</uint>
+        <uint>50</uint>
         <key>ditherType</key>
-        <enum type="SettingsBase::DitherType">FloydSteinbergAlpha</enum>
+        <enum type="SettingsBase::DitherType">NearestNeighbour</enum>
         <key>backgroundColor</key>
         <uint>0</uint>
         <key>libGdx</key>
@@ -74,7 +74,7 @@
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
-        <uint>0</uint>
+        <uint>6</uint>
         <key>webpQualityLevel</key>
         <uint>101</uint>
         <key>textureSubPath</key>
@@ -153,7 +153,7 @@
         <key>forceIdenticalLayout</key>
         <false/>
         <key>outputFormat</key>
-        <enum type="SettingsBase::OutputFormat">RGBA8888</enum>
+        <enum type="SettingsBase::OutputFormat">RGBA4444</enum>
         <key>contentProtection</key>
         <struct type="ContentProtection">
             <key>key</key>
@@ -189,6 +189,102 @@
         <key>fileList</key>
         <array>
             <filename>../theme/metalworks</filename>
+            <filename>../skin/undo_sign.png</filename>
+            <filename>../skin/action.png</filename>
+            <filename>../skin/action_accent.png</filename>
+            <filename>../skin/action_danger.png</filename>
+            <filename>../skin/action_item_0.png</filename>
+            <filename>../skin/action_item_1.png</filename>
+            <filename>../skin/action_item_2.png</filename>
+            <filename>../skin/action_item_3.png</filename>
+            <filename>../skin/action_pause.png</filename>
+            <filename>../skin/action_play.png</filename>
+            <filename>../skin/action_plus.png</filename>
+            <filename>../skin/action_timer.png</filename>
+            <filename>../skin/alarm_grey.png</filename>
+            <filename>../skin/arrow_g_left.png</filename>
+            <filename>../skin/arrow_g_right.png</filename>
+            <filename>../skin/arrow_w_left.png</filename>
+            <filename>../skin/arrow_w_right.png</filename>
+            <filename>../skin/book_open.png</filename>
+            <filename>../skin/bookmark_off.png</filename>
+            <filename>../skin/bookmark_on.png</filename>
+            <filename>../skin/bookmark_outline_white.png</filename>
+            <filename>../skin/calendar_multiple_white.png</filename>
+            <filename>../skin/calendar_today_white.png</filename>
+            <filename>../skin/cancel_download.png</filename>
+            <filename>../skin/cart_grey.png</filename>
+            <filename>../skin/check.png</filename>
+            <filename>../skin/check_off.png</filename>
+            <filename>../skin/check_on.png</filename>
+            <filename>../skin/chevron_g.png</filename>
+            <filename>../skin/chevron_w.png</filename>
+            <filename>../skin/circle.png</filename>
+            <filename>../skin/circle_mask.png</filename>
+            <filename>../skin/close_g.png</filename>
+            <filename>../skin/close_w.png</filename>
+            <filename>../skin/comment_alert.png</filename>
+            <filename>../skin/compass.png</filename>
+            <filename>../skin/dots.png</filename>
+            <filename>../skin/download.png</filename>
+            <filename>../skin/download_g.png</filename>
+            <filename>../skin/download_w.png</filename>
+            <filename>../skin/drag.png</filename>
+            <filename>../skin/email.png</filename>
+            <filename>../skin/hizb_0_4.png</filename>
+            <filename>../skin/hizb_1_4.png</filename>
+            <filename>../skin/hizb_2_4.png</filename>
+            <filename>../skin/hizb_3_4.png</filename>
+            <filename>../skin/ic_calendar.png</filename>
+            <filename>../skin/ic_clock.png</filename>
+            <filename>../skin/ic_compass.png</filename>
+            <filename>../skin/ic_finder.png</filename>
+            <filename>../skin/ic_greeting.png</filename>
+            <filename>../skin/ic_inbox.png</filename>
+            <filename>../skin/ic_map_marker_radius.png</filename>
+            <filename>../skin/ic_pray.png</filename>
+            <filename>../skin/ic_quran.png</filename>
+            <filename>../skin/ic_wallpaper.png</filename>
+            <filename>../skin/info.png</filename>
+            <filename>../skin/jump.png</filename>
+            <filename>../skin/kaaba.png</filename>
+            <filename>../skin/letter_e.png</filename>
+            <filename>../skin/letter_n.png</filename>
+            <filename>../skin/letter_s.png</filename>
+            <filename>../skin/letter_w.png</filename>
+            <filename>../skin/list_bulleted.png</filename>
+            <filename>../skin/logout.png</filename>
+            <filename>../skin/meccan_icon.png</filename>
+            <filename>../skin/medinan_icon.png</filename>
+            <filename>../skin/menu.png</filename>
+            <filename>../skin/pencil_gray.png</filename>
+            <filename>../skin/pencil_white.png</filename>
+            <filename>../skin/radian.png</filename>
+            <filename>../skin/radian_white.png</filename>
+            <filename>../skin/recitation.png</filename>
+            <filename>../skin/remove.png</filename>
+            <filename>../skin/repeat_black.png</filename>
+            <filename>../skin/round_alert.png</filename>
+            <filename>../skin/search.png</filename>
+            <filename>../skin/setting.png</filename>
+            <filename>../skin/shadow.png</filename>
+            <filename>../skin/shadow_left.png</filename>
+            <filename>../skin/shadow_paper_left.png</filename>
+            <filename>../skin/shadow_paper_right.png</filename>
+            <filename>../skin/shadow_right.png</filename>
+            <filename>../skin/share_variant.png</filename>
+            <filename>../skin/star.png</filename>
+            <filename>../skin/time-0.png</filename>
+            <filename>../skin/time-1.png</filename>
+            <filename>../skin/time-2.png</filename>
+            <filename>../skin/time-3.png</filename>
+            <filename>../skin/time-4.png</filename>
+            <filename>../skin/time-5.png</filename>
+            <filename>../skin/time-6.png</filename>
+            <filename>../skin/time-7.png</filename>
+            <filename>../skin/timer_grey.png</filename>
+            <filename>../skin/toolbar_button_bg.png</filename>
+            <filename>../skin/translation.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

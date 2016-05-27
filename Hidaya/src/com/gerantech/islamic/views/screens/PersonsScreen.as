@@ -28,14 +28,11 @@ package com.gerantech.islamic.views.screens
 		private var personList:FilteredPersonScreen;
 		private var languageSelector:LanguageActionList;
 		private var sortable:SortablePersonList;
-		
-		public function PersonsScreen()
-		{
-		}
-		
+
 		override protected function initialize():void
 		{
 			super.initialize();
+			title = loc("page_"+type);
 			layout = new AnchorLayout();
 
 			sortable = new SortablePersonList(type);

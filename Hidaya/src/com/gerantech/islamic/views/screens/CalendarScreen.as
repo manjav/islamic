@@ -13,6 +13,9 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.lists.FastList;
 	import com.gerantech.islamic.views.lists.QList;
 	
+	import flash.geom.Point;
+	import flash.utils.getTimer;
+	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.List;
 	import feathers.controls.StackScreenNavigatorItem;
@@ -43,6 +46,12 @@ package com.gerantech.islamic.views.screens
 		private var actionButton:FlatButton;
 		private var actionButtonShown:Boolean;
 		
+		private var weekCollection:ListCollection;
+		private var daysCollection:ListCollection;
+		private var dayTime:Number;
+		private var region:Point;
+		private var todayIndex:uint;
+		
 		override protected function initialize():void
 		{
 			super.initialize();
@@ -50,15 +59,16 @@ package com.gerantech.islamic.views.screens
 			layout = new AnchorLayout();
 
 			var startOfWeek:uint = appModel.ltr ? 0 : 6;
-			var calLen:uint = (5*21)+(date.day-startOfWeek);
-			// create data for lists
-			var t:Number = date.getTime();
-			times = new Vector.<Number>(calLen*2, true);
-			for(var i:uint=0; i<calLen*2; i++)
-				times[i] = t + Time.DAY_TIME_LEN*(i-calLen);
-			
+			var passedDays:uint = 140; // passed day must be factor 7 for week list alignment
+			dayTime = date.getTime();
+			region = new Point();
+			times = getTimes(startOfWeek-date.day-passedDays, 350);
+			daysCollection = new ListCollection(times);
+			todayIndex = passedDays-startOfWeek;
+
 			calHeader = new CalendarHeader();
 			calHeader.layoutData = new AnchorLayoutData(0,0,NaN,0);
+			addChild(calHeader);
 			
 			weekLayout = new TiledRowsLayout();
 			weekLayout.useSquareTiles = false;
@@ -66,77 +76,74 @@ package com.gerantech.islamic.views.screens
 			weekLayout.requestedColumnCount = 7;
 
 			weekList = new FastList();
+			weekList.alignPivot("right", "top");
 			weekList.backgroundSkin = new Quad(1, 1, BaseMaterialTheme.CHROME_COLOR);
 			weekList.backgroundSkin.alpha = 0.1;
-			weekList.visible = false;
-			weekList.alpha = 0;
+			weekList.interactionMode = "mouse";
 			weekList.layout = weekLayout;
 			weekList.layoutData = new AnchorLayoutData(calHeader.height, 0, NaN, 0);
-			weekList.height = appModel.sizes.getPixelByDP(100);
+			weekList.height = appModel.sizes.DP32 * 4;
 			weekList.scrollBarDisplayMode = List.SCROLL_BAR_DISPLAY_MODE_NONE;
 			weekList.itemRendererFactory = function():IListItemRenderer
 			{
 				return new WeekCalItemRenderer();
 			}
-			weekList.dataProvider = new ListCollection(times);
-			weekList.scrollToDisplayIndex(calLen);
-			weekList.selectedIndex = calLen;
-			weekList.isQuickHitAreaEnabled = false
+			weekList.isQuickHitAreaEnabled = false;
 			weekList.addEventListener(Event.TRIGGERED, weekList_triggeredHandler);
 			addChild(weekList);
-
+			
+			addEventListener(FeathersEventType.TRANSITION_IN_COMPLETE, transitionInCompleteHandler);
+			var shadow:ImageLoader = new ImageLoader();
+			shadow.source = Assets.getTexture("shadow");
+			shadow.maintainAspectRatio = false;
+			shadow.layoutData = new AnchorLayoutData(weekList.height+calHeader.height,0,NaN,0);
+			shadow.height = appModel.sizes.DP8;
+			addChild(shadow);
+			
 			list = new QList();
-			list.layoutData = new AnchorLayoutData(appModel.sizes.getPixelByDP(100)+calHeader.height,0,0,0);
+			list.layoutData = new AnchorLayoutData(weekList.height+calHeader.height,0,0,0);
 			list.scrollBarDisplayMode = List.SCROLL_BAR_DISPLAY_MODE_NONE;
 			list.itemRendererFactory = function():IListItemRenderer
 			{
 				return new CalendarItemRenderer();
 			}
-			list.visible = false;
-			list.alpha = 0;
-			list.dataProvider = new ListCollection(times);
 			list.addEventListener(Event.CHANGE, list_changeHandler);
 			addChild(list);
 			
-			addChild(calHeader);
-			
-			var shadow:ImageLoader = new ImageLoader();
-			shadow.source = Assets.getTexture("shadow");
-			shadow.maintainAspectRatio = false;
-			shadow.layoutData = new AnchorLayoutData(appModel.sizes.getPixelByDP(100)+calHeader.height,0,NaN,0);
-			shadow.height = appModel.sizes.DP8;
-			addChild(shadow);
-			
 			actionButton = new FlatButton("calendar_today_white", "action_accent", false, 1, 1);
 			actionButton.iconScale = 0.3;
-			actionButton.width = actionButton.height = AppModel.instance.sizes.toolbar;
-			actionButton.filter = new DropShadowFilter(AppModel.instance.sizes.getPixelByDP(2), 90*(Math.PI/180), 0, 0.4, 3);
+			actionButton.width = actionButton.height = appModel.sizes.toolbar;
+			actionButton.filter = new DropShadowFilter(appModel.sizes.getPixelByDP(2), 90*(Math.PI/180), 0, 0.4, 3);
 			actionButton.addEventListener(Event.TRIGGERED, actionButton_triggerd);
 			actionButton.layoutData = new AnchorLayoutData(NaN, appModel.sizes.DP16, NaN);
-			//actionButton.visible = false;
-			actionButton.y = appModel.sizes.height + appModel.sizes.DP16 - AppModel.instance.sizes.toolbar;
+			actionButton.y = appModel.sizes.height+appModel.sizes.toolbar*2;
 			addChild(actionButton);
-			
-			addEventListener(FeathersEventType.TRANSITION_IN_COMPLETE, transitionInCompleteHandler);
 		}
-		
-		override protected function stage_resizeHandler(event:Event):void
-		{
-			//weekList.pivotX = appModel.sizes.width/2
-			super.stage_resizeHandler(event);
-		}
-		
+
 		private function transitionInCompleteHandler():void
 		{
+			trace(" --  Calendar tc1", getTimer()-Hidaya.ft);
+			
 			weekList.scaleX = appModel.ltr ? 1 : -1;
 			weekList.alignPivot("right", "top");
-			weekList.visible = true;
+			weekList.alpha = 0;
 			Starling.juggler.tween(weekList, 0.3, {alpha:1});
+			weekList.dataProvider = daysCollection;
+			//weekList.scrollToDisplayIndex(todayIndex);
+			//weekList.selectedIndex = todayIndex;
+			trace(" --  weekList data set", getTimer()-Hidaya.ft);
 
-			list.visible = true;
+			list.alpha = 0;
 			Starling.juggler.tween(list, 0.4, {alpha:1, delay:0.1});
-			list.verticalScrollPosition = times.length/2*CalendarItemRenderer.HEIGHT;
-			list.addEventListener(Event.SCROLL, list_scrollHandler);
+			list.dataProvider = daysCollection;
+			//list.verticalScrollPosition = todayIndex * CalendarItemRenderer.HEIGHT;
+			//list.addEventListener(Event.SCROLL, list_scrollHandler);
+			trace(" --  list data set", getTimer()-Hidaya.ft);
+			
+			//daysCollection.addAll(new ListCollection(getTimes(region.y, 500)));
+			trace(" --  data added", getTimer()-Hidaya.ft);
+			gotoDay(appModel.date.middleTime);
+			//showActionButton(true);
 		}
 		
 		private function list_scrollHandler(event:Event):void
@@ -148,20 +155,21 @@ package com.gerantech.islamic.views.screens
 			firstItemIndex = f.index;
 			weekList.scrollToDisplayIndex(firstItemIndex, 0.5);
 			weekList.selectedIndex = firstItemIndex;
-			//trace(f.index, f.visible, f.titleDiplay.text)	
 			
+			//updateTimes(f.index);	
 			showActionButton(times[firstItemIndex] != appModel.date.firstTime);
 		}
-		
-		private function showActionButton(param0:Boolean):void
+
+		// toggle appearance of action button
+		private function showActionButton(show:Boolean):void
 		{
-			if(actionButtonShown == param0)
+			if(actionButtonShown == show)
 				return;
 			
-			actionButtonShown = param0;
+			actionButtonShown = show;
 			
 			if(actionButtonShown)
-				Starling.juggler.tween(actionButton, 0.4, {y:appModel.sizes.height - appModel.sizes.DP16 - AppModel.instance.sizes.toolbar, transition:Transitions.EASE_OUT});
+				Starling.juggler.tween(actionButton, 0.4, {y:appModel.sizes.height - appModel.sizes.DP16 - appModel.sizes.toolbar, transition:Transitions.EASE_OUT});
 			else
 			{
 				var tw:Tween = new Tween(actionButton, 0.4, Transitions.EASE_IN);
@@ -191,39 +199,53 @@ package com.gerantech.islamic.views.screens
 			gotoDay(event.data as Number);
 		}
 		
-		private function gotoDay(time:Number):void
+		private function gotoDay(time:Number, duration:Number=0.5):void
 		{
 			list.removeEventListener(Event.SCROLL, list_scrollHandler);
 			var index:int = times.indexOf(time);
 			var newPosition:Number = Math.min(index*CalendarItemRenderer.HEIGHT, times.length*CalendarItemRenderer.HEIGHT-list.height);
-
-			//reduce distance for performance 
-			if(Math.abs(list.verticalScrollPosition-newPosition)>10)
-				list.verticalScrollPosition -= (list.verticalScrollPosition-newPosition)*0.9;
-			var tw:Tween = new Tween(list, 0.4, Transitions.EASE_OUT);
-			tw.animate("verticalScrollPosition", newPosition);
-			tw.onComplete = function ():void
-			{
-				list.addEventListener(Event.SCROLL, list_scrollHandler);
-			};
-			Starling.juggler.add(tw);
 			
-			weekList.scrollToDisplayIndex(index, 0.5);
+			if(duration == 0)
+				list.verticalScrollPosition = newPosition;
+			else
+			{
+				//reduce distance for performance 
+				if(Math.abs(list.verticalScrollPosition-newPosition)>10)
+					list.verticalScrollPosition -= (list.verticalScrollPosition-newPosition)*0.9;
+				var tw:Tween = new Tween(list, duration, Transitions.EASE_OUT);
+				tw.animate("verticalScrollPosition", newPosition);
+				tw.onComplete = function ():void
+				{
+					list.addEventListener(Event.SCROLL, list_scrollHandler);
+				};
+				Starling.juggler.add(tw);
+			}
+			
+			weekList.scrollToDisplayIndex(index, duration);
 			weekList.selectedIndex = index;
 		}
 		
+		/**
+		 * action button click handler
+		 */
 		private function actionButton_triggerd(event:Event):void
 		{
 			gotoDay(appModel.date.middleTime);
 			showActionButton(false);
 		}
 		
+		/**
+		 * every page that need to custom toolbar, must call this overrided method
+		 */
 		override protected function createToolbarItems():void
 		{
 			super.createToolbarItems();
 			appModel.toolbar.accessoriesData.push(new ToolbarButtonData(appModel.PAGE_SETTINGS, "setting", toolbarButtons_triggerdHandler));
 		}
 		
+		/**
+		 * all toobar buttons click handler
+		 */
 		private function toolbarButtons_triggerdHandler(item:ToolbarButtonData):void
 		{
 			switch(item.name)
@@ -240,5 +262,42 @@ package com.gerantech.islamic.views.screens
 			}
 		}
 		
+		/**
+		 * lazy loading times for bot lists
+		 */
+		private function updateTimes(index:int):void
+		{
+			// fill passed days
+			if(index==0)
+			{
+				list.removeEventListener(Event.SCROLL, list_scrollHandler);
+				daysCollection.addAllAt(new ListCollection(getTimes(region.x-14, 14)), 0);
+				gotoDay(times[index + 14], 0);
+				list.addEventListener(Event.SCROLL, list_scrollHandler);
+			}
+			// fill next days
+			if(index > times.length-7)
+			{
+				daysCollection.addAll(new ListCollection(getTimes(region.y, 14)));
+			}
+		}
+		
+		/**
+		 * provide array of times by index of start day in calendar
+		 */
+		private function getTimes(start:int, length:int):Vector.<Number>
+		{
+			// set region of days
+			if(start < region.x) 
+				region.x = start;
+			if(start+length > region.y)
+				region.y = start+length;
+			//trace(region);
+			
+			var ret:Vector.<Number> = new Vector.<Number>();
+			for(var i:uint=0; i<length; i++)
+				ret[i] = dayTime + Time.DAY_TIME_LEN * (start+i);
+			return ret;
+		}
 	}
 }

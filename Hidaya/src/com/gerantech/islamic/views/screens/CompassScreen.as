@@ -32,6 +32,7 @@ package com.gerantech.islamic.views.screens
 		override protected function initialize():void
 		{
 			super.initialize();
+			title = loc(appModel.PAGE_COMPASS);
 			LocationManager.instance;
 			
 			cityButton = new EiditableButton();

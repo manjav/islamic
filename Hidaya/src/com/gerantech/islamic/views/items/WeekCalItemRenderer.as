@@ -41,7 +41,7 @@ package com.gerantech.islamic.views.items
 			super.initialize();
 			layout = new AnchorLayout();
 			width = appModel.sizes.width/7;
-			height = appModel.sizes.width/10;
+			height = appModel.sizes.DP32;
 			
 			dayData = new DayDataProvider();
 			
@@ -70,10 +70,10 @@ package com.gerantech.islamic.views.items
 			todayFontDescription = new FontDescription (titleDiplay.fontFamily, "bold",		titleDiplay.fontPosture, FontLookup.EMBEDDED_CFF);
 			otherFontDescription = new FontDescription (titleDiplay.fontFamily, "normal",	titleDiplay.fontPosture, FontLookup.EMBEDDED_CFF);
 			
-			elementFormat_selected_today =	new ElementFormat(todayFontDescription, appModel.sizes.orginalFontSize*1.3,	BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
-			elementFormat_selected_other =	new ElementFormat(otherFontDescription, appModel.sizes.orginalFontSize*1.1,	BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
-			elementFormat_normal_today =	new ElementFormat(todayFontDescription, appModel.sizes.orginalFontSize*1.3,	BaseMaterialTheme.PRIMARY_TEXT_COLOR);
-			elementFormat_normal_other =	new ElementFormat(otherFontDescription, appModel.sizes.orginalFontSize*1.1,	BaseMaterialTheme.PRIMARY_TEXT_COLOR);
+			elementFormat_selected_today =	new ElementFormat(todayFontDescription, appModel.sizes.orginalFontSize*1.2,	BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
+			elementFormat_selected_other =	new ElementFormat(otherFontDescription, appModel.sizes.orginalFontSize*1.0,	BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
+			elementFormat_normal_today =	new ElementFormat(todayFontDescription, appModel.sizes.orginalFontSize*1.2,	BaseMaterialTheme.PRIMARY_TEXT_COLOR);
+			elementFormat_normal_other =	new ElementFormat(otherFontDescription, appModel.sizes.orginalFontSize*1.0,	BaseMaterialTheme.PRIMARY_TEXT_COLOR);
 		}
 		
 		override protected function commitData():void

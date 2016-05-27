@@ -22,7 +22,7 @@ package com.gerantech.islamic.views.controls
 				image.y = -256;
 				image.x = -image.width/2;
 				slice.addChild(image);
-				slice.rotation = i*22.5*(Math.PI/90);
+				slice.rotation = deg2rad(i*45);
 				addChild(slice);
 				
 				if(i%2 == 0)
@@ -35,10 +35,18 @@ package com.gerantech.islamic.views.controls
 					else if(i==6)
 						arrows = "w";
 					
+					var sideBG:Image = new Image(Assets.getBackgroundTexture("normal"));
+					sideBG.scale9Grid = Assets.BACKGROUND_GRID;
+					sideBG.width = 48;
+					sideBG.height = 15;
+					sideBG.x = -24;
+					sideBG.y = -258;
+					slice.addChild(sideBG);
+					
 					var side:Image = new Image(Assets.getTexture("letter_"+arrows));
 					//side.height = side.width = 50;
 					side.x = -side.width/2;
-					side.y = -256-side.height/2;
+					side.y = -252-side.height/2;
 					slice.addChild(side);
 				}
 				

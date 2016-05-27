@@ -23,14 +23,10 @@ package com.gerantech.islamic.views.screens
 
 		private var waitingIcon:ImageLoader;
 
-		public function OmenScreen()
-		{
-			super();
-		}
-		
 		override protected function initialize():void
 		{
 			super.initialize();
+			title = loc(appModel.PAGE_OMEN);
 			
 			var padding:Number = appModel.sizes.border*4;
 			layout = new AnchorLayout()
