@@ -203,22 +203,21 @@ package com.gerantech.islamic.views.items
 				AppController.instance.alert("purchase_popup_title", "purchase_popup_message", "cancel_button", "purchase_popup_accept_label", BillingManager.instance.purchase);
 				return;
 			}*/
-			trace(person.type)
 			super.isSelected = value;
 			//trace(index, value,person.state);
 			switch(person.state)
 			{
 				case Person.NO_FILE:
-					person.addEventListener(Person.TRANSLATION_PROGRESS_CHANGED, translationProgressChanged);
-					Translator(person).loadTransltaion();
+					person.addEventListener(Person.LOADING_PROGRESS_CHANGED, translationProgressChanged);
+					person.load();
 					break;
 				case Person.LOADING:
 				case Person.PREPARING:
-					person.removeEventListener(Person.TRANSLATION_PROGRESS_CHANGED, translationProgressChanged);
-					Translator(person).stopDownload();
+					person.removeEventListener(Person.LOADING_PROGRESS_CHANGED, translationProgressChanged);
+					person.unload();
 					break;
 				case Person.HAS_FILE:
-					person.type == Person.TYPE_TRANSLATOR ? Translator(person).loadTransltaion() : person.state = Person.SELECTED;
+					person.type == Person.TYPE_RECITER ? person.state = Person.SELECTED : person.load() ;
 					break;
 				case Person.SELECTED:
 					person.state = Person.HAS_FILE;

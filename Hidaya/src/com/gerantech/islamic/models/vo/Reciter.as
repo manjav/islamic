@@ -1,10 +1,7 @@
 package com.gerantech.islamic.models.vo
 {
 	import com.gerantech.islamic.models.ResourceModel;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.utils.LoadAndSaver;
-	
-	import flash.events.IOErrorEvent;
 
 	public class Reciter extends Person
 	{

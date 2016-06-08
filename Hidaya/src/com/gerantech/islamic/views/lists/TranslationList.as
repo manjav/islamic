@@ -116,14 +116,14 @@ package com.gerantech.islamic.views.lists
 		private function loadTranslator():void
 		{
 			currentTranslator = ResourceModel.instance.selectedTranslators[translatorIndex];
-			currentTranslator.removeEventListener(Person.TRANSLATION_LOADED, loadTranslator);
-			currentTranslator.removeEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
+			currentTranslator.removeEventListener(Person.LOADING_COMPLETE, loadTranslator);
+			currentTranslator.removeEventListener(Person.LOADING_ERROR, translationErrorHandler);
 			
 			if(currentTranslator.loadingState!=Translator.L_LOADED)
 			{
-				currentTranslator.loadTransltaion();
-				currentTranslator.addEventListener(Person.TRANSLATION_LOADED, loadTranslator);
-				currentTranslator.addEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
+				currentTranslator.load();
+				currentTranslator.addEventListener(Person.LOADING_COMPLETE, loadTranslator);
+				currentTranslator.addEventListener(Person.LOADING_ERROR, translationErrorHandler);
 				return;
 			}
 			translations.push(currentTranslator);
@@ -239,8 +239,8 @@ package com.gerantech.islamic.views.lists
 		private function translationErrorHandler(event:Event):void
 		{
 			var translator:Person = Person(event.currentTarget)
-			translator.removeEventListener(Person.TRANSLATION_LOADED, loadTranslator);
-			translator.removeEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
+			translator.removeEventListener(Person.LOADING_COMPLETE, loadTranslator);
+			translator.removeEventListener(Person.LOADING_ERROR, translationErrorHandler);
 			
 			translations.push(translator);
 			translations.push({text:(translator.flag.dir=="rtl" ? loc("translation_error") : "Nerwork error")+"\n", translator:translator, aya:page.ayas[0]});

@@ -1,6 +1,8 @@
 package com.gerantech.islamic.views.screens
 {
 	import com.gerantech.islamic.models.vo.Alert;
+	import com.gerantech.islamic.models.vo.Local;
+	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.models.vo.Time;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.items.AlertItemRenderer;
@@ -8,6 +10,7 @@ package com.gerantech.islamic.views.screens
 	
 	import feathers.controls.Button;
 	import feathers.controls.List;
+	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.layout.VerticalLayout;
@@ -47,6 +50,7 @@ package com.gerantech.islamic.views.screens
 			list.addEventListener(AlertItemRenderer.EVENT_SELECT, list_eventSelectHandler);
 			list.addEventListener(AlertItemRenderer.EVENT_DELETE, list_eventDeleteHandler);
 			list.addEventListener(AlertItemRenderer.EVENT_CHANGE_TYPE, list_eventChangeTypeHandler);
+			list.addEventListener(AlertItemRenderer.EVENT_CHANGE_RECITER, list_eventChangeReciterHandler);
 			addChild(list);
 			
 			picker = new TimePicker();
@@ -72,6 +76,13 @@ package com.gerantech.islamic.views.screens
 			appModel.theme.setSimpleButtonStyle(addButton);
 			addChild(addButton);
 			//acceptCallback = acceptCallbackHandler;
+		}
+		
+		private function list_eventChangeReciterHandler(event:Event):void
+		{
+			var screenItem:StackScreenNavigatorItem = appModel.navigator.getScreen(appModel.PAGE_FILTERED);
+			screenItem.properties = {type:Person.TYPE_MOATHEN, mode:new Local("", ""), flags:[]};
+			appModel.navigator.pushScreen(appModel.PAGE_FILTERED);
 		}
 		
 		private function list_eventChangeTypeHandler(event:Event):void
@@ -143,7 +154,7 @@ package com.gerantech.islamic.views.screens
 
 			if(!breaked)
 			{
-				_time.alerts.push(new Alert(t, Alert.TYPE_NOTIFICATION, _time));
+				_time.alerts.push(new Alert(t, userModel.timesModel.moathens[0], _time));
 				list.dataProvider = new ListCollection(_time.alerts);
 			}
 			update();

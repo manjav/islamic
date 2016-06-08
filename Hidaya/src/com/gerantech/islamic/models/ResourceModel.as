@@ -23,12 +23,12 @@ package com.gerantech.islamic.models
 		[Embed("../assets/contents/words.bt", mimeType="application/octet-stream")]
 		private static const wordsClass:Class;
 		[Embed(source = "../assets/contents/persons-embeded.json", mimeType="application/octet-stream")]
-		private static const personsClass:Class;
+		public static const personsClass:Class;
 		
 		public var quranXML:XML;
 		public var metaXML:XML;
 		public var simpleQuran:Array;
-		private var persons:Object;
+		public var persons:Object;
 		
 		public var playerAyaList:Array;
 		public var popupSuraList:Array;
@@ -70,7 +70,8 @@ package com.gerantech.islamic.models
 			simpleQuran = byte.readObject();
 			byte.clear();
 
-			persons = JSON.parse(new personsClass());
+			if(persons == null)
+				persons = JSON.parse(new personsClass());
 			switch(AppModel.instance.descriptor.market)
 			{
 				case "google":

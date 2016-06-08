@@ -5,7 +5,7 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.managers.LocationManager;
 	import com.gerantech.islamic.models.vo.Location;
-	import com.gerantech.islamic.views.buttons.EiditableButton;
+	import com.gerantech.islamic.views.buttons.EditableButton;
 	import com.gerantech.islamic.views.controls.CompassCanvas;
 	import com.gerantech.islamic.views.popups.GeoCityPopup;
 	
@@ -26,7 +26,7 @@ package com.gerantech.islamic.views.screens
 		private var canvas:CompassCanvas;
 		private var compass:CompassExtension;
 		private var lastAngle:Number = 0;
-		private var cityButton:EiditableButton;
+		private var cityButton:EditableButton;
 		private var minSize:Number;
 
 		override protected function initialize():void
@@ -35,7 +35,7 @@ package com.gerantech.islamic.views.screens
 			title = loc(appModel.PAGE_COMPASS);
 			LocationManager.instance;
 			
-			cityButton = new EiditableButton();
+			cityButton = new EditableButton();
 			cityButton.label = userModel.city.name;
 			cityButton.addEventListener("triggered", cityButton_triggeredHandler);
 			addChild(cityButton);
