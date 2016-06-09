@@ -7,6 +7,7 @@ package com.gerantech.islamic.models.vo
 	
 	import flash.display.Bitmap;
 	import flash.events.IOErrorEvent;
+	import flash.events.ProgressEvent;
 	import flash.filesystem.File;
 	
 	import mx.resources.IResourceManager;
@@ -19,10 +20,11 @@ package com.gerantech.islamic.models.vo
 	{
 		public static const TYPE_TRANSLATOR:String = "translator";
 		public static const TYPE_RECITER:String = "reciter";
+		public static const TYPE_MOATHEN:String = "moathen";
 		
-		public static const TRANSLATION_LOADED:String = "translationLoaded";
-		public static const TRANSLATION_PROGRESS_CHANGED:String = "translationProgressChanged";
-		public static const TRANSLATION_ERROR:String = "translationError";
+		public static const LOADING_COMPLETE:String = "translationLoaded";
+		public static const LOADING_PROGRESS_CHANGED:String = "translationProgressChanged";
+		public static const LOADING_ERROR:String = "translationError";
 		
 		public static const CHECKSUM_LOADED:String = "checksumLoaded";
 		public static const CHECKSUM_ERROR:String = "checksumError";
@@ -68,10 +70,11 @@ package com.gerantech.islamic.models.vo
 		
 		protected var localPath:String = "";
 		protected var rm:IResourceManager;
-		protected var _state:String = null;
+		protected var _state:String = "noFile";
 		
 		private var imageLoading:Boolean;
 		private var iconLoadSaver:LoadAndSaver;
+		private var sourceLoadSaver:LoadAndSaver;
 
 		public function Person(person:Object=null, type:String="translator", flag:Local=null)
 		{
@@ -95,6 +98,8 @@ package com.gerantech.islamic.models.vo
 			this.iconPath = (type==TYPE_TRANSLATOR?UserModel.instance.TRANSLATOR_PATH:UserModel.instance.SOUNDS_PATH) + path + "/" + path + ".pbqr";
 			if(type==TYPE_TRANSLATOR)
 				this.localPath = UserModel.instance.TRANSLATOR_PATH + path + "/" + path + ".idb" ;
+			else if(type==TYPE_MOATHEN)
+				this.localPath = UserModel.instance.SOUNDS_PATH + path + "/" + path + ".dat" ;
 			else
 				this.localPath = UserModel.instance.SOUNDS_PATH + path + "/" ;
 			this.state = checkState();
@@ -109,7 +114,6 @@ package com.gerantech.islamic.models.vo
 			loadTime ++;
 			if(loadTime>2 || imageLoading)
 				return;
-			//trace(path, imageUrl)
 			imageLoading = true;
 			
 			iconLoadSaver = new LoadAndSaver(iconPath, iconUrl, null, true);
@@ -147,13 +151,13 @@ package com.gerantech.islamic.models.vo
 			if(localPath=="" || localPath==null)
 				return NO_FILE;
 			
-			if(type==TYPE_TRANSLATOR)
+			if(type==TYPE_TRANSLATOR || type == TYPE_MOATHEN)
 			{
 				existsFile = new File(localPath).exists;
 				if(ret != SELECTED)
 					ret = existsFile ? HAS_FILE : NO_FILE;
 			}
-			else if(ret != SELECTED)
+			else if(type==TYPE_RECITER && ret != SELECTED)
 				ret = HAS_FILE;
 			
 			//trace(localPath, ret, type)
@@ -163,16 +167,21 @@ package com.gerantech.islamic.models.vo
 		public function getCurrentMessage():String
 		{
 			var sizeStr:String = '';//trace(type, state)
-			if(type==TYPE_TRANSLATOR && (state==NO_FILE||state==LOADING))
+			if((type==TYPE_TRANSLATOR||type==TYPE_MOATHEN) && (state==NO_FILE||state==LOADING))
 			{
 				if(size>1000000)
-					sizeStr = ' , ' + StrTools.getNumberFromLocale(size/1048576).substr(0,4)	+ " " + rm.getString("loc", "mbyte_t");
+					sizeStr = StrTools.getNumberFromLocale(size/1048576).substr(0,4)	+ " " + rm.getString("loc", "mbyte_t");
 				else
-					sizeStr = ' , ' + StrTools.getNumberFromLocale(size/1024)					+ " " + rm.getString("loc", "kbyte_t");
+					sizeStr = StrTools.getNumberFromLocale(int(size/1024))				+ " " + rm.getString("loc", "kbyte_t");
 			}
-			return (rm.getString("loc", mode)+' , '+rm.getString("loc", flag.name) + sizeStr);
+			if(type==TYPE_MOATHEN)
+				return sizeStr;
+
+			return (rm.getString("loc", mode)+' , '+rm.getString("loc", flag.name) + (sizeStr==""?"":' , '+sizeStr));
 		}
 
+		// states  -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+		
 		public function set state(value:String):void
 		{
 			if(_state==value)
@@ -203,6 +212,55 @@ package com.gerantech.islamic.models.vo
 			return _defaultImage;
 		}
 		
+		// source loading -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+		
+		/**
+		 * Load any source such as translation database or athan sound file from url and save to path
+		 */
+		public function load():void
+		{
+			sourceLoadSaver = new LoadAndSaver(localPath, url, null, false, size);
+			sourceLoadSaver.addEventListener("complete", sourceLoadSaver_completeHandler);
+			sourceLoadSaver.addEventListener(IOErrorEvent.IO_ERROR, sourceLoadSaver_ioErrorHandler);
+			sourceLoadSaver.addEventListener(ProgressEvent.PROGRESS, sourceLoadSaver_progressHandler);
+			state = PREPARING;
+		}
+		
+		protected function sourceLoadSaver_progressHandler(event:ProgressEvent):void
+		{
+			state = LOADING;
+			percent = event.bytesLoaded/size;//trace(event.bytesLoaded, size)
+			dispatchEventWith(LOADING_PROGRESS_CHANGED);
+			//trace(percent, event.bytesLoaded/1200000);
+		}
+		
+		protected function sourceLoadSaver_completeHandler(event:*):void
+		{//trace(event)
+			sourceLoadSaver.removeEventListener("complete", sourceLoadSaver_completeHandler);
+			sourceLoadSaver.removeEventListener(IOErrorEvent.IO_ERROR, sourceLoadSaver_ioErrorHandler);
+			sourceLoadSaver.removeEventListener(ProgressEvent.PROGRESS, sourceLoadSaver_progressHandler);
+		}
+		
+		protected function sourceLoadSaver_ioErrorHandler(event:IOErrorEvent):void
+		{//trace(event.text)
+			unload();
+			dispatchEventWith(LOADING_ERROR);
+		}
+		
+		public function unload():void
+		{
+			//isTranslateDownloading = false;
+			percent = 0;
+			state = NO_FILE;    
+			sourceLoadSaver.closeLoader();
+			sourceLoadSaver.removeEventListener("complete", sourceLoadSaver_completeHandler);
+			sourceLoadSaver.removeEventListener(IOErrorEvent.IO_ERROR, sourceLoadSaver_ioErrorHandler);
+			sourceLoadSaver.removeEventListener(ProgressEvent.PROGRESS, sourceLoadSaver_progressHandler);
+			//testFile(itemRenderer);//loadingState = "noFile";
+		}
+	
+		
+		// utils -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
 		
 		protected function loc(resourceName:String):String
 		{

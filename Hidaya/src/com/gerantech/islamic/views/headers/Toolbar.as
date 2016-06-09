@@ -196,7 +196,7 @@ package com.gerantech.islamic.views.headers
 		{
 			setLayout();
 			UserModel.instance.scheduleSaving();
-			trace(appModel.navigator.activeScreenID);
+			//trace(appModel.navigator.activeScreenID);
 			if(appModel.navigator.activeScreenID != appModel.PAGE_DASHBOARD)
 				y=0;
 			return;

@@ -2,6 +2,7 @@ package com.gerantech.islamic.views.screens
 {
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.managers.BillingManager;
+	import com.gerantech.islamic.models.TimesModel;
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.utils.StrTools;
@@ -73,6 +74,38 @@ package com.gerantech.islamic.views.screens
 			}
 		}
 		
+		
+		
+		private function getFilterList():Array
+		{
+			var ret:Array = new Array();
+			var allPerson:Array ;
+			var selectedPerson:Array ;
+			if(type==Person.TYPE_TRANSLATOR)
+			{
+				allPerson = resourceModel.translators;
+				selectedPerson = resourceModel.selectedTranslators;
+			}
+			else if(type==Person.TYPE_RECITER)
+			{
+				allPerson = resourceModel.reciters;
+				selectedPerson = resourceModel.selectedReciters;
+			}
+			else if(type==Person.TYPE_MOATHEN)
+			{
+				allPerson = userModel.timesModel.moathens;
+				selectedPerson = new Array();
+			}
+			
+			for each(var p:Person in allPerson)
+			if(existLanguage(p) && p.mode==mode.name && searchText(p))
+			{//trace(p.name, p.mode, mode.name, existLanguage(p))
+				p.state = selectedPerson.indexOf(p)>-1 ? Person.SELECTED : p.checkState(); 
+				ret.push(p);
+			}
+			return ret;
+		}
+		
 		private function showPurchaseAlert():void
 		{
 			AppController.instance.alert("purchase_popup_title", "purchase_popup_message", "cancel_button", "purchase_popup_accept_label", BillingManager.instance.purchase);
@@ -104,7 +137,13 @@ package com.gerantech.islamic.views.screens
 		}
 		private function waitingForPersonsChanging():void
 		{
-			var sampleList:Array = type==Person.TYPE_TRANSLATOR ? resourceModel.selectedTranslators : resourceModel.selectedReciters;
+			var sampleList:Array ;
+			if(type==Person.TYPE_TRANSLATOR)
+				sampleList = resourceModel.selectedTranslators;
+			else if(type==Person.TYPE_RECITER)
+				sampleList = resourceModel.selectedReciters;
+			else if(type==Person.TYPE_MOATHEN)
+				sampleList = new Array();
 			
 			for each(var p:Person in listData)
 			{
@@ -121,6 +160,13 @@ package com.gerantech.islamic.views.screens
 				if(ps.state == Person.SELECTED)
 					ret.push(ps);*/
 			
+			if(type==Person.TYPE_TRANSLATOR)
+				resourceModel.selectedTranslators = sampleList;
+			else if(type==Person.TYPE_RECITER)
+				resourceModel.selectedReciters = sampleList;
+			/*else if(type==Person.TYPE_RECITER)
+				userModel.timesModel.moathens = sampleList;*/
+
 			type==Person.TYPE_TRANSLATOR ? resourceModel.selectedTranslators = sampleList : resourceModel.selectedReciters = sampleList;
 			///backwardEnabled = true;
 			userModel.scheduleSaving();
@@ -132,35 +178,22 @@ package com.gerantech.islamic.views.screens
 			//	return;
 			super.backButtonFunction();
 		}
-		
-		private function getFilterList():Array
-		{
-			var ret:Array = new Array();
-			var allPerson:Array = type==Person.TYPE_TRANSLATOR?resourceModel.translators : resourceModel.reciters
-			var selectedPerson:Array = type==Person.TYPE_TRANSLATOR?resourceModel.selectedTranslators : resourceModel.selectedReciters
-			
-			for each(var p:Person in allPerson)
-				if(existLanguage(p) && p.mode==mode.name && searchText(p))
-				{//trace(p.name, p.mode, mode.name, existLanguage(p))
-					p.state = selectedPerson.indexOf(p)>-1 ? Person.SELECTED : p.checkState(); 
-					ret.push(p);
-				}			
-			return ret;
-		}
-		
+
 		private function searchText(person:Person):Boolean
 		{
 			if(searchPattern=="")
 				return true;
-			if(person.type==Person.TYPE_RECITER)
-				return (person.name.toLowerCase().indexOf(searchPattern)>-1 || person.ename.toLowerCase().indexOf(searchPattern)>-1);
-			else
+			if(person.type==Person.TYPE_TRANSLATOR)
 				return person.name.toLowerCase().indexOf(searchPattern)>-1;
-				
+			else
+				return (person.name.toLowerCase().indexOf(searchPattern)>-1 || person.ename.toLowerCase().indexOf(searchPattern)>-1);
 		}
 		
 		private function existLanguage(person:Person):Boolean
 		{
+			if(flags.length == 0)
+				return true;
+			
 			for each(var f:Local in flags)
 				if (f.name == person.flag.name)
 					return true; 

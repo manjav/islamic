@@ -4,14 +4,16 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.vo.Location;
+	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
-	import com.gerantech.islamic.views.buttons.EiditableButton;
+	import com.gerantech.islamic.views.buttons.EditableButton;
 	import com.gerantech.islamic.views.controls.CheckPanel;
 	import com.gerantech.islamic.views.controls.Devider;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.controls.SettingPanel;
 	import com.gerantech.islamic.views.controls.Spacer;
 	import com.gerantech.islamic.views.items.FontItemRenderer;
+	import com.gerantech.islamic.views.items.PersonItemRenderer;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	import com.gerantech.islamic.views.popups.GeoCityPopup;
 	
@@ -45,7 +47,7 @@ package com.gerantech.islamic.views.screens
 		private var locPanel:SettingPanel;
 		private var idlePanel:SettingPanel;
 		private var nightModePanel:CheckPanel;
-		private var cityButton:EiditableButton;
+		private var cityButton:EditableButton;
 		private var hijriOffsets:Array;
 		private var hijriOffsetsPanel:SettingPanel;
 		
@@ -103,7 +105,7 @@ package com.gerantech.islamic.views.screens
 					ciyLabel.layoutData = ld;
 					addChild(ciyLabel);
 					
-					cityButton = new EiditableButton();
+					cityButton = new EditableButton();
 					cityButton.label = userModel.city.name;
 					cityButton.addEventListener("triggered", cityButton_triggeredHandler);
 					cityButton.layoutData = ld;

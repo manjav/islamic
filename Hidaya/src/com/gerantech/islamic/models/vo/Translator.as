@@ -2,7 +2,6 @@ package com.gerantech.islamic.models.vo
 {
 	import com.gerantech.islamic.managers.NotificationManager;
 	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.utils.LoadAndSaver;
@@ -39,8 +38,9 @@ package com.gerantech.islamic.models.vo
 			super(person, TYPE_TRANSLATOR, flag);
 		}
 		
-		
-		public function loadTransltaion():void
+		// source loading -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+
+		public override function load():void
 		{
 			//trace("loadTransltaion", loadingState, state)
 			if(loadingState==1 && state==HAS_FILE)
@@ -54,32 +54,21 @@ package com.gerantech.islamic.models.vo
 			if(dbFile.exists)
 			{
 				loadDB();
-				return
+				return;
 			}
-			
-			dbLoadSaver = new LoadAndSaver(localPath, url, null, false, size);
-			dbLoadSaver.addEventListener("complete", dbLoadSaver_CompleteHandler);
-			dbLoadSaver.addEventListener(IOErrorEvent.IO_ERROR, dbLoadSaver_ioErrorHandler);
-			dbLoadSaver.addEventListener(ProgressEvent.PROGRESS, dbLoadSaver_progressHandler);
-			state = PREPARING;
+			super.load();
 		}
 		
-		private function dbLoadSaver_progressHandler(event:ProgressEvent):void
+		protected override function sourceLoadSaver_completeHandler(event:*):void
 		{
-			state = LOADING;
-			percent = event.bytesLoaded/size;//trace(event.bytesLoaded, size)
-			dispatchEventWith(TRANSLATION_PROGRESS_CHANGED);
-			//trace(percent, event.bytesLoaded/1200000);
-		}
-		
-		private function dbLoadSaver_CompleteHandler(event:*):void
-		{//trace(event)
-			dbLoadSaver.removeEventListener("complete", dbLoadSaver_CompleteHandler);
-			dbLoadSaver.removeEventListener(IOErrorEvent.IO_ERROR, dbLoadSaver_ioErrorHandler);
-			dbLoadSaver.removeEventListener(ProgressEvent.PROGRESS, dbLoadSaver_progressHandler);
-			
+			super.sourceLoadSaver_completeHandler(event);
 			loadDB();
 		}		
+		public override function unload():void
+		{
+			super.unload();
+			loadingState = L_NOT_LOADED;
+		}
 		
 		private function loadDB():void
 		{//trace(dbFile.nativePath);
@@ -93,7 +82,7 @@ package com.gerantech.islamic.models.vo
 		{trace(event)
 			loadingState = L_LOAD_ERROR;
 			state = NO_FILE;
-			dispatchEventWith(TRANSLATION_ERROR);
+			dispatchEventWith(LOADING_ERROR);
 		}
 		
 		protected function sqlConnection_openHandler(event:SQLEvent):void
@@ -116,7 +105,7 @@ package com.gerantech.islamic.models.vo
 					replaceResponder(null);
 			}
 			else 
-				dispatchEventWith(TRANSLATION_LOADED);
+				dispatchEventWith(LOADING_COMPLETE);
 		}
 		
 		/**
@@ -128,7 +117,7 @@ package com.gerantech.islamic.models.vo
 			if(replaceIndex>2 || flag.path!="fa")
 			{
 				query("CREATE TABLE IF NOT EXISTS matadata (version INTEGER);", function():void{query("INSERT INTO 'matadata' VALUES (1);", trace)});
-				dispatchEventWith(TRANSLATION_LOADED);
+				dispatchEventWith(LOADING_COMPLETE);
 				if(ResourceModel.instance.selectedTranslators[0]==this)
 					remindeFirstTranslate();
 				return;
@@ -174,26 +163,7 @@ package com.gerantech.islamic.models.vo
 			}			
 		}		
 		
-		
-		private function dbLoadSaver_ioErrorHandler(event:IOErrorEvent):void
-		{trace(event.text)
-			state = NO_FILE;
-			stopDownload();
-			dispatchEventWith(TRANSLATION_ERROR);
-		}
-		
-		public function stopDownload():void
-		{
-			//isTranslateDownloading = false;
-			percent = 0;
-			state = NO_FILE;    
-			loadingState = L_NOT_LOADED;
-			dbLoadSaver.closeLoader();
-			dbLoadSaver.removeEventListener("complete", dbLoadSaver_CompleteHandler);
-			dbLoadSaver.removeEventListener(IOErrorEvent.IO_ERROR, dbLoadSaver_ioErrorHandler);
-			dbLoadSaver.removeEventListener(ProgressEvent.PROGRESS, dbLoadSaver_progressHandler);
-			//testFile(itemRenderer);//loadingState = "noFile";
-		}
+
 		
 		/**
 		 * Search pattern in translatin data base 

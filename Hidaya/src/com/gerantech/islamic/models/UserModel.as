@@ -239,7 +239,6 @@ package com.gerantech.islamic.models
 			}
 			appController.setPaths(this, storagePath);
 			configModel.setAssets(appModel, this);
-			timesModel.data = user.times;
 			locale	= user.local;
 			bookmarks = new BookmarkCollection(user.bookmarks);
 			nightMode = user.nightMode;
@@ -266,10 +265,11 @@ package com.gerantech.islamic.models
 			
 			user.bookmarks = 			bookmarks.data as Array;
 			if(ResourceModel.instance.selectedTranslators && ResourceModel.instance.selectedTranslators.length>0)
-				user.translators = 			ResourceModel.instance.selectedTranslators;
+				user.translators = 		ResourceModel.instance.selectedTranslators;
 			if(ResourceModel.instance.selectedReciters && ResourceModel.instance.selectedReciters.length>0)
-				user.reciters = 			ResourceModel.instance.selectedReciters;
-			user.times = 				timesModel.data;
+				user.reciters = 		ResourceModel.instance.selectedReciters;
+			if(timesModel.loaded)
+				user.times = 			timesModel.data;
 
 			var so:SharedObject = SharedObject.getLocal("user-data");
 			so.data.user = user;

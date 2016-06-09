@@ -1,7 +1,6 @@
 package com.gerantech.islamic.models.vo
 {
-	import com.gerantech.islamic.models.TimesModel;
-
+	
 	public class User
 	{
 		public var profile:Profile = new Profile();
@@ -24,7 +23,7 @@ package com.gerantech.islamic.models.vo
 		public var pageRepeat:uint = 1;
 		
 		public var bookmarks:Array = [];
-		public var times:Array = [];
+		public var times:Array = [[{offset:0, moathen:"muhammad_taghi_tasviechi"}], [], [{offset:0, moathen:"muhammad_taghi_tasviechi"}], [], [], [{offset:0, moathen:"muhammad_taghi_tasviechi"}], [], []];
 		
 /*		public var p_uid:String;
 		public var p_numRun:uint;

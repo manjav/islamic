@@ -238,9 +238,9 @@ package com.gerantech.islamic.views.screens
 			if(tr.loadingState!=Translator.L_LOADED)
 			{
 				loadingTranslation = true;
-				tr.addEventListener(Person.TRANSLATION_LOADED, translationLoaded);
-				tr.addEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
-				tr.loadTransltaion();
+				tr.addEventListener(Person.LOADING_COMPLETE, translationLoaded);
+				tr.addEventListener(Person.LOADING_ERROR, translationErrorHandler);
+				tr.load();
 				return;
 			}
 			
@@ -252,15 +252,15 @@ package com.gerantech.islamic.views.screens
 		{
 			loadingTranslation = false;
 			searchSubtitle.log("translationErrorHandler", 0xFF0000);
-			event.currentTarget.removeEventListener(Person.TRANSLATION_LOADED, translationLoaded);
-			event.currentTarget.removeEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
+			event.currentTarget.removeEventListener(Person.LOADING_COMPLETE, translationLoaded);
+			event.currentTarget.removeEventListener(Person.LOADING_ERROR, translationErrorHandler);
 		}
 		
 		private function translationLoaded(event:Event):void
 		{
 			loadingTranslation = false;
-			event.currentTarget.removeEventListener(Person.TRANSLATION_LOADED, translationLoaded);
-			event.currentTarget.removeEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
+			event.currentTarget.removeEventListener(Person.LOADING_COMPLETE, translationLoaded);
+			event.currentTarget.removeEventListener(Person.LOADING_ERROR, translationErrorHandler);
 			startTranslationSearch(userModel.searchPatt);
 		}
 		

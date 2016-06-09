@@ -131,9 +131,9 @@ package com.gerantech.islamic.views.controls
 			
 			if(translator.loadingState!=Translator.L_LOADED)
 			{
-				translator.loadTransltaion();
-				translator.addEventListener(Person.TRANSLATION_LOADED, translationLoaded);
-				translator.addEventListener(Person.TRANSLATION_ERROR, translationErrorHandler);
+				translator.load();
+				translator.addEventListener(Person.LOADING_COMPLETE, translationLoaded);
+				translator.addEventListener(Person.LOADING_ERROR, translationErrorHandler);
 				return;
 			}
 			
@@ -180,7 +180,7 @@ package com.gerantech.islamic.views.controls
 		
 		private function translationLoaded(event:Event):void
 		{
-			translator.removeEventListener(Person.TRANSLATION_LOADED, translationLoaded);
+			translator.removeEventListener(Person.LOADING_COMPLETE, translationLoaded);
 			aya = _aya;
 		}
 		

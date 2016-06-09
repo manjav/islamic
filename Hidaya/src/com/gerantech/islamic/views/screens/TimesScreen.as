@@ -1,5 +1,6 @@
 package com.gerantech.islamic.views.screens
 {
+	import com.gerantech.islamic.models.TimesModel;
 	import com.gerantech.islamic.models.vo.DayDataProvider;
 	import com.gerantech.islamic.models.vo.ToolbarButtonData;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
@@ -9,7 +10,6 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.items.TimeItemRenderer;
 	
-	import feathers.controls.LayoutGroup;
 	import feathers.controls.List;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.controls.renderers.IListItemRenderer;
@@ -17,9 +17,6 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 	
-	import flashx.textLayout.elements.DivElement;
-	
-	import starling.display.Quad;
 	import starling.events.Event;
 
 	public class TimesScreen extends BaseCustomPanelScreen
@@ -39,6 +36,8 @@ package com.gerantech.islamic.views.screens
 		
 		override protected function initialize():void
 		{
+			userModel.timesModel.load();
+			
 			super.initialize();
 			title = loc(appModel.PAGE_TIMES);
 			verticalScrollPolicy = horizontalScrollPolicy = SCROLL_POLICY_OFF;
