@@ -145,7 +145,7 @@ package com.gerantech.islamic.models.vo
 			dispatchEventWith(ICON_LOADED);			
 		}
 		
-		public function checkState():String
+		public function checkState(forceCheck:Boolean=false):String
 		{
 			var ret:String = state;
 			if(localPath=="" || localPath==null)
@@ -154,7 +154,7 @@ package com.gerantech.islamic.models.vo
 			if(type==TYPE_TRANSLATOR || type == TYPE_MOATHEN)
 			{
 				existsFile = new File(localPath).exists;
-				if(ret != SELECTED)
+				if(ret != SELECTED || forceCheck)
 					ret = existsFile ? HAS_FILE : NO_FILE;
 			}
 			else if(type==TYPE_RECITER && ret != SELECTED)

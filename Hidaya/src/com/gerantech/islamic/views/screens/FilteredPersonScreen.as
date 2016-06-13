@@ -3,7 +3,9 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.managers.BillingManager;
 	import com.gerantech.islamic.models.TimesModel;
+	import com.gerantech.islamic.models.vo.Alert;
 	import com.gerantech.islamic.models.vo.Local;
+	import com.gerantech.islamic.models.vo.Moathen;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.SearchInput;
@@ -27,6 +29,7 @@ package com.gerantech.islamic.views.screens
 	{
 		public var mode:Local;
 		public var flags:Array;
+		public var alert:Alert;
 		
 		private var list:FastList;
 		private var listData:Array;		
@@ -54,6 +57,7 @@ package com.gerantech.islamic.views.screens
 			list.layoutData = new AnchorLayoutData(0, 0, 0, 0); 
 			//list.verticalScrollPolicy = List.SCROLL_POLICY_ON;
 			list.addEventListener(Event.SELECT, list_changedHandler);
+			list.addEventListener(Event.RENDER, list_testHandler);
 			addChild(list);
 			
 			if(type==Person.TYPE_TRANSLATOR && !appModel.preventPurchaseWarning && !userModel.premiumMode)
@@ -74,33 +78,47 @@ package com.gerantech.islamic.views.screens
 			}
 		}
 		
-		
+		private function list_testHandler(event:Event):void
+		{
+			for each(var m:Moathen in listData)
+			{
+				if(m == event.data)
+				{
+					if(m.playing)
+						m.stop();
+					else
+						m.play();
+				}
+				else
+					m.stop();
+			}
+		}
 		
 		private function getFilterList():Array
 		{
 			var ret:Array = new Array();
 			var allPerson:Array ;
-			var selectedPerson:Array ;
+			var selectedPersons:Array ;
 			if(type==Person.TYPE_TRANSLATOR)
 			{
 				allPerson = resourceModel.translators;
-				selectedPerson = resourceModel.selectedTranslators;
+				selectedPersons = resourceModel.selectedTranslators;
 			}
 			else if(type==Person.TYPE_RECITER)
 			{
 				allPerson = resourceModel.reciters;
-				selectedPerson = resourceModel.selectedReciters;
+				selectedPersons = resourceModel.selectedReciters;
 			}
 			else if(type==Person.TYPE_MOATHEN)
 			{
 				allPerson = userModel.timesModel.moathens;
-				selectedPerson = new Array();
+				selectedPersons = new Array(alert.moathen);
 			}
 			
 			for each(var p:Person in allPerson)
 			if(existLanguage(p) && p.mode==mode.name && searchText(p))
 			{//trace(p.name, p.mode, mode.name, existLanguage(p))
-				p.state = selectedPerson.indexOf(p)>-1 ? Person.SELECTED : p.checkState(); 
+				p.state = selectedPersons.indexOf(p)>-1 ? Person.SELECTED : p.checkState(true); 
 				ret.push(p);
 			}
 			return ret;
@@ -110,7 +128,6 @@ package com.gerantech.islamic.views.screens
 		{
 			AppController.instance.alert("purchase_popup_title", "purchase_popup_message", "cancel_button", "purchase_popup_accept_label", BillingManager.instance.purchase);
 		}
-		
 
 		private function shopHeader_closeHandler():void
 		{
@@ -133,6 +150,12 @@ package com.gerantech.islamic.views.screens
 		{
 			//backwardEnabled = false;
 			clearTimeout(changeTID);
+			if(type == Person.TYPE_MOATHEN)
+			{
+				alert.moathen = list.selectedItem as Moathen;
+				backButtonFunction();
+				return;
+			}
 			changeTID = setTimeout(waitingForPersonsChanging, 500);
 		}
 		private function waitingForPersonsChanging():void
@@ -142,9 +165,7 @@ package com.gerantech.islamic.views.screens
 				sampleList = resourceModel.selectedTranslators;
 			else if(type==Person.TYPE_RECITER)
 				sampleList = resourceModel.selectedReciters;
-			else if(type==Person.TYPE_MOATHEN)
-				sampleList = new Array();
-			
+		
 			for each(var p:Person in listData)
 			{
 				var ex:int = sampleList.indexOf(p);
@@ -155,17 +176,10 @@ package com.gerantech.islamic.views.screens
 					sampleList.splice(ex,1);
 			}
 			
-			/*var ret:Array = new Array();
-			for each(var ps:Person in sampleList)
-				if(ps.state == Person.SELECTED)
-					ret.push(ps);*/
-			
 			if(type==Person.TYPE_TRANSLATOR)
 				resourceModel.selectedTranslators = sampleList;
 			else if(type==Person.TYPE_RECITER)
 				resourceModel.selectedReciters = sampleList;
-			/*else if(type==Person.TYPE_RECITER)
-				userModel.timesModel.moathens = sampleList;*/
 
 			type==Person.TYPE_TRANSLATOR ? resourceModel.selectedTranslators = sampleList : resourceModel.selectedReciters = sampleList;
 			///backwardEnabled = true;
@@ -215,6 +229,16 @@ package com.gerantech.islamic.views.screens
 			super.createToolbarItems();
 			appModel.toolbar.centerItem = new SearchInput();
 		}
+		
+		override protected function feathersControl_removedFromStageHandler(event:Event):void
+		{
+			if(listData && type == Person.TYPE_MOATHEN)
+				for each(var m:Moathen in listData)
+					m.stop();
+			super.feathersControl_removedFromStageHandler(event);
+		}
+		
+		
 		
 	}
 }

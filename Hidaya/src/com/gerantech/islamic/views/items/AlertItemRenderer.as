@@ -81,7 +81,7 @@ package com.gerantech.islamic.views.items
 		
 		private function reciterImage_triggeredHandler():void
 		{
-			_owner.dispatchEventWith(EVENT_CHANGE_RECITER, false, index); 
+			_owner.dispatchEventWith(EVENT_CHANGE_RECITER, false, alert); 
 		}
 		
 		private function deleteButton_triggeredHandler():void

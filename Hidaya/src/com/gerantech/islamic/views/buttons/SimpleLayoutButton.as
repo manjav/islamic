@@ -98,7 +98,7 @@ package com.gerantech.islamic.views.buttons
 		protected function trigger():void
 		{
 			if(hasEventListener(Event.TRIGGERED))
-			this.dispatchEventWith(Event.TRIGGERED);
+			this.dispatchEventWith(Event.TRIGGERED, false, this);
 		}
 		
 		/**

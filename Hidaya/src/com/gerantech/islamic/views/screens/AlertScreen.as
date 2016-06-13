@@ -81,7 +81,7 @@ package com.gerantech.islamic.views.screens
 		private function list_eventChangeReciterHandler(event:Event):void
 		{
 			var screenItem:StackScreenNavigatorItem = appModel.navigator.getScreen(appModel.PAGE_FILTERED);
-			screenItem.properties = {type:Person.TYPE_MOATHEN, mode:new Local("", ""), flags:[]};
+			screenItem.properties = {type:Person.TYPE_MOATHEN, mode:new Local("", ""), flags:[], alert:event.data};
 			appModel.navigator.pushScreen(appModel.PAGE_FILTERED);
 		}
 		

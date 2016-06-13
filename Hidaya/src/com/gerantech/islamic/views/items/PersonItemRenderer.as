@@ -1,8 +1,10 @@
 package com.gerantech.islamic.views.items
 {
+	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.vo.Person;
-	import com.gerantech.islamic.models.vo.Translator;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
+	import com.gerantech.islamic.views.buttons.FlatButton;
+	import com.gerantech.islamic.views.controls.Devider;
 	import com.gerantech.islamic.views.controls.PersonAccessory;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	
@@ -12,6 +14,8 @@ package com.gerantech.islamic.views.items
 	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
+	import feathers.layout.AnchorLayout;
+	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
 	import feathers.layout.VerticalLayout;
@@ -31,32 +35,45 @@ package com.gerantech.islamic.views.items
 		private var accessory:PersonAccessory;
 		private var nameDisplay:RTLLabel;
 		private var messageDisplay:RTLLabel;
-		
-		public function PersonItemRenderer()
-		{
-			super();
-		}
+
+		private var testButton:FlatButton;
 		
 		override protected function initialize():void
 		{
 			super.initialize();
 			height = appModel.sizes.twoLineItem;
+			layout = new AnchorLayout();
 			
-			var myLayout:HorizontalLayout = new HorizontalLayout();
-			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
-			myLayout.gap = myLayout.padding = appModel.sizes.DP16;
+			var bgTouchable:Devider = new Devider();
+			bgTouchable.alpha = 0;
+			bgTouchable.layoutData = new AnchorLayoutData(0, 0, 0, 0);
+			touchTarget = bgTouchable;
+			addChild(bgTouchable);
+			
+			var container:LayoutGroup = new LayoutGroup();
+			container.layoutData = new AnchorLayoutData(0, 0, 0, 0);
+			addChild(container);
+			
+			var containerLayout:HorizontalLayout = new HorizontalLayout();
+			containerLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			containerLayout.gap = containerLayout.padding = appModel.sizes.DP16;
 			//myLayout.paddingRight = appModel.sizes.DP8;
-			layout = myLayout;
+			container.layout = containerLayout;
 			
 			accessory = new PersonAccessory();
 			accessory.width = appModel.sizes.DP40;
 			accessory.layoutData = new HorizontalLayoutData(NaN, 100);
-			addChild(accessory);
+			accessory.touchable = accessory.touchGroup = false;
+			
+			testButton = new FlatButton(Assets.getTexture("mute-toggle-button-loud-up-icon"), null, true);
+			testButton.width = appModel.sizes.DP40;
+			testButton.addEventListener(Event.TRIGGERED, test_triggeredHandler); 
+			testButton.layoutData = new HorizontalLayoutData(NaN, 100);
 			
 			mainContents = new LayoutGroup();
 			mainContents.layoutData = new HorizontalLayoutData(100, 100);
 			mainContents.layout = new VerticalLayout();
-			addChild(mainContents);
+			mainContents.touchable = mainContents.touchGroup = false;
 			
 			var fontSize:uint = height/5.4;
 			nameDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, fontSize, null, "bold");
@@ -73,13 +90,19 @@ package com.gerantech.islamic.views.items
 			personImage.source = Person.getDefaultImage();
 			personImage.layoutData = new HorizontalLayoutData(NaN, 100);
 			personImage.delayTextureCreation = true;
+			personImage.touchable = personImage.touchGroup = false;
 
-			var itms:Array = [accessory, mainContents, personImage];
+			var itms:Array = [accessory, testButton, mainContents, personImage];
 			if(appModel.ltr)
 				itms.reverse();
 			
 			for each(var itm:DisplayObject in itms)
-				addChild(itm);
+				container.addChild(itm);
+		}
+		
+		private function test_triggeredHandler():void
+		{
+			_owner.dispatchEventWith(Event.RENDER, false, person);
 		}
 		
 		override protected function commitData():void
@@ -88,44 +111,40 @@ package com.gerantech.islamic.views.items
 				return;
 			if(person==_data)
 				return;
+			if(person != null)
+				person.removeEventListener(Person.STATE_CHANGED, personStatesChanged);
 			
 			person = _data as Person;
 			person.addEventListener(Person.STATE_CHANGED, personStatesChanged);
 			
+			testButton.visible = person.type == Person.TYPE_MOATHEN;
+			
 			nameDisplay.text = (appModel.ltr&&person.type==Person.TYPE_RECITER) ? person.ename : person.name;
 			
-			showIcon();
+			showMessage();
+			if(!person.hasIcon)
+			{
+				person.addEventListener(Person.ICON_LOADED, person_iconLoadedHandler);
+				person.loadImage();
+			}
+			else
+				personImage.source = person.iconTexture;
 			
 			accessory.setState(person.state);
 			super.commitData();
 		}
 		
-		// ICON  -------------------------------------------------
-		private function showIcon():void
-		{
-			if(person.hasIcon)
-			{
-				personImage.source = person.iconTexture;
-				showMessage();
-			}
-			else
-			{
-				person.addEventListener(Person.ICON_LOADED, person_iconLoadedHandler);
-				person.loadImage();
-			}
-		}
 		private function person_iconLoadedHandler():void
 		{
 			person.removeEventListener(Event.COMPLETE, person_iconLoadedHandler);
 			if(parent!=null)
 				personImage.source = person.iconTexture;
-			showMessage();
 		}
 		
 		// MESSAGE  -------------------------------------------------
 		private function showMessage():void
 		{
-			if(intevalId==0)
+			if(intevalId == 0)
 			{
 				messageDisplay.text = person.getCurrentMessage();
 				intevalId = 10000;
@@ -136,10 +155,10 @@ package com.gerantech.islamic.views.items
 				intevalId = setInterval(internalCaller, 400);
 			}
 		}
+
 		private function internalCaller():void
 		{
-			var rect:Rectangle = getBounds(_owner);
-		//	trace(rect.y, tempY)
+			var rect:Rectangle = getBounds(_owner);//trace(rect.y, tempY)
 			if(Math.abs(tempY-rect.y)<appModel.sizes.twoLineItem)
 			{
 				clearInterval(intevalId);
@@ -148,39 +167,6 @@ package com.gerantech.islamic.views.items
 			tempY = rect.y;
 		}
 		
-		// CHANGE STATES -------------------------------------------------
-		/*override public function set currentState(value:String):void
-		{
-			var lastState:String = super.currentState;
-			super.currentState = value;
-			
-			trace(value, lastState)//, person.state);
-			if(value==lastState)
-				return;
-			
-			if(value==STATE_SELECTED)
-			{
-				switch(person.state)
-				{
-					case Person.NO_FILE:
-						person.addEventListener(Person.TRANSLATION_PROGRESS_CHANGED, translationProgressChanged);
-						person.loadTranslaion();
-						break;
-					case Person.LOADING:
-						person.removeEventListener(Person.TRANSLATION_PROGRESS_CHANGED, translationProgressChanged);
-						person.stopDownload();
-						break;
-					case Person.HAS_FILE:
-						person.loadTranslaion();
-						break;
-					case Person.SELECTED:
-						person.state = Person.HAS_FILE;
-						break;
-				}
-				_owner.dispatchEventWith(Event.SELECT, false, person);
-			}
-		}*/
-
 		private function personStatesChanged(event:Event):void
 		{
 			accessory.setState(person.state, person.hasIcon?0.8:0);
@@ -192,6 +178,7 @@ package com.gerantech.islamic.views.items
 		{
 			accessory.setPercent(person.percent)
 		}
+		
 		
 		override public function set isSelected(value:Boolean):void
 		{
@@ -217,12 +204,12 @@ package com.gerantech.islamic.views.items
 					person.unload();
 					break;
 				case Person.HAS_FILE:
-					person.type == Person.TYPE_RECITER ? person.state = Person.SELECTED : person.load() ;
+					person.type == Person.TYPE_RECITER ? person.state = Person.SELECTED : person.load();
 					break;
 				case Person.SELECTED:
 					person.state = Person.HAS_FILE;
 					break;
 			}
-		}		
+		}	
 	}
 }

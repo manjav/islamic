@@ -16,6 +16,8 @@ package com.gerantech.islamic.views.items
 	import feathers.controls.renderers.LayoutGroupListItemRenderer;
 	import feathers.skins.ImageSkin;
 	
+	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -45,11 +47,13 @@ package com.gerantech.islamic.views.items
 		private var screenRect:Rectangle;
 		private var commitPhase:uint;
 
+		protected var touchTarget:DisplayObjectContainer;
 		protected var touch:Touch;
 		protected var skin:ImageSkin;
 		
 		override protected function initialize():void
 		{
+			touchTarget = this;
 			addEventListener( TouchEvent.TOUCH, touchHandler);
 			addEventListener( Event.REMOVED_FROM_STAGE, removedFromStageHandler );
 		}
@@ -111,41 +115,41 @@ package com.gerantech.islamic.views.items
 		}
 	
 		
-		private function touchHandler( event:TouchEvent ):void
+		protected function touchHandler( event:TouchEvent ):void
 		{
-			if( !this._isEnabled )
+			if( !_isEnabled )
 			{
-				this.touchID = -1;
+				touchID = -1;
 				return;
 			}
 			
-			if( this.touchID >= 0 )
+			if( touchID >= 0 )
 			{
-				touch = event.getTouch( this, null, this.touchID );
+				touch = event.getTouch( touchTarget, null, touchID );
 				if( !touch )
 					return;
 			
 				if( touch.phase == TouchPhase.ENDED )
 				{
-					touch.getLocation( this.stage, HELPER_POINT );
-					var isInBounds:Boolean = this.contains( this.stage.hitTest( HELPER_POINT ) );
+					touch.getLocation( touchTarget.stage, HELPER_POINT );
+					var isInBounds:Boolean = touchTarget.contains( touchTarget.stage.hitTest( HELPER_POINT ) );
 					if( isInBounds )
 					{
 						dispatchEventWith(Event.TRIGGERED);
 						if(_owner.allowMultipleSelection)
-							this.isSelected = !isSelected;
+							isSelected = !isSelected;
 						else
-							this.isSelected = true;
+							isSelected = true;
 					}
 					// the touch has ended, so now we can start watching for a new one.
-					this.touchID = -1;
+					touchID = -1;
 				}
 				return;
 			}
 			else
 			{
 				// we aren't tracking another touch, so let's look for a new one.
-				touch = event.getTouch( this, TouchPhase.BEGAN );
+				touch = event.getTouch( touchTarget, TouchPhase.BEGAN );
 				if(touch)
 				{
 					currentState = STATE_DOWN;
@@ -156,13 +160,13 @@ package com.gerantech.islamic.views.items
 					return;
 				}
 				// save the touch ID so that we can track this touch's phases.
-				this.touchID = touch.id;
+				touchID = touch.id;
 			}
 		}
 		protected function removedFromStageHandler( event:Event ):void
 		{
 			clearInterval(intevalId);
-			this.touchID = -1;
+			touchID = -1;
 		}
 		
 		override public function set isSelected(value:Boolean):void
@@ -178,15 +182,18 @@ package com.gerantech.islamic.views.items
 		}
 		public function set currentState(value:String):void
 		{
-			if(this._currentState == value)
+			if(_currentState == value)
 			{
 				return;
 			}
-			if(this.stateNames.indexOf(value) < 0)
+			if(stateNames.indexOf(value) < 0)
 			{
 				throw new ArgumentError("Invalid state: " + value + ".");
+				return;
 			}
 			_currentState = value;
+			if(skin)
+				skin.defaultTexture = skin.getTextureForState(_currentState);
 		}	
 		
 		protected function loc(resourceName:String, parameters:Array=null, locale:String=null):String
