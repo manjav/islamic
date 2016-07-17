@@ -1,13 +1,15 @@
 package com.gerantech.islamic.models.vo
 {
-	import flash.events.Event;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	import flash.net.URLRequest;
 
 	public class Moathen extends Person
 	{
+		public static var SOUND_TOGGLED:String = "soundToggled";
+		
 		private var channel:SoundChannel;
+		
 		public var playing:Boolean;
 		
 		public function Moathen(person:Object=null, flag:Local=null)
@@ -37,6 +39,7 @@ package com.gerantech.islamic.models.vo
 			var sound:Sound = new Sound(new URLRequest(existsFile?localPath:url));
 			channel = sound.play();
 			playing = true;
+			dispatchEventWith(SOUND_TOGGLED, false, playing);
 		}
 		
 		public function stop():void
@@ -44,6 +47,7 @@ package com.gerantech.islamic.models.vo
 			if(channel)
 				channel.stop();
 			playing = false;
+			dispatchEventWith(SOUND_TOGGLED, false, playing);
 		}
 		
 		

@@ -174,10 +174,7 @@ package com.gerantech.islamic.models.vo
 				else
 					sizeStr = StrTools.getNumberFromLocale(int(size/1024))				+ " " + rm.getString("loc", "kbyte_t");
 			}
-			if(type==TYPE_MOATHEN)
-				return sizeStr;
-
-			return (rm.getString("loc", mode)+' , '+rm.getString("loc", flag.name) + (sizeStr==""?"":' , '+sizeStr));
+			return (rm.getString("loc", mode)+(type==TYPE_MOATHEN?"":' , '+rm.getString("loc", flag.name)) + (sizeStr==""?"":' , '+sizeStr));
 		}
 
 		// states  -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-

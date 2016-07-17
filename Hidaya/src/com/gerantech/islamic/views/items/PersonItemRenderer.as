@@ -1,6 +1,7 @@
 package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.models.Assets;
+	import com.gerantech.islamic.models.vo.Moathen;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.buttons.FlatButton;
@@ -65,10 +66,11 @@ package com.gerantech.islamic.views.items
 			accessory.layoutData = new HorizontalLayoutData(NaN, 100);
 			accessory.touchable = accessory.touchGroup = false;
 			
-			testButton = new FlatButton(Assets.getTexture("mute-toggle-button-loud-up-icon"), null, true);
-			testButton.width = appModel.sizes.DP40;
+			testButton = new FlatButton(Assets.getTexture("action_play"), "circle", false, 1, 0.5);
+			testButton.iconScale = 0.6;
+			testButton.height = testButton.width = appModel.sizes.getPixelByDP(28);
 			testButton.addEventListener(Event.TRIGGERED, test_triggeredHandler); 
-			testButton.layoutData = new HorizontalLayoutData(NaN, 100);
+			testButton.layoutData = new HorizontalLayoutData(NaN, NaN);
 			
 			mainContents = new LayoutGroup();
 			mainContents.layoutData = new HorizontalLayoutData(100, 100);
@@ -112,12 +114,21 @@ package com.gerantech.islamic.views.items
 			if(person==_data)
 				return;
 			if(person != null)
+			{
 				person.removeEventListener(Person.STATE_CHANGED, personStatesChanged);
+				if(person.type == Person.TYPE_MOATHEN)
+					Moathen(person).removeEventListener(Moathen.SOUND_TOGGLED, moathen_soundToggledHandler);
+			}
 			
 			person = _data as Person;
 			person.addEventListener(Person.STATE_CHANGED, personStatesChanged);
 			
+			
 			testButton.visible = person.type == Person.TYPE_MOATHEN;
+			if(person.type == Person.TYPE_MOATHEN)
+			{
+				Moathen(person).addEventListener(Moathen.SOUND_TOGGLED, moathen_soundToggledHandler);
+			}
 			
 			nameDisplay.text = (appModel.ltr&&person.type==Person.TYPE_RECITER) ? person.ename : person.name;
 			
@@ -132,6 +143,11 @@ package com.gerantech.islamic.views.items
 			
 			accessory.setState(person.state);
 			super.commitData();
+		}
+		
+		private function moathen_soundToggledHandler(event:Event):void
+		{
+			testButton.icon.source = Assets.getTexture("action_"+(event.data ? "pause" : "play"));
 		}
 		
 		private function person_iconLoadedHandler():void

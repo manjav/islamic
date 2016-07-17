@@ -1178,7 +1178,7 @@
       "url": "http://gerantech.com/islamic/athans/muhammad_taghi_tasviechi.mp3",
       "size": 193873,
       "flag": "fa",
-      "mode": ""
+      "mode": "athan_t"
     },
     {
       "path": "salim_moazzenzadeh",
@@ -1187,7 +1187,7 @@
       "url": "http://gerantech.com/islamic/athans/salim_moazzenzadeh.mp3",
       "size": 1108467, 
       "flag": "fa",
-      "mode": ""
+      "mode": "athan_t"
     },
     {
       "path": "rahim_moazzenzadeh",
@@ -1196,7 +1196,7 @@
       "url": "http://gerantech.com/islamic/athans/rahim_moazzenzadeh.mp3",
       "size": 1271856, 
       "flag": "fa",
-      "mode": ""
+      "mode": "athan_t"
     },
     {
       "path": "muhammad_aghati",
@@ -1205,7 +1205,7 @@
       "url": "http://gerantech.com/islamic/athans/muhammad_aghati.mp3",
       "size": 1129088, 
       "flag": "fa",
-      "mode": ""
+      "mode": "athan_t"
     },
     {
       "path": "raghib_mustafa_ghalwash",
@@ -1214,7 +1214,7 @@
       "url": "http://gerantech.com/islamic/athans/raghib_mustafa_ghalwash.mp3",
       "size": 1420032, 
       "flag": "fa",
-      "mode": ""
+      "mode": "athan_t"
     }
   ]
 }

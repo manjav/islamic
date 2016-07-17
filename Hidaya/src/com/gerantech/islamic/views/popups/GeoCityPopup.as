@@ -1,6 +1,5 @@
 package com.gerantech.islamic.views.popups
 {
-	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.managers.LocationManager;
 	import com.gerantech.islamic.models.vo.Location;
 	
@@ -13,7 +12,6 @@ package com.gerantech.islamic.views.popups
 	import flash.utils.setTimeout;
 	
 	import feathers.controls.Button;
-	import feathers.events.FeathersEventType;
 
 	public class GeoCityPopup extends GeoPopup
 	{

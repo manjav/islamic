@@ -128,7 +128,7 @@ package
 			trace(" --  user_completeHandler", getTimer()-ft);
 			
 			// Flurry initialising ----------------------------------------------------
-			// Flurry.getInstance().logEnabled = true
+			//Flurry.getInstance().logEnabled = true
 			Flurry.getInstance().setAndroidAPIKey("34RKN4HMZ7C8YWW9BD52");
 			Flurry.getInstance().startSession();
 			Flurry.getInstance().setAppVersion(appModel.descriptor.versionNumber);

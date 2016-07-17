@@ -82,7 +82,7 @@ package com.gerantech.islamic.views.screens
 			weekList.interactionMode = "mouse";
 			weekList.layout = weekLayout;
 			weekList.layoutData = new AnchorLayoutData(calHeader.height, 0, NaN, 0);
-			weekList.height = appModel.sizes.DP32 * 4;
+			weekList.height = Math.min(appModel.sizes.DP32 * 4, appModel.sizes.height/4);
 			weekList.scrollBarDisplayMode = List.SCROLL_BAR_DISPLAY_MODE_NONE;
 			weekList.itemRendererFactory = function():IListItemRenderer
 			{

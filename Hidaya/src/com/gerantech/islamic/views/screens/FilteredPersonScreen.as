@@ -2,7 +2,6 @@ package com.gerantech.islamic.views.screens
 {
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.managers.BillingManager;
-	import com.gerantech.islamic.models.TimesModel;
 	import com.gerantech.islamic.models.vo.Alert;
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.models.vo.Moathen;

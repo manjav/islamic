@@ -3,7 +3,6 @@ package com.gerantech.islamic.models
 	import com.gerantech.islamic.events.UserEvent;
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.managers.BillingManager;
-	import com.gerantech.islamic.managers.ProfileManager;
 	import com.gerantech.islamic.managers.UserDataUpdater;
 	import com.gerantech.islamic.models.vo.Aya;
 	import com.gerantech.islamic.models.vo.Juze;
@@ -37,7 +36,7 @@ package com.gerantech.islamic.models
 
 		private var saveTimeout:uint;
 		private var preventSaver:Boolean;
-		public var profileManager:ProfileManager;
+		//public var profileManager:ProfileManager;
 		public var userUpdater:UserDataUpdater;
 		private var backupTimeout:uint;
 		public var pagesList:Array;
@@ -59,7 +58,7 @@ package com.gerantech.islamic.models
 			user = new User();
 			bookmarks = new BookmarkCollection(user.bookmarks);
 			userUpdater = new UserDataUpdater();
-			profileManager = new ProfileManager();
+			//profileManager = new ProfileManager();
 			timesModel = new TimesModel();
 		}
 				
