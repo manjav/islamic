@@ -1,7 +1,9 @@
 package com.gerantech.islamic.managers
 {
 	import com.gerantech.islamic.models.AppModel;
+	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.UserModel;
+	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.popups.BasePopUp;
 	import com.gerantech.islamic.views.popups.InfoPopUp;
@@ -144,19 +146,23 @@ package com.gerantech.islamic.managers
 			}
 				
 		}
-		public function addPopup(popupClass:Class, closeCallback:Function=null, closable:Boolean=true):BasePopUp
+		public function addPopup(popupClass:Class, closeCallback:Function=null, closable:Boolean=true, overlayFactory:Function=null):BasePopUp
 		{		
 			var overlay:FlatButton;
 			var popup:BasePopUp = new popupClass();
 			popup.closable = closable;
 			popup.addEventListener(Event.CLOSE, popup_closeHandler);
-			PopUpManager.addPopUp(popup, true, true, geoPopup_overlayFactory);
+			if(overlayFactory == null)
+				overlayFactory = geoPopup_overlayFactory;
+			PopUpManager.addPopUp(popup, true, true, overlayFactory);
 			
 			function geoPopup_overlayFactory():DisplayObject
 			{
-				overlay = new FlatButton(null, null, true, 0.3, 0.3, 0);
+				overlay = new FlatButton(null, null, true, 0.3, 0.2, 0);
+				popup.overlay = overlay;
 				if(closable)
 					overlay.addEventListener(Event.TRIGGERED, popup.close);
+				
 				return overlay;
 			}
 			function popup_closeHandler():void
@@ -171,7 +177,8 @@ package com.gerantech.islamic.managers
 			}
 			function fadeToCompleteHandler():void
 			{
-				overlay.removeEventListener(Event.TRIGGERED, popup.close);
+				if(overlay != null)
+					overlay.removeEventListener(Event.TRIGGERED, popup.close);
 				if(PopUpManager.isPopUp(popup))
 					PopUpManager.removePopUp(popup);
 			}
