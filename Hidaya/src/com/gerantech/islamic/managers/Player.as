@@ -72,7 +72,7 @@ package com.gerantech.islamic.managers
 			userModel = UserModel.instance;
 			resModel = ResourceModel.instance;
 	
-			NativeAbilities.instance.init();
+			NativeAbilities.instance.listenTelephonyStates();
 			NativeAbilities.instance.addEventListener(AndroidEvent.CALL_STATE_CHANGED, phone_callStateChanged);
 		}
 
