@@ -28,8 +28,8 @@ package com.gerantech.islamic.views.screens
 	public class SearchScreen extends BaseCustomPanelScreen
 	{
 		private var list:List;
-		private var resultList:Array;
 		private var wordList:List;
+		private var resultList:Array;
 		private var searchSubtitle:SearchSubtitle;
 		private var startScrollBarIndicator:Number = 0;
 		private var loadingTranslation:Boolean;

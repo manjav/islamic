@@ -11,6 +11,7 @@ package com.gerantech.islamic.views.items
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 	
+	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
 
@@ -24,6 +25,7 @@ package com.gerantech.islamic.views.items
 		private var otherSkin:Quad;
 
 		private var dayData:DayDataProvider;
+		private var isToday:Boolean;
 		
 
 		public static function get HEIGHT():uint
@@ -42,7 +44,6 @@ package com.gerantech.islamic.views.items
 			height = HEIGHT;
 			
 			dayData = new DayDataProvider();
-			dayData.addEventListener("update", dayData_updateHandler);
 			
 			todaySkin = new Quad(1,1, BaseMaterialTheme.ACCENT_COLOR);
 			otherSkin = new Quad(1,1, BaseMaterialTheme.CHROME_COLOR);
@@ -50,6 +51,7 @@ package com.gerantech.islamic.views.items
 			header = new LayoutGroup();
 			header.layoutData = new VerticalLayoutData(100);
 			header.layout = new AnchorLayout();
+			header.backgroundSkin = otherSkin;
 			addChild(header);
 			
 			titleDiplay = new RTLLabel("", userModel.nightMode ? BaseMaterialTheme.PRIMARY_TEXT_COLOR : BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR, null, null, true, null, 1, null, "bold");
@@ -64,18 +66,41 @@ package com.gerantech.islamic.views.items
 		override protected function commitData():void
 		{
 			super.commitData();
+			
 			dayData.setTime(_data);
-			header.backgroundSkin = dayData.isToday ? todaySkin : otherSkin;
+			setHeader(dayData.isToday);
+			titleDiplay.text = dayData.mainDateString;
+			messageDisplay.visible = false;
+		}
+		
+		private function setHeader(value:Boolean):void
+		{
+			if(isToday == value)
+				return;
+			
+			isToday = value;
+			header.backgroundSkin = isToday ? todaySkin : otherSkin
+			
+		}
+		
+		override protected function commitAfterStopScrolling():void
+		{
+			if(!dayData.updated)
+			{
+				dayData.addEventListener("update", dayData_updateHandler);
+				return;
+			}
+			dayData_updateHandler(null);
 		}
 		
 		private function dayData_updateHandler(event:Event):void
 		{//trace(dayData.mainDateString, dayData.currentDate);
-			titleDiplay.text = dayData.mainDateString;
+			dayData.removeEventListener("update", dayData_updateHandler);
+			
 			messageDisplay.text = dayData.secondaryDatesString + "\n" + dayData.eventsString + "\n" + dayData.googleEventsString;
-			/*if(message.length>0)
-				message += "\n"+ evStr;
-			messageDisplay.text = message;*/
+			messageDisplay.visible = true;
+			messageDisplay.alpha = 0;
+			Starling.juggler.tween(messageDisplay, 0.2, {alpha:1});
 		}
-	
 	}
 }

@@ -103,6 +103,9 @@ package com.gerantech.islamic.views.items
 		
 		override public function set isSelected(value:Boolean):void
 		{
+			if(super.isSelected == value)
+				return;
+			
 			super.isSelected = value;
 			setTitleStyle();
 		}

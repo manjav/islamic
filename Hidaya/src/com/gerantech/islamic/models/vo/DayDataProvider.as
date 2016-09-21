@@ -31,6 +31,7 @@ package com.gerantech.islamic.models.vo
 		private var sqlConnection:SQLConnection;
 		private var googleEvents:Vector.<CalendarEvent>;
 		private var _time:Object;
+		public var updated:Boolean;
 
 		public function DayDataProvider()
 		{
@@ -45,6 +46,7 @@ package com.gerantech.islamic.models.vo
 		
 		public function setTime(time:Object):void
 		{
+			updated = false;
 			_time = time as Number;
 			date.setTime(time);
 
@@ -83,11 +85,13 @@ package com.gerantech.islamic.models.vo
 				{
 					if(result is SQLErrorEvent)
 						trace(SQLErrorEvent(result).text);
+					updated = true;
 					dispatchEventWith("update");
 					return;
 				}
 				for(var s:int=0; s<result.data.length; s++)
 					eventsString += result.data[s].text + (s<result.data.length-1?" - ":"");
+				updated = true;
 				dispatchEventWith("update");
 			}
 		}		
