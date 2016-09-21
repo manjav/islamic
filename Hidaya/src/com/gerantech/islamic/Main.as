@@ -1,12 +1,18 @@
 package com.gerantech.islamic
 {
 	import com.gerantech.islamic.events.AppEvent;
+	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.models.AppModel;
+	import com.gerantech.islamic.models.TimesModel;
 	import com.gerantech.islamic.models.UserModel;
+	import com.gerantech.islamic.models.vo.Alert;
+	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.themes.CustomTheme;
 	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.views.controls.CustomDrawers;
 	import com.gerantech.islamic.views.headers.Toolbar;
+	import com.gerantech.islamic.views.popups.AthanPopUp;
+	import com.gerantech.islamic.views.popups.BasePopUp;
 	import com.gerantech.islamic.views.popups.TutorialPopUp;
 	import com.gerantech.islamic.views.screens.AboutScreen;
 	import com.gerantech.islamic.views.screens.AlertScreen;
@@ -26,6 +32,9 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.views.screens.SettingsScreen;
 	import com.gerantech.islamic.views.screens.TimesScreen;
 	
+	import flash.events.InvokeEvent;
+	import flash.utils.getTimer;
+	
 	import feathers.controls.StackScreenNavigator;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.core.PopUpManager;
@@ -36,6 +45,8 @@ package com.gerantech.islamic
 	import org.praytimes.constants.CalculationMethod;
 	
 	import starling.core.Starling;
+	import starling.display.DisplayObject;
+	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 
@@ -46,7 +57,6 @@ package com.gerantech.islamic
 		public function Main()
 		{
 			appModel = AppModel.instance;
-			
 			appModel.navigator = new StackScreenNavigator();
 			appModel.navigator.autoSizeMode = StackScreenNavigator.AUTO_SIZE_MODE_STAGE;
 			appModel.navigator.clipContent = true;
@@ -56,7 +66,7 @@ package com.gerantech.islamic
 			
 			addModal(appModel.PAGE_SETTINGS,			SettingsScreen);
 			addModal(appModel.PAGE_ABOUT,				AboutScreen);
-
+			
 			addModal(appModel.PAGE_QURAN,				QuranScreen);
 			addModal(appModel.PAGE_INDEX,				IndexScreen);
 			addModal(appModel.PAGE_BOOKMARKS,			BookmarksScreen);
@@ -71,7 +81,7 @@ package com.gerantech.islamic
 			addModal(appModel.PAGE_CITY,				CityScreen);
 			addModal(appModel.PAGE_TIMES,				TimesScreen);
 			addModal(appModel.PAGE_ALERT,				AlertScreen);
-			addModal(appModel.PAGE_CALENDAR, 			CalendarScreen);
+			addModal(appModel.PAGE_CALENDAR, 			CalendarScreen);			
 		}
 		
 		private function addModal(screenId:String, screenClass:Class, pushTransition:Function=null, popTransition:Function=null):void
@@ -91,28 +101,57 @@ package com.gerantech.islamic
 		{
 			appModel.theme = new CustomTheme();
 			appModel.drawers = new CustomDrawers();
-			addChild(appModel.drawers);
 			appModel.drawers.content = appModel.navigator;
+			addChild(appModel.drawers);
+
+			trace(" --  Main createScreens", getTimer()-Hidaya.ft);
 			
+			// check invoke event for getting metadata and arguments
+			appModel.addEventListener(InvokeEvent.INVOKE, showInvokedCommand);
+			if(appModel.invokeData != null)
+				showInvokedCommand();
+			else
+				showDashbord();
+		}
+		
+		private function showInvokedCommand():void
+		{
+			var timeModel:TimesModel = UserModel.instance.timesModel;
+			timeModel.load();
+			
+			try
+			{
+				var alert:Alert = timeModel.times[appModel.invokeData.timeIndex].alerts[appModel.invokeData.alertIndex];
+				var athanPopUp:AthanPopUp = AppController.instance.addPopup(AthanPopUp, null, true, function():DisplayObject{return new Quad(1, 1, BaseMaterialTheme.CHROME_COLOR)}) as AthanPopUp;
+				athanPopUp.addEventListener(Event.CLOSE, showDashbord);
+				athanPopUp.alert = alert;
+			}
+			catch(e:Error)
+			{
+				trace(e.message);
+			}			
+		}
+		
+		private function showDashbord():void
+		{
 			appModel.date = new MultiDate(null, UserModel.instance.hijriOffset);
 			appModel.prayTimes = new PrayTime(CalculationMethod.TEHRAN, UserModel.instance.city.latitude, UserModel.instance.city.longitude);
-
+			
 			/*if(UserModel.instance.user.profile.numRun==1)
 			{
-				var tute:TutorialPopUp = new TutorialPopUp();
-				tute.addEventListener(Event.CLOSE, tute_closeHandler);
-				PopUpManager.addPopUp(tute);
+			var tute:TutorialPopUp = new TutorialPopUp();
+			tute.addEventListener(Event.CLOSE, tute_closeHandler);
+			PopUpManager.addPopUp(tute);
 			}
 			else*/
-				tute_closeHandler(null)
+			tute_closeHandler(null);			
 		}
-
 		
 		private function tute_closeHandler(event:Event):void
 		{
-			if(event!=null)
+			if(event != null)
 				PopUpManager.removePopUp(event.currentTarget as TutorialPopUp, true);
-			Starling.current.nativeStage.autoOrients=true;
+			Starling.current.nativeStage.autoOrients = true;
 			
 			appModel.toolbar = new Toolbar();
 			addChild(appModel.toolbar);

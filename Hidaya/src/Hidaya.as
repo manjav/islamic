@@ -1,6 +1,7 @@
 package 
 {
 	import com.freshplanet.nativeExtensions.Flurry;
+	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.Main;
 	import com.gerantech.islamic.events.AppEvent;
 	import com.gerantech.islamic.events.UserEvent;
@@ -22,7 +23,9 @@ package
 	import flash.display3D.Context3DProfile;
 	import flash.display3D.Context3DRenderMode;
 	import flash.events.Event;
+	import flash.events.InvokeEvent;
 	import flash.geom.Rectangle;
+	import flash.net.URLVariables;
 	import flash.system.Capabilities;
 	import flash.utils.clearTimeout;
 	import flash.utils.getTimer;
@@ -53,8 +56,9 @@ package
 		public function Hidaya()
 		{
 			ft = getTimer();
-			trace(ResourceManager.getInstance().getString("loc", "quran_t"))//, String.fromCharCode(0x25b8));
+				
 			mouseEnabled = mouseChildren = false;
+			appModel = AppModel.instance;
 			
 			graphics.beginFill(0x009688);
 			graphics.drawRect(0, 0, Capabilities.screenResolutionX, Capabilities.screenResolutionY);
@@ -63,37 +67,25 @@ package
 			{
 				stage.scaleMode = StageScaleMode.NO_SCALE;
 				stage.align = StageAlign.TOP_LEFT;
-			//	stage.quality = StageQuality.LOW;
 				stage.setOrientation(StageOrientation.DEFAULT);
 				stage.autoOrients=false;
 			}
+			
+			NativeAbilities.instance.showOnLockScreen();
 			NativeApplication.nativeApplication.systemIdleMode = SystemIdleMode.KEEP_AWAKE;
-
-			//Add Splash -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+			NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, nativeApplication_invokeHandler);
 			loaderInfo.addEventListener(Event.COMPLETE, loaderInfo_completeHandler);
 			
-			//Load Assets --------------------------------------------------------
-			trace(" --  Hidaya", getTimer()-ft);
-			//appModel.assetManager = new AssetManager();
-			//appModel.assetManager.verbose = false
-			//appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/atlases/skins.png"));
-			//appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/atlases/skins.xml"));
-			//appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/images/bitmaps"));
-			//appModel.assetManager.enqueue(File.applicationDirectory.resolvePath("com/gerantech/islamic/assets/contents/config-embeded.json"));
-			//appModel.assetManager.enqueue(File.documentsDirectory.resolvePath("islamic/texts/config-data.json"));
-			//Assets.loadSclaed9Textures(["dialog", "i_dialog", "item_roundrect_down", "item_roundrect_normal", "item_roundrect_selected", "i_item_roundrect_down", "i_item_roundrect_normal", "i_item_roundrect_selected"], null);
-			//scaled9TexturesLoaded();
+			//trace(" --  Hidaya", getTimer()-ft);
 		}
 		
 		private function loaderInfo_completeHandler(event:Event):void
 		{
-			trace(" --  loaderInfo_completeHandler", getTimer()-ft);
+			//trace(" --  Hidaya loaderInfo_completeHandler", getTimer()-ft);
 			loaderInfo.removeEventListener(Event.COMPLETE, loaderInfo_completeHandler);
-			stage.scaleMode = StageScaleMode.NO_SCALE;
-			stage.align = StageAlign.TOP_LEFT;
 			
-			appModel = AppModel.instance;
 			appModel.init(this as Hidaya);
+			appModel.addEventListener(AppEvent.PUSH_FIRST_SCREEN, appModel_pushFirstScreen);
 			appController = AppController.instance;
 			configModel = ConfigModel.instance;
 			
@@ -101,18 +93,21 @@ package
 			Starling.multitouchEnabled = true;
 			_starling = new Starling(Main, stage, null, null, Context3DRenderMode.AUTO, Context3DProfile.BASELINE);
 			_starling.supportHighResolutions = true;
-			_starling.skipUnchangedFrames = true;
 			_starling.enableErrorChecking = false;
+			setTimeout(function():void{_starling.skipUnchangedFrames = true}, 4000);
 			//_starling.showStats = true;
 			//_starling.showStatsAt(HAlign.CENTER, VAlign.BOTTOM);
 			_starling.addEventListener("rootCreated", starling_rootCreatedHandler);
 			_starling.start();
-		}
 
+			trace(ResourceManager.getInstance().getString("loc", "quran_t"))
+		}
+		
 		private function starling_rootCreatedHandler():void
 		{
 			_starling.removeEventListener("rootCreated", starling_rootCreatedHandler);
-			trace(" --  starling_rootCreatedHandler", getTimer()-ft);
+			//trace(" --  starling_rootCreatedHandler", getTimer()-ft);
+			
 			userModel = UserModel.instance;
 			userModel.addEventListener(UserEvent.LOAD_DATA_COMPLETE, user_completeHandler);
 			userModel.addEventListener(UserEvent.LOAD_DATA_ERROR, user_completeHandler);
@@ -125,7 +120,7 @@ package
 		
 		protected function user_completeHandler():void
 		{
-			trace(" --  user_completeHandler", getTimer()-ft);
+			//trace(" --  user_completeHandler", getTimer()-ft);
 			
 			// Flurry initialising ----------------------------------------------------
 			//Flurry.getInstance().logEnabled = true
@@ -147,10 +142,31 @@ package
 			}
 			trace("5", getTimer()-ft);
 			Main(_starling.root).createScreens();
-			graphics.clear();
-			trace("6", getTimer()-ft);
 			//stage.quality = StageQuality.BEST;
 			//Assets.save();
+		}
+		private function appModel_pushFirstScreen():void
+		{
+			appModel.removeEventListener(AppEvent.PUSH_FIRST_SCREEN, appModel_pushFirstScreen);
+			graphics.clear();
+			trace("6", getTimer()-ft);
+		}		
+		
+		protected function nativeApplication_invokeHandler(event:InvokeEvent):void
+		{
+			//NativeApplication.nativeApplication.removeEventListener(InvokeEvent.INVOKE, nativeApplication_invokeHandler);
+			trace(" --  nativeApplication_invokeHandler", getTimer()-ft);
+			for(var k:String in event.arguments)
+			{
+				var val:String = String(event.arguments[k]);
+				if(val.search("hidaya://athan")>-1)
+				{
+					var urlVariables:URLVariables =  new URLVariables(val.split("?")[1]);
+					appModel.invokeData = {type:"athan", timeIndex:urlVariables.timeIndex, alertIndex:urlVariables.alertIndex};
+					if(appModel.hasEventListener(InvokeEvent.INVOKE))
+						appModel.dispatchEventWith(InvokeEvent.INVOKE, false, appModel.invokeData);
+				}
+			}
 		}
 		
 		
@@ -160,7 +176,7 @@ package
 			appModel.sizes.resize(stage.stageWidth, stage.stageHeight);
 			appModel.upside = stage.stageHeight>stage.stageWidth;//stage.deviceOrientation=="default" || stage.deviceOrientation=="upsideDown" || stage.deviceOrientation=="unknown";
 			
-			if(_starling==null)
+			if(_starling == null)
 				return;
 			
 			var viewPort:Rectangle = _starling.viewPort;
@@ -194,10 +210,11 @@ package
 		//Active and deactive handler ---------------------------------------------
 		private function stage_deactivateHandler(event:Event):void
 		{
+			_starling.skipUnchangedFrames = false;
 			_starling.stop();
 			stage.frameRate = (Player.instance.playing||DownloadManager.instance.downloading) ? 0.5 : 0;
 			stage.addEventListener(Event.ACTIVATE, stage_activateHandler, false, 0, true);
-			userModel.activeBackup();
+			//userModel.activeBackup();
 		}
 		
 		private function stage_activateHandler(event:Event):void
@@ -205,7 +222,8 @@ package
 			stage.removeEventListener(Event.ACTIVATE, stage_activateHandler);
 			_starling.start();
 			stage.frameRate = 60;
-			userModel.deactiveBackup();
+			//userModel.deactiveBackup();
+			setTimeout(function():void{_starling.skipUnchangedFrames = true}, 4000);
 		}
 	}
 }
