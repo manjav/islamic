@@ -1176,7 +1176,7 @@
       "ename": "Muhammad Taghi Tasviechi",
       "name": "محمدتقی تسویه‌چی",
       "url": "http://gerantech.com/islamic/athans/muhammad_taghi_tasviechi.mp3",
-      "size": 193873,
+      "size": 188688,
       "flag": "fa",
       "mode": "athan_t"
     },
@@ -1185,7 +1185,7 @@
       "ename": "Salim Moazzenzadeh",
       "name": "سلیم موذن‌زاده اردبیلی",
       "url": "http://gerantech.com/islamic/athans/salim_moazzenzadeh.mp3",
-      "size": 1108467, 
+      "size": 207968, 
       "flag": "fa",
       "mode": "athan_t"
     },
@@ -1194,7 +1194,7 @@
       "ename": "Rahim Moazzenzadeh",
       "name": "رحیم موذن‌زاده اردبیلی",
       "url": "http://gerantech.com/islamic/athans/rahim_moazzenzadeh.mp3",
-      "size": 1271856, 
+      "size": 586832, 
       "flag": "fa",
       "mode": "athan_t"
     },
@@ -1203,7 +1203,16 @@
       "ename": "Muhammad Aghati",
       "name": "محمد آقاتی",
       "url": "http://gerantech.com/islamic/athans/muhammad_aghati.mp3",
-      "size": 1129088, 
+      "size": 275000, 
+      "flag": "fa",
+      "mode": "athan_t"
+    },
+    {
+      "path": "jalaleddin_taj_esfahani",
+      "ename": "Jalaleddin Taj Isfahani",
+      "name": "جلال الدین تاج اصفهانی",
+      "url": "http://gerantech.com/islamic/athans/jalaleddin_taj_esfahani.mp3",
+      "size": 443984, 
       "flag": "fa",
       "mode": "athan_t"
     },
@@ -1212,7 +1221,115 @@
       "ename": "Raghib Mustafa Ghalwash",
       "name": "راغب مصطفی غلوش",
       "url": "http://gerantech.com/islamic/athans/raghib_mustafa_ghalwash.mp3",
-      "size": 1420032, 
+      "size": 706640, 
+      "flag": "fa",
+      "mode": "athan_t"
+    },
+    {
+      "path": "muhammad_tookhi",
+      "ename": "Muhammad Tookhi",
+      "name": "محمد طوخی",
+      "url": "http://gerantech.com/islamic/athans/muhammad_tookhi.mp3",
+      "size": 566048, 
+      "flag": "fa",
+      "mode": "athan_t"
+    },
+    {
+      "path": "muhammad_hussein_aboozeid",
+      "ename": "Muhammad Hussein Aboozeid",
+      "name": "محمدحسین ابوزید",
+      "url": "http://gerantech.com/islamic/athans/muhammad_hussein_aboozeid.mp3",
+      "size": 677336, 
+      "flag": "fa",
+      "mode": "athan_t"
+    },
+    {
+      "path": "javad_zabihi",
+      "ename": "DJawad Zabihi",
+      "name": "سیدجواد ذبیحی",
+      "url": "http://gerantech.com/islamic/athans/javad_zabihi.mp3",
+      "size": 546396, 
+      "flag": "fa",
+      "mode": "athan_t"
+    },
+    {
+      "path": "hussein_sobhdel",
+      "ename": "Hussein Sobhdel",
+      "name": "حسین صبحدل",
+      "url": "http://gerantech.com/islamic/athans/hussein_sobhdel.mp3",
+      "size": 625748, 
+      "flag": "fa",
+      "mode": "athan_t"
+    },
+    {
+      "path": "muhammad_ghaffari",
+      "ename": "muhammad_ghaffari",
+      "name": "محمد غفاری",
+      "url": "http://gerantech.com/islamic/athans/muhammad_ghaffari.mp3",
+      "size": 875504, 
+      "flag": "fa",
+      "mode": "athan_t"
+    },
+    {
+      "path": "hussein_sabzali",
+      "ename": "Hussein Sabzali",
+      "name": "حسین سبزعلی",
+      "url": "http://gerantech.com/islamic/athans/hussein_sabzali.mp3",
+      "size": 757334, 
+      "flag": "fa",
+      "mode": "athan_t"
+    },
+    {
+      "path": "hussein_karami",
+      "ename": "Hussein Karami",
+      "name": "حسین کرمی",
+      "url": "http://gerantech.com/islamic/athans/hussein_karami.mp3",
+      "size": 709052, 
+      "flag": "fa",
+      "mode": "athan_t"
+    },
+    {
+      "path": "saeed_toosi",
+      "ename": "Saeed Toosi",
+      "name": "سعید طوسی",
+      "url": "http://gerantech.com/islamic/athans/saeed_toosi.mp3",
+      "size": 889700, 
+      "flag": "fa",
+      "mode": "athan_t"
+    },
+    {
+      "path": "hassan_rezaeian",
+      "ename": "hassan_rezaeian",
+      "name": "حسن رضائیان",
+      "url": "http://gerantech.com/islamic/athans/hassan_rezaeian.mp3",
+      "size": 772232, 
+      "flag": "fa",
+      "mode": "athan_t"
+    },
+    {
+      "path": "husseinali_sharif",
+      "ename": "husseinali_sharif",
+      "name": "حسینعلی شریف",
+      "url": "http://gerantech.com/islamic/athans/husseinali_sharif.mp3",
+      "size": 609316, 
+      "flag": "fa",
+      "mode": "athan_t"
+    },
+    {
+      "path": "ghasim_raziei",
+      "ename": "Ghasim Raziei",
+      "name": "قاسم رضیعی",
+      "url": "http://gerantech.com/islamic/athans/ghasim_raziei.mp3",
+      "size": 845024, 
+      "flag": "fa",
+      "mode": "athan_t"
+    },
+    {
+      "path": "muhammad_hussein_saeedian",
+      "ename": "Muhammad Hussein Saeedian",
+      "name": "محمدحسین سعیدیان",
+      "url": "http://gerantech.com/islamic/athans/muhammad_hussein_saeedian.mp3",
+      "size": 955766, 
       "flag": "fa",
       "mode": "athan_t"
     }
