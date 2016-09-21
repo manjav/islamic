@@ -226,7 +226,7 @@ package com.gerantech.islamic.models.vo
 		protected function sourceLoadSaver_progressHandler(event:ProgressEvent):void
 		{
 			state = LOADING;
-			percent = event.bytesLoaded/size;//trace(event.bytesLoaded, size)
+			percent = event.bytesLoaded/size;//trace(event.bytesLoaded, size, event.bytesTotal)
 			dispatchEventWith(LOADING_PROGRESS_CHANGED);
 			//trace(percent, event.bytesLoaded/1200000);
 		}

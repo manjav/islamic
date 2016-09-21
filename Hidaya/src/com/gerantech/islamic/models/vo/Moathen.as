@@ -1,5 +1,6 @@
 package com.gerantech.islamic.models.vo
 {
+	import flash.events.Event;
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	import flash.net.URLRequest;
@@ -38,8 +39,15 @@ package com.gerantech.islamic.models.vo
 		{
 			var sound:Sound = new Sound(new URLRequest(existsFile?localPath:url));
 			channel = sound.play();
+			channel.addEventListener(Event.SOUND_COMPLETE, channel_completeHandler);
 			playing = true;
 			dispatchEventWith(SOUND_TOGGLED, false, playing);
+		}
+		
+		protected function channel_completeHandler(event:Event):void
+		{
+			channel.removeEventListener(Event.COMPLETE, channel_completeHandler);
+			dispatchEventWith("soundEnded");
 		}
 		
 		public function stop():void

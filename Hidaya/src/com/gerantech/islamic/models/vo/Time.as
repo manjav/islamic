@@ -1,5 +1,7 @@
 package com.gerantech.islamic.models.vo
 {
+	import com.gerantech.islamic.utils.StrTools;
+	
 	import mx.resources.ResourceManager;
 
 	public class Time
@@ -31,10 +33,8 @@ package com.gerantech.islamic.models.vo
 		{
 			if (alert == 0)
 				return loc("alert_sync") + " " + loc("pray_time_"+index);
-			else if (alert>0)
-				return alert + " " + loc("alert_after") + " " + loc("pray_time_"+index);
 			else
-				return Math.abs(alert) + " " + loc("alert_before") + " " + loc("pray_time_"+index);
+				return StrTools.getNumberFromLocale(Math.abs(alert)) + " " + loc(alert>0?"alert_after":"alert_before") + " " + loc("pray_time_"+index);
 		}
 		protected function loc(str:String, parameters:Array=null, locale:String=null):String
 		{

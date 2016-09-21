@@ -23,7 +23,7 @@ package com.gerantech.islamic.models.vo
 		public var pageRepeat:uint = 1;
 		
 		public var bookmarks:Array = [];
-		public var times:Array = [[{offset:0, moathen:"muhammad_taghi_tasviechi"}], [], [{offset:0, moathen:"muhammad_taghi_tasviechi"}], [], [], [{offset:0, moathen:"muhammad_taghi_tasviechi"}], [], []];
+		public var times:Array = [[{offset:0, moathen:"muhammad_taghi_tasviechi", type:"typeAlarm"}], [], [{offset:0, moathen:"muhammad_taghi_tasviechi", type:"typeAlarm"}], [], [], [{offset:0, moathen:"muhammad_taghi_tasviechi", type:"typeAlarm"}], [], []];
 		
 /*		public var p_uid:String;
 		public var p_numRun:uint;

@@ -44,7 +44,7 @@ package com.gerantech.islamic.views.controls
 		}
 		
 		public function setPercent(value:Number):void
-		{trace(value);
+		{
 			slider.value = value;
 		}
 		

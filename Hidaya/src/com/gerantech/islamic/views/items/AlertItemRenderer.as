@@ -4,6 +4,7 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.models.vo.Alert;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
+	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.buttons.SimpleLayoutButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
@@ -13,6 +14,10 @@ package com.gerantech.islamic.views.items
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
 	
+	import gt.utils.GTStringUtils;
+	
+	import starling.animation.Transitions;
+	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Event;
 
@@ -26,8 +31,9 @@ package com.gerantech.islamic.views.items
 		private var alert:Alert;
 
 		private var titleDisplay:RTLLabel;
-		//private var typeButton:FlatButton;
+		private var typeButton:FlatButton;
 		private var reciterButton:FlatButton;
+		private var alertDate:Date;
 	
 		override protected function initialize():void
 		{
@@ -35,6 +41,7 @@ package com.gerantech.islamic.views.items
 			//backgroundSkin = new Quad(1, 1, BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR);
 			//backgroundSkin.alpha = 0;
 			height = AppModel.instance.sizes.singleLineItem;
+			alertDate = new Date();
 			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
 			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
@@ -55,23 +62,23 @@ package com.gerantech.islamic.views.items
 			titleButton.layoutData = new HorizontalLayoutData(100, 100);
 			titleButton.layout = new AnchorLayout();
 			
-			titleDisplay = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, false, null, 0.9, null, "bold");
+			titleDisplay = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, true, null, 0.84, null, "bold");
 			titleDisplay.layoutData = new AnchorLayoutData(NaN,0,NaN,0,NaN,0);
 			titleButton.addChild(titleDisplay); 
-			/*
+			
 			typeButton = new FlatButton("comment_alert");
 			typeButton.addEventListener(Event.TRIGGERED, typeButton_triggeredHandler);
 			typeButton.pivotX = typeButton.width/2;
 			//typeButton.pivotY = -typeButton.height/2;
 			typeButton.layoutData = new HorizontalLayoutData(NaN, 100);
-			typeButton.iconScale = 0.4;*/
+			typeButton.iconScale = 0.42;
 			
 			var deleteButton:FlatButton = new FlatButton("remove");
 			deleteButton.addEventListener(Event.TRIGGERED, deleteButton_triggeredHandler);
 			deleteButton.layoutData = new HorizontalLayoutData(NaN, 100);
-			deleteButton.iconScale = 0.4;
+			deleteButton.iconScale = 0.42;
 			
-			var itms:Array = [reciterButton, titleButton, deleteButton];
+			var itms:Array = [reciterButton, titleButton, typeButton,  deleteButton];
 			if(!appModel.ltr)
 				itms.reverse();
 			
@@ -88,14 +95,18 @@ package com.gerantech.islamic.views.items
 		{
 			_owner.dispatchEventWith(EVENT_DELETE, false, index); 
 		}
-		/*private function typeButton_triggeredHandler():void
+		
+		private function typeButton_triggeredHandler():void
 		{
 			alert.type = alert.type == Alert.TYPE_NOTIFICATION ? Alert.TYPE_ALARM : Alert.TYPE_NOTIFICATION;
 			typeButton.texture = alert.type == Alert.TYPE_NOTIFICATION ? "comment_alert" : "alarm_grey" ;
 			typeButton.scaleX = typeButton.scaleY = 0.6;
 			Starling.juggler.tween(typeButton, 0.3, {scaleX:1, scaleY:1, transition:Transitions.EASE_OUT});
-			_owner.dispatchEventWith(EVENT_CHANGE_TYPE, false, [index, alert.type]); 
-		}*/
+			_owner.dispatchEventWith(EVENT_CHANGE_TYPE, false, [index, alert.type]);
+			
+			reciterButton.icon.alpha = alert.type == Alert.TYPE_ALARM ? 1 : 0.4;
+			reciterButton.touchable = alert.type == Alert.TYPE_ALARM;
+		}
 		private function titleButton_triggeredHandler():void
 		{
 			_owner.dispatchEventWith(EVENT_SELECT, false, index); 
@@ -113,16 +124,20 @@ package com.gerantech.islamic.views.items
 				alert.moathen.loadImage();
 			}
 			else
-				reciterButton.icon.source = alert.moathen.iconTexture;
+				moathen_iconLoadedHandler();
 			
-			titleDisplay.text = alert.owner.getAlertTitle(alert.offset);
-			//typeButton.texture = alert.type == Alert.TYPE_NOTIFICATION ? "comment_alert" : "alarm_grey" 
+			alertDate.setTime(alert.owner.date.getTime() + alert.offset*60000);
+			titleDisplay.text = alert.owner.getAlertTitle(alert.offset) + " ( " + StrTools.getNumber(GTStringUtils.dateToTime(alertDate))+" )";
+
+			typeButton.texture = alert.type == Alert.TYPE_NOTIFICATION ? "comment_alert" : "alarm_grey" ;
 		}
 		
 		private function moathen_iconLoadedHandler():void
 		{
 			alert.moathen.removeEventListener(Person.ICON_LOADED, moathen_iconLoadedHandler);
 			reciterButton.icon.source = alert.moathen.iconTexture;
+			reciterButton.icon.alpha = alert.type == Alert.TYPE_ALARM ? 1 : 0.4;
+			reciterButton.touchable = alert.type == Alert.TYPE_ALARM;
 		}
 		
 		override public function set currentState(value:String):void
