@@ -2,7 +2,10 @@ package com.gerantech.islamic.views.popups
 {
 	import com.freshplanet.nativeExtensions.Flurry;
 	import com.gerantech.islamic.models.AppModel;
+	import com.gerantech.islamic.models.ConfigModel;
+	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
+	import com.gerantech.islamic.views.buttons.FlatButton;
 	
 	import flash.ui.Keyboard;
 	import flash.utils.getQualifiedClassName;
@@ -16,9 +19,8 @@ package com.gerantech.islamic.views.popups
 	
 	public class BasePopUp extends LayoutGroup
 	{
-		protected  var appModel:AppModel;
-		protected var userModel:UserModel;
 		public var closable:Boolean = true;
+		public var overlay:FlatButton;
 		
 		public function BasePopUp()
 		{
@@ -28,8 +30,7 @@ package com.gerantech.islamic.views.popups
 		override protected function initialize():void
 		{
 			super.initialize();
-			appModel = AppModel.instance;
-			userModel = UserModel.instance;
+			_isInitialized = true;
 			
 			autoSizeMode = LayoutGroup.AUTO_SIZE_MODE_STAGE; 
 			stage_resizeHandler(null);
@@ -56,23 +57,19 @@ package com.gerantech.islamic.views.popups
 			}
 		}
 		
-		protected function loc(str:String, parameters:Array=null, locale:String=null):String
-		{
-			return ResourceManager.getInstance().getString("loc", str, parameters, locale);
-		}
-		
 		public function close():void
 		{
 			dispatchEventWith(Event.CLOSE);
 		}		
 		
 		
-		/*override protected function stage_resizeHandler(event:Event):void
+		protected function loc(resourceName:String, parameters:Array=null, locale:String=null):String
 		{
-		width = AppModel.instance.sizes.width-AppModel.instance.sizes.border*2;
-		height = AppModel.instance.sizes.height-AppModel.instance.sizes.border*6;
-		
-		if(event)
-		super.stage_resizeHandler(event);
-		}*/	}
+			return ResourceManager.getInstance().getString("loc", resourceName, parameters, locale);
+		}
+		protected function get appModel():		AppModel		{	return AppModel.instance;		}
+		protected function get userModel():		UserModel		{	return UserModel.instance;		}
+		protected function get configModel():	ConfigModel		{	return ConfigModel.instance;	}
+		protected function get resourceModel():	ResourceModel	{	return ResourceModel.instance;	}
+	}
 }

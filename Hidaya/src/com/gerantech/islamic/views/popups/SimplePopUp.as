@@ -111,10 +111,11 @@ package com.gerantech.islamic.views.popups
 		
 		public function show():void
 		{
-			var tw:Tween = new Tween(this, 0.3);
+			Starling.juggler.tween(this, 0.3, {alpha:1, onComplete:initializeCompleted});
+			/*var tw:Tween = new Tween(this, 0.3);
 			tw.fadeTo(1);
 			tw.onComplete = initializeCompleted;
-			Starling.juggler.add(tw);
+			Starling.juggler.add(tw);*/
 		}
 		
 		override public function close():void
@@ -123,10 +124,11 @@ package com.gerantech.islamic.views.popups
 			if(hasEventListener("startClosing"))
 				dispatchEventWith("startClosing"); 
 			
-			var tw:Tween = new Tween(this, 0.2);
+			Starling.juggler.tween(this, 0.2, {alpha:0, onComplete:super.close});
+/*			var tw:Tween = new Tween(this, 0.2);
 			tw.fadeTo(0);
 			tw.onComplete = super.close;
-			Starling.juggler.add(tw);
+			Starling.juggler.add(tw);*/
 		}		
 		
 		/*override protected function feathersControl_addedToStageHandler(event:Event):void

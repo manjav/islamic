@@ -5,7 +5,6 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	
 	import feathers.controls.Button;
-	import feathers.events.FeathersEventType;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
