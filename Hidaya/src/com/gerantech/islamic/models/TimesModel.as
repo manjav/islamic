@@ -68,20 +68,25 @@ package com.gerantech.islamic.models
 		{
 			trace("updateNotfications");
 			var alarmTime:Number = 0;
+			NativeAbilities.instance.cancelInvokeApp();
 			NativeAbilities.instance.cancelLocalNotifications();
 			var d:Date = new Date();
 			var n:Number = d.getTime();
 			for each(var t:Time in times)
 			{
-				for each(var a:Alert in t.alerts)
+				for (var a:uint=0; a<t.alerts.length; a++)
 				{
-					alarmTime = t.date.getTime() + a.offset*60000;
+					alarmTime = t.date.getTime() + t.alerts[a].offset*60000;
 					if(n > alarmTime)
 						alarmTime += Time.DAY_TIME_LEN;
-					NativeAbilities.instance.scheduleLocalNotification(loc("pray_time_"+t.index), loc("pray_time_"+t.index), t.getAlertTitle(a.offset), alarmTime, Time.DAY_TIME_LEN, "", "", "", "", false);
+					
+					if(t.alerts[a].type == Alert.TYPE_ALARM)
+						NativeAbilities.instance.invokeAppScheme("hidaya://athan?timeIndex="+t.index+"&alertIndex="+a, alarmTime, 0, false);
+					else if(t.alerts[a].type == Alert.TYPE_NOTIFICATION)
+						NativeAbilities.instance.scheduleLocalNotification(loc("pray_time_"+t.index), loc("pray_time_"+t.index), t.getAlertTitle(t.alerts[a].offset), alarmTime, Time.DAY_TIME_LEN, "", "", "", "", false);
 
-					var dt:Date = new Date();
-					dt.setTime(alarmTime);
+					//var dt:Date = new Date();
+					//dt.setTime(alarmTime);
 					//trace(t.index, loc("pray_time_"+t.index), dt, "     " , t.date, "     " , a.offset);
 				}
 			}
@@ -95,9 +100,7 @@ package com.gerantech.islamic.models
 				times[t] = new Time(t);
 				times[t].alerts = new Vector.<Alert>();
 				for (var a:uint=0; a<value[t].length; a++)
-				{
-					times[t].alerts.push(new Alert(value[t][a].offset, getMoathen(value[t][a].moathen), times[t]));
-				}
+					times[t].alerts.push(new Alert(value[t][a].offset, getMoathen(value[t][a].moathen), times[t], value[t][a].type));
 			}
 			//updateNotfications();
 		}
@@ -109,7 +112,7 @@ package com.gerantech.islamic.models
 			{
 				ret[t] = new Array();
 				for(var a:uint=0; a<times[t].alerts.length; a++)
-					ret[t][a] = {offset:times[t].alerts[a].offset, moathen:times[t].alerts[a].moathen.path};
+					ret[t][a] = {offset:times[t].alerts[a].offset, moathen:times[t].alerts[a].moathen.path, type:times[t].alerts[a].type};
 			}
 			return ret;
 		}

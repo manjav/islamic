@@ -1,5 +1,6 @@
 package com.gerantech.islamic.views.screens
 {
+	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.models.vo.Alert;
 	import com.gerantech.islamic.models.vo.Local;
 	import com.gerantech.islamic.models.vo.Person;
@@ -89,6 +90,7 @@ package com.gerantech.islamic.views.screens
 		{
 //			var selectedAlert:Alert = _time.alerts[event.data[0]];
 			_time.alerts[event.data[0]].type = event.data[1];
+			NativeAbilities.instance.showToast(loc(event.data[1]==Alert.TYPE_ALARM ? "alert_type_alarm" : "alert_type_notification"), 1);
 			//list.dataProvider = new ListCollection(_time.alerts);
 		}
 		
