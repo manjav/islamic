@@ -35,7 +35,7 @@ package
 	
 	import starling.core.Starling;
 
-	[SWF(frameRate="60")]//,backgroundColor="#009688"
+	[SWF(frameRate="60", backgroundColor="#009688")]
 	
 	[ResourceBundle("loc")]
 
@@ -59,10 +59,7 @@ package
 				
 			mouseEnabled = mouseChildren = false;
 			appModel = AppModel.instance;
-			
-			graphics.beginFill(0x009688);
-			graphics.drawRect(0, 0, Capabilities.screenResolutionX, Capabilities.screenResolutionY);
-			
+
 			if(stage)
 			{
 				stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -76,7 +73,7 @@ package
 			NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, nativeApplication_invokeHandler);
 			loaderInfo.addEventListener(Event.COMPLETE, loaderInfo_completeHandler);
 			
-			//trace(" --  Hidaya", getTimer()-ft);
+			trace(" --  Hidaya", getTimer()-ft);
 		}
 		
 		private function loaderInfo_completeHandler(event:Event):void
@@ -85,7 +82,6 @@ package
 			loaderInfo.removeEventListener(Event.COMPLETE, loaderInfo_completeHandler);
 			
 			appModel.init(this as Hidaya);
-			appModel.addEventListener(AppEvent.PUSH_FIRST_SCREEN, appModel_pushFirstScreen);
 			appController = AppController.instance;
 			configModel = ConfigModel.instance;
 			
@@ -140,17 +136,12 @@ package
 			//	trace(appModel.sizes.orginalFontSize, userModel.fontSize)
 			//	UserModel.instance.premiumMode = Capabilities.cpuArchitecture=="x86"
 			}
-			trace("5", getTimer()-ft);
 			Main(_starling.root).createScreens();
 			//stage.quality = StageQuality.BEST;
 			//Assets.save();
+			trace("5", getTimer()-ft);
 		}
-		private function appModel_pushFirstScreen():void
-		{
-			appModel.removeEventListener(AppEvent.PUSH_FIRST_SCREEN, appModel_pushFirstScreen);
-			graphics.clear();
-			trace("6", getTimer()-ft);
-		}		
+	
 		
 		protected function nativeApplication_invokeHandler(event:InvokeEvent):void
 		{

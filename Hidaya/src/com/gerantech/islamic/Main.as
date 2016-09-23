@@ -8,11 +8,9 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.models.vo.Alert;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.themes.CustomTheme;
-	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.views.controls.CustomDrawers;
 	import com.gerantech.islamic.views.headers.Toolbar;
 	import com.gerantech.islamic.views.popups.AthanPopUp;
-	import com.gerantech.islamic.views.popups.BasePopUp;
 	import com.gerantech.islamic.views.popups.TutorialPopUp;
 	import com.gerantech.islamic.views.screens.AboutScreen;
 	import com.gerantech.islamic.views.screens.AlertScreen;
@@ -32,6 +30,7 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.views.screens.SettingsScreen;
 	import com.gerantech.islamic.views.screens.TimesScreen;
 	
+	import flash.desktop.NativeApplication;
 	import flash.events.InvokeEvent;
 	import flash.utils.getTimer;
 	
@@ -40,9 +39,6 @@ package com.gerantech.islamic
 	import feathers.core.PopUpManager;
 	import feathers.motion.Cover;
 	import feathers.motion.Reveal;
-	
-	import org.praytimes.PrayTime;
-	import org.praytimes.constants.CalculationMethod;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
@@ -103,48 +99,44 @@ package com.gerantech.islamic
 			appModel.drawers = new CustomDrawers();
 			appModel.drawers.content = appModel.navigator;
 			addChild(appModel.drawers);
-
+			
+			UserModel.instance.timesModel.load();
 			trace(" --  Main createScreens", getTimer()-Hidaya.ft);
 			
 			// check invoke event for getting metadata and arguments
+			//appModel.invokeData = {type:"athan", timeIndex:0, alertIndex:0};
 			appModel.addEventListener(InvokeEvent.INVOKE, showInvokedCommand);
 			if(appModel.invokeData != null)
+			{
 				showInvokedCommand();
+			}
 			else
-				showDashbord();
+			{
+				/*if(UserModel.instance.user.profile.numRun==1)
+				{
+				var tute:TutorialPopUp = new TutorialPopUp();
+				tute.addEventListener(Event.CLOSE, tute_closeHandler);
+				PopUpManager.addPopUp(tute);
+				}
+				else*/
+				tute_closeHandler(null);
+			}
 		}
 		
 		private function showInvokedCommand():void
 		{
 			var timeModel:TimesModel = UserModel.instance.timesModel;
-			timeModel.load();
-			
-			try
-			{
+
 				var alert:Alert = timeModel.times[appModel.invokeData.timeIndex].alerts[appModel.invokeData.alertIndex];
 				var athanPopUp:AthanPopUp = AppController.instance.addPopup(AthanPopUp, null, true, function():DisplayObject{return new Quad(1, 1, BaseMaterialTheme.CHROME_COLOR)}) as AthanPopUp;
-				athanPopUp.addEventListener(Event.CLOSE, showDashbord);
+				if(appModel.navigator.rootScreenID == null)
+					athanPopUp.addEventListener(Event.CLOSE, athanPopUp_closeHandler);
 				athanPopUp.alert = alert;
-			}
-			catch(e:Error)
-			{
-				trace(e.message);
-			}			
 		}
 		
-		private function showDashbord():void
+		private function athanPopUp_closeHandler(event:Event):void
 		{
-			appModel.date = new MultiDate(null, UserModel.instance.hijriOffset);
-			appModel.prayTimes = new PrayTime(CalculationMethod.TEHRAN, UserModel.instance.city.latitude, UserModel.instance.city.longitude);
-			
-			/*if(UserModel.instance.user.profile.numRun==1)
-			{
-			var tute:TutorialPopUp = new TutorialPopUp();
-			tute.addEventListener(Event.CLOSE, tute_closeHandler);
-			PopUpManager.addPopUp(tute);
-			}
-			else*/
-			tute_closeHandler(null);			
+			NativeApplication.nativeApplication.exit();
 		}
 		
 		private function tute_closeHandler(event:Event):void
@@ -157,7 +149,6 @@ package com.gerantech.islamic
 			addChild(appModel.toolbar);
 			
 			appModel.navigator.rootScreenID = appModel.PAGE_DASHBOARD;
-			appModel.dispatchEventWith(AppEvent.PUSH_FIRST_SCREEN);
 		}
 	}
 }

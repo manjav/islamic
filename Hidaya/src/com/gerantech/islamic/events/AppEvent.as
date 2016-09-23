@@ -5,7 +5,6 @@ package com.gerantech.islamic.events
 	public class AppEvent extends Event
 	{
 		public static const ORIENTATION_CHANGED:String = "orientationChanged";
-		public static const PUSH_FIRST_SCREEN:String = "pushFirstScreen";
 		//public static const INVALIDATE_CONTROLS:String = "invalidateControls";
 		/*public static const APP_FULL_SCREEN:String = "appFullScreen";
 		public static const APP_AUTO_ORIENTS:String = "appautoOrientsDisabled";
