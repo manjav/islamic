@@ -2,6 +2,7 @@ package com.gerantech.islamic.views.controls
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
+	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.StrTools;
 	
@@ -129,7 +130,7 @@ package com.gerantech.islamic.views.controls
 			var ret:Vector.<Date> = new Vector.<Date>(2);
 			var now:Date = new Date();
 			var nowTime:Number = now.getTime();
-			var times:Vector.<Date> = AppModel.instance.prayTimes.getTimes(now).toDates();
+			var times:Vector.<Date> = UserModel.instance.timesModel.prayTimes.getTimes(now).toDates();
 			times.splice(0, 1);
 			for(var t:uint=0; t < times.length; t++)
 			{
@@ -139,7 +140,7 @@ package com.gerantech.islamic.views.controls
 					{
 						ret[1] = times[0];
 						now.setTime(nowTime - (1000 * 60 * 60 * 24));
-						ret[0] = AppModel.instance.prayTimes.getTimes(now).toDates()[8];
+						ret[0] = UserModel.instance.timesModel.prayTimes.getTimes(now).toDates()[8];
 						nextTimeString = loc("pray_time_"+t);
 					}
 					else if(t<=7)
@@ -155,7 +156,7 @@ package com.gerantech.islamic.views.controls
 			{
 				ret[0] = times[7];
 				now.setTime(nowTime + (1000 * 60 * 60 * 24));
-				ret[1] = AppModel.instance.prayTimes.getTimes(now).toDates()[0];
+				ret[1] = UserModel.instance.timesModel.prayTimes.getTimes(now).toDates()[0];
 				nextTimeString = loc("pray_time_"+0);
 			}
 			

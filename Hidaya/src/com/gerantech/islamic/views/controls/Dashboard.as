@@ -16,7 +16,6 @@ package com.gerantech.islamic.views.controls
 	
 	public class Dashboard extends LayoutGroup
 	{
-		private var appModel:AppModel;
 		private var padding:Number;
 		private var details:LayoutGroup;
 		private var intervalID:uint;
@@ -26,7 +25,6 @@ package com.gerantech.islamic.views.controls
 		{
 			super.initialize();
 			layout = new AnchorLayout();
-			appModel = AppModel.instance;
 			height = appModel.sizes.dashboard;
 			
 			// Add clock -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
@@ -50,7 +48,7 @@ package com.gerantech.islamic.views.controls
 			var dateText_1:RTLLabel = new RTLLabel("", 0xFFFFFF, null, null, false, null, 1);
 			var dateText_2:RTLLabel = new RTLLabel("", 0xFFFFFF, null, null, false, null, 0.9);
 			
-			var date:MultiDate = appModel.date;
+			var date:MultiDate = userModel.timesModel.date;
 			var dateIslamicStr:String = loc("month_i_"+date.monthQamari)	+ " " + num(date.fullYearQamari);
 			var datePersianStr:String = loc("month_p_"+date.monthShamsi)	+ " " + num(date.fullYearShamsi);    
 			var dateGergoriStr:String = loc("month_g_"+date.month)			+ ", " + num(date.fullYear);  
@@ -81,6 +79,8 @@ package com.gerantech.islamic.views.controls
 		}
 
 
+		protected function get appModel():		AppModel		{	return AppModel.instance;		}
+		protected function get userModel():		UserModel		{	return UserModel.instance;		}
 		protected function loc(str:String, parameters:Array=null, locale:String=null):String
 		{
 			return ResourceManager.getInstance().getString("loc", str, parameters, locale);
@@ -89,6 +89,7 @@ package com.gerantech.islamic.views.controls
 		{
 			return StrTools.getNumber(input);
 		}
+		
 		override public function dispose():void
 		{
 			clearInterval(intervalID);

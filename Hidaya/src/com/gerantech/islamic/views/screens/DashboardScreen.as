@@ -99,12 +99,12 @@ package com.gerantech.islamic.views.screens
 					break;
 				case appModel.PAGE_CALENDAR:
 					var screenItem:StackScreenNavigatorItem = appModel.navigator.getScreen(appModel.PAGE_CALENDAR);
-					screenItem.properties = {date : new Date(appModel.date.fullYear, appModel.date.month, appModel.date.date, 12)};
+					screenItem.properties = {date : new Date(userModel.timesModel.date.fullYear, userModel.timesModel.date.month, userModel.timesModel.date.date, 12)};
 					appModel.navigator.pushScreen(appModel.PAGE_CALENDAR); 
 					break;
 				case appModel.PAGE_TIMES:
 					screenItem = appModel.navigator.getScreen(appModel.PAGE_TIMES);
-					screenItem.properties = {date:appModel.date};
+					screenItem.properties = {date:userModel.timesModel.date};
 					appModel.navigator.pushScreen(appModel.PAGE_TIMES); 
 					break;
 				default:

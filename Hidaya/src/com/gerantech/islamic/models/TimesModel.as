@@ -3,21 +3,26 @@ package com.gerantech.islamic.models
 	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.models.vo.Alert;
 	import com.gerantech.islamic.models.vo.Moathen;
-	import com.gerantech.islamic.models.vo.Reciter;
 	import com.gerantech.islamic.models.vo.Time;
+	import com.gerantech.islamic.utils.MultiDate;
 	
 	import mx.resources.ResourceManager;
+	
+	import org.praytimes.PrayTime;
+	import org.praytimes.constants.CalculationMethod;
 
 	public class TimesModel
 	{
 		public var loaded:Boolean;
-		public var times:Vector.<Time> = new Vector.<Time>(8, true);
+		public var times:Vector.<Time>;
+		public var date:MultiDate;
+		public var prayTimes:PrayTime;
+		
 		public var moathens:Array;
-
-		private var resourceModel:ResourceModel;
 		
 		public function TimesModel()
 		{
+			times = new Vector.<Time>(8, true);
 			/*for(var i:uint=0; i<times.length; i++)
 				times[i] = new Time(i);
 
@@ -29,15 +34,26 @@ package com.gerantech.islamic.models
 			
 		public function load():void
 		{
-			if(loaded)
-				return;
 			
-			resourceModel = ResourceModel.instance;
-			if(resourceModel.persons == null)
-				resourceModel.persons = JSON.parse(new ResourceModel.personsClass());
+			date = new MultiDate(null, userModel.hijriOffset);
+			prayTimes = new PrayTime(CalculationMethod.TEHRAN, userModel.city.latitude, userModel.city.longitude);
+			var dates:Vector.<Date> = prayTimes.getTimes(date.dateClass).toDates();
+			for(var t:uint=0; t<times.length; t++)
+			{
+				if(!loaded)
+					times[t] = new Time(t);
+				times[t].date = dates[t+1];
+			}
 			
-			createReciters();
-			data = UserModel.instance.user.times;
+			if(!loaded)
+			{
+				if(resourceModel.persons == null)
+					resourceModel.persons = JSON.parse(new ResourceModel.personsClass());
+	
+				createReciters();
+				
+				data = userModel.user.times;
+			}
 			
 			loaded = true;
 		}
@@ -95,12 +111,13 @@ package com.gerantech.islamic.models
 		
 		public function set data(value:Array):void
 		{
-			for(var t:uint=0; t<value.length; t++)
+
+			for(var t:uint=0; t<times.length; t++)
 			{
-				times[t] = new Time(t);
 				times[t].alerts = new Vector.<Alert>();
-				for (var a:uint=0; a<value[t].length; a++)
-					times[t].alerts.push(new Alert(value[t][a].offset, getMoathen(value[t][a].moathen), times[t], value[t][a].type));
+				if(value[t].length > 0 )
+					for (var a:uint=0; a<value[t].length; a++)
+						times[t].alerts.push(new Alert(value[t][a].offset, getMoathen(value[t][a].moathen), times[t], value[t][a].type));
 			}
 			//updateNotfications();
 		}
@@ -118,9 +135,10 @@ package com.gerantech.islamic.models
 		}
 		
 		
-		protected function loc(str:String, parameters:Array=null, locale:String=null):String
-		{
-			return ResourceManager.getInstance().getString("loc", str, parameters, locale);
-		}
+		protected function loc(str:String, parameters:Array=null, locale:String=null):String { return ResourceManager.getInstance().getString("loc", str, parameters, locale); }
+		//protected function get appModel():		AppModel		{	return AppModel.instance;		}
+		protected function get userModel():		UserModel		{	return UserModel.instance;		}
+		//protected function get configModel():	ConfigModel		{	return ConfigModel.instance;	}
+		protected function get resourceModel():	ResourceModel	{	return ResourceModel.instance;	}
 	}
 }

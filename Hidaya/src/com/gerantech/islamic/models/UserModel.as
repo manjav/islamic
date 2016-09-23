@@ -114,7 +114,7 @@ package com.gerantech.islamic.models
 		public function set personRepeat(value:uint):void{user.personRepeat=value, scheduleSaving()}
 		
 		public function get hijriOffset():int{return user.hijriOffset}
-		public function set hijriOffset(value:int):void{user.hijriOffset=value, appModel.date.hijriOffset=value, appModel.date.calculate(), scheduleSaving()}
+		public function set hijriOffset(value:int):void{user.hijriOffset=value, timesModel.date.hijriOffset=value, timesModel.date.calculate(), scheduleSaving()}
 		
 		public function get lastItem():Aya{return _lastItem};
 		public function setLastItem(sura:uint, aya:uint):void
@@ -275,12 +275,12 @@ package com.gerantech.islamic.models
 			so.flush(100000);
 		}		
 		
-		public function scheduleSaving():void
+		public function scheduleSaving(time:uint = 3000):void
 		{
 			clearTimeout(saveTimeout);
 			if(preventSaver)
 				return;
-			saveTimeout = setTimeout(save, 3000);
+			saveTimeout = setTimeout(save, time);
 			
 		}		
 		

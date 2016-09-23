@@ -1,6 +1,5 @@
 package com.gerantech.islamic.views.screens
 {
-	import com.gerantech.islamic.models.TimesModel;
 	import com.gerantech.islamic.models.vo.DayDataProvider;
 	import com.gerantech.islamic.models.vo.ToolbarButtonData;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
@@ -71,11 +70,8 @@ package com.gerantech.islamic.views.screens
 			dayData.setTime(date.dateClass.getTime());
 			
 			var nextTimeFound:Boolean;
-			var dates:Vector.<Date> = appModel.prayTimes.getTimes(date.dateClass).toDates();
 			for (var i:uint=0; i<userModel.timesModel.times.length; i++)
 			{
-				var d:Date = dates[i+1];
-				userModel.timesModel.times[i].date = d;
 				if(!nextTimeFound && dayData.isToday && userModel.timesModel.times[i].isPending(dayData.date.dateClass))
 					userModel.timesModel.times[i].pending = nextTimeFound = true;
 			}

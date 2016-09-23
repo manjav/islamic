@@ -99,8 +99,8 @@ package com.gerantech.islamic.models
 		public var preventPurchaseWarning:Boolean;
 
 		public var sizes:MetricUtils;
-		public var date:MultiDate;
-		public var prayTimes:PrayTime;
+		//public var date:MultiDate;
+		//public var prayTimes:PrayTime;
 		public var invokeData:Object;
 		
 		public function get pushTransition():Function

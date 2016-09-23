@@ -142,7 +142,7 @@ package com.gerantech.islamic.views.screens
 			
 			//daysCollection.addAll(new ListCollection(getTimes(region.y, 500)));
 			trace(" --  data added", getTimer()-Hidaya.ft);
-			gotoDay(appModel.date.middleTime);
+			gotoDay(userModel.timesModel.date.middleTime);
 			//showActionButton(true);
 		}
 		
@@ -157,7 +157,7 @@ package com.gerantech.islamic.views.screens
 			weekList.selectedIndex = firstItemIndex;
 			
 			//updateTimes(f.index);	
-			showActionButton(times[firstItemIndex] != appModel.date.firstTime);
+			showActionButton(times[firstItemIndex] != userModel.timesModel.date.firstTime);
 		}
 
 		// toggle appearance of action button
@@ -230,7 +230,7 @@ package com.gerantech.islamic.views.screens
 		 */
 		private function actionButton_triggerd(event:Event):void
 		{
-			gotoDay(appModel.date.middleTime);
+			gotoDay(userModel.timesModel.date.middleTime);
 			showActionButton(false);
 		}
 		

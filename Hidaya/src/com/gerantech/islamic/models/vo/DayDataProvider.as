@@ -2,7 +2,6 @@ package com.gerantech.islamic.models.vo
 {
 	import com.gerantech.extensions.CalendarEvent;
 	import com.gerantech.extensions.NativeAbilities;
-	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.utils.StrTools;
@@ -139,7 +138,7 @@ package com.gerantech.islamic.models.vo
 		
 		public function get isToday():Boolean
 		{
-			return AppModel.instance.date.equalDay(date.dateClass);
+			return UserModel.instance.timesModel.date.equalDay(date.dateClass);
 		}
 		
 		public function get isFirstDay():Boolean

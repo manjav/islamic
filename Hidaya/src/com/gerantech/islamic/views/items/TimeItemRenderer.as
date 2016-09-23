@@ -1,6 +1,7 @@
 package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.models.Assets;
+	import com.gerantech.islamic.models.TimesModel;
 	import com.gerantech.islamic.models.vo.Time;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.MetricUtils;
@@ -85,7 +86,7 @@ package com.gerantech.islamic.views.items
 			if(backgroundSkin == null)
 			{
 				createSkin();
-				if(time.isPending(appModel.date.dateClass))
+				if(time.isPending(userModel.timesModel.date.dateClass))
 				{
 					skin.setTextureForState("normal", Assets.getBackgroundTexture("down"));
 				}
