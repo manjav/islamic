@@ -27,6 +27,7 @@ package com.gerantech.islamic.views.screens
 		private var picker:TimePicker;
 		private var selectedAlartIndex:int;
 		private var titleLable:RTLLabel;
+		private var alertCollection:ListCollection;
 
 		override protected function initialize():void
 		{
@@ -41,13 +42,14 @@ package com.gerantech.islamic.views.screens
 			clayout.gap = appModel.sizes.DP16;
 			layout = clayout;
 			
+			alertCollection = new ListCollection(_time.alerts);
 			list = new List();
 			list.itemRendererFactory = function():IListItemRenderer
 			{
 				return new AlertItemRenderer();
 			}
-			list.maxHeight = maxHeight-appModel.sizes.dashboard 
-			list.dataProvider = new ListCollection(_time.alerts);
+			list.maxHeight = maxHeight-appModel.sizes.dashboard;
+			list.dataProvider = alertCollection;
 			list.addEventListener(AlertItemRenderer.EVENT_SELECT, list_eventSelectHandler);
 			list.addEventListener(AlertItemRenderer.EVENT_DELETE, list_eventDeleteHandler);
 			list.addEventListener(AlertItemRenderer.EVENT_CHANGE_TYPE, list_eventChangeTypeHandler);
@@ -91,13 +93,12 @@ package com.gerantech.islamic.views.screens
 //			var selectedAlert:Alert = _time.alerts[event.data[0]];
 			_time.alerts[event.data[0]].type = event.data[1];
 			NativeAbilities.instance.showToast(loc(event.data[1]==Alert.TYPE_ALARM ? "alert_type_alarm" : "alert_type_notification"), 1);
-			//list.dataProvider = new ListCollection(_time.alerts);
+			update();
 		}
 		
 		private function list_eventDeleteHandler(event:Event):void
 		{
 			_time.alerts.splice(event.data as int, 1);
-			list.dataProvider = new ListCollection(_time.alerts);
 			update();
 		}
 		
@@ -119,8 +120,7 @@ package com.gerantech.islamic.views.screens
 			picker.removeEventListener(Event.CHANGE, picker_addHandler);
 			picker.removeEventListener(Event.CHANGE, picker_changeHandler);
 			
-			time.alerts[selectedAlartIndex].offset = picker.selectedItem as int;
-			list.dataProvider = new ListCollection(_time.alerts);
+			_time.alerts[selectedAlartIndex].offset = picker.selectedItem as int;
 			update();
 			
 			picker.addEventListener(Event.CHANGE, picker_changeHandler);
@@ -155,10 +155,8 @@ package com.gerantech.islamic.views.screens
 				}
 
 			if(!breaked)
-			{
 				_time.alerts.push(new Alert(t, userModel.timesModel.moathens[0], _time));
-				list.dataProvider = new ListCollection(_time.alerts);
-			}
+			
 			update();
 			picker.addEventListener(Event.CHANGE, picker_changeHandler);
 		}
@@ -176,7 +174,9 @@ package com.gerantech.islamic.views.screens
 		
 		private function update():void
 		{
+			list.height = Math.min(maxHeight-appModel.sizes.dashboard, _time.alerts.length * appModel.sizes.singleLineItem);
 			userModel.timesModel.updateNotfications();
+			userModel.scheduleSaving(1000);
 		}
 		
 	}
