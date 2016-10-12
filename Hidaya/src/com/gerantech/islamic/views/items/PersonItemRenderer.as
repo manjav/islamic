@@ -68,7 +68,7 @@ package com.gerantech.islamic.views.items
 			
 			testButton = new FlatButton(Assets.getTexture("action_play"), "circle", false, 1, 0.5);
 			testButton.iconScale = 0.6;
-			testButton.height = testButton.width = appModel.sizes.getPixelByDP(28);
+			testButton.height = testButton.width = appModel.sizes.DP32;
 			testButton.addEventListener(Event.TRIGGERED, test_triggeredHandler); 
 			testButton.layoutData = new HorizontalLayoutData(NaN, NaN);
 			

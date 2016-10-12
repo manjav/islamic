@@ -47,7 +47,6 @@ package com.gerantech.islamic.models.vo
 		public var name:String = "";
 		public var ename:String = "";
 		public var url:String = "";
-		//public var pic:String = "";
 		public var size:Number = 1200;
 		
 		public var mode:String = "";
@@ -104,7 +103,6 @@ package com.gerantech.islamic.models.vo
 				this.localPath = UserModel.instance.SOUNDS_PATH + path + "/" ;
 			this.state = checkState();
 			rm = ResourceManager.getInstance();
-			//message = getcurrentMessage();
 		}
 		
 		
@@ -201,11 +199,8 @@ package com.gerantech.islamic.models.vo
 		public static function getDefaultImage():Texture
 		{
 			if(_defaultImage == null)
-			{
-				//var ba:ByteArray = AppModel.instance.assetManager.getByteArray("unknown");
 				_defaultImage = Assets.getTexture("unknown");
-				//ba.clear();
-			}
+			
 			return _defaultImage;
 		}
 		

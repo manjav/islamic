@@ -127,11 +127,11 @@ package com.gerantech.islamic
 		{
 			var timeModel:TimesModel = UserModel.instance.timesModel;
 
-				var alert:Alert = timeModel.times[appModel.invokeData.timeIndex].alerts[appModel.invokeData.alertIndex];
-				var athanPopUp:AthanPopUp = AppController.instance.addPopup(AthanPopUp, null, true, function():DisplayObject{return new Quad(1, 1, BaseMaterialTheme.CHROME_COLOR)}) as AthanPopUp;
-				if(appModel.navigator.rootScreenID == null)
-					athanPopUp.addEventListener(Event.CLOSE, athanPopUp_closeHandler);
-				athanPopUp.alert = alert;
+			var alert:Alert = timeModel.times[appModel.invokeData.timeIndex].alerts[appModel.invokeData.alertIndex];
+			var athanPopUp:AthanPopUp = AppController.instance.addPopup(AthanPopUp, null, true, function():DisplayObject{return new Quad(1, 1, BaseMaterialTheme.CHROME_COLOR)}) as AthanPopUp;
+			if(appModel.navigator.rootScreenID == null)
+				athanPopUp.addEventListener(Event.CLOSE, athanPopUp_closeHandler);
+			athanPopUp.alert = alert;
 		}
 		
 		private function athanPopUp_closeHandler(event:Event):void

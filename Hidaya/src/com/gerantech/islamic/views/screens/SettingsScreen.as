@@ -4,7 +4,6 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.vo.Location;
-	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.buttons.EditableButton;
 	import com.gerantech.islamic.views.controls.CheckPanel;
@@ -13,7 +12,6 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.controls.SettingPanel;
 	import com.gerantech.islamic.views.controls.Spacer;
 	import com.gerantech.islamic.views.items.FontItemRenderer;
-	import com.gerantech.islamic.views.items.PersonItemRenderer;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	import com.gerantech.islamic.views.popups.GeoCityPopup;
 	
@@ -198,20 +196,17 @@ package com.gerantech.islamic.views.screens
 		
 		private function naviPanel_changeHandler():void
 		{
-			userModel.navigationMode = naviPanel.picker.selectedItem;
-			naviPanel.picker.closeList();
+			userModel.navigationMode = naviPanel.selectedItem;
 		}		
 	
 		private function fontPanel_changeHandler(event:Event):void
 		{
-			userModel.font = fontPanel.picker.selectedItem;
-			fontPanel.picker.closeList();
+			userModel.font = fontPanel.selectedItem;
 		}
 		
 		private function remindePanel_changeHandler():void
 		{
-			userModel.remniderTime = remindePanel.picker.selectedItem;
-			remindePanel.picker.closeList();
+			userModel.remniderTime = remindePanel.selectedItem;
 			
 			if(resourceModel.hasTranslator)
 				resourceModel.selectedTranslators[0].remindeFirstTranslate();
@@ -220,8 +215,7 @@ package com.gerantech.islamic.views.screens
 		// base settings --------------------------------------------------------
 		private function locPanel_changeHandler(event:Event):void
 		{
-			userModel.locale = locPanel.picker.selectedItem;
-			locPanel.picker.closeList();
+			userModel.locale = locPanel.selectedItem;
 			setTimeout(initialize, 100);
 			/*locPanel.resetContent();
 			//naviPanel.resetContent();
@@ -235,8 +229,7 @@ package com.gerantech.islamic.views.screens
 		}*/
 		private function idlePanel_changeHandler():void
 		{
-			userModel.idleMode = idlePanel.picker.selectedItem;
-			idlePanel.picker.closeList();
+			userModel.idleMode = idlePanel.selectedItem;
 		}
 		
 		private function nightModePanel_changeHandler(event:Event):void
