@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+    <versions>
+        <swc version="1.2"/>
+        <flex version="4.7.0" build="354172" minimumSupportedVersion="3.0.0"/>
+        <compiler name="ActionScript Compiler" version="2.0.0" build="354172"/>
+    </versions>
+    <features>
+        <feature-script-deps/>
+    </features>
+    <libraries>
+        <library path="library.swf">
+            <script name="com/gerantech/extensions/CompassExtension" mod="1451052882516">
+                <def id="com.gerantech.extensions:CompassExtension"/>
+                <dep id="Function" type="s"/>
+                <dep id="Number" type="e"/>
+                <dep id="com.gerantech.extensions.events:CompassEvent" type="e"/>
+                <dep id="flash.events:EventDispatcher" type="i"/>
+                <dep id="flash.events:IEventDispatcher" type="s"/>
+                <dep id="flash.events:StatusEvent" type="e"/>
+                <dep id="flash.external:ExtensionContext" type="s"/>
+                <dep id="flash.system:Capabilities" type="e"/>
+                <dep id="trace" type="e"/>
+            </script>
+            <script name="com/gerantech/extensions/events/CompassEvent" mod="1431505436647">
+                <def id="com.gerantech.extensions.events:CompassEvent"/>
+                <dep id="Boolean" type="s"/>
+                <dep id="Number" type="s"/>
+                <dep id="String" type="s"/>
+                <dep id="flash.events:Event" type="i"/>
+            </script>
+            <digests>
+                <digest type="SHA-256" signed="false" value="b640ed7b1b9711aeb670d135187ad45664ad689ef591d93547bc14533a124070"/>
+            </digests>
+        </library>
+    </libraries>
+</swc>
