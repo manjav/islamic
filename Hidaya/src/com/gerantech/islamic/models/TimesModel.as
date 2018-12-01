@@ -86,6 +86,7 @@ package com.gerantech.islamic.models
 			var alarmTime:Number = 0;
 			NativeAbilities.instance.cancelInvokeApp();
 			NativeAbilities.instance.cancelLocalNotifications();
+			
 			var d:Date = new Date();
 			var n:Number = d.getTime();
 			for each(var t:Time in times)
@@ -97,7 +98,7 @@ package com.gerantech.islamic.models
 						alarmTime += Time.DAY_TIME_LEN;
 					
 					if(t.alerts[a].type == Alert.TYPE_ALARM)
-						NativeAbilities.instance.invokeAppScheme("hidaya://athan?timeIndex="+t.index+"&alertIndex="+a, alarmTime, 0, false);
+						NativeAbilities.instance.invokeAppScheme("hidaya://athan?timeIndex="+t.index+"&alertIndex="+a, alarmTime, Time.DAY_TIME_LEN, false);
 					else if(t.alerts[a].type == Alert.TYPE_NOTIFICATION)
 						NativeAbilities.instance.scheduleLocalNotification(loc("pray_time_"+t.index), loc("pray_time_"+t.index), t.getAlertTitle(t.alerts[a].offset), alarmTime, Time.DAY_TIME_LEN, "", "", "", "", false);
 

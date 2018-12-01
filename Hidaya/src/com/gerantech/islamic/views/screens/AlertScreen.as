@@ -8,12 +8,15 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.items.AlertItemRenderer;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
+	import com.gerantech.islamic.views.lists.QList;
 	
 	import feathers.controls.Button;
 	import feathers.controls.List;
+	import feathers.controls.PickerList;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
+	import feathers.events.FeathersEventType;
 	import feathers.layout.VerticalLayout;
 	
 	import starling.events.Event;
@@ -24,10 +27,11 @@ package com.gerantech.islamic.views.screens
 		private var _time:Time;
 		private var addButton:Button;
 		private var list:List;
-		private var picker:TimePicker;
+		private var picker:PickerList;
 		private var selectedAlartIndex:int;
 		private var titleLable:RTLLabel;
 		private var alertCollection:ListCollection;
+		private var pickerList:QList;
 
 		override protected function initialize():void
 		{
@@ -56,7 +60,7 @@ package com.gerantech.islamic.views.screens
 			list.addEventListener(AlertItemRenderer.EVENT_CHANGE_RECITER, list_eventChangeReciterHandler);
 			addChild(list);
 			
-			picker = new TimePicker();
+			picker = new PickerList();
 			picker.buttonProperties.visible = false;
 			picker.listProperties.width = appModel.sizes.width*0.8;
 			picker.listProperties.itemRendererFactory = function():IListItemRenderer
@@ -68,7 +72,13 @@ package com.gerantech.islamic.views.screens
 			picker.listProperties.maxHeight = maxHeight-appModel.sizes.dashboard 
 			picker.includeInLayout = false;
 			picker.dataProvider = new ListCollection(Time.ALERT_PEAKS);
-			picker.addEventListener(Event.CHANGE, picker_changeHandler);
+			picker.addEventListener(FeathersEventType.CREATION_COMPLETE, picker_creationCompleteHandler);
+			picker.listFactory = function () : QList
+			{
+				var list:QList = new QList();
+				pickerList = list;
+				return list;
+			}
 			addChild(picker);
 			
 			title = loc("pray_time_"+_time.index);
@@ -78,116 +88,101 @@ package com.gerantech.islamic.views.screens
 			addButton.addEventListener(Event.TRIGGERED, addButton_triggeredHandler);
 			appModel.theme.setSimpleButtonStyle(addButton);
 			addChild(addButton);
-			//acceptCallback = acceptCallbackHandler;
 		}
 		
+		private function picker_creationCompleteHandler():void
+		{
+			picker.removeEventListener(FeathersEventType.CREATION_COMPLETE, picker_creationCompleteHandler);
+			pickerList.addEventListener(Event.CHANGE, pickerList_changeHandler);
+		}
+		
+		// athan list items handlers -----------------------
 		private function list_eventChangeReciterHandler(event:Event):void
 		{
 			var screenItem:StackScreenNavigatorItem = appModel.navigator.getScreen(appModel.PAGE_FILTERED);
 			screenItem.properties = {type:Person.TYPE_MOATHEN, mode:new Local("athan_t",""), flags:[], alert:event.data};
 			appModel.navigator.pushScreen(appModel.PAGE_FILTERED);
 		}
-		
 		private function list_eventChangeTypeHandler(event:Event):void
 		{
-//			var selectedAlert:Alert = _time.alerts[event.data[0]];
 			_time.alerts[event.data[0]].type = event.data[1];
 			NativeAbilities.instance.showToast(loc(event.data[1]==Alert.TYPE_ALARM ? "alert_type_alarm" : "alert_type_notification"), 1);
 			update();
 		}
-		
 		private function list_eventDeleteHandler(event:Event):void
 		{
 			_time.alerts.splice(event.data as int, 1);
 			update();
 		}
-		
 		private function list_eventSelectHandler(event:Event):void
 		{
+			pickerList.removeEventListener(Event.CHANGE, pickerList_changeHandler);
+			
 			selectedAlartIndex = event.data as int;
 			var selectedAlert:Alert = _time.alerts[selectedAlartIndex];
-			picker.selectedIndex = Time.ALERT_PEAKS.indexOf(selectedAlert.offset);
-			picker.getList().scrollToDisplayIndex(picker.selectedIndex, 0.4);
+			pickerList.selectedIndex = Time.ALERT_PEAKS.indexOf(selectedAlert.offset);
+			pickerList.scrollToDisplayIndex(pickerList.selectedIndex, 0.4);
 			picker.openList();
+			
+			pickerList.addEventListener(Event.CHANGE, pickerList_changeHandler);
 		}
 		
-		private function picker_changeHandler():void
-		{
-			picker.closeList();
-			if(picker.selectedItem == null)
-				return;
-			
-			picker.removeEventListener(Event.CHANGE, picker_addHandler);
-			picker.removeEventListener(Event.CHANGE, picker_changeHandler);
-			
-			_time.alerts[selectedAlartIndex].offset = picker.selectedItem as int;
-			update();
-			
-			picker.addEventListener(Event.CHANGE, picker_changeHandler);
-		}
 		
 		private function addButton_triggeredHandler():void
 		{
-			//list.removeEventListener(Event.CHANGE, list_changeHandler);
-			picker.removeEventListener(Event.CHANGE, picker_changeHandler);
+			pickerList.removeEventListener(Event.CHANGE, pickerList_changeHandler);
 			
+			pickerList.selectedIndex = selectedAlartIndex = -1;
+			pickerList.scrollToDisplayIndex(Time.ALERT_PEAKS.indexOf(0), 0.4);
 			picker.openList();		
-			picker.selectedIndex = -1;
-			picker.getList().scrollToDisplayIndex(Time.ALERT_PEAKS.indexOf(0), 0.4);
-			picker.addEventListener(Event.CHANGE, picker_addHandler);
-		}		
-		private function picker_addHandler():void
+			
+			pickerList.addEventListener(Event.CHANGE, pickerList_changeHandler);
+		}
+		
+		
+		private function pickerList_changeHandler():void
 		{
 			picker.closeList();
-			if(picker.selectedItem == null)
+			if(pickerList.selectedItem == null)
 				return;
-			
-			picker.removeEventListener(Event.CHANGE, picker_addHandler);
-			picker.removeEventListener(Event.CHANGE, picker_changeHandler);
-			
-			var breaked:Boolean;
-			var t:int = picker.selectedItem as int;
-			for each(var a:Alert in _time.alerts)
+
+			trace(selectedAlartIndex);
+			// when add athan button triggered ------------------
+			if(selectedAlartIndex == -1)
+			{
+				var breaked:Boolean;
+				var t:int = pickerList.selectedItem as int;
+				for each(var a:Alert in _time.alerts)
 				if(a.offset == t)
 				{
 					breaked = true;
 					break;
 				}
-
-			if(!breaked)
-				_time.alerts.push(new Alert(t, userModel.timesModel.moathens[0], _time));
+				
+				if(!breaked)
+					_time.alerts.push(new Alert(t, userModel.timesModel.moathens[0], _time));
+			}
+			// when an athan list item selected ------------------
+			else
+			{
+				_time.alerts[selectedAlartIndex].offset = pickerList.selectedItem as int;
+			}
 			
 			update();
-			picker.addEventListener(Event.CHANGE, picker_changeHandler);
 		}
-		/*
-		private function acceptCallbackHandler():void
+
+		
+		private function update():void
 		{
-			userModel.timesModel.times[_time.index].alerts = _time.alerts;
-			dispatchEventWith(Event.CHANGE);
-		}*/
+			list.height = Math.min(maxHeight-appModel.sizes.dashboard, _time.alerts.length * appModel.sizes.singleLineItem);
+			alertCollection.updateAll();
+			userModel.timesModel.updateNotfications();
+			userModel.scheduleSaving(1000);
+		}
 		
 		private function getAlertTitle(item:Object):String
 		{
 			return _time.getAlertTitle(int(item));
 		}
-		
-		private function update():void
-		{
-			list.height = Math.min(maxHeight-appModel.sizes.dashboard, _time.alerts.length * appModel.sizes.singleLineItem);
-			userModel.timesModel.updateNotfications();
-			userModel.scheduleSaving(1000);
-		}
-		
-	}
-}
-import feathers.controls.List;
-import feathers.controls.PickerList;
-
-class TimePicker extends PickerList
-{
-	public function getList():List
-	{
-		return list;
 	}
 }

@@ -172,7 +172,6 @@ package com.gerantech.islamic.views.screens
 		private function hijriOffsetsPanel_changeHandler():void
 		{
 			userModel.hijriOffset = hijriOffsetsPanel.picker.selectedItem.value;
-			trace(hijriOffsetsPanel.picker.selectedIndex, userModel.hijriOffset);
 		}
 		
 		//Select City -------------------------------------------------------------

@@ -14,14 +14,16 @@ package com.gerantech.islamic.views.items
 		override protected function initialize():void
 		{
 			super.initialize();
-			addChild(appModel.ltr?iconDisplay:titleDisplay);
-			addChild(appModel.ltr?titleDisplay:iconDisplay);
+			//addChild(appModel.ltr?iconDisplay:titleDisplay);
+			//addChild(appModel.ltr?titleDisplay:iconDisplay);
 		}
 		
 		override protected function commitData():void
 		{
 			if(_data==null || _owner==null)
 				return;
+			if(iconDisplay == null)
+				addElements(true);
 			translator = _data as Translator;
 			
 			titleDisplay.text = translator.name;

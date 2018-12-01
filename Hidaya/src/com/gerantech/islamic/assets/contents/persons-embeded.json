@@ -1289,15 +1289,6 @@
       "mode": "athan_t"
     },
     {
-      "path": "saeed_toosi",
-      "ename": "Saeed Toosi",
-      "name": "سعید طوسی",
-      "url": "http://gerantech.com/islamic/athans/saeed_toosi.mp3",
-      "size": 889700, 
-      "flag": "fa",
-      "mode": "athan_t"
-    },
-    {
       "path": "hassan_rezaeian",
       "ename": "hassan_rezaeian",
       "name": "حسن رضائیان",
@@ -1333,5 +1324,16 @@
       "flag": "fa",
       "mode": "athan_t"
     }
+  ],
+  "temp": [
+    {
+      "path": "saeed_toosi",
+      "ename": "Saeed Toosi",
+      "name": "سعید طوسی",
+      "url": "http://gerantech.com/islamic/athans/saeed_toosi.mp3",
+      "size": 889700, 
+      "flag": "fa",
+      "mode": "athan_t"
+    } 
   ]
 }

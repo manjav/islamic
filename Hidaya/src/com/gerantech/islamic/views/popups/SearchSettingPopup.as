@@ -7,10 +7,7 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.views.items.SearchSourceItemRenderer;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	
-	import feathers.controls.Button;
-	import feathers.controls.PickerList;
 	import feathers.controls.renderers.IListItemRenderer;
-	import feathers.data.ListCollection;
 	import feathers.layout.VerticalLayout;
 	
 	import starling.events.Event;
@@ -20,8 +17,9 @@ package com.gerantech.islamic.views.popups
 
 		private var sourcePanel:SettingPanel;
 		private var scopePanel:SettingPanel;
-		private var suraPicker:PickerList;
-		private var juzePicker:PickerList;
+		private var suraPicker:SettingPanel;
+		private var juzePicker:SettingPanel;
+		private var searchScopeIndex:uint;
 
 		
 		public function SearchSettingPopup()
@@ -42,23 +40,47 @@ package com.gerantech.islamic.views.popups
 			container.layout = clayout;
 			
 			sourcePanel = new SettingPanel (loc("search_set_source"), ConfigModel.instance.searchSources, userModel.searchSource, SearchSourceItemRenderer);
-			sourcePanel.addEventListener(Event.CHANGE, sourcePanel.picker.closeList);
 			container.addChild(sourcePanel);
 			
+			searchScopeIndex = userModel.searchScope;
 			var scopeData:Array = new Array({name:loc("search_set_scope_0")}, {name:loc("search_set_scope_1")}, {name:loc("search_set_scope_2")});
 			scopePanel = new SettingPanel (loc("search_set_scope"), scopeData, userModel.searchScope);
 			scopePanel.addEventListener(Event.CHANGE, scopePanel_changeHandler);
 			container.addChild(scopePanel);
-			
-			suraPicker = new PickerList();
-			suraPicker.buttonProperties.iconPosition = appModel.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
-			suraPicker.listProperties.width = appModel.sizes.twoLineItem*3;
-			suraPicker.listProperties.maxHeight = Math.min(appModel.sizes.height, appModel.sizes.width)-appModel.sizes.DP32;
-			suraPicker.labelFunction = function( item:Object ):String
+			show();			
+	
+			scopePanel_changeHandler(null);
+			acceptCallback = acceptCallbackHandler;
+		}
+				
+		
+		private function scopePanel_changeHandler(event:Event):void
+		{
+			container.removeChildren(3);
+			if(scopePanel.selectedIndex > -1)
+				searchScopeIndex = scopePanel.selectedIndex;
+
+			if(searchScopeIndex == 1)
 			{
-				return loc("sura_l") + " " + (appModel.ltr ? ResourceModel.instance.suraList[item.index].tname : ResourceModel.instance.suraList[item.index].name);
-			};
-			suraPicker.listProperties.itemRendererFactory = function():IListItemRenderer
+				createSuraPicker();
+				suraPicker.selectedIndex = userModel.searchSura;
+				container.addChild(suraPicker);
+			}
+			else if(searchScopeIndex == 2)
+			{
+				createJuzePicker();
+				juzePicker.selectedIndex = userModel.searchJuze;
+				container.addChild(juzePicker);
+			}
+		}
+		
+		private function createSuraPicker():void
+		{
+			if(suraPicker != null)
+				return;
+			
+			suraPicker = new SettingPanel(null, ResourceModel.instance.popupSuraList, userModel.searchSura, null, itemFactory, labelFunction);
+			function itemFactory():IListItemRenderer
 			{
 				var i:SettingItemRenderer = new SettingItemRenderer();
 				i.labelFunction = function( item:Object ):String
@@ -66,18 +88,20 @@ package com.gerantech.islamic.views.popups
 					return StrTools.getNumberFromLocale(item.index+1) + ". " + (appModel.ltr ? ResourceModel.instance.suraList[item.index].tname : ResourceModel.instance.suraList[item.index].name);
 				};
 				return i;
-			}
-			suraPicker.dataProvider = new ListCollection(ResourceModel.instance.popupSuraList);
-				
-			juzePicker = new PickerList();
-			juzePicker.buttonProperties.iconPosition = appModel.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
-			juzePicker.listProperties.width = appModel.sizes.twoLineItem*3;
-			juzePicker.listProperties.maxHeight = Math.min(appModel.sizes.height, appModel.sizes.width)-appModel.sizes.DP32;
-			juzePicker.labelFunction = function( item:Object ):String
-			{
-				return loc("juze_l") + " " + loc("j_"+(item.index+1));
 			};
-			juzePicker.listProperties.itemRendererFactory = function():IListItemRenderer
+			function labelFunction( item:Object ):String
+			{
+				return loc("sura_l") + " " + (appModel.ltr ? ResourceModel.instance.suraList[item.index].tname : ResourceModel.instance.suraList[item.index].name);
+			};
+		}
+		
+		private function createJuzePicker():void
+		{
+			if(juzePicker != null)
+				return;
+			
+			juzePicker = new SettingPanel(null, ResourceModel.instance.juzeList, userModel.searchJuze, null, itemFactory, labelFunction);
+			function itemFactory():IListItemRenderer
 			{
 				var i:SettingItemRenderer = new SettingItemRenderer();
 				i.labelFunction = function( item:Object ):String
@@ -85,50 +109,21 @@ package com.gerantech.islamic.views.popups
 					return StrTools.getNumberFromLocale(item.index+1) + ". " + loc("juze_l") + " " + loc("j_"+(item.index+1));
 				};
 				return i;
-			}
-			juzePicker.dataProvider = new ListCollection(ResourceModel.instance.juzeList);
-			acceptCallback = acceptCallbackHandler;
-			
-			addEventListener(Event.ADDED_TO_STAGE, popup_addedToStageHandler);
-			popup_addedToStageHandler(null);
-		}
-		
-		protected function popup_addedToStageHandler(event:Event):void
-		{
-			suraPicker.removeEventListener(Event.CHANGE, suraPicker.closeList);
-			suraPicker.selectedIndex = userModel.searchSura;
-			suraPicker.addEventListener(Event.CHANGE, suraPicker.closeList);
-			
-			juzePicker.removeEventListener(Event.CHANGE, juzePicker.closeList);
-			juzePicker.selectedIndex = userModel.searchJuze;
-			juzePicker.addEventListener(Event.CHANGE, juzePicker.closeList);
-			
-			sourcePanel.picker.selectedIndex = userModel.searchSource;
-			scopePanel.picker.selectedIndex = userModel.searchScope;
-			scopePanel_changeHandler(null);
-			
-			if(event!=null)
-				show();			
-		}
-				
-		
-		private function scopePanel_changeHandler(event:Event):void
-		{
-			container.removeChildren(3);
-			if(scopePanel.picker.selectedIndex==1)
-				container.addChild(suraPicker);
-			else if(scopePanel.picker.selectedIndex==2)
-				container.addChild(juzePicker);
-			
-			scopePanel.picker.closeList();
+			};
+			function labelFunction( item:Object ):String
+			{
+				return loc("juze_l") + " " + loc("j_"+(item.index+1));
+			};
 		}
 		
 		private function acceptCallbackHandler():void
 		{
 			userModel.searchSource = sourcePanel.picker.selectedIndex;
-			userModel.searchScope = scopePanel.picker.selectedIndex;
-			userModel.searchSura = suraPicker.selectedIndex;
-			userModel.searchJuze = juzePicker.selectedIndex;
+			userModel.searchScope = searchScopeIndex;
+			if(suraPicker)
+				userModel.searchSura = suraPicker.selectedIndex;
+			if(juzePicker)
+				userModel.searchJuze = juzePicker.selectedIndex;
 		}
 
 	}

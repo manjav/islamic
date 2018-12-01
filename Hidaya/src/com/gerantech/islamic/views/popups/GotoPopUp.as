@@ -7,6 +7,7 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.CustomTextInput;
 	import com.gerantech.islamic.views.controls.RTLLabel;
+	import com.gerantech.islamic.views.controls.SettingPanel;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	
 	import flash.text.ReturnKeyLabel;
@@ -33,8 +34,8 @@ package com.gerantech.islamic.views.popups
 		private var pageLabel:RTLLabel;
 		private var pageInput:CustomTextInput;
 
-		private var suraPicker:PickerList;
-		private var ayaPicker:PickerList;
+		private var suraPicker:SettingPanel;
+		private var ayaPicker:SettingPanel;
 		private var isPage:Boolean = true;
 
 		private var pageGroup:LayoutGroup;
@@ -44,7 +45,6 @@ package com.gerantech.islamic.views.popups
 		
 		private var pageMode:Boolean;
 		private var resModel:ResourceModel;
-		private var inited:Boolean;
 
 		public function GotoPopUp()
 		{
@@ -58,9 +58,7 @@ package com.gerantech.islamic.views.popups
 			super.initialize();
 			
 			resModel = ResourceModel.instance;
-			if(inited)
-				return;
-			
+
 			var cLayout:VerticalLayout = new VerticalLayout();
 			cLayout.gap = appModel.sizes.border*3;
 			cLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
@@ -71,6 +69,7 @@ package com.gerantech.islamic.views.popups
 			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_BOTTOM;
 			hLayout.gap = appModel.sizes.border*3;
 			
+			// add page text when navigation mode set to page by page  ------------------------------
 			pageMode = userModel.navigationMode.value=="page_navi";
 			if(pageMode)
 			{
@@ -85,9 +84,6 @@ package com.gerantech.islamic.views.popups
 				pageInput = new CustomTextInput(SoftKeyboardType.NUMBER, ReturnKeyLabel.DONE, BaseMaterialTheme.DESCRIPTION_TEXT_COLOR);
 				pageInput.maxChars = 3;
 				pageInput.width = width*0.5;
-				//pageInput.addEventListener(FeathersEventType.FOCUS_IN, pageInput_focusHandler);
-				//pageInput.addEventListener(FeathersEventType.FOCUS_OUT, pageInput_focusHandler);
-				
 				pageGroup.addChild(appModel.ltr?pageLabel:pageInput);
 				pageGroup.addChild(appModel.ltr?pageInput:pageLabel);
 			}
@@ -100,19 +96,15 @@ package com.gerantech.islamic.views.popups
 			suraGroup.layoutData = new VerticalLayoutData(100);
 			container.addChild(suraGroup);
 			
-			suraPicker = new PickerList();
-			suraPicker.buttonProperties.iconPosition = appModel.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
+			// set sura pannel --------------------------------
+			suraPicker = new SettingPanel(null, resModel.popupSuraList, userModel.lastItem.sura-1, null, suraItemFactory, suraLabelFunction);
 			suraPicker.layoutData = new HorizontalLayoutData(70);
-			suraPicker.listProperties.width = appModel.sizes.twoLineItem*3;
-			suraPicker.listProperties.maxHeight = Math.min(appModel.sizes.height, appModel.sizes.width)-appModel.sizes.DP32;
-			suraPicker.labelFunction = function( item:Object ):String
+			suraPicker.addEventListener(Event.CHANGE, suraPicker_changeHandler);
+			function suraLabelFunction( item:Object ):String
 			{
 				return (appModel.ltr ? resModel.suraList[item.index].tname : resModel.suraList[item.index].name);
 			};
-			suraPicker.dataProvider = new ListCollection(resModel.popupSuraList);
-			suraPicker.selectedIndex = userModel.lastItem.sura-1;
-			suraPicker.addEventListener(Event.CHANGE, suraPicker_changeHandler);
-			suraPicker.listProperties.itemRendererFactory = function():IListItemRenderer
+			function suraItemFactory():IListItemRenderer
 			{
 				var i:SettingItemRenderer = new SettingItemRenderer();
 				i.labelFunction = function( item:Object ):String
@@ -120,25 +112,21 @@ package com.gerantech.islamic.views.popups
 					return StrTools.getNumberFromLocale(item.index+1) + ". " + (appModel.ltr ? resModel.suraList[item.index].tname : resModel.suraList[item.index].name);
 				};
 				return i;
-			}
+			};
 			
-			ayaPicker = new PickerList();
-			ayaPicker.buttonProperties.iconPosition = appModel.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
+			// set aya pannel --------------------------------
+			ayaPicker = new SettingPanel(null, resModel.suraList[userModel.lastItem.sura-1].ayas, userModel.lastItem.aya-1, null, ayaItemFactory, ayaLabelFunction);
 			ayaPicker.layoutData = new HorizontalLayoutData(30);
-			ayaPicker.listProperties.width = appModel.sizes.twoLineItem*2;
-			ayaPicker.listProperties.maxHeight = Math.min(appModel.sizes.height, appModel.sizes.width)-appModel.sizes.DP32;
-			ayaPicker.labelField = "name";
-			initAyaPicker(suraPicker.selectedIndex);
-			ayaPicker.labelFunction = function( item:Object ):String
+			function ayaLabelFunction( item:Object ):String
 			{
 				if(item==null)
 					return "";
 				return StrTools.getNumberFromLocale(item.name);
 			};
-			ayaPicker.listProperties.itemRendererFactory = function():IListItemRenderer
+			function ayaItemFactory():IListItemRenderer
 			{
 				return new SettingItemRenderer();
-			}
+			};
 
 			suraGroup.addChild(appModel.ltr?suraPicker:ayaPicker);
 			suraGroup.addChild(appModel.ltr?ayaPicker:suraPicker);
@@ -146,7 +134,6 @@ package com.gerantech.islamic.views.popups
 			acceptCallback = buttons_triggerHandler;
 			hideAssets();
 			setTimeout(assetsFadeIn, 1);
-			inited = true;
 		}
 		
 		private function pageInput_focusHandler():void
@@ -156,7 +143,6 @@ package com.gerantech.islamic.views.popups
 
 		private function suraPicker_changeHandler():void
 		{
-			suraPicker.closeList();
 			setTimeout(initAyaPicker, 1, suraPicker.selectedIndex);
 		}
 		
@@ -164,7 +150,7 @@ package com.gerantech.islamic.views.popups
 		{
 			if(resModel.suraList[suraIndex].ayas==null || resModel.suraList[suraIndex].ayas.length==0)
 				resModel.suraList[suraIndex].complete();
-			ayaPicker.dataProvider = new ListCollection(resModel.suraList[suraIndex].ayas);
+			ayaPicker.pickerList.dataProvider = new ListCollection(resModel.suraList[suraIndex].ayas);
 			ayaPicker.selectedIndex = Math.min(resModel.suraList[suraIndex].numAyas, Math.max(0, userModel.lastItem.aya-1));
 			ayaPicker.addEventListener(Event.CHANGE, ayaPicker_changeHandler);			
 		}
@@ -192,7 +178,6 @@ package com.gerantech.islamic.views.popups
 		
 		private function ayaPicker_changeHandler():void
 		{
-			ayaPicker.closeList();
 			isPage = false;
 			if(!pageMode)
 				return;

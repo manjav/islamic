@@ -60,7 +60,7 @@ package com.gerantech.islamic.utils
 		}
 		
 		/**
-		 * Calculate shamsi and qamari date according to gregorian date
+		 * Calculate shamsi and qamari based on gregorian date
 		 */
 		public function calculate():void
 		{
@@ -191,7 +191,6 @@ package com.gerantech.islamic.utils
 
 		public function equalDay(i_date:Date):Boolean
 		{
-			// TODO Auto Generated method stub
 			return i_date.date == date && i_date.month==month && i_date.fullYear==fullYear;
 		}
 	}

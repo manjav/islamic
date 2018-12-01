@@ -100,7 +100,7 @@ package com.gerantech.islamic.views.items
 		{
 			titleDisplay = new RTLLabel("", BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0.9, null, "bold");
 			titleDisplay.layoutData = new HorizontalLayoutData(100);
-//
+
 			if(hasIcon)
 			{
 				iconDisplay = new ImageLoader();

@@ -21,29 +21,45 @@ package com.gerantech.islamic.views.controls
 	
 	public class SettingPanel extends LayoutGroup
 	{
-		private var titleDisplay:RTLLabel;
 		public var picker:PickerList;
+		public var pickerList:QList;
+		
 		private var label:String;
+		private var titleDisplay:RTLLabel;
 
 		private var spacer:Spacer;
 		private var changed:Boolean;
 		
 		private var data:Object;
 		private var _selectedItem:Object;
-		private var itemRendererFactory:Class;
-		private var pickerList:QList;
 		
-		public function SettingPanel(label:String, data:Object, selectedItem:Object, itemRendererFactory:Class=null)
+		private var itemRendererFactory:Function;
+		private var labelFunction:Function;
+		
+		public function SettingPanel(label:String, data:Object, selectedItem:Object, itemRendererClass:Class=null, itemRendererFactory:Function=null, labelFunction:Function=null)
 		{
 			this.label = label;
-			if(itemRendererFactory==null)
-				itemRendererFactory = SettingItemRenderer;
+			
+			// set factories -----------------------
+			if ( itemRendererFactory != null )
+			{
+				this.itemRendererFactory = itemRendererFactory;
+			}
+			else 
+			{
+				if(itemRendererClass != null)
+					this.itemRendererFactory = function():IListItemRenderer { return new itemRendererClass(); };
+				else
+					this.itemRendererFactory = function():IListItemRenderer { return new SettingItemRenderer(); };
+				
+			}
+			this.labelFunction = labelFunction;
+			
 			
 			height = AppModel.instance.sizes.singleLineItem;
 			
 			this.data = data;
 			this._selectedItem = selectedItem;
-			this.itemRendererFactory = itemRendererFactory;
 		}
 		
 		protected override function initialize():void
@@ -55,6 +71,15 @@ package com.gerantech.islamic.views.controls
 			mLayout.gap = AppModel.instance.sizes.DP8;
 			layout = mLayout;
 			
+			// create label and spacer if need
+			if( label!= null && label.length > 0)
+			{
+				titleDisplay = new RTLLabel(label, BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0.9, null, "bold");
+				
+				spacer = new Spacer()
+				spacer.layoutData =  new HorizontalLayoutData(100);
+			}
+			
 			// set selected index for list preview
 			var index:uint = 0;
 			var selectedIndex:uint;
@@ -62,7 +87,7 @@ package com.gerantech.islamic.views.controls
 				selectedIndex = _selectedItem as uint;
 
 			for each(var obj:Object in data)
-			{//trace(obj.value, _selectedItem.value)
+			{
 				if(!obj.name)
 					obj.name = ResourceManager.getInstance().getString("loc", obj.value); //trace(obj.name, obj.value);
 				
@@ -71,18 +96,13 @@ package com.gerantech.islamic.views.controls
 				index++;
 			}			
 			
-			titleDisplay = new RTLLabel(label, BaseMaterialTheme.PRIMARY_TEXT_COLOR, null, null, false, null, 0.9, null, "bold");
-			
-			spacer = new Spacer()
-			spacer.layoutData =  new HorizontalLayoutData(100);
-			
 			picker = new PickerList();
 			picker.buttonProperties.iconPosition = AppModel.instance.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
-			picker.labelField = "name";
-			picker.listProperties.itemRendererFactory = function():IListItemRenderer
-			{
-				return new itemRendererFactory();
-			}
+			if(labelFunction != null)
+				picker.labelFunction = labelFunction;
+			else
+				picker.labelField = "name";
+			picker.listProperties.itemRendererFactory = itemRendererFactory;
 			picker.dataProvider = new ListCollection(data);
 			picker.selectedIndex = selectedIndex;
 			picker.addEventListener(FeathersEventType.CREATION_COMPLETE, picker_creationCompleteHandler);
@@ -93,6 +113,9 @@ package com.gerantech.islamic.views.controls
 				return list;
 			}
 			resetContent();
+			//picker.buttonProperties.iconPosition = appModel.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
+			//picker.listProperties.width = appModel.sizes.twoLineItem*3;
+			//picker.listProperties.maxHeight = Math.min(appModel.sizes.height, appModel.sizes.width)-appModel.sizes.DP32;
 			
 		}	
 		
@@ -106,31 +129,37 @@ package com.gerantech.islamic.views.controls
 		{
 			//trace("picker_changeHandler", event, pickerList.selectedItem);
 			if(picker.selectedItem && hasEventListener(Event.CHANGE))
-			{
 				dispatchEventWith(Event.CHANGE);
-				picker.closeList();
-			}
+			picker.closeList();
 		}
 		
 		public function resetContent():void
 		{
-			titleDisplay.bidiLevel = AppModel.instance.ltr?0:1;
-			titleDisplay.textAlign = AppModel.instance.ltr?"left":"right";
-			
-			var els:Array;
-			if(AppModel.instance.ltr)
-				els = new Array(titleDisplay, spacer, picker) ;
+			if(titleDisplay != null)
+			{
+				titleDisplay.bidiLevel = AppModel.instance.ltr?0:1;
+				titleDisplay.textAlign = AppModel.instance.ltr?"left":"right";
+				
+				var els:Array;
+				if(AppModel.instance.ltr)
+					els = new Array(titleDisplay, spacer, picker) ;
+				else
+					els = new Array(picker, spacer, titleDisplay) ;
+				
+				var _label:String = ResourceManager.getInstance().getString("loc", label);
+				if(_label==null)
+					_label = label;
+				titleDisplay.text = _label;
+			}
 			else
-				els = new Array(picker, spacer, titleDisplay) ;
+			{
+				picker.layoutData = new HorizontalLayoutData(100);
+				els = new Array(picker);
+			}
 
 			removeChildren();
 			for each(var c:FeathersControl in els)
 				addChild(c);
-			
-			var _label:String = ResourceManager.getInstance().getString("loc", label);
-			if(_label==null)
-				_label = label;
-			titleDisplay.text = _label;
 		}
 		
 		public function get selectedItem():Object
@@ -138,6 +167,23 @@ package com.gerantech.islamic.views.controls
 			if(pickerList)
 				return pickerList.selectedItem;
 			return null;
+		}
+		public function set selectedItem(value:Object):void
+		{
+			if(pickerList)
+				pickerList.selectedItem = value;
+		}
+		
+		public function get selectedIndex():int
+		{
+			if(pickerList)
+				return pickerList.selectedIndex;
+			return -1;
+		}
+		public function set selectedIndex(value:int):void
+		{
+			if(pickerList)
+				pickerList.selectedIndex = value;
 		}
 		
 	}
