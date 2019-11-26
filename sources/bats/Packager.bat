@@ -14,9 +14,9 @@ cd %~dp0 & cd ..
 :: NOTICE: all paths are relative to project root
 
 :: Android packaging
-set AND_CERT_NAME="towerstory"
-set AND_CERT_PASS=12345
-set AND_CERT_FILE=cert/android.p12
+set AND_CERT_NAME="gerantech"
+set AND_CERT_PASS=163100
+set AND_CERT_FILE=cert/gerantech.p12
 set AND_ICONS=files/icons/android
 if NOT %SERVER%==iran set AND_ICONS=files/icons/gndroid
 
@@ -70,7 +70,7 @@ set APP_DIR=bin
 
 :: Output packages
 set DIST_PATH=dist
-set DIST_NAME=boomland-%APP_VER%.%DATE%-%SERVER%-%MARKET%%TARGET%
+set DIST_NAME=hidaya-%APP_VER%.%DATE%-%SERVER%-%MARKET%%TARGET%
 
 if not exist "%CERT_FILE%" goto certificate
 :: Output file
