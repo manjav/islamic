@@ -9,6 +9,9 @@ package com.gerantech.islamic.models.vo
 		public var versionLabel:String;
 		public var versionNumber:String;
 		public var market:String;
+		public var server:String;
+		public var analyticskey:String;
+		public var analyticssec:String;
 		
 		public function Descriptor(xml:XML)
 		{

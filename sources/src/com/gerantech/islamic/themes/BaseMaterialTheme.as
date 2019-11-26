@@ -2690,4 +2690,3 @@ package com.gerantech.islamic.themes
 
 	}
 }
-

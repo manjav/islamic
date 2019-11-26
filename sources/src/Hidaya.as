@@ -35,10 +35,6 @@ package
 	
 	import starling.core.Starling;
 
-	[SWF(frameRate="60", backgroundColor="#009688")]
-	
-	[ResourceBundle("loc")]
-
 	public class Hidaya extends Sprite
 	{
 		private var _starling:Starling;
