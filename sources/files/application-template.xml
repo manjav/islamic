@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<application xmlns="http://ns.adobe.com/air/application/26.0">
+  <id>com.gerantech.islamic</id>
+  <versionNumber>0.9.100</versionNumber>
+  <versionLabel>0.9.100</versionLabel>
+  <supportedProfiles>mobileDevice</supportedProfiles>
+  <filename>Hidaya</filename>
+  <name>Hidayah</name><!-- Hidayah  هدایت الهدایة -->
+  <description>__DESCRIPTION__</description><!--<description>{"platform":"android", "market":"cafebazaar"}</description> cafebazaar-myket-cando-ario-google -->
+  <initialWindow>
+    <title>Hidaya</title>
+    <content>release.swf</content>
+    <visible>true</visible>
+    <fullScreen>true</fullScreen>
+    <renderMode>direct</renderMode>
+    <systemChrome>standard</systemChrome>
+    <aspectRatio>portrait</aspectRatio>
+    <autoOrients>false</autoOrients>
+    <depthAndStencil>true</depthAndStencil>
+  </initialWindow>
+  <icon>
+    <image48x48>icons/icon-48.png</image48x48>
+    <!--<image57x57>icons/icon_57.png</image57x57>-->
+    <image72x72>icons/icon-72.png</image72x72>
+    <!--<image76x76>icons/icon_76.png</image76x76>-->
+    <image96x96>icons/icon-96.png</image96x96>
+    <!--    <image114x114>icons/icon_114.png</image114x114>-->
+    <!--    <image120x120>icons/icon_120.png</image120x120>-->
+    <image144x144>icons/icon-144.png</image144x144>
+    <!--<image152x152>icons/icon_152.png</image152x152>-->
+    <!--<image512x512>icons/icon_512.png</image512x512>-->
+  </icon>
+  <android>
+    <manifestAdditions><![CDATA[<manifest android:installLocation="auto">
+
+	<!-- In APP Billing permissions -->
+	<!--<uses-permission android:name="com.android.vending.BILLING" /> <uses-permission android:name="com.farsitel.bazaar.permission.PAY_THROUGH_BAZAAR" /> <uses-permission android:name="ir.mservices.market.BILLING" /> <uses-permission android:name="com.arioclub.android.sdk.IAB" />-->
+	<uses-permission android:name="com.domain.market.BILLING" />
+	
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	<uses-permission android:name="android.permission.USE_CREDENTIALS" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+	<permission android:name="air.com.pushwoosh.testapp.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+	<uses-permission android:name="air.com.pushwoosh.testapp.permission.C2D_MESSAGE"/>
+	
+	<application android:enabled="true">
+	
+		<meta-data android:name="com.google.android.gms.version" android:value="4452000" /> 
+		<activity android:name="com.gerantech.extensions.gplus.GPConnector" android:theme="@android:style/Theme.Translucent.NoTitleBar"/> 
+		
+		<activity android:name="com.pozirk.payment.BillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:background="#30000000" />
+		
+		<meta-data android:name="PW_APPID" android:value="993AB-36B12" /><!--  FCC5C-745C7 -->
+		<meta-data android:name="PW_PROJECT_ID" android:value="A698290547104" />
+		<meta-data android:name="PW_BROADCAST_PUSH" android:value="true" />
+		<receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+			<intent-filter>
+				<action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+				<action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+				<category android:name="air.com.pushwoosh.testapp"/>
+			</intent-filter>
+		</receiver>
+		<activity android:name="com.arellomobile.android.push.PushWebview"/>
+		<activity android:name="com.arellomobile.android.push.MessageActivity"/>
+		<activity android:name="com.arellomobile.android.push.PushHandlerActivity"/>
+		<activity android:name="com.pushwoosh.nativeExtensions.PushActivity">
+			<intent-filter>
+				<action android:name="air.com.pushwoosh.testapp.MESSAGE"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+			</intent-filter>
+		</activity>
+		<service android:name="com.arellomobile.android.push.PushGCMIntentService"/>
+		<receiver android:name="com.arellomobile.android.push.AlarmReceiver"/>
+		
+		
+		<activity android:excludeFromRecents="false" android:showOnLockScreen="true">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+				<category android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+				<data android:scheme="hidaya"/>
+			</intent-filter>
+		</activity>
+		
+		<receiver android:name="com.gerantech.extensions.recievers.InvokeAppReceiver"/>
+		<receiver android:name="com.gerantech.extensions.recievers.LocalNotificationReceiver"/>
+
+	</application>		
+
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.VIBRATE"/>
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.READ_CALENDAR" />
+	
+	<!--<uses-permission android:name="android.permission.CAMERA"/>-->
+	<!--<uses-permission android:name="android.permission.RECORD_AUDIO"/>-->
+	<!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>-->
+	<!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>-->
+
+	<uses-sdk android:minSdkVersion="9" android:targetSdkVersion="16"/>
+	</manifest>]]></manifestAdditions>
+  </android>
+  <iPhone> 
+	 <InfoAdditions>
+		<![CDATA[
+			<key>UIDeviceFamily</key>
+			<array>
+				<string>1</string>
+				<string>2</string>
+			</array>
+			<key>UIStatusBarStyle</key>
+			<string>UIStatusBarStyleBlackOpaque</string>
+			<key>UIRequiresPersistentWiFi</key>
+			<string>YES</string>
+			<key>Pushwoosh_APPID</key>
+			<string>539E9-AB8AE</string>
+		]]>
+	</InfoAdditions> 
+	<Entitlements>
+		<![CDATA[
+		<key>aps-environment</key>
+		<string>development</string>
+		]]>
+	</Entitlements>  
+   <requestedDisplayResolution>high</requestedDisplayResolution> 
+   </iPhone> 
+	
+  <extensions>
+    <extensionID>com.freshplanet.AirFlurry</extensionID>
+    <extensionID>com.gerantech.extensions.compass</extensionID>
+    <extensionID>com.gerantech.extensions.nativeabilities</extensionID>
+    <extensionID>com.pushwoosh.PushNotification</extensionID>
+    <extensionID>com.pozirk.AndroidInAppPurchase</extensionID>
+  </extensions>
+</application>
