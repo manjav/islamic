@@ -1,18 +1,20 @@
 # Build and Release Folders
-Hidaya/bin/
-Hidaya/bin-debug/
-Hidaya/bin-release/
-Hidaya/bin-release-temp/
-.swf
-.settings
-.project
-.actionScriptProperties
-.flexProperties
+[Dd]ist/
+[Bb]in/
+[Cc]ert/
+
 # Other files and folders
+.settings/
+.vscode/
+
+bats/SetupDescriptor.bat
+
+# Executables
+*.swf
+*.air
+*.ipa
+*.apk
+
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
-islamic-fd/dist/
-islamic-fd/application.xml
-islamic-fd/bin/release.swf
-islamic-fd/obj/islamic-fdConfig.xml
