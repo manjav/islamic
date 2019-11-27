@@ -11,16 +11,16 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.popups.SearchSettingPopup;
-	
-	import flash.text.engine.ElementFormat;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	
+
+	import flash.text.engine.ElementFormat;
+
+	import gt.utils.Localizations;
+
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.events.Event;
@@ -84,7 +84,7 @@ package com.gerantech.islamic.views.headers
 			addChild(actionButton);
 			
 			var q:Translator = new Translator();
-			q.name = ResourceManager.getInstance().getString("loc", "quran_t");
+			q.name = Localizations.instance.get("quran_t");
 			q.iconUrl = "app:/com/gerantech/islamic/assets/images/icon/icon-192.png";
 			q.iconPath = userModel.TRANSLATOR_PATH + "quran/quran.pbqr";
 

@@ -1,24 +1,24 @@
 package com.gerantech.islamic.managers
 {
 	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.UserModel;
-	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.popups.BasePopUp;
 	import com.gerantech.islamic.views.popups.InfoPopUp;
-	
+
+	import feathers.core.PopUpManager;
+
 	import flash.desktop.NativeApplication;
 	import flash.desktop.SystemIdleMode;
 	import flash.events.EventDispatcher;
 	import flash.filesystem.File;
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
-	
+
+	import gt.utils.Localizations;
+
 	import mx.resources.ResourceManager;
-	
-	import feathers.core.PopUpManager;
-	
+
 	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
@@ -187,11 +187,11 @@ package com.gerantech.islamic.managers
 		
 		public function alert(title:String, message:String, cancelButtonLabel:String="know_button", acceptButtonLabel:String="", acceptCallback:Function=null, cancelCallback:Function=null, closable:Boolean=true):void
 		{
-			var ttl:String = ResourceManager.getInstance().getString("loc", title);
+			var ttl:String = Localizations.instance.get(title);
 			if(ttl==null)
 				ttl = title;
 			
-			var msg:String = ResourceManager.getInstance().getString("loc", message);
+			var msg:String = Localizations.instance.get(message);
 			if(msg==null)
 				msg = message;
 			
@@ -200,9 +200,9 @@ package com.gerantech.islamic.managers
 			infoPopUp.closable = closable;
 			infoPopUp.title = ttl;
 			infoPopUp.message = msg;
-			infoPopUp.cancelButtonLabel = ResourceManager.getInstance().getString("loc", cancelButtonLabel);
+			infoPopUp.cancelButtonLabel = Localizations.instance.get(cancelButtonLabel);
 			infoPopUp.cancelCallback = cancelCallback;
-			infoPopUp.acceptButtonLabel = ResourceManager.getInstance().getString("loc", acceptButtonLabel);
+			infoPopUp.acceptButtonLabel = Localizations.instance.get(acceptButtonLabel);
 			infoPopUp.acceptCallback = acceptCallback;
 			infoPopUp.addEventListener(Event.CLOSE, infoPopUp_closeHandler);
 			PopUpManager.addPopUp(infoPopUp, true, true, infoPopUp_overlayFactory);

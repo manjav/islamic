@@ -5,7 +5,7 @@ package com.gerantech.islamic.models.vo
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.utils.StrTools;
-	
+
 	import flash.data.SQLConnection;
 	import flash.data.SQLMode;
 	import flash.data.SQLStatement;
@@ -14,9 +14,9 @@ package com.gerantech.islamic.models.vo
 	import flash.events.SQLEvent;
 	import flash.filesystem.File;
 	import flash.utils.setTimeout;
-	
-	import mx.resources.ResourceManager;
-	
+
+	import gt.utils.Localizations;
+
 	import starling.events.EventDispatcher;
 
 	public class DayDataProvider extends EventDispatcher
@@ -185,7 +185,7 @@ package com.gerantech.islamic.models.vo
 	
 		protected function loc(resourceName:String, parameters:Array=null, locale:String=null):String
 		{
-			return ResourceManager.getInstance().getString("loc", resourceName, parameters, locale);
+			return Localizations.instance.get(resourceName, parameters);//, locale);
 		}
 	}
 }

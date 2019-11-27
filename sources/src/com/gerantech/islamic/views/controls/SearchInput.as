@@ -7,17 +7,17 @@ package com.gerantech.islamic.views.controls
 	import com.gerantech.islamic.views.screens.FilteredPersonScreen;
 	import com.gerantech.islamic.views.screens.IndexScreen;
 	import com.gerantech.islamic.views.screens.SearchScreen;
-	
-	import flash.text.ReturnKeyLabel;
-	import flash.text.SoftKeyboardType;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.LayoutGroup;
 	import feathers.events.FeathersEventType;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	
+
+	import flash.text.ReturnKeyLabel;
+	import flash.text.SoftKeyboardType;
+
+	import gt.utils.Localizations;
+
 	import starling.core.Starling;
 	import starling.events.Event;
 	
@@ -49,7 +49,7 @@ package com.gerantech.islamic.views.controls
 				case AppModel.instance.PAGE_FILTERED: prompt="search_in"; break;
 				case AppModel.instance.PAGE_CITY: prompt="city_prompt"; break;
 			}
-			searchText.prompt = ResourceManager.getInstance().getString("loc", prompt);
+			searchText.prompt = Localizations.instance.get(prompt);
 			searchText.text = searchPage ? UserModel.instance.searchPatt : "";
 		}
 		
@@ -59,7 +59,7 @@ package com.gerantech.islamic.views.controls
 			layout = new AnchorLayout();
 			
 			searchText = new CustomTextInput(SoftKeyboardType.DEFAULT, ReturnKeyLabel.SEARCH);
-			//searchText.prompt = ResourceManager.getInstance().getString("loc", "search_in");
+			//searchText.prompt = Localizations.instance.get("search_in");
 			//searchText.text = UserModel.instance.searchPatt;
 			searchText.layoutData = new AnchorLayoutData(0,0,0,0);
 			searchText.addEventListener(Event.CHANGE, searchInput_changeHandler);

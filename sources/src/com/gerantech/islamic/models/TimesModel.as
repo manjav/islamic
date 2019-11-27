@@ -5,9 +5,9 @@ package com.gerantech.islamic.models
 	import com.gerantech.islamic.models.vo.Moathen;
 	import com.gerantech.islamic.models.vo.Time;
 	import com.gerantech.islamic.utils.MultiDate;
-	
-	import mx.resources.ResourceManager;
-	
+
+	import gt.utils.Localizations;
+
 	import org.praytimes.PrayTime;
 	import org.praytimes.constants.CalculationMethod;
 
@@ -136,7 +136,7 @@ package com.gerantech.islamic.models
 		}
 		
 		
-		protected function loc(str:String, parameters:Array=null, locale:String=null):String { return ResourceManager.getInstance().getString("loc", str, parameters, locale); }
+		protected function loc(str:String, parameters:Array=null, locale:String=null):String { return Localizations.instance.get(str, parameters); }
 		//protected function get appModel():		AppModel		{	return AppModel.instance;		}
 		protected function get userModel():		UserModel		{	return UserModel.instance;		}
 		//protected function get configModel():	ConfigModel		{	return ConfigModel.instance;	}

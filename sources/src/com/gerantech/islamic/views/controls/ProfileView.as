@@ -71,12 +71,12 @@ package com.gerantech.islamic.views.controls
 			
 			vGroup.addChild(new Spacer());
 			
-			var nameLabel:RTLLabel = new RTLLabel(profileData.registered?profileData.name:ResourceManager.getInstance().getString("loc", "profile_label"), 0xFFFFFF);
+			var nameLabel:RTLLabel = new RTLLabel(profileData.registered?profileData.name:Localizations.instance.get("profile_label"), 0xFFFFFF);
 			nameLabel.truncateToFit = true;
 			nameLabel.layoutData = new VerticalLayoutData(100);
 			vGroup.addChild(nameLabel);
 			
-			var emailLabal:RTLLabel = new RTLLabel(profileData.registered?profileData.email:ResourceManager.getInstance().getString("loc", "profile_message"), 0xAAAAAA, null, null, false, null, 0.8);
+			var emailLabal:RTLLabel = new RTLLabel(profileData.registered?profileData.email:Localizations.instance.get("profile_message"), 0xAAAAAA, null, null, false, null, 0.8);
 			emailLabal.truncateToFit = true;
 			emailLabal.layoutData = new VerticalLayoutData(100);
 			vGroup.addChild(emailLabal);

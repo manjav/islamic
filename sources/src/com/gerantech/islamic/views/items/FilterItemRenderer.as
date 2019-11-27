@@ -2,14 +2,14 @@ package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.vo.Local;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.Check;
 	import feathers.controls.Label;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	
+
+	import gt.utils.Localizations;
+
 	import starling.display.Quad;
 		
 	public class FilterItemRenderer extends BaseCustomItemRenderer
@@ -54,7 +54,7 @@ package com.gerantech.islamic.views.items
 					return;
 				
 				local = _data as Local;
-				checkDisplay.label = ResourceManager.getInstance().getString("loc", local.name);
+				checkDisplay.label = Localizations.instance.get(local.name);
 			}
 		}
 		

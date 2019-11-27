@@ -4,12 +4,13 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.buttons.SimpleLayoutButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	
+	import feathers.layout.VerticalAlign;
+
+	import gt.utils.Localizations;
+
 	import starling.display.Quad;
 	import starling.events.Event;
 	
@@ -29,7 +30,7 @@ package com.gerantech.islamic.views.headers
 		{
 			super.initialize();
 			var hlayout:HorizontalLayout = new HorizontalLayout();
-			hlayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			hlayout.verticalAlign = VerticalAlign.MIDDLE;
 			hlayout.paddingRight = AppModel.instance.ltr? 0 : AppModel.instance.sizes.border*3;
 			hlayout.paddingLeft = AppModel.instance.ltr? AppModel.instance.sizes.border*3 : 0;
 			layout = hlayout;
@@ -37,7 +38,7 @@ package com.gerantech.islamic.views.headers
 			
 			backgroundSkin = new Quad(1,1,0x96000e);
 			
-			messageText = new RTLLabel(ResourceManager.getInstance().getString("loc", "purchase_warning"), 0xFFFFFF);
+			messageText = new RTLLabel(Localizations.instance.get("purchase_warning"), 0xFFFFFF);
 			messageText.layoutData = new HorizontalLayoutData(100);
 			
 			closeButton = new FlatButton("close_w", null, true);

@@ -2,16 +2,16 @@ package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
-	
+
+	import feathers.controls.renderers.LayoutGroupListItemRenderer;
+	import feathers.events.FeathersEventType;
+
 	import flash.geom.Rectangle;
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
-	
-	import mx.resources.ResourceManager;
-	
-	import feathers.controls.renderers.LayoutGroupListItemRenderer;
-	import feathers.events.FeathersEventType;
-	
+
+	import gt.utils.Localizations;
+
 	import starling.events.Event;
 
 	
@@ -86,7 +86,7 @@ package com.gerantech.islamic.views.items
 		
 		protected function loc(resourceName:String, parameters:Array=null, locale:String=null):String
 		{
-			return ResourceManager.getInstance().getString("loc", resourceName, parameters, locale);
+			return Localizations.instance.get(resourceName, parameters);//, locale);
 		}
 
 	}

@@ -13,7 +13,7 @@ package
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.UserModel;
-	
+
 	import flash.desktop.NativeApplication;
 	import flash.desktop.SystemIdleMode;
 	import flash.display.Sprite;
@@ -30,9 +30,7 @@ package
 	import flash.utils.clearTimeout;
 	import flash.utils.getTimer;
 	import flash.utils.setTimeout;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import starling.core.Starling;
 
 	public class Hidaya extends Sprite
@@ -90,8 +88,6 @@ package
 			//_starling.showStatsAt(HAlign.CENTER, VAlign.BOTTOM);
 			_starling.addEventListener("rootCreated", starling_rootCreatedHandler);
 			_starling.start();
-
-			trace(ResourceManager.getInstance().getString("loc", "quran_t"))
 		}
 		
 		private function starling_rootCreatedHandler():void
@@ -134,7 +130,6 @@ package
 			Main(_starling.root).createScreens();
 			//stage.quality = StageQuality.BEST;
 			//Assets.save();
-			trace("5", getTimer()-ft);
 		}
 	
 		
@@ -207,7 +202,7 @@ package
 		{
 			stage.removeEventListener(Event.ACTIVATE, stage_activateHandler);
 			_starling.start();
-			stage.frameRate = 60;
+			stage.frameRate = 40;
 			//userModel.deactiveBackup();
 			setTimeout(function():void{_starling.skipUnchangedFrames = true}, 4000);
 		}

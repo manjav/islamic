@@ -152,10 +152,10 @@ package com.gerantech.islamic.managers
 				for each(var p:String in conf.freeReciters)
 					persons.push(ConfigModel.instance.getReciterByPath(p).name);
 				
-				purchaseMessage = ResourceManager.getInstance().getString("loc", "purchase_player_1")+"\n"+bullet+" ";
+				purchaseMessage = Localizations.instance.get("purchase_player_1")+"\n"+bullet+" ";
 				purchaseMessage+= (persons.join("\n"+bullet+" "));
-				purchaseMessage += ("\n"+ResourceManager.getInstance().getString("loc", "purchase_player_2"));
-				purchaseMessage += ("\n\n"+ResourceManager.getInstance().getString("loc", "purchase_popup_message"));
+				purchaseMessage += ("\n"+Localizations.instance.get("purchase_player_2"));
+				purchaseMessage += ("\n\n"+Localizations.instance.get("purchase_popup_message"));
 				AppController.instance.alert("purchase_popup_title", purchaseMessage, "cancel_button", "purchase_popup_accept_label", BillingManager.instance.purchase);
 				return;
 			}*/

@@ -3,11 +3,11 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.LayoutGroup;
-	
+
+	import gt.utils.Localizations;
+
 	import starling.display.Quad;
 	
 	public class BaseSubtitle extends LayoutGroup
@@ -29,7 +29,7 @@ package com.gerantech.islamic.views.headers
 		
 		protected function loc(str:String, parameters:Array=null, locale:String=null):String
 		{
-			return ResourceManager.getInstance().getString("loc", str, parameters, locale);
+			return Localizations.instance.get(str, parameters);//, locale);
 		}
 		
 	}

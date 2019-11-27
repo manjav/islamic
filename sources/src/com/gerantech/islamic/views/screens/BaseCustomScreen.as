@@ -5,12 +5,12 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
-	
-	import flash.utils.getQualifiedClassName;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.Screen;
+
+	import flash.utils.getQualifiedClassName;
+
+	import gt.utils.Localizations;
 	
 	public class BaseCustomScreen extends Screen
 	{
@@ -47,7 +47,7 @@ package com.gerantech.islamic.views.screens
 		
 		protected function loc(resourceName:String, parameters:Array=null, locale:String=null):String
 		{
-			return ResourceManager.getInstance().getString("loc", resourceName, parameters, locale);
+			return Localizations.instance.get(resourceName, parameters);//, locale);
 		}
 		protected function get appModel():		AppModel		{	return AppModel.instance;		}
 		protected function get userModel():		UserModel		{	return UserModel.instance;		}

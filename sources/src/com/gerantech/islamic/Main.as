@@ -1,6 +1,5 @@
 package com.gerantech.islamic
 {
-	import com.gerantech.islamic.events.AppEvent;
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.TimesModel;
@@ -29,22 +28,24 @@ package com.gerantech.islamic
 	import com.gerantech.islamic.views.screens.SearchScreen;
 	import com.gerantech.islamic.views.screens.SettingsScreen;
 	import com.gerantech.islamic.views.screens.TimesScreen;
-	
-	import flash.desktop.NativeApplication;
-	import flash.events.InvokeEvent;
-	import flash.utils.getTimer;
-	
+
+	import feathers.controls.AutoSizeMode;
 	import feathers.controls.StackScreenNavigator;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.core.PopUpManager;
 	import feathers.motion.Cover;
 	import feathers.motion.Reveal;
-	
+
+	import flash.desktop.NativeApplication;
+	import flash.events.InvokeEvent;
+	import flash.utils.getTimer;
+
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import gt.utils.Localizations;
 
 	public class Main extends Sprite
 	{		
@@ -54,29 +55,29 @@ package com.gerantech.islamic
 		{
 			appModel = AppModel.instance;
 			appModel.navigator = new StackScreenNavigator();
-			appModel.navigator.autoSizeMode = StackScreenNavigator.AUTO_SIZE_MODE_STAGE;
+			appModel.navigator.autoSizeMode = AutoSizeMode.STAGE;
 			appModel.navigator.clipContent = true;
 			
 			var dashItem:StackScreenNavigatorItem = new StackScreenNavigatorItem(DashboardScreen);
 			appModel.navigator.addScreen(appModel.PAGE_DASHBOARD, dashItem);
 			
 			addModal(appModel.PAGE_SETTINGS,			SettingsScreen);
-			addModal(appModel.PAGE_ABOUT,				AboutScreen);
+			addModal(appModel.PAGE_ABOUT,					AboutScreen);
 			
-			addModal(appModel.PAGE_QURAN,				QuranScreen);
-			addModal(appModel.PAGE_INDEX,				IndexScreen);
+			addModal(appModel.PAGE_QURAN,					QuranScreen);
+			addModal(appModel.PAGE_INDEX,					IndexScreen);
 			addModal(appModel.PAGE_BOOKMARKS,			BookmarksScreen);
 			addModal(appModel.PAGE_SEARCH,				SearchScreen);
 			addModal(appModel.PAGE_PERSON,				PersonsScreen);
 			addModal(appModel.PAGE_FILTERED,			FilteredPersonScreen);
-			addModal(appModel.PAGE_OMEN,				OmenScreen);
+			addModal(appModel.PAGE_OMEN,					OmenScreen);
 			
 			addModal(appModel.PAGE_PURCHASE,			PurchaseScreen);
 			addModal(appModel.PAGE_DOWNLOAD,			DownloadScreen);
 			addModal(appModel.PAGE_COMPASS,				CompassScreen);
-			addModal(appModel.PAGE_CITY,				CityScreen);
-			addModal(appModel.PAGE_TIMES,				TimesScreen);
-			addModal(appModel.PAGE_ALERT,				AlertScreen);
+			addModal(appModel.PAGE_CITY,					CityScreen);
+			addModal(appModel.PAGE_TIMES,					TimesScreen);
+			addModal(appModel.PAGE_ALERT,					AlertScreen);
 			addModal(appModel.PAGE_CALENDAR, 			CalendarScreen);			
 		}
 		
@@ -103,6 +104,13 @@ package com.gerantech.islamic
 			UserModel.instance.timesModel.load();
 			trace(" --  Main createScreens", getTimer()-Hidaya.ft);
 			
+			Localizations.instance.addEventListener(Event.CHANGE, localizations_changeHandler);
+			Localizations.instance.changeLocale(Localizations.instance.getLocaleByTimezone("Asia/Tehran"));//NativeAbilities.instance.getTimezone()
+		}
+		
+		private function localizations_changeHandler(event:Event):void
+		{
+			Localizations.instance.removeEventListener(Event.CHANGE, localizations_changeHandler);
 			// check invoke event for getting metadata and arguments
 			//appModel.invokeData = {type:"athan", timeIndex:0, alertIndex:0};
 			appModel.addEventListener(InvokeEvent.INVOKE, showInvokedCommand);
@@ -120,9 +128,10 @@ package com.gerantech.islamic
 				}
 				else*/
 				tute_closeHandler(null);
+
 			}
 		}
-		
+
 		private function showInvokedCommand():void
 		{
 			var timeModel:TimesModel = UserModel.instance.timesModel;

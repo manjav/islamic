@@ -3,6 +3,7 @@ package com.gerantech.islamic.models.vo
 	import com.gerantech.islamic.utils.StrTools;
 	
 	import mx.resources.ResourceManager;
+	import gt.utils.Localizations;
 
 	public class Time
 	{
@@ -38,7 +39,7 @@ package com.gerantech.islamic.models.vo
 		}
 		protected function loc(str:String, parameters:Array=null, locale:String=null):String
 		{
-			return ResourceManager.getInstance().getString("loc", str, parameters, locale);
+			return Localizations.instance.get(str, parameters);//, locale);
 		}
 
 	}

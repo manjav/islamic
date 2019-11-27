@@ -25,6 +25,7 @@ package com.gerantech.islamic.views.items
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
+	import gt.utils.Localizations;
 
 	public class DownloadItemRenderer extends BaseCustomItemRenderer
 	{
@@ -124,7 +125,7 @@ package com.gerantech.islamic.views.items
 			progressBar.enabled = false;
 			Starling.juggler.removeTweens(progressBar);
 			//TweenLite.killTweensOf(progressBar);
-			nameDisplay.text = StrTools.getNumberFromLocale(String(index+1)) + ". " + ResourceManager.getInstance().getString("loc", "sura_l")+" "+ (appModel.ltr?(download.tname+","):download.name);
+			nameDisplay.text = StrTools.getNumberFromLocale(String(index+1)) + ". " + Localizations.instance.get("sura_l")+" "+ (appModel.ltr?(download.tname+","):download.name);
 			
 			messageDisplay.visible = false;
 			messageDisplay.alpha = 0;

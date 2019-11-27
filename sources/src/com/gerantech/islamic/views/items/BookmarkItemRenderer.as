@@ -7,12 +7,13 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	
+	import feathers.layout.VerticalAlign;
+
+	import gt.utils.Localizations;
+
 	import starling.display.Quad;
 	import starling.events.Event;
 
@@ -34,7 +35,7 @@ package com.gerantech.islamic.views.items
 			height = appModel.sizes.singleLineItem;
 			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
-			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			myLayout.verticalAlign = VerticalAlign.MIDDLE;
 			myLayout.gap = appModel.sizes.border*4;
 			myLayout.paddingLeft = appModel.ltr ? appModel.sizes.border*4 : 0;
 			myLayout.paddingRight = appModel.ltr ? 0 : appModel.sizes.border*4;
@@ -66,7 +67,7 @@ package com.gerantech.islamic.views.items
 			//trace(ResourceManager.getInstance().localeChain, appModel.ltr)
 			bookmark = Bookmark.getFromObject(_data);
 			var sura:Sura = ResourceModel.instance.suraList[bookmark.sura-1];
-			nameDisplay.text = ResourceManager.getInstance().getString("loc", "sura_l")+" "+ (appModel.ltr?(sura.tname+","):sura.name) + " "+ResourceManager.getInstance().getString("loc", "verse_l")+" "+ StrTools.getNumberFromLocale(bookmark.aya);
+			nameDisplay.text = Localizations.instance.get("sura_l")+" "+ (appModel.ltr?(sura.tname+","):sura.name) + " "+Localizations.instance.get("verse_l")+" "+ StrTools.getNumberFromLocale(bookmark.aya);
 			super.commitData();
 		}
 		

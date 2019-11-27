@@ -1,19 +1,18 @@
 package com.gerantech.islamic.views.controls
 {
 	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.buttons.FlatButton;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	
+
+	import gt.utils.Localizations;
+
 	import starling.events.Event;
 	
 	public class CheckPanel extends LayoutGroup
@@ -73,7 +72,7 @@ package com.gerantech.islamic.views.controls
 			container.addChild(!AppModel.instance.ltr?checkDisplay:titleDisplay);
 			container.addChild(AppModel.instance.ltr?checkDisplay:titleDisplay);
 			
-			var _label:String = ResourceManager.getInstance().getString("loc", label);
+			var _label:String = Localizations.instance.get(label);
 			if(_label==null)
 				_label = label;
 			titleDisplay.text = _label;

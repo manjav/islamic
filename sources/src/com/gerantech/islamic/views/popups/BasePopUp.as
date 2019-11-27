@@ -6,14 +6,15 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.views.buttons.FlatButton;
-	
+
+	import feathers.controls.AutoSizeMode;
+	import feathers.controls.LayoutGroup;
+
 	import flash.ui.Keyboard;
 	import flash.utils.getQualifiedClassName;
-	
-	import mx.resources.ResourceManager;
-	
-	import feathers.controls.LayoutGroup;
-	
+
+	import gt.utils.Localizations;
+
 	import starling.events.Event;
 	import starling.events.KeyboardEvent;
 	
@@ -32,7 +33,7 @@ package com.gerantech.islamic.views.popups
 			super.initialize();
 			_isInitialized = true;
 			
-			autoSizeMode = LayoutGroup.AUTO_SIZE_MODE_STAGE; 
+			autoSizeMode = AutoSizeMode.STAGE; 
 			stage_resizeHandler(null);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, stage_keyUpHandler);	 
 			addEventListener(Event.REMOVED_FROM_STAGE, removeFromStageHandler);
@@ -65,7 +66,7 @@ package com.gerantech.islamic.views.popups
 		
 		protected function loc(resourceName:String, parameters:Array=null, locale:String=null):String
 		{
-			return ResourceManager.getInstance().getString("loc", resourceName, parameters, locale);
+			return Localizations.instance.get(resourceName, parameters);//, locale);
 		}
 		protected function get appModel():		AppModel		{	return AppModel.instance;		}
 		protected function get userModel():		UserModel		{	return UserModel.instance;		}

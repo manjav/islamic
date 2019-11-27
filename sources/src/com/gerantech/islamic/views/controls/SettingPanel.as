@@ -4,9 +4,7 @@ package com.gerantech.islamic.views.controls
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	import com.gerantech.islamic.views.lists.QList;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.Button;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.PickerList;
@@ -16,7 +14,10 @@ package com.gerantech.islamic.views.controls
 	import feathers.events.FeathersEventType;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	
+	import feathers.layout.VerticalAlign;
+
+	import gt.utils.Localizations;
+
 	import starling.events.Event;
 	
 	public class SettingPanel extends LayoutGroup
@@ -67,7 +68,7 @@ package com.gerantech.islamic.views.controls
 			super.initialize()
 			
 			var mLayout:HorizontalLayout = new HorizontalLayout();
-			mLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			mLayout.verticalAlign = VerticalAlign.MIDDLE;
 			mLayout.gap = AppModel.instance.sizes.DP8;
 			layout = mLayout;
 			
@@ -89,7 +90,7 @@ package com.gerantech.islamic.views.controls
 			for each(var obj:Object in data)
 			{
 				if(!obj.name)
-					obj.name = ResourceManager.getInstance().getString("loc", obj.value); //trace(obj.name, obj.value);
+					obj.name = Localizations.instance.get(obj.value); //trace(obj.name, obj.value);
 				
 				if(obj.hasOwnProperty("value") && _selectedItem.hasOwnProperty("value") && obj.value==_selectedItem.value)
 					selectedIndex = index;
@@ -146,7 +147,7 @@ package com.gerantech.islamic.views.controls
 				else
 					els = new Array(picker, spacer, titleDisplay) ;
 				
-				var _label:String = ResourceManager.getInstance().getString("loc", label);
+				var _label:String = Localizations.instance.get(label);
 				if(_label==null)
 					_label = label;
 				titleDisplay.text = _label;

@@ -8,15 +8,15 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.items.BookmarkItemRenderer;
 	import com.gerantech.islamic.views.popups.UndoAlert;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.core.PopUpManager;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	
+
+	import gt.utils.Localizations;
+
 	import starling.events.Event;
 
 	public class BookmarksScreen extends BaseCustomPanelScreen
@@ -80,7 +80,7 @@ package com.gerantech.islamic.views.screens
 			userModel.bookmarks.removeItemAt(removedIndex);
 			refresh();
 			
-			undoAlert = new UndoAlert(ResourceManager.getInstance().getString("loc", "undo_remove"), undoRemovedItem);
+			undoAlert = new UndoAlert(Localizations.instance.get("undo_remove"), undoRemovedItem);
 			undoAlert.addEventListener(Event.CLOSE, undoAlert_closeHandler);
 			PopUpManager.addPopUp(undoAlert, false);
 		}

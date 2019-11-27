@@ -23,6 +23,7 @@ package com.gerantech.islamic.views.lists
 	import feathers.layout.VerticalLayout;
 	
 	import starling.events.Event;
+	import gt.utils.Localizations;
 	
 	public class TranslationList extends LayoutGroup
 	{
@@ -44,7 +45,7 @@ package com.gerantech.islamic.views.lists
 			super();
 			this.headerHeight = headerHeight;
 			
-			//autoSizeMode = AUTO_SIZE_MODE_STAGE;
+			//autoSizeMode = AutoSizeMode.STAGE;
 			
 			appModel = AppModel.instance;
 			userModel = UserModel.instance;
@@ -250,7 +251,7 @@ package com.gerantech.islamic.views.lists
 		
 		private function loc(resourceName:String, parameters:Array=null, locale:String=null):String
 		{
-			return ResourceManager.getInstance().getString("loc", resourceName, parameters, locale);
+			return Localizations.instance.get(resourceName, parameters);//, locale);
 		}
 	}
 }

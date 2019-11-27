@@ -8,18 +8,18 @@ package com.gerantech.islamic.views.controls
 	import com.gerantech.islamic.models.vo.Translator;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.StrTools;
-	
-	import flash.text.TextFormat;
-	import flash.text.engine.ElementFormat;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
 	import feathers.core.ITextRenderer;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	
+
+	import flash.text.TextFormat;
+	import flash.text.engine.ElementFormat;
+
+	import gt.utils.Localizations;
+
 	import starling.core.Starling;
 	import starling.events.Event;
 	
@@ -124,7 +124,7 @@ package com.gerantech.islamic.views.controls
 			limitMode = _isEnabled && _aya.sura>2;
 			if(limitMode)
 			{
-				label.text = ResourceManager.getInstance().getString("loc", "purchase_translate", null, translator.flag.dir=="rtl"?"fa_IR":"en_US"); 
+				label.text = Localizations.instance.get("purchase_translate", null);//, translator.flag.dir=="rtl"?"fa_IR":"en_US"); 
 				showLabel();
 				return;
 			}
@@ -166,7 +166,7 @@ package com.gerantech.islamic.views.controls
 		
 		private function translationErrorHandler():void
 		{
-			label.text = translator.flag.dir=="rtl" ? ResourceManager.getInstance().getString("loc", "translation_error") : "Nerwork error";
+			label.text = translator.flag.dir=="rtl" ? Localizations.instance.get("translation_error") : "Nerwork error";
 			showLabel();
 		}
 		

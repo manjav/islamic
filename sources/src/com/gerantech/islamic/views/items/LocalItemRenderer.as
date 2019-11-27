@@ -24,6 +24,8 @@ package com.gerantech.islamic.views.items
 	
 	import starling.display.Image;
 	import starling.display.Quad;
+	import flashx.textLayout.formats.TextAlign;
+	import gt.utils.Localizations;
 		
 	public class LocalItemRenderer extends BaseCustomItemRenderer
 	{
@@ -46,7 +48,7 @@ package com.gerantech.islamic.views.items
 			
 			labelDisplay = new TextBlockTextRenderer();
 			var fd:FontDescription = new FontDescription("SourceSansPro", FontWeight.NORMAL, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF);
-			labelDisplay.textAlign = TextBlockTextRenderer.TEXT_ALIGN_RIGHT;
+			labelDisplay.textAlign = TextAlign.RIGHT;
 			labelDisplay.elementFormat = new ElementFormat(fd, UserModel.instance.fontSize, 0);
 			labelDisplay.layoutData = new AnchorLayoutData(NaN, NaN, NaN, NaN, 0, 0);
 			addChild(labelDisplay);
@@ -60,7 +62,7 @@ package com.gerantech.islamic.views.items
 				if(local==_data)
 					return;
 				local = _data as Local;
-				labelDisplay.text = ResourceManager.getInstance().getString("loc", local.name);
+				labelDisplay.text = Localizations.instance.get(local.name);
 				TweenLite.to(this, 0.5, {delay:index/listLen/3, alpha:1});
 			}
 		}

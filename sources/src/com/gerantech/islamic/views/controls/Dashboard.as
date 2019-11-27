@@ -4,15 +4,16 @@ package com.gerantech.islamic.views.controls
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.utils.StrTools;
-	
-	import flash.utils.clearInterval;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.VerticalLayout;
+
+	import flash.utils.clearInterval;
+
+	import gt.utils.Localizations;
+	import feathers.layout.HorizontalAlign;
 	
 	public class Dashboard extends LayoutGroup
 	{
@@ -35,7 +36,7 @@ package com.gerantech.islamic.views.controls
 			addChild(clock);
 			
 			var detailsLayout:VerticalLayout = new VerticalLayout();
-			detailsLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY; 
+			detailsLayout.horizontalAlign = HorizontalAlign.JUSTIFY; 
 			detailsLayout.padding = padding;
 			
 			details = new LayoutGroup();
@@ -83,7 +84,7 @@ package com.gerantech.islamic.views.controls
 		protected function get userModel():		UserModel		{	return UserModel.instance;		}
 		protected function loc(str:String, parameters:Array=null, locale:String=null):String
 		{
-			return ResourceManager.getInstance().getString("loc", str, parameters, locale);
+			return Localizations.instance.get(str, parameters);//, locale);
 		}
 		protected function num(input:Object):String
 		{

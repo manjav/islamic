@@ -14,21 +14,21 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.views.buttons.SeekToucher;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.popups.PlayerPopUp;
-	
-	import flash.geom.Point;
-	import flash.utils.clearTimeout;
-	import flash.utils.setTimeout;
-	
-	import mx.resources.ResourceManager;
-	
+
+	import feathers.controls.AutoSizeMode;
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	
+
+	import flash.geom.Point;
+	import flash.utils.clearTimeout;
+	import flash.utils.setTimeout;
+
 	import gt.utils.GTStringUtils;
-	
+	import gt.utils.Localizations;
+
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
@@ -80,7 +80,7 @@ package com.gerantech.islamic.views.headers
 		{
 			super.initialize();
 			
-			autoSizeMode = AUTO_SIZE_MODE_STAGE;
+			autoSizeMode = AutoSizeMode.STAGE;
 			appModel = AppModel.instance;
 			configModel = ConfigModel.instance;
 			_height = height = appModel.sizes.toolbar;
@@ -291,7 +291,7 @@ package com.gerantech.islamic.views.headers
 		{
 			if(!UserModel.instance.premiumMode)
 			{
-				var purchaseMessage:String = ResourceManager.getInstance().getString("loc", "purchase_repeat")+"\n"+ResourceManager.getInstance().getString("loc", "purchase_popup_message");
+				var purchaseMessage:String = Localizations.instance.get("purchase_repeat")+"\n"+Localizations.instance.get("purchase_popup_message");
 				AppController.instance.alert("purchase_popup_title", purchaseMessage, "cancel_button", "purchase_popup_accept_label", BillingManager.instance.purchase);
 				return;
 			}

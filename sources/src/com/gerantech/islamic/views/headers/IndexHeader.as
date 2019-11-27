@@ -2,13 +2,13 @@ package com.gerantech.islamic.views.headers
 {
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.views.controls.IndexSorter;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	
+
+	import gt.utils.Localizations;
+
 	import starling.display.Quad;
 	import starling.events.Event;
 	
@@ -99,7 +99,7 @@ package com.gerantech.islamic.views.headers
 		
 		private function loc(str:String):String
 		{
-			return ResourceManager.getInstance().getString("loc", str)
+			return Localizations.instance.get(str)
 		}
 		
 	}

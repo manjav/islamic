@@ -15,6 +15,7 @@ package com.gerantech.islamic.views.lists
 	import feathers.skins.SmartDisplayObjectStateValueSelector;
 	
 	import starling.events.Event;
+	import gt.utils.Localizations;
 	
 	public class TranslatorPickerList extends PickerList
 	{
@@ -41,7 +42,7 @@ package com.gerantech.islamic.views.lists
 			
 			
 				
-			var data:Array = new Array({name:ResourceManager.getInstance().getString("loc", "quran_t"), icon:"app:/com/gerantech/islamic/assets/images/icon/icon-192.png"});
+			var data:Array = new Array({name:Localizations.instance.get("quran_t"), icon:"app:/com/gerantech/islamic/assets/images/icon/icon-192.png"});
 			for each(var p:Person in ConfigModel.instance.selectedTranslators)
 				data.push({name:p.name, icon:p.iconTexture});
 			dataProvider = new ListCollection(data);

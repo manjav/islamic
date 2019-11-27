@@ -6,14 +6,16 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
-	import flash.utils.getQualifiedClassName;
-	
-	import mx.resources.ResourceManager;
-	
+
+	import feathers.controls.AutoSizeMode;
 	import feathers.controls.Header;
 	import feathers.controls.PanelScreen;
+	import feathers.controls.ScrollPolicy;
 	import feathers.layout.AnchorLayoutData;
+
+	import flash.utils.getQualifiedClassName;
+
+	import gt.utils.Localizations;
 	
 	public class BaseCustomPanelScreen extends PanelScreen
 	{
@@ -25,8 +27,8 @@ package com.gerantech.islamic.views.screens
 		override protected function initialize():void
 		{
 			super.initialize();
-			horizontalScrollPolicy = verticalScrollPolicy = SCROLL_POLICY_OFF;
-			autoSizeMode = AUTO_SIZE_MODE_STAGE;
+			horizontalScrollPolicy = verticalScrollPolicy = ScrollPolicy.OFF;
+			autoSizeMode = AutoSizeMode.STAGE;
 			
 			appModel.drawers.isEnabled = false;
 /*			width = appModel.sizes.width;
@@ -89,7 +91,7 @@ package com.gerantech.islamic.views.screens
 		
 		protected function loc(resourceName:String, parameters:Array=null, locale:String=null):String
 		{
-			return ResourceManager.getInstance().getString("loc", resourceName, parameters, locale);
+			return Localizations.instance.get(resourceName, parameters);//, locale);
 		}
 		protected function get appModel():		AppModel		{	return AppModel.instance;		}
 		protected function get userModel():		UserModel		{	return UserModel.instance;		}

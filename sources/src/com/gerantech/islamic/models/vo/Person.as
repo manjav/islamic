@@ -4,15 +4,17 @@ package com.gerantech.islamic.models.vo
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.utils.LoadAndSaver;
 	import com.gerantech.islamic.utils.StrTools;
-	
+
 	import flash.display.Bitmap;
 	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.filesystem.File;
-	
+
+	import gt.utils.Localizations;
+
 	import mx.resources.IResourceManager;
 	import mx.resources.ResourceManager;
-	
+
 	import starling.events.EventDispatcher;
 	import starling.textures.Texture;
 
@@ -256,7 +258,7 @@ package com.gerantech.islamic.models.vo
 		
 		protected function loc(resourceName:String):String
 		{
-			return ResourceManager.getInstance().getString("loc", resourceName);
+			return Localizations.instance.get(resourceName);
 		}
 	}
 }

@@ -22,6 +22,7 @@ package com.gerantech.islamic.views.items
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import gt.utils.Localizations;
 	
 	public class BaseCustomItemRenderer extends LayoutGroupListItemRenderer
 	{
@@ -198,7 +199,7 @@ package com.gerantech.islamic.views.items
 		
 		protected function loc(resourceName:String, parameters:Array=null, locale:String=null):String
 		{
-			return ResourceManager.getInstance().getString("loc", resourceName, parameters, locale);
+			return Localizations.instance.get(resourceName, parameters);//, locale);
 		}
 		protected function get appModel():		AppModel		{	return AppModel.instance;		}
 		protected function get userModel():		UserModel		{	return UserModel.instance;		}

@@ -1,16 +1,17 @@
 package com.gerantech.islamic.views.controls
 {
 	import com.gerantech.islamic.models.AppModel;
-	
-	import mx.resources.ResourceManager;
-	
+
+	import feathers.controls.AutoSizeMode;
 	import feathers.controls.Button;
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	
+
+	import gt.utils.Localizations;
+
 	import spine.Event;
-	
+
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
@@ -38,7 +39,7 @@ package com.gerantech.islamic.views.controls
 		override protected function initialize ():void
 		{
 			super.initialize();
-			autoSizeMode = AUTO_SIZE_MODE_STAGE;
+			autoSizeMode = AutoSizeMode.STAGE;
 			
 			/*var atlas:Atlas = new Atlas(new SpineboyAtlasFile(), new StarlingTextureLoader(new SpineboyAtlasTexture()));
 			var json:SkeletonJson = new SkeletonJson(new AtlasAttachmentLoader(atlas));
@@ -107,7 +108,7 @@ package com.gerantech.islamic.views.controls
 		
 		private function setTitle(str:String):void
 		{
-			titleDisplay.text = ResourceManager.getInstance().getString("loc", str);
+			titleDisplay.text = Localizations.instance.get(str);
 			titleDisplay.pivotY = titleDisplay.height/2;
 			titleDisplay.alpha = 0;
 			titleDisplay.scaleX = titleDisplay.scaleY = 0.5;

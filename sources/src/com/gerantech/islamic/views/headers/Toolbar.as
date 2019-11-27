@@ -7,16 +7,17 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.buttons.ToolbarButton;
 	import com.gerantech.islamic.views.lists.MenuList;
-	
-	import flash.utils.setTimeout;
-	
+
+	import feathers.controls.AutoSizeMode;
 	import feathers.controls.Callout;
 	import feathers.controls.LayoutGroup;
 	import feathers.core.FeathersControl;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	
+
+	import flash.utils.setTimeout;
+
 	import starling.display.Quad;
 	import starling.events.Event;
 	import starling.filters.DropShadowFilter;
@@ -41,7 +42,7 @@ package com.gerantech.islamic.views.headers
 		
 		public function Toolbar()
 		{
-			autoSizeMode = AUTO_SIZE_MODE_STAGE;
+			autoSizeMode = AutoSizeMode.STAGE;
 			appModel = AppModel.instance;
 			backgroundSkin = new Quad(1, 1, BaseMaterialTheme.CHROME_COLOR);
 						
@@ -230,7 +231,7 @@ package com.gerantech.islamic.views.headers
 					title = "page_"+currentPersonType;
 				
 				addChild(screenTitle);
-				screenTitle.text = ResourceManager.getInstance().getString("loc", title);
+				screenTitle.text = Localizations.instance.get(title);
 				screenTitle.alpha = 0;
 				TweenLite.to(screenTitle, 0.3, {alpha:1});
 			}

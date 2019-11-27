@@ -7,11 +7,10 @@ package com.gerantech.islamic.managers
 	import com.pozirk.payment.android.InAppPurchaseDetails;
 	import com.pozirk.payment.android.InAppPurchaseEvent;
 	import com.pozirk.payment.android.InAppSkuDetails;
-	
+
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
-	
-	import mx.resources.ResourceManager;
+	import gt.utils.Localizations;
 	
 	public class BillingManager
 	{
@@ -117,7 +116,7 @@ package com.gerantech.islamic.managers
 			
 		private function lostMarket():void
 		{
-			NativeAbilities.instance.showToast(ResourceManager.getInstance().getString("loc", "purchase_lost"), 1);
+			NativeAbilities.instance.showToast(Localizations.instance.get("purchase_lost"), 1);
 			init();
 		}
 
@@ -158,7 +157,7 @@ package com.gerantech.islamic.managers
 		{
 			if(!inited)
 			{
-				NativeAbilities.instance.showToast(ResourceManager.getInstance().getString("loc", "purchase_lost"), 1);
+				NativeAbilities.instance.showToast(Localizations.instance.get("purchase_lost"), 1);
 				return;
 			}
 			_iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreAllSuccess);
@@ -235,26 +234,26 @@ package com.gerantech.islamic.managers
 			switch(AppModel.instance.descriptor.market)
 			{
 				case "google":
-					//link = '<a href="https://play.google.com/store/apps/details?id=air.'+AppModel.instance.descriptor.id+'">'+ResourceManager.getInstance().getString("loc", "download_link")+'</a>';			
+					//link = '<a href="https://play.google.com/store/apps/details?id=air.'+AppModel.instance.descriptor.id+'">'+Localizations.instance.get("download_link")+'</a>';			
 					link = 'https://play.google.com/store/apps/details?id=air.'+AppModel.instance.descriptor.id;			
 					break;
 				
 				case "cafebazaar":
-				//	link = '<a href="bazaar://details?id=air.'+AppModel.instance.descriptor.id+'">'+ResourceManager.getInstance().getString("loc", "download_link")+'</a>';			
+				//	link = '<a href="bazaar://details?id=air.'+AppModel.instance.descriptor.id+'">'+Localizations.instance.get("download_link")+'</a>';			
 					link = 'https://cafebazaar.ir/app/air.'+AppModel.instance.descriptor.id;			
 					break;
 				
 				case "myket":
-				//	link = '<a href="http://myket.ir/App/air.com.gerantech.islamic/%D9%86%D8%B1%D9%85-%D8%A7%D9%81%D8%B2%D8%A7%D8%B1-%D8%A7%D8%B3%D9%84%D8%A7%D9%85%DB%8C-%D9%87%D8%AF%D8%A7%DB%8C%D8%AA">'+ResourceManager.getInstance().getString("loc", "download_link")+'</a>';			
+				//	link = '<a href="http://myket.ir/App/air.com.gerantech.islamic/%D9%86%D8%B1%D9%85-%D8%A7%D9%81%D8%B2%D8%A7%D8%B1-%D8%A7%D8%B3%D9%84%D8%A7%D9%85%DB%8C-%D9%87%D8%AF%D8%A7%DB%8C%D8%AA">'+Localizations.instance.get("download_link")+'</a>';			
 					link = 'http://myket.ir/App/air.com.gerantech.islamic/%D9%86%D8%B1%D9%85-%D8%A7%D9%81%D8%B2%D8%A7%D8%B1-%D8%A7%D8%B3%D9%84%D8%A7%D9%85%DB%8C-%D9%87%D8%AF%D8%A7%DB%8C%D8%AA';			
 					break;
 				
 				case "cando":
-				//	link = '<a href="cando://details?id=air.'+AppModel.instance.descriptor.id+'">'+ResourceManager.getInstance().getString("loc", "download_link")+'</a>';			
+				//	link = '<a href="cando://details?id=air.'+AppModel.instance.descriptor.id+'">'+Localizations.instance.get("download_link")+'</a>';			
 					link = 'cando://details?id=air.'+AppModel.instance.descriptor.id;			
 					break;
 			}			
-			NativeAbilities.instance.shareText(ResourceManager.getInstance().getString("loc", "app_title"), ResourceManager.getInstance().getString("loc", "app_descript")+"\n"+link);
+			NativeAbilities.instance.shareText(Localizations.instance.get("app_title"), Localizations.instance.get("app_descript")+"\n"+link);
 		}
 	}
 }

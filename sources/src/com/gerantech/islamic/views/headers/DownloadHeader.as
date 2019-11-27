@@ -25,6 +25,7 @@ package com.gerantech.islamic.views.headers
 	
 	import starling.display.Quad;
 	import starling.events.Event;
+	import gt.utils.Localizations;
 	
 	public class DownloadHeader extends LayoutGroup
 	{
@@ -152,7 +153,7 @@ package com.gerantech.islamic.views.headers
 		
 		private function loc(resourceName:String):String
 		{
-			return ResourceManager.getInstance().getString("loc", resourceName);
+			return Localizations.instance.get(resourceName);
 		}
 		
 		public function set description(value:String):void

@@ -24,6 +24,9 @@ package com.gerantech.islamic.views.items
 	import feathers.layout.VerticalLayoutData;
 	
 	import starling.events.Event;
+	import gt.utils.Localizations;
+	import feathers.layout.HorizontalAlign;
+	import feathers.layout.VerticalAlign;
 	
 	public class PurchasePage extends LayoutGroup
 	{
@@ -36,14 +39,13 @@ package com.gerantech.islamic.views.items
 		{
 			super.initialize();
 			var vlayout:VerticalLayout = new VerticalLayout();
-			vlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
-			vlayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
+			vlayout.horizontalAlign = HorizontalAlign.CENTER;
+			vlayout.verticalAlign = VerticalAlign.MIDDLE;
 			vlayout.gap = AppModel.instance.sizes.twoLineItem/4;
 			layout = vlayout;
 			
 			
-			
-			var message:String = loc("purchase_navigation");//ResourceManager.getInstance().getString("loc", "purchase_navigation")
+			var message:String = loc("purchase_navigation");//Localizations.instance.get("purchase_navigation")
 			var messageDisplay:RTLLabel = new RTLLabel(message, 0xFF0000, "center", null, true);
 			messageDisplay.layoutData = new VerticalLayoutData(90);
 			addChild(messageDisplay);
@@ -73,7 +75,7 @@ package com.gerantech.islamic.views.items
 		
 		private function loc(resourceName:String):String
 		{
-			return ResourceManager.getInstance().getString("loc", resourceName);
+			return Localizations.instance.get(resourceName);
 		}
 
 		

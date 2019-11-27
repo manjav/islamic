@@ -3,17 +3,16 @@ package com.gerantech.islamic.managers
 	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.User;
-	
+
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
 	import flash.net.URLRequest;
 	import flash.net.URLStream;
 	import flash.utils.ByteArray;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import gt.php.MySQL;
 	import gt.php.PHPInterface;
+	import gt.utils.Localizations;
 
 	public class UserDataUpdater
 	{
@@ -93,7 +92,7 @@ package com.gerantech.islamic.managers
 		
 		private function loc(key:String):String
 		{
-			return ResourceManager.getInstance().getString("loc", key);
+			return Localizations.instance.get(key);
 		}
 		
 	}

@@ -8,20 +8,18 @@ package com.gerantech.islamic.views.lists
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.items.SortableItemRenderer;
 	import com.gerantech.islamic.views.popups.UndoAlert;
-	
-	import flash.geom.Point;
-	import flash.utils.setTimeout;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.ScrollContainer;
 	import feathers.core.PopUpManager;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
-	
-	import flashx.textLayout.tlf_internal;
-	
+
+	import flash.geom.Point;
+	import flash.utils.setTimeout;
+
+	import gt.utils.Localizations;
+
 	import starling.animation.Transitions;
 	import starling.core.Starling;
 	import starling.events.Event;
@@ -110,10 +108,10 @@ package com.gerantech.islamic.views.lists
 		private function removeItem(item:SortableItemRenderer, index:uint):void
 		{
 			itemContainer.removeChild(item);
-			var undoAlert:UndoAlert = new UndoAlert(ResourceManager.getInstance().getString("loc", "undo_remove"), undoDeleteCaller, 2, 1, [item,index]);
+			var undoAlert:UndoAlert = new UndoAlert(Localizations.instance.get("undo_remove"), undoDeleteCaller, 2, 1, [item,index]);
 			undoAlert.addEventListener(Event.CLOSE, undoAlert_closeHandler);
 			PopUpManager.addPopUp(undoAlert, false);
-			//new Alert(parent, ResourceManager.getInstance().getString("loc", "undo_remove"), undoDeleteCaller, [item,index]);
+			//new Alert(parent, Localizations.instance.get("undo_remove"), undoDeleteCaller, [item,index]);
 			function undoAlert_closeHandler(event:Event):void
 			{
 				PopUpManager.removePopUp(event.currentTarget as UndoAlert, true);

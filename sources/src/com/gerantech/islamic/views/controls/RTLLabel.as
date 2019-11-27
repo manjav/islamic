@@ -63,12 +63,12 @@ package com.gerantech.islamic.views.controls
 			return _measurementTextLines[0].textWidth>=width;
 		}
 		
-		public function get numLines():uint
+		/* override public function get numLines():int
 		{
 			if(_measurementTextLines==null)
 				return 0;
 			return _measurementTextLines.length;
-		}
+		}*/
 
 	}
 }

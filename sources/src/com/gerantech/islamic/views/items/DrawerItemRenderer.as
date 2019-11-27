@@ -5,15 +5,15 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
-	import flash.text.engine.ElementFormat;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	
+
+	import flash.text.engine.ElementFormat;
+
+	import gt.utils.Localizations;
+
 	import starling.display.Quad;
 
 	public class DrawerItemRenderer extends BaseCustomItemRenderer
@@ -77,7 +77,7 @@ package com.gerantech.islamic.views.items
 				return;
 			}
 			iconDisplay.source = Assets.getTexture(String(_data.icon));
-			titleDisplay.text = ResourceManager.getInstance().getString("loc", String(_data.title));
+			titleDisplay.text = Localizations.instance.get(String(_data.title));
 		}
 
 	}

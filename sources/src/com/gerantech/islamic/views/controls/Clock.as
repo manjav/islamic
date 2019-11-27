@@ -1,27 +1,24 @@
 package com.gerantech.islamic.views.controls
 {
-	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.StrTools;
-	
+
 	import flash.desktop.NativeApplication;
 	import flash.events.Event;
 	import flash.utils.clearInterval;
 	import flash.utils.setInterval;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import gt.utils.GTStringUtils;
-	
+	import gt.utils.Localizations;
+
 	import starling.animation.Transitions;
 	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.utils.deg2rad;
-	import starling.utils.rad2deg;
 	
 	public class Clock extends Sprite
 	{
@@ -188,7 +185,7 @@ package com.gerantech.islamic.views.controls
 		
 		protected function loc(str:String, parameters:Array=null, locale:String=null):String
 		{
-			return ResourceManager.getInstance().getString("loc", str, parameters, locale);
+			return Localizations.instance.get(str, parameters);//, locale);
 		}
 		protected function num(input:Object):String
 		{
@@ -199,7 +196,5 @@ package com.gerantech.islamic.views.controls
 			clearInterval(intervalID);
 			super.dispose();
 		}
-		
-		
 	}
 }

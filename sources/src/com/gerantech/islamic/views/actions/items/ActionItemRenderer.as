@@ -6,13 +6,14 @@ package com.gerantech.islamic.views.actions.items
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.buttons.SimpleLayoutButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	
+	import feathers.layout.VerticalAlign;
+
+	import gt.utils.Localizations;
+
 	import starling.display.Quad;
 	
 	public class ActionItemRenderer extends SimpleLayoutButton
@@ -23,7 +24,7 @@ package com.gerantech.islamic.views.actions.items
 		{
 			this.mode = mode;
 			var mLayout:HorizontalLayout = new HorizontalLayout();
-			mLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			mLayout.verticalAlign = VerticalAlign.MIDDLE;
 			mLayout.gap = AppModel.instance.sizes.border*2;
 			layout = mLayout;
 			
@@ -33,7 +34,7 @@ package com.gerantech.islamic.views.actions.items
 			backgroundSkin = new Quad(1, 1);
 			backgroundSkin.alpha = 0;
 			
-			var label:RTLLabel = new RTLLabel(ResourceManager.getInstance().getString("loc", mode.name), BaseMaterialTheme.PRIMARY_TEXT_COLOR, "right"); 
+			var label:RTLLabel = new RTLLabel(Localizations.instance.get(mode.name), BaseMaterialTheme.PRIMARY_TEXT_COLOR, "right"); 
 			label.layoutData = new HorizontalLayoutData(100);
 			addChild(label);
 			
