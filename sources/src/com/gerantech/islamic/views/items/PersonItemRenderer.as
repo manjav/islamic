@@ -8,11 +8,7 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.views.controls.Devider;
 	import com.gerantech.islamic.views.controls.PersonAccessory;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
-	import flash.geom.Rectangle;
-	import flash.utils.clearInterval;
-	import flash.utils.setInterval;
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
@@ -21,9 +17,14 @@ package com.gerantech.islamic.views.items
 	import feathers.layout.HorizontalLayoutData;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
-	
+
+	import flash.geom.Rectangle;
+	import flash.utils.clearInterval;
+	import flash.utils.setInterval;
+
 	import starling.display.DisplayObject;
 	import starling.events.Event;
+	import feathers.layout.VerticalAlign;
 
 	public class PersonItemRenderer extends BaseCustomItemRenderer
 	{
@@ -56,7 +57,7 @@ package com.gerantech.islamic.views.items
 			addChild(container);
 			
 			var containerLayout:HorizontalLayout = new HorizontalLayout();
-			containerLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			containerLayout.verticalAlign = VerticalAlign.MIDDLE;
 			containerLayout.gap = containerLayout.padding = appModel.sizes.DP16;
 			//myLayout.paddingRight = appModel.sizes.DP8;
 			container.layout = containerLayout;

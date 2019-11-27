@@ -8,19 +8,18 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.controls.Spacer;
 	import com.gerantech.islamic.views.items.DrawerItemRenderer;
-	
-	import flash.net.URLRequest;
-	import flash.net.navigateToURL;
-	
+
 	import feathers.controls.ImageLoader;
-	import feathers.controls.LayoutGroup;
 	import feathers.controls.List;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
-	
+
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
+
 	import starling.events.Event;
 	
 	public class AboutScreen extends BaseCustomPanelScreen
@@ -77,7 +76,7 @@ package com.gerantech.islamic.views.screens
 			var headerGroup:LayoutGroup = new LayoutGroup();
 			var hlayout:HorizontalLayout = new HorizontalLayout();
 			hlayout.gap = appModel.sizes.border*3;
-			hlayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			hlayout.verticalAlign = VerticalAlign.MIDDLE;
 			headerGroup.layout = hlayout;
 			addChild(headerGroup);
 			

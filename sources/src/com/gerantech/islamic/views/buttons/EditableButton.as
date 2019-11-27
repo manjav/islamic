@@ -4,14 +4,15 @@ package com.gerantech.islamic.views.buttons
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
 	import feathers.skins.ImageSkin;
-	
+
 	import starling.display.DisplayObject;
 	import starling.textures.Texture;
+	import feathers.layout.VerticalAlign;
 
 	public class EditableButton extends SimpleLayoutButton
 	{
@@ -61,7 +62,7 @@ package com.gerantech.islamic.views.buttons
 			backgroundSkin = skin;
 			
 			var hlayout:HorizontalLayout = new HorizontalLayout();
-			hlayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			hlayout.verticalAlign = VerticalAlign.MIDDLE;
 			layout = hlayout;
 			
 			iconDisplay = new ImageLoader();

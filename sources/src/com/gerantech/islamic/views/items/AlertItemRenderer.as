@@ -8,18 +8,19 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.buttons.SimpleLayoutButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
+
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	
+
 	import gt.utils.GTStringUtils;
-	
+
 	import starling.animation.Transitions;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Event;
+	import feathers.layout.VerticalAlign;
 
 	public class AlertItemRenderer extends BaseCustomItemRenderer
 	{
@@ -44,7 +45,7 @@ package com.gerantech.islamic.views.items
 			alertDate = new Date();
 			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
-			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			myLayout.verticalAlign = VerticalAlign.MIDDLE;
 			/*if(appModel.ltr)
 				myLayout.paddingLeft = appModel.sizes.DP16;
 			else

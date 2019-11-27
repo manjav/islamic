@@ -9,7 +9,15 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.controls.Devider;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
+
+	import feathers.controls.ImageLoader;
+	import feathers.controls.LayoutGroup;
+	import feathers.controls.text.TextBlockTextRenderer;
+	import feathers.controls.text.TextFieldTextRenderer;
+	import feathers.layout.AnchorLayout;
+	import feathers.layout.AnchorLayoutData;
+	import feathers.layout.HorizontalLayout;
+
 	import flash.text.TextFormat;
 	import flash.text.engine.ElementFormat;
 	import flash.text.engine.FontDescription;
@@ -18,16 +26,9 @@ package com.gerantech.islamic.views.items
 	import flash.text.engine.FontWeight;
 	import flash.text.engine.LineJustification;
 	import flash.text.engine.SpaceJustifier;
-	
-	import feathers.controls.ImageLoader;
-	import feathers.controls.LayoutGroup;
-	import feathers.controls.text.TextBlockTextRenderer;
-	import feathers.controls.text.TextFieldTextRenderer;
-	import feathers.layout.AnchorLayout;
-	import feathers.layout.AnchorLayoutData;
-	import feathers.layout.HorizontalLayout;
-	
+
 	import starling.filters.ColorMatrixFilter;
+	import feathers.layout.VerticalAlign;
 	
 	public class TranslationItemRenderer extends BaseCustomItemRenderer	
 	{
@@ -97,7 +98,7 @@ package com.gerantech.islamic.views.items
 			devider.layoutData = new AnchorLayoutData(border,0,NaN,0);
 			
 			tLayout = new HorizontalLayout();
-			tLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			tLayout.verticalAlign = VerticalAlign.MIDDLE;
 			tLayout.gap = tLayout.paddingBottom = tLayout.paddingTop = border;
 			
 			translatorHeader = new LayoutGroup();

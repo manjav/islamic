@@ -3,21 +3,22 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
-	import flash.geom.Rectangle;
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	
+
+	import flash.geom.Rectangle;
+
 	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import feathers.layout.VerticalAlign;
 
 	public class UndoAlert extends BasePopUp
 	{
@@ -49,7 +50,7 @@ package com.gerantech.islamic.views.popups
 			//addChild(background);
 			
 			var hLayout:HorizontalLayout = new HorizontalLayout();
-			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			hLayout.verticalAlign = VerticalAlign.MIDDLE;
 			hLayout.gap = hLayout.padding = AppModel.instance.sizes.twoLineItem/4;
 			
 			var hGroup:LayoutGroup = new LayoutGroup();

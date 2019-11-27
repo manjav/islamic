@@ -11,32 +11,32 @@
 	import com.gerantech.islamic.models.vo.Sura;
 	import com.gerantech.islamic.models.vo.media.Breakpoint;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
-	import com.gerantech.islamic.views.buttons.SimpledButton;
 	import com.gerantech.islamic.views.headers.SuraHeader;
-	
+
+	import feathers.controls.LayoutGroup;
+	import feathers.controls.ScrollContainer;
+	import feathers.events.FeathersEventType;
+	import feathers.layout.VerticalLayout;
+
+	import fl.text.TLFTextField;
+
 	import flash.display.BitmapData;
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
 	import flash.text.AntiAliasType;
 	import flash.text.engine.FontLookup;
-	
-	import feathers.controls.LayoutGroup;
-	import feathers.controls.ScrollContainer;
-	import feathers.events.FeathersEventType;
-	import feathers.layout.VerticalLayout;
-	
-	import fl.text.TLFTextField;
-	
+
 	import flashx.textLayout.elements.TextFlow;
 	import flashx.textLayout.formats.Direction;
 	import flashx.textLayout.formats.TextAlign;
 	import flashx.textLayout.formats.TextLayoutFormat;
 	import flashx.textLayout.formats.VerticalAlign;
-	
+
 	import starling.display.Image;
 	import starling.events.Event;
 	import starling.filters.ColorMatrixFilter;
 	import starling.textures.Texture;
+	import feathers.controls.ButtonState;
 	
 	
 	public class UthmaniPage extends ScrollContainer
@@ -318,7 +318,7 @@
 			
 			_selectedItem = value;
 			for each(var b:Breakpoint in buttonList)
-				b.currentState = (b==value) ? SimpledButton.STATE_SELECTED : SimpledButton.STATE_UP;
+				b.currentState = (b==value) ? ButtonState.UP_AND_SELECTED : ButtonState.UP;
 				
 			dispatchEventWith(Event.CHANGE, false, _selectedItem);
 		}

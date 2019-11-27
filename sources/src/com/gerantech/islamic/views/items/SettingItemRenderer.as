@@ -5,14 +5,15 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
-	import flash.geom.Rectangle;
-	import flash.text.engine.ElementFormat;
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
 	import feathers.skins.ImageSkin;
+
+	import flash.geom.Rectangle;
+	import flash.text.engine.ElementFormat;
+	import feathers.layout.VerticalAlign;
 
 	public class SettingItemRenderer extends BaseCustomItemRenderer
 	{		
@@ -52,7 +53,7 @@ package com.gerantech.islamic.views.items
 				height = AppModel.instance.sizes.singleLineItem;
 			
 			myLayout = new HorizontalLayout();
-			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			myLayout.verticalAlign = VerticalAlign.MIDDLE;
 			myLayout.gap = myLayout.padding = height/4;
 			layout = myLayout;
 		}

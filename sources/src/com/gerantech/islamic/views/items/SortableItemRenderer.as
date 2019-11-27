@@ -7,8 +7,7 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.controls.Spacer;
-	
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.StackScreenNavigatorItem;
@@ -16,10 +15,11 @@ package com.gerantech.islamic.views.items
 	import feathers.layout.HorizontalLayoutData;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
-	
+
 	import starling.display.DisplayObject;
 	import starling.display.Quad;
 	import starling.events.Event;
+	import feathers.layout.VerticalAlign;
 	
 	public class SortableItemRenderer extends LayoutGroup
 	{
@@ -46,7 +46,7 @@ package com.gerantech.islamic.views.items
 			var grid:uint = appModel.sizes.DP32;
 			
 			var myLayout:HorizontalLayout = new HorizontalLayout();
-			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			myLayout.verticalAlign = VerticalAlign.MIDDLE;
 			myLayout.gap = myLayout.paddingRight = appModel.sizes.DP4;
 			myLayout.firstGap = myLayout.paddingLeft = appModel.sizes.DP8;
 			layout = myLayout;

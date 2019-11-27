@@ -14,14 +14,11 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.items.AyaItemRenderer;
 	import com.gerantech.islamic.views.items.PageItemRenderer;
 	import com.gerantech.islamic.views.items.UthmaniPageItemRenderer;
+	import com.gerantech.islamic.views.lists.FastList;
 	import com.gerantech.islamic.views.popups.GotoPopUp;
 	import com.gerantech.islamic.views.popups.TranslationPopUp;
-	
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
-	
+
 	import feathers.controls.Callout;
-	import feathers.controls.List;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.controls.renderers.IListItemRenderer;
@@ -30,12 +27,15 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalLayout;
-	
+
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
+
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import com.gerantech.islamic.views.lists.FastList;
+	import feathers.controls.ScrollPolicy;
 
 	
 	public class QuranScreen extends BaseCustomScreen
@@ -231,14 +231,14 @@ package com.gerantech.islamic.views.screens
 				//y += delta.y;
 				userModel.dispatchEventWith(UserEvent.FONT_SIZE_CHANGE_END);
 				touchEnded = true;
-				list.horizontalScrollPolicy = List.SCROLL_POLICY_AUTO;
+				list.horizontalScrollPolicy = ScrollPolicy.AUTO;
 			}            
 			else if (touches.length == 2)
 			{
 				if(touchEnded)
 				{
 					userModel.dispatchEventWith(UserEvent.FONT_SIZE_CHANGE_START);
-					list.horizontalScrollPolicy = List.SCROLL_POLICY_OFF;
+					list.horizontalScrollPolicy = ScrollPolicy.OFF;
 				}
 				touchEnded = false;
 				// two fingers touching -> rotate and scale

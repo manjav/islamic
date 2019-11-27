@@ -25,17 +25,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.gerantech.islamic.themes
 {
 	import com.gerantech.islamic.models.Assets;
-	
-	import flash.geom.Rectangle;
-	import flash.text.TextFormat;
-	import flash.text.engine.CFFHinting;
-	import flash.text.engine.ElementFormat;
-	import flash.text.engine.FontDescription;
-	import flash.text.engine.FontLookup;
-	import flash.text.engine.FontPosture;
-	import flash.text.engine.FontWeight;
-	import flash.text.engine.RenderingMode;
-	
+
 	import feathers.controls.Alert;
 	import feathers.controls.Button;
 	import feathers.controls.ButtonGroup;
@@ -101,7 +91,17 @@ package com.gerantech.islamic.themes
 	import feathers.skins.ImageSkin;
 	import feathers.system.DeviceCapabilities;
 	import feathers.themes.StyleNameFunctionTheme;
-	
+
+	import flash.geom.Rectangle;
+	import flash.text.TextFormat;
+	import flash.text.engine.CFFHinting;
+	import flash.text.engine.ElementFormat;
+	import flash.text.engine.FontDescription;
+	import flash.text.engine.FontLookup;
+	import flash.text.engine.FontPosture;
+	import flash.text.engine.FontWeight;
+	import flash.text.engine.RenderingMode;
+
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.display.Image;
@@ -1256,13 +1256,13 @@ package com.gerantech.islamic.themes
 		{
 			textRenderer.elementFormat = this.lightUIElementFormat;
 			textRenderer.selectedElementFormat = this.darkUIElementFormat;
-			textRenderer.setElementFormatForState(Button.STATE_DOWN, this.darkUIElementFormat);
-			textRenderer.setElementFormatForState(Button.STATE_DISABLED, this.lightUIDisabledElementFormat);
+			textRenderer.setElementFormatForState(ButtonState.DOWN, this.darkUIElementFormat);
+			textRenderer.setElementFormatForState(ButtonState.DISABLED, this.lightUIDisabledElementFormat);
 			if(textRenderer.stateContext is ToggleButton)
 			{
 				//for convenience, this function can style both a regular button
 				//and a toggle button
-				textRenderer.setElementFormatForState(ToggleButton.STATE_DISABLED_AND_SELECTED, this.darkUIDisabledElementFormat);
+				textRenderer.setElementFormatForState(ButtonState.DISABLED_AND_SELECTED, this.darkUIDisabledElementFormat);
 			}
 		}
 
@@ -1795,7 +1795,7 @@ package com.gerantech.islamic.themes
 			textRenderer.elementFormat = this.largeLightElementFormat;
 			textRenderer.disabledElementFormat = this.largeDisabledElementFormat;
 			textRenderer.selectedElementFormat = this.largeDarkElementFormat;
-			textRenderer.setElementFormatForState(ToggleButton.STATE_DOWN, this.largeDarkElementFormat);
+			textRenderer.setElementFormatForState(ButtonState.DOWN, this.largeDarkElementFormat);
 		}
 
 		protected function setItemRendererAccessoryLabelStyles(textRenderer:TextBlockTextRenderer):void
@@ -1803,7 +1803,7 @@ package com.gerantech.islamic.themes
 			textRenderer.elementFormat = this.lightElementFormat;
 			textRenderer.disabledElementFormat = this.disabledElementFormat;
 			textRenderer.selectedElementFormat = this.darkElementFormat;
-			textRenderer.setElementFormatForState(ToggleButton.STATE_DOWN, this.darkElementFormat);
+			textRenderer.setElementFormatForState(ButtonState.DOWN, this.darkElementFormat);
 		}
 
 		protected function setItemRendererIconLabelStyles(textRenderer:TextBlockTextRenderer):void
@@ -1811,14 +1811,14 @@ package com.gerantech.islamic.themes
 			textRenderer.elementFormat = this.lightElementFormat;
 			textRenderer.disabledElementFormat = this.disabledElementFormat;
 			textRenderer.selectedElementFormat = this.darkElementFormat;
-			textRenderer.setElementFormatForState(ToggleButton.STATE_DOWN, this.darkElementFormat);
+			textRenderer.setElementFormatForState(ButtonState.DOWN, this.darkElementFormat);
 		}
 
 		protected function setCheckItemRendererLabelStyles(textRenderer:TextBlockTextRenderer):void
 		{
 			textRenderer.elementFormat = this.largeLightElementFormat;
 			textRenderer.disabledElementFormat = this.largeDisabledElementFormat;
-			textRenderer.setElementFormatForState(ToggleButton.STATE_DOWN, this.largeDarkElementFormat);
+			textRenderer.setElementFormatForState(ButtonState.DOWN, this.largeDarkElementFormat);
 		}
 
 		protected function setCheckItemRendererAccessoryLabelStyles(textRenderer:TextBlockTextRenderer):void

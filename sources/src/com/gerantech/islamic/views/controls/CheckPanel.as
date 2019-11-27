@@ -14,6 +14,7 @@ package com.gerantech.islamic.views.controls
 	import gt.utils.Localizations;
 
 	import starling.events.Event;
+	import feathers.layout.VerticalAlign;
 	
 	public class CheckPanel extends LayoutGroup
 	{
@@ -34,11 +35,11 @@ package com.gerantech.islamic.views.controls
 			height = AppModel.instance.sizes.singleLineItem;
 			
 			container = new LayoutGroup();
-			container.layoutData =  new AnchorLayoutData(0, 0, 0, 0);
+			container.layoutData = new AnchorLayoutData(0, 0, 0, 0);
 			addChild(container);
 			
 			var mLayout:HorizontalLayout = new HorizontalLayout();
-			mLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			mLayout.verticalAlign = VerticalAlign.MIDDLE;
 			mLayout.gap = AppModel.instance.sizes.DP8;
 			container.layout = mLayout;
 			

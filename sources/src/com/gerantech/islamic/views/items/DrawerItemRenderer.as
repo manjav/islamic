@@ -15,6 +15,7 @@ package com.gerantech.islamic.views.items
 	import gt.utils.Localizations;
 
 	import starling.display.Quad;
+	import feathers.layout.VerticalAlign;
 
 	public class DrawerItemRenderer extends BaseCustomItemRenderer
 	{		
@@ -39,7 +40,7 @@ package com.gerantech.islamic.views.items
 			backgroundSkin.alpha = 0;
 			
 			myLayout = new HorizontalLayout();
-			myLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			myLayout.verticalAlign = VerticalAlign.MIDDLE;
 			myLayout.padding = AppModel.instance.sizes.DP16;
 			myLayout.gap = AppModel.instance.sizes.DP32
 			layout = myLayout;

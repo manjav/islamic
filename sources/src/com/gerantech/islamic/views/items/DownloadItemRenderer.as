@@ -1,7 +1,6 @@
 package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.managers.DownloadManager;
-	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.vo.DownloadPackage;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.StrTools;
@@ -9,9 +8,7 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.views.controls.DownloadAccessory;
 	import com.gerantech.islamic.views.controls.LinierProgressBar;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
@@ -19,13 +16,15 @@ package com.gerantech.islamic.views.items
 	import feathers.layout.HorizontalLayoutData;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
-	
+
+	import gt.utils.Localizations;
+
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
-	import gt.utils.Localizations;
+	import feathers.layout.VerticalAlign;
 
 	public class DownloadItemRenderer extends BaseCustomItemRenderer
 	{
@@ -55,7 +54,7 @@ package com.gerantech.islamic.views.items
 			height = _height = appModel.sizes.singleLineItem;
 			
 			var hLayout:HorizontalLayout = new HorizontalLayout();
-			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			hLayout.verticalAlign = VerticalAlign.MIDDLE;
 			//hLayout.paddingRight = hLayout.gap = appModel.sizes.border/3;
 			hLayout.paddingLeft = appModel.sizes.border*2;
 			layout = hLayout;

@@ -22,6 +22,7 @@ package com.gerantech.islamic.views.controls
 
 	import starling.core.Starling;
 	import starling.events.Event;
+	import feathers.layout.VerticalAlign;
 	
 	public class TranslationLine extends LayoutGroup
 	{
@@ -46,7 +47,7 @@ package com.gerantech.islamic.views.controls
 			_isEnabled = !UserModel.instance.premiumMode && !translator.free;
 			
 			hLayout = new HorizontalLayout();
-			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			hLayout.verticalAlign = VerticalAlign.MIDDLE;
 			hLayout.gap = UserModel.instance.fontSize;
 			layout = hLayout;
 			

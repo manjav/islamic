@@ -1,32 +1,16 @@
 package com.gerantech.islamic.views.controls
 {
-	import com.greensock.TweenLite;
-	import com.greensock.easing.Elastic;
-	import com.greensock.easing.Expo;
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.ConfigModel;
-	import com.gerantech.islamic.views.items.BaseQPageItemRenderer;
-	
-	import feathers.controls.Button;
-	import feathers.controls.LayoutGroup;
+
 	import feathers.controls.List;
 	import feathers.controls.ScrollContainer;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
-	import feathers.events.FeathersEventType;
-	import feathers.layout.AnchorLayout;
-	import feathers.layout.AnchorLayoutData;
-	import feathers.layout.HorizontalLayoutData;
-	
-	import flashx.textLayout.elements.ListItemElement;
-	
+
 	import starling.events.Event;
-	import starling.events.Touch;
-	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
 	
 	public class NavigationDrawer extends AbstractDrawer
 	{

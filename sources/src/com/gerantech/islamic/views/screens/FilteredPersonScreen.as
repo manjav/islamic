@@ -11,16 +11,16 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.headers.ShopHeader;
 	import com.gerantech.islamic.views.items.PersonItemRenderer;
 	import com.gerantech.islamic.views.lists.FastList;
-	
-	import flash.utils.clearTimeout;
-	import flash.utils.setTimeout;
-	
+
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.VerticalLayout;
-	
+
+	import flash.utils.clearTimeout;
+	import flash.utils.setTimeout;
+
 	import starling.core.Starling;
 	import starling.events.Event;
 	
@@ -54,7 +54,7 @@ package com.gerantech.islamic.views.screens
 			listData = getFilterList();
 			list.dataProvider = new ListCollection(listData);
 			list.layoutData = new AnchorLayoutData(0, 0, 0, 0); 
-			//list.verticalScrollPolicy = List.SCROLL_POLICY_ON;
+			//list.verticalScrollPolicy = ScrollPolicy.ON;
 			list.addEventListener(Event.SELECT, list_changedHandler);
 			list.addEventListener(Event.RENDER, list_testHandler);
 			addChild(list);

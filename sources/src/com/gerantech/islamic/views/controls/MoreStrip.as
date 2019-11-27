@@ -4,13 +4,15 @@ package com.gerantech.islamic.views.controls
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.UserModel;
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	
+
 	import starling.text.TextField;
+	import feathers.layout.VerticalAlign;
+	import starling.text.TextFormat;
 	
 	public class MoreStrip extends LayoutGroup
 	{
@@ -22,11 +24,11 @@ package com.gerantech.islamic.views.controls
 		{
 			super.initialize();
 			var mlayout:HorizontalLayout = new HorizontalLayout();
-			mlayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			mlayout.verticalAlign = VerticalAlign.MIDDLE;
 			layout = mlayout;
 			
 			height = AppModel.instance.sizes.twoLineItem/2
-			var textField:TextField = new TextField(height/2, height, ConfigModel.instance.selectedTranslators.length.toString(), "SourceSans", UserModel.instance.fontSize);
+			var textField:TextField = new TextField(height/2, height, ConfigModel.instance.selectedTranslators.length.toString(), new TextFormat("SourceSans", UserModel.instance.fontSize));
 			
 			var icon:ImageLoader = new ImageLoader();
 			icon.delayTextureCreation = true;
@@ -36,8 +38,6 @@ package com.gerantech.islamic.views.controls
 			addChild(icon);
 			addChild(textField);
 			
-		}
-		
-		
+		}		
 	}
 }

@@ -5,17 +5,18 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.vo.Aya;
 	import com.gerantech.islamic.views.lists.FastList;
-	
-	import flash.utils.setTimeout;
-	
+
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.VerticalLayout;
-	
+
+	import flash.utils.setTimeout;
+
 	import starling.events.Event;
+	import feathers.controls.ScrollPolicy;
 	
 	public class PageItemRenderer extends BaseQPageItemRenderer
 	{
@@ -52,7 +53,7 @@ package com.gerantech.islamic.views.items
 			list.layout = listLayout;
 			list.layoutData = new AnchorLayoutData(0, 0, 0, 0);
 			list.autoHideBackground = true;
-			list.horizontalScrollPolicy = List.SCROLL_POLICY_OFF;
+			list.horizontalScrollPolicy = ScrollPolicy.OFF;
 			list.snapScrollPositionsToPixels = true
 			list.addEventListener(FeathersEventType.RENDERER_ADD, list_rendererHandler);
 			list.itemRendererFactory = function():IListItemRenderer
@@ -77,7 +78,7 @@ package com.gerantech.islamic.views.items
 				
 		private function user_fontChangeHandler(event:Event):void
 		{
-			list.verticalScrollPolicy = event.type==UserEvent.FONT_SIZE_CHANGE_START ? List.SCROLL_POLICY_OFF : List.SCROLL_POLICY_AUTO;
+			list.verticalScrollPolicy = event.type==UserEvent.FONT_SIZE_CHANGE_START ? ScrollPolicy.OFF : ScrollPolicy.AUTO;
 		}
 		
 		private function list_selectHandler(event:Event):void

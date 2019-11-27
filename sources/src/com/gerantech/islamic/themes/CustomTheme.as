@@ -4,16 +4,7 @@ package com.gerantech.islamic.themes
 	import com.gerantech.islamic.utils.MetricUtils;
 	import com.gerantech.islamic.views.lists.QList;
 	import com.gerantech.islamic.views.popups.CustomBottomDrawerPopUpContentManager;
-	
-	import flash.text.TextFormat;
-	import flash.text.engine.CFFHinting;
-	import flash.text.engine.ElementFormat;
-	import flash.text.engine.FontDescription;
-	import flash.text.engine.FontLookup;
-	import flash.text.engine.FontPosture;
-	import flash.text.engine.FontWeight;
-	import flash.text.engine.RenderingMode;
-	
+
 	import feathers.controls.Button;
 	import feathers.controls.ButtonState;
 	import feathers.controls.Callout;
@@ -24,8 +15,18 @@ package com.gerantech.islamic.themes
 	import feathers.controls.ToggleButton;
 	import feathers.controls.popups.CalloutPopUpContentManager;
 	import feathers.events.FeathersEventType;
+	import feathers.layout.Direction;
 	import feathers.skins.ImageSkin;
-	
+
+	import flash.text.TextFormat;
+	import flash.text.engine.CFFHinting;
+	import flash.text.engine.ElementFormat;
+	import flash.text.engine.FontDescription;
+	import flash.text.engine.FontLookup;
+	import flash.text.engine.FontPosture;
+	import flash.text.engine.FontWeight;
+	import flash.text.engine.RenderingMode;
+
 	import starling.display.Image;
 	import starling.events.Event;
 	
@@ -106,7 +107,7 @@ package com.gerantech.islamic.themes
 		override protected function setSimpleScrollBarStyles(scrollBar:SimpleScrollBar):void
 		{
 			super.setSimpleScrollBarStyles(scrollBar);
-			if(scrollBar.direction == SimpleScrollBar.DIRECTION_VERTICAL)
+			if(scrollBar.direction == Direction.VERTICAL)
 			{
 				scrollBar.paddingRight = AppModel.instance.ltr ? this.scrollBarGutterSize : 0;
 				scrollBar.paddingLeft = AppModel.instance.ltr ? 0 : this.scrollBarGutterSize;

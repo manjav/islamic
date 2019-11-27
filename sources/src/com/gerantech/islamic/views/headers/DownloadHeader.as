@@ -4,7 +4,6 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.managers.NotificationManager;
 	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.DownloadPackage;
 	import com.gerantech.islamic.models.vo.Person;
 	import com.gerantech.islamic.models.vo.Reciter;
@@ -13,19 +12,19 @@ package com.gerantech.islamic.views.headers
 	import com.gerantech.islamic.views.buttons.SimpleLayoutButton;
 	import com.gerantech.islamic.views.controls.PersonAccessory;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	
+
+	import gt.utils.Localizations;
+
 	import starling.display.Quad;
 	import starling.events.Event;
-	import gt.utils.Localizations;
+	import feathers.layout.VerticalAlign;
 	
 	public class DownloadHeader extends LayoutGroup
 	{
@@ -56,7 +55,7 @@ package com.gerantech.islamic.views.headers
 			this.reciter = reciter;
 
 			hlayout = new HorizontalLayout();
-			hlayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			hlayout.verticalAlign = VerticalAlign.MIDDLE;
 			hlayout.gap = appModel.sizes.border;
 		//	hlayout.padding = appModel.sizes.border;
 			layout = hlayout;
@@ -71,7 +70,7 @@ package com.gerantech.islamic.views.headers
 			var dLayout:HorizontalLayout = new HorizontalLayout();
 			dLayout.padding = appModel.sizes.border*3;
 			dLayout.paddingLeft = appModel.sizes.border;
-			dLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			dLayout.verticalAlign = VerticalAlign.MIDDLE;
 			
 			downloadButton = new SimpleLayoutButton();
 			downloadButton.backgroundSkin = new Quad(1,1,BaseMaterialTheme.ACCENT_COLOR);

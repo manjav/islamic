@@ -1,23 +1,23 @@
 package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.models.Assets;
-	import com.gerantech.islamic.models.TimesModel;
 	import com.gerantech.islamic.models.vo.Time;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.MetricUtils;
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
-	
+
 	import gt.utils.GTStringUtils;
-	
+
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
+	import feathers.layout.VerticalAlign;
 
 	public class TimeItemRenderer extends BaseCustomItemRenderer
 	{
@@ -32,7 +32,7 @@ package com.gerantech.islamic.views.items
 			var sizes:MetricUtils = appModel.sizes;
 			
 			var hlayout:HorizontalLayout = new HorizontalLayout();
-			hlayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_MIDDLE;
+			hlayout.verticalAlign = VerticalAlign.MIDDLE;
 			hlayout.gap = sizes.DP8;
 			hlayout.firstGap = appModel.ltr ? sizes.DP8 : sizes.DP24;
 			hlayout.lastGap = appModel.ltr ? sizes.DP24 : sizes.DP8;

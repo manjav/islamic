@@ -14,7 +14,6 @@ package com.gerantech.islamic.models
 		
 	public class ResourceModel
 	{
-		//[Embed("../assets/contents/quran-uthmani.xml", encoding = "utf-8")]
 		[Embed(source="../assets/contents/quran-uthmani.xml", mimeType="application/octet-stream")]
 		private static const quranClass:Class;
 		[Embed("../assets/contents/uthmani-metadata.xml", mimeType="application/octet-stream")]//, mimeType="application/octet-stream")]
