@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<application xmlns="http://ns.adobe.com/air/application/26.0">
-  <id>com.gerantech.islamic</id>
-  <versionNumber>0.9.100</versionNumber>
-  <versionLabel>0.9.100</versionLabel>
+<application xmlns="http://ns.adobe.com/air/application/32.0">
+  <id>__APPID__</id>
+  <versionNumber>0.9.200</versionNumber>
+  <versionLabel>0.9.200</versionLabel>
   <supportedProfiles>mobileDevice</supportedProfiles>
   <filename>Hidaya</filename>
   <name>Hidayah</name><!-- Hidayah  هدایت الهدایة -->
@@ -11,7 +11,7 @@
     <title>Hidaya</title>
     <content>release.swf</content>
     <visible>true</visible>
-    <fullScreen>true</fullScreen>
+    <fullScreen>false</fullScreen>
     <renderMode>direct</renderMode>
     <systemChrome>standard</systemChrome>
     <aspectRatio>portrait</aspectRatio>
@@ -34,7 +34,6 @@
     <manifestAdditions><![CDATA[<manifest android:installLocation="auto">
 
 	<!-- In APP Billing permissions -->
-	<!--<uses-permission android:name="com.android.vending.BILLING" /> <uses-permission android:name="com.farsitel.bazaar.permission.PAY_THROUGH_BAZAAR" /> <uses-permission android:name="ir.mservices.market.BILLING" /> <uses-permission android:name="com.arioclub.android.sdk.IAB" />-->
 	<uses-permission android:name="com.domain.market.BILLING" />
 	
 	<uses-permission android:name="android.permission.INTERNET" />
@@ -74,7 +73,6 @@
 		</activity>
 		<service android:name="com.arellomobile.android.push.PushGCMIntentService"/>
 		<receiver android:name="com.arellomobile.android.push.AlarmReceiver"/>
-		
 		
 		<activity android:excludeFromRecents="false" android:showOnLockScreen="true">
 			<intent-filter>

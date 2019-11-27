@@ -9,7 +9,7 @@ if "%PLATFORM%"=="android" (set ANA_KEY=%ANA_KEY_AND%) else (set ANA_KEY=%ANA_KE
 if "%PLATFORM%"=="android" (set ANA_SEC=%ANA_SEC_AND%) else (set ANA_SEC=%ANA_SEC_IOS%) 
 
 set APPID_TEMP=__APPID__
-set APPID_FINE=com.grantech.k2k
+set APPID_FINE=com.gerantech.islamic
 
 set DESC_TEMP=__DESCRIPTION__
 set DESC_FINE={ "platform": "%PLATFORM%", "market": "%MARKET%", "server": "%SERVER%", "analyticskey": "%ANA_KEY%", "analyticssec": "%ANA_SEC%" }
