@@ -84,7 +84,7 @@ package
 			_starling = new Starling(Main, stage, null, null, Context3DRenderMode.AUTO, Context3DProfile.BASELINE);
 			_starling.supportHighResolutions = true;
 			_starling.enableErrorChecking = false;
-			setTimeout(function():void{_starling.skipUnchangedFrames = true}, 4000);
+			_starling.skipUnchangedFrames = true;
 			//_starling.showStats = true;
 			//_starling.showStatsAt(HAlign.CENTER, VAlign.BOTTOM);
 			_starling.addEventListener("rootCreated", starling_rootCreatedHandler);
@@ -192,10 +192,10 @@ package
 		//Active and deactive handler ---------------------------------------------
 		private function stage_deactivateHandler(event:Event):void
 		{
-			_starling.skipUnchangedFrames = false;
-			_starling.stop();
-			stage.frameRate = (Player.instance.playing||DownloadManager.instance.downloading) ? 0.5 : 0;
+			// _starling.skipUnchangedFrames = false;
 			stage.addEventListener(Event.ACTIVATE, stage_activateHandler, false, 0, true);
+			stage.frameRate = (Player.instance.playing||DownloadManager.instance.downloading) ? 0.5 : 0;
+			_starling.stop();
 			//userModel.activeBackup();
 		}
 		
@@ -205,7 +205,7 @@ package
 			_starling.start();
 			stage.frameRate = 40;
 			//userModel.deactiveBackup();
-			setTimeout(function():void{_starling.skipUnchangedFrames = true}, 4000);
+			// setTimeout(function():void{_starling.skipUnchangedFrames = true}, 4000);
 		}
 	}
 }
