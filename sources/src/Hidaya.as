@@ -63,6 +63,7 @@ package
 			}
 			
 			NativeAbilities.instance.showOnLockScreen();
+			NativeAbilities.instance.changeStatusColor(0, 110, 96, 255);
 			NativeApplication.nativeApplication.systemIdleMode = SystemIdleMode.KEEP_AWAKE;
 			NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE, nativeApplication_invokeHandler);
 			loaderInfo.addEventListener(Event.COMPLETE, loaderInfo_completeHandler);
