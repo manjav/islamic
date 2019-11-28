@@ -105,7 +105,10 @@ package com.gerantech.islamic
 			trace(" --  Main createScreens", getTimer()-Hidaya.ft);
 			
 			Localizations.instance.addEventListener(Event.CHANGE, localizations_changeHandler);
-			Localizations.instance.changeLocale(Localizations.instance.getLocaleByTimezone("Asia/Tehran"));//NativeAbilities.instance.getTimezone()
+			if( UserModel.instance.locale == null )
+				Localizations.instance.changeLocale(Localizations.instance.getLocaleByTimezone("Asia/Tehran"));//NativeAbilities.instance.getTimezone()
+			else
+				Localizations.instance.changeLocale(UserModel.instance.locale.value);
 		}
 		
 		private function localizations_changeHandler(event:Event):void

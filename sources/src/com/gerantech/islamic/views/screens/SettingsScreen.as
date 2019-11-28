@@ -215,6 +215,7 @@ package com.gerantech.islamic.views.screens
 		private function locPanel_changeHandler(event:Event):void
 		{
 			userModel.locale = locPanel.selectedItem;
+			Localizations.instance.changeLocale(userModel.locale.value);
 			setTimeout(initialize, 100);
 			/*locPanel.resetContent();
 			//naviPanel.resetContent();
