@@ -8,6 +8,7 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.VerticalLayout;
 	
 	import starling.events.Event;
+	import feathers.layout.HorizontalAlign;
 
 
 	
@@ -32,7 +33,7 @@ package com.gerantech.islamic.views.screens
 			var mlayout:VerticalLayout = new VerticalLayout();
 			mlayout.lastGap = mlayout.firstGap = appModel.sizes.border;
 			mlayout.gap = mlayout.padding = appModel.sizes.border*4;
-			mlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			mlayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			layout = mlayout;
 			
 			var purchaseMessage:String;

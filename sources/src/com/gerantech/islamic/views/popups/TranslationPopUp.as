@@ -10,19 +10,19 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.headers.TranslationHeader;
 	import com.gerantech.islamic.views.items.TranslationPageItemRenderer;
-	
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
-	
+
 	import feathers.controls.List;
-	import feathers.controls.ScrollContainer;
+	import feathers.controls.ScrollPolicy;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalLayout;
-	
+
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
+
 	import starling.animation.Transitions;
 	import starling.core.Starling;
 	import starling.display.Quad;
@@ -111,7 +111,7 @@ package com.gerantech.islamic.views.popups
 			}
 			list.snapToPages = true;
 			//list.autoHideBackground = true;
-			list.verticalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
+			list.verticalScrollPolicy = ScrollPolicy.OFF;
 			list.addEventListener("translateChanged", list_translateChangedHandler);
 			addChild(list);
 			

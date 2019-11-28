@@ -4,16 +4,18 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.managers.AppController;
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
-	import flash.geom.Rectangle;
-	
+
+	import feathers.controls.AutoSizeMode;
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.ScrollContainer;
+	import feathers.controls.ScrollPolicy;
 	import feathers.layout.HorizontalLayout;
+	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
-	
-	import starling.animation.Tween;
+
+	import flash.geom.Rectangle;
+
 	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.filters.DropShadowFilter;
@@ -51,7 +53,7 @@ package com.gerantech.islamic.views.popups
 		{
 			removeChildren();
 			super.initialize();
-			autoSizeMode = AUTO_SIZE_MODE_CONTENT; 
+			autoSizeMode = AutoSizeMode.CONTENT; 
 			var skin:Image = new Image(Assets.getSclaed9Textures(userModel.nightMode?"i_dialog":"dialog"));
 			skin.scale9Grid = new Rectangle(skin.width/2-1, skin.height/2-1, 2, 2);
 			backgroundSkin = skin;//new Scale9Image(Assets.getSclaed9Textures(userModel.nightMode?"i_dialog":"dialog"));
@@ -66,8 +68,8 @@ package com.gerantech.islamic.views.popups
 			vLayout.padding = appModel.sizes.getPixelByDP(24);
 			vLayout.gap = appModel.sizes.DP4;
 			vLayout.paddingTop = appModel.sizes.DP16;
-			//vLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
-			vLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
+			//vLayout.horizontalAlign = HorizontalAlign.JUSTIFY;
+			vLayout.verticalAlign = VerticalAlign.TOP;
 			layout = vLayout;
 			
 			titleDisplay = new RTLLabel(_title, 1, null, null, false, null, 0, null, "bold");
@@ -75,9 +77,9 @@ package com.gerantech.islamic.views.popups
 			addChild(titleDisplay);
 			
 			container = new ScrollContainer();
-			container.autoSizeMode = AUTO_SIZE_MODE_CONTENT; 
+			container.autoSizeMode = AutoSizeMode.CONTENT; 
 			container.layoutData = new VerticalLayoutData(100);
-			container.horizontalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
+			container.horizontalScrollPolicy = ScrollPolicy.OFF;
 			container.maxHeight = maxHeight - vLayout.paddingBottom - vLayout.paddingTop -  appModel.sizes.twoLineItem;
 			addChild(container);
 			
@@ -140,7 +142,6 @@ package com.gerantech.islamic.views.popups
 		
 		protected function initializeCompleted():void
 		{
-
 		}
 		
 	}

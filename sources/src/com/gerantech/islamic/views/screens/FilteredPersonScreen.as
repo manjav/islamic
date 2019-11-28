@@ -23,6 +23,8 @@ package com.gerantech.islamic.views.screens
 
 	import starling.core.Starling;
 	import starling.events.Event;
+	import feathers.layout.VerticalAlign;
+	import feathers.layout.HorizontalAlign;
 	
 	public class FilteredPersonScreen extends BaseCustomPanelScreen
 	{
@@ -69,8 +71,8 @@ package com.gerantech.islamic.views.screens
 				addChild(shopHeader);
 				
 				listLayout = new VerticalLayout();
-				listLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
-				listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+				listLayout.verticalAlign = VerticalAlign.TOP;
+				listLayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 				listLayout.paddingTop = shopHeader._height;
 				listLayout.useVirtualLayout = true;
 				list.layout = listLayout;

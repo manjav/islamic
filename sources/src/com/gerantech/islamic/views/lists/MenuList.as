@@ -5,10 +5,11 @@ package com.gerantech.islamic.views.lists
 	import com.gerantech.islamic.models.vo.ToolbarButtonData;
 	import com.gerantech.islamic.views.buttons.FlatButton;
 	import com.gerantech.islamic.views.items.MenuItemRenderer;
-	
+
 	import feathers.controls.renderers.IListItemRenderer;
+	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalLayout;
-	
+
 	import starling.events.Event;
 	
 	public class MenuList extends QList
@@ -26,7 +27,7 @@ package com.gerantech.islamic.views.lists
 			super.initialize();
 			
 			var llaouyt:VerticalLayout = new VerticalLayout();
-			llaouyt.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			llaouyt.horizontalAlign = HorizontalAlign.JUSTIFY;
 			layout = llaouyt;
 
 			itemRendererFactory = function():IListItemRenderer

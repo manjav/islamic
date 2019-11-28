@@ -11,6 +11,7 @@ package com.gerantech.islamic.views.lists
 
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.ScrollContainer;
+	import feathers.controls.ScrollPolicy;
 	import feathers.core.PopUpManager;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
@@ -149,7 +150,7 @@ package com.gerantech.islamic.views.lists
 			if(touch.phase == TouchPhase.BEGAN)
 			{
 				NativeAbilities.instance.vibrate(10);
-				itemContainer.verticalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
+				itemContainer.verticalScrollPolicy = ScrollPolicy.OFF;
 				tempY = touch.globalY-obj.y;
 				obj.filter = new FilterChain(new DropShadowFilter(0, 0, BaseMaterialTheme.PRIMARY_TEXT_COLOR, 0.5, 1));//  BlurFilter.createGlow(0, 0.5);
 				itemContainer.setChildIndex(obj, itemContainer.numChildren-1);
@@ -160,7 +161,7 @@ package com.gerantech.islamic.views.lists
 			}
 			else if(touch.phase == TouchPhase.ENDED)
 			{
-				itemContainer.verticalScrollPolicy = ScrollContainer.SCROLL_POLICY_ON;
+				itemContainer.verticalScrollPolicy = ScrollPolicy.ON;
 				obj.filter = null;
 				srotList()
 			}

@@ -12,8 +12,10 @@ package com.gerantech.islamic.views.screens
 	import feathers.controls.ImageLoader;
 	import feathers.controls.List;
 	import feathers.controls.ScrollContainer;
+	import feathers.controls.ScrollPolicy;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
+	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 
@@ -29,13 +31,13 @@ package com.gerantech.islamic.views.screens
 		override protected function initialize():void
 		{
 			super.initialize();
-			verticalScrollPolicy = SCROLL_POLICY_AUTO;
+			verticalScrollPolicy = ScrollPolicy.AUTO;
 			
 			var mlayout:VerticalLayout = new VerticalLayout();
 			mlayout.lastGap = mlayout.firstGap = appModel.sizes.border;
 			mlayout.gap = -appModel.sizes.border;
 			mlayout.padding = appModel.sizes.border*2;
-			mlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			mlayout.horizontalAlign = HorizontalAlign.CENTER;
 			layout = mlayout;
 			
 			createAboutHeader();
@@ -122,7 +124,7 @@ package com.gerantech.islamic.views.screens
 			list = new List();
 			list.layoutData = new VerticalLayoutData(100);
 			list.dataProvider = new ListCollection(data);
-			list.verticalScrollPolicy = list.horizontalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF
+			list.verticalScrollPolicy = list.horizontalScrollPolicy = ScrollPolicy.OFF
 			list.itemRendererFactory = function():IListItemRenderer
 			{
 				return new DrawerItemRenderer(appModel.ltr);

@@ -107,6 +107,7 @@ package com.gerantech.islamic.themes
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.textures.Texture;
+	import feathers.controls.StepperButtonLayoutMode;
 
 	/**
 	 * The base class for the "Metal Works" theme for mobile Feathers apps.
@@ -1783,7 +1784,7 @@ package com.gerantech.islamic.themes
 			renderer.accessoryGap = this.smallGutterSize;
 			renderer.minAccessoryGap = this.smallGutterSize;
 			renderer.accessoryPosition = RelativePosition.BOTTOM;
-			renderer.layoutOrder = BaseDefaultItemRenderer.LAYOUT_ORDER_LABEL_ACCESSORY_ICON;
+			// renderer.layoutOrder = BaseDefaultItemRenderer.LAYOUT_ORDER_LABEL_ACCESSORY_ICON;
 			renderer.minWidth = this.gridSize;
 			renderer.minHeight = this.gridSize;
 			renderer.minTouchWidth = this.gridSize;
@@ -1839,7 +1840,7 @@ package com.gerantech.islamic.themes
 
 		protected function setNumericStepperStyles(stepper:NumericStepper):void
 		{
-			stepper.buttonLayoutMode = NumericStepper.BUTTON_LAYOUT_MODE_SPLIT_HORIZONTAL;
+			stepper.buttonLayoutMode = StepperButtonLayoutMode.SPLIT_HORIZONTAL;
 			stepper.incrementButtonLabel = "+";
 			stepper.decrementButtonLabel = "-";
 		}

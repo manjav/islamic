@@ -54,21 +54,21 @@ package com.gerantech.islamic.views.items
 			button.name = "purchase";
 			button.label = loc("purchase_popup_accept_label");
 			//button.height = AppModel.instance.sizes.singleLineItem;
-		//	button.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
+		//	button.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompleteHandler);
 			button.addEventListener(Event.TRIGGERED, buttons_triggerHandler);
 			addChild(button);
 			
 			var rbutton:Button = new Button();
 			rbutton.name = "sura";
 			rbutton.label = loc("sura_navi");
-			//rbutton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
+			//rbutton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompleteHandler);
 			rbutton.addEventListener(Event.TRIGGERED, buttons_triggerHandler);
 			addChild(rbutton);	
 			
 			var fbutton:Button = new Button();
 			fbutton.name = "first";
 			fbutton.label = loc("goto_popup") + " " + loc("sura_l") + " " + loc("j_1");
-			//fbutton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompjleteHandler);
+			//fbutton.addEventListener(FeathersEventType.CREATION_COMPLETE, buttons_creationCompleteHandler);
 			fbutton.addEventListener(Event.TRIGGERED, buttons_triggerHandler);
 			addChild(fbutton);
 		}
@@ -77,7 +77,6 @@ package com.gerantech.islamic.views.items
 		{
 			return Localizations.instance.get(resourceName);
 		}
-
 		
 		private function buttons_triggerHandler(event:Event):void
 		{
@@ -96,12 +95,10 @@ package com.gerantech.islamic.views.items
 					UserModel.instance.setLastItem(1, 1);
 					UserModel.instance.dispatchEventWith(UserEvent.SET_ITEM);
 					break;
-				
-				
 			}
 		}
 		
-		private function buttons_creationCompjleteHandler(event:Event):void
+	/* 	private function buttons_creationCompleteHandler(event:Event):void
 		{
 			var btn:Button = event.currentTarget as Button;
 			var fd2:FontDescription = new FontDescription("SourceSansPro", FontWeight.BOLD, FontPosture.NORMAL, FontLookup.EMBEDDED_CFF, RenderingMode.CFF, CFFHinting.NONE);
@@ -115,7 +112,7 @@ package com.gerantech.islamic.views.items
 			//var skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
 			//skinSelector.defaultValue = new Quad(1,1);
 			//btn.stateToSkinFunction = skinSelector.updateValue;
-		}
+		} */
 
 	}
 }

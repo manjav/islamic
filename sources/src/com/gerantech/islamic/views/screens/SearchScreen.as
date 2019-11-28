@@ -24,6 +24,7 @@ package com.gerantech.islamic.views.screens
 	
 	import starling.events.Event;
 	import com.gerantech.islamic.views.controls.SearchInput;
+	import feathers.layout.HorizontalAlign;
 	
 	public class SearchScreen extends BaseCustomPanelScreen
 	{
@@ -46,12 +47,12 @@ package com.gerantech.islamic.views.screens
 			searchSubtitle.addEventListener(Event.CHANGE, searchSubtitle_changeHandler);
 			
 			var listLayout: VerticalLayout = new VerticalLayout();
-			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			listLayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			listLayout.hasVariableItemDimensions = true;
 			listLayout.paddingTop = searchSubtitle._height+appModel.sizes.DP8;
 			
 			var wLayout: VerticalLayout = new VerticalLayout();
-			wLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			wLayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			wLayout.paddingTop = searchSubtitle._height+appModel.sizes.DP32;
 			
 			list = new List();

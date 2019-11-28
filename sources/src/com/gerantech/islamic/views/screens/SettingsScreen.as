@@ -25,6 +25,8 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.VerticalLayoutData;
 	
 	import starling.events.Event;
+	import feathers.layout.HorizontalAlign;
+	import gt.utils.Localizations;
 	
 	public class SettingsScreen extends BaseCustomPanelScreen
 	{
@@ -55,7 +57,7 @@ package com.gerantech.islamic.views.screens
 			title = loc(appModel.PAGE_SETTINGS);
 			
 			var mLayout:VerticalLayout = new VerticalLayout();
-			mLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			mLayout.horizontalAlign = HorizontalAlign.CENTER;
 			layout = mLayout;
 			
 			var ld:VerticalLayoutData = new VerticalLayoutData(92);

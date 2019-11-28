@@ -9,7 +9,7 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.items.AlertItemRenderer;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	import com.gerantech.islamic.views.lists.QList;
-	
+
 	import feathers.controls.Button;
 	import feathers.controls.List;
 	import feathers.controls.PickerList;
@@ -17,8 +17,9 @@ package com.gerantech.islamic.views.screens
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
+	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalLayout;
-	
+
 	import starling.events.Event;
 
 	public class AlertScreen extends BaseCustomPanelScreen
@@ -42,7 +43,7 @@ package com.gerantech.islamic.views.screens
 				_time.alerts.push(a);
 			*/
 			var clayout:VerticalLayout = new VerticalLayout();
-			clayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			clayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			clayout.gap = appModel.sizes.DP16;
 			layout = clayout;
 			

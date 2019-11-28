@@ -10,10 +10,9 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.items.DashboardItemRenderer;
 	import com.gerantech.islamic.views.popups.BasePopUp;
 	import com.gerantech.islamic.views.popups.GeoPopup;
-	
-	import flash.net.FileReference;
-	
+
 	import feathers.controls.List;
+	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
@@ -21,7 +20,9 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.TiledRowsLayout;
-	
+
+	import flash.net.FileReference;
+
 	import starling.animation.Transitions;
 	import starling.core.Starling;
 	import starling.display.Quad;
@@ -53,7 +54,7 @@ package com.gerantech.islamic.views.screens
 			list = new List();
 			list.layoutData = new AnchorLayoutData(0,0,0,0);
 			list.layout = listLayout;
-			list.scrollBarDisplayMode = List.SCROLL_BAR_DISPLAY_MODE_NONE;
+			list.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
 			list.snapToPages = true;
 			list.pageHeight = appModel.sizes.orginalWidth/3*1.4
 			list.itemRendererFactory = function ():IListItemRenderer

@@ -17,6 +17,8 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.VerticalLayoutData;
 	
 	import starling.events.Event;
+	import feathers.layout.HorizontalAlign;
+	import feathers.controls.ScrollPolicy;
 
 	public class TimesScreen extends BaseCustomPanelScreen
 	{
@@ -39,16 +41,16 @@ package com.gerantech.islamic.views.screens
 			
 			super.initialize();
 			title = loc(appModel.PAGE_TIMES);
-			verticalScrollPolicy = horizontalScrollPolicy = SCROLL_POLICY_OFF;
+			verticalScrollPolicy = horizontalScrollPolicy = ScrollPolicy.OFF;
 			
 			var vlayout:VerticalLayout = new VerticalLayout();
 			//vlayout.paddingTop = appModel.sizes.DP8; 
-			vlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			vlayout.horizontalAlign = HorizontalAlign.CENTER;
 			layout = vlayout;
 			
 			var headerlayout:VerticalLayout = new VerticalLayout();
 			headerlayout.gap = headerlayout.padding = appModel.sizes.DP8; 
-			headerlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			headerlayout.horizontalAlign = HorizontalAlign.CENTER;
 			
 			header2 = new Devider(BaseMaterialTheme.CHROME_COLOR, 1);
 			header2.layout = headerlayout;

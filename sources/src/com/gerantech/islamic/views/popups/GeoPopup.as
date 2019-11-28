@@ -20,6 +20,7 @@ package com.gerantech.islamic.views.popups
 	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.filters.ColorMatrixFilter;
+	import feathers.layout.HorizontalAlign;
 
 	public class GeoPopup extends InfoPopUp
 	{
@@ -36,7 +37,7 @@ package com.gerantech.islamic.views.popups
 		{
 			super.initialize();
 			var layout:VerticalLayout = new VerticalLayout();
-			layout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			layout.horizontalAlign = HorizontalAlign.CENTER;
 			layout.gap = appModel.sizes.DP16; 
 			layout.paddingTop = -appModel.sizes.DP16; 
 			container.layout = layout;

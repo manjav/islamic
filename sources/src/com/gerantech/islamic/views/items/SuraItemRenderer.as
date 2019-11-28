@@ -12,10 +12,10 @@ package com.gerantech.islamic.views.items
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
+	import feathers.layout.VerticalAlign;
 
 	import starling.display.Quad;
 	import starling.filters.ColorMatrixFilter;
-	import feathers.layout.VerticalAlign;
 
 	public class SuraItemRenderer extends BaseCustomItemRenderer
 	{
@@ -61,7 +61,7 @@ package com.gerantech.islamic.views.items
 			myLayout = new HorizontalLayout();
 			//myLayout.padding = appModel.sizes.border;
 			myLayout.verticalAlign = VerticalAlign.MIDDLE;
-		//	myLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_RIGHT
+		//	myLayout.horizontalAlign = HorizontalAlign.RIGHT
 			layout = myLayout;
 			
 			grid *= 0.9;

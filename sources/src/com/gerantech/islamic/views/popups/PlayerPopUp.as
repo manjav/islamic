@@ -2,10 +2,12 @@ package com.gerantech.islamic.views.popups
 {
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.SettingPanel;
-	
+
 	import feathers.controls.PickerList;
+	import feathers.layout.HorizontalAlign;
+	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
-	
+
 	import starling.events.Event;
 
 	public class PlayerPopUp extends SimplePopUp
@@ -32,8 +34,8 @@ package com.gerantech.islamic.views.popups
 			
 			var cLayout:VerticalLayout = new VerticalLayout();
 			cLayout.gap = appModel.sizes.border*3;
-			cLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
-			cLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
+			cLayout.horizontalAlign = HorizontalAlign.JUSTIFY;
+			cLayout.verticalAlign = VerticalAlign.MIDDLE;
 			container.layout = cLayout;
 			
 			

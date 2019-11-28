@@ -6,10 +6,11 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.views.controls.SettingPanel;
 	import com.gerantech.islamic.views.items.SearchSourceItemRenderer;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
-	
+
 	import feathers.controls.renderers.IListItemRenderer;
+	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalLayout;
-	
+
 	import starling.events.Event;
 
 	public class SearchSettingPopup extends InfoPopUp
@@ -35,7 +36,7 @@ package com.gerantech.islamic.views.popups
 			super.initialize();
 			
 			var clayout:VerticalLayout = new VerticalLayout();
-			clayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			clayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			clayout.paddingBottom = appModel.sizes.DP16;
 			container.layout = clayout;
 			

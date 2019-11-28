@@ -13,9 +13,13 @@
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.headers.SuraHeader;
 
+	import feathers.controls.ButtonState;
 	import feathers.controls.LayoutGroup;
+	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.ScrollContainer;
+	import feathers.controls.ScrollPolicy;
 	import feathers.events.FeathersEventType;
+	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalLayout;
 
 	import fl.text.TLFTextField;
@@ -36,7 +40,6 @@
 	import starling.events.Event;
 	import starling.filters.ColorMatrixFilter;
 	import starling.textures.Texture;
-	import feathers.controls.ButtonState;
 	
 	
 	public class UthmaniPage extends ScrollContainer
@@ -76,17 +79,17 @@
 			mainHeight = width*r;
 			
 			scrollLayout = new VerticalLayout();
-			scrollLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
-			scrollLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			scrollLayout.verticalAlign = VerticalAlign.MIDDLE;
+			scrollLayout.horizontalAlign = HorizontalAlign.CENTER;
 			scrollLayout.paddingTop = headerHeight;
 			scrollLayout.paddingBottom = ResourceModel.instance.selectedReciters.length>0?AppModel.instance.sizes.toolbar*1.6:0
 			layout = scrollLayout;
 			
-			scrollBarDisplayMode = SCROLL_BAR_DISPLAY_MODE_NONE;
+			scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
 			elasticity = 0.1;
 			decelerationRate = 0.98;
 			//verticalScrollBarPosition = ScrollContainer.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
-			horizontalScrollPolicy = SCROLL_POLICY_OFF;
+			horizontalScrollPolicy = ScrollPolicy.OFF;
 
 			if(page.text==null)
 				page.create();

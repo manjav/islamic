@@ -1,7 +1,6 @@
 package com.gerantech.islamic.views.lists
 {
 	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.models.vo.Page;
@@ -11,19 +10,20 @@ package com.gerantech.islamic.views.lists
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.items.TranslationItemRenderer;
-	
-	import mx.resources.ResourceManager;
-	
+
 	import feathers.controls.LayoutGroup;
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
+	import feathers.layout.HorizontalAlign;
+	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
-	
-	import starling.events.Event;
+
 	import gt.utils.Localizations;
+
+	import starling.events.Event;
 	
 	public class TranslationList extends LayoutGroup
 	{
@@ -62,8 +62,8 @@ package com.gerantech.islamic.views.lists
 			addChild(waitingLabel);
 			
 			listLayout = new VerticalLayout();
-			listLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
-			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			listLayout.verticalAlign = VerticalAlign.TOP;
+			listLayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			listLayout.padding = appModel.sizes.border*2;
 			listLayout.paddingTop = headerHeight;
 			listLayout.paddingBottom = ResourceModel.instance.hasReciter?appModel.sizes.toolbar*1.5+appModel.sizes.border:appModel.sizes.border

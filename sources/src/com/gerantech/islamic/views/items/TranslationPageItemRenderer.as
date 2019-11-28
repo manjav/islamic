@@ -2,7 +2,6 @@ package com.gerantech.islamic.views.items
 {
 	import com.freshplanet.nativeExtensions.Flurry;
 	import com.gerantech.islamic.managers.Player;
-	import com.gerantech.islamic.models.ConfigModel;
 	import com.gerantech.islamic.models.ResourceModel;
 	import com.gerantech.islamic.models.vo.Aya;
 	import com.gerantech.islamic.models.vo.Person;
@@ -10,15 +9,17 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
+
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
+	import feathers.layout.HorizontalAlign;
+	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
-	
+
 	import starling.events.Event;
 
 	public class TranslationPageItemRenderer extends BasePageItemRenderer
@@ -52,8 +53,8 @@ package com.gerantech.islamic.views.items
 			addChild(waitingLabel);
 			
 			listLayout = new VerticalLayout();
-			listLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
-			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			listLayout.verticalAlign = VerticalAlign.TOP;
+			listLayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			listLayout.padding = appModel.sizes.border*2;
 			listLayout.paddingBottom = ResourceModel.instance.hasReciter?appModel.sizes.toolbar*1.5+appModel.sizes.border:appModel.sizes.border
 			listLayout.hasVariableItemDimensions = true;

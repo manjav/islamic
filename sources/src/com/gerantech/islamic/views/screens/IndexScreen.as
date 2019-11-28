@@ -9,16 +9,17 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.items.HizbItemRenderer;
 	import com.gerantech.islamic.views.items.SuraItemRenderer;
 	import com.gerantech.islamic.views.lists.FastList;
-	
-	import feathers.controls.List;
+
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.VerticalLayout;
-	
+
 	import starling.events.Event;
+	import feathers.layout.VerticalAlign;
+	import feathers.layout.HorizontalAlign;
 
 	public class IndexScreen extends BaseCustomScreen
 	{
@@ -47,8 +48,8 @@ package com.gerantech.islamic.views.screens
 
 			//Create hizb list on right of the page
 			var hizbsLayout: VerticalLayout = new VerticalLayout();
-			hizbsLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
-			hizbsLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			hizbsLayout.verticalAlign = VerticalAlign.TOP;
+			hizbsLayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			hizbsLayout.paddingTop = appModel.sizes.subtitle + appModel.sizes.toolbar;
 			
 			hizbsList = new FastList();
@@ -65,8 +66,8 @@ package com.gerantech.islamic.views.screens
 		
 			//Create sura list on left of the page
 			var surasLayout: VerticalLayout = new VerticalLayout();
-			surasLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_TOP;
-			surasLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			surasLayout.verticalAlign = VerticalAlign.TOP;
+			surasLayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			surasLayout.paddingTop = appModel.sizes.subtitle + appModel.sizes.toolbar;
 			
 			surasList = new FastList();

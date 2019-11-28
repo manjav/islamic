@@ -4,13 +4,14 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.models.vo.DayDataProvider;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
+
 	import feathers.controls.LayoutGroup;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
+	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
-	
+
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
@@ -39,7 +40,7 @@ package com.gerantech.islamic.views.items
 			vlayout = new VerticalLayout();
 			vlayout.gap = vlayout.paddingTop = vlayout.paddingBottom = appModel.sizes.DP4;
 			//vlayout.paddingLeft = vlayout.paddingRight = appModel.sizes.DP16;
-			vlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			vlayout.horizontalAlign = HorizontalAlign.CENTER;
 			layout = vlayout;
 			height = HEIGHT;
 			

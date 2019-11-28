@@ -220,7 +220,6 @@ package com.gerantech.islamic.views.headers
 		
 		public function fadeIn():void
 		{
-			return;
 			/*for each(var b:ToolbarButton in activeButtons)
 				b.removeFromParent();
 				

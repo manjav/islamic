@@ -2,15 +2,15 @@ package com.gerantech.islamic.views.popups
 {
 	import com.gerantech.islamic.views.controls.FeaturesView;
 	import com.gerantech.islamic.views.items.TutorialItemRenderer;
-	
+
 	import feathers.controls.List;
-	import feathers.controls.ScrollContainer;
+	import feathers.controls.ScrollPolicy;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.HorizontalLayout;
-	
+
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.events.Event;
@@ -62,8 +62,8 @@ package com.gerantech.islamic.views.popups
 			list.dataProvider = new ListCollection(tutes);
 			list.snapToPages = true;
 			list.autoHideBackground = true;
-			list.verticalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
-			//list.horizontalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
+			list.verticalScrollPolicy = ScrollPolicy.OFF;
+			//list.horizontalScrollPolicy = ScrollContainer.ScrollPolicy.OFF;
 			//list.addEventListener("addAya", list_ayaChangedHandler);
 			list.addEventListener("next", list_nextHandler);
 			list.scrollToPageIndex(selectedTute, 0, 0);

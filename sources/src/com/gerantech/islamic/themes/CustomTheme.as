@@ -16,6 +16,7 @@ package com.gerantech.islamic.themes
 	import feathers.controls.popups.CalloutPopUpContentManager;
 	import feathers.events.FeathersEventType;
 	import feathers.layout.Direction;
+	import feathers.layout.RelativePosition;
 	import feathers.skins.ImageSkin;
 
 	import flash.text.TextFormat;
@@ -80,7 +81,7 @@ package com.gerantech.islamic.themes
 			button.minGap = this.gutterSize;
 			button.minHeight = sizes.DP36;
 			//button.padding = sizes.border;
-			button.iconPosition = Button.ICON_POSITION_LEFT;
+			button.iconPosition = RelativePosition.LEFT;
 		}
 		override protected function setPickerListStyles(list:PickerList):void
 		{

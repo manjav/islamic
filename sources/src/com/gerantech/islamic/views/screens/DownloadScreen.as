@@ -7,7 +7,7 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.headers.DownloadHeader;
 	import com.gerantech.islamic.views.items.DownloadItemRenderer;
 	import com.gerantech.islamic.views.lists.FastList;
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
@@ -15,8 +15,9 @@ package com.gerantech.islamic.views.screens
 	import feathers.events.FeathersEventType;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
+	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalLayout;
-	
+
 	import starling.events.Event;
 	
 	public class DownloadScreen extends BaseCustomPanelScreen
@@ -47,7 +48,7 @@ package com.gerantech.islamic.views.screens
 			addChild(downloadHeader);
 			
 			listLayout = new VerticalLayout();
-			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			listLayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			listLayout.gap = appModel.sizes.twoLineItem/6;
 			listLayout.paddingTop = appModel.sizes.twoLineItem/4;
 			

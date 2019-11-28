@@ -1,18 +1,17 @@
 package com.gerantech.islamic.views.headers
 {
-	import com.gerantech.islamic.models.AppModel;
-	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
-	import com.gerantech.islamic.views.controls.Devider;
 	import com.gerantech.islamic.views.items.WeekNameItemRenderer;
-	
+
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
+	import feathers.layout.HorizontalAlign;
 	import feathers.layout.HorizontalLayout;
-	
+	import feathers.layout.VerticalAlign;
+
 	import starling.display.Quad;
 
 	public class CalendarHeader extends BaseSubtitle
@@ -42,8 +41,8 @@ package com.gerantech.islamic.views.headers
 				data.reverse();
 
 			var listLayout:HorizontalLayout = new HorizontalLayout();
-			listLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_JUSTIFY;
-			listLayout.horizontalAlign = HorizontalLayout.HORIZONTAL_ALIGN_CENTER;
+			listLayout.verticalAlign = VerticalAlign.JUSTIFY;
+			listLayout.horizontalAlign = HorizontalAlign.CENTER;
 			
 			
 			list = new List();

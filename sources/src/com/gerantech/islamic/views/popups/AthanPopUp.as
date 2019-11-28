@@ -8,8 +8,10 @@ package com.gerantech.islamic.views.popups
 	import feathers.controls.Button;
 	import feathers.controls.ImageLoader;
 	import feathers.controls.LayoutGroup;
+	import feathers.layout.HorizontalAlign;
 	import feathers.layout.HorizontalLayout;
 	import feathers.layout.HorizontalLayoutData;
+	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
 
@@ -17,7 +19,6 @@ package com.gerantech.islamic.views.popups
 	import starling.animation.Tween;
 	import starling.core.Starling;
 	import starling.events.Event;
-	import feathers.layout.VerticalAlign;
 
 	public class AthanPopUp extends SimplePopUp
 	{
@@ -39,7 +40,7 @@ package com.gerantech.islamic.views.popups
 			userModel.timesModel.updateNotfications();
 			
 			var containerLayout:VerticalLayout = new VerticalLayout();
-			containerLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			containerLayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			containerLayout.firstGap = appModel.sizes.DP16;
 			container.layout = containerLayout;
 			

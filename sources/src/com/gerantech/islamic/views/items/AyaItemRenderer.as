@@ -24,6 +24,7 @@ package com.gerantech.islamic.views.items
 	
 	import starling.core.Starling;
 	import starling.events.Event;
+	import feathers.layout.HorizontalAlign;
 	
 	public class AyaItemRenderer extends BaseCustomItemRenderer
 	{
@@ -65,7 +66,7 @@ package com.gerantech.islamic.views.items
 			vLayout = new VerticalLayout();
 			vLayout.gap = Math.round(Math.min(appModel.sizes.border*3, userModel.fontSize*1.2))*0.7; 
 			vLayout.paddingTop = vLayout.paddingRight = vLayout.paddingLeft = vLayout.gap*3;
-			vLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_CENTER;
+			vLayout.horizontalAlign = HorizontalAlign.CENTER;
 			vLayout.paddingBottom = vLayout.gap*2;
 			layout = vLayout
 			

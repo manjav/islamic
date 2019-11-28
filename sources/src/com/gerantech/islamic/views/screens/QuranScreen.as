@@ -19,7 +19,7 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.popups.TranslationPopUp;
 
 	import feathers.controls.Callout;
-	import feathers.controls.ScrollContainer;
+	import feathers.controls.ScrollPolicy;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
@@ -35,7 +35,6 @@ package com.gerantech.islamic.views.screens
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
-	import feathers.controls.ScrollPolicy;
 
 	
 	public class QuranScreen extends BaseCustomScreen
@@ -126,7 +125,7 @@ package com.gerantech.islamic.views.screens
 			list.scrollToDisplayIndex(selectedIndex, 0);
 			list.snapToPages = true;
 			list.autoHideBackground = true;
-			list.verticalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF;
+			list.verticalScrollPolicy = ScrollPolicy.OFF;
 			list.addEventListener(Event.SCROLL, list_scrollHandler);
 			list.addEventListener("showTranslation", list_showTranslationHandler);
 			list.addEventListener("changeTranslation", list_changeTranslationHandler);

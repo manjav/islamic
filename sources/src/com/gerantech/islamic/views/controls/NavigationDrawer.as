@@ -23,7 +23,7 @@ package com.gerantech.islamic.views.controls
 			
 			list = new List();
 			list.dataProvider = new ListCollection(ConfigModel.instance.views);
-			list.verticalScrollPolicy = list.horizontalScrollPolicy = ScrollContainer.SCROLL_POLICY_OFF
+			list.verticalScrollPolicy = list.horizontalScrollPolicy = ScrollContainer.ScrollPolicy.OFF
 			list.itemRendererFactory = function():IListItemRenderer
 			{
 				var renderer : DefaultListItemRenderer = new DefaultListItemRenderer();

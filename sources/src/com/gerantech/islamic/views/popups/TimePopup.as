@@ -13,6 +13,7 @@ package com.gerantech.islamic.views.popups
 	import feathers.layout.VerticalLayout;
 	
 	import starling.events.Event;
+	import feathers.layout.HorizontalAlign;
 
 	public class TimePopup extends InfoPopUp
 	{
@@ -33,7 +34,7 @@ package com.gerantech.islamic.views.popups
 			super.initialize();
 			
 			var clayout:VerticalLayout = new VerticalLayout();
-			clayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			clayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			clayout.paddingBottom = appModel.sizes.DP16;
 			container.layout = clayout;
 			

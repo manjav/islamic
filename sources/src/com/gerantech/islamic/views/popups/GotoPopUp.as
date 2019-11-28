@@ -9,23 +9,23 @@ package com.gerantech.islamic.views.popups
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.controls.SettingPanel;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
-	
+
+	import feathers.controls.Button;
+	import feathers.controls.LayoutGroup;
+	import feathers.controls.renderers.IListItemRenderer;
+	import feathers.data.ListCollection;
+	import feathers.layout.HorizontalLayout;
+	import feathers.layout.HorizontalLayoutData;
+	import feathers.layout.VerticalAlign;
+	import feathers.layout.VerticalLayout;
+	import feathers.layout.VerticalLayoutData;
+
 	import flash.text.ReturnKeyLabel;
 	import flash.text.SoftKeyboardType;
 	import flash.text.engine.FontPosture;
 	import flash.text.engine.FontWeight;
 	import flash.utils.setTimeout;
-	
-	import feathers.controls.Button;
-	import feathers.controls.LayoutGroup;
-	import feathers.controls.PickerList;
-	import feathers.controls.renderers.IListItemRenderer;
-	import feathers.data.ListCollection;
-	import feathers.layout.HorizontalLayout;
-	import feathers.layout.HorizontalLayoutData;
-	import feathers.layout.VerticalLayout;
-	import feathers.layout.VerticalLayoutData;
-	
+
 	import starling.core.Starling;
 	import starling.events.Event;
 
@@ -61,12 +61,12 @@ package com.gerantech.islamic.views.popups
 
 			var cLayout:VerticalLayout = new VerticalLayout();
 			cLayout.gap = appModel.sizes.border*3;
-			cLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
+			cLayout.verticalAlign = VerticalAlign.MIDDLE;
 			cLayout.paddingBottom = appModel.sizes.DP16;
 			container.layout = cLayout;
 			
 			var hLayout:HorizontalLayout = new HorizontalLayout();
-			hLayout.verticalAlign = HorizontalLayout.VERTICAL_ALIGN_BOTTOM;
+			hLayout.verticalAlign = VerticalAlign.BOTTOM;
 			hLayout.gap = appModel.sizes.border*3;
 			
 			// add page text when navigation mode set to page by page  ------------------------------

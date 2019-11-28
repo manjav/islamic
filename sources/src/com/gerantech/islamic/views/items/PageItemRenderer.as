@@ -6,17 +6,19 @@ package com.gerantech.islamic.views.items
 	import com.gerantech.islamic.models.vo.Aya;
 	import com.gerantech.islamic.views.lists.FastList;
 
-	import feathers.controls.List;
+	import feathers.controls.ScrollPolicy;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
 	import feathers.events.FeathersEventType;
 	import feathers.layout.AnchorLayoutData;
+	import feathers.layout.HorizontalAlign;
+	import feathers.layout.RelativePosition;
+	import feathers.layout.VerticalAlign;
 	import feathers.layout.VerticalLayout;
 
 	import flash.utils.setTimeout;
 
 	import starling.events.Event;
-	import feathers.controls.ScrollPolicy;
 	
 	public class PageItemRenderer extends BaseQPageItemRenderer
 	{
@@ -41,15 +43,15 @@ package com.gerantech.islamic.views.items
 			super.initialize();
 			
 			var listLayout: VerticalLayout = new VerticalLayout();
-			listLayout.verticalAlign = VerticalLayout.VERTICAL_ALIGN_MIDDLE;
-			listLayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			listLayout.verticalAlign = VerticalAlign.MIDDLE;
+			listLayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			listLayout.paddingTop = appModel.sizes.border + appModel.sizes.subtitle + appModel.sizes.toolbar;
 			listLayout.paddingBottom = ResourceModel.instance.hasReciter?appModel.sizes.toolbar+appModel.sizes.border:appModel.sizes.border
 			listLayout.hasVariableItemDimensions = true;
 			//listLayout.gap = appModel.sizes.border;
 			
 			list = new FastList();
-			list.verticalScrollBarPosition = List.VERTICAL_SCROLL_BAR_POSITION_RIGHT;
+			list.verticalScrollBarPosition = RelativePosition.RIGHT;
 			list.layout = listLayout;
 			list.layoutData = new AnchorLayoutData(0, 0, 0, 0);
 			list.autoHideBackground = true;

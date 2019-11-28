@@ -1,6 +1,5 @@
 package com.gerantech.islamic.views.screens
 {
-	import com.gerantech.islamic.models.AppModel;
 	import com.gerantech.islamic.models.Assets;
 	import com.gerantech.islamic.models.vo.Time;
 	import com.gerantech.islamic.models.vo.ToolbarButtonData;
@@ -12,12 +11,9 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.items.WeekCalItemRenderer;
 	import com.gerantech.islamic.views.lists.FastList;
 	import com.gerantech.islamic.views.lists.QList;
-	
-	import flash.geom.Point;
-	import flash.utils.getTimer;
-	
+
 	import feathers.controls.ImageLoader;
-	import feathers.controls.List;
+	import feathers.controls.ScrollBarDisplayMode;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
@@ -25,7 +21,10 @@ package com.gerantech.islamic.views.screens
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.layout.TiledRowsLayout;
-	
+
+	import flash.geom.Point;
+	import flash.utils.getTimer;
+
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
@@ -83,7 +82,7 @@ package com.gerantech.islamic.views.screens
 			weekList.layout = weekLayout;
 			weekList.layoutData = new AnchorLayoutData(calHeader.height, 0, NaN, 0);
 			weekList.height = Math.min(appModel.sizes.DP32 * 4, appModel.sizes.height/4);
-			weekList.scrollBarDisplayMode = List.SCROLL_BAR_DISPLAY_MODE_NONE;
+			weekList.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
 			weekList.itemRendererFactory = function():IListItemRenderer
 			{
 				return new WeekCalItemRenderer();
@@ -102,7 +101,7 @@ package com.gerantech.islamic.views.screens
 			
 			list = new QList();
 			list.layoutData = new AnchorLayoutData(weekList.height+calHeader.height,0,0,0);
-			list.scrollBarDisplayMode = List.SCROLL_BAR_DISPLAY_MODE_NONE;
+			list.scrollBarDisplayMode = ScrollBarDisplayMode.NONE;
 			list.itemRendererFactory = function():IListItemRenderer
 			{
 				return new CalendarItemRenderer();

@@ -19,6 +19,7 @@ package com.gerantech.islamic.views.controls
 	import gt.utils.Localizations;
 
 	import starling.events.Event;
+	import feathers.layout.RelativePosition;
 	
 	public class SettingPanel extends LayoutGroup
 	{
@@ -98,7 +99,7 @@ package com.gerantech.islamic.views.controls
 			}			
 			
 			picker = new PickerList();
-			picker.buttonProperties.iconPosition = AppModel.instance.ltr ? Button.ICON_POSITION_RIGHT : Button.ICON_POSITION_LEFT;
+			picker.buttonProperties.iconPosition = AppModel.instance.ltr ? RelativePosition.RIGHT : RelativePosition.LEFT;
 			if(labelFunction != null)
 				picker.labelFunction = labelFunction;
 			else

@@ -1,5 +1,6 @@
 package com.gerantech.islamic.views.items
 {
+	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalLayout;
 
 	public class InboxItemRenderer extends BaseCustomItemRenderer
@@ -16,13 +17,9 @@ package com.gerantech.islamic.views.items
 			height = userModel.fontSize*4;
 			
 			var mlayout:VerticalLayout = new VerticalLayout();
-			mlayout.horizontalAlign = VerticalLayout.HORIZONTAL_ALIGN_JUSTIFY;
+			mlayout.horizontalAlign = HorizontalAlign.JUSTIFY;
 			layout = mlayout;
-			
-		//	titleDisplay = new RTLLabel("", 1, 
-			
 		}
-		
 		
 		override protected function commitData():void
 		{
