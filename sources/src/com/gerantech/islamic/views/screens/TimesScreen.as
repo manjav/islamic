@@ -1,6 +1,6 @@
 package com.gerantech.islamic.views.screens
 {
-	import com.gerantech.islamic.models.vo.DayDataProvider;
+	import com.gerantech.islamic.models.vo.EventsProvider;
 	import com.gerantech.islamic.models.vo.ToolbarButtonData;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.MultiDate;
@@ -8,17 +8,17 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.controls.Devider;
 	import com.gerantech.islamic.views.controls.RTLLabel;
 	import com.gerantech.islamic.views.items.TimeItemRenderer;
-	
+
 	import feathers.controls.List;
+	import feathers.controls.ScrollPolicy;
 	import feathers.controls.StackScreenNavigatorItem;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.data.ListCollection;
+	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
-	
+
 	import starling.events.Event;
-	import feathers.layout.HorizontalAlign;
-	import feathers.controls.ScrollPolicy;
 
 	public class TimesScreen extends BaseCustomPanelScreen
 	{
@@ -27,14 +27,11 @@ package com.gerantech.islamic.views.screens
 		private var list:List;
 		private var data:Vector.<Date>;
 		private var eventsLabel:RTLLabel;
-		private var dayData:DayDataProvider;
-
+		private var dayData:EventsProvider;
 		private var mainDateLabel:RTLLabel;
-
 		private var secondaryDateLabel:RTLLabel;
-
 		private var header2:Devider;
-		
+
 		override protected function initialize():void
 		{
 			userModel.timesModel.load();
@@ -67,16 +64,14 @@ package com.gerantech.islamic.views.screens
 			eventsLabel = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, true, null, 0.8);
 			eventsLabel.layoutData = new VerticalLayoutData(((appModel.sizes.width-appModel.sizes.DP32)/appModel.sizes.width)*100);
 			
-			dayData = new DayDataProvider();
+			dayData = new EventsProvider();
 			dayData.addEventListener("update", dayData_updateHandler);
 			dayData.setTime(date.dateClass.getTime());
 			
 			var nextTimeFound:Boolean;
 			for (var i:uint=0; i<userModel.timesModel.times.length; i++)
-			{
 				if(!nextTimeFound && dayData.isToday && userModel.timesModel.times[i].isPending(dayData.date.dateClass))
 					userModel.timesModel.times[i].pending = nextTimeFound = true;
-			}
 			
 			list = new List();
 			list.itemRendererFactory = function():IListItemRenderer
