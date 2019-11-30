@@ -30,7 +30,7 @@ package com.gerantech.islamic.views.screens
 		private var dayData:EventsProvider;
 		private var mainDateLabel:RTLLabel;
 		private var secondaryDateLabel:RTLLabel;
-		private var header2:Devider;
+		private var devider:Devider;
 
 		override protected function initialize():void
 		{
@@ -49,17 +49,14 @@ package com.gerantech.islamic.views.screens
 			headerlayout.gap = headerlayout.padding = appModel.sizes.DP8; 
 			headerlayout.horizontalAlign = HorizontalAlign.CENTER;
 			
-			header2 = new Devider(BaseMaterialTheme.CHROME_COLOR, 1);
-			header2.layout = headerlayout;
-			header2.layoutData = new VerticalLayoutData(100);
-			header2.backgroundSkin.alpha = 0.5;
-			addChild(header2);
-			/*
-			mainDateLabel = new RTLLabel("", 1, null, null, false, null, 0.9, null, "bold");
-			header2.addChild(mainDateLabel);
-			*/
+			devider = new Devider(BaseMaterialTheme.CHROME_COLOR, 1);
+			devider.layout = headerlayout;
+			devider.layoutData = new VerticalLayoutData(100);
+			devider.backgroundSkin.alpha = 0.5;
+			addChild(devider);
+			
 			secondaryDateLabel = new RTLLabel("", 1, "center", null, false, null, 0.9, null, "bold");
-			header2.addChild(secondaryDateLabel);
+			devider.addChild(secondaryDateLabel);
 
 			eventsLabel = new RTLLabel("", BaseMaterialTheme.DESCRIPTION_TEXT_COLOR, null, null, true, null, 0.8);
 			eventsLabel.layoutData = new VerticalLayoutData(((appModel.sizes.width-appModel.sizes.DP32)/appModel.sizes.width)*100);
@@ -102,7 +99,7 @@ package com.gerantech.islamic.views.screens
 			secondaryDateLabel.text = dayData.mainDateString + "\n" + dayData.secondaryDatesString;
 			if(dayData.eventsString.length+dayData.googleEventsString.length>0)
 			{
-				header2.addChild(eventsLabel);
+				devider.addChild(eventsLabel);
 				eventsLabel.text = loc("day_events") + "\n" + dayData.eventsString+"\n"+ dayData.googleEventsString;		
 			}
 		}
