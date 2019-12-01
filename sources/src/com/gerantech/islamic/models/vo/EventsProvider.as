@@ -1,55 +1,52 @@
 package com.gerantech.islamic.models.vo
 {
 	import com.gerantech.extensions.CalendarEvent;
-	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.models.UserModel;
 	import com.gerantech.islamic.utils.MultiDate;
 	import com.gerantech.islamic.utils.StrTools;
-
-	import flash.data.SQLConnection;
-	import flash.data.SQLMode;
-	import flash.data.SQLStatement;
-	import flash.errors.SQLError;
-	import flash.events.SQLErrorEvent;
-	import flash.events.SQLEvent;
-	import flash.filesystem.File;
-	import flash.utils.setTimeout;
 
 	import gt.utils.Localizations;
 
 	import starling.events.EventDispatcher;
 
-	public class DayDataProvider extends EventDispatcher
+	public class EventsProvider extends EventDispatcher
 	{
+		public var date:MultiDate;
+		public var holiday:Boolean;
 		public var mainDateString:String = "";
 		public var secondaryDatesString:String = "";
 		public var eventsString:String = "";
 		public var googleEventsString:String = "";
-		public var date:MultiDate;
 		
-		private var sqlConnection:SQLConnection;
+		private var time:Object;
+		private var persians:Array;
+		private var gregorians:Array;
+		private var islamics:Array;
 		private var googleEvents:Vector.<CalendarEvent>;
-		private var _time:Object;
-		public var updated:Boolean;
 
-		public function DayDataProvider()
+		[Embed(source = "../../assets/contents/events-persian.csv", mimeType="application/octet-stream")]
+		private static const PersianEvents:Class;
+		[Embed(source = "../../assets/contents/events-gregorian.csv", mimeType="application/octet-stream")]
+		private static const GaregorianEvents:Class;
+		[Embed(source = "../../assets/contents/events-islamic.csv", mimeType="application/octet-stream")]
+		private static const IslamicEvents:Class;
+	
+		public function EventsProvider()
 		{
-			date = new MultiDate(null, UserModel.instance.hijriOffset);
-			sqlConnection = new SQLConnection();
-			//sqlConnection.addEventListener(SQLEvent.OPEN, sqlConnection_openHandler); 
-			//sqlConnection.addEventListener(SQLErrorEvent.ERROR, sqlConnection_errorHandler); 
-			sqlConnection.open(File.applicationDirectory.resolvePath("assets/contents/events.db"), SQLMode.READ);//, null, false, 1024, AppModel.instance.byteArraySec); 
-			googleEvents = NativeAbilities.instance.getCalendarEvents();
+			this.date = new MultiDate(null, UserModel.instance.hijriOffset);
+			this.persians = createEvents(new PersianEvents());
+			this.islamics = createEvents(new IslamicEvents());
+			this.gregorians = createEvents(new GaregorianEvents());
+			this.googleEvents = new Vector.<CalendarEvent>;// NativeAbilities.instance.getCalendarEvents();
 		}
-		
-		
+				
 		public function setTime(time:Object):void
 		{
-			updated = false;
-			_time = time as Number;
-			date.setTime(time);
+			this.holiday = false;
+			this.time = time as Number;
+			this.date.setTime(time);
 
-			mainDateString = isToday ? "امروز " : "";
+			this.mainDateString = isToday ? "امروز " : "";
 			//setTitleStyle(date.date==appModel.date.date && date.month==appModel.date.month ? BaseMaterialTheme.PRIMARY_BACKGROUND_COLOR : BaseMaterialTheme.PRIMARY_TEXT_COLOR); 
 			switch(UserModel.instance.locale.value)
 			{
@@ -68,74 +65,46 @@ package com.gerantech.islamic.models.vo
 			}
 			
 			// get google calendar events
-			var ge:Array = getGoogleEvents();
-			googleEventsString = ge.length>0 ? ge.join(" - ") : "";
+			// var ge:Array = getGoogleEvents();
+			// googleEventsString = ge.length>0 ? ge.join(" - ") : "";
 			
 			// get persian, gregorian and islamic calendars events
 			eventsString = "";
-			query("select text, holiday from hijri where date="+date.dateQamari+" AND month="+date.monthQamari
-				+ " union all select text, holiday from persian where date="+date.dateShamsi+" AND month="+date.monthShamsi
-				+ " union all select text, holiday from gregorian where date="+date.date+" AND month="+date.month
-				, persianQueryCallback);
-			
-			function persianQueryCallback(result:Object):void
-			{
-				if(result is SQLErrorEvent || result.data==null)
-				{
-					if(result is SQLErrorEvent)
-						trace(SQLErrorEvent(result).text);
-					updated = true;
-					dispatchEventWith("update");
-					return;
-				}
-				for(var s:int=0; s<result.data.length; s++)
-					eventsString += result.data[s].text + (s<result.data.length-1?" - ":"");
-				updated = true;
-				dispatchEventWith("update");
+			for each(var e:Array in persians)
+				if( int(e[0]) == date.monthShamsi && int(e[1]) == date.dateShamsi )
+					addEvent(e);
+			for each(e in gregorians)
+				if( int(e[0]) == date.month && int(e[1]) == date.date )
+					addEvent(e);
+			for each(e in islamics)
+				if( int(e[0]) == date.monthQamari && int(e[1]) == date.dateQamari )
+					addEvent(e);
+
+			function addEvent(e:Object):void {
+				eventsString += "\n• " + e[2];
+				if( !holiday )
+					holiday = e[3] == "1\r";
 			}
 		}		
-		
-		private function query(query:String, response:Function):void
-		{
-			var createStmt:SQLStatement = new SQLStatement(); 
-			createStmt.sqlConnection = sqlConnection; 
-			createStmt.text = query ;
-			createStmt.addEventListener(SQLEvent.RESULT, createResult); 
-			createStmt.addEventListener(SQLErrorEvent.ERROR, createError); 
-			if(sqlConnection==null || sqlConnection.connected)
-				createStmt.execute(); 
-			else
-			{
-				setTimeout(response, 1, new SQLErrorEvent(SQLErrorEvent.ERROR, false, false, new SQLError("execute", "SQL Connection not found.")));
-				return;
-			}
-			//trace(query);
-			function createError(event:SQLErrorEvent):void
-			{
-				response(event);
-			}
-			function createResult(event:SQLEvent):void
-			{
-				response(createStmt.getResult());
-			}			
-		}
-
 		
 		private function getGoogleEvents():Array
 		{
 			var ret:Array = new Array();
-			if(googleEvents != null)
-				for each(var ev:CalendarEvent in googleEvents)
-				{
-					//trace(ev.startTime, ev.name);
-					if(ev.startTime >=_time && ev.startTime<_time+Time.DAY_TIME_LEN)
-						ret.push(ev.name);
-				}
+			if(googleEvents == null)
+				return ret;
+			for each(var ev:CalendarEvent in googleEvents)
+				if(ev.startTime >=time && ev.startTime<time+Time.DAY_TIME_LEN)
+					ret.push(ev.name);
 			return ret;
 		}
 		
-		
-		
+		public function get isHoliday():Boolean
+		{
+			if( holiday )
+				return true;
+			return date.day == 5;
+		}
+
 		public function get isToday():Boolean
 		{
 			return UserModel.instance.timesModel.date.equalDay(date.dateClass);
@@ -186,6 +155,16 @@ package com.gerantech.islamic.models.vo
 		protected function loc(resourceName:String, parameters:Array=null, locale:String=null):String
 		{
 			return Localizations.instance.get(resourceName, parameters);//, locale);
+		}
+
+		private function createEvents(csv:*):Array
+		{
+			var ret:Array = new Array();
+			var lines:Array = csv.toString().split("\n");
+
+			for(var i:int=1; i<lines.length; i++)
+				ret.push(String(lines[i]).split(","));
+			return ret;
 		}
 	}
 }

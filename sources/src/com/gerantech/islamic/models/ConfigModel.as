@@ -22,7 +22,6 @@ package com.gerantech.islamic.models
 		[Embed(source = "../assets/contents/config-embeded.json", mimeType="application/octet-stream")]
 		private static const YourJSON:Class;
 		
-		
 		private static var _this:ConfigModel;
 		
 		public var searchSources:Array;

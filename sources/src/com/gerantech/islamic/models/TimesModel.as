@@ -2,6 +2,7 @@ package com.gerantech.islamic.models
 {
 	import com.gerantech.extensions.NativeAbilities;
 	import com.gerantech.islamic.models.vo.Alert;
+	import com.gerantech.islamic.models.vo.EventsProvider;
 	import com.gerantech.islamic.models.vo.Moathen;
 	import com.gerantech.islamic.models.vo.Time;
 	import com.gerantech.islamic.utils.MultiDate;
@@ -17,6 +18,7 @@ package com.gerantech.islamic.models
 		public var times:Vector.<Time>;
 		public var date:MultiDate;
 		public var prayTimes:PrayTime;
+		public var events:EventsProvider;
 		
 		public var moathens:Array;
 		
@@ -34,7 +36,7 @@ package com.gerantech.islamic.models
 			
 		public function load():void
 		{
-			
+			events = new EventsProvider();
 			date = new MultiDate(null, userModel.hijriOffset);
 			prayTimes = new PrayTime(CalculationMethod.TEHRAN, userModel.city.latitude, userModel.city.longitude);
 			var dates:Vector.<Date> = prayTimes.getTimes(date.dateClass).toDates();
@@ -51,12 +53,11 @@ package com.gerantech.islamic.models
 					resourceModel.persons = JSON.parse(new ResourceModel.personsClass());
 	
 				createReciters();
-				
 				data = userModel.user.times;
 			}
-			
 			loaded = true;
 		}
+			
 		//RECITERS ______________________________________________________________________________________________________
 		private function createReciters():void
 		{
@@ -72,6 +73,7 @@ package com.gerantech.islamic.models
 				i++;
 			}
 		}
+		
 		private function getMoathen(moathen:String):Moathen
 		{
 			for each(var r:Moathen in moathens)
