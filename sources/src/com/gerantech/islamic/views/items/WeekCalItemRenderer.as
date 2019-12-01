@@ -1,23 +1,22 @@
 package com.gerantech.islamic.views.items
 {
 	import com.gerantech.islamic.models.Assets;
-	import com.gerantech.islamic.models.vo.DayDataProvider;
+	import com.gerantech.islamic.models.vo.EventsProvider;
 	import com.gerantech.islamic.themes.BaseMaterialTheme;
 	import com.gerantech.islamic.utils.StrTools;
 	import com.gerantech.islamic.views.controls.RTLLabel;
-	
-	import flash.text.engine.ElementFormat;
-	import flash.text.engine.FontDescription;
-	import flash.text.engine.FontLookup;
-	
+
 	import feathers.controls.ImageLoader;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 
+	import flash.text.engine.ElementFormat;
+	import flash.text.engine.FontDescription;
+	import flash.text.engine.FontLookup;
+	import com.gerantech.islamic.models.UserModel;
+
 	public class WeekCalItemRenderer extends BaseCustomItemRenderer
 	{
-		private var dayData:DayDataProvider;
-		
 		private var background:ImageLoader;
 		private var titleDiplay:RTLLabel;
 		
@@ -42,8 +41,6 @@ package com.gerantech.islamic.views.items
 			layout = new AnchorLayout();
 			width = appModel.sizes.width/7;
 			height = appModel.sizes.DP32;
-			
-			dayData = new DayDataProvider();
 			
 			background = new ImageLoader();
 			background.visible = false;
@@ -81,19 +78,19 @@ package com.gerantech.islamic.views.items
 			super.commitData();
 			monthDiplay.removeFromParent();
 			
-			dayData.setTime(_data);
-			if(dayData.isFirstDay)
+			events.setTime(_data);
+			if(events.isFirstDay)
 			{
-				monthDiplay.text = loc("month_p_"+dayData.currentMonth);
+				monthDiplay.text = loc("month_p_"+events.currentMonth);
 				addChild(monthDiplay);
 			}
 			
-			titleDiplay.text =  StrTools.getNumber(dayData.currentDate);
+			titleDiplay.text =  StrTools.getNumber(events.currentDate);
 
 			setTitleStyle(true);
 		}
 
-/*		override public function set currentState(value:String):void
+/*	override public function set currentState(value:String):void
 		{
 			if(_currentState == value)
 				return;
@@ -112,16 +109,22 @@ package com.gerantech.islamic.views.items
 		
 		private function setTitleStyle(force:Boolean=false):void
 		{
-			var elFrm:String = "elementFormat_"+(isSelected?"selected_":"normal_")+(dayData.isToday?"today":"other");
+			var elFrm:String = "elementFormat_"+(isSelected?"selected_":"normal_")+(events.isToday?"today":"other");
 			background.visible = isSelected;
 			if(elFrm == _currentElementFormat && !force)
 				return;
 			
 			//trace(date.dateShamsi, currentState)
 			_currentElementFormat = elFrm;
-			titleDiplay.layoutData = !isSelected&&dayData.isFirstDay?firstLayoutData:normalLayoutData;
-			monthDiplay.visible = !isSelected&&dayData.isFirstDay;
+			titleDiplay.layoutData = !isSelected&&events.isFirstDay?firstLayoutData:normalLayoutData;
+			monthDiplay.visible = !isSelected&&events.isFirstDay;
 			titleDiplay.elementFormat = this[_currentElementFormat];
 		}
+		
+		static public function get events():EventsProvider
+		{
+			return UserModel.instance.timesModel.events;
+		}
+
 	}
 }

@@ -44,7 +44,7 @@ package com.gerantech.islamic.views.screens
 		private var firstItemIndex:int = -1;
 		private var actionButton:FlatButton;
 		private var actionButtonShown:Boolean;
-		
+
 		private var weekCollection:ListCollection;
 		private var daysCollection:ListCollection;
 		private var dayTime:Number;
@@ -58,10 +58,10 @@ package com.gerantech.islamic.views.screens
 			layout = new AnchorLayout();
 
 			var startOfWeek:uint = appModel.ltr ? 0 : 6;
-			var passedDays:uint = 140; // passed day must be factor 7 for week list alignment
+			var passedDays:uint = 420; // passed day must be factor 7 for week list alignment
 			dayTime = date.getTime();
 			region = new Point();
-			times = getTimes(startOfWeek-date.day-passedDays, 350);
+			times = getTimes(startOfWeek-date.day-passedDays, 770);
 			daysCollection = new ListCollection(times);
 			todayIndex = passedDays-startOfWeek;
 
@@ -121,8 +121,6 @@ package com.gerantech.islamic.views.screens
 
 		private function transitionInCompleteHandler():void
 		{
-			trace(" --  Calendar tc1", getTimer()-Hidaya.ft);
-			
 			weekList.scaleX = appModel.ltr ? 1 : -1;
 			weekList.alignPivot("right", "top");
 			weekList.alpha = 0;
@@ -130,17 +128,14 @@ package com.gerantech.islamic.views.screens
 			weekList.dataProvider = daysCollection;
 			//weekList.scrollToDisplayIndex(todayIndex);
 			//weekList.selectedIndex = todayIndex;
-			trace(" --  weekList data set", getTimer()-Hidaya.ft);
 
 			list.alpha = 0;
 			Starling.juggler.tween(list, 0.4, {alpha:1, delay:0.1});
 			list.dataProvider = daysCollection;
 			//list.verticalScrollPosition = todayIndex * CalendarItemRenderer.HEIGHT;
 			//list.addEventListener(Event.SCROLL, list_scrollHandler);
-			trace(" --  list data set", getTimer()-Hidaya.ft);
 			
 			//daysCollection.addAll(new ListCollection(getTimes(region.y, 500)));
-			trace(" --  data added", getTimer()-Hidaya.ft);
 			gotoDay(userModel.timesModel.date.middleTime);
 			//showActionButton(true);
 		}
