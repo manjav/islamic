@@ -33,7 +33,6 @@ package com.gerantech.islamic.views.screens
 		{
 			super.initialize();
 			title = loc(appModel.PAGE_COMPASS);
-			LocationManager.instance;
 			
 			cityButton = new EditableButton();
 			cityButton.label = userModel.city.name;

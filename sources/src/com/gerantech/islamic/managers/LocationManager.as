@@ -1,5 +1,7 @@
 package com.gerantech.islamic.managers
 {
+	import com.gerantech.islamic.utils.LoadAndSaver;
+
 	import flash.data.SQLConnection;
 	import flash.data.SQLMode;
 	import flash.data.SQLStatement;
@@ -7,20 +9,44 @@ package com.gerantech.islamic.managers
 	import flash.events.SQLEvent;
 	import flash.filesystem.File;
 	import flash.utils.setTimeout;
+	import flash.events.IOErrorEvent;
 
 	public class LocationManager
 	{
 		private var sqlConnection:SQLConnection;
 		public function LocationManager()
 		{
-			
+		}
+		
+		public function connect():void
+		{
+			var db:File = File.applicationStorageDirectory.resolvePath("geoname.sqlite");
+			if( !db.exists )
+			{
+				var loader:LoadAndSaver = new LoadAndSaver(db.nativePath, "http://gerantech.com/islamic/geoname.sqlite");
+				loader.addEventListener(IOErrorEvent.IO_ERROR, loader_ioerrorHandler);
+				loader.addEventListener("complete", loader_completeHandler);
+				return;
+			}
+			if( sqlConnection != null && sqlConnection.connected )
+				return;
+				
 			sqlConnection = new SQLConnection();
 			sqlConnection.addEventListener(SQLEvent.OPEN, sqlConnection_openHandler); 
 			sqlConnection.addEventListener(SQLErrorEvent.ERROR, sqlConnection_errorHandler); 
-			var db:File = File.applicationDirectory.resolvePath("assets/contents/geoname.sqlite");
 			sqlConnection.openAsync(db, SQLMode.READ);
 		}
-		
+
+		protected function loader_completeHandler(event:*):void
+		{
+			connect();
+		}
+
+		private function loader_ioerrorHandler(event:IOErrorEvent):void
+		{
+			AppController.instance.alert("", "geo_error", "cancel_button", "geo_retry", connect);
+		}
+
 		protected function sqlConnection_errorHandler(event:SQLErrorEvent):void
 		{trace(event)
 		}
@@ -30,18 +56,17 @@ package com.gerantech.islamic.managers
 		
 		private function query(queryStr:String, response:Function):void
 		{//trace(queryStr)
+			if(sqlConnection == null || !sqlConnection.connected)
+			{
+				connect();
+				return;
+			}
 			var createStmt:SQLStatement = new SQLStatement(); 
 			createStmt.sqlConnection = sqlConnection; 
 			createStmt.text = queryStr ;
 			createStmt.addEventListener(SQLEvent.RESULT, createResult); 
 			createStmt.addEventListener(SQLErrorEvent.ERROR, createError); 
-			if(sqlConnection.connected)
-				createStmt.execute(); 
-			else
-			{
-				setTimeout(response, 1, "SQL Connection not found.");
-				return;
-			}
+			createStmt.execute(); 
 			function createError(event:SQLErrorEvent):void
 			{
 				response(event.text);

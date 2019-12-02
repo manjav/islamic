@@ -19,7 +19,7 @@ package com.gerantech.islamic.views.screens
 		{
 			super.initialize();
 			layout = new AnchorLayout();
-			
+			LocationManager.instance.connect();
 			
 			list = new List();
 			list.itemRendererFactory = function ():IListItemRenderer
