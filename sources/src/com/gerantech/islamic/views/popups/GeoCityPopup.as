@@ -2,7 +2,9 @@ package com.gerantech.islamic.views.popups
 {
 	import com.gerantech.islamic.managers.LocationManager;
 	import com.gerantech.islamic.models.vo.Location;
-	
+
+	import feathers.controls.Button;
+
 	import flash.events.Event;
 	import flash.events.GeolocationEvent;
 	import flash.events.IOErrorEvent;
@@ -10,16 +12,13 @@ package com.gerantech.islamic.views.popups
 	import flash.net.URLRequest;
 	import flash.utils.clearTimeout;
 	import flash.utils.setTimeout;
-	
-	import feathers.controls.Button;
 
 	public class GeoCityPopup extends GeoPopup
 	{
 		private var urlLoader:URLLoader;
 		private var tryIndex:uint = 1;
 		private var latitude:Number;
-		private var longitude:Number;
-		
+		private var longitude:Number;		
 
 		override protected function initialize():void
 		{
@@ -34,7 +33,6 @@ package com.gerantech.islamic.views.popups
 			buttonBar.addChild(searchButton);
 			buttonBar.addChild(enableButton);
 		}
-
 		
 		override protected function geoLocation_updateHandler(event:GeolocationEvent):void
 		{

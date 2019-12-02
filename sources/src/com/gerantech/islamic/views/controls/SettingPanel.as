@@ -35,8 +35,8 @@ package com.gerantech.islamic.views.controls
 		private var data:Object;
 		private var _selectedItem:Object;
 		
-		private var itemRendererFactory:Function;
-		private var labelFunction:Function;
+		public var itemRendererFactory:Function;
+		public var labelFunction:Function;
 		
 		public function SettingPanel(label:String, data:Object, selectedItem:Object, itemRendererClass:Class=null, itemRendererFactory:Function=null, labelFunction:Function=null)
 		{

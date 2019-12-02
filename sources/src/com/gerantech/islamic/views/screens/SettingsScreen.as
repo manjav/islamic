@@ -14,19 +14,20 @@ package com.gerantech.islamic.views.screens
 	import com.gerantech.islamic.views.items.FontItemRenderer;
 	import com.gerantech.islamic.views.items.SettingItemRenderer;
 	import com.gerantech.islamic.views.popups.GeoCityPopup;
-	
-	import flash.sensors.Geolocation;
-	import flash.utils.setTimeout;
-	
+
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
+	import feathers.layout.HorizontalAlign;
 	import feathers.layout.VerticalLayout;
 	import feathers.layout.VerticalLayoutData;
-	
-	import starling.events.Event;
-	import feathers.layout.HorizontalAlign;
+
+	import flash.sensors.Geolocation;
+	import flash.utils.setTimeout;
+
 	import gt.utils.Localizations;
+
+	import starling.events.Event;
 	
 	public class SettingsScreen extends BaseCustomPanelScreen
 	{
@@ -82,13 +83,13 @@ package com.gerantech.islamic.views.screens
 					}
 					
 					hijriOffsetsPanel = new SettingPanel("hijri_correction", hijriOffsets, getOffsetsIndex());
-					hijriOffsetsPanel.picker.listProperties.itemRendererFactory = function():IListItemRenderer
+					hijriOffsetsPanel.itemRendererFactory = function():IListItemRenderer
 					{
 						var ret:SettingItemRenderer = new SettingItemRenderer();
 						ret.labelFunction = labelFunction;
 						return ret;
 					}
-					hijriOffsetsPanel.picker.labelFunction = labelFunction;
+					hijriOffsetsPanel.labelFunction = labelFunction;
 					hijriOffsetsPanel.addEventListener(Event.CHANGE, hijriOffsetsPanel_changeHandler);
 					hijriOffsetsPanel.layoutData = ld;
 					addChild(hijriOffsetsPanel);
@@ -110,7 +111,6 @@ package com.gerantech.islamic.views.screens
 					cityButton.addEventListener("triggered", cityButton_triggeredHandler);
 					cityButton.layoutData = ld;
 					addChild(cityButton);
-
 					break
 
 				case MODE_QURAN:
