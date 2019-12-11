@@ -23,7 +23,7 @@ package com.gerantech.islamic.managers
 			var db:File = File.applicationStorageDirectory.resolvePath("geoname.sqlite");
 			if( !db.exists )
 			{
-				var loader:LoadAndSaver = new LoadAndSaver(db.nativePath, "http://gerantech.com/islamic/geoname.sqlite");
+				var loader:LoadAndSaver = new LoadAndSaver(db.nativePath, "http://grantech.ir/islamic/geoname.sqlite");
 				loader.addEventListener(IOErrorEvent.IO_ERROR, loader_ioerrorHandler);
 				loader.addEventListener("complete", loader_completeHandler);
 				return;

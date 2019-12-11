@@ -20,7 +20,7 @@ package com.gerantech.islamic.managers
 		private var db_name:String = 'gerantec_islamic';//"ddbb"
 		private var db_user:String = 'gerantec_padmin';//"root"
 		private var db_pass:String = 'P@1nt@dm1n';//""
-		private var db_path:String = 'gerantech.com/islamic/php/users.php';//""
+		private var db_path:String = 'grantech.ir/islamic/php/users.php';//""
 		private var sqlConnector:MySQL;
 
 		public function UserDataUpdater()
@@ -41,7 +41,7 @@ package com.gerantech.islamic.managers
 			bytes.position = 0;
 			bytes.compress();
 
-			var php:PHPInterface = new PHPInterface("gerantech.com/islamic/php/dataUpdater.php", "file", {name:user.profile.gid, file:bytes});
+			var php:PHPInterface = new PHPInterface("grantech.ir/islamic/php/dataUpdater.php", "file", {name:user.profile.gid, file:bytes});
 			php.addEventListener(Event.COMPLETE, php_completeHandler);
 			php.addEventListener(IOErrorEvent.IO_ERROR, php_ioErrorHandler);
 			php.load();
@@ -69,7 +69,7 @@ package com.gerantech.islamic.managers
 			var urlSteram:URLStream = new URLStream();
 			urlSteram.addEventListener(Event.COMPLETE, urlSteram_completeHandler);
 			urlSteram.addEventListener(IOErrorEvent.IO_ERROR, php_ioErrorHandler);
-			urlSteram.load(new URLRequest("http://gerantech.com/islamic/user_data/"+user.profile.gid));
+			urlSteram.load(new URLRequest("http://grantech.ir/islamic/user_data/"+user.profile.gid));
 		}
 		
 		protected function urlSteram_completeHandler(event:Event):void

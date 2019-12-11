@@ -51,14 +51,14 @@ package com.gerantech.islamic.models
 				parts[i].enabled = i<5;
 			
 
-			/*var urlStream:URLLoader = new URLLoader(new URLRequest("http://gerantech.com/islamic/config-data.xml"))
+			/*var urlStream:URLLoader = new URLLoader(new URLRequest("http://grantech.ir/islamic/config-data.xml"))
 			urlStream.addEventListener(Event.COMPLETE, configLoader_completeHandler);
 			urlStream.addEventListener(IOErrorEvent.IO_ERROR, configLoader_ioErrorHandler);*/
 		}
 		
 		protected function configLoader_ioErrorHandler(event:IOErrorEvent):void
 		{
-			trace("http://gerantech.com/islamic/config-data.xml not found.");
+			trace("http://grantech.ir/islamic/config-data.xml not found.");
 		}
 		
 		protected function configLoader_completeHandler(event:Event):void

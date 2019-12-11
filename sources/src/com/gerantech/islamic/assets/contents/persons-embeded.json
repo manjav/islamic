@@ -3,7 +3,7 @@
     {
       "name": "Efendi Nahi",
       "size": 2391040,
-      "url": "http://gerantech.com/islamic/translations/sq.nahi.idb",
+      "url": "http://grantech.ir/islamic/translations/sq.nahi.idb",
       "path": "sq.nahi",
       "flag": "sq",
       "mode": "trans_t"
@@ -11,7 +11,7 @@
     {
       "name": "Feti Mehdiu",
       "size": 2114560,
-      "url": "http://gerantech.com/islamic/translations/sq.mehdiu.idb",
+      "url": "http://grantech.ir/islamic/translations/sq.mehdiu.idb",
       "path": "sq.mehdiu",
       "flag": "sq",
       "mode": "trans_t"
@@ -19,7 +19,7 @@
     {
       "name": "Sherif Ahmeti",
       "size": 2333696,
-      "url": "http://gerantech.com/islamic/translations/sq.ahmeti.idb",
+      "url": "http://grantech.ir/islamic/translations/sq.ahmeti.idb",
       "path": "sq.ahmeti",
       "flag": "sq",
       "mode": "trans_t"
@@ -27,7 +27,7 @@
     {
       "name": "Ramdane At Mansour",
       "size": 1568768,
-      "url": "http://gerantech.com/islamic/translations/ber.mensur.idb",
+      "url": "http://grantech.ir/islamic/translations/ber.mensur.idb",
       "path": "ber.mensur",
       "flag": "ber",
       "mode": "trans_t"
@@ -35,7 +35,7 @@
     {
       "name": "تفسیر جلالین",
       "size": 2436096,
-      "url": "http://gerantech.com/islamic/translations/ar.jalalayn.idb",
+      "url": "http://grantech.ir/islamic/translations/ar.jalalayn.idb",
       "path": "ar.jalalayn",
       "flag": "ar",
       "mode": "tafsi_t"
@@ -43,7 +43,7 @@
     {
       "name": "تفسير المیسر",
       "size": 3799040,
-      "url": "http://gerantech.com/islamic/translations/ar.muyassar.idb",
+      "url": "http://grantech.ir/islamic/translations/ar.muyassar.idb",
       "path": "ar.muyassar",
       "flag": "ar",
       "mode": "tafsi_t"
@@ -51,7 +51,7 @@
     {
       "name": "ሳዲ�� - ሳኒ ሐቢብ",
       "size": 1295360,
-      "url": "http://gerantech.com/islamic/translations/am.sadiq.idb",
+      "url": "http://grantech.ir/islamic/translations/am.sadiq.idb",
       "path": "am.sadiq",
       "flag": "am",
       "mode": "trans_t"
@@ -59,7 +59,7 @@
     {
       "name": "Məmmədəliyev & Bünyadov",
       "size": 3080192,
-      "url": "http://gerantech.com/islamic/translations/az.mammadaliyev.idb",
+      "url": "http://grantech.ir/islamic/translations/az.mammadaliyev.idb",
       "path": "az.mammadaliyev",
       "flag": "az",
       "mode": "trans_t"
@@ -67,7 +67,7 @@
     {
       "name": "Musayev",
       "size": 2106368,
-      "url": "http://gerantech.com/islamic/translations/az.musayev.idb",
+      "url": "http://grantech.ir/islamic/translations/az.musayev.idb",
       "path": "az.musayev",
       "flag": "az",
       "mode": "trans_t"
@@ -75,7 +75,7 @@
     {
       "name": "জহুরুল হক",
       "size": 2372608,
-      "url": "http://gerantech.com/islamic/translations/bn.hoque.idb",
+      "url": "http://grantech.ir/islamic/translations/bn.hoque.idb",
       "path": "bn.hoque",
       "flag": "bn",
       "mode": "trans_t"
@@ -83,7 +83,7 @@
     {
       "name": "মুহিউদ্দীন খান",
       "size": 2144256,
-      "url": "http://gerantech.com/islamic/translations/bn.bengali.idb",
+      "url": "http://grantech.ir/islamic/translations/bn.bengali.idb",
       "path": "bn.bengali",
       "flag": "bn",
       "mode": "trans_t"
@@ -91,7 +91,7 @@
     {
       "name": "Korkut",
       "size": 1946624,
-      "url": "http://gerantech.com/islamic/translations/bs.korkut.idb",
+      "url": "http://grantech.ir/islamic/translations/bs.korkut.idb",
       "path": "bs.korkut",
       "flag": "bs",
       "mode": "trans_t"
@@ -99,7 +99,7 @@
     {
       "name": "Mlivo",
       "size": 1827840,
-      "url": "http://gerantech.com/islamic/translations/bs.mlivo.idb",
+      "url": "http://grantech.ir/islamic/translations/bs.mlivo.idb",
       "path": "bs.mlivo",
       "flag": "bs",
       "mode": "trans_t"
@@ -107,7 +107,7 @@
     {
       "name": "Теофанов",
       "size": 1830912,
-      "url": "http://gerantech.com/islamic/translations/bg.theophanov.idb",
+      "url": "http://grantech.ir/islamic/translations/bg.theophanov.idb",
       "path": "bg.theophanov",
       "flag": "bg",
       "mode": "trans_t"
@@ -115,7 +115,7 @@
     {
       "name": "Muhammad Ma Jian",
       "size": 627712,
-      "url": "http://gerantech.com/islamic/translations/zh.jian.idb",
+      "url": "http://grantech.ir/islamic/translations/zh.jian.idb",
       "path": "zh.jian",
       "flag": "zh",
       "mode": "trans_t"
@@ -123,7 +123,7 @@
     {
       "name": "Muhammad Ma Jian (Traditional)",
       "size": 631808,
-      "url": "http://gerantech.com/islamic/translations/zh.majian.idb",
+      "url": "http://grantech.ir/islamic/translations/zh.majian.idb",
       "path": "zh.majian",
       "flag": "zh",
       "mode": "trans_t"
@@ -131,7 +131,7 @@
     {
       "name": "Hrbek",
       "size": 1955840,
-      "url": "http://gerantech.com/islamic/translations/cs.hrbek.idb",
+      "url": "http://grantech.ir/islamic/translations/cs.hrbek.idb",
       "path": "cs.hrbek",
       "flag": "cs",
       "mode": "trans_t"
@@ -139,7 +139,7 @@
     {
       "name": "Nykl",
       "size": 1959936,
-      "url": "http://gerantech.com/islamic/translations/cs.nykl.idb",
+      "url": "http://grantech.ir/islamic/translations/cs.nykl.idb",
       "path": "cs.nykl",
       "flag": "cs",
       "mode": "trans_t"
@@ -147,7 +147,7 @@
     {
       "name": "ދިވެހި",
       "size": 3833856,
-      "url": "http://gerantech.com/islamic/translations/dv.divehi.idb",
+      "url": "http://grantech.ir/islamic/translations/dv.divehi.idb",
       "path": "dv.divehi",
       "flag": "dv",
       "mode": "trans_t"
@@ -155,7 +155,7 @@
     {
       "name": "Keyzer",
       "size": 2623488,
-      "url": "http://gerantech.com/islamic/translations/nl.keyzer.idb",
+      "url": "http://grantech.ir/islamic/translations/nl.keyzer.idb",
       "path": "nl.keyzer",
       "flag": "nl",
       "mode": "trans_t"
@@ -163,7 +163,7 @@
     {
       "name": "Leemhuis",
       "size": 2351104,
-      "url": "http://gerantech.com/islamic/translations/nl.leemhuis.idb",
+      "url": "http://grantech.ir/islamic/translations/nl.leemhuis.idb",
       "path": "nl.leemhuis",
       "flag": "nl",
       "mode": "trans_t"
@@ -171,7 +171,7 @@
     {
       "name": "Siregar",
       "size": 2565120,
-      "url": "http://gerantech.com/islamic/translations/nl.siregar.idb",
+      "url": "http://grantech.ir/islamic/translations/nl.siregar.idb",
       "path": "nl.siregar",
       "flag": "nl",
       "mode": "trans_t"
@@ -179,7 +179,7 @@
     {
       "name": "Ahmed ali",
       "size": 2110464,
-      "url": "http://gerantech.com/islamic/translations/en.ahmedali.idb",
+      "url": "http://grantech.ir/islamic/translations/en.ahmedali.idb",
       "path": "en.ahmedali",
       "flag": "en",
       "mode": "trans_t"
@@ -187,7 +187,7 @@
     {
       "name": "Ahmed Raza Khan",
       "size": 2446336,
-      "url": "http://gerantech.com/islamic/translations/en.ahmedraza.idb",
+      "url": "http://grantech.ir/islamic/translations/en.ahmedraza.idb",
       "path": "en.ahmedraza",
       "flag": "en",
       "mode": "trans_t"
@@ -195,7 +195,7 @@
     {
       "name": "Arberry",
       "size": 2089984,
-      "url": "http://gerantech.com/islamic/translations/en.arberry.idb",
+      "url": "http://grantech.ir/islamic/translations/en.arberry.idb",
       "path": "en.arberry",
       "flag": "en",
       "mode": "trans_t"
@@ -203,7 +203,7 @@
     {
       "name": "Daryabadi",
       "size": 2266112,
-      "url": "http://gerantech.com/islamic/translations/en.daryabadi.idb",
+      "url": "http://grantech.ir/islamic/translations/en.daryabadi.idb",
       "path": "en.daryabadi",
       "flag": "en",
       "mode": "trans_t"
@@ -211,7 +211,7 @@
     {
       "name": "Hilali & Khan",
       "size": 3034112,
-      "url": "http://gerantech.com/islamic/translations/en.hilali.idb",
+      "url": "http://grantech.ir/islamic/translations/en.hilali.idb",
       "path": "en.hilali",
       "flag": "en",
       "mode": "trans_t"
@@ -219,7 +219,7 @@
     {
       "name": "Talal Itani",
       "size": 1995776,
-      "url": "http://gerantech.com/islamic/translations/en.itani.idb",
+      "url": "http://grantech.ir/islamic/translations/en.itani.idb",
       "path": "en.itani",
       "flag": "en",
       "mode": "trans_t"
@@ -227,7 +227,7 @@
     {
       "name": "Maududi",
       "size": 2480128,
-      "url": "http://gerantech.com/islamic/translations/en.maududi.idb",
+      "url": "http://grantech.ir/islamic/translations/en.maududi.idb",
       "path": "en.maududi",
       "flag": "en",
       "mode": "trans_t"
@@ -235,7 +235,7 @@
     {
       "name": "Pickthall",
       "size": 2224128,
-      "url": "http://gerantech.com/islamic/translations/en.pickthall.idb",
+      "url": "http://grantech.ir/islamic/translations/en.pickthall.idb",
       "path": "en.pickthall",
       "flag": "en",
       "mode": "trans_t"
@@ -243,7 +243,7 @@
     {
       "name": "Ali Quli Qarai",
       "size": 2204672,
-      "url": "http://gerantech.com/islamic/translations/en.qarai.idb",
+      "url": "http://grantech.ir/islamic/translations/en.qarai.idb",
       "path": "en.qarai",
       "flag": "en",
       "mode": "trans_t"
@@ -251,7 +251,7 @@
     {
       "name": "Qaribullah & Darwish",
       "size": 2083840,
-      "url": "http://gerantech.com/islamic/translations/en.qaribullah.idb",
+      "url": "http://grantech.ir/islamic/translations/en.qaribullah.idb",
       "path": "en.qaribullah",
       "flag": "en",
       "mode": "trans_t"
@@ -259,7 +259,7 @@
     {
       "name": "Saheeh International",
       "size": 2311168,
-      "url": "http://gerantech.com/islamic/translations/en.sahih.idb",
+      "url": "http://grantech.ir/islamic/translations/en.sahih.idb",
       "path": "en.sahih",
       "flag": "en",
       "mode": "trans_t"
@@ -267,7 +267,7 @@
     {
       "name": "Sarwar",
       "size": 2249728,
-      "url": "http://gerantech.com/islamic/translations/en.sarwar.idb",
+      "url": "http://grantech.ir/islamic/translations/en.sarwar.idb",
       "path": "en.sarwar",
       "flag": "en",
       "mode": "trans_t"
@@ -275,7 +275,7 @@
     {
       "name": "Shakir",
       "size": 2273280,
-      "url": "http://gerantech.com/islamic/translations/en.shakir.idb",
+      "url": "http://grantech.ir/islamic/translations/en.shakir.idb",
       "path": "en.shakir",
       "flag": "en",
       "mode": "trans_t"
@@ -283,7 +283,7 @@
     {
       "name": "Transliteration",
       "size": 2760704,
-      "url": "http://gerantech.com/islamic/translations/en.transliteration.idb",
+      "url": "http://grantech.ir/islamic/translations/en.transliteration.idb",
       "path": "en.transliteration",
       "flag": "en",
       "mode": "quran_t"
@@ -291,7 +291,7 @@
     {
       "name": "Wahiduddin",
       "size": 2203648,
-      "url": "http://gerantech.com/islamic/translations/en.wahiduddin.idb",
+      "url": "http://grantech.ir/islamic/translations/en.wahiduddin.idb",
       "path": "en.wahiduddin",
       "flag": "en",
       "mode": "trans_t"
@@ -299,7 +299,7 @@
     {
       "name": "Yusuf",
       "size": 2448384,
-      "url": "http://gerantech.com/islamic/translations/en.yusufali.idb",
+      "url": "http://grantech.ir/islamic/translations/en.yusufali.idb",
       "path": "en.yusufali",
       "flag": "en",
       "mode": "trans_t"
@@ -307,7 +307,7 @@
     {
       "name": "Hamidullah",
       "size": 2388992,
-      "url": "http://gerantech.com/islamic/translations/fr.hamidullah.idb",
+      "url": "http://grantech.ir/islamic/translations/fr.hamidullah.idb",
       "path": "fr.hamidullah",
       "flag": "fr",
       "mode": "trans_t"
@@ -315,7 +315,7 @@
     {
       "name": "Abu Rida",
       "size": 2488320,
-      "url": "http://gerantech.com/islamic/translations/de.aburida.idb",
+      "url": "http://grantech.ir/islamic/translations/de.aburida.idb",
       "path": "de.aburida",
       "flag": "de",
       "mode": "trans_t"
@@ -323,7 +323,7 @@
     {
       "name": "Bubenheim & Elyas",
       "size": 2530304,
-      "url": "http://gerantech.com/islamic/translations/de.bubenheim.idb",
+      "url": "http://grantech.ir/islamic/translations/de.bubenheim.idb",
       "path": "de.bubenheim",
       "flag": "de",
       "mode": "trans_t"
@@ -331,7 +331,7 @@
     {
       "name": "Khoury",
       "size": 2430976,
-      "url": "http://gerantech.com/islamic/translations/de.khoury.idb",
+      "url": "http://grantech.ir/islamic/translations/de.khoury.idb",
       "path": "de.khoury",
       "flag": "de",
       "mode": "trans_t"
@@ -339,7 +339,7 @@
     {
       "name": "Zaidan",
       "size": 2591744,
-      "url": "http://gerantech.com/islamic/translations/de.zaidan.idb",
+      "url": "http://grantech.ir/islamic/translations/de.zaidan.idb",
       "path": "de.zaidan",
       "flag": "de",
       "mode": "trans_t"
@@ -347,7 +347,7 @@
     {
       "name": "Gumi",
       "size": 2310144,
-      "url": "http://gerantech.com/islamic/translations/ha.gumi.idb",
+      "url": "http://grantech.ir/islamic/translations/ha.gumi.idb",
       "path": "ha.gumi",
       "flag": "ha",
       "mode": "trans_t"
@@ -355,7 +355,7 @@
     {
       "name": "फ़ारूक़ ख़ान & अहमद",
       "size": 2266112,
-      "url": "http://gerantech.com/islamic/translations/hi.farooq.idb",
+      "url": "http://grantech.ir/islamic/translations/hi.farooq.idb",
       "path": "hi.farooq",
       "flag": "hi",
       "mode": "trans_t"
@@ -363,7 +363,7 @@
     {
       "name": "फ़ारूक़ ख़ान & नदवी",
       "size": 2554880,
-      "url": "http://gerantech.com/islamic/translations/hi.hindi.idb",
+      "url": "http://grantech.ir/islamic/translations/hi.hindi.idb",
       "path": "hi.hindi",
       "flag": "hi",
       "mode": "trans_t"
@@ -371,7 +371,7 @@
     {
       "name": "Bahasa Indonesia",
       "size": 3082240,
-      "url": "http://gerantech.com/islamic/translations/id.indonesian.idb",
+      "url": "http://grantech.ir/islamic/translations/id.indonesian.idb",
       "path": "id.indonesian",
       "flag": "id",
       "mode": "trans_t"
@@ -379,7 +379,7 @@
     {
       "name": "Quraish Shihab",
       "size": 6304768,
-      "url": "http://gerantech.com/islamic/translations/id.muntakhab.idb",
+      "url": "http://grantech.ir/islamic/translations/id.muntakhab.idb",
       "path": "id.muntakhab",
       "flag": "id",
       "mode": "trans_t"
@@ -387,7 +387,7 @@
     {
       "name": "Tafsir Jalalayn",
       "size": 2048,
-      "url": "http://gerantech.com/islamic/translations/id.jalalayn.idb",
+      "url": "http://grantech.ir/islamic/translations/id.jalalayn.idb",
       "path": "id.jalalayn",
       "flag": "id",
       "mode": "tafsi_t"
@@ -395,7 +395,7 @@
     {
       "name": "Piccardo",
       "size": 2125824,
-      "url": "http://gerantech.com/islamic/translations/it.piccardo.idb",
+      "url": "http://grantech.ir/islamic/translations/it.piccardo.idb",
       "path": "it.piccardo",
       "flag": "it",
       "mode": "trans_t"
@@ -403,7 +403,7 @@
     {
       "name": "Japanese",
       "size": 1045504,
-      "url": "http://gerantech.com/islamic/translations/ja.japanese.idb",
+      "url": "http://grantech.ir/islamic/translations/ja.japanese.idb",
       "path": "ja.japanese",
       "flag": "ja",
       "mode": "trans_t"
@@ -411,7 +411,7 @@
     {
       "name": "Korean",
       "size": 1072128,
-      "url": "http://gerantech.com/islamic/translations/ko.korean.idb",
+      "url": "http://grantech.ir/islamic/translations/ko.korean.idb",
       "path": "ko.korean",
       "flag": "ko",
       "mode": "trans_t"
@@ -419,7 +419,7 @@
     {
       "name": "ته‌فسیری ئاسان\t",
       "size": 3546112,
-      "url": "http://gerantech.com/islamic/translations/ku.asan.idb",
+      "url": "http://grantech.ir/islamic/translations/ku.asan.idb",
       "path": "ku.asan",
       "flag": "ku",
       "mode": "trans_t"
@@ -427,7 +427,7 @@
     {
       "name": "Basmeih",
       "size": 3961856,
-      "url": "http://gerantech.com/islamic/translations/ms.basmeih.idb",
+      "url": "http://grantech.ir/islamic/translations/ms.basmeih.idb",
       "path": "ms.basmeih",
       "flag": "ms",
       "mode": "trans_t"
@@ -435,7 +435,7 @@
     {
       "name": "Abdul Hameed",
       "size": 3139584,
-      "url": "http://gerantech.com/islamic/translations/ml.abdulhameed.idb",
+      "url": "http://grantech.ir/islamic/translations/ml.abdulhameed.idb",
       "path": "ml.abdulhameed",
       "flag": "ml",
       "mode": "trans_t"
@@ -443,7 +443,7 @@
     {
       "name": "Karakunnu & Elayavoor",
       "size": 2748416,
-      "url": "http://gerantech.com/islamic/translations/ml.karakunnu.idb",
+      "url": "http://grantech.ir/islamic/translations/ml.karakunnu.idb",
       "path": "ml.karakunnu",
       "flag": "no",
       "mode": "trans_t"
@@ -451,7 +451,7 @@
     {
       "name": "Einar Berg",
       "size": 1879040,
-      "url": "http://gerantech.com/islamic/translations/no.berg.idb",
+      "url": "http://grantech.ir/islamic/translations/no.berg.idb",
       "path": "no.berg",
       "flag": "no",
       "mode": "trans_t"
@@ -459,7 +459,7 @@
     {
       "name": "مهدي الهي قمشه اي",
       "size": 2349056,
-      "url": "http://gerantech.com/islamic/translations/fa.ghomshei.idb",
+      "url": "http://grantech.ir/islamic/translations/fa.ghomshei.idb",
       "path": "fa.ghomshei",
       "flag": "fa",
       "mode": "trans_t"
@@ -467,7 +467,7 @@
     {
       "name": "حسین انصاریان",
       "size": 2461696,
-      "url": "http://gerantech.com/islamic/translations/fa.ansarian.idb",
+      "url": "http://grantech.ir/islamic/translations/fa.ansarian.idb",
       "path": "fa.ansarian",
       "flag": "fa",
       "mode": "trans_t"
@@ -475,7 +475,7 @@
     {
       "name": "آیتی",
       "size": 1693696,
-      "url": "http://gerantech.com/islamic/translations/fa.ayati.idb",
+      "url": "http://grantech.ir/islamic/translations/fa.ayati.idb",
       "path": "fa.ayati",
       "flag": "fa",
       "mode": "trans_t"
@@ -483,7 +483,7 @@
     {
       "name": "بهرام پور",
       "size": 1753088,
-      "url": "http://gerantech.com/islamic/translations/fa.bahrampour.idb",
+      "url": "http://grantech.ir/islamic/translations/fa.bahrampour.idb",
       "path": "fa.bahrampour",
       "flag": "fa",
       "mode": "trans_t"
@@ -491,7 +491,7 @@
     {
       "name": "خرمدل",
       "size": 6902784,
-      "url": "http://gerantech.com/islamic/translations/fa.khorramdel.idb",
+      "url": "http://grantech.ir/islamic/translations/fa.khorramdel.idb",
       "path": "fa.khorramdel",
       "flag": "fa",
       "mode": "tafsi_t"
@@ -499,7 +499,7 @@
     {
       "name": "خرم شاهی",
       "size": 1846272,
-      "url": "http://gerantech.com/islamic/translations/fa.khorramshahi.idb",
+      "url": "http://grantech.ir/islamic/translations/fa.khorramshahi.idb",
       "path": "fa.khorramshahi",
       "flag": "fa",
       "mode": "trans_t"
@@ -507,7 +507,7 @@
     {
       "name": "صادقی تهرانی",
       "size": 2183168,
-      "url": "http://gerantech.com/islamic/translations/fa.sadeqi.idb",
+      "url": "http://grantech.ir/islamic/translations/fa.sadeqi.idb",
       "path": "fa.sadeqi",
       "flag": "fa",
       "mode": "trans_t"
@@ -515,7 +515,7 @@
     {
       "name": "محمد مهدي فولادوند",
       "size": 1927168,
-      "url": "http://gerantech.com/islamic/translations/fa.fooladvand.idb",
+      "url": "http://grantech.ir/islamic/translations/fa.fooladvand.idb",
       "path": "fa.fooladvand",
       "flag": "fa",
       "mode": "trans_t"
@@ -523,7 +523,7 @@
     {
       "name": "محسن قرائتی - تفسیر نور",
       "size": 12063744,
-      "url": "http://gerantech.com/islamic/translations/fa.gharaati.idb",
+      "url": "http://grantech.ir/islamic/translations/fa.gharaati.idb",
       "path": "fa.gharaati",
       "flag": "fa",
       "mode": "tafsi_t"
@@ -531,7 +531,7 @@
     {
       "name": "مکارم شیرازی - تفسیر نمونه",
       "size": 35451904,
-      "url": "http://gerantech.com/islamic/translations/fa.nemooneh.idb",
+      "url": "http://grantech.ir/islamic/translations/fa.nemooneh.idb",
       "path": "fa.nemooneh",
       "flag": "fa",
       "mode": "tafsi_t"
@@ -539,7 +539,7 @@
     {
       "name": "مجتبوی",
       "size": 2027520,
-      "url": "http://gerantech.com/islamic/translations/fa.mojtabavi.idb",
+      "url": "http://grantech.ir/islamic/translations/fa.mojtabavi.idb",
       "path": "fa.mojtabavi",
       "flag": "fa",
       "mode": "trans_t"
@@ -547,7 +547,7 @@
     {
       "name": "معزی",
       "size": 1593344,
-      "url": "http://gerantech.com/islamic/translations/fa.moezzi.idb",
+      "url": "http://grantech.ir/islamic/translations/fa.moezzi.idb",
       "path": "fa.moezzi",
       "flag": "fa",
       "mode": "trans_t"
@@ -555,7 +555,7 @@
     {
       "name": "مکارم شیرازی",
       "size": 2219008,
-      "url": "http://gerantech.com/islamic/translations/fa.makarem.idb",
+      "url": "http://grantech.ir/islamic/translations/fa.makarem.idb",
       "path": "fa.makarem",
       "flag": "fa",
       "mode": "trans_t"
@@ -563,7 +563,7 @@
     {
       "name": "Bielawskiego",
       "size": 2171904,
-      "url": "http://gerantech.com/islamic/translations/pl.bielawskiego.idb",
+      "url": "http://grantech.ir/islamic/translations/pl.bielawskiego.idb",
       "path": "pl.bielawskiego",
       "flag": "pl",
       "mode": "trans_t"
@@ -571,7 +571,7 @@
     {
       "name": "El-Hayek",
       "size": 2114560,
-      "url": "http://gerantech.com/islamic/translations/pt.elhayek.idb",
+      "url": "http://grantech.ir/islamic/translations/pt.elhayek.idb",
       "path": "pt.elhayek",
       "flag": "pt",
       "mode": "trans_t"
@@ -579,7 +579,7 @@
     {
       "name": "Grigore",
       "size": 2038784,
-      "url": "http://gerantech.com/islamic/translations/ro.grigore.idb",
+      "url": "http://grantech.ir/islamic/translations/ro.grigore.idb",
       "path": "ro.grigore",
       "flag": "ro",
       "mode": "trans_t"
@@ -587,7 +587,7 @@
     {
       "name": "Абу Адель",
       "size": 4218880,
-      "url": "http://gerantech.com/islamic/translations/ru.abuadel.idb",
+      "url": "http://grantech.ir/islamic/translations/ru.abuadel.idb",
       "path": "ru.abuadel",
       "flag": "ru",
       "mode": "trans_t"
@@ -595,7 +595,7 @@
     {
       "name": "Аль-Мунтахаб",
       "size": 4535296,
-      "url": "http://gerantech.com/islamic/translations/ru.muntahab.idb",
+      "url": "http://grantech.ir/islamic/translations/ru.muntahab.idb",
       "path": "ru.muntahab",
       "flag": "ru",
       "mode": "trans_t"
@@ -603,7 +603,7 @@
     {
       "name": "Крачковский",
       "size": 1861632,
-      "url": "http://gerantech.com/islamic/translations/ru.krachkovsky.idb",
+      "url": "http://grantech.ir/islamic/translations/ru.krachkovsky.idb",
       "path": "ru.krachkovsky",
       "flag": "ru",
       "mode": "trans_t"
@@ -611,7 +611,7 @@
     {
       "name": "Кулиев",
       "size": 2085888,
-      "url": "http://gerantech.com/islamic/translations/ru.kuliev.idb",
+      "url": "http://grantech.ir/islamic/translations/ru.kuliev.idb",
       "path": "ru.kuliev",
       "flag": "ru",
       "mode": "trans_t"
@@ -619,7 +619,7 @@
     {
       "name": "Кулиев + ас-Саади",
       "size": 12918784,
-      "url": "http://gerantech.com/islamic/translations/ru.kuliev_alsaadi.idb",
+      "url": "http://grantech.ir/islamic/translations/ru.kuliev_alsaadi.idb",
       "path": "ru.kuliev_alsaadi",
       "flag": "ru",
       "mode": "tafsi_t"
@@ -627,7 +627,7 @@
     {
       "name": "Османов",
       "size": 2221056,
-      "url": "http://gerantech.com/islamic/translations/ru.osmanov.idb",
+      "url": "http://grantech.ir/islamic/translations/ru.osmanov.idb",
       "path": "ru.osmanov",
       "flag": "ru",
       "mode": "trans_t"
@@ -635,7 +635,7 @@
     {
       "name": "Порохова",
       "size": 2296832,
-      "url": "http://gerantech.com/islamic/translations/ru.porokhova.idb",
+      "url": "http://grantech.ir/islamic/translations/ru.porokhova.idb",
       "path": "ru.porokhova",
       "flag": "ru",
       "mode": "trans_t"
@@ -643,7 +643,7 @@
     {
       "name": "Саблуков",
       "size": 2008064,
-      "url": "http://gerantech.com/islamic/translations/ru.sablukov.idb",
+      "url": "http://grantech.ir/islamic/translations/ru.sablukov.idb",
       "path": "ru.sablukov",
       "flag": "ru",
       "mode": "trans_t"
@@ -651,7 +651,7 @@
     {
       "name": "امروٽي",
       "size": 2059264,
-      "url": "http://gerantech.com/islamic/translations/sd.amroti.idb",
+      "url": "http://grantech.ir/islamic/translations/sd.amroti.idb",
       "path": "sd.amroti",
       "flag": "sd",
       "mode": "trans_t"
@@ -659,7 +659,7 @@
     {
       "name": "Abduh",
       "size": 1965056,
-      "url": "http://gerantech.com/islamic/translations/so.abduh.idb",
+      "url": "http://grantech.ir/islamic/translations/so.abduh.idb",
       "path": "so.abduh",
       "flag": "so",
       "mode": "trans_t"
@@ -667,7 +667,7 @@
     {
       "name": "Raúl González Bórnez",
       "size": 2210816,
-      "url": "http://gerantech.com/islamic/translations/es.bornez.idb",
+      "url": "http://grantech.ir/islamic/translations/es.bornez.idb",
       "path": "es.bornez",
       "flag": "es",
       "mode": "trans_t"
@@ -675,7 +675,7 @@
     {
       "name": "Julio Cortes",
       "size": 1948672,
-      "url": "http://gerantech.com/islamic/translations/es.cortes.idb",
+      "url": "http://grantech.ir/islamic/translations/es.cortes.idb",
       "path": "es.cortes",
       "flag": "es",
       "mode": "trans_t"
@@ -683,7 +683,7 @@
     {
       "name": "Muhammad Isa García",
       "size": 2335744,
-      "url": "http://gerantech.com/islamic/translations/es.garcia.idb",
+      "url": "http://grantech.ir/islamic/translations/es.garcia.idb",
       "path": "es.garcia",
       "flag": "es",
       "mode": "trans_t"
@@ -691,7 +691,7 @@
     {
       "name": "Al-Barwani",
       "size": 2014208,
-      "url": "http://gerantech.com/islamic/translations/sw.barwani.idb",
+      "url": "http://grantech.ir/islamic/translations/sw.barwani.idb",
       "path": "sw.barwani",
       "flag": "sw",
       "mode": "trans_t"
@@ -699,7 +699,7 @@
     {
       "name": "Bernström",
       "size": 2574336,
-      "url": "http://gerantech.com/islamic/translations/sv.bernstrom.idb",
+      "url": "http://grantech.ir/islamic/translations/sv.bernstrom.idb",
       "path": "sv.bernstrom",
       "flag": "sv",
       "mode": "trans_t"
@@ -707,7 +707,7 @@
     {
       "name": "Оятӣ",
       "size": 1961984,
-      "url": "http://gerantech.com/islamic/translations/tg.ayati.idb",
+      "url": "http://grantech.ir/islamic/translations/tg.ayati.idb",
       "path": "tg.ayati",
       "flag": "tg",
       "mode": "trans_t"
@@ -715,7 +715,7 @@
     {
       "name": "ஜான் டிரஸ்ட்",
       "size": 3355648,
-      "url": "http://gerantech.com/islamic/translations/ta.tamil.idb",
+      "url": "http://grantech.ir/islamic/translations/ta.tamil.idb",
       "path": "ta.tamil",
       "flag": "ta",
       "mode": "trans_t"
@@ -723,7 +723,7 @@
     {
       "name": "Yakub Ibn Nugman",
       "size": 3220480,
-      "url": "http://gerantech.com/islamic/translations/tt.nugman.idb",
+      "url": "http://grantech.ir/islamic/translations/tt.nugman.idb",
       "path": "tt.nugman",
       "flag": "tt",
       "mode": "trans_t"
@@ -731,7 +731,7 @@
     {
       "name": "ภาษาไทย",
       "size": 2432000,
-      "url": "http://gerantech.com/islamic/translations/th.thai.idb",
+      "url": "http://grantech.ir/islamic/translations/th.thai.idb",
       "path": "th.thai",
       "flag": "th",
       "mode": "trans_t"
@@ -739,7 +739,7 @@
     {
       "name": "Abdulbakî Gölpınarlı",
       "size": 2162688,
-      "url": "http://gerantech.com/islamic/translations/tr.golpinarli.idb",
+      "url": "http://grantech.ir/islamic/translations/tr.golpinarli.idb",
       "path": "tr.golpinarli",
       "flag": "tr",
       "mode": "trans_t"
@@ -747,7 +747,7 @@
     {
       "name": "Alİ Bulaç",
       "size": 2298880,
-      "url": "http://gerantech.com/islamic/translations/tr.bulac.idb",
+      "url": "http://grantech.ir/islamic/translations/tr.bulac.idb",
       "path": "tr.bulac",
       "flag": "tr",
       "mode": "trans_t"
@@ -755,7 +755,7 @@
     {
       "name": "Çeviriyazı",
       "size": 1460224,
-      "url": "http://gerantech.com/islamic/translations/tr.transliteration.idb",
+      "url": "http://grantech.ir/islamic/translations/tr.transliteration.idb",
       "path": "tr.transliteration",
       "flag": "tr",
       "mode": "quran_t"
@@ -763,7 +763,7 @@
     {
       "name": "Diyanet İşleri",
       "size": 2398208,
-      "url": "http://gerantech.com/islamic/translations/tr.diyanet.idb",
+      "url": "http://grantech.ir/islamic/translations/tr.diyanet.idb",
       "path": "tr.diyanet",
       "flag": "tr",
       "mode": "trans_t"
@@ -771,7 +771,7 @@
     {
       "name": "Diyanet Vakfı",
       "size": 2217984,
-      "url": "http://gerantech.com/islamic/translations/tr.vakfi.idb",
+      "url": "http://grantech.ir/islamic/translations/tr.vakfi.idb",
       "path": "tr.vakfi",
       "flag": "tr",
       "mode": "trans_t"
@@ -779,7 +779,7 @@
     {
       "name": "Edip Yüksel",
       "size": 1852416,
-      "url": "http://gerantech.com/islamic/translations/tr.yuksel.idb",
+      "url": "http://grantech.ir/islamic/translations/tr.yuksel.idb",
       "path": "tr.yuksel",
       "flag": "tr",
       "mode": "trans_t"
@@ -787,7 +787,7 @@
     {
       "name": "Elmalılı Hamdi Yazır",
       "size": 2256896,
-      "url": "http://gerantech.com/islamic/translations/tr.yazir.idb",
+      "url": "http://grantech.ir/islamic/translations/tr.yazir.idb",
       "path": "tr.yazir",
       "flag": "tr",
       "mode": "trans_t"
@@ -795,7 +795,7 @@
     {
       "name": "Öztürk",
       "size": 2209792,
-      "url": "http://gerantech.com/islamic/translations/tr.ozturk.idb",
+      "url": "http://grantech.ir/islamic/translations/tr.ozturk.idb",
       "path": "tr.ozturk",
       "flag": "tr",
       "mode": "trans_t"
@@ -803,7 +803,7 @@
     {
       "name": "Suat Yıldırım",
       "size": 3091456,
-      "url": "http://gerantech.com/islamic/translations/tr.yildirim.idb",
+      "url": "http://grantech.ir/islamic/translations/tr.yildirim.idb",
       "path": "tr.yildirim",
       "flag": "tr",
       "mode": "trans_t"
@@ -811,7 +811,7 @@
     {
       "name": "Süleyman Ateş",
       "size": 2048,
-      "url": "http://gerantech.com/islamic/translations/tr.ates.idb",
+      "url": "http://grantech.ir/islamic/translations/tr.ates.idb",
       "path": "tr.ates",
       "flag": "tr",
       "mode": "trans_t"
@@ -819,7 +819,7 @@
     {
       "name": "ابوالاعلی مودودی",
       "size": 2321408,
-      "url": "http://gerantech.com/islamic/translations/ur.maududi.idb",
+      "url": "http://grantech.ir/islamic/translations/ur.maududi.idb",
       "path": "ur.maududi",
       "flag": "ur",
       "mode": "trans_t"
@@ -827,7 +827,7 @@
     {
       "name": "احمد رضا خان",
       "size": 1770496,
-      "url": "http://gerantech.com/islamic/translations/ur.kanzuliman.idb",
+      "url": "http://grantech.ir/islamic/translations/ur.kanzuliman.idb",
       "path": "ur.kanzuliman",
       "flag": "ur",
       "mode": "trans_t"
@@ -835,7 +835,7 @@
     {
       "name": "احمد علی",
       "size": 1887232,
-      "url": "http://gerantech.com/islamic/translations/ur.ahmedali.idb",
+      "url": "http://grantech.ir/islamic/translations/ur.ahmedali.idb",
       "path": "ur.ahmedali",
       "flag": "ur",
       "mode": "trans_t"
@@ -843,7 +843,7 @@
     {
       "name": "جالندہری",
       "size": 2171904,
-      "url": "http://gerantech.com/islamic/translations/ur.jalandhry.idb",
+      "url": "http://grantech.ir/islamic/translations/ur.jalandhry.idb",
       "path": "ur.jalandhry",
       "flag": "ur",
       "mode": "trans_t"
@@ -851,7 +851,7 @@
     {
       "name": "طاہر القادری",
       "size": 2795520,
-      "url": "http://gerantech.com/islamic/translations/ur.qadri.idb",
+      "url": "http://grantech.ir/islamic/translations/ur.qadri.idb",
       "path": "ur.qadri",
       "flag": "ur",
       "mode": "trans_t"
@@ -859,7 +859,7 @@
     {
       "name": "علامہ جوادی",
       "size": 2145280,
-      "url": "http://gerantech.com/islamic/translations/ur.jawadi.idb",
+      "url": "http://grantech.ir/islamic/translations/ur.jawadi.idb",
       "path": "ur.jawadi",
       "flag": "ur",
       "mode": "trans_t"
@@ -867,7 +867,7 @@
     {
       "name": "محمد جوناگڑھی",
       "size": 2148352,
-      "url": "http://gerantech.com/islamic/translations/ur.junagarhi.idb",
+      "url": "http://grantech.ir/islamic/translations/ur.junagarhi.idb",
       "path": "ur.junagarhi",
       "flag": "ur",
       "mode": "trans_t"
@@ -875,7 +875,7 @@
     {
       "name": "محمد حسین نجفی",
       "size": 2441216,
-      "url": "http://gerantech.com/islamic/translations/ur.najafi.idb",
+      "url": "http://grantech.ir/islamic/translations/ur.najafi.idb",
       "path": "ur.najafi",
       "flag": "ur",
       "mode": "trans_t"
@@ -883,7 +883,7 @@
     {
       "name": "محمد صالح",
       "size": 3033088,
-      "url": "http://gerantech.com/islamic/translations/ug.saleh.idb",
+      "url": "http://grantech.ir/islamic/translations/ug.saleh.idb",
       "path": "ug.saleh",
       "flag": "ug",
       "mode": "trans_t"
@@ -891,7 +891,7 @@
     {
       "name": "Мухаммад Содик",
       "size": 3487744,
-      "url": "http://gerantech.com/islamic/translations/uz.sodik.idb",
+      "url": "http://grantech.ir/islamic/translations/uz.sodik.idb",
       "path": "uz.sodik",
       "flag": "uz",
       "mode": "trans_t"
@@ -1175,7 +1175,7 @@
       "path": "muhammad_taghi_tasviechi",
       "ename": "Muhammad Taghi Tasviechi",
       "name": "محمدتقی تسویه‌چی",
-      "url": "http://gerantech.com/islamic/athans/muhammad_taghi_tasviechi.mp3",
+      "url": "http://grantech.ir/islamic/athans/muhammad_taghi_tasviechi.mp3",
       "size": 188688,
       "flag": "fa",
       "mode": "athan_t"
@@ -1184,7 +1184,7 @@
       "path": "salim_moazzenzadeh",
       "ename": "Salim Moazzenzadeh",
       "name": "سلیم موذن‌زاده اردبیلی",
-      "url": "http://gerantech.com/islamic/athans/salim_moazzenzadeh.mp3",
+      "url": "http://grantech.ir/islamic/athans/salim_moazzenzadeh.mp3",
       "size": 207968, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1193,7 +1193,7 @@
       "path": "rahim_moazzenzadeh",
       "ename": "Rahim Moazzenzadeh",
       "name": "رحیم موذن‌زاده اردبیلی",
-      "url": "http://gerantech.com/islamic/athans/rahim_moazzenzadeh.mp3",
+      "url": "http://grantech.ir/islamic/athans/rahim_moazzenzadeh.mp3",
       "size": 586832, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1202,7 +1202,7 @@
       "path": "muhammad_aghati",
       "ename": "Muhammad Aghati",
       "name": "محمد آقاتی",
-      "url": "http://gerantech.com/islamic/athans/muhammad_aghati.mp3",
+      "url": "http://grantech.ir/islamic/athans/muhammad_aghati.mp3",
       "size": 275000, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1211,7 +1211,7 @@
       "path": "jalaleddin_taj_esfahani",
       "ename": "Jalaleddin Taj Isfahani",
       "name": "جلال الدین تاج اصفهانی",
-      "url": "http://gerantech.com/islamic/athans/jalaleddin_taj_esfahani.mp3",
+      "url": "http://grantech.ir/islamic/athans/jalaleddin_taj_esfahani.mp3",
       "size": 443984, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1220,7 +1220,7 @@
       "path": "raghib_mustafa_ghalwash",
       "ename": "Raghib Mustafa Ghalwash",
       "name": "راغب مصطفی غلوش",
-      "url": "http://gerantech.com/islamic/athans/raghib_mustafa_ghalwash.mp3",
+      "url": "http://grantech.ir/islamic/athans/raghib_mustafa_ghalwash.mp3",
       "size": 706640, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1229,7 +1229,7 @@
       "path": "muhammad_tookhi",
       "ename": "Muhammad Tookhi",
       "name": "محمد طوخی",
-      "url": "http://gerantech.com/islamic/athans/muhammad_tookhi.mp3",
+      "url": "http://grantech.ir/islamic/athans/muhammad_tookhi.mp3",
       "size": 566048, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1238,7 +1238,7 @@
       "path": "muhammad_hussein_aboozeid",
       "ename": "Muhammad Hussein Aboozeid",
       "name": "محمدحسین ابوزید",
-      "url": "http://gerantech.com/islamic/athans/muhammad_hussein_aboozeid.mp3",
+      "url": "http://grantech.ir/islamic/athans/muhammad_hussein_aboozeid.mp3",
       "size": 677336, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1247,7 +1247,7 @@
       "path": "javad_zabihi",
       "ename": "DJawad Zabihi",
       "name": "سیدجواد ذبیحی",
-      "url": "http://gerantech.com/islamic/athans/javad_zabihi.mp3",
+      "url": "http://grantech.ir/islamic/athans/javad_zabihi.mp3",
       "size": 546396, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1256,7 +1256,7 @@
       "path": "hussein_sobhdel",
       "ename": "Hussein Sobhdel",
       "name": "حسین صبحدل",
-      "url": "http://gerantech.com/islamic/athans/hussein_sobhdel.mp3",
+      "url": "http://grantech.ir/islamic/athans/hussein_sobhdel.mp3",
       "size": 625748, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1265,7 +1265,7 @@
       "path": "muhammad_ghaffari",
       "ename": "muhammad_ghaffari",
       "name": "محمد غفاری",
-      "url": "http://gerantech.com/islamic/athans/muhammad_ghaffari.mp3",
+      "url": "http://grantech.ir/islamic/athans/muhammad_ghaffari.mp3",
       "size": 875504, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1274,7 +1274,7 @@
       "path": "hussein_sabzali",
       "ename": "Hussein Sabzali",
       "name": "حسین سبزعلی",
-      "url": "http://gerantech.com/islamic/athans/hussein_sabzali.mp3",
+      "url": "http://grantech.ir/islamic/athans/hussein_sabzali.mp3",
       "size": 757334, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1283,7 +1283,7 @@
       "path": "hussein_karami",
       "ename": "Hussein Karami",
       "name": "حسین کرمی",
-      "url": "http://gerantech.com/islamic/athans/hussein_karami.mp3",
+      "url": "http://grantech.ir/islamic/athans/hussein_karami.mp3",
       "size": 709052, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1292,7 +1292,7 @@
       "path": "hassan_rezaeian",
       "ename": "hassan_rezaeian",
       "name": "حسن رضائیان",
-      "url": "http://gerantech.com/islamic/athans/hassan_rezaeian.mp3",
+      "url": "http://grantech.ir/islamic/athans/hassan_rezaeian.mp3",
       "size": 772232, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1301,7 +1301,7 @@
       "path": "husseinali_sharif",
       "ename": "husseinali_sharif",
       "name": "حسینعلی شریف",
-      "url": "http://gerantech.com/islamic/athans/husseinali_sharif.mp3",
+      "url": "http://grantech.ir/islamic/athans/husseinali_sharif.mp3",
       "size": 609316, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1310,7 +1310,7 @@
       "path": "ghasim_raziei",
       "ename": "Ghasim Raziei",
       "name": "قاسم رضیعی",
-      "url": "http://gerantech.com/islamic/athans/ghasim_raziei.mp3",
+      "url": "http://grantech.ir/islamic/athans/ghasim_raziei.mp3",
       "size": 845024, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1319,7 +1319,7 @@
       "path": "muhammad_hussein_saeedian",
       "ename": "Muhammad Hussein Saeedian",
       "name": "محمدحسین سعیدیان",
-      "url": "http://gerantech.com/islamic/athans/muhammad_hussein_saeedian.mp3",
+      "url": "http://grantech.ir/islamic/athans/muhammad_hussein_saeedian.mp3",
       "size": 955766, 
       "flag": "fa",
       "mode": "athan_t"
@@ -1330,7 +1330,7 @@
       "path": "saeed_toosi",
       "ename": "Saeed Toosi",
       "name": "سعید طوسی",
-      "url": "http://gerantech.com/islamic/athans/saeed_toosi.mp3",
+      "url": "http://grantech.ir/islamic/athans/saeed_toosi.mp3",
       "size": 889700, 
       "flag": "fa",
       "mode": "athan_t"

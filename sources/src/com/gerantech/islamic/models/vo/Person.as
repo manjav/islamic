@@ -95,7 +95,7 @@ package com.gerantech.islamic.models.vo
 			this.url = value.url;
 			this.size = value.size;
 			this.mode = value.mode;
-			this.iconUrl = "http://gerantech.com/islamic/images/"+type+"s/"+value.path.split(" ").join("-")+".png";
+			this.iconUrl = "http://grantech.ir/islamic/images/"+type+"s/"+value.path.split(" ").join("-")+".png";
 			this.iconPath = (type==TYPE_TRANSLATOR?UserModel.instance.TRANSLATOR_PATH:UserModel.instance.SOUNDS_PATH) + path + "/" + path + ".pbqr";
 			if(type==TYPE_TRANSLATOR)
 				this.localPath = UserModel.instance.TRANSLATOR_PATH + path + "/" + path + ".idb" ;

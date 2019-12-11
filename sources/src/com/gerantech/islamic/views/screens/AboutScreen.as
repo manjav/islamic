@@ -149,7 +149,7 @@ package com.gerantech.islamic.views.screens
 					headers += "From: no-reply@thepartyfinder.co.uk\r\nX-Mailer: php";
 					headers += "MIME-Version: 1.0\r\n";
 					headers += "Content-type:text/html;charset=UTF-8\r\n";*/
-					var url:String = "mailto:hidaya@gerantech.com?subject=(ver: "+appModel.descriptor.versionNumber+" "+(userModel.premiumMode?"pro":"free")+" ,market: "+appModel.descriptor.market+")";
+					var url:String = "mailto:hidaya@grantech.ir?subject=(ver: "+appModel.descriptor.versionNumber+" "+(userModel.premiumMode?"pro":"free")+" ,market: "+appModel.descriptor.market+")";
 					navigateToURL(new URLRequest(url));
 						break;
 			}

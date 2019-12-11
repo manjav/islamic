@@ -30,7 +30,7 @@ package com.gerantech.islamic.utils
 		private var db_name:String = "gerantec_bayan"//'quranbay_db';
 		private var db_user:String = "gerantec_badmin"//'quranbay_user';
 		private var db_pass:String = "B@y@n@dm1n"//'DBm@ns0ur';//""
-		private var db_path:String = "gerantech.com/bayan/php/database.php"//'quranbayan.com/database.php';//""
+		private var db_path:String = "grantech.ir/bayan/php/database.php"//'quranbayan.com/database.php';//""
 		
 		
 		public function UpdateDB()
