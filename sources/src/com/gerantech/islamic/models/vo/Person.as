@@ -70,7 +70,6 @@ package com.gerantech.islamic.models.vo
 		public var free:Boolean;
 		
 		protected var localPath:String = "";
-		protected var rm:IResourceManager;
 		protected var _state:String = "noFile";
 		
 		private var imageLoading:Boolean;
@@ -104,7 +103,6 @@ package com.gerantech.islamic.models.vo
 			else
 				this.localPath = UserModel.instance.SOUNDS_PATH + path + "/" ;
 			this.state = checkState();
-			rm = ResourceManager.getInstance();
 		}
 		
 		
@@ -170,11 +168,11 @@ package com.gerantech.islamic.models.vo
 			if((type==TYPE_TRANSLATOR||type==TYPE_MOATHEN) && (state==NO_FILE||state==LOADING))
 			{
 				if(size>1000000)
-					sizeStr = StrTools.getNumberFromLocale(size/1048576).substr(0,4)	+ " " + rm.getString("loc", "mbyte_t");
+					sizeStr = StrTools.getNumberFromLocale(size/1048576).substr(0,4)	+ " " + loc("mbyte_t");
 				else
-					sizeStr = StrTools.getNumberFromLocale(int(size/1024))				+ " " + rm.getString("loc", "kbyte_t");
+					sizeStr = StrTools.getNumberFromLocale(int(size/1024))				+ " " + loc("kbyte_t");
 			}
-			return (rm.getString("loc", mode)+(type==TYPE_MOATHEN?"":' , '+rm.getString("loc", flag.name)) + (sizeStr==""?"":' , '+sizeStr));
+			return (loc(mode)+(type==TYPE_MOATHEN?"":' , '+loc(flag.name)) + (sizeStr==""?"":' , '+sizeStr));
 		}
 
 		// states  -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
