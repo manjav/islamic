@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/32.0">
   <id>__APPID__</id>
-  <versionNumber>0.9.200</versionNumber>
-  <versionLabel>0.9.200</versionLabel>
+  <versionNumber>__VERID__</versionNumber>
+  <versionLabel>__VERLABEL__</versionLabel>
   <supportedProfiles>mobileDevice</supportedProfiles>
   <filename>Hidaya</filename>
   <name>Hidayah</name><!-- Hidayah  هدایت الهدایة -->
@@ -24,8 +24,8 @@
     <image72x72>icons/icon-72.png</image72x72>
     <!--<image76x76>icons/icon_76.png</image76x76>-->
     <image96x96>icons/icon-96.png</image96x96>
-    <!--    <image114x114>icons/icon_114.png</image114x114>-->
-    <!--    <image120x120>icons/icon_120.png</image120x120>-->
+    <!--<image114x114>icons/icon_114.png</image114x114>-->
+    <!--<image120x120>icons/icon_120.png</image120x120>-->
     <image144x144>icons/icon-144.png</image144x144>
     <!--<image152x152>icons/icon_152.png</image152x152>-->
     <!--<image512x512>icons/icon_512.png</image512x512>-->
@@ -34,7 +34,7 @@
     <manifestAdditions><![CDATA[<manifest android:installLocation="auto">
 
 	<!-- In APP Billing permissions -->
-	<uses-permission android:name="com.domain.market.BILLING" />
+	<uses-permission android:name="__BILLING__" />
 	
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
